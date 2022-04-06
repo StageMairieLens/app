@@ -1,0 +1,31 @@
+.box {
+  width: 50%;
+  background: #ececec;
+  margin : 15% 25%;
+  border-radius: 3%;
+  padding: 10px;
+  box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+}
+
+.image{
+  width : 350px;
+  border : solid grey 2px;
+
+}
+
+.input {
+  width : 55%;
+}
+
+.image {
+  display : inline;
+}
+
+button {
+  margin-left : 10px;
+}
+
+.title_image {
+  font-size : 35px;
+  text-transform: uppercase;
+}

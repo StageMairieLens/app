@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { RecopierGameComponent } from './recopier-game/recopier-game.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IndexComponent } from './index/index.component'; // CLI imports AppRoutingModule
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { IndexComponent } from './index/index.component'; // CLI imports AppRout
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
