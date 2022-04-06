@@ -8,3 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 }
+
+function userConnect() {
+  console.log('hello');
+}
+
+
