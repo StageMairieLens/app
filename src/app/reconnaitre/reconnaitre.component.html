@@ -1,0 +1,8 @@
+<body>
+    <div>
+    <img src="{{ variable }}">
+    </div>
+    <div id="mot" *ngFor="let mot of liste">
+        <button  type="button" id="{{ mot }}" (click)="!change($event,mot);" >{{ mot }}</button>
+    </div>
+</body>
