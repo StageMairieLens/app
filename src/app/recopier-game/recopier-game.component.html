@@ -7,17 +7,14 @@
     </div>
     <div class="col-6">
       <p class="text-center title_image">title</p>
-      <div class="text-center align-middle">
+      <div class="text-center">
         <input type="text" name="input_recopier" id="input_recopier" #input_recopier>
-      <button type="button" (click)="sendAnswer(input_recopier.value)" class="btn btn-primary">
-        Envoyer
-      </button>
+        <button type="button" (click)="sendAnswer(input_recopier.value)" class="btn btn-primary">
+          Envoyer
+        </button>
+        <p id="result"></p>
       </div>
+
     </div>
   </div>
-    <div class="text-center">
-      <p id="result"></p>
-
-  </div>
 </div>
-

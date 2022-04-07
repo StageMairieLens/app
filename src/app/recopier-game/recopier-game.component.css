@@ -13,6 +13,13 @@
 
 }
 
+#input_recopier {
+  text-transform: uppercase;
+  text-align : center;
+}
+
+
+
 .input {
   width : 55%;
 }
