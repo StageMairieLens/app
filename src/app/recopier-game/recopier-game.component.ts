@@ -36,10 +36,13 @@ export class RecopierGameComponent implements OnInit {
   sendAnswer(text: string,img : Image): void {
     if (text.toUpperCase() === img.getNom().toUpperCase()) {
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
-      document.getElementById('container')!.animate([ { opacity: 1 },
+
+      setTimeout(() => {
+        document.getElementById('container')!.animate([ { opacity: 1 },
         { opacity: 0.1, offset: 0.7 },
         { opacity: 1 } ],
       800);
+      },1000);
 
       setTimeout(() => {
         this.showImageCpt++;
@@ -48,7 +51,7 @@ export class RecopierGameComponent implements OnInit {
         document.getElementById('progressbar')!.style.width = ((this.showImageCpt/this.image.length)*100).toString() + '%';
 
       },
-      600);
+      1600);
     } else {
       document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
       document.getElementById('container')?.animate([
