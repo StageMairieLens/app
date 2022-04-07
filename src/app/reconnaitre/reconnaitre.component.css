@@ -3,32 +3,45 @@ img{
     margin-top: 50px;
     width: 200px;
 }
-.mot{
-    display: inline-block;
+.animated-background{
+  background: linear-gradient(
+      to right, #833ab4,
+      #fd1d1d, #fcb045); 
+  background-size: 400% 400%;
+  animation: animate-background 10s infinite ease-in-out;
+}
+
+@keyframes animate-background {
+  0%{
+      background-position: 0 50%;
+  }
+  50%{
+      background-position: 100% 50%;
+  }
+  100%{
+      background-position: 0 50%;
+  }
 }
 button{
-    
+    width: fit-content;
     display: inline-block;
+    margin-right: -4px;
     text-align: center;
     border:#666 1px solid;
     border-radius:50%;
-    margin:0% 1%;
+    margin-right: 3px;
     background: rgb(7, 156, 201);
     border-radius: 3%;
     padding: 10px;
     box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
 }
-.disabled {
-    display: block !important; /* since you set the element's display to none inline,
-                                  we need to use !important flag (which is pretty bad)
-                                  to override the inline style */
-    pointer-events: none; /* Disable an element interaction, so it will not respond any event */
-    color: red; /* Gray out the text color to signify being disabled */
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: red;
+  color: #666666;
 }
 
-button:target{
-    display: block;
-}
 button:hover
 {
 background-color:#ccc;

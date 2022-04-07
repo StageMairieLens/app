@@ -1,8 +1,11 @@
 <body>
+    <div class="animated-background" ></div>
     <div>
     <img src="{{ variable }}">
+    <p>Nombre d'erreur = {{ compteur }}</p> <!-- Affiche le nombre d'erreur -->
     </div>
-    <div id="mot" *ngFor="let mot of liste">
-        <button  type="button" id="{{ mot }}" (click)="!change($event,mot);" >{{ mot }}</button>
+    <div id="mot" class="text-center"> <!-- Centre les mots -->
+        <button  *ngFor="let mot of liste_mot" type="button" id="{{ mot }}" [disabled]="clicked" (click)="!change($event,mot)    ;" >{{ mot }}</button>
+        <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
     </div>
 </body>
