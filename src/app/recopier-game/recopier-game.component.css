@@ -1,38 +1,74 @@
 .box {
   width: 50%;
-  background: #ececec;
-  margin : 15% 25%;
+  background: #3bb8c9;
+  margin: 10% 25%;
   border-radius: 3%;
   padding: 10px;
   box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+  color: white;
 }
 
-.image{
-  width : 350px;
-  border : solid grey 2px;
-
+.image {
+  width: 350px;
+  border: solid grey 2px;
 }
 
 #input_recopier {
   text-transform: uppercase;
-  text-align : center;
+  text-align: center;
 }
 
+.title {
+  text-transform: uppercase;
+  font-size: 105px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  text-shadow: rgb(0, 0, 0, 0.7) 5px 8px;
+}
 
+.title :nth-child(1n) {
+  color: #835ba7;
+}
+.title :nth-child(2n) {
+  color: #3e4194;
+}
+.title :nth-child(3n) {
+  color: #01afee;
+}
+.title :nth-child(4n) {
+  color: #00a656;
+}
+.title :nth-child(5n) {
+  color: #fff116;
+}
+.title :nth-child(6n) {
+  color: #f68635;
+}
+.title :nth-child(7n) {
+  color: #ec3238
+}
+.title :nth-child(8n) {
+  color: #835ba7
+}
 
 .input {
-  width : 55%;
+  width: 55%;
 }
 
 .image {
-  display : inline;
+  display: inline;
 }
 
 button {
-  margin-left : 10px;
+  margin-left: 10px;
 }
 
 .title_image {
-  font-size : 35px;
+  font-size: 35px;
   text-transform: uppercase;
+}
+
+.progress {
+  margin-top: 5px;
+  background-color: #bebebe;
 }

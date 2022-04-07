@@ -1,4 +1,6 @@
 @import url('../node_modules/font-awesome/css/font-awesome.min.css');
 body {
-  background : rgb(11, 182, 182);
+  background-image : url('https://imgs.search.brave.com/3iDFVd-YLYK-N4N2NTit8-Zpg6ErjKEkrZrox98wWFY/rs:fit:1200:980:1/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3RpL3ZlY3Rl/dXItbGlicmUvcDMv/MTI0NzUzLXZlY3Rl/dXItbGlicmUtZC1p/Y29uZXMtZGUtam91/ci1wb3VyLWVuZmFu/dHMtdmVjdG9yaWVs/LmpwZw');
+  background-size: 70%;
+  background-position-x: center;
 }
