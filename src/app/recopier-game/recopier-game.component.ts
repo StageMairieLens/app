@@ -34,7 +34,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   sendAnswer(text: string,img : Image): void {
-    if (text === img.getNom().toUpperCase()) {
+    if (text.toUpperCase() === img.getNom().toUpperCase()) {
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
       document.getElementById('container')!.animate([ { opacity: 1 },
         { opacity: 0.1, offset: 0.7 },
