@@ -1,1 +1,23 @@
-<p>recopier-game works!</p>
+<div class="container-md box">
+  <div class="row">
+    <div class="col-5">
+      <img
+        src="https://imgs.search.brave.com/-eWW3d6u1vKgtJG-bhT1TVStKGfCTGDUowy95wYkUHY/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9sb25n/d29vZGdhcmRlbnMu/b3JnL3NpdGVzL2Rl/ZmF1bHQvZmlsZXMv/aGlnaGxpZ2h0X2lt/YWdlcy83Njc1OC5q/cGc"
+        class="image" alt="">
+    </div>
+    <div class="col-6">
+      <p class="text-center title_image">title</p>
+      <div class="text-center align-middle">
+        <input type="text" name="input_recopier" id="input_recopier" #input_recopier>
+      <button type="button" (click)="sendAnswer(input_recopier.value)" class="btn btn-primary">
+        Envoyer
+      </button>
+      </div>
+    </div>
+  </div>
+    <div class="text-center">
+      <p id="result"></p>
+
+  </div>
+</div>
+

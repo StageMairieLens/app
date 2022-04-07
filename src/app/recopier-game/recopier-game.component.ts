@@ -12,4 +12,14 @@ export class RecopierGameComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  sendAnswer(text: string): void {
+    if (text === 'test') {
+      document.getElementById('result')!.innerHTML = "Victory";
+    } else {
+      document.getElementById('result')!.innerHTML = "Defeat";
+
+    }
+
+  }
+
 }
