@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild,ChangeDetectorRef } from '@angular/core';
 
 
+
 @Component({
   selector: 'app-reconnaitre',
   templateUrl: './reconnaitre.component.html',
@@ -23,7 +24,9 @@ export class ReconnaitreComponent implements OnInit {
 
     
   }
-  
+  async delay(ms: number) {
+    await new Promise<void>(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+}
   alea(li : String[]):void{
     var m = li.length, t, i;
   
@@ -42,17 +45,33 @@ export class ReconnaitreComponent implements OnInit {
   
   }
   change($event: any,varia:string):Boolean{
-    this.variable=this.liste_image[this.prochaine_image];
+    //this.variable=this.liste_image[this.prochaine_image];
     if(varia == "Lion"){ //Si reponse trouver alert un message et bloque tous les bouttons
-      alert("Bien joué");
+      //alert("Bien joué");
       this.clicked=false;
       this.prochaine_image+=1;
+      document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
+
+      setTimeout(() => {
+        this.variable=this.liste_image[this.prochaine_image];
+        document.getElementById('container')!.animate([ { opacity: 1 },
+        { opacity: 0.1, offset: 0.7 },
+        { opacity: 1 } ],
+        
+      800);
+      },1000);
+      setTimeout(() => {
+        document.getElementById('result')!.innerHTML = '';
+        document.getElementById('progressbar')!.style.width = ((this.prochaine_image/this.liste_image.length)*100).toString() + '%';
+        
+      },
+      1600);
       if(this.prochaine_image < this.liste_image.length){
         for(var i of this.liste_mot){
           (<HTMLButtonElement>document.getElementById(i)).disabled = false;
 
         }
-        this.variable=this.liste_image[this.prochaine_image];
+        
         
         //($event.target as HTMLButtonElement).disabled = false;
       }
@@ -66,10 +85,18 @@ export class ReconnaitreComponent implements OnInit {
       ($event.target as HTMLButtonElement).disabled = true;
       this.compteur+=1;
      
-      console.log(this.compteur);
+      document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
+      document.getElementById('container')?.animate([
+        { transform: 'translateX(0px)'},
+        { transform: 'translateX(-50px)'},
+        { transform: 'translateX(50px)'}
+      ], { duration : 200 }
+      );
       return false;
     }
+    
   }
+
   
   
 
