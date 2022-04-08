@@ -1,0 +1,67 @@
+<div class="text-center">
+  <h1 class="title">
+    <span>FILLE</span>
+    <span>&</span>
+    <span>GARCON</span>
+  </h1>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="card align-self-left col" id="container" style="width: 32rem">
+      <div class="card-body text-center">
+        <h5 class="card-title title_image">FILLE</h5>
+        <p class="card-text">Déplacer les éléments associé au fille ci-dessous</p>
+
+        <div
+        cdkDropList
+        #girlList="cdkDropList"
+        [cdkDropListData]="girl"
+        [cdkDropListConnectedTo]="[boyList]"
+        class="align-bottom"
+        (cdkDropListDropped)="drop($event)">
+        <button *ngFor="let item of girl" cdkDrag>
+          {{item}}
+        </button>
+      </div>
+      </div>
+    </div>
+
+    <div class="card align-self-right col" id="container" style="width: 32rem;">
+      <div class="card-body text-center">
+        <h5 class="card-title title_image">Garcon</h5>
+        <p class="card-text">Déplacer les éléments associé au garçon ci-dessous</p>
+
+        <div
+        cdkDropList
+        #boyList="cdkDropList"
+        [cdkDropListData]="boy"
+        [cdkDropListConnectedTo]="[girlList]"
+        class="align-bottom"
+        (cdkDropListDropped)="drop($event)">
+        <button *ngFor="let item of boy" cdkDrag>
+          {{item}}
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card align-middle container" id="container" style="width: 32rem;margin-top : 10%">
+  <div class="card-body text-center">
+    <h5 class="card-title title_image">MOTS</h5>
+    <div
+    cdkDropList
+    #motList="cdkDropList"
+    [cdkDropListData]="mots"
+    [cdkDropListConnectedTo]="[girlList,boyList]"
+    class="align-bottom"
+    (cdkDropListDropped)="drop($event)">
+    <button *ngFor="let item of mots" cdkDrag>
+      {{item}}
+    </button>
+  </div>
+</div>
