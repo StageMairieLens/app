@@ -86,7 +86,7 @@ export class ReconnaitreComponent implements OnInit {
       this.compteur+=1;
      
       document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
-      document.getElementById('container')?.animate([
+      document.getElementById('container2')?.animate([
         { transform: 'translateX(0px)'},
         { transform: 'translateX(-50px)'},
         { transform: 'translateX(50px)'}
