@@ -12,7 +12,7 @@ const routes: Routes = [
   {path : '' ,component: IndexComponent},
   {path : 'recopier', component : RecopierGameComponent},
   { path: 'reconnaitre', component : ReconnaitreComponent},
-  { path: 'boygirl', component : BoyGirlGameComponent},
+  { path: 'boygirl', component : BoyGirlGameComponent}, 
 ];
 
 @NgModule({
