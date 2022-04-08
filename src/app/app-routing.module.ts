@@ -14,13 +14,9 @@ const routes: Routes = [
   {path : '' ,component: IndexComponent},
   {path : 'recopier', component : RecopierGameComponent},
   { path: 'reconnaitre', component : ReconnaitreComponent},
-<<<<<<< HEAD
   { path: 'boygirl', component : BoyGirlGameComponent},
   {path: 'abecedaire', component : AbecedaireComponent},
   {path: 'memory', component : MemoryComponent}
-=======
-  { path: 'boygirl', component : BoyGirlGameComponent}, 
->>>>>>> 83de06b8a623a617f8c4d75663897f51ea3b4dd4
 ];
 
 @NgModule({

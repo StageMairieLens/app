@@ -10,7 +10,38 @@
   margin-left : -10px;
 }
 
+.title {
+  text-transform: uppercase;
+  font-size: 105px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  text-shadow: rgb(0, 0, 0, 0.7) 5px 8px;
+}
 
+.title :nth-child(1n) {
+  color: #835ba7;
+}
+.title :nth-child(2n) {
+  color: #3e4194;
+}
+.title :nth-child(3n) {
+  color: #01afee;
+}
+.title :nth-child(4n) {
+  color: #00a656;
+}
+.title :nth-child(5n) {
+  color: #fff116;
+}
+.title :nth-child(6n) {
+  color: #f68635;
+}
+.title :nth-child(7n) {
+  color: #ec3238
+}
+.title :nth-child(8n) {
+  color: #835ba7
+}
 
 .code-place {
     width: 50%;
