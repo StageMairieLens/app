@@ -11,12 +11,12 @@
   </h1>
 </div>
 
-<div *ngIf="this.showImageCpt != this.image.length" class="card align-middle container" id="container" style="width: 32rem;">
-  <img class="card-img-top image" src="{{ this.image[this.showImageCpt].getSrc() }}" alt="Card image cap">
+<div *ngIf="this.showImageCpt != this.r.images.length" class="card align-middle container" id="card" style="width: 32rem;">
+  <img class="card-img-top image" src="{{ this.r.images[this.showImageCpt].getSrc() }}" alt="Card image cap">
   <div class="card-body text-center">
-    <h5 class="card-title title_image">{{this.image[this.showImageCpt].getNom()}}</h5>
+    <h5 class="card-title title_image">{{this.r.images[this.showImageCpt].getNom()}}</h5>
     <input type="text" name="input_recopier" id="input_recopier" #input_recopier (keypress)="enterKey($event)">
-        <button type="button" (click)="sendAnswer(input_recopier.value,this.image[this.showImageCpt])" class="btn btn-primary">
+        <button type="button" (click)="sendAnswer(input_recopier.value,this.r.images[this.showImageCpt])" class="btn btn-primary">
           Envoyer
         </button>
         <p id="result" class="text-center"></p>
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<div *ngIf="this.showImageCpt == this.image.length" class="card align-middle container" id="container" style="width: 32rem;">
+<div *ngIf="this.showImageCpt == this.r.images.length" class="card align-middle container" id="card" style="width: 32rem;">
   <img class="card-img-top image" src="https://imgs.search.brave.com/DrvWMJ9F_FqJX6j0t6s5PbltaTGgOEjXC4uRBdpPidM/rs:fit:681:254:1/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWxsdXN0/cmF0aW9ucy9jb25n/cmF0dWxhdGlvbnMt/aWxsdXN0cmF0aW9u/LWlkMTE0NDU1Mzc0/Mz9rPTYmbT0xMTQ0/NTUzNzQzJnM9MTcw/NjY3YSZ3PTAmaD1N/cWJlVzJEc0ZfbmFt/N1B5NWFqS0J3ZlJW/bU1iblNMT2FyNFNu/Z2xBektRPQ" alt="Card image cap">
   <div class="card-body text-center">
     <h5 class="card-title title_image">Félicitation !</h5>
