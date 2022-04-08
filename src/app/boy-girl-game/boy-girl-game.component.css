@@ -1,0 +1,27 @@
+.title {
+  text-transform: uppercase;
+  font-size: 105px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  text-shadow: rgb(0, 0, 0, 0.7) 5px 8px;
+}
+
+.title :nth-child(1n) {
+  color: #e004c3;
+}
+.title :nth-child(2n) {
+  color: #bd250a;
+}
+.title :nth-child(3n) {
+  color: #01afee;
+}
+
+
+.card {
+  width: 25%;
+  background: #3bb8c9;
+  border-radius: 3%;
+  padding: 10px;
+  box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+  color: white;
+}
