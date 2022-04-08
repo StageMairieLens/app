@@ -1,0 +1,12 @@
+.plateau {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    width: 75%;
+    display: block;
+}
+
+.image {
+    height: 220px;
+    width: 220px;
+}

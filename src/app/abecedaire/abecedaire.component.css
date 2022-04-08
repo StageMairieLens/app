@@ -1,0 +1,67 @@
+.image {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    display: block;
+}
+
+.container {
+    width: 50%;
+    background: #3bb8c9;
+    border-radius: 3%;
+    padding: 10px;
+    box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+    color: white;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.sound {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+    display: block;
+}
+
+.mot {
+    text-align: center;
+    font-size: 25px;
+    user-select: none;
+}
+
+.line {
+    text-align: center;
+}
+
+.text {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+    user-select: none;
+}
+
+.button {
+    margin: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color: orange;
+    display: inline-block;
+}
+
+.wrong {
+    background-color: red;
+    color: white;
+}
+
+.right {
+    background-color: blue;
+    color: white;
+
+}
+
+.progress {
+    margin-top: 5px;
+    background-color: #bebebe;
+}

@@ -5,7 +5,9 @@ import {AppComponent} from './app.component'
 import {RouterModule,Routes} from '@angular/router';
 import { ReconnaitreComponent } from './reconnaitre/reconnaitre.component';
 import { IndexComponent } from './index/index.component';
-import {BoyGirlGameComponent} from './boy-girl-game/boy-girl-game.component'
+import {BoyGirlGameComponent} from './boy-girl-game/boy-girl-game.component';
+import { AbecedaireComponent } from './abecedaire/abecedaire.component';
+import { MemoryComponent } from './memory/memory.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path : 'recopier', component : RecopierGameComponent},
   { path: 'reconnaitre', component : ReconnaitreComponent},
   { path: 'boygirl', component : BoyGirlGameComponent},
+  {path: 'abecedaire', component : AbecedaireComponent},
+  {path: 'memory', component : MemoryComponent}
 ];
 
 @NgModule({
