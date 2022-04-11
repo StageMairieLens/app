@@ -2,11 +2,16 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    width: 75%;
     display: block;
 }
 
-.image {
-    height: 220px;
-    width: 220px;
+.container {
+    background: #3bb8c9;
+    border-radius: 3%;
+    padding: 10px;
+    box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+    color: white;
+    margin-bottom: 25px;
+    max-width: fit-content;
+    width: 75%;
 }

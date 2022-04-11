@@ -11,6 +11,7 @@ import { BoyGirlGameComponent } from './boy-girl-game/boy-girl-game.component';
 import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
+import { TileComponent } from './memory/tile/tile.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PanelComponent } from './panel/panel.component';
     BoyGirlGameComponent,
     AbecedaireComponent,
     MemoryComponent,
-    PanelComponent
+    PanelComponent,
+    TileComponent
   ],
   imports: [
     BrowserModule,

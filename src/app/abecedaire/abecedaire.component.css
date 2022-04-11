@@ -15,6 +15,7 @@
     color: white;
     margin-top: 25px;
     margin-bottom: 25px;
+    max-width: fit-content;
 }
 
 .sound {

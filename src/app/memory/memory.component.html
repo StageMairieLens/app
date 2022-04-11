@@ -1,63 +1,63 @@
-<div class="plateau">
+<div class="plateau container">
 <table>
     <tr>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 1" id="1" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 2" id="2" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 5" id="5" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 7" id="7" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 13" id="13" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 14" id="14" [derriere]="derriere"></app-tile>
         </td>
     </tr>
     <tr>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 3" id="3" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 4" id="4" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 6" id="6" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 8" id="8" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 15" id="15" [derriere]="derriere"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 16" id="16" [derriere]="derriere"></app-tile>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <app-tile *ngIf="nbTile >= 9" id="9" [derriere]="derriere"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 10" id="10" [derriere]="derriere"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 11" id="11" [derriere]="derriere"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 12" id="12" [derriere]="derriere"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 17" id="17" [derriere]="derriere"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 18" id="18" [derriere]="derriere"></app-tile>
         </td>
     </tr>
 </table>

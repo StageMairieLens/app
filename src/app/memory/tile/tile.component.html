@@ -1,0 +1,3 @@
+<img *ngIf="retourner == false" src="{{derriere}}" class="image" (click)="click()">
+<img *ngIf="retourner == true && isImage == true" src="{{affichage}}" class="image">
+<div *ngIf="retourner == true && isImage == false" class="image mot">{{affichage}}</div>
