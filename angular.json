@@ -32,7 +32,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["src/js/js/image-puzzle.js"]
           },
           "configurations": {
             "production": {
