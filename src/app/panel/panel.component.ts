@@ -3,6 +3,7 @@ import { Game } from './Game'
 import { Option} from './Option'
 import { Image} from './../recopier-game/Image'
 import { Recopier } from './../recopier-game/Recopier'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panel',
@@ -11,7 +12,7 @@ import { Recopier } from './../recopier-game/Recopier'
 })
 export class PanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
 
   optionGame : string[] = ['Recopier','Memory','Reconnaitre','Abécédaire','Fille&Garçon','Puzzle'];
@@ -21,6 +22,12 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  redirect(str : string): void {
+    if(str == 'Accueil') {
+      this.router.navigate(['/']);
+    }
   }
 
 }
