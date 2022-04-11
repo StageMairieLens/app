@@ -28,8 +28,9 @@
                     <p id="levelPanel">
                         <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
                         /> <label for="easy">Easy</label>
-                        <input type="radio" name="level" id="medium" value="4" onchange="imagePuzzle.startGame(images, this.value);" />                        <label for="medium">Medium</label>
+                        <input type="radio" name="level" id="medium" value="4" onchange="imagePuzzle.startGame(images, this.value);" />                      <label for="medium">Medium</label>
                         <input type="radio" name="level" id="hard" value="5" onchange="imagePuzzle.startGame(images, this.value);" />                        <label for="hard">Hard</label>
+                        <!--mettre une variable dans value pour modifier la difficulter-->
                     </p>
                     <div>
                         <button id="btnRule" type="button" class="btn" onclick="rules();">Rules</button>

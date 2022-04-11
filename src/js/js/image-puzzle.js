@@ -1,6 +1,6 @@
 ﻿var images = [
     { src: '../../assets/images/london-bridge.jpg', title: 'London Bridge' },
-    { src: '../../assets/images/lotus-temple.JPG', title: 'Lotus Temple' },
+    { src: '../../assets/images/lotus-temple.jpg', title: 'Lotus Temple' },
     { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
     { src: '../../assets/images/statue-of-liberty.jpg', title: 'Statue Of Liberty' },
     { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
