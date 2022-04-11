@@ -1,24 +1,79 @@
 .container {
-  background-color : #303030;
-  color : white;
-  margin-top : 5%;
-  padding : 5px;
+  background-color: #303030;
+  color: white;
+  margin-top: 5%;
+  padding: 5px;
 }
 
 .card-header {
-  background-color : #ececec;
-  color : #303030;
-  text-align : center;
+  background-color: #ececec;
+  color: #303030;
+  text-align: center;
   text-transform: uppercase;
   font-size: 32px;
 }
 
 .choice {
-  background-color : #ffffffee;
+  background-color: #ffffffee;
   opacity: 0.9;
-  padding : 10px;
-  margin-right : 5px;
-  border : 3px solid lightblue;
+  padding: 10px;
+  margin-right: 5px;
+  border: 3px solid lightblue;
   box-shadow: rgba(0, 0, 0, 0.459) 5px 2px;
+}
 
+img {
+  margin: 5px;
+}
+
+.selectImage_container {
+  display: inline-block;
+  width: 45%;
+  background: rgba(255, 255, 255, 0.74);
+  margin-right: 5%;
+}
+
+.figure-caption {
+  color: black;
+}
+img:hover {
+  cursor: pointer;
+  border: 3px solid #fff;
+}
+
+#container1 {
+  float: left;
+}
+#container2 {
+  float: right;
+}
+
+.image {
+  position: relative;
+  width: 25%;
+  max-width: 400px;
+  display: inline-block;
+}
+
+.image_add {
+  position: relative;
+  width: 25%;
+  max-width: 400px;
+  display: inline-block;
+  color: black;
+  text-align: center;
+}
+
+.image img {
+  width: 200px;
+  height: 200px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+.image button:hover {
+  border: black solid 2px;
 }

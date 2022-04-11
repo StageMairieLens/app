@@ -25,7 +25,8 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="redirect('Accueil')" >Déconnexion</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"
+          (click)="redirect('Accueil')">Déconnexion</button>
       </form>
     </div>
   </nav>
@@ -44,8 +45,58 @@
   <div class="card container" *ngIf="this.selectedGame != ''">
     <h5 class="card-header">{{this.selectedGame}}</h5>
     <div class="card-body">
-      <!-- {{r1.id}}
-      {{r2.id}} -->
+      <div class="stepMenu">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active"><button type="button" class="btn btn-primary" (click)="this.formStep = 0">Images</button></li>
+            <li class="breadcrumb-item active"><button type="button" class="btn btn-primary" (click)="this.formStep = 1">Couleurs</button></li>
+            <li class="breadcrumb-item active"><button type="button" class="btn btn-primary" (click)="this.formStep = 2">Texte</button></li>
+          </ol>
+        </nav>
+      </div>
+
+      <div *ngIf="this.formStep == 0">
+        <h2 class="card-title">Choisissez les images</h2>
+        <div *ngIf="this.selectedGame == 'Recopier'">
+          <div class="card-body selectImage_container text-center">
+            <h5 class="card-header" style="color : black">Listes des images</h5>
+            <figure class="figure" *ngFor="let image of this.liste_image">
+              <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+              <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+            </figure>
+
+          </div>
+          <div class="card-body selectImage_container text-center">
+            <h5 class="card-header" style="color : black">Images selectionné</h5>
+            <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez selectionné
+              aucune image</h6>
+            <figure class="figure" *ngFor="let image of this.selectedImages">
+              <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
+              <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="this.formStep == 1">
+        COULEURS
+      </div>
+
+      <div *ngIf="this.formStep == 2">
+        TEXT
+      </div>
+
+
+      <div class="align-bottom" style="margin : 10px">
+        <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+          (click)="previousStep()">
+          Etape précédente
+        </button>
+        <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+          (click)="nextStep()">
+          Etape suivante
+        </button>
+      </div>
     </div>
   </div>
 

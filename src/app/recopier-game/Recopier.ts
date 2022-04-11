@@ -1,5 +1,5 @@
-import { Image } from './Image'
-import { Progress } from './Progress'
+import { Image } from '../Image'
+import { Progress } from '../Progress'
 
 export class Recopier {
   id: number;
