@@ -8,6 +8,7 @@ import { IndexComponent } from './index/index.component';
 import { ReconnaitreComponent } from './reconnaitre/reconnaitre.component'; // CLI imports AppRoutingModule
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BoyGirlGameComponent } from './boy-girl-game/boy-girl-game.component';
+import { PuzzleComponent } from './puzzle/puzzle.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { BoyGirlGameComponent } from './boy-girl-game/boy-girl-game.component';
     RecopierGameComponent,
     IndexComponent,
     ReconnaitreComponent,
-    BoyGirlGameComponent
+    BoyGirlGameComponent,
+    PuzzleComponent
   ],
   imports: [
     BrowserModule,

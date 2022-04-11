@@ -6,13 +6,15 @@ import {RouterModule,Routes} from '@angular/router';
 import { ReconnaitreComponent } from './reconnaitre/reconnaitre.component';
 import { IndexComponent } from './index/index.component';
 import {BoyGirlGameComponent} from './boy-girl-game/boy-girl-game.component'
+import { PuzzleComponent } from './puzzle/puzzle.component';
 
 
 const routes: Routes = [
   {path : '' ,component: IndexComponent},
   {path : 'recopier', component : RecopierGameComponent},
   { path: 'reconnaitre', component : ReconnaitreComponent},
-  { path: 'boygirl', component : BoyGirlGameComponent}, 
+  { path: 'boygirl', component : BoyGirlGameComponent},
+  { path: 'puzzle', component: PuzzleComponent}, 
 ];
 
 @NgModule({

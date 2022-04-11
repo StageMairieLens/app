@@ -38,7 +38,9 @@
 .title :nth-child(10n) {
   color: #835ba7;
 }
-
+#error{
+  color: red;
+}
 p{
   margin-left: 4px;
   border-radius: 3%;
@@ -47,7 +49,7 @@ p{
 }
 .card {
   width: 30%;
-  background: #3bb8c9;
+  background: yellowgreen;
   border-radius: 3%;
   padding: 10px;
   box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
@@ -56,7 +58,7 @@ p{
 .image {
   display: inline;
   border: solid grey 2px;
-  width:500px;
+  width:300px;
   margin-top: 70px;
 }
 button {
