@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Image } from './Image'
 import { Recopier } from './Recopier'
+import { Progress} from './Progress'
 
 @Component({
   selector: 'app-recopier-game',
@@ -10,7 +11,7 @@ import { Recopier } from './Recopier'
 export class RecopierGameComponent implements OnInit {
 
   constructor() {
-    this.r = new Recopier([],'#3bb8c9','red','black',this.typeEcriture);
+    this.r = new Recopier(this.images,'#3bb8c9','red','black','green','red',Progress.Red,this.typeEcriture);
     // this.r = null;
   }
 
@@ -62,7 +63,7 @@ export class RecopierGameComponent implements OnInit {
 
   sendAnswer(text: string, img: Image): void {
     if (text.toUpperCase() === img.getNom().toUpperCase()) {
-      document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
+      document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
 
       setTimeout(() => {
         document.getElementById('card')!.animate([{ opacity: 1 },
@@ -80,7 +81,7 @@ export class RecopierGameComponent implements OnInit {
       },
         1600);
     } else {
-      document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
+      document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
       document.getElementById('card')?.animate([
         { transform: 'translateX(0px)' },
         { transform: 'translateX(-50px)' },
