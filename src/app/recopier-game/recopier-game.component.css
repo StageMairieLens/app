@@ -1,6 +1,5 @@
 .card {
   width: 50%;
-  background: #3bb8c9;
   border-radius: 3%;
   padding: 10px;
   box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
@@ -65,6 +64,13 @@ button {
   font-size: 35px;
   text-transform: uppercase;
 }
+
+.title_image_error {
+  font-size: 35px;
+  text-transform: uppercase;
+  color : red;
+}
+
 
 .progress {
   margin-top: 5px;

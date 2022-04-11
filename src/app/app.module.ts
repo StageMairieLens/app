@@ -9,6 +9,9 @@ import { ReconnaitreComponent } from './reconnaitre/reconnaitre.component'; // C
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BoyGirlGameComponent } from './boy-girl-game/boy-girl-game.component';
 import { PuzzleComponent } from './puzzle/puzzle.component';
+import { AbecedaireComponent } from './abecedaire/abecedaire.component';
+import { MemoryComponent } from './memory/memory.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
     IndexComponent,
     ReconnaitreComponent,
     BoyGirlGameComponent,
-    PuzzleComponent
+    PuzzleComponent,
+    AbecedaireComponent,
+    MemoryComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,

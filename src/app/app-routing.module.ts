@@ -8,6 +8,10 @@ import { IndexComponent } from './index/index.component';
 import {BoyGirlGameComponent} from './boy-girl-game/boy-girl-game.component'
 import { PuzzleComponent } from './puzzle/puzzle.component';
 
+import { AbecedaireComponent } from './abecedaire/abecedaire.component';
+import { MemoryComponent } from './memory/memory.component';
+import { PanelComponent } from './panel/panel.component';
+
 
 const routes: Routes = [
   {path : '' ,component: IndexComponent},
@@ -15,6 +19,9 @@ const routes: Routes = [
   { path: 'reconnaitre', component : ReconnaitreComponent},
   { path: 'boygirl', component : BoyGirlGameComponent},
   { path: 'puzzle', component: PuzzleComponent}, 
+  {path: 'abecedaire', component : AbecedaireComponent},
+  {path: 'memory', component : MemoryComponent},
+  {path: 'panel', component : PanelComponent},
 ];
 
 @NgModule({

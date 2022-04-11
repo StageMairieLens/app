@@ -11,27 +11,37 @@
   </h1>
 </div>
 
-<div *ngIf="this.showImageCpt != this.image.length" class="card align-middle container" id="container" style="width: 32rem;">
-  <img class="card-img-top image" src="{{ this.image[this.showImageCpt].getSrc() }}" alt="Card image cap">
+<div *ngIf="this.r == null" class="card align-middle container" id="card_error" style="width: 32rem;">
+  <img class="card-img-top image" src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw" alt="Card image cap">
   <div class="card-body text-center">
-    <h5 class="card-title title_image">{{this.image[this.showImageCpt].getNom()}}</h5>
-    <input type="text" name="input_recopier" id="input_recopier" #input_recopier (keypress)="enterKey($event)">
-        <button type="button" (click)="sendAnswer(input_recopier.value,this.image[this.showImageCpt])" class="btn btn-primary">
-          Envoyer
-        </button>
-        <p id="result" class="text-center"></p>
-        <div class="align-bottom">
-          <div class="progress">
-            <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-          </div>
-        </div>
+    <h5 class="card-title title_image_error">Erreur !</h5>
+    <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
 </div>
 
-<div *ngIf="this.showImageCpt == this.image.length" class="card align-middle container" id="container" style="width: 32rem;">
+<div *ngIf="this.r != null">
+  <div *ngIf="this.showImageCpt != this.r!.images.length" class="card align-middle container" id="card" style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
+    <img class="card-img-top image" src="{{ this.r!.images[this.showImageCpt].getSrc() }}" alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image" [ngStyle]="{color : this.r!.title_color}">{{this.r!.images[this.showImageCpt].getNom()}}</h5>
+      <input type="text" name="input_recopier" id="input_recopier" #input_recopier (keypress)="enterKey($event)">
+          <button type="button" (click)="sendAnswer(input_recopier.value,this.r!.images[this.showImageCpt])" class="btn btn-primary">
+            Envoyer
+          </button>
+          <p id="result" class="text-center"></p>
+          <div class="align-bottom">
+            <div class="progress">
+              <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.showImageCpt == this.r!.images.length" class="card align-middle container" id="card_finish" style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
   <img class="card-img-top image" src="https://imgs.search.brave.com/DrvWMJ9F_FqJX6j0t6s5PbltaTGgOEjXC4uRBdpPidM/rs:fit:681:254:1/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWxsdXN0/cmF0aW9ucy9jb25n/cmF0dWxhdGlvbnMt/aWxsdXN0cmF0aW9u/LWlkMTE0NDU1Mzc0/Mz9rPTYmbT0xMTQ0/NTUzNzQzJnM9MTcw/NjY3YSZ3PTAmaD1N/cWJlVzJEc0ZfbmFt/N1B5NWFqS0J3ZlJW/bU1iblNMT2FyNFNu/Z2xBektRPQ" alt="Card image cap">
   <div class="card-body text-center">
-    <h5 class="card-title title_image">Félicitation !</h5>
-    <p class="card-text">Vous avez recopier correctement touts les mots !</p>
+    <h5 class="card-title title_image" [ngStyle]="{color : this.r!.title_color}">Félicitation !</h5>
+    <p class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous avez recopier correctement touts les mots !</p>
   </div>
 </div>
