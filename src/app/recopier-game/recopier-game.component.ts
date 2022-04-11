@@ -9,11 +9,15 @@ import { Recopier } from './Recopier'
 })
 export class RecopierGameComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.r = new Recopier([],'#3bb8c9','red','black',this.typeEcriture);
+    // this.r = null;
+  }
 
   image: Image[] = [];
   showImageCpt: number = 0;
   typeEcriture: string = "CAPITAL"; // default
+  r : Recopier | null;
 
   images : Image[] = [
     new Image('Fleur', 'https://imgs.search.brave.com/-eWW3d6u1vKgtJG-bhT1TVStKGfCTGDUowy95wYkUHY/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9sb25n/d29vZGdhcmRlbnMu/b3JnL3NpdGVzL2Rl/ZmF1bHQvZmlsZXMv/aGlnaGxpZ2h0X2lt/YWdlcy83Njc1OC5q/cGc'),
@@ -24,7 +28,6 @@ export class RecopierGameComponent implements OnInit {
     new Image('Cheval', 'https://imgs.search.brave.com/hpUGtW8aoMo7IUZCk6mp9f4ft3oZkPdnw9e8su27heM/rs:fit:900:652:1/g:ce/aHR0cDovL3d3dy5j/aGV2YWxhbm5vbmNl/LmNvbS9waG90b3Mt/YW5ub25jZXMxLzEv/Z2VycmV0LThhMzE5/OTUwYjNhN2Y5YTQx/MjM5YTlhMzNlNjA4/NGFjLmpwZw')
   ];
 
-  r : Recopier = new Recopier(this.images,'blue',this.typeEcriture);
 
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
@@ -32,12 +35,11 @@ export class RecopierGameComponent implements OnInit {
 
   enterKey($event: KeyboardEvent): void {
     if ($event.key == 'Enter') {
-      this.sendAnswer((<HTMLInputElement>$event.target).value, this.r.images[this.showImageCpt]);
+      this.sendAnswer((<HTMLInputElement>$event.target).value, this.r!.images[this.showImageCpt]);
     }
   }
 
   ngOnInit(): void {
-    // document.getElementById('card')!.style.backgroundColor = this.r.bg_color;
 
   }
 
@@ -73,7 +75,7 @@ export class RecopierGameComponent implements OnInit {
         this.showImageCpt++;
         document.getElementById('result')!.innerHTML = '';
         (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
-        document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r.images.length) * 100).toString() + '%';
+        document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
 
       },
         1600);

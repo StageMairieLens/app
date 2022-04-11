@@ -17,8 +17,8 @@ export class PanelComponent implements OnInit {
 
   optionGame : string[] = ['Recopier','Memory','Reconnaitre','Abécédaire','Fille&Garçon','Puzzle'];
   selectedGame : string = "";
-  r1 : Recopier = new Recopier([],'red','CAPITAL');
-  r2 : Recopier = new Recopier([],'blue','CAPITAL');
+  // r1 : Recopier = new Recopier([],'red','CAPITAL');
+  // r2 : Recopier = new Recopier([],'blue','CAPITAL');
 
 
   ngOnInit(): void {
