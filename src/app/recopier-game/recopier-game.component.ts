@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Image } from './Image'
 import { Recopier } from './Recopier'
-import { Progress} from './Progress'
+import { Progress } from './Progress'
 
 @Component({
   selector: 'app-recopier-game',
@@ -11,16 +11,16 @@ import { Progress} from './Progress'
 export class RecopierGameComponent implements OnInit {
 
   constructor() {
-    this.r = new Recopier(this.images,'#3bb8c9','red','black','green','red',Progress.Red,this.typeEcriture);
+    this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture);
     // this.r = null;
   }
 
   image: Image[] = [];
   showImageCpt: number = 0;
   typeEcriture: string = "CAPITAL"; // default
-  r : Recopier | null;
+  r: Recopier | null;
 
-  images : Image[] = [
+  images: Image[] = [
     new Image('Fleur', 'https://imgs.search.brave.com/-eWW3d6u1vKgtJG-bhT1TVStKGfCTGDUowy95wYkUHY/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9sb25n/d29vZGdhcmRlbnMu/b3JnL3NpdGVzL2Rl/ZmF1bHQvZmlsZXMv/aGlnaGxpZ2h0X2lt/YWdlcy83Njc1OC5q/cGc'),
     new Image('Lion', 'https://imgs.search.brave.com/Pe4oHRuA8lRa0gURHyJEdpiDiayBgKXfoI4YpwQOesE/rs:fit:1024:712:1/g:ce/aHR0cDovL2ltZy5i/dXJyYXJkLWx1Y2Fz/LmNvbS9rZW55YS9m/dWxsL2ltcHJlc3Np/dmVfbWFsZV9saW9u/LmpwZw'),
     new Image('Chien', 'https://imgs.search.brave.com/pdVRubgeL8KsfN_B9SQ9qd9HSHeo2Q1gX2hqBLisaJc/rs:fit:1200:731:1/g:ce/aHR0cHM6Ly93d3cu/bmV3c2h1Yi5jby5u/ei9ob21lL2xpZmVz/dHlsZS8yMDE5LzEx/L2RvZy15ZWFycy1h/cmUtYS1teXRoLTIt/eWVhci1vbGQtZG9n/cy1hbHJlYWR5LW1p/ZGRsZS1hZ2VkLXNj/aWVudGlzdHMvX2pj/cl9jb250ZW50L3Bh/ci92aWRlby9pbWFn/ZS5keW5pbWcuMTI4/MC5xNzUuanBnL3Yx/NTc0NTcyMzU4ODE4/L0dFVFRZLWxhYnJh/ZG9yLXB1cHB5LTEx/MjAuanBn'),
