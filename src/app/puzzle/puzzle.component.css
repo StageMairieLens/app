@@ -60,7 +60,7 @@
     }
 
 #collage button  {
-    background-color:#f5f2f2;
+    background-color:blue;
     border:1px solid #cce;
     display: inline;
     font-size: 14px;
@@ -82,44 +82,3 @@ h3{
     margin:3px 0px;
     text-align:center;
 }
-/*
-.puzzle{
-    background-image: url("../../assets/lion.jpg");
-    width: 100px;
-    height: 100px;
-}
-.piece1 {
-    background-position: 10%;
-
-}
-.piece2{
-    background-position: 20% ;
-}
-.piece3 {
-    background-position: 30%;
-
-}
-.piece4{
-    background-position: 40% ;
-}
-.piece5 {
-    background-position: 50%;
-
-}
-.piece6{
-    background-position: 60% ;
-}
-.piece7 {
-    background-position: 70%;
-
-}
-.piece8{
-    background-position: 80% ;
-}
-.piece9 {
-    background-position: 90%;
-
-}
-.piece10{
-    background-position: 100% ;
-}*/

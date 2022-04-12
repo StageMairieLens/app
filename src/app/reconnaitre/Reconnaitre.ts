@@ -30,5 +30,6 @@ export class Reconnaitre {
     this.button_text_color = button_text_color;
     this.typeEcriture = typeEcriture;
   }
+  
 
 }

@@ -14,7 +14,7 @@ function restart() {
     imagePuzzle.startGame(images, gridSize);
 }
 function rules() {
-    alert('Re arrange the image parts in a way that it correctly forms the picture. \nThe no. of steps taken will be counted.');
+    alert('Réorganiser pour créer une image comme celle-ci');
 }
 var timerFunction;
 
