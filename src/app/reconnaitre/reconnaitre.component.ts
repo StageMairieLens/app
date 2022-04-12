@@ -13,13 +13,15 @@ export class ReconnaitreComponent implements OnInit {
 
   constructor() {
     this.r = null;
-   }
+    this.alea(this.liste_images);
+    this.alea2(this.liste_mot_boutton);
+  }
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Reconnaitre | null;
   @Input() showTitle : boolean = true;
   clicked = false; //Le boutton n'est pas désactiver
   //liste_images : String[] = ["../../assets/lion.jpg","../../assets/chat.jpg","../../assets/chien.jpeg","../../assets/souris.jpg"];
-  liste_images: Image[] = [
+  images: Image[] = [
     new Image('Fleur', '../../assets/fleur.jpg'),
     new Image('Lion', '../../assets/lion.jpg'),
     new Image('Chat', '../../assets/chat.jpg'),
@@ -27,11 +29,13 @@ export class ReconnaitreComponent implements OnInit {
     new Image('Elephant', '../../assets/elephant.jpg'),
     new Image('Voiture', '../../assets/voiture.png')
   ];
+  liste_images = [];
   prochaine_image = 0;
    //Variable qui contient l'image a trouver
-  liste_mot : string[] =["Lion","AZE","chat","pas","test2","4","5","6","8","9"]; //Liste qui contient les noms des images
+  liste_mot : string[] = []; //Liste qui contient les noms des images
+  liste_mot_boutton : string[] = [];
   compteur = 0 ; //Compte le nombre d'erreur
-  variable : Image = this.liste_images[this.prochaine_image];
+  variable : string = this.liste_images[this.prochaine_image];
   ngOnInit(): void {
     //Zthis.alea(this.liste_images);
     console.log(this.liste_images);
@@ -42,8 +46,32 @@ export class ReconnaitreComponent implements OnInit {
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
 }
-  alea(li : String[]):void{
-    var m = li.length, t, i;
+  alea(li:string[]):void{
+    for(var taile=0;this.images[taile];taile++){
+      this.liste_mot.push(this.images[taile].getNom());
+      li.push(this.images[taile].getSrc());
+    }
+    var m = this.liste_mot.length, t, i,t2;
+
+    // While there remain elements to shuffle
+    while (m) {
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+
+      // And swap it with the current element.
+      t = li[m];
+      t2 = this.liste_mot[m];
+      li[m] = li[i];
+      this.liste_mot[m] = this.liste_mot[i];
+      li[i] = t;
+      this.liste_mot[i] = t2;
+    }
+  }
+  alea2(li:string[]):void{
+    for(var taile=0;this.images[taile];taile++){
+      li.push(this.liste_mot[taile]);
+    }
+    var m = this.liste_mot.length, t, i,t2;
 
     // While there remain elements to shuffle
     while (m) {
@@ -55,14 +83,11 @@ export class ReconnaitreComponent implements OnInit {
       li[m] = li[i];
       li[i] = t;
     }
-
-
-
   }
+
   change($event: any,varia:string):Boolean{
     //this.variable=this.liste_images[this.prochaine_image];
-    if(varia == "Lion"){ //Si reponse trouver alert un message et bloque tous les bouttons
-      //alert("Bien joué");
+    if(varia == this.liste_mot[this.prochaine_image]){ //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked=false;
       this.prochaine_image+=1;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';

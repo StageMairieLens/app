@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <form ngNoForm [action]="url" method="post">
+    
     <div id="collage">
         <h2>Image Puzzle</h2>
         <hr />
@@ -25,7 +25,7 @@
                         Time Taken: <span id="timerPanel"></span> secs
                     </div>
                     <img id="actualImage" />
-                    <div>Re-arrange to create a picture like this.</div>
+                    <div>Réorganiser pour créer une image comme celle-ci.</div>
                     <p id="levelPanel">
                         <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
                         /> <label for="easy">Easy</label>
@@ -43,18 +43,18 @@
         </div>
         <div id="gameOver" style="display:none;">
             <div style="background-color: #fc9e9e; padding: 5px 10px 20px 10px; text-align: center; ">
-                <h2 style="text-align:center">Game Over!!</h2>
-                Congratulations!! <br /> You have completed this picture.
+                <h2 style="text-align:center">Fin de partie!!</h2>
+                Félicitation!!<br /> Tu as compléter l'image.
                 <br /> Steps: <span id="stepCount" class="stepCount">0</span> steps.
                 <br /> Time Taken: <span class="timeCount">0</span> seconds<br />
                 <div>
-                    <button type="button" onclick="window.location.reload(true);">Play Again</button>
+                    <button type="button" onclick="window.location.reload(true);">Joue encore</button>
                 </div>
             </div>
         </div>
         
         
     </div>
-    </form>   
+      
 </body>
 </html>

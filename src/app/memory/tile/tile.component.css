@@ -1,0 +1,11 @@
+.image {
+    height: 185px;
+    width: 185px;
+    padding: 10px;
+}
+
+.mot {
+    font-size: 50px;
+    text-align: center;
+    padding-top: 50px;
+}

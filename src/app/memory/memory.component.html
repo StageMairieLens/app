@@ -1,64 +1,70 @@
-<div class="plateau">
+<div *ngIf="!finish" class="plateau container">
 <table>
     <tr>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 1" #tile1 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 2" #tile2 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 5" #tile5 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 7" #tile7 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 13" #tile13 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
-        </td>
-        <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 14" #tile14 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
     <tr>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 3" #tile3 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 4" #tile4 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 6" #tile6 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 8" #tile8 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 15" #tile15 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
         <td>
-            <img class="image" src="{{derriere}}">
+            <app-tile *ngIf="nbTile >= 16" #tile16 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <app-tile *ngIf="nbTile >= 9" #tile9 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 10" #tile10 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 11" #tile11 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 12" #tile12 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 17" #tile17 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 18" #tile18 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
 </table>
+<div class="text">{{essaie}} essaie(s) {{nbBon}} trouvé(s)</div>
+</div>
+
+<div *ngIf="finish" class="container" style="background-color: white; margin-top: 10%;">
+    <img src="../../assets/congratulation.webp">
+    <div class="text" style="color: black;">Félicitation !</div>
 </div>

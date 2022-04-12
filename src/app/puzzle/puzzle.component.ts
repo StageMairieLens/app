@@ -8,8 +8,7 @@ declare function lance():any;
   styleUrls: ['./puzzle.component.css']
 })
 export class PuzzleComponent implements OnInit {
-  name = 'Dynamic Form Action Demo';
-  url = 'test.php'
+  
   constructor() { }
   ngOnInit(): void {
     lance();

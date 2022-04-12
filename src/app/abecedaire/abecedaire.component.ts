@@ -8,15 +8,15 @@ import { delay } from 'rxjs';
 })
 export class AbecedaireComponent implements OnInit {
 
-  @Input() rightLetter = '';
+  rightLetter = '';
   errors = 0;
   image = "";
   mot = "";
   map = new Map();
   entries = this.map.entries();
   nbEntries = 0;
-  @Input() sound = true;
-  @Input() afficherMot = "cursif";
+  sound = true;
+  afficherMot = "cursif";
 
   constructor() { }
 

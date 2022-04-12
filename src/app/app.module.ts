@@ -12,6 +12,7 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
 import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
+import { TileComponent } from './memory/tile/tile.component';
 import { ImagesComponent } from './images/images.component';
 import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +34,7 @@ import { MatDividerModule } from '@angular/material/divider';
     AbecedaireComponent,
     MemoryComponent,
     PanelComponent,
+    TileComponent,
     ImagesComponent
   ],
   imports: [
