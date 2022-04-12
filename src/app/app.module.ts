@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { RecopierGameComponent } from './recopier-game/recopier-game.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
 import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
+import { ImagesComponent } from './images/images.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,14 @@ import { PanelComponent } from './panel/panel.component';
     PuzzleComponent,
     AbecedaireComponent,
     MemoryComponent,
-    PanelComponent
+    PanelComponent,
+    ImagesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DragDropModule
+    DragDropModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

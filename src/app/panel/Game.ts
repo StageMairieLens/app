@@ -1,5 +1,5 @@
 import { Option } from './Option';
-import { Image } from '../recopier-game/Image';
+import { Image } from '../Image';
 
 export class Game {
   nom : string;

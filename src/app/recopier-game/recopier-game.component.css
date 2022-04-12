@@ -8,6 +8,7 @@
 
 .image {
   border: solid grey 2px;
+  width : 490px;
 }
 
 #input_recopier {
