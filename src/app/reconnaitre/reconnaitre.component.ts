@@ -8,6 +8,8 @@ import { Component, OnInit,ViewChild,ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
+  name = 'Dynamic Form Action Demo';
+  url = 'test.php'; 
   constructor() { }
   clicked = false; //Le boutton n'est pas désactiver
   liste_image : String[] = ["../../assets/lion.jpg","../../assets/chat.jpg","../../assets/chien.jpeg","../../assets/souris.jpg"];

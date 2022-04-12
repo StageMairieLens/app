@@ -1,4 +1,6 @@
 <body>
+
+  <!-- Barre de navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/panel">Sessions</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -31,6 +33,7 @@
     </div>
   </nav>
 
+  <!-- Si aucun jeu n'est selectionné -->
   <div class="card container" *ngIf="this.selectedGame === ''">
     <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
     <div class="card-body">
@@ -42,61 +45,205 @@
     </div>
   </div>
 
+  <!-- Si un jeu est selectionné -->
   <div class="card container" *ngIf="this.selectedGame != ''">
     <h5 class="card-header">{{this.selectedGame}}</h5>
     <div class="card-body">
-      <div class="stepMenu">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item active"><button type="button" class="btn btn-primary" (click)="this.formStep = 0">Images</button></li>
-            <li class="breadcrumb-item active"><button type="button" class="btn btn-primary" (click)="this.formStep = 1">Couleurs</button></li>
-            <li class="breadcrumb-item active"><button type="button" class="btn btn-primary" (click)="this.formStep = 2">Texte</button></li>
-          </ol>
-        </nav>
-      </div>
 
-      <div *ngIf="this.formStep == 0">
-        <h2 class="card-title">Choisissez les images</h2>
-        <div *ngIf="this.selectedGame == 'Recopier'">
-          <div class="card-body selectImage_container text-center">
-            <h5 class="card-header" style="color : black">Listes des images</h5>
-            <figure class="figure" *ngFor="let image of this.liste_image">
-              <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
-              <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-            </figure>
+      <div *ngIf="!this.previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button type="button" class="btn btn-danger" (click)="setPrevisualiser(true)">
+            Prévisualiser
+          </button>
+        </div>
 
+        <!-- Menu de navigation dans le formulaire -->
+        <div class="stepMenu">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><button type="button" class="btn btn-primary" (click)="setFormStep(0)">Images
+                  <i class="fa-solid fa-images"></i>
+                </button></li>
+              <li class="breadcrumb-item"><button type="button" class="btn btn-outline-primary"
+                  (click)="setFormStep(1)">Couleurs
+                  <i class="fa-solid fa-brush"></i>
+                </button></li>
+              <li class="breadcrumb-item"><button type="button" class="btn btn-outline-primary"
+                  (click)="setFormStep(2)">Texte
+                  <i class="fa-solid fa-font"></i></button></li>
+            </ol>
+          </nav>
+        </div>
+
+
+        <!-- Etape du formulaire 1 -- Choix des images-->
+        <div *ngIf="this.formStep == 0">
+          <h2 class="card-title text-center">Choisissez les images</h2>
+          <div *ngIf="this.selectedGame == 'Recopier'">
+            <div class="card-body selectImage_container text-center align-top">
+              <h5 class="card-header" style="color : black">Listes des images</h5>
+              <figure class="figure" *ngFor="let image of this.liste_image">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+
+            </div>
+            <div class="card-body selectImage_container text-center">
+              <h5 class="card-header" style="color : black">Images selectionné</h5>
+              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez selectionné
+                aucune image</h6>
+              <figure class="figure" *ngFor="let image of this.selectedImages">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
           </div>
-          <div class="card-body selectImage_container text-center">
-            <h5 class="card-header" style="color : black">Images selectionné</h5>
-            <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez selectionné
-              aucune image</h6>
-            <figure class="figure" *ngFor="let image of this.selectedImages">
-              <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
-              <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-            </figure>
-          </div>
+        </div>
+
+        <!-- Etape du formulaire 2 -- Choix des couleurs -->
+        <div *ngIf="this.formStep == 1">
+          <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+          <form>
+
+            <div class="form-row">
+              <div class="col-md-4">
+                <label for="recopier_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_bg_color = recopier_bg_color_input.value " #recopier_bg_color_input
+                    value="{{this.recopier_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+                </label>
+              </div>
+              <div class="col-md-4">
+                <label for="recopier_text_color_input" class="form-label align-middle">Couleur du texte
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_text_color = recopier_text_color_input.value " #recopier_text_color_input
+                    value="{{this.recopier_text_color}}" title="Choisissez la couleur du texte">
+                </label>
+              </div>
+
+              <div class="col-md-4">
+                <label for="recopier_title_color_input" class="form-label align-middle">Couleur du titre
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_title_color = recopier_title_color_input.value " #recopier_title_color_input
+                    value="{{this.recopier_title_color}}" title="Choisissez la couleur du titre">
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="recopier_good_answer_color_input" class="form-label align-middle">Couleur du message bonne
+                  réponse
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_good_answer_color = recopier_good_answer_color_input.value "
+                    #recopier_good_answer_color_input value="{{this.recopier_good_answer_color}}"
+                    title="Choisissez la couleur du message de bonne réponse">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message mauvaise
+                  réponse
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
+                    #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
+                    title="Choisissez la couleur du messaage de mauvaise réponse">
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="recopier_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan du
+                  bouton
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_button_bg_color = recopier_button_bg_color_input.value "
+                    #recopier_button_bg_color_input value="{{this.recopier_button_bg_color}}"
+                    title="Choisissez la couleur d'arriére-plan du bouton">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="recopier_button_text_color_input" class="form-label align-middle">Couleur du texte du bouton
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_button_text_color = recopier_button_text_color_input.value "
+                    #recopier_button_text_color_input value="{{this.recopier_button_text_color}}"
+                    title="Choisissez la couleur du texte du bouton">
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="recopier_input_bg_color_input" class="form-label align-middle">Couleur d'arriére plan de la
+                  zone d'entrée
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_input_bg_color = recopier_input_bg_color_input.value "
+                    #recopier_input_bg_color_input value="{{this.recopier_input_bg_color}}"
+                    title="Choisissez la couleur d'arriére-plan de la zone d'entrée">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="recopier_input_text_color_input" class="form-label align-middle">Couleur du texte de la zone
+                  d'entrée
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.recopier_input_text_color = recopier_input_text_color_input.value "
+                    #recopier_input_text_color_input value="{{this.recopier_input_text_color}}"
+                    title="Choisissez la couleur du texte du bouton">
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression
+                  <select class="form-control" aria-label="Default select example" #progressSelectValue
+                    (change)="changeProgressValue(progressSelectValue)">
+                    <option *ngFor="let p of this.progressValue" value="{{p}}" #progressValue>
+                      <p *ngIf="p == 'blue'">Bleu</p>
+                      <p *ngIf="p == 'green'">Vert</p>
+                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                      <p *ngIf="p == 'orange'">Orange</p>
+                      <p *ngIf="p == 'red'">Rouge</p>
+                    </option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Etape du formulaire 3 -- Choix des textes -->
+        <div *ngIf="this.formStep == 2">
+          TEXT
+        </div>
+
+
+
+
+
+
+        <div class="align-bottom" style="margin : 10px">
+          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            (click)="previousStep()">
+            Etape précédente
+          </button>
+          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+            (click)="nextStep()">
+            Etape suivante
+          </button>
         </div>
       </div>
 
-      <div *ngIf="this.formStep == 1">
-        COULEURS
+      <div *ngIf="this.previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button type="button" class="btn btn-danger" (click)="setPrevisualiser(false)">
+            Quitter la prévisualisation
+          </button>
+        </div>
+
+        <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
       </div>
 
-      <div *ngIf="this.formStep == 2">
-        TEXT
-      </div>
-
-
-      <div class="align-bottom" style="margin : 10px">
-        <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-          (click)="previousStep()">
-          Etape précédente
-        </button>
-        <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
-          (click)="nextStep()">
-          Etape suivante
-        </button>
-      </div>
     </div>
   </div>
 

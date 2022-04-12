@@ -13,6 +13,7 @@
       <span>E</span>
     </h1>
   </div>
+  <form ngNoform [action]="url" method="post">
   <div *ngIf="this.prochaine_image != this.liste_image.length" class="card align-middle container" id="container"
     style="width: 32rem;">
 
@@ -47,5 +48,5 @@
     </div>
   </div>
  
-
+  </form>
 </body>

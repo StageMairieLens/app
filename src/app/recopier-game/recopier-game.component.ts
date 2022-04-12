@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Image } from '../Image'
 import { Recopier } from './Recopier'
 import { Progress } from '../Progress'
@@ -11,14 +11,15 @@ import { Progress } from '../Progress'
 export class RecopierGameComponent implements OnInit {
 
   constructor() {
-    this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture);
-    // this.r = null;
+    // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture);
+    this.r = null;
   }
 
   image: Image[] = [];
   showImageCpt: number = 0;
   typeEcriture: string = "CAPITAL"; // default
-  r: Recopier | null;
+  @Input() r: Recopier | null;
+  @Input() showTitle : boolean = true;
 
   images: Image[] = [
     new Image('Fleur', '../../assets/fleur.jpg'),
@@ -41,7 +42,6 @@ export class RecopierGameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
 

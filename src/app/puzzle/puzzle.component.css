@@ -48,10 +48,10 @@
     width: 400px;
 }
 
-    #collage #sortable li {
+    #collage #sortable li  {
         background-size: 400% 400%;
         border: none;
-        cursor: pointer;
+        cursor: progress;
         margin: 0;
         padding: 0;
         float: left;
