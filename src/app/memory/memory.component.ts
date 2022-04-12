@@ -21,6 +21,7 @@ export class MemoryComponent implements OnInit {
   retourner: string = "0";
   essaie: number = 0;
   nbBon: number = 0;
+  finish: boolean = false;
   @ViewChild("tile1") tile1!: TileComponent;
   @ViewChild("tile2") tile2!: TileComponent;
   @ViewChild("tile3") tile3!: TileComponent;
@@ -58,6 +59,12 @@ export class MemoryComponent implements OnInit {
 
   ngAfterViewInit() {
     this.tiles = [this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15, this.tile16, this.tile17, this.tile18];
+    for(var i = 0; i < this.nbTile; i++) {
+      this.tiles[i].isImage = this.isImage[i];
+      this.tiles[i].sound = this.sound[i];
+      this.tiles[i].id = (i+1).toString();
+      this.tiles[i].affichage = this.affichage[i];
+    }
   }
 
   start(): void {
@@ -112,7 +119,9 @@ export class MemoryComponent implements OnInit {
         this.retourner = "0";
         this.nbBon++;
         if(this.nbBon >= this.nbTile/2) {
-          //victory
+          setTimeout(() => {
+            this.finish = true;
+          }, 1000);
         }
       }
       else {

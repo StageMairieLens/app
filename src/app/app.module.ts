@@ -33,7 +33,6 @@ import { ImagesComponent } from './images/images.component';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

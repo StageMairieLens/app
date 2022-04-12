@@ -6,6 +6,7 @@ import { Image } from '../Image'
 import { Recopier } from './../recopier-game/Recopier'
 import { Router } from '@angular/router';
 import { ImagesComponent } from '../images/images.component';
+import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 
 @Component({
   selector: 'app-panel',
@@ -17,6 +18,7 @@ export class PanelComponent implements OnInit {
   constructor(private router: Router) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
+    this.reconnaitre = null;
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -48,6 +50,17 @@ export class PanelComponent implements OnInit {
   recopier_input_text_color: string = "#000000";
   recopier_progress: Progress = Progress.Orange;
   recopier_type_ecriture = "CURSIF";
+
+  reconnaitre: Reconnaitre | null;
+  reconnaitre_bg_color: string = "#3bb8c9";
+  reconnaitre_title_color: string = "#ffffff";
+  reconnaitre_good_answer_color: string = "#0dff00";
+  reconnaitre_wrong_answer_color: string = "#ff0000";
+  reconnaitre_button_bg_color: string = "#0f73b1";
+  reconnaitre_button_text_color: string = "#ffffff";
+  reconnaitre_progress: Progress = Progress.Orange;
+  reconnaitre_type_ecriture = "CURSIF";
+ 
 
   formStep: number = 0;
   // r1 : Recopier = new Recopier([],'red','CAPITAL');

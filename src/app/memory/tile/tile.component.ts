@@ -11,8 +11,8 @@ export class TileComponent implements OnInit {
   @Input() isImage = true;
   @Input() affichage = "";
   @Input() sound = false;
-  @Input() set = "0";
-  @Output() _set = new EventEmitter<string>();
+  @Input() id = "0";
+  @Output() _id = new EventEmitter<string>();
   @Input() disable = false;
   retourner = false;
 
@@ -27,7 +27,7 @@ export class TileComponent implements OnInit {
       if(this.sound) {
         //TO DO
       }
-      this._set.emit(this.set);
+      this._id.emit(this.id);
     }
   }
 
