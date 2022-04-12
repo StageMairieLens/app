@@ -12,6 +12,7 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
 import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
+import { TileComponent } from './memory/tile/tile.component';
 import { ImagesComponent } from './images/images.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ImagesComponent } from './images/images.component';
     AbecedaireComponent,
     MemoryComponent,
     PanelComponent,
+    TileComponent,
     ImagesComponent
   ],
   imports: [
