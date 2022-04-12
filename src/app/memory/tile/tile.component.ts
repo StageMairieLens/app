@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-tile',
@@ -10,8 +10,10 @@ export class TileComponent implements OnInit {
   @Input() derriere = "";
   @Input() isImage = true;
   @Input() affichage = "";
-  @Input() set = 0;
   @Input() sound = false;
+  @Input() set = "0";
+  @Output() _set = new EventEmitter<string>();
+  @Input() disable = false;
   retourner = false;
 
   constructor() { }
@@ -19,12 +21,14 @@ export class TileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setDerriere(image: string) {
-    this.derriere = image;
-  }
-
   click(): void {
-    this.retourner = true;
+    if(!this.disable) {
+      this.retourner = true;
+      if(this.sound) {
+        //TO DO
+      }
+      this._set.emit(this.set);
+    }
   }
 
   cacher(): void {

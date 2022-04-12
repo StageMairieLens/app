@@ -2,63 +2,64 @@
 <table>
     <tr>
         <td>
-            <app-tile *ngIf="nbTile >= 1" id="1" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 1" #tile1 [derriere]="derriere" [affichage]="affichage[0]" [isImage]="isImage[0]" [sound]="sound[0]" set="1" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 2" id="2" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 2" #tile2 [derriere]="derriere" [affichage]="affichage[1]" [isImage]="isImage[1]" [sound]="sound[1]" set="2" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 5" id="5" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 5" #tile5 [derriere]="derriere" [affichage]="affichage[4]" [isImage]="isImage[4]" [sound]="sound[4]" set="5" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 7" id="7" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 7" #tile7 [derriere]="derriere" [affichage]="affichage[6]" [isImage]="isImage[6]" [sound]="sound[6]" set="7" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 13" id="13" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 13" #tile13 [derriere]="derriere" [affichage]="affichage[12]" [isImage]="isImage[12]" [sound]="sound[12]" set="13" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 14" id="14" [derriere]="derriere"></app-tile>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <app-tile *ngIf="nbTile >= 3" id="3" [derriere]="derriere"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 4" id="4" [derriere]="derriere"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 6" id="6" [derriere]="derriere"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 8" id="8" [derriere]="derriere"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 15" id="15" [derriere]="derriere"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 16" id="16" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 14" #tile14 [derriere]="derriere" [affichage]="affichage[13]" [isImage]="isImage[13]" [sound]="sound[13]" set="14" (_set)="retourne($event)"></app-tile>
         </td>
     </tr>
     <tr>
         <td>
-            <app-tile *ngIf="nbTile >= 9" id="9" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 3" #tile3 [derriere]="derriere" [affichage]="affichage[2]" [isImage]="isImage[2]" [sound]="sound[2]" set="3" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 10" id="10" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 4" #tile4 [derriere]="derriere" [affichage]="affichage[3]" [isImage]="isImage[3]" [sound]="sound[3]" set="4" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 11" id="11" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 6" #tile6 [derriere]="derriere" [affichage]="affichage[5]" [isImage]="isImage[5]" [sound]="sound[5]" set="6" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 12" id="12" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 8" #tile8 [derriere]="derriere" [affichage]="affichage[7]" [isImage]="isImage[7]" [sound]="sound[7]" set="8" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 17" id="17" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 15" #tile15 [derriere]="derriere" [affichage]="affichage[14]" [isImage]="isImage[14]" [sound]="sound[14]" set="15" (_set)="retourne($event)"></app-tile>
         </td>
         <td>
-            <app-tile *ngIf="nbTile >= 18" id="18" [derriere]="derriere"></app-tile>
+            <app-tile *ngIf="nbTile >= 16" #tile16 [derriere]="derriere" [affichage]="affichage[15]" [isImage]="isImage[15]" [sound]="sound[15]" set="16" (_set)="retourne($event)"></app-tile>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <app-tile *ngIf="nbTile >= 9" #tile9 [derriere]="derriere" [affichage]="affichage[8]" [isImage]="isImage[8]" [sound]="sound[8]" set="9" (_set)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 10" #tile10 [derriere]="derriere" [affichage]="affichage[9]" [isImage]="isImage[9]" [sound]="sound[9]" set="10" (_set)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 11" #tile11 [derriere]="derriere" [affichage]="affichage[10]" [isImage]="isImage[10]" [sound]="sound[10]" set="11" (_set)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 12" #tile12 [derriere]="derriere" [affichage]="affichage[11]" [isImage]="isImage[11]" [sound]="sound[11]" set="12" (_set)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 17" #tile17 [derriere]="derriere" [affichage]="affichage[16]" [isImage]="isImage[16]" [sound]="sound[16]" set="17" (_set)="retourne($event)"></app-tile>
+        </td>
+        <td>
+            <app-tile *ngIf="nbTile >= 18" #tile18 [derriere]="derriere" [affichage]="affichage[17]" [isImage]="isImage[17]" [sound]="sound[17]" set="18" (_set)="retourne($event)"></app-tile>
         </td>
     </tr>
 </table>
+<div class="text">{{essaie}} essaie(s) {{nbBon}} trouvé(s)</div>
 </div>
