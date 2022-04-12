@@ -10,7 +10,7 @@ import { Image } from '../Image'
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
- 
+
   constructor() {
     this.r = null;
    }
@@ -29,7 +29,7 @@ export class ReconnaitreComponent implements OnInit {
   ];
   prochaine_image = 0;
    //Variable qui contient l'image a trouver
-  liste_mot : string[] =["Lion","AZE","chat","pas","test2","4","5","6","8","9"]; //Liste qui contient les noms des images 
+  liste_mot : string[] =["Lion","AZE","chat","pas","test2","4","5","6","8","9"]; //Liste qui contient les noms des images
   compteur = 0 ; //Compte le nombre d'erreur
   variable : Image = this.liste_images[this.prochaine_image];
   ngOnInit(): void {
@@ -37,27 +37,27 @@ export class ReconnaitreComponent implements OnInit {
     console.log(this.liste_images);
     this.variable = this.liste_images[this.prochaine_image];
 
-    
+
   }
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
 }
   alea(li : String[]):void{
     var m = li.length, t, i;
-  
+
     // While there remain elements to shuffle
     while (m) {
       // Pick a remaining element…
       i = Math.floor(Math.random() * m--);
-  
+
       // And swap it with the current element.
       t = li[m];
       li[m] = li[i];
       li[i] = t;
     }
-  
-    
-  
+
+
+
   }
   change($event: any,varia:string):Boolean{
     //this.variable=this.liste_images[this.prochaine_image];
@@ -72,13 +72,13 @@ export class ReconnaitreComponent implements OnInit {
         document.getElementById('container')!.animate([ { opacity: 1 },
         { opacity: 0.1, offset: 0.7 },
         { opacity: 1 } ],
-        
+
       800);
       },1000);
       setTimeout(() => {
         document.getElementById('result')!.innerHTML = '';
         document.getElementById('progressbar')!.style.width = ((this.prochaine_image/this.liste_images.length)*100).toString() + '%';
-        
+
       },
       1600);
       if(this.prochaine_image < this.liste_images.length){
@@ -86,8 +86,8 @@ export class ReconnaitreComponent implements OnInit {
           (<HTMLButtonElement>document.getElementById(i)).disabled = false;
 
         }
-        
-        
+
+
         //($event.target as HTMLButtonElement).disabled = false;
       }
       else{
@@ -99,7 +99,7 @@ export class ReconnaitreComponent implements OnInit {
       //document.getElementById(varia)!.style.backgroundColor="red";
       ($event.target as HTMLButtonElement).disabled = true;
       this.compteur+=1;
-     
+
       document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
       document.getElementById('container2')?.animate([
         { transform: 'translateX(0px)'},
@@ -109,10 +109,10 @@ export class ReconnaitreComponent implements OnInit {
       );
       return false;
     }
-    
+
   }
 
-  
-  
+
+
 
 }

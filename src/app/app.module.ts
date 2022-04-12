@@ -13,6 +13,14 @@ import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
 import { ImagesComponent } from './images/images.component';
+import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
@@ -31,8 +39,18 @@ import { ImagesComponent } from './images/images.component';
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
+    MatRadioModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatStepperModule,
+    MatCardModule,
+    MatDividerModule
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_RADIO_DEFAULT_OPTIONS,
+    useValue: { color: 'accent' },
+  }],
   bootstrap: [AppComponent]
 })
 

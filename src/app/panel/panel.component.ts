@@ -15,7 +15,7 @@ import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 })
 export class PanelComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, ) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
@@ -59,13 +59,12 @@ export class PanelComponent implements OnInit {
   reconnaitre_button_bg_color: string = "#0f73b1";
   reconnaitre_button_text_color: string = "#ffffff";
   reconnaitre_progress: Progress = Progress.Orange;
-  reconnaitre_type_ecriture = "CURSIF";
- 
+  reconnaitre_type_ecriture = "SCRIPT";
+
 
   formStep: number = 0;
   // r1 : Recopier = new Recopier([],'red','CAPITAL');
   // r2 : Recopier = new Recopier([],'blue','CAPITAL');
-
 
   ngOnInit(): void {
   }
@@ -112,13 +111,13 @@ export class PanelComponent implements OnInit {
   }
 
   setActive(element: Element | null): void {
-    element!.classList.remove('btn-outline-primary');
-    element!.classList.add('btn-primary');
+    element!.classList.remove('active');
+    element!.classList.add('active');
   }
 
   setInactive(element: Element | null) {
-    element!.classList.remove('btn-primary');
-    element!.classList.add('btn-outline-primary');
+    element!.classList.remove('active');
+    element!.classList.add('active');
   }
 
   nextStep(): void {
@@ -131,9 +130,9 @@ export class PanelComponent implements OnInit {
   }
 
   setFormStep(step: number): void {
-    this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+    // this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
     this.formStep = step;
-    this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
+    // this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
 
   }
 
