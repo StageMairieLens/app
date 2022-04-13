@@ -47,19 +47,7 @@
     height: 40px;
     width: 40px;
     border-radius: 100%;
-    background-color: orange;
     display: inline-block;
-}
-
-.wrong {
-    background-color: red;
-    color: white;
-}
-
-.right {
-    background-color: blue;
-    color: white;
-
 }
 
 .progress {

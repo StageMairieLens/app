@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { delay } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Image } from '../Image';
+import { Progress } from '../Progress';
+import { Abecedaire } from './Abecedaire';
 
 @Component({
   selector: 'app-abecedaire',
@@ -8,46 +10,43 @@ import { delay } from 'rxjs';
 })
 export class AbecedaireComponent implements OnInit {
 
+  game: Abecedaire | null;
   rightLetter = '';
   errors = 0;
-  image = "";
-  mot = "";
-  map = new Map();
-  entries = this.map.entries();
+  images: Image[] = [
+    new Image("Orange", "../../assets/orange.jpg"),
+    new Image("Voiture", "../../assets/voiture.png"),
+  ];
   nbEntries = 0;
   sound = true;
   afficherMot = "cursif";
 
-  constructor() { }
+  constructor() {
+    this.game = new Abecedaire(this.images, '#3bb8c9', 'red', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', "cursif");
+    //this.game = null;
+  }
 
   ngOnInit(): void {
-    this.map.set("Orange", "../../assets/orange.jpg");
-    this.map.set("Voiture", "../../assets/voiture.png");
-    let entry = this.entries.next().value;
-    this.image = entry[1];
-    this.mot = entry[0];
-    this.rightLetter = entry[0][0].toUpperCase();
+    this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
+    this.afficherMot = this.game!.typeEcriture;
+    this.addImage("Félicitation !", "../../assets/images/congratulation.png");
   }
 
   nextImage() {
-    if(this.nbEntries == this.map.size) {
-      this.mot = "Félicitation!"
+    if(this.nbEntries == this.game!.images.length - 1) {
       var buttons = document.getElementsByClassName("button");
       for(var i = 0; i < buttons.length; i++) {
-        (buttons.item(i) as HTMLButtonElement).className = "button";
+        (buttons.item(i) as HTMLButtonElement).style.backgroundColor = this.game!.button_bg_color;
       }
     }
     else {
-      let entry = this.entries.next().value;
-      this.image = entry[1];
-      this.mot = entry[0];
-      this.rightLetter = entry[0][0].toUpperCase();
+      this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
       this.resetButton();
     }
   }
 
   addImage(mot: string, image: string) {
-    this.map.set(mot, image);
+    this.game!.images.push(new Image(mot, image));
   }
 
   errorsPlus(): void {
@@ -61,27 +60,27 @@ export class AbecedaireComponent implements OnInit {
   click($event: MouseEvent,letter:string): void {
     ($event.target as HTMLButtonElement).disabled = true;
     if(letter == this.rightLetter) {
-      ($event.target as HTMLButtonElement).className += " right";
+      ($event.target as HTMLButtonElement).style.backgroundColor = this.game!.good_answer_color;
       var buttons = document.getElementsByClassName("button");
       for(var i = 0; i < buttons.length; i++) {
         (buttons.item(i) as HTMLButtonElement).disabled = true;
       }
       setTimeout(() => {
         this.nbEntries++;
-        document.getElementById('progressbar')!.style.width = ((this.nbEntries / this.map.size) * 100).toString() + '%';
+        document.getElementById('progressbar')!.style.width = ((this.nbEntries / (this.game!.images.length - 1)) * 100).toString() + '%';
         this.nextImage();
       }, 1000);
     }
     else {
       this.errorsPlus();
-      ($event.target as HTMLButtonElement).className += " wrong";
+      ($event.target as HTMLButtonElement).style.backgroundColor = this.game!.wrong_answer_color;
     }
   }
 
   resetButton() {
     var buttons = document.getElementsByClassName("button");
     for(var i = 0; i < buttons.length; i++) {
-      (buttons.item(i) as HTMLButtonElement).className = "button";
+      (buttons.item(i) as HTMLButtonElement).style.backgroundColor = this.game!.button_bg_color;
       (buttons.item(i) as HTMLButtonElement).disabled = false;
     }
   }
