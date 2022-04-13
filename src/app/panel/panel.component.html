@@ -357,6 +357,7 @@
           <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
             mat-raised-button color="warn">Prévisualiser</button>
         </div>
+      </div>
 
         <!-- Formulaire Reconnaitre - Menu de navigation -->
         <div class="stepMenu">
@@ -409,6 +410,17 @@
           </div>
         </div>
 
+              <!-- Formulaire Recopier - Prévisualisation -->
+      <div *ngIf="this.reconnaitre_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
+              mat-raised-button color="warn">Quitter la prévisualisation</button>
+          </div>
+        </div>
+        <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+      </div>
+
         <!--Formulaire Reconnaite -  Menu de navigation par étape -->
         <div class="align-bottom" style="margin : 10px">
           <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
@@ -423,20 +435,9 @@
           </button>
         </div>
 
-        <!-- Formulaire Recopier - Prévisualisation -->
-        <div *ngIf="this.reconnaitre_previsualiser">
-          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-              <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
-                mat-raised-button color="warn">Quitter la prévisualisation</button>
-            </div>
-          </div>
-          <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
-        </div>
 
       </div>
     </div>
-  </div>
 
 
 
