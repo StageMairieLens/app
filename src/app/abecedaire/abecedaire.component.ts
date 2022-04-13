@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Abecedaire } from './Abecedaire';
@@ -10,7 +10,7 @@ import { Abecedaire } from './Abecedaire';
 })
 export class AbecedaireComponent implements OnInit {
 
-  game: Abecedaire | null;
+  @Input() game: Abecedaire | null;
   rightLetter = '';
   errors = 0;
   images: Image[] = [
@@ -20,6 +20,7 @@ export class AbecedaireComponent implements OnInit {
   nbEntries = 0;
   sound = true;
   afficherMot = "cursif";
+  finish = false;
 
   constructor() {
     this.game = new Abecedaire(this.images, '#3bb8c9', 'red', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', "cursif");
@@ -29,15 +30,15 @@ export class AbecedaireComponent implements OnInit {
   ngOnInit(): void {
     this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
     this.afficherMot = this.game!.typeEcriture;
-    this.addImage("Félicitation !", "../../assets/images/congratulation.png");
   }
 
   nextImage() {
-    if(this.nbEntries == this.game!.images.length - 1) {
+    if(this.nbEntries == this.game!.images.length) {
       var buttons = document.getElementsByClassName("button");
       for(var i = 0; i < buttons.length; i++) {
         (buttons.item(i) as HTMLButtonElement).style.backgroundColor = this.game!.button_bg_color;
       }
+      this.finish = true;
     }
     else {
       this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
@@ -67,7 +68,7 @@ export class AbecedaireComponent implements OnInit {
       }
       setTimeout(() => {
         this.nbEntries++;
-        document.getElementById('progressbar')!.style.width = ((this.nbEntries / (this.game!.images.length - 1)) * 100).toString() + '%';
+        document.getElementById('progressbar')!.style.width = ((this.nbEntries / (this.game!.images.length)) * 100).toString() + '%';
         this.nextImage();
       }, 1000);
     }

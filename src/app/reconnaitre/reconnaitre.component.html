@@ -1,47 +1,58 @@
-<body>
-  <div *ngIf="this.showTitle" class="text-center">
-    <h1 class="title">
-      <span>R</span>
-      <span>E</span>
-      <span>C</span>
-      <span>O</span>
-      <span>N</span>
-      <span>A</span>
-      <span>I</span>
-      <span>T</span>
-      <span>R</span>
-      <span>E</span>
-    </h1>
-  </div>
+<div *ngIf="this.showTitle" class="text-center">
+  <h1 class="title">
+    <span>R</span>
+    <span>E</span>
+    <span>C</span>
+    <span>O</span>
+    <span>N</span>
+    <span>A</span>
+    <span>I</span>
+    <span>T</span>
+    <span>R</span>
+    <span>E</span>
+  </h1>
+</div>
 
-  <!-- Si le jeu est null -->
-  <div *ngIf="this.r == null" class="card align-middle container" id="card_error"
-    style="width: 32rem; background-color: #3bb8c9; color : black">
-    <img class="card-img-top image"
-      src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
-      alt="Card image cap">
-    <div class="card-body text-center">
-      <h5 class="card-title title_image_error">Erreur !</h5>
-      <p class="card-text">Il n'y a pas de jeu selectionné !</p>
-    </div>
+<!-- Si le jeu est null -->
+<div *ngIf="this.r == null" class="card align-middle container" id="card_error"
+  style="width: 32rem; background-color: #3bb8c9; color : black">
+  <img class="card-img-top image"
+    src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
+    alt="Card image cap">
+  <div class="card-body text-center">
+    <h5 class="card-title title_image_error">Erreur !</h5>
+    <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
+</div>
 
-  <!-- Si le jeu n'est pas null -->
-  <div *ngIf="this.r != null">
+<!-- Si le jeu n'est pas null -->
+<div *ngIf="this.r != null">
 
     <!-- Si la liste d'image n'est pas vide -->
-    <div *ngIf="this.r!.liste_images.length != 0">
+    <div *ngIf="this.r!.images.length != 0">
       <div *ngIf="this.prochaine_image != this.taille_to" class="card align-middle container" id="container"
         style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
 
 
-        <div class="col">
-          <p id="error" [ngStyle]="{background : this.r!.text_color}">Nombre d'erreur = {{ compteur }}</p>
-          <!-- Affiche le nombre d'erreur -->
+      <div class="col">
+        <p id="error" [ngStyle]="{background : this.r!.text_color}">Nombre d'erreur = {{ compteur }}</p>
+        <!-- Affiche le nombre d'erreur -->
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <img src="{{ this.images[this.prochaine_image] }}" class="card-img-top image">
+        </div>
+        <p id="result" class="text-center"></p>
+        <div id="mot" class="text-center">
+          <!-- Centre les mots -->
+          <button *ngFor="let mot of liste_mot_boutton" type="button" id="{{ mot }}" [disabled]="clicked"
+            (click)="!change($event,mot)    ;"
+            [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}">{{ mot }}</button>
+          <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
         </div>
         <div class="row">
           <div class="col text-center">
-            <img src="{{ this.r!.liste_images[this.prochaine_image].getSrc() }}" class="card-img-top image">
+            <img src="{{ this.r!.images[this.prochaine_image].getSrc() }}" class="card-img-top image">
           </div>
           <p id="result" class="text-center"></p>
           <div id="mot" class="text-center">
@@ -52,33 +63,33 @@
             <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
           </div>
 
+      </div>
+      <div class="align-bottom">
+        <div class="progress" *ngIf="this.r!.color_progress_bar == 'blue' ">
+          <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
         </div>
-        <div class="align-bottom">
-          <div class="progress" *ngIf="this.r!.color_progress_bar == 'blue' ">
-            <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-              aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-          </div>
 
-          <div class="progress" *ngIf="this.r!.color_progress_bar == 'green' ">
-            <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-              role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-          </div>
-
-          <div class="progress" *ngIf="this.r!.color_progress_bar == 'lightblue' ">
-            <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-              role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-          </div>
-
-          <div class="progress" *ngIf="this.r!.color_progress_bar == 'orange' ">
-            <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-              role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-          </div>
-
-          <div class="progress" *ngIf="this.r!.color_progress_bar == 'red' ">
-            <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-              role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-          </div>
+        <div class="progress" *ngIf="this.r!.color_progress_bar == 'green' ">
+          <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+            role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
         </div>
+
+        <div class="progress" *ngIf="this.r!.color_progress_bar == 'lightblue' ">
+          <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+            role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+        </div>
+
+        <div class="progress" *ngIf="this.r!.color_progress_bar == 'orange' ">
+          <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+            role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+        </div>
+
+        <div class="progress" *ngIf="this.r!.color_progress_bar == 'red' ">
+          <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+            role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+        </div>
+      </div>
 
         <!-- Carte félicitation -->
         <div *ngIf="this.prochaine_image == this.taille_to" class="card align-middle container"
@@ -94,20 +105,19 @@
           </div>
         </div>
       </div>
-
-
     </div>
-    <!-- Si la liste d'image est vide -->
-    <div *ngIf="this.r!.liste_images.length == 0" class="card align-middle container" id="card_finish"
-      style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
-      <img class="card-img-top image"
-        src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
-        alt="Card image cap">
-      <div class="card-body text-center">
-        <h5 class="card-title title_image_error">Erreur !</h5>
-        <p class="card-text" style="color : black">Il n'y a pas d'image selectionné</p>
-      </div>
+
+
+  </div>
+  <!-- Si la liste d'image est vide -->
+  <div *ngIf="this.r!.images.length == 0" class="card align-middle container" id="card_finish"
+    style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
+    <img class="card-img-top image"
+      src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
+      alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image_error">Erreur !</h5>
+      <p class="card-text" style="color : black">Il n'y a pas d'image selectionné</p>
     </div>
   </div>
-
-</body>
+</div>

@@ -16,13 +16,12 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Menu déroulé
+            Créer un jeu
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/panel">Option 1</a>
-            <a class="dropdown-item" href="/panel">Option 2</a>
+            <a *ngFor="let g of this.optionGame" class="dropdown-item" href="/panel/create/{{g}}">{{g}}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/panel">Option 3</a>
+            <a class="dropdown-item" href="/panel">Index</a>
           </div>
         </li>
       </ul>
@@ -38,7 +37,7 @@
     <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
     <div class="card-body">
       <div align="center">
-        <button class="choice" *ngFor="let c of this.optionGame" (click)="this.selectedGame = c" mat-raised-button
+        <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/create', c]" mat-raised-button
           color="primary">{{c}}</button>
       </div>
     </div>
@@ -160,7 +159,7 @@
                   <input type="color" class="form-control form-control-color"
                     (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
                     #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
-                    title="Choisissez la couleur du messaage de mauvaise réponse">
+                    title="Choisissez la couleur du message de mauvaise réponse">
                 </label>
               </div>
             </div>
@@ -213,7 +212,7 @@
               </div>
               <div class="col-md-8">
                 <select class="form-control" aria-label="Default select example" #progressSelectValue
-                  (change)="changeProgressValue(progressSelectValue)">
+                  (change)="changeProgressValue('Recopier',progressSelectValue)">
                   <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
                     ng-selected="p == this.recopier_progress" #progressValue>
                     <p *ngIf="p == 'blue'">Bleu</p>
@@ -304,6 +303,8 @@
             </div>
           </div>
 
+
+          <!-- Bouton de création du jeu -->
           <div class="form-row align-middle text-center" align="center">
             <div class="col-md-12 text-center">
               <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le jeu
@@ -322,13 +323,13 @@
         <div class="align-bottom" style="margin : 10px">
           <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
             (click)="previousStep()">
-            <i class="fa-solid fa-arrow-left"></i>
+            <i class="fa-solid fa-angles-left"></i>
             Etape précédente
           </button>
           <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
             (click)="nextStep()">
             Etape suivante
-            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-angles-right"></i>
           </button>
         </div>
       </div>
@@ -357,7 +358,6 @@
           <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
             mat-raised-button color="warn">Prévisualiser</button>
         </div>
-      </div>
 
         <!-- Formulaire Reconnaitre - Menu de navigation -->
         <div class="stepMenu">
@@ -385,9 +385,11 @@
 
 
         <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
-        <div *ngIf="this.formStep == 0">
-          <h2 class="card-title text-center">Choisissez les images</h2>
-          <div *ngIf="this.selectedGame == 'Reconnaitre'">
+        <div *ngIf="this.selectedGame == 'Reconnaitre'">
+
+          <!-- Etape 1 : Choix des images -->
+          <div *ngIf="this.formStep == 0">
+            <h2 class="card-title text-center">Choisissez les images</h2>
             <div class="card-body selectImage_container text-center align-top">
               <h5 class="card-header" style="color : black">Listes des images</h5>
               <figure class="figure" *ngFor="let image of this.liste_image">
@@ -408,9 +410,209 @@
               </figure>
             </div>
           </div>
+
+
+          <!-- Etape du formulaire 2 -- Choix des couleurs -->
+          <div *ngIf="this.formStep == 1">
+            <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+            <form>
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="reconnaitre_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_bg_color = reconnaitre_bg_color_input.value "
+                      #reconnaitre_bg_color_input value="{{this.reconnaitre_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan">
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label for="reconnaitre_text_color_input" class="form-label align-middle">Couleur du texte
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_text_color = reconnaitre_text_color_input.value "
+                      #reconnaitre_text_color_input value="{{this.reconnaitre_text_color}}"
+                      title="Choisissez la couleur du texte">
+                  </label>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="reconnaitre_title_color_input" class="form-label align-middle">Couleur du titre
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_title_color = reconnaitre_title_color_input.value "
+                      #reconnaitre_title_color_input value="{{this.reconnaitre_title_color}}"
+                      title="Choisissez la couleur du titre">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="reconnaitre_good_answer_color_input" class="form-label align-middle">Couleur du message
+                    bonne
+                    réponse
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_good_answer_color = reconnaitre_good_answer_color_input.value "
+                      #reconnaitre_good_answer_color_input value="{{this.reconnaitre_good_answer_color}}"
+                      title="Choisissez la couleur du message de bonne réponse">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                    mauvaise
+                    réponse
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_wrong_answer_color = reconnaitre_wrong_answer_color_input.value "
+                      #reconnaitre_wrong_answer_color_input value="{{this.reconnaitre_wrong_answer_color}}"
+                      title="Choisissez la couleur du message de mauvaise réponse">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="reconnaitre_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                    du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_button_bg_color = reconnaitre_button_bg_color_input.value "
+                      #reconnaitre_button_bg_color_input value="{{this.reconnaitre_button_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan du bouton">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="reconnaitre_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.reconnaitre_button_text_color = reconnaitre_button_text_color_input.value "
+                      #reconnaitre_button_text_color_input value="{{this.reconnaitre_button_text_color}}"
+                      title="Choisissez la couleur du texte du bouton">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
+
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" #progressSelectValue
+                    (change)="changeProgressValue('Reconnaitre',progressSelectValue)">
+                    <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                      ng-selected="p == this.reconnaitre_progress" #progressValue>
+                      <p *ngIf="p == 'blue'">Bleu</p>
+                      <p *ngIf="p == 'green'">Vert</p>
+                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                      <p *ngIf="p == 'orange'">Orange</p>
+                      <p *ngIf="p == 'red'">Rouge</p>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="progress" *ngIf="this.reconnaitre_progress == 'blue' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.reconnaitre_progress == 'green' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.reconnaitre_progress == 'lightblue' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.reconnaitre_progress == 'orange' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.reconnaitre_progress == 'red' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- Etape du formulaire 3 -- Choix des textes -->
+          <div *ngIf="this.formStep == 2" style="text-align : center;">
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Type d'écriture</h2>
+                <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CURSIF'" value="Cursif"
+                    (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CURSIF'" value="Cursif"
+                    (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+                    style="font-family: cursiveFont; font-size: 40px">
+                    Cursif</mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CAPITAL'" value="Capital"
+                    (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CAPITAL'" value="Capital"
+                    (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'SCRIPT'" value="Script"
+                    (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'SCRIPT'" value="Script"
+                    (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+
+            <!-- Bouton de création du jeu -->
+            <div class="form-row align-middle text-center" align="center">
+              <div class="col-md-12 text-center">
+                <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+                  jeu
+                  <i class="fa-solid fa-check"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!--Formulaire Reconnaite -  Menu de navigation par étape -->
+          <div class="align-bottom" style="margin : 10px">
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+              (click)="previousStep()">
+              <i class="fa-solid fa-angles-left"></i>
+              Etape précédente
+            </button>
+            <button type="button" class="btn btn-primary align-right"
+              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              Etape suivante
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
+          </div>
+
         </div>
 
-              <!-- Formulaire Recopier - Prévisualisation -->
+
+      </div>
+
+      <!-- Formulaire Reconnaitre - Prévisualisation -->
       <div *ngIf="this.reconnaitre_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
@@ -420,25 +622,8 @@
         </div>
         <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
       </div>
-
-        <!--Formulaire Reconnaite -  Menu de navigation par étape -->
-        <div class="align-bottom" style="margin : 10px">
-          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-            (click)="previousStep()">
-            <i class="fa-solid fa-arrow-left"></i>
-            Etape précédente
-          </button>
-          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
-            (click)="nextStep()">
-            Etape suivante
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-
-
-      </div>
     </div>
 
 
-
+  </div>
 </body>

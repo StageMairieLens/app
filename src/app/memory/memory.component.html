@@ -1,70 +1,117 @@
-<div *ngIf="!finish" class="plateau container">
+<div *ngIf="this.showTitle" class="text-center">
+    <h1 class="title">
+        <span>M</span>
+        <span>E</span>
+        <span>M</span>
+        <span>O</span>
+        <span>R</span>
+        <span>Y</span>
+    </h1>
+</div>
+
+<div *ngIf="game == null" class="card align-middle container" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
+    <img class="card-img-top" src="../../assets/images/error.png" alt="Card image cap">
+    <div class="card-body text-center">
+        <h5 class="card-title" style="color: red">Erreur !</h5>
+        <p class="card-text">Il n'y a pas de jeu selectionné !</p>
+    </div>
+</div>
+
+<div *ngIf="game != null && game.images.length < (game.nbTile/2)" class="card align-middle container" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
+    <img class="card-img-top" src="../../assets/images/error.png" alt="Card image cap">
+    <div class="card-body text-center">
+        <h5 class="card-title" style="color: red">Erreur !</h5>
+        <p class="card-text">Pas assez d'images sélectionnées !</p>
+    </div>
+</div>
+
+<div *ngIf="!finish && game != null" class="plateau container" [ngStyle]="{background: game!.bg_color}">
 <table>
     <tr>
-        <td>
-            <app-tile *ngIf="nbTile >= 1" #tile1 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="1">
+            <app-tile *ngIf="nbTile >= 1" #tile1 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 2" #tile2 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="2">
+            <app-tile *ngIf="nbTile >= 2" #tile2 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 5" #tile5 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="5">
+            <app-tile *ngIf="nbTile >= 5" #tile5 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 7" #tile7 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="7">
+            <app-tile *ngIf="nbTile >= 7" #tile7 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 13" #tile13 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="13">
+            <app-tile *ngIf="nbTile >= 13" #tile13 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 14" #tile14 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <app-tile *ngIf="nbTile >= 3" #tile3 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 4" #tile4 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 6" #tile6 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 8" #tile8 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 15" #tile15 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
-        </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 16" #tile16 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="14">
+            <app-tile *ngIf="nbTile >= 14" #tile14 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
     <tr>
-        <td>
-            <app-tile *ngIf="nbTile >= 9" #tile9 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="3">
+            <app-tile *ngIf="nbTile >= 3" #tile3 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 10" #tile10 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="4">
+            <app-tile *ngIf="nbTile >= 4" #tile4 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 11" #tile11 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="6">
+            <app-tile *ngIf="nbTile >= 6" #tile6 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 12" #tile12 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="8">
+            <app-tile *ngIf="nbTile >= 8" #tile8 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 17" #tile17 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="15">
+            <app-tile *ngIf="nbTile >= 15" #tile15 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td>
-            <app-tile *ngIf="nbTile >= 18" #tile18 [derriere]="derriere" (_id)="retourne($event)"></app-tile>
+        <td id="16">
+            <app-tile *ngIf="nbTile >= 16" #tile16 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        </td>
+    </tr>
+    <tr>
+        <td id="9">
+            <app-tile *ngIf="nbTile >= 9" #tile9 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td id="10">
+            <app-tile *ngIf="nbTile >= 10" #tile10 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td id="11">
+            <app-tile *ngIf="nbTile >= 11" #tile11 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td id="12">
+            <app-tile *ngIf="nbTile >= 12" #tile12 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td id="17">
+            <app-tile *ngIf="nbTile >= 17" #tile17 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        </td>
+        <td id="18">
+            <app-tile *ngIf="nbTile >= 18" #tile18 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
 </table>
-<div class="text">{{essaie}} essaie(s) {{nbBon}} trouvé(s)</div>
+<div style="margin: 20px;">
+<div class="progress" *ngIf="this.game!.color_progress_bar == 'blue' ">
+    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
 </div>
 
-<div *ngIf="finish" class="container" style="background-color: white; margin-top: 10%;">
-    <img src="../../assets/congratulation.webp">
+<div class="progress" *ngIf="this.game!.color_progress_bar == 'green' ">
+    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+</div>
+
+<div class="progress" *ngIf="this.game!.color_progress_bar == 'lightblue' ">
+    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+</div>
+
+<div class="progress" *ngIf="this.game!.color_progress_bar == 'orange' ">
+    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+</div>
+
+<div class="progress" *ngIf="this.game!.color_progress_bar == 'red' ">
+    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+</div>
+</div>
+</div>
+
+<div *ngIf="finish" class="container" style="background-color: white; margin-top: 10%;" [ngStyle]="{background: game!.bg_color}">
+    <img src="../../assets/images/congratulations.png">
     <div class="text" style="color: black;">Félicitation !</div>
 </div>
