@@ -22,6 +22,7 @@ const routes: Routes = [
   {path: 'abecedaire', component : AbecedaireComponent},
   {path: 'memory', component : MemoryComponent},
   {path: 'panel', component : PanelComponent},
+  {path: 'panel/create/:jeu', component : PanelComponent},
 ];
 
 @NgModule({

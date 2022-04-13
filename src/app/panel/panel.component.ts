@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { ImagesComponent } from '../images/images.component';
 import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Puzzle } from '../puzzle/Puzzle';
+import { ActivatedRoute } from '@angular/router'
+
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -15,7 +17,9 @@ import { Puzzle } from '../puzzle/Puzzle';
 })
 export class PanelComponent implements OnInit {
 
-  constructor(private router: Router, ) {
+  jeu : string | null = "";
+
+  constructor(private router: Router, private route : ActivatedRoute ) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
@@ -36,7 +40,7 @@ export class PanelComponent implements OnInit {
   previsualiser: boolean = false;
 
   optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abécédaire', 'Fille&Garçon', 'Puzzle'];
-  selectedGame: string = "";
+  selectedGame: string | null = "";
 
 
   recopier: Recopier | null;
@@ -62,7 +66,7 @@ export class PanelComponent implements OnInit {
   reconnaitre_wrong_answer_color: string = "#ff0000";
   reconnaitre_button_bg_color: string = "#0f73b1";
   reconnaitre_button_text_color: string = "#ffffff";
-  reconnaitre_progress: Progress = Progress.Orange;
+  reconnaitre_progress: Progress = Progress.Blue;
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_previsualiser : boolean = false;
 
@@ -80,6 +84,11 @@ export class PanelComponent implements OnInit {
   // r2 : Recopier = new Recopier([],'blue','CAPITAL');
 
   ngOnInit(): void {
+    this.jeu = this.route.snapshot.paramMap.get('jeu');
+
+    if(this.jeu != null ) {
+      this.selectedGame = this.jeu;
+    }
   }
 
   test(): void {
@@ -128,24 +137,44 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  changeProgressValue(element: HTMLSelectElement): void {
+  changeProgressValue(jeu : string, element: HTMLSelectElement): void {
 
-    switch (element.value) {
-      case 'blue':
-        this.recopier_progress = Progress.Blue;
-        break;
-      case 'green':
-        this.recopier_progress = Progress.Green;
-        break;
-      case 'lightblue':
-        this.recopier_progress = Progress.LightBlue;
-        break;
-      case 'orange':
-        this.recopier_progress = Progress.Orange;
-        break;
-      case 'red':
-        this.recopier_progress = Progress.Red;
-        break;
+    if(jeu == 'Recopier') {
+      switch (element.value) {
+        case 'blue':
+          this.recopier_progress = Progress.Blue;
+          break;
+        case 'green':
+          this.recopier_progress = Progress.Green;
+          break;
+        case 'lightblue':
+          this.recopier_progress = Progress.LightBlue;
+          break;
+        case 'orange':
+          this.recopier_progress = Progress.Orange;
+          break;
+        case 'red':
+          this.recopier_progress = Progress.Red;
+          break;
+      }
+    } else if (jeu == 'Reconnaitre') {
+      switch (element.value) {
+        case 'blue':
+          this.reconnaitre_progress = Progress.Blue;
+          break;
+        case 'green':
+          this.reconnaitre_progress = Progress.Green;
+          break;
+        case 'lightblue':
+          this.reconnaitre_progress = Progress.LightBlue;
+          break;
+        case 'orange':
+          this.reconnaitre_progress = Progress.Orange;
+          break;
+        case 'red':
+          this.reconnaitre_progress = Progress.Red;
+          break;
+      }
     }
   }
 
