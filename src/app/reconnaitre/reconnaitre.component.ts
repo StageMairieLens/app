@@ -13,16 +13,16 @@ export class ReconnaitreComponent implements OnInit {
 
   constructor() {
     // this.r = null;
-    this.r = new Reconnaitre([new Image('Fleur', '../../assets/fleur.jpg')], 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',this.taille_to);
-    //this.alea(this.liste_images);
-    //this.alea2(this.liste_mot_boutton);
+    this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL');
+    this.alea(this.r!.images);
+    this.alea2(this.liste_mot_boutton);
   }
   ngOnInit(): void {
     //Zthis.alea(this.liste_images);
     // console.log(this.liste_images);
-    this.variable = this.images[this.prochaine_image].src;
-    this.alea(this.images);
-    this.alea2(this.liste_mot_boutton);
+    //this.variable = this.r!.images[this.prochaine_image].src;
+    this.alea(this.r!.images);
+    //this.alea2(this.liste_mot_boutton);
 
 
   }
@@ -46,26 +46,25 @@ export class ReconnaitreComponent implements OnInit {
   //liste_mot: string[] = []; //Liste qui contient les noms des images
   liste_mot_boutton: string[] = [];
   compteur = 0; //Compte le nombre d'erreur
-  variable: string = this.images[this.prochaine_image].nom;
+  //variable: string = this.r!.images[this.prochaine_image].nom;
 
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
   }
   alea(li:Image[]): void {
-    for (var taile = 0; this.images[taile]; taile++) {
-      this.taille_to++;
-    }
-    var name,src, i;
-
+    
+    var m=li.length,name,src, i;
+    
     // While there remain elements to shuffle
     while (this.taille_to) {
       // Pick a remaining element…
-      i = Math.floor(Math.random() * this.taille_to--);
+      i = Math.floor(Math.random() * m--);
 
       // And swap it with the current element.
-      name = li[this.taille_to].nom;
-      src = li[this.taille_to].src;
-      li[this.taille_to] = li[i];
+      name = li[m].nom;
+      src = li[m].src;
+      li[m].nom = li[i].nom;
+      li[m].src=li[i].src;
       li[i].nom= name;
       li[i].src=src;
       
@@ -73,8 +72,8 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
   alea2(li: string[]): void {
-    for (var taile = 0; this.images[taile]; taile++) {
-      li.push(this.images[taile].nom);
+    for (var taile = 0; this.r!.images[taile]; taile++) {
+      li.push(this.r!.images[taile].nom);
     }
     var m = this.taille_to, t, i, t2;
 
@@ -92,13 +91,13 @@ export class ReconnaitreComponent implements OnInit {
 
   change($event: any, varia: string): Boolean {
     //this.variable=this.liste_images[this.prochaine_image];
-    if (varia == this.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
+    if (varia == this.r!.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked = false;
       this.prochaine_image += 1;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
 
       setTimeout(() => {
-        this.variable = this.images[this.prochaine_image].nom;
+        //this.variable = this.r!.images[this.prochaine_image].nom;
         document.getElementById('container')!.animate([{ opacity: 1 },
         { opacity: 0.1, offset: 0.7 },
         { opacity: 1 }],
@@ -107,13 +106,13 @@ export class ReconnaitreComponent implements OnInit {
       }, 1000);
       setTimeout(() => {
         document.getElementById('result')!.innerHTML = '';
-        document.getElementById('progressbar')!.style.width = ((this.prochaine_image / this.taille_to) * 100).toString() + '%';
+        document.getElementById('progressbar')!.style.width = ((this.prochaine_image / this.r!.images.length) * 100).toString() + '%';
 
       },
         1600);
-      if (this.prochaine_image < this.taille_to) {
-        for (var i=0;i<this.taille_to;i++) {
-          (<HTMLButtonElement>document.getElementById(this.images[i].nom)).disabled = false;
+      if (this.prochaine_image < this.r!.images.length) {
+        for (var i=0;i<this.r!.liste_button.length;i++) {
+          (<HTMLButtonElement>document.getElementById(this.r!.images[i].nom)).disabled = false;
 
         }
 
@@ -131,7 +130,8 @@ export class ReconnaitreComponent implements OnInit {
       this.compteur += 1;
 
       document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
-      document.getElementById('container2')?.animate([
+      
+      document.getElementById('container')?.animate([
         { transform: 'translateX(0px)' },
         { transform: 'translateX(-50px)' },
         { transform: 'translateX(50px)' }

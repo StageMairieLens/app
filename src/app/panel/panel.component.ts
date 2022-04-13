@@ -69,7 +69,7 @@ export class PanelComponent implements OnInit {
   reconnaitre_progress: Progress = Progress.Blue;
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_previsualiser : boolean = false;
-
+  
   puzzle : Puzzle | null;
   puzzle_bg_color: string = "#3bb8c9";
   puzzle_title_color: string = "#ffffff";

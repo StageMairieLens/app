@@ -58,8 +58,8 @@ p{
 .image {
   display: inline;
   border: solid grey 2px;
-  width:300px;
-  margin-top: 70px;
+  
+  margin-top: 10px;
 }
 button {
   margin-top: 5px;
