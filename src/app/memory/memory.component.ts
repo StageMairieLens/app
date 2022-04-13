@@ -59,17 +59,19 @@ export class MemoryComponent implements OnInit {
 
   constructor() {
     this.game = new Memory(this.images, 18, this.setting, '#3bb8c9', 'white', 'white', 'blue', 'red', Progress.Blue, 'cursif');
-    //this.game = null;
+    // this.game = null;
   }
 
   ngOnInit(): void {
+    if(this.game == null) return;
     this.nbTile = this.game!.nbTile;
     this.setting = this.game!.setting;
     this.typeEcriture = this.game!.typeEcriture;
     this.start();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
+    if(this.game == null) return;
     this.tiles = [this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15, this.tile16, this.tile17, this.tile18];
     for(var i = 0; i < this.nbTile; i++) {
       this.tiles[i].isImage = this.isImage[i];
@@ -83,7 +85,7 @@ export class MemoryComponent implements OnInit {
     var val;
     var i = 0;
     var a;
-    while(i < this.nbTile/2) {
+    while(i < this.game!.images.length && i < this.nbTile/2) {
       for(var x = 0; x < 2; x++) {
         a = this.random();
         this.sets[a] = i;
@@ -145,7 +147,6 @@ export class MemoryComponent implements OnInit {
         document.getElementById(this.retourner)!.style.border = "3px solid";
         document.getElementById(this.retourner)!.style.borderColor = this.game!.wrong_answer_color;
         setTimeout(() => {
-          console.log(id, this.retourner);
           this.tiles[Number(id)-1].cacher();
           this.tiles[Number(this.retourner)-1].cacher();
           document.getElementById(id)!.style.border = "none";
