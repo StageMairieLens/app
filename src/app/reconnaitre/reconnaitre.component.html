@@ -31,7 +31,7 @@
           (click)="!change($event,mot)    ;"[ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}">{{ mot }}</button>
         <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
       </div>
-        
+
     </div>
     <div class="align-bottom">
       <div class="progress" *ngIf="this.r!.color_progress_bar == 'blue' ">
@@ -61,6 +61,7 @@
         <p class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous avez recconue correctement touts les mots !</p>
       </div>
     </div>
+
     <div *ngIf="this.r!.liste_images.length == 0" class="card align-middle container" id="card_finish" style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
       <img class="card-img-top image" src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw" alt="Card image cap">
       <div class="card-body text-center">
@@ -69,5 +70,5 @@
       </div>
     </div>
   </div>
- 
+
 </body>
