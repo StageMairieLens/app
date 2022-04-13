@@ -7,7 +7,7 @@ import { Recopier } from './../recopier-game/Recopier'
 import { Router } from '@angular/router';
 import { ImagesComponent } from '../images/images.component';
 import { Reconnaitre } from '../reconnaitre/Reconnaitre';
-
+import { Puzzle } from '../puzzle/Puzzle';
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
@@ -19,6 +19,7 @@ export class PanelComponent implements OnInit {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
+    this.puzzle = null;
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -60,6 +61,16 @@ export class PanelComponent implements OnInit {
   reconnaitre_button_text_color: string = "#ffffff";
   reconnaitre_progress: Progress = Progress.Orange;
   reconnaitre_type_ecriture = "SCRIPT";
+  reconnaitre_text_color: string = "#000000";
+
+
+  puzzle : Puzzle | null;
+  puzzle_bg_color: string = "#3bb8c9";
+  puzzle_title_color: string = "#ffffff";
+  puzzle_button_bg_color: string = "#0f73b1";
+  puzzle_button_text_color: string = "#ffffff";
+  puzzle_type_ecriture = "SCRIPT";
+  puzzle_text_color: string = "#000000";
 
 
   formStep: number = 0;
