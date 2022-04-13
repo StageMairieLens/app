@@ -11,24 +11,24 @@
     <div id="collage">
         <h2>Image Puzzle</h2>
         <hr />
-        <div id="playPanel" style="padding:5px ; background-color: red;">
+        <div id="playPanel" style="padding:5px ;"[ngStyle]="{background : this.r!.bg_color}">
             <h3 id="imgTitle"></h3>
             <hr />
-            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;">
-                <ul id="sortable" class="sortable"></ul>
+            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;"[ngStyle]="{background : this.r!.bg_color}">
+                <ul id="sortable" class="sortable"[ngStyle]="{background : this.r!.bg_color}"></ul>
                 <div id="actualImageBox">
                     <div id="stepBox">
-                        <div>Steps:</div>
-                        <div id="stepCount" class="stepCount">0</div>
+                        <div [ngStyle]="{background : this.r!.text_color}">Steps:</div>
+                        <div id="stepCount" class="stepCount"[ngStyle]="{background : this.r!.text_color}">0</div>
                     </div>
                     <div id="timeBox">
                         Time Taken: <span id="timerPanel"></span> secs
                     </div>
                     <img id="actualImage" />
-                    <div>Réorganiser pour créer une image comme celle-ci.</div>
+                    <div [ngStyle]="{background : this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
                     <p id="levelPanel">
                         <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
-                        /> <label for="easy">Easy</label>
+                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
                         <input type="radio" name="level" id="medium" value="4" onchange="imagePuzzle.startGame(images, this.value);" />                      <label for="medium">Medium</label>
                         <input type="radio" name="level" id="hard" value="5" onchange="imagePuzzle.startGame(images, this.value);" />                        <label for="hard">Hard</label>
                         <!--mettre une variable dans value pour modifier la difficulter-->

@@ -13,8 +13,17 @@ export class ReconnaitreComponent implements OnInit {
 
   constructor() {
     this.r = null;
+    //this.alea(this.liste_images);
+    //this.alea2(this.liste_mot_boutton);
+  }
+  ngOnInit(): void {
+    //Zthis.alea(this.liste_images);
+    console.log(this.liste_images);
+    this.variable = this.liste_images[this.prochaine_image];
     this.alea(this.liste_images);
     this.alea2(this.liste_mot_boutton);
+
+
   }
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Reconnaitre | null;
@@ -36,13 +45,7 @@ export class ReconnaitreComponent implements OnInit {
   liste_mot_boutton : string[] = [];
   compteur = 0 ; //Compte le nombre d'erreur
   variable : string = this.liste_images[this.prochaine_image];
-  ngOnInit(): void {
-    //Zthis.alea(this.liste_images);
-    console.log(this.liste_images);
-    this.variable = this.liste_images[this.prochaine_image];
-
-
-  }
+  
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
 }
