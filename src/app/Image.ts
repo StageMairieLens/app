@@ -9,4 +9,8 @@ export class Image {
 
   getNom(): string { return this.nom };
   getSrc(): string { return this.src };
+  change_nom(img:Image[],x:string,val:number) {
+    img[val].nom=x;
+
+  }
 }

@@ -20,8 +20,8 @@ export class Reconnaitre {
   color_progress_bar: Progress;
 
   typeEcriture: string;
-
-  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string) {
+  taille = 0;
+  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string,taille:number) {
     this.id = Reconnaitre.nb++;
     this.liste_images = liste_images;
     this.bg_color = bg_color;
@@ -33,6 +33,7 @@ export class Reconnaitre {
     this.button_text_color = button_text_color;
     this.text_color = text_color;
     this.typeEcriture = typeEcriture;
+    this.taille=taille;
   }
   
 

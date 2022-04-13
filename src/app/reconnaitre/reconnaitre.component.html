@@ -31,7 +31,7 @@
 
     <!-- Si la liste d'image n'est pas vide -->
     <div *ngIf="this.r!.liste_images.length != 0">
-      <div *ngIf="this.prochaine_image != this.liste_images.length" class="card align-middle container" id="container"
+      <div *ngIf="this.prochaine_image != this.taille_to" class="card align-middle container" id="container"
         style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
 
 
@@ -41,13 +41,13 @@
         </div>
         <div class="row">
           <div class="col text-center">
-            <img src="{{ liste_images[this.prochaine_image] }}" class="card-img-top image">
+            <img src="{{ this.r!.liste_images[this.prochaine_image].getSrc() }}" class="card-img-top image">
           </div>
           <p id="result" class="text-center"></p>
           <div id="mot" class="text-center">
             <!-- Centre les mots -->
-            <button *ngFor="let mot of liste_mot_boutton" type="button" id="{{ mot }}" [disabled]="clicked"
-              (click)="!change($event,mot)    ;"
+            <button *ngFor="let mot of images" type="button" id="{{ images[prochaine_image].nom }}" [disabled]="clicked"
+              (click)="!change($event,mot.nom);"
               [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}">{{ mot }}</button>
             <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
           </div>
@@ -81,7 +81,7 @@
         </div>
 
         <!-- Carte félicitation -->
-        <div *ngIf="this.prochaine_image == this.liste_images.length" class="card align-middle container"
+        <div *ngIf="this.prochaine_image == this.taille_to" class="card align-middle container"
           id="container2" style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
           <img class="card-img-top image"
             src="https://imgs.search.brave.com/DrvWMJ9F_FqJX6j0t6s5PbltaTGgOEjXC4uRBdpPidM/rs:fit:681:254:1/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWxsdXN0/cmF0aW9ucy9jb25n/cmF0dWxhdGlvbnMt/aWxsdXN0cmF0aW9u/LWlkMTE0NDU1Mzc0/Mz9rPTYmbT0xMTQ0/NTUzNzQzJnM9MTcw/NjY3YSZ3PTAmaD1N/cWJlVzJEc0ZfbmFt/N1B5NWFqS0J3ZlJW/bU1iblNMT2FyNFNu/Z2xBektRPQ"
