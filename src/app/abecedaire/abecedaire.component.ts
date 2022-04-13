@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Abecedaire } from './Abecedaire';
@@ -10,7 +10,7 @@ import { Abecedaire } from './Abecedaire';
 })
 export class AbecedaireComponent implements OnInit {
 
-  game: Abecedaire | null;
+  @Input() game: Abecedaire | null;
   rightLetter = '';
   errors = 0;
   images: Image[] = [

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Memory } from './Memory';
@@ -11,7 +11,7 @@ import { TileComponent } from './tile/tile.component';
 })
 export class MemoryComponent implements OnInit {
 
-  game: Memory | null;
+  @Input() game: Memory | null;
   derriere = "../../assets/lapin.webp";
   images: Image[] = [
     new Image("Orange", "../../assets/orange.jpg"),
@@ -24,6 +24,7 @@ export class MemoryComponent implements OnInit {
     new Image("Maison", "../../assets/house.svg"),
     new Image("Panda", "../../assets/panda.png")
   ]
+  showTitle: boolean = true;
   nbTile = 18;
   setting: string[] = ["image", "image"];
   affichage: string[] = [];
@@ -151,7 +152,7 @@ export class MemoryComponent implements OnInit {
           document.getElementById(this.retourner)!.style.border = "none";
           this.retourner = "0";
           this.enable();
-        }, 1500);
+        }, 1000);
       }
     }
   }
