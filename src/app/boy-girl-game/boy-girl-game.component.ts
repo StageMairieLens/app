@@ -13,6 +13,12 @@ export class BoyGirlGameComponent implements OnInit {
     this.bg = new BoyGirl(this.girl,this.boy,'#3bb8c9','pink','blue','orange','brown','lightblue','red','black','black','black','black','white','black');
   }
   ngOnInit(): void {
+    this.boy = this.bg!.listMotsGarcon;
+    this.girl = this.bg!.listMotsFille;
+
+    this.girlFinish = this.girl;
+    this.boyFinish = this.boy;
+
     this.mots = this.boy.concat(this.girl);
     this.boy = [];
     this.girl = [];
@@ -25,10 +31,10 @@ export class BoyGirlGameComponent implements OnInit {
   finish : boolean = false;
   mots : string[] = [];
 
-  girl : string[] = ['girl','girl','girl'];
+  girl : string[] = [];
   girlFinish : string[] = this.girl;
 
-  boy : string[] = ['boy','boy','boy'];
+  boy : string[] = [];
   boyFinish : string[] = this.boy;
 
 
@@ -38,7 +44,7 @@ export class BoyGirlGameComponent implements OnInit {
     if(this.boy.length == this.boyFinish.length) {
       let result = true;
       for(let i = 0; i < this.boy.length ; i++) {
-        if(this.boy[i] != this.boyFinish[i]) {
+        if(!this.boyFinish.includes(this.boy[i])) {
           return false;
         }
       }
@@ -51,7 +57,7 @@ export class BoyGirlGameComponent implements OnInit {
     if(this.girl.length == this.girlFinish.length) {
       let result = true;
       for(let i = 0; i < this.girl.length ; i++) {
-        if(this.girl[i] != this.girlFinish[i]) {
+        if(!this.girlFinish.includes(this.girl[i])) {
           return false;
         }
       }
@@ -87,9 +93,8 @@ export class BoyGirlGameComponent implements OnInit {
         event.currentIndex,
       );
     }
-    console.log(this.checkBoy());
-    console.log(this.checkGirl());
-    console.log(this.mots.length);
+    console.log(this.boyFinish);
+    console.log(this.boy);
     if((this.checkBoy() && this.checkGirl() ) && this.mots.length == 0  ) {
       this.finish = true;
       document.getElementById('content')!.style.display = 'none';

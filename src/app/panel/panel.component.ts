@@ -10,6 +10,13 @@ import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Puzzle } from '../puzzle/Puzzle';
 import { ActivatedRoute } from '@angular/router'
 import {BoyGirl } from '../boy-girl-game/BoygGirl'
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-panel',
@@ -98,9 +105,9 @@ export class PanelComponent implements OnInit {
   boygirl_title_color_fille : string = "#000000";
   boygirl_title_color_garcon : string = "#000000";
   boygirl_title_color_mot : string = "#000000";
-  boygirl_text_color_fille : string = "#000000";
-  boygirl_text_color_garcon : string = "#000000";
-  boygirl_text_color_mot : string = "#000000";
+  boygirl_text_color_fille : string = "#ffffff";
+  boygirl_text_color_garcon : string = "#ffffff";
+  boygirl_text_color_mot : string = "#ffffff";
   boygirl_previsualiser : boolean = false;
 
 
@@ -112,14 +119,56 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
 
-    if(this.jeu != null ) {
-      this.selectedGame = this.jeu;
+    if(this.jeu != null) {
+      if(this.optionGame.includes(this.jeu)) {
+        this.selectedGame = this.jeu;
+      }else {
+        this.router.navigate(['/panel']);
+      }
+
     }
   }
 
-  test(): void {
-    console.log(this.recopier_progress);
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
+
+  addMotsFille(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.boygirl_listMotsFille.push(value);
+    }
+
+    event.chipInput!.clear();
   }
+
+  removeFille(str: string): void {
+    const index = this.boygirl_listMotsFille.indexOf(str);
+
+    if (index >= 0) {
+      this.boygirl_listMotsFille.splice(index, 1);
+    }
+  }
+
+  addMotsGarcon(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.boygirl_listMotsGarcon.push(value);
+    }
+
+    event.chipInput!.clear();
+  }
+
+  removeGarcon(str: string): void {
+    const index = this.boygirl_listMotsGarcon.indexOf(str);
+
+    if (index >= 0) {
+      this.boygirl_listMotsGarcon.splice(index, 1);
+    }
+  }
+
 
   setSelected(element: HTMLOptionElement): void {
     element.selected = true;

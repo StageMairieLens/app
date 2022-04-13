@@ -19,9 +19,9 @@
             Créer un jeu
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a *ngFor="let g of this.optionGame" class="dropdown-item" href="/panel/create/{{g}}">{{g}}</a>
-            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/panel">Index</a>
+            <div class="dropdown-divider"></div>
+            <a *ngFor="let g of this.optionGame" class="dropdown-item" href="/panel/create/{{g}}">{{g}}</a>
           </div>
         </li>
       </ul>
@@ -33,7 +33,7 @@
   </nav>
 
   <!-- Si aucun jeu n'est selectionné -->
-  <div class="card container" *ngIf="this.selectedGame === ''">
+  <div class="card container" *ngIf="this.selectedGame === '' ">
     <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
     <div class="card-body">
       <div align="center">
@@ -44,7 +44,7 @@
   </div>
 
   <!-- Si un jeu est selectionné -->
-  <div class="card container" *ngIf="this.selectedGame != ''">
+  <div class="card container" *ngIf="this.selectedGame != '' && this.optionGame.includes(this.selectedGame!)">
 
     <!-- Affiche le nom du jeu sélectionné -->
     <h5 class="card-header">{{this.selectedGame}}</h5>
@@ -335,6 +335,7 @@
       </div>
 
 
+
       <!-- Formulaire Recopier - Prévisualisation -->
       <div *ngIf="this.recopier_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
@@ -349,11 +350,12 @@
     </div>
 
 
+    <!-- Formulaire Fille Garcon -->
     <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
       <div *ngIf="!this.boygirl_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)"
-            mat-raised-button color="warn">Prévisualiser</button>
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)" mat-raised-button
+            color="warn">Prévisualiser</button>
         </div>
 
         <!-- Formulaire Reconnaitre - Menu de navigation -->
@@ -380,18 +382,72 @@
           </nav>
         </div>
 
+        <div *ngIf="this.formStep == 0">
+          <h2 class="card-title text-center">Listes de mots</h2>
+
+          <div class="form-row">
+            <div class="col-md-6">
+              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%" appearance="fill">
+                <mat-label>Mots pour fille</mat-label>
+                <mat-chip-list #listFille aria-label="Mots pour fille">
+                  <mat-chip *ngFor="let mots of this.boygirl_listMotsFille" (removed)="removeFille(mots)">
+                    {{mots}}
+                    <button matChipRemove>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip>
+                  <input placeholder="Entrez le mots ici" [matChipInputFor]="listFille"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addMotsFille($event)">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6">
+              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%" appearance="fill">
+                <mat-label>Mots pour garçon</mat-label>
+                <mat-chip-list #listGarcon aria-label="Mots pour garçon">
+                  <mat-chip *ngFor="let mots of this.boygirl_listMotsGarcon" (removed)="removeGarcon(mots)">
+                    {{mots}}
+                    <button matChipRemove>
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip>
+                  <input placeholder="Entrez le mots ici" [matChipInputFor]="listGarcon"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="addMotsGarcon($event)">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
 
       </div>
 
-      <!-- Formulaire Recopier - Prévisualisation -->
-      <div *ngIf="this.recopier_previsualiser">
+      <!-- Formulaire Recopier - Menu de navigation par étape -->
+      <div class="align-bottom" style="margin : 10px">
+        <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+          (click)="previousStep()">
+          <i class="fa-solid fa-angles-left"></i>
+          Etape précédente
+        </button>
+        <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+          (click)="nextStep()">
+          Etape suivante
+          <i class="fa-solid fa-angles-right"></i>
+        </button>
+      </div>
+
+      <!-- Formulaire Fille Garcon - Prévisualisation -->
+      <div *ngIf="this.boygirl_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(false)"
               mat-raised-button color="warn">Quitter la prévisualisation</button>
           </div>
         </div>
-        <app-boy-girl-game></app-boy-girl-game>
+        <app-boy-girl-game [bg]="this.boygirl" [showTitle]="false"></app-boy-girl-game>
       </div>
 
 
