@@ -9,6 +9,14 @@ import { ImagesComponent } from '../images/images.component';
 import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Puzzle } from '../puzzle/Puzzle';
 import { ActivatedRoute } from '@angular/router'
+import {BoyGirl } from '../boy-girl-game/BoygGirl'
+import {MatChipInputEvent} from '@angular/material/chips';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-panel',
@@ -24,6 +32,7 @@ export class PanelComponent implements OnInit {
     this.recopier = null;
     this.reconnaitre = null;
     this.puzzle = null;
+    this.boygirl = null;
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -43,6 +52,7 @@ export class PanelComponent implements OnInit {
   selectedGame: string | null = "";
 
 
+  // VARIABLE JEU RECOPIER
   recopier: Recopier | null;
   recopier_bg_color: string = "#3bb8c9";
   recopier_text_color: string = "#000000";
@@ -58,6 +68,8 @@ export class PanelComponent implements OnInit {
   recopier_isVocaliser : boolean = false;
   recopier_previsualiser : boolean = false;
 
+
+  // VARIABLE JEU RECONNAITRE
   reconnaitre: Reconnaitre | null;
   reconnaitre_bg_color: string = "#3bb8c9";
   reconnaitre_title_color: string = "#ffffff";
@@ -69,7 +81,8 @@ export class PanelComponent implements OnInit {
   reconnaitre_progress: Progress = Progress.Blue;
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_previsualiser : boolean = false;
-  
+
+  // VARIABLE JEU PUZZLE
   puzzle : Puzzle | null;
   puzzle_bg_color: string = "#3bb8c9";
   puzzle_title_color: string = "#ffffff";
@@ -78,7 +91,27 @@ export class PanelComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
 
+  // VARIABLE JEU BOY&GIRL
+  boygirl : BoyGirl | null;
+  boygirl_listMotsFille : string[] = [];
+  boygirl_listMotsGarcon : string[] = [];
+  boygirl_bg_color_container : string = "#3bb8c9";
+  boygirl_bg_color_fille : string = "#ffc0cb";
+  boygirl_bg_color_garcon : string = "#add9e6";
+  boygirl_bg_color_mot : string = "#fea500";
+  boygirl_word_color_fille : string = "#000000"
+  boygirl_word_color_garcon : string = "#000000"
+  boygirl_word_color_mot : string = "#000000"
+  boygirl_title_color_fille : string = "#000000";
+  boygirl_title_color_garcon : string = "#000000";
+  boygirl_title_color_mot : string = "#000000";
+  boygirl_text_color_fille : string = "#ffffff";
+  boygirl_text_color_garcon : string = "#ffffff";
+  boygirl_text_color_mot : string = "#ffffff";
+  boygirl_previsualiser : boolean = false;
 
+
+  // ETAPE D'AVANCEMENT FORMULAIRE
   formStep: number = 0;
   // r1 : Recopier = new Recopier([],'red','CAPITAL');
   // r2 : Recopier = new Recopier([],'blue','CAPITAL');
@@ -86,14 +119,56 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
 
-    if(this.jeu != null ) {
-      this.selectedGame = this.jeu;
+    if(this.jeu != null) {
+      if(this.optionGame.includes(this.jeu)) {
+        this.selectedGame = this.jeu;
+      }else {
+        this.router.navigate(['/panel']);
+      }
+
     }
   }
 
-  test(): void {
-    console.log(this.recopier_progress);
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
+
+  addMotsFille(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.boygirl_listMotsFille.push(value);
+    }
+
+    event.chipInput!.clear();
   }
+
+  removeFille(str: string): void {
+    const index = this.boygirl_listMotsFille.indexOf(str);
+
+    if (index >= 0) {
+      this.boygirl_listMotsFille.splice(index, 1);
+    }
+  }
+
+  addMotsGarcon(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.boygirl_listMotsGarcon.push(value);
+    }
+
+    event.chipInput!.clear();
+  }
+
+  removeGarcon(str: string): void {
+    const index = this.boygirl_listMotsGarcon.indexOf(str);
+
+    if (index >= 0) {
+      this.boygirl_listMotsGarcon.splice(index, 1);
+    }
+  }
+
 
   setSelected(element: HTMLOptionElement): void {
     element.selected = true;
@@ -107,6 +182,21 @@ export class PanelComponent implements OnInit {
     else {
       this.recopier = null;
       this.recopier_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      },0);
+    }
+  }
+
+  setPrevisualiserBoyGirl(prev: boolean): void {
+    if (prev == true) {
+      this.boygirl = new BoyGirl(this.boygirl_listMotsFille,this.boygirl_listMotsGarcon,this.boygirl_bg_color_container,this.boygirl_bg_color_fille,this.boygirl_bg_color_garcon,this.boygirl_bg_color_mot,this.boygirl_word_color_fille,this.boygirl_word_color_garcon,this.boygirl_word_color_mot,this.boygirl_title_color_fille,this.boygirl_title_color_garcon,this.boygirl_title_color_mot,this.boygirl_text_color_fille,this.boygirl_text_color_garcon,this.boygirl_text_color_mot);
+      this.boygirl_previsualiser = true;
+    }
+    else {
+      this.boygirl = null;
+      this.boygirl_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
