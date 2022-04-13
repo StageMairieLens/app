@@ -11,7 +11,7 @@ import { Progress } from '../Progress'
 export class RecopierGameComponent implements OnInit {
 
   constructor() {
-    // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture);
+    // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
   }
 
@@ -19,7 +19,7 @@ export class RecopierGameComponent implements OnInit {
   showImageCpt: number = 0;
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Recopier | null;
-  @Input() showTitle : boolean = true;
+  @Input() showTitle: boolean = true;
 
   images: Image[] = [
     new Image('Fleur', '../../assets/fleur.jpg'),
@@ -62,7 +62,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   sendAnswer(text: string, img: Image): void {
-    if(this.r!.typeEcriture == 'CAPITAL') {
+    if (this.r!.typeEcriture == 'CAPITAL') {
       if (text.toUpperCase() === img.getNom().toUpperCase()) {
         document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
 

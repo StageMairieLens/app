@@ -22,8 +22,9 @@ export class Recopier {
   color_progress_bar: Progress;
 
   typeEcriture: string;
+  isVocaliser : boolean;
 
-  constructor(images: Image[], bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, input_bg_color: string, input_text_color: string, typeEcriture: string) {
+  constructor(images: Image[], bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, input_bg_color: string, input_text_color: string, typeEcriture: string, isVocaliser : boolean) {
     this.id = Recopier.nb++;
     this.images = images;
     this.bg_color = bg_color;
@@ -37,6 +38,7 @@ export class Recopier {
     this.input_bg_color = input_bg_color;
     this.input_text_color = input_text_color;
     this.typeEcriture = typeEcriture;
+    this.isVocaliser = isVocaliser;
   }
 
 }

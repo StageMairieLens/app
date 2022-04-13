@@ -48,18 +48,22 @@ export class PanelComponent implements OnInit {
   recopier_button_text_color: string = "#ffffff";
   recopier_input_bg_color: string = "#ffffff";
   recopier_input_text_color: string = "#000000";
-  recopier_progress: Progress = Progress.Orange;
+  recopier_progress: Progress = Progress.Blue;
   recopier_type_ecriture = "CURSIF";
+  recopier_isVocaliser : boolean = false;
+  recopier_previsualiser : boolean = false;
 
   reconnaitre: Reconnaitre | null;
   reconnaitre_bg_color: string = "#3bb8c9";
   reconnaitre_title_color: string = "#ffffff";
+  reconnaitre_text_color: string = "#000000";
   reconnaitre_good_answer_color: string = "#0dff00";
   reconnaitre_wrong_answer_color: string = "#ff0000";
   reconnaitre_button_bg_color: string = "#0f73b1";
   reconnaitre_button_text_color: string = "#ffffff";
   reconnaitre_progress: Progress = Progress.Orange;
   reconnaitre_type_ecriture = "SCRIPT";
+  reconnaitre_previsualiser : boolean = false;
 
 
   formStep: number = 0;
@@ -77,15 +81,41 @@ export class PanelComponent implements OnInit {
     element.selected = true;
   }
 
-  setPrevisualiser(prev: boolean): void {
+  setPrevisualiserRecopier(prev: boolean): void {
     if (prev == true) {
-      this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
-      this.previsualiser = true;
+      this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
+      this.recopier_previsualiser = true;
     }
     else {
       this.recopier = null;
-      this.previsualiser = false;
-      this.setFormStep(this.formStep);
+      this.recopier_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      },0);
+    }
+  }
+
+  setPrevisualiserReconnaitre(prev: boolean): void {
+    if (prev == true) {
+      this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color,this.reconnaitre_title_color,this.reconnaitre_text_color,this.reconnaitre_good_answer_color,this.reconnaitre_wrong_answer_color,this.reconnaitre_progress,this.reconnaitre_button_bg_color,this.reconnaitre_button_text_color,this.reconnaitre_type_ecriture);
+      this.reconnaitre_previsualiser = true;
+    }
+    else {
+      this.reconnaitre = null;
+      this.reconnaitre_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      },0);
+    }
+  }
+
+  isActive(button : HTMLButtonElement) : boolean {
+    if(document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -111,13 +141,13 @@ export class PanelComponent implements OnInit {
   }
 
   setActive(element: Element | null): void {
-    element!.classList.remove('active');
-    element!.classList.add('active');
+    (<HTMLButtonElement>element!).style.background = 'white';
+    (<HTMLButtonElement>element!).style.color = 'black';
   }
 
   setInactive(element: Element | null) {
-    element!.classList.remove('active');
-    element!.classList.add('active');
+    (<HTMLButtonElement>element!).style.background = '';
+    (<HTMLButtonElement>element!).style.color = 'white';
   }
 
   nextStep(): void {
@@ -130,9 +160,9 @@ export class PanelComponent implements OnInit {
   }
 
   setFormStep(step: number): void {
-    // this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+    this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
     this.formStep = step;
-    // this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
+    this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
 
   }
 
@@ -161,6 +191,10 @@ export class PanelComponent implements OnInit {
     if (index > -1) {
       this.selectedImages.splice(index, 1);
     }
+  }
+
+  create() : void {
+
   }
 
 }

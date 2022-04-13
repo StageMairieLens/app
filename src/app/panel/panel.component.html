@@ -40,21 +40,24 @@
       <div align="center">
         <button class="choice" *ngFor="let c of this.optionGame" (click)="this.selectedGame = c" mat-raised-button
           color="primary">{{c}}</button>
-
       </div>
     </div>
   </div>
 
   <!-- Si un jeu est selectionné -->
   <div class="card container" *ngIf="this.selectedGame != ''">
-    <h5 class="card-header">{{this.selectedGame}}</h5>
-    <div class="card-body">
 
-      <div *ngIf="!this.previsualiser">
+    <!-- Affiche le nom du jeu sélectionné -->
+    <h5 class="card-header">{{this.selectedGame}}</h5>
+
+    <!-- Formulaire Recopier -->
+    <div *ngIf="this.selectedGame == 'Recopier'" class="card-body">
+
+      <!-- Formulaire Recopier - Bouton de prévisualisation -->
+      <div *ngIf="!this.recopier_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button type="button" class="btn btn-danger" (click)="setPrevisualiser(true)">
-            Prévisualiser
-          </button>
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(true)"
+            mat-raised-button color="warn">Prévisualiser</button>
         </div>
 
         <!-- Menu de navigation dans le formulaire -->
@@ -62,17 +65,18 @@
           <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center">
               <li class="breadcrumb-item">
-                <button mat-fab color="primary" aria-label="Images" (click)="setFormStep(0)">
+                <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                  aria-label="Images" (click)="setFormStep(0)">
                   <i class="fa-solid fa-images"></i>
                 </button>
               </li>
               <li class="breadcrumb-item">
-                <button mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
                   <i class="fa-solid fa-brush"></i>
                 </button>
               </li>
               <li class="breadcrumb-item">
-                <button mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
                   <i class="fa-solid fa-font"></i>
                 </button>
               </li>
@@ -82,7 +86,7 @@
 
 
 
-        <!-- Etape du formulaire 1 -- Choix des images-->
+        <!--Formulaire Recopier Etape du formulaire 1 -- Choix des images-->
         <div *ngIf="this.formStep == 0">
           <h2 class="card-title text-center">Choisissez les images</h2>
           <div *ngIf="this.selectedGame == 'Recopier'">
@@ -203,19 +207,55 @@
             </div>
 
             <div class="form-row">
+              <div class="col-md-4">
+                <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
+
+              </div>
+              <div class="col-md-8">
+                <select class="form-control" aria-label="Default select example" #progressSelectValue
+                  (change)="changeProgressValue(progressSelectValue)">
+                  <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                    ng-selected="p == this.recopier_progress" #progressValue>
+                    <p *ngIf="p == 'blue'">Bleu</p>
+                    <p *ngIf="p == 'green'">Vert</p>
+                    <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                    <p *ngIf="p == 'orange'">Orange</p>
+                    <p *ngIf="p == 'red'">Rouge</p>
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
               <div class="col-md-12">
-                <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression
-                  <select class="form-control" aria-label="Default select example" #progressSelectValue
-                    (change)="changeProgressValue(progressSelectValue)">
-                    <option *ngFor="let p of this.progressValue" value="{{p}}" #progressValue>
-                      <p *ngIf="p == 'blue'">Bleu</p>
-                      <p *ngIf="p == 'green'">Vert</p>
-                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
-                      <p *ngIf="p == 'orange'">Orange</p>
-                      <p *ngIf="p == 'red'">Rouge</p>
-                    </option>
-                  </select>
-                </label>
+                <div class="progress" *ngIf="this.recopier_progress == 'blue' ">
+                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                  </div>
+                </div>
+
+                <div class="progress" *ngIf="this.recopier_progress == 'green' ">
+                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                  </div>
+                </div>
+
+                <div class="progress" *ngIf="this.recopier_progress == 'lightblue' ">
+                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                  </div>
+                </div>
+
+                <div class="progress" *ngIf="this.recopier_progress == 'orange' ">
+                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                  </div>
+                </div>
+
+                <div class="progress" *ngIf="this.recopier_progress == 'red' ">
+                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -223,47 +263,178 @@
 
         <!-- Etape du formulaire 3 -- Choix des textes -->
         <div *ngIf="this.formStep == 2" style="text-align : center;">
-          <h2 class="card-title">Type d'écriture</h2>
-          <mat-radio-group aria-label="Choisissez un type d'écriture">
+          <div class="form-row">
+            <div class="col-md-12">
+              <h2 class="card-title">Type d'écriture</h2>
+              <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-            <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif" (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
-            <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif" (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">Cursif</mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
+                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+                  checked>Cursif</mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
+                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+                  Cursif</mat-radio-button>
 
-            <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital" (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL</mat-radio-button>
-            <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital" (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
+                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                </mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
+                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
 
-            <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script" (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script</mat-radio-button>
-            <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script" (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" >Script</mat-radio-button>
-          </mat-radio-group>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
+                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                </mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
+                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12">
+              <h2 class="card-title">Vocalisation</h2>
+              <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
+                style="margin-right : 2%; color : #ff4083"></i>
+              <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+
+              <mat-slide-toggle (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+              </mat-slide-toggle>
+              <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
+                style="margin-left : 2%; color : #ff4083"></i>
+              <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+            </div>
+          </div>
+
+          <div class="form-row align-middle text-center" align="center">
+            <div class="col-md-12 text-center">
+              <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le jeu
+                <i class="fa-solid fa-check"></i>
+              </button>
+            </div>
+          </div>
+
         </div>
 
 
 
 
 
-
+        <!-- Formulaire Recopier - Menu de navigation par étape -->
         <div class="align-bottom" style="margin : 10px">
           <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
             (click)="previousStep()">
+            <i class="fa-solid fa-arrow-left"></i>
             Etape précédente
           </button>
           <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
             (click)="nextStep()">
             Etape suivante
+            <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
       </div>
 
-      <div *ngIf="this.previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button type="button" class="btn btn-danger" (click)="setPrevisualiser(false)">
-            Quitter la prévisualisation
-          </button>
-        </div>
 
+      <!-- Formulaire Recopier - Prévisualisation -->
+      <div *ngIf="this.recopier_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
+              mat-raised-button color="warn">Quitter la prévisualisation</button>
+          </div>
+        </div>
         <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
       </div>
 
+    </div>
+
+    <!-- Formulaire Reconnaitre -->
+    <div class="card-body" *ngIf="this.selectedGame == 'Reconnaitre'">
+
+
+      <!-- Formulaire Reconnaitre - Bouton de prévisualisation -->
+      <div *ngIf="!this.reconnaitre_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
+            mat-raised-button color="warn">Prévisualiser</button>
+        </div>
+
+        <!-- Formulaire Reconnaitre - Menu de navigation -->
+        <div class="stepMenu">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item">
+                <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                  aria-label="Images" (click)="setFormStep(0)">
+                  <i class="fa-solid fa-images"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                  <i class="fa-solid fa-brush"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                  <i class="fa-solid fa-font"></i>
+                </button>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+
+        <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
+        <div *ngIf="this.formStep == 0">
+          <h2 class="card-title text-center">Choisissez les images</h2>
+          <div *ngIf="this.selectedGame == 'Reconnaitre'">
+            <div class="card-body selectImage_container text-center align-top">
+              <h5 class="card-header" style="color : black">Listes des images</h5>
+              <figure class="figure" *ngFor="let image of this.liste_image">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
+
+            <div class="card-body selectImage_container text-center">
+              <h5 class="card-header" style="color : black">Images selectionné</h5>
+              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                selectionné
+                aucune image</h6>
+              <figure class="figure" *ngFor="let image of this.selectedImages">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                  (click)="deleteImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <!--Formulaire Reconnaite -  Menu de navigation par étape -->
+        <div class="align-bottom" style="margin : 10px">
+          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            (click)="previousStep()">
+            <i class="fa-solid fa-arrow-left"></i>
+            Etape précédente
+          </button>
+          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+            (click)="nextStep()">
+            Etape suivante
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Formulaire Recopier - Prévisualisation -->
+        <div *ngIf="this.reconnaitre_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
+                mat-raised-button color="warn">Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+        </div>
+
+      </div>
     </div>
   </div>
 

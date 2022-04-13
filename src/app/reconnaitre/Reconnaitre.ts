@@ -21,7 +21,7 @@ export class Reconnaitre {
 
   typeEcriture: string;
 
-  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, input_bg_color: string, input_text_color: string, typeEcriture: string) {
+  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string) {
     this.id = Reconnaitre.nb++;
     this.liste_images = liste_images;
     this.bg_color = bg_color;

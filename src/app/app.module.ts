@@ -21,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 @NgModule({
@@ -47,12 +50,15 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatStepperModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'accent' },
-  }],
+  }
+  ],
   bootstrap: [AppComponent]
 })
 
