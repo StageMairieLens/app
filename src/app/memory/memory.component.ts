@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Image } from '../Image';
+import { Progress } from '../Progress';
+import { Memory } from './Memory';
 import { TileComponent } from './tile/tile.component';
 
 @Component({
@@ -8,9 +11,19 @@ import { TileComponent } from './tile/tile.component';
 })
 export class MemoryComponent implements OnInit {
 
+  game: Memory | null;
   derriere = "../../assets/lapin.webp";
-  map = new Map();
-  entries = this.map.entries();
+  images: Image[] = [
+    new Image("Orange", "../../assets/orange.jpg"),
+    new Image("Voiture", "../../assets/voiture.png"),
+    new Image("Chat", "../../assets/chat.jpg"),
+    new Image("Chien", "../../assets/chien.jpeg"),
+    new Image("Lion", "../../assets/lion.jpg"),
+    new Image("Souris", "../../assets/souris.jpg"),
+    new Image("Son", "../../assets/sound.png"),
+    new Image("Maison", "../../assets/house.svg"),
+    new Image("Panda", "../../assets/panda.png")
+  ]
   nbTile = 18;
   setting: string[] = ["image", "image"];
   affichage: string[] = [];
@@ -22,6 +35,7 @@ export class MemoryComponent implements OnInit {
   essaie: number = 0;
   nbBon: number = 0;
   finish: boolean = false;
+  typeEcriture: string = "cursif";
   @ViewChild("tile1") tile1!: TileComponent;
   @ViewChild("tile2") tile2!: TileComponent;
   @ViewChild("tile3") tile3!: TileComponent;
@@ -42,18 +56,15 @@ export class MemoryComponent implements OnInit {
   @ViewChild("tile18") tile18!: TileComponent;
   tiles: TileComponent[] = [];
 
-  constructor() {}
+  constructor() {
+    this.game = new Memory(this.images, 18, this.setting, '#3bb8c9', 'white', 'white', 'blue', 'red', Progress.Blue, 'cursif');
+    //this.game = null;
+  }
 
   ngOnInit(): void {
-    this.map.set("Orange", "../../assets/orange.jpg");
-    this.map.set("Voiture", "../../assets/voiture.png");
-    this.map.set("Chat", "../../assets/chat.jpg");
-    this.map.set("Chien", "../../assets/chien.jpeg");
-    this.map.set("Lion", "../../assets/lion.jpg");
-    this.map.set("Souris", "../../assets/souris.jpg");
-    this.map.set("Son", "../../assets/sound.png");
-    this.map.set("Maison", "../../assets/house.svg");
-    this.map.set("Panda", "../../assets/panda.png");
+    this.nbTile = this.game!.nbTile;
+    this.setting = this.game!.setting;
+    this.typeEcriture = this.game!.typeEcriture;
     this.start();
   }
 
@@ -68,34 +79,31 @@ export class MemoryComponent implements OnInit {
   }
 
   start(): void {
-    var entry = this.entries.next();
     var val;
     var i = 0;
     var a;
-    while(!entry.done && i < this.nbTile/2) {
-      val = entry.value;
+    while(i < this.nbTile/2) {
       for(var x = 0; x < 2; x++) {
         a = this.random();
         this.sets[a] = i;
         switch(this.setting[x]) {
           case "image":
-            this.affichage[a] = val[1];
+            this.affichage[a] = this.game!.images[i].getSrc();
             this.isImage[a] = true;
             this.sound[a] = false;
             break;
           case "mot":
-            this.affichage[a] = val[0];
+            this.affichage[a] = this.game!.images[i].getNom();
             this.isImage[a] = false;
             this.sound[a] = false;
             break;
           case "sound":
-            this.affichage[a] = val[1];
+            this.affichage[a] = this.game!.images[i].getSrc();
             this.isImage[a] = true;
             this.sound[a] = true;
         }
       }
       i++
-      entry = this.entries.next();
     }
   }
 
@@ -116,8 +124,13 @@ export class MemoryComponent implements OnInit {
     else {
       this.essaie++;
       if(this.sets[Number(id)-1] == this.sets[Number(this.retourner)-1]) {
-        this.retourner = "0";
         this.nbBon++;
+        document.getElementById(id)!.style.border = "3px solid";
+        document.getElementById(id)!.style.borderColor = this.game!.good_answer_color;
+        document.getElementById(this.retourner)!.style.border = "3px solid";
+        document.getElementById(this.retourner)!.style.borderColor = this.game!.good_answer_color;
+        this.retourner = "0";
+        document.getElementById('progressbar')!.style.width = ((this.nbBon / (this.game!.nbTile/2)) * 100).toString() + '%';
         if(this.nbBon >= this.nbTile/2) {
           setTimeout(() => {
             this.finish = true;
@@ -126,10 +139,16 @@ export class MemoryComponent implements OnInit {
       }
       else {
         this.disable();
+        document.getElementById(id)!.style.border = "3px solid";
+        document.getElementById(id)!.style.borderColor = this.game!.wrong_answer_color;
+        document.getElementById(this.retourner)!.style.border = "3px solid";
+        document.getElementById(this.retourner)!.style.borderColor = this.game!.wrong_answer_color;
         setTimeout(() => {
           console.log(id, this.retourner);
           this.tiles[Number(id)-1].cacher();
           this.tiles[Number(this.retourner)-1].cacher();
+          document.getElementById(id)!.style.border = "none";
+          document.getElementById(this.retourner)!.style.border = "none";
           this.retourner = "0";
           this.enable();
         }, 1500);
