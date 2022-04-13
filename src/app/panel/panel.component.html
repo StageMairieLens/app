@@ -348,6 +348,56 @@
 
     </div>
 
+
+    <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
+      <div *ngIf="!this.boygirl_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)"
+            mat-raised-button color="warn">Prévisualiser</button>
+        </div>
+
+        <!-- Formulaire Reconnaitre - Menu de navigation -->
+        <div class="stepMenu">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item">
+                <button title="Listes de mots" style="background : white; color : black" mat-fab color="primary"
+                  aria-label="Mots" (click)="setFormStep(0)">
+                  <i class="fa-solid fa-font"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                  <i class="fa-solid fa-brush"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                  <i class="fa-solid fa-font"></i>
+                </button>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+
+      </div>
+
+      <!-- Formulaire Recopier - Prévisualisation -->
+      <div *ngIf="this.recopier_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
+              mat-raised-button color="warn">Quitter la prévisualisation</button>
+          </div>
+        </div>
+        <app-boy-girl-game></app-boy-girl-game>
+      </div>
+
+
+
+    </div>
+
     <!-- Formulaire Reconnaitre -->
     <div class="card-body" *ngIf="this.selectedGame == 'Reconnaitre'">
 

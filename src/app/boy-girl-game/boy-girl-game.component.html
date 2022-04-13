@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center" *ngIf="this.showTitle">
   <h1 class="title">
     <span>FILLE</span>
     <span>&</span>
@@ -7,75 +7,83 @@
 </div>
 
 
-<div class="container" id="content">
-  <div class="row">
-    <div class="card align-self-left col" id="girlContainer" style="width: 32rem">
-      <div class="card-body text-center">
-        <h5 class="card-title title_image">FILLE</h5>
-        <p class="card-text">Déplacer les éléments associé au fille ci-dessous</p>
+<div *ngIf="this.bg != null">
+  <div class="container" id="content">
+    <div class="row">
+      <div class="card align-self-left col" id="girlContainer" [ngStyle]="{background : this.bg!.bg_color_fille}"
+        style="width: 32rem">
+        <div class="card-body text-center">
+          <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_fille}">FILLE</h5>
+          <p class="card-text" [ngStyle]="{color : this.bg!.text_color_fille}">Déplacer les éléments associé au fille
+            ci-dessous</p>
 
-        <div
-        cdkDropList
-        #girlList="cdkDropList"
-        id='girlList'
-        [cdkDropListData]="girl"
-        [cdkDropListConnectedTo]="[boyList,motList]"
-        class="align-bottom dropZone container"
-        (cdkDropListDropped)="drop($event)">
-        <div class="drop_content" *ngFor="let mot of girl" cdkDrag>
+          <div cdkDropList #girlList="cdkDropList" id='girlList' [cdkDropListData]="girl"
+            [cdkDropListConnectedTo]="[boyList,motList]" class="align-bottom dropZone container"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drop_content" *ngFor="let mot of girl" cdkDrag
+              [ngStyle]="{background : this.bg!.word_color_fille , color : this.bg!.text_color_fille}">
+              {{mot}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card align-self-right col" id="boyContainer" [ngStyle]="{background : this.bg!.bg_color_garcon}"
+        style="width: 32rem;">
+        <div class="card-body text-center">
+          <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_garcon}">Garcon</h5>
+          <p class="card-text" [ngStyle]="{color : this.bg!.text_color_garcon}">Déplacer les éléments associé au garçon
+            ci-dessous</p>
+
+          <div cdkDropList #boyList="cdkDropList" id='boyList' [cdkDropListData]="boy"
+            [cdkDropListConnectedTo]="[girlList,motList]" class="align-bottom dropZone"
+            (cdkDropListDropped)="drop($event)">
+            <div class="drop_content" *ngFor="let mot of boy" cdkDrag
+              [ngStyle]="{background : this.bg!.word_color_garcon , color : this.bg!.text_color_garcon}">
+              {{mot}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card align-middle container" id="container" [ngStyle]="{background : this.bg!.bg_color_mot}"
+    style="width: 32rem;margin-top : 5%">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_mot}">Liste de mots</h5>
+      <div cdkDropList #motList="cdkDropList" [cdkDropListData]="mots" [cdkDropListConnectedTo]="[girlList, boyList]"
+        class="align-bottom dropZone align-middle" (cdkDropListDropped)="drop($event)">
+        <div class="drop_content" *ngFor="let mot of mots" cdkDrag
+          [ngStyle]="{background : this.bg!.word_color_mot , color : this.bg!.text_color_mot}">
           {{mot}}
         </div>
-
-      </div>
       </div>
     </div>
+  </div>
 
-    <div class="card align-self-right col" id="boyContainer" style="width: 32rem;">
-      <div class="card-body text-center">
-        <h5 class="card-title title_image">Garcon</h5>
-        <p class="card-text">Déplacer les éléments associé au garçon ci-dessous</p>
 
-        <div
-        cdkDropList
-
-        #boyList="cdkDropList"
-        id='boyList'
-        [cdkDropListData]="boy"
-        [cdkDropListConnectedTo]="[girlList,motList]"
-        class="align-bottom dropZone"
-        (cdkDropListDropped)="drop($event)">
-        <div class="drop_content" *ngFor="let mot of boy" cdkDrag>
-          {{mot}}
-        </div>
-
-      </div>
-      </div>
+  <div *ngIf="this.finish" class="card align-middle container" id="finish" style="width: 32rem;" [ngStyle]="{background : this.bg!.bg_color_container}">
+    <img class="card-img-top image"
+      src="https://imgs.search.brave.com/DrvWMJ9F_FqJX6j0t6s5PbltaTGgOEjXC4uRBdpPidM/rs:fit:681:254:1/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWxsdXN0/cmF0aW9ucy9jb25n/cmF0dWxhdGlvbnMt/aWxsdXN0cmF0aW9u/LWlkMTE0NDU1Mzc0/Mz9rPTYmbT0xMTQ0/NTUzNzQzJnM9MTcw/NjY3YSZ3PTAmaD1N/cWJlVzJEc0ZfbmFt/N1B5NWFqS0J3ZlJW/bU1iblNMT2FyNFNu/Z2xBektRPQ"
+      alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image">Félicitation !</h5>
+      <p class="card-text">Vous avez classé correctement touts les mots !</p>
     </div>
   </div>
 </div>
 
+<div *ngIf="this.bg == null" class="card align-middle container" id="card_error" style="width: 32rem; color : black ; background : #3bb8c9">
 
-<div class="card align-middle container" id="container" style="width: 32rem;margin-top : 10%">
-  <div class="card-body text-center">
-    <h5 class="card-title title_image">Liste de mots</h5>
-    <div
-    cdkDropList
-    #motList="cdkDropList"
-    [cdkDropListData]="mots"
-    [cdkDropListConnectedTo]="[girlList, boyList]"
-    class="align-bottom dropZone align-middle"
-    (cdkDropListDropped)="drop($event)">
-    <div class="drop_content" *ngFor="let mot of mots" cdkDrag>
-      {{mot}}
+    <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image_error">Erreur !</h5>
+      <p class="card-text">Il n'y a pas de jeu selectionné !</p>
     </div>
-  </div>
-</div>
-</div>
 
-<div *ngIf="this.finish" class="card align-middle container" id="finish" style="width: 32rem;">
-  <img class="card-img-top image" src="https://imgs.search.brave.com/DrvWMJ9F_FqJX6j0t6s5PbltaTGgOEjXC4uRBdpPidM/rs:fit:681:254:1/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWxsdXN0/cmF0aW9ucy9jb25n/cmF0dWxhdGlvbnMt/aWxsdXN0cmF0aW9u/LWlkMTE0NDU1Mzc0/Mz9rPTYmbT0xMTQ0/NTUzNzQzJnM9MTcw/NjY3YSZ3PTAmaD1N/cWJlVzJEc0ZfbmFt/N1B5NWFqS0J3ZlJW/bU1iblNMT2FyNFNu/Z2xBektRPQ" alt="Card image cap">
-  <div class="card-body text-center">
-    <h5 class="card-title title_image">Félicitation !</h5>
-    <p class="card-text">Vous avez classé correctement touts les mots !</p>
-  </div>
+
 </div>
