@@ -1,6 +1,6 @@
 .image {
-    height: 185px;
-    width: 185px;
+    height: 100%;
+    max-width: 195px;;
     padding: 10px;
 }
 
