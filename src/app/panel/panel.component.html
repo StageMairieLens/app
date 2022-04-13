@@ -38,9 +38,9 @@
     <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
     <div class="card-body">
       <div align="center">
-        <button class="choice" *ngFor="let c of this.optionGame" (click)="this.selectedGame = c">
-          {{c}}
-        </button>
+        <button class="choice" *ngFor="let c of this.optionGame" (click)="this.selectedGame = c" mat-raised-button
+          color="primary">{{c}}</button>
+
       </div>
     </div>
   </div>
@@ -61,19 +61,25 @@
         <div class="stepMenu">
           <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item"><button type="button" class="btn btn-primary" (click)="setFormStep(0)">Images
+              <li class="breadcrumb-item">
+                <button mat-fab color="primary" aria-label="Images" (click)="setFormStep(0)">
                   <i class="fa-solid fa-images"></i>
-                </button></li>
-              <li class="breadcrumb-item"><button type="button" class="btn btn-outline-primary"
-                  (click)="setFormStep(1)">Couleurs
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
                   <i class="fa-solid fa-brush"></i>
-                </button></li>
-              <li class="breadcrumb-item"><button type="button" class="btn btn-outline-primary"
-                  (click)="setFormStep(2)">Texte
-                  <i class="fa-solid fa-font"></i></button></li>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                  <i class="fa-solid fa-font"></i>
+                </button>
+              </li>
             </ol>
           </nav>
         </div>
+
 
 
         <!-- Etape du formulaire 1 -- Choix des images-->
@@ -90,10 +96,12 @@
             </div>
             <div class="card-body selectImage_container text-center">
               <h5 class="card-header" style="color : black">Images selectionné</h5>
-              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez selectionné
+              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                selectionné
                 aucune image</h6>
               <figure class="figure" *ngFor="let image of this.selectedImages">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                  (click)="deleteImage(image)">
                 <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
               </figure>
             </div>
@@ -142,7 +150,8 @@
                 </label>
               </div>
               <div class="col-md-6">
-                <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message mauvaise
+                <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                  mauvaise
                   réponse
                   <input type="color" class="form-control form-control-color"
                     (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
@@ -213,8 +222,19 @@
         </div>
 
         <!-- Etape du formulaire 3 -- Choix des textes -->
-        <div *ngIf="this.formStep == 2">
-          TEXT
+        <div *ngIf="this.formStep == 2" style="text-align : center;">
+          <h2 class="card-title">Type d'écriture</h2>
+          <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+            <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif" (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+            <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif" (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">Cursif</mat-radio-button>
+
+            <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital" (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL</mat-radio-button>
+            <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital" (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
+
+            <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script" (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script</mat-radio-button>
+            <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script" (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" >Script</mat-radio-button>
+          </mat-radio-group>
         </div>
 
 

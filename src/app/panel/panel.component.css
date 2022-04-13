@@ -17,16 +17,16 @@
 }
 
 .choice {
-  background-color: #ffffffee;
-  opacity: 0.9;
-  padding: 10px;
   margin-right: 5px;
-  border: 3px solid lightblue;
   box-shadow: rgba(0, 0, 0, 0.459) 5px 2px;
 }
 
 img {
   margin: 5px;
+}
+
+.active {
+  color : black;
 }
 
 .selectImage_container {
@@ -102,4 +102,7 @@ img {
 .form-row {
   margin-left : 4%;
   margin-bottom : 20px;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 25px;
 }
