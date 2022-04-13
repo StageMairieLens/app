@@ -13,6 +13,14 @@
       <span>E</span>
     </h1>
   </div>
+  <div *ngIf="this.r == null" class="card align-middle container" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
+    <img class="card-img-top image" src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw" alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image_error">Erreur !</h5>
+      <p class="card-text">Il n'y a pas de jeu selectionné !</p>
+    </div>
+  </div>
+  <div *ngIf="this.r != null">
   <div *ngIf="this.prochaine_image != this.liste_images.length" class="card align-middle container" id="container"
     style="width: 32rem;"[ngStyle]="{background : this.r!.bg_color}">
 
@@ -69,6 +77,7 @@
         <p class="card-text" style="color : black">Il n'y a pas d'image selectionné</p>
       </div>
     </div>
+  </div>
   </div>
 
 </body>
