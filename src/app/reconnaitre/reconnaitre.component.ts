@@ -52,9 +52,9 @@ export class ReconnaitreComponent implements OnInit {
     await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
   }
   alea(li:Image[]): void {
-    
+
     var m=li.length,name,src, i;
-    
+
     // While there remain elements to shuffle
     while (this.taille_to) {
       // Pick a remaining element…
@@ -67,8 +67,8 @@ export class ReconnaitreComponent implements OnInit {
       li[m].src=li[i].src;
       li[i].nom= name;
       li[i].src=src;
-      
-    
+
+
     }
   }
   alea2(li: string[]): void {
@@ -93,7 +93,6 @@ export class ReconnaitreComponent implements OnInit {
     //this.variable=this.liste_images[this.prochaine_image];
     if (varia == this.r!.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked = false;
-      this.prochaine_image += 1;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
 
       setTimeout(() => {
@@ -104,6 +103,10 @@ export class ReconnaitreComponent implements OnInit {
 
           800);
       }, 1000);
+      setTimeout(() => {
+        this.prochaine_image += 1;
+
+      },1600);
       setTimeout(() => {
         document.getElementById('result')!.innerHTML = '';
         document.getElementById('progressbar')!.style.width = ((this.prochaine_image / this.r!.images.length) * 100).toString() + '%';
@@ -130,7 +133,7 @@ export class ReconnaitreComponent implements OnInit {
       this.compteur += 1;
 
       document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
-      
+
       document.getElementById('container')?.animate([
         { transform: 'translateX(0px)' },
         { transform: 'translateX(-50px)' },

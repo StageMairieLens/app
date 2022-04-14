@@ -1,4 +1,3 @@
-
 .title {
   text-transform: uppercase;
   font-size: 105px;
@@ -10,27 +9,35 @@
 .title :nth-child(1n) {
   color: #835ba7;
 }
+
 .title :nth-child(2n) {
   color: #3e4194;
 }
+
 .title :nth-child(3n) {
   color: #01afee;
 }
+
 .title :nth-child(4n) {
   color: #00a656;
 }
+
 .title :nth-child(5n) {
   color: #fff116;
 }
+
 .title :nth-child(6n) {
   color: #f68635;
 }
+
 .title :nth-child(7n) {
-  color: #ec3238
+  color: #ec3238;
 }
+
 .title :nth-child(8n) {
   color: #00a656;
 }
+
 .title :nth-child(9n) {
   color: #01afee;
 }
@@ -38,15 +45,17 @@
 .title :nth-child(10n) {
   color: #835ba7;
 }
-#error{
+
+#error {
   color: red;
 }
-p{
+
+p {
   margin-left: 4px;
   border-radius: 3%;
   padding: 1px;
-
 }
+
 .card {
   width: 30%;
   background: yellowgreen;
@@ -55,41 +64,53 @@ p{
   box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
   color: white;
 }
+
 .image {
   display: inline;
   border: solid grey 2px;
-  
+
   margin-top: 10px;
 }
+
 button {
   margin-top: 5px;
-  height: 50px;
-  width: 50px;
+  /* height: 50px;
+  width: 50px; */
+  width : 70px;
+  height : 70px;
   border-radius: 50%;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   text-align: center;
-  margin-right: 3px;
+  /* margin-right: 3px; */
   background: rgb(201, 140, 7);
   padding: auto;
   box-shadow: rgba(92, 8, 8, 0.4) 10px 15px;
+  margin-right : 7px;
+}
+
+#mot {
+  margin-top : 10px;
+  margin-bottom : 10px;
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
   border: 1px solid #999999;
   background-color: red;
   color: #666666;
 }
-button[disabled]:hover{
+
+button[disabled]:hover {
   background-color: red;
 }
+
 .progress {
   margin-top: 5px;
   background-color: red;
 }
-button:hover
-{
-background-color:purple;
-color:#000;
-box-shadow:3px 8px #888;
+
+button:hover {
+  background-color: purple;
+  color: #000;
+  box-shadow: 3px 8px #888;
 }
