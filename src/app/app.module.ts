@@ -24,6 +24,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from '@angular/material/chips';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -54,7 +55,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatDividerModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatChipsModule
+    MatChipsModule,
+    FormsModule,
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,

@@ -14,7 +14,7 @@ export class ReconnaitreComponent implements OnInit {
 
   constructor() {
     // this.r = null;
-    this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL');
+    this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
     this.alea(this.r!.images);
     this.alea2(this.liste_mot_boutton);
   }

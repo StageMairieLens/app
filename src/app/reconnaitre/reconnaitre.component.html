@@ -40,7 +40,8 @@
         <div class="col text-center">
           <div class="col d-flex justify-content-center">
             <!-- <p id="error" >Nombre d'erreur = {{ compteur }}</p> -->
-            <mat-card id="error"[ngStyle]="{color : this.r!.text_color}" style="width : 50%" class="text-center">Nombre d'erreur = {{compteur}}</mat-card>
+            <mat-card id="error" [ngStyle]="{color : this.r!.text_color}" style="width : 50%" class="text-center">Nombre
+              d'erreur = {{compteur}}</mat-card>
             <!-- Affiche le nombre d'erreur -->
           </div>
           <img style="width:400px;" src="{{ this.r!.images[this.prochaine_image].src }}" class="card-img-top image ">
@@ -55,11 +56,30 @@
             (click)="change($event,mot)    ;"
             [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}">{{ mot }}</button> -->
 
-          <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
-            *ngFor="let mot of this.r!.liste_button" id="{{mot}}" (click)="change($event,mot)"
-            mat-fab color="primary" aria-label="Example icon button with a delete icon">
-            {{mot}}
-          </button>
+          <div *ngIf="this.r!.typeEcriture == 'CURSIF'">
+            <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
+              *ngFor="let mot of this.r!.liste_button" style="font-family : cursiveFont; font-size : 28px" id="{{mot}}"
+              (click)="change($event,mot)" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+              {{mot}}
+            </button>
+          </div>
+
+          <div *ngIf="this.r!.typeEcriture == 'CAPITAL'">
+            <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
+              *ngFor="let mot of this.r!.liste_button" style="text-transform : uppercase" id="{{mot}}"
+              (click)="change($event,mot)" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+              {{mot}}
+            </button>
+          </div>
+
+
+          <div *ngIf="this.r!.typeEcriture == 'SCRIPT'">
+            <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
+              *ngFor="let mot of this.r!.liste_button" id="{{mot}}"
+              (click)="change($event,mot)" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+              {{mot}}
+            </button>
+          </div>
 
           <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
         </div>
