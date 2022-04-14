@@ -16,7 +16,13 @@ export class ImagesComponent implements OnInit {
     new Image('Fleur', '../../assets/fleur.jpg'),
     new Image('Chat', '../../assets/chat.jpg'),
     new Image('Voiture', '../../assets/voiture.png'),
-    new Image('Elephant', '../../assets/elephant.jpg')
+    new Image('Elephant', '../../assets/elephant.jpg'),
+    new Image('Chien', '../../assets/chien.jpeg'),
+    new Image('Lapin', '../../assets/lapin.webp'),
+    new Image('Panda', '../../assets/panda.png'),
+    new Image('Souris', '../../assets/souris.jpg'),
+    new Image('Maison', '../../assets/house.svg'),
+    new Image('Orange', '../../assets/orange.jpg')
   ];
 
 

@@ -25,66 +25,66 @@
     </div>
 </div>
 
-<div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2)" class="plateau container" [ngStyle]="{background: game!.bg_color}">
+<div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2) && game.derriere != null" class="plateau container" [ngStyle]="{background: game!.bg_color}">
 <table style="table-layout: fixed;">
     <tr>
         <td id="1" *ngIf="nbTile >= 1">
-            <app-tile #tile1 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile1 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="2" *ngIf="nbTile >= 2">
-            <app-tile #tile2 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile2 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="5" *ngIf="nbTile >= 5">
-            <app-tile #tile5 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile5 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="7" *ngIf="nbTile >= 7">
-            <app-tile #tile7 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile7 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="13" *ngIf="nbTile >= 13">
-            <app-tile #tile13 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile13 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="14" *ngIf="nbTile >= 14">
-            <app-tile #tile14 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile14 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
     <tr>
         <td id="3" *ngIf="nbTile >= 3">
-            <app-tile #tile3 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile3 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="4" *ngIf="nbTile >= 4">
-            <app-tile #tile4 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile4 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="6" *ngIf="nbTile >= 6">
-            <app-tile #tile6 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile6 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="8" *ngIf="nbTile >= 8">
-            <app-tile #tile8 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile8 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="15" *ngIf="nbTile >= 15">
-            <app-tile #tile15 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile15 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="16" *ngIf="nbTile >= 16">
-            <app-tile #tile16 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile16 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
     <tr>
         <td id="9" *ngIf="nbTile >= 9">
-            <app-tile #tile9 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile9 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="10" *ngIf="nbTile >= 10">
-            <app-tile #tile10 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile10 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="11" *ngIf="nbTile >= 11">
-            <app-tile #tile11 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile11 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="12" *ngIf="nbTile >= 12">
-            <app-tile #tile12 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile12 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="17" *ngIf="nbTile >= 17">
-            <app-tile #tile17 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile17 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
         <td id="18" *ngIf="nbTile >= 18">
-            <app-tile #tile18 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+            <app-tile #tile18 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
     </tr>
 </table>
