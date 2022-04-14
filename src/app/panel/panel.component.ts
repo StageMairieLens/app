@@ -133,7 +133,7 @@ export class PanelComponent implements OnInit {
   //VARIABLE JEU MEMORY
   memory : Memory | null;
   memory_nbTile: number = 18;
-  memory_settings: string[] = ["cursif", "cursif"];
+  memory_settings: string[] = ['image', 'image'];
   memory_bg_color: string = "#3bb8c9";
   memory_text_color: string = "#ffffff";
   memory_good_answer_color: string = "#3498db";

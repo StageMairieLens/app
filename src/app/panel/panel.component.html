@@ -295,7 +295,8 @@
                 style="margin-right : 2%; color : #ff4083"></i>
               <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-              <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser" (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+              <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
+                (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
               </mat-slide-toggle>
               <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
                 style="margin-left : 2%; color : #ff4083"></i>
@@ -716,7 +717,8 @@
                   style="margin-right : 2%; color : #ff4083"></i>
                 <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-                <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser" (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser"
+                  (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
                 </mat-slide-toggle>
                 <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
                   style="margin-left : 2%; color : #ff4083"></i>
@@ -843,9 +845,8 @@
                 <div class="col-md-4">
                   <label for="abecedaire_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value "
-                      #abecedaire_bg_color_input value="{{this.abecedaire_bg_color}}"
-                      title="Choisissez la couleur d'arriére-plan">
+                      (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value " #abecedaire_bg_color_input
+                      value="{{this.abecedaire_bg_color}}" title="Choisissez la couleur d'arriére-plan">
                   </label>
                 </div>
                 <div class="col-md-4">
@@ -1064,8 +1065,8 @@
       <!-- Formulaire Memory - Bouton de prévisualisation -->
       <div *ngIf="!this.memory_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)"
-            mat-raised-button color="warn">Prévisualiser</button>
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)" mat-raised-button
+            color="warn">Prévisualiser</button>
         </div>
 
         <!-- Formulaire Memory - Menu de navigation -->
@@ -1131,17 +1132,15 @@
                 <div class="col-md-4">
                   <label for="memory_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.memory_bg_color = memory_bg_color_input.value "
-                      #memory_bg_color_input value="{{this.memory_bg_color}}"
-                      title="Choisissez la couleur d'arriére-plan">
+                      (change)="this.memory_bg_color = memory_bg_color_input.value " #memory_bg_color_input
+                      value="{{this.memory_bg_color}}" title="Choisissez la couleur d'arriére-plan">
                   </label>
                 </div>
                 <div class="col-md-4">
                   <label for="memory_text_color_input" class="form-label align-middle">Couleur du texte
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.memory_text_color = memory_text_color_input.value "
-                      #memory_text_color_input value="{{this.memory_text_color}}"
-                      title="Choisissez la couleur du texte">
+                      (change)="this.memory_text_color = memory_text_color_input.value " #memory_text_color_input
+                      value="{{this.memory_text_color}}" title="Choisissez la couleur du texte">
                   </label>
                 </div>
               </div>
@@ -1232,33 +1231,20 @@
                 <h2 class="card-title">Paramètre 1</h2>
                 <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-                  <mat-radio-button *ngIf="this.memory_settings[0] == 'image'" value="Image"
-                    (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px" checked>Image
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[0] != 'image'" value="Image"
-                    (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px">Image
+                  <mat-radio-button value="Image" (change)="this.changeMemorySetting(0, 'image')"
+                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'image'">Image
                   </mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.memory_settings[0] == 'cursif'" value="Cursif"
-                    (change)="this.changeMemorySetting(0, 'cursif')"
-                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[0] != 'cursif'" value="Cursif"
-                    (change)="this.changeMemorySetting(0, 'cursif')"
-                    style="font-family: cursiveFont; font-size: 40px">
-                    Cursif</mat-radio-button>
-
-                  <mat-radio-button *ngIf="this.memory_settings[0] == 'capital'" value="Capital"
-                    (change)="this.changeMemorySetting(0, 'capital')" style="font-size : 40px" checked>Capital
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[0] != 'capital'" value="Capital"
-                    (change)="this.changeMemorySetting(0, 'capital')" style="font-size : 40px">Capital
+                  <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(0, 'cursif')"
+                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'cursif'">Cursif
                   </mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.memory_settings[0] == 'script'" value="Script"
-                    (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px" checked>Script
+                  <mat-radio-button value="Capital" (change)="this.changeMemorySetting(0, 'capital')"
+                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'capital'">Capital
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[0] != 'script'" value="Script"
-                    (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px">Script
+
+                  <mat-radio-button value="Script" (change)="this.changeMemorySetting(0, 'script')"
+                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'script'">Script
                   </mat-radio-button>
                 </mat-radio-group>
               </div>
@@ -1269,33 +1255,21 @@
                 <h2 class="card-title">Paramètre 2</h2>
                 <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-                  <mat-radio-button *ngIf="this.memory_settings[1] == 'image'" value="Image"
-                    (change)="this.changeMemorySetting(1, 'image')" style="font-size : 40px" checked>Image
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[1] != 'image'" value="Image"
-                    (change)="this.changeMemorySetting(1, 'image')" style="font-size : 40px">Image
+
+                  <mat-radio-button value="Image" (change)="this.changeMemorySetting(1, 'image')"
+                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'image'">Image
                   </mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.memory_settings[1] == 'cursif'" value="Cursif"
-                    (change)="this.changeMemorySetting(1, 'cursif')"
-                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[1] != 'cursif'" value="Cursif"
-                    (change)="this.changeMemorySetting(1, 'cursif')"
-                    style="font-family: cursiveFont; font-size: 40px">
-                    Cursif</mat-radio-button>
-
-                  <mat-radio-button *ngIf="this.memory_settings[1] == 'capital'" value="Capital"
-                    (change)="this.changeMemorySetting(1, 'capital')" style="font-size : 40px" checked>Capital
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[1] != 'capital'" value="Capital"
-                    (change)="this.changeMemorySetting(1, 'capital')" style="font-size : 40px">Capital
+                  <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(1, 'cursif')"
+                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'cursif'">Cursif
                   </mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.memory_settings[1] == 'script'" value="Script"
-                    (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px" checked>Script
+                  <mat-radio-button value="Capital" (change)="this.changeMemorySetting(1, 'capital')"
+                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'capital'">Capital
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[1] != 'script'" value="Script"
-                    (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px">Script
+
+                  <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')"
+                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'script'">Script
                   </mat-radio-button>
                 </mat-radio-group>
               </div>
