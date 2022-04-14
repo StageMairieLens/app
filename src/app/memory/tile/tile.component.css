@@ -6,9 +6,18 @@
 }
 
 .mot {
-    font-size: 2vw;
+    font-size: 1vw;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 5%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.cursif {
+    font-size: 1.5vw;
+    text-align: center;
+    padding-top: 5%;
     word-wrap: break-word;
     white-space: pre-wrap;
     word-break: break-word;
