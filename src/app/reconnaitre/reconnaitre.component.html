@@ -32,7 +32,7 @@
   <div *ngIf="this.r!.images.length != 0">
 
     <!-- Si ce n'est pas la derniere image -->
-    <div *ngIf="this.prochaine_image != this.images.length" class="card align-middle container" id="container"
+    <div *ngIf="this.prochaine_image != this.r!.images.length" class="card align-middle container" id="container"
       style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
 
       <div class="row">
@@ -56,7 +56,7 @@
             [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}">{{ mot }}</button> -->
 
           <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
-            *ngFor="let mot of this.r!.liste_button" id="{{mot}}" [disabled]="clicked" (click)="change($event,mot)"
+            *ngFor="let mot of this.r!.liste_button" id="{{mot}}" (click)="change($event,mot)"
             mat-fab color="primary" aria-label="Example icon button with a delete icon">
             {{mot}}
           </button>

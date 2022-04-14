@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Reconnaitre } from './Reconnaitre'
 import { Progress } from '../Progress'
 import { Image } from '../Image'
+import { MatButton } from '@angular/material/button';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class ReconnaitreComponent implements OnInit {
   ];
   //liste_images = [];
   prochaine_image = 0;
-  taille_to=0;
+  taille_to = 0;
   //Variable qui contient l'image a trouver
   //liste_mot: string[] = []; //Liste qui contient les noms des images
   liste_mot_boutton: string[] = [];
@@ -51,9 +52,9 @@ export class ReconnaitreComponent implements OnInit {
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
   }
-  alea(li:Image[]): void {
+  alea(li: Image[]): void {
 
-    var m=li.length,name,src, i;
+    var m = li.length, name, src, i;
 
     // While there remain elements to shuffle
     while (this.taille_to) {
@@ -64,9 +65,9 @@ export class ReconnaitreComponent implements OnInit {
       name = li[m].nom;
       src = li[m].src;
       li[m].nom = li[i].nom;
-      li[m].src=li[i].src;
-      li[i].nom= name;
-      li[i].src=src;
+      li[m].src = li[i].src;
+      li[i].nom = name;
+      li[i].src = src;
 
 
     }
@@ -106,7 +107,7 @@ export class ReconnaitreComponent implements OnInit {
       setTimeout(() => {
         this.prochaine_image += 1;
 
-      },1600);
+      }, 1600);
       setTimeout(() => {
         document.getElementById('result')!.innerHTML = '';
         document.getElementById('progressbar')!.style.width = ((this.prochaine_image / this.r!.images.length) * 100).toString() + '%';
@@ -114,10 +115,16 @@ export class ReconnaitreComponent implements OnInit {
       },
         1600);
       if (this.prochaine_image < this.r!.images.length) {
-        for (var i=0;i<this.r!.liste_button.length;i++) {
-          (<HTMLButtonElement>document.getElementById(this.r!.images[i].nom)).disabled = false;
+        setTimeout(() => {
+          for (var i = 0; i < this.r!.liste_button.length; i++) {
+            document.getElementById(this.r!.images[i].nom)!.classList.remove("disabled")
+            document.getElementById(this.r!.images[i].nom)!.style.backgroundColor = this.r!.button_bg_color;
+            document.getElementById(this.r!.images[i].nom)!.style.border = '';
+            document.getElementById(this.r!.images[i].nom)!.style.color = this.r!.button_text_color;
 
-        }
+
+          }
+        }, 1600);
 
 
         //($event.target as HTMLButtonElement).disabled = false;
@@ -128,18 +135,22 @@ export class ReconnaitreComponent implements OnInit {
       return true;
     }
     else { //Transforme le boutton et le désactive et incrémente le nombre d'erreurs
-      //document.getElementById(varia)!.style.backgroundColor="red";
-      ($event.target as HTMLButtonElement).disabled = true;
-      this.compteur += 1;
+      if (!document.getElementById(varia)!.classList.contains('disabled')) {
+        document.getElementById(varia)!.style.backgroundColor = "red";
+        document.getElementById(varia)!.style.border = '1px solid #999999';
+        document.getElementById(varia)!.style.color = '#999999';
+        document.getElementById(varia)!.classList.add('disabled');
+        this.compteur += 1;
 
-      document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
+        document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
 
-      document.getElementById('container')?.animate([
-        { transform: 'translateX(0px)' },
-        { transform: 'translateX(-50px)' },
-        { transform: 'translateX(50px)' }
-      ], { duration: 200 }
-      );
+        document.getElementById('container')?.animate([
+          { transform: 'translateX(0px)' },
+          { transform: 'translateX(-50px)' },
+          { transform: 'translateX(50px)' }
+        ], { duration: 200 }
+        );
+      }
       return false;
     }
 
