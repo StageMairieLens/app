@@ -13,7 +13,7 @@ import { TileComponent } from './tile/tile.component';
 export class MemoryComponent implements OnInit {
 
   @Input() game: Memory | null;
-  derriere = "../../assets/lapin.webp";
+  derriere: Image | null;
   images: Image[] = [
     new Image("Orange", "../../assets/orange.jpg"),
     new Image("Voiture", "../../assets/voiture.png"),
@@ -59,14 +59,16 @@ export class MemoryComponent implements OnInit {
   tiles: TileComponent[] = [];
 
   constructor() {
-    this.game = new Memory(this.images, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue);
-    // this.game = null;
+    this.derriere = null;
+    // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue);
+    this.game = null;
   }
 
   ngOnInit(): void {
-    if(this.game == null) return;
-    this.nbTile = this.game!.nbTile;
-    this.setting = this.game!.setting;
+    if(this.game == null || this.game.derriere == null) return;
+    this.nbTile = this.game.nbTile;
+    this.setting = this.game.setting;
+    this.derriere = this.game.derriere;
     this.start();
   }
 

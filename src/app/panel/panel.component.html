@@ -1099,7 +1099,7 @@
 
           <!-- Etape 1 : Choix des images -->
           <div *ngIf="this.formStep == 0">
-            <h2 class="card-title text-center">Choisissez les images</h2>
+            <h2 class="card-title text-center">Choisissez les images (La première sera l'image pour le derrière des tuiles)</h2>
             <div class="card-body selectImage_container text-center align-top">
               <h5 class="card-header" style="color : black">Listes des images</h5>
               <figure class="figure" *ngFor="let image of this.liste_image">
@@ -1270,6 +1270,27 @@
 
                   <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')"
                     style="font-size : 40px" [checked]="this.memory_settings[1] == 'script'">Script
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Nombre de tuiles</h2>
+                <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+
+                  <mat-radio-button value="tile8" (change)="this.changeMemoryNbTile(8)"
+                    style="font-size : 40px" [checked]="this.memory_nbTile == 8">8
+                  </mat-radio-button>
+
+                  <mat-radio-button value="Cursif" (change)="this.changeMemoryNbTile(12)"
+                    style="font-size : 40px" [checked]="this.memory_nbTile == 12">12
+                  </mat-radio-button>
+
+                  <mat-radio-button value="Capital" (change)="this.changeMemoryNbTile(18)"
+                    style="font-size : 40px" [checked]="this.memory_nbTile == 18">18
                   </mat-radio-button>
                 </mat-radio-group>
               </div>

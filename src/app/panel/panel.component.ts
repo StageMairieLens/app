@@ -149,7 +149,6 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
-    console.log(this.memory_settings);
     if(this.jeu != null) {
       if(this.optionGame.includes(this.jeu)) {
         this.selectedGame = this.jeu;
@@ -163,6 +162,10 @@ export class PanelComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
+
+  getMemorySetting(n: number): string {
+    return this.memory_settings[n];
+  }
 
   changeMemorySetting(n: number, setting: string): void {
     this.memory_settings[n] = setting;
@@ -276,7 +279,7 @@ export class PanelComponent implements OnInit {
 
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
-      this.memory = new Memory(this.selectedImages, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress);
+      this.memory = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress);
       this.memory_previsualiser = true;
     }
     else {

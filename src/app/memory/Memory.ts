@@ -6,6 +6,7 @@ export class Memory {
   static nb: number = 0;
 
   images: Image[];
+  derriere: Image | null;
 
   nbTile: number;
   setting: string[];
@@ -18,9 +19,10 @@ export class Memory {
 
   color_progress_bar: Progress;
   
-  constructor(images: Image[], nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress) {
+  constructor(images: Image[], derriere: Image | null, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress) {
     this.id = Memory.nb++;
     this.images = images;
+    this.derriere = derriere;
     this.nbTile = nbTile;
     this.setting = setting;
     this.bg_color = bg_color;
