@@ -1,13 +1,28 @@
+<div *ngIf="this.showTitle" class="text-center">
+    <h1 class="title">
+        <span>A</span>
+        <span>B</span>
+        <span>E</span>
+        <span>C</span>
+        <span>E</span>
+        <span>D</span>
+        <span>A</span>
+        <span>I</span>
+        <span>R</span>
+        <span>E</span>
+    </h1>
+</div>
+
 <div *ngIf="game == null" class="card align-middle container" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
-    <img class="card-img-top" src="../../assets/images/error.png" alt="Card image cap">
+    <img class="img-fluid rounded card-img-top" src="../../assets/images/error.png" alt="Card image cap">
     <div class="card-body text-center">
         <h5 class="card-title" style="color: red">Erreur !</h5>
         <p class="card-text">Il n'y a pas de jeu selectionné !</p>
     </div>
 </div>
 
-<div *ngIf="game!.images.length == 0" class="card align-middle container" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
-    <img class="card-img-top" src="../../assets/images/error.png" alt="Card image cap">
+<div *ngIf="game!.images.length <= 0" class="card align-middle container" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
+    <img class="img-fluid rounded card-img-top" src="../../assets/images/error.png" alt="Card image cap">
     <div class="card-body text-center">
         <h5 class="card-title" style="color: red">Erreur !</h5>
         <p class="card-text">Aucune images !</p>
@@ -16,13 +31,13 @@
 
 <div *ngIf="game != null && game!.images.length != 0 && finish == false">
     <div class="container" [ngStyle]="{background: game!.bg_color}">
-    <img class="image" src={{this.game!.images[this.nbEntries].getSrc()}}>
-    <div *ngIf="this.afficherMot == 'cursif'"><p [ngStyle]="{color: game!.text_color}" class="mot" >{{this.game!.images[this.nbEntries].getNom()}}</p></div>
+    <img class="img-fluid rounded image" src={{this.game!.images[this.nbEntries].getSrc()}}>
+    <div *ngIf="this.afficherMot == 'script'"><p [ngStyle]="{color: game!.text_color}" class="mot" >{{this.game!.images[this.nbEntries].getNom()}}</p></div>
     <p *ngIf="this.afficherMot == 'capital'" style="text-transform:uppercase" [ngStyle]="{color: game!.text_color}" class="mot" >{{this.game!.images[this.nbEntries].getNom()}}</p>
+    <div *ngIf="this.afficherMot == 'cursif'" style="font-family: cursiveFont;" [ngStyle]="{color: game!.text_color}" class="mot">{{this.game!.images[this.nbEntries].getNom()}}</div>
     <img *ngIf="this.sound" class="sound" src="../../assets/sound.png">
     </div>
-    <div class="container">
-    <div class="line">
+    <div class="container col-md-12 text-center">
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'A')">A</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'B')">B</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'C')">C</button>
@@ -32,8 +47,6 @@
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'G')">G</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'H')">H</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'I')">I</button>
-    </div>
-    <div class="line">
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'J')">J</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'K')">K</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'L')">L</button>
@@ -43,8 +56,6 @@
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'P')">P</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'Q')">Q</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'R')">R</button>
-    </div>
-    <div class="line">
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'S')">S</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'T')">T</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'U')">U</button>
@@ -53,7 +64,6 @@
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'X')">X</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'Y')">Y</button>
         <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}" (click)="click($event, 'Z')">Z</button>
-    </div>
     <div class="text">{{errors}} erreur(s).</div>
     <div class="progress" *ngIf="this.game!.color_progress_bar == 'blue' ">
         <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
@@ -78,6 +88,6 @@
 </div>
 
 <div *ngIf="game != null && finish == true" class="container">
-    <img src="../../assets/images/congratulations.png">
+    <img class="img-fluid rounded" src="../../assets/images/congratulations.png">
     <div class="text">Félicitations !</div>
 </div>
