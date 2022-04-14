@@ -25,6 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatChipsModule} from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
+import {MatBadgeModule} from '@angular/material/badge';
+import {CdkTableModule} from '@angular/cdk/table';
 
 
 
@@ -57,6 +59,8 @@ import { FormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatChipsModule,
     FormsModule,
+    MatBadgeModule,
+    CdkTableModule
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,
