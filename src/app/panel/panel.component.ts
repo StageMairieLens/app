@@ -114,6 +114,7 @@ export class PanelComponent implements OnInit {
   boygirl_text_color_garcon : string = "#ffffff";
   boygirl_text_color_mot : string = "#ffffff";
   boygirl_previsualiser : boolean = false;
+  boygirl_form_step : number = 0;
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire : Abecedaire | null;
