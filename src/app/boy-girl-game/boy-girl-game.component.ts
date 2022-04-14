@@ -10,7 +10,7 @@ export class BoyGirlGameComponent implements OnInit {
 
   constructor() {
     // this.bg = null;
-    this.bg = new BoyGirl(this.girl,this.boy,'#3bb8c9','pink','blue','orange','brown','lightblue','red','black','black','black','black','white','black');
+    this.bg = new BoyGirl(this.girl,this.boy,'#3bb8c9','pink','blue','orange','brown','lightblue','red','black','black','black','black','white','black','SCRIPT');
   }
   ngOnInit(): void {
     this.boy = this.bg!.listMotsGarcon;
@@ -20,6 +20,7 @@ export class BoyGirlGameComponent implements OnInit {
     this.boyFinish = this.boy;
 
     this.mots = this.boy.concat(this.girl);
+    this.taille_ini = this.mots.length;
     this.boy = [];
     this.girl = [];
     this.shuffle();
@@ -36,6 +37,7 @@ export class BoyGirlGameComponent implements OnInit {
 
   boy : string[] = [];
   boyFinish : string[] = this.boy;
+  taille_ini : number = 0;
 
 
 

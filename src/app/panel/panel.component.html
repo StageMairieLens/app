@@ -364,25 +364,20 @@
             <ol class="breadcrumb justify-content-center">
               <li class="breadcrumb-item">
                 <button title="Listes de mots" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Mots" (click)="setFormStep(0)">
+                  aria-label="Mots" (click)="setFormStepBoyGirl(0)">
                   <i class="fa-solid fa-font"></i>
                 </button>
               </li>
               <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStepBoyGirl(1)">
                   <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
-                  <i class="fa-solid fa-font"></i>
                 </button>
               </li>
             </ol>
           </nav>
         </div>
 
-        <div *ngIf="this.formStep == 0">
+        <div *ngIf="this.boygirl_form_step == 0">
           <h2 class="card-title text-center">Listes de mots</h2>
 
           <div class="form-row">
@@ -422,6 +417,33 @@
               </mat-form-field>
             </div>
           </div>
+
+          <div class="form-row text-center">
+            <div class="col-md-12">
+              <h2 class="card-title">Type d'écriture</h2>
+              <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
+                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+                  checked>Cursif</mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
+                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+                  Cursif</mat-radio-button>
+
+                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
+                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                </mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
+                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
+
+                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
+                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                </mat-radio-button>
+                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
+                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
         </div>
 
 
@@ -430,12 +452,12 @@
       <!-- Formulaire Recopier - Menu de navigation par étape -->
       <div class="align-bottom" style="margin : 10px">
         <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-          (click)="previousStep()">
+          (click)="previousStepBoyGirl()">
           <i class="fa-solid fa-angles-left"></i>
           Etape précédente
         </button>
         <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
-          (click)="nextStep()">
+          (click)="nextStepBoyGirl()">
           Etape suivante
           <i class="fa-solid fa-angles-right"></i>
         </button>
@@ -981,7 +1003,7 @@
                 <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark"
                   style="margin-right : 2%; color : #ff4083"></i>
                 <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
-  
+
                 <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput>
                 </mat-slide-toggle>
                 <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"

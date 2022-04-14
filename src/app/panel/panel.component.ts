@@ -9,9 +9,9 @@ import { ImagesComponent } from '../images/images.component';
 import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Puzzle } from '../puzzle/Puzzle';
 import { ActivatedRoute } from '@angular/router'
-import {BoyGirl } from '../boy-girl-game/BoygGirl'
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { BoyGirl } from '../boy-girl-game/BoygGirl'
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 
 
@@ -26,9 +26,9 @@ export interface Fruit {
 })
 export class PanelComponent implements OnInit {
 
-  jeu : string | null = "";
+  jeu: string | null = "";
 
-  constructor(private router: Router, private route : ActivatedRoute ) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
@@ -67,8 +67,8 @@ export class PanelComponent implements OnInit {
   recopier_input_text_color: string = "#000000";
   recopier_progress: Progress = Progress.Blue;
   recopier_type_ecriture = "CURSIF";
-  recopier_isVocaliser : boolean = false;
-  recopier_previsualiser : boolean = false;
+  recopier_isVocaliser: boolean = false;
+  recopier_previsualiser: boolean = false;
 
 
   // VARIABLE JEU RECONNAITRE
@@ -82,11 +82,11 @@ export class PanelComponent implements OnInit {
   reconnaitre_button_text_color: string = "#ffffff";
   reconnaitre_progress: Progress = Progress.Blue;
   reconnaitre_type_ecriture = "SCRIPT";
-  reconnaitre_isVocaliser : boolean = true;
-  reconnaitre_previsualiser : boolean = false;
+  reconnaitre_isVocaliser: boolean = true;
+  reconnaitre_previsualiser: boolean = false;
 
   // VARIABLE JEU PUZZLE
-  puzzle : Puzzle | null;
+  puzzle: Puzzle | null;
   puzzle_bg_color: string = "#3bb8c9";
   puzzle_title_color: string = "#ffffff";
   puzzle_button_bg_color: string = "#0f73b1";
@@ -95,37 +95,38 @@ export class PanelComponent implements OnInit {
   puzzle_text_color: string = "#000000";
 
   // VARIABLE JEU BOY&GIRL
-  boygirl : BoyGirl | null;
-  boygirl_listMotsFille : string[] = [];
-  boygirl_listMotsGarcon : string[] = [];
-  boygirl_bg_color_container : string = "#3bb8c9";
-  boygirl_bg_color_fille : string = "#ffc0cb";
-  boygirl_bg_color_garcon : string = "#add9e6";
-  boygirl_bg_color_mot : string = "#fea500";
-  boygirl_word_color_fille : string = "#000000"
-  boygirl_word_color_garcon : string = "#000000"
-  boygirl_word_color_mot : string = "#000000"
-  boygirl_title_color_fille : string = "#000000";
-  boygirl_title_color_garcon : string = "#000000";
-  boygirl_title_color_mot : string = "#000000";
-  boygirl_text_color_fille : string = "#ffffff";
-  boygirl_text_color_garcon : string = "#ffffff";
-  boygirl_text_color_mot : string = "#ffffff";
-  boygirl_previsualiser : boolean = false;
-  boygirl_form_step : number = 0;
+  boygirl: BoyGirl | null;
+  boygirl_listMotsFille: string[] = [];
+  boygirl_listMotsGarcon: string[] = [];
+  boygirl_bg_color_container: string = "#3bb8c9";
+  boygirl_bg_color_fille: string = "#ffc0cb";
+  boygirl_bg_color_garcon: string = "#add9e6";
+  boygirl_bg_color_mot: string = "#fea500";
+  boygirl_word_color_fille: string = "#000000"
+  boygirl_word_color_garcon: string = "#000000"
+  boygirl_word_color_mot: string = "#000000"
+  boygirl_title_color_fille: string = "#000000";
+  boygirl_title_color_garcon: string = "#000000";
+  boygirl_title_color_mot: string = "#000000";
+  boygirl_text_color_fille: string = "#ffffff";
+  boygirl_text_color_garcon: string = "#ffffff";
+  boygirl_text_color_mot: string = "#ffffff";
+  boygirl_type_ecriture : string = "SCRIPT";
+  boygirl_previsualiser: boolean = false;
+  boygirl_form_step: number = 0;
 
   // VARIABLE JEU ABECEDAIRE
-  abecedaire : Abecedaire | null;
-  abecedaire_bg_color : string = "#3bb8c9";
-  abecedaire_text_color : string = "#ffffff";
-  abecedaire_good_answer_color : string = "#3498db";
-  abecedaire_wrong_answer_color : string = "#e74c3c";
-  abecedaire_progress : Progress = Progress.Blue;
-  abecedaire_button_bg_color : string = "#f39c12";
-  abecedaire_button_text_color : string = "#ffffff";
-  abecedaire_type_ecriture : string = "script";
-  abecedaire_isVocaliser : boolean = false;
-  abecedaire_previsualiser : boolean = false;
+  abecedaire: Abecedaire | null;
+  abecedaire_bg_color: string = "#3bb8c9";
+  abecedaire_text_color: string = "#ffffff";
+  abecedaire_good_answer_color: string = "#3498db";
+  abecedaire_wrong_answer_color: string = "#e74c3c";
+  abecedaire_progress: Progress = Progress.Blue;
+  abecedaire_button_bg_color: string = "#f39c12";
+  abecedaire_button_text_color: string = "#ffffff";
+  abecedaire_type_ecriture: string = "script";
+  abecedaire_isVocaliser: boolean = false;
+  abecedaire_previsualiser: boolean = false;
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -136,10 +137,10 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
 
-    if(this.jeu != null) {
-      if(this.optionGame.includes(this.jeu)) {
+    if (this.jeu != null) {
+      if (this.optionGame.includes(this.jeu)) {
         this.selectedGame = this.jeu;
-      }else {
+      } else {
         this.router.navigate(['/panel']);
       }
 
@@ -148,7 +149,7 @@ export class PanelComponent implements OnInit {
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
+  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
 
   addMotsFille(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -201,14 +202,14 @@ export class PanelComponent implements OnInit {
       this.recopier_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      },0);
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
     }
   }
 
   setPrevisualiserBoyGirl(prev: boolean): void {
     if (prev == true) {
-      this.boygirl = new BoyGirl(this.boygirl_listMotsFille,this.boygirl_listMotsGarcon,this.boygirl_bg_color_container,this.boygirl_bg_color_fille,this.boygirl_bg_color_garcon,this.boygirl_bg_color_mot,this.boygirl_word_color_fille,this.boygirl_word_color_garcon,this.boygirl_word_color_mot,this.boygirl_title_color_fille,this.boygirl_title_color_garcon,this.boygirl_title_color_mot,this.boygirl_text_color_fille,this.boygirl_text_color_garcon,this.boygirl_text_color_mot);
+      this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot,this.boygirl_type_ecriture);
       this.boygirl_previsualiser = true;
     }
     else {
@@ -216,14 +217,14 @@ export class PanelComponent implements OnInit {
       this.boygirl_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      },0);
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
+      }, 0);
     }
   }
 
   setPrevisualiserReconnaitre(prev: boolean): void {
     if (prev == true) {
-      this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color,this.reconnaitre_title_color,this.reconnaitre_text_color,this.reconnaitre_good_answer_color,this.reconnaitre_wrong_answer_color,this.reconnaitre_progress,this.reconnaitre_button_bg_color,this.reconnaitre_button_text_color,this.reconnaitre_type_ecriture,this.reconnaitre_isVocaliser);
+      this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser);
       this.reconnaitre_previsualiser = true;
     }
     else {
@@ -231,14 +232,14 @@ export class PanelComponent implements OnInit {
       this.reconnaitre_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      },0);
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
     }
   }
 
   setPrevisualiserAbecedaire(prev: boolean): void {
     if (prev == true) {
-      this.abecedaire = new Abecedaire(this.selectedImages,this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+      this.abecedaire = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
       this.abecedaire_previsualiser = true;
     }
     else {
@@ -246,22 +247,22 @@ export class PanelComponent implements OnInit {
       this.abecedaire_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      },0);
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
     }
   }
 
-  isActive(button : HTMLButtonElement) : boolean {
-    if(document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
+  isActive(button: HTMLButtonElement): boolean {
+    if (document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
       return true;
     } else {
       return false;
     }
   }
 
-  changeProgressValue(jeu : string, element: HTMLSelectElement): void {
+  changeProgressValue(jeu: string, element: HTMLSelectElement): void {
 
-    if(jeu == 'Recopier') {
+    if (jeu == 'Recopier') {
       switch (element.value) {
         case 'blue':
           this.recopier_progress = Progress.Blue;
@@ -334,7 +335,14 @@ export class PanelComponent implements OnInit {
       step++;
       this.setFormStep(step);
     }
+  }
 
+  nextStepBoyGirl(): void {
+    let step = this.boygirl_form_step;
+    if (this.boygirl_form_step < 1) {
+      step++;
+      this.setFormStepBoyGirl(step);
+    }
   }
 
   setFormStep(step: number): void {
@@ -344,11 +352,26 @@ export class PanelComponent implements OnInit {
 
   }
 
+  setFormStepBoyGirl(step: number): void {
+    this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
+    this.boygirl_form_step = step;
+    this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
+
+  }
+
   previousStep(): void {
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
       this.setFormStep(step);
+    }
+  }
+
+  previousStepBoyGirl(): void {
+    let step = this.boygirl_form_step;
+    if (this.boygirl_form_step > 0) {
+      step--;
+      this.setFormStepBoyGirl(step);
     }
   }
 
@@ -371,7 +394,7 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  create() : void {
+  create(): void {
 
   }
 
