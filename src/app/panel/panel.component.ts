@@ -104,8 +104,8 @@ export class PanelComponent implements OnInit {
   boygirl_bg_color_fille: string = "#ffc0cb";
   boygirl_bg_color_garcon: string = "#add9e6";
   boygirl_bg_color_mot: string = "#fea500";
-  boygirl_word_color_fille: string = "#000000"
-  boygirl_word_color_garcon: string = "#000000"
+  boygirl_word_color_fille: string = "#ffc0cb"
+  boygirl_word_color_garcon: string = "#0f73b1"
   boygirl_word_color_mot: string = "#000000"
   boygirl_title_color_fille: string = "#000000";
   boygirl_title_color_garcon: string = "#000000";

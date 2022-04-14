@@ -424,24 +424,24 @@
               <h2 class="card-title">Type d'écriture</h2>
               <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
-                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+                <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CURSIF'" value="Cursif"
+                  (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
                   checked>Cursif</mat-radio-button>
-                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
-                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+                <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CURSIF'" value="Cursif"
+                  (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
                   Cursif</mat-radio-button>
 
-                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
-                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CAPITAL'" value="Capital"
+                  (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
                 </mat-radio-button>
-                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
-                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
+                <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CAPITAL'" value="Capital"
+                  (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
 
-                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
-                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'SCRIPT'" value="Script"
+                  (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
                 </mat-radio-button>
-                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
-                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
+                <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'SCRIPT'" value="Script"
+                  (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
               </mat-radio-group>
             </div>
           </div>
