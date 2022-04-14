@@ -132,7 +132,7 @@ export class PanelComponent implements OnInit {
   //VARIABLE JEU MEMORY
   memory : Memory | null;
   memory_nbTile: number = 18;
-  memory_settings: string[] = ["cursif", "cursif"];
+  memory_settings: string[] = ["image", "image"];
   memory_bg_color: string = "#3bb8c9";
   memory_text_color: string = "#ffffff";
   memory_good_answer_color: string = "#3498db";
@@ -148,7 +148,6 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
-    console.log(this.memory_settings);
     if(this.jeu != null) {
       if(this.optionGame.includes(this.jeu)) {
         this.selectedGame = this.jeu;
@@ -162,6 +161,10 @@ export class PanelComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
+
+  getMemorySetting(n: number): string {
+    return this.memory_settings[n];
+  }
 
   changeMemorySetting(n: number, setting: string): void {
     this.memory_settings[n] = setting;

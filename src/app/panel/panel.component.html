@@ -1210,10 +1210,10 @@
                 <h2 class="card-title">Paramètre 1</h2>
                 <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-                  <mat-radio-button *ngIf="this.memory_settings[0] == 'image'" value="Image"
+                  <mat-radio-button *ngIf="this.getMemorySetting(0) == 'image'" value="Image"
                     (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px" checked>Image
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.memory_settings[0] != 'image'" value="Image"
+                  <mat-radio-button *ngIf="this.getMemorySetting(0) != 'image'" value="Image"
                     (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px">Image
                   </mat-radio-button>
 
