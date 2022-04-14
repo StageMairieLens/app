@@ -26,7 +26,7 @@
 </div>
 
 <div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2)" class="plateau container" [ngStyle]="{background: game!.bg_color}">
-<table>
+<table style="table-layout: fixed;">
     <tr>
         <td id="1" *ngIf="nbTile >= 1">
             <app-tile #tile1 [derriere]="derriere" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>

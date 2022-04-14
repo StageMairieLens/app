@@ -14,6 +14,7 @@ export class TileComponent implements OnInit {
   @Input() id = "0";
   @Output() _id = new EventEmitter<string>();
   @Input() disable = false;
+  @Input() cursif = false;
   retourner = false;
 
   constructor() { }
