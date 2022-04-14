@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { timeStamp } from 'console';
 import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Memory } from './Memory';
@@ -26,10 +27,11 @@ export class MemoryComponent implements OnInit {
   ]
   showTitle: boolean = true;
   nbTile = 18;
-  setting: string[] = ["image", "image"];
+  setting: string[] = ["image", "script"];
   affichage: string[] = [];
   isImage: boolean[] = [];
   sound: boolean[] = [];
+  cursif: boolean[] = [];
   sets: number[] = [];
   hash: number[] = [];
   retourner: string = "0";
@@ -78,6 +80,7 @@ export class MemoryComponent implements OnInit {
       this.tiles[i].sound = this.sound[i];
       this.tiles[i].id = (i+1).toString();
       this.tiles[i].affichage = this.affichage[i];
+      this.tiles[i].cursif = this.cursif[i];
     }
   }
 
@@ -94,16 +97,32 @@ export class MemoryComponent implements OnInit {
             this.affichage[a] = this.game!.images[i].getSrc();
             this.isImage[a] = true;
             this.sound[a] = false;
+            this.cursif[a] = false;
             break;
-          case "mot":
+          case "cursif":
             this.affichage[a] = this.game!.images[i].getNom();
             this.isImage[a] = false;
             this.sound[a] = false;
+            this.cursif[a] = true;
+            break;
+          case "script":
+            this.affichage[a] = this.game!.images[i].getNom();
+            this.isImage[a] = false;
+            this.sound[a] = false;
+            this.cursif[a] = false;
+            break;
+          case "capital":
+            this.affichage[a] = this.game!.images[i].getNom().toUpperCase();
+            this.isImage[a] = false;
+            this.sound[a] = false;
+            this.cursif[a] = false;
             break;
           case "sound":
             this.affichage[a] = this.game!.images[i].getSrc();
             this.isImage[a] = true;
             this.sound[a] = true;
+            this.cursif[a] = false;
+            break;
         }
       }
       i++

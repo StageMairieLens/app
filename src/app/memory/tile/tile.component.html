@@ -1,3 +1,4 @@
 <img *ngIf="retourner == false" src="{{derriere}}" class="img-fluid rounded image" (click)="click()">
 <img *ngIf="retourner == true && isImage == true" src="{{affichage}}" class="image">
-<div *ngIf="retourner == true && isImage == false" class="image mot">{{affichage}}</div>
+<div *ngIf="retourner == true && isImage == false && cursif == false" class="image mot">{{affichage}}</div>
+<div *ngIf="retourner == true && isImage == false && cursif == true" style="font-family: cursiveFont;" class="image mot">{{affichage}}</div>

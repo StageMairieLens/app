@@ -1,11 +1,15 @@
 .image {
     height: 100%;
+    width: 100%;
     max-width: 195px;;
     padding: 10px;
 }
 
 .mot {
-    font-size: 50px;
+    font-size: 2vw;
     text-align: center;
     padding-top: 50px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
