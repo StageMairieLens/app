@@ -25,7 +25,7 @@ export class MemoryComponent implements OnInit {
     new Image("Maison", "../../assets/house.svg"),
     new Image("Panda", "../../assets/panda.png")
   ]
-  showTitle: boolean = true;
+  @Input() showTitle: boolean = true;
   nbTile = 18;
   setting: string[] = ["image", "script"];
   affichage: string[] = [];
@@ -38,7 +38,6 @@ export class MemoryComponent implements OnInit {
   essaie: number = 0;
   nbBon: number = 0;
   finish: boolean = false;
-  typeEcriture: string = "cursif";
   @ViewChild("tile1") tile1!: TileComponent;
   @ViewChild("tile2") tile2!: TileComponent;
   @ViewChild("tile3") tile3!: TileComponent;
@@ -60,7 +59,7 @@ export class MemoryComponent implements OnInit {
   tiles: TileComponent[] = [];
 
   constructor() {
-    this.game = new Memory(this.images, 18, this.setting, '#3bb8c9', 'white', 'white', 'blue', 'red', Progress.Blue, 'cursif');
+    this.game = new Memory(this.images, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue);
     // this.game = null;
   }
 
@@ -68,7 +67,6 @@ export class MemoryComponent implements OnInit {
     if(this.game == null) return;
     this.nbTile = this.game!.nbTile;
     this.setting = this.game!.setting;
-    this.typeEcriture = this.game!.typeEcriture;
     this.start();
   }
 

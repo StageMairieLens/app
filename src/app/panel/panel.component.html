@@ -1035,6 +1035,295 @@
       </div>
     </div>
 
+    <!-- Formulaire Memory -->
+    <div class="card-body" *ngIf="this.selectedGame == 'Memory'">
+
+
+      <!-- Formulaire Memory - Bouton de prévisualisation -->
+      <div *ngIf="!this.memory_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)"
+            mat-raised-button color="warn">Prévisualiser</button>
+        </div>
+
+        <!-- Formulaire Memory - Menu de navigation -->
+        <div class="stepMenu">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item">
+                <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                  aria-label="Images" (click)="setFormStep(0)">
+                  <i class="fa-solid fa-images"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                  <i class="fa-solid fa-brush"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                  <i class="fa-solid fa-font"></i>
+                </button>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+
+        <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
+        <div *ngIf="this.selectedGame == 'Memory'">
+
+          <!-- Etape 1 : Choix des images -->
+          <div *ngIf="this.formStep == 0">
+            <h2 class="card-title text-center">Choisissez les images</h2>
+            <div class="card-body selectImage_container text-center align-top">
+              <h5 class="card-header" style="color : black">Listes des images</h5>
+              <figure class="figure" *ngFor="let image of this.liste_image">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
+
+            <div class="card-body selectImage_container text-center">
+              <h5 class="card-header" style="color : black">Images selectionné</h5>
+              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                selectionné
+                aucune image</h6>
+              <figure class="figure" *ngFor="let image of this.selectedImages">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                  (click)="deleteImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
+          </div>
+
+
+          <!-- Etape du formulaire 2 -- Choix des couleurs -->
+          <div *ngIf="this.formStep == 1">
+            <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+            <form>
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="memory_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.memory_bg_color = memory_bg_color_input.value "
+                      #memory_bg_color_input value="{{this.memory_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan">
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label for="memory_text_color_input" class="form-label align-middle">Couleur du texte
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.memory_text_color = memory_text_color_input.value "
+                      #memory_text_color_input value="{{this.memory_text_color}}"
+                      title="Choisissez la couleur du texte">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="memory_good_answer_color_input" class="form-label align-middle">Couleur du message
+                    bonne
+                    réponse
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.memory_good_answer_color = memory_good_answer_color_input.value "
+                      #memory_good_answer_color_input value="{{this.memory_good_answer_color}}"
+                      title="Choisissez la couleur du message de bonne réponse">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="memory_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                    mauvaise
+                    réponse
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.memory_wrong_answer_color = memory_wrong_answer_color_input.value "
+                      #memory_wrong_answer_color_input value="{{this.memory_wrong_answer_color}}"
+                      title="Choisissez la couleur du message de mauvaise réponse">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
+
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" #progressSelectValue
+                    (change)="changeProgressValue('Memory',progressSelectValue)">
+                    <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                      ng-selected="p == this.memory_progress" #progressValue>
+                      <p *ngIf="p == 'blue'">Bleu</p>
+                      <p *ngIf="p == 'green'">Vert</p>
+                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                      <p *ngIf="p == 'orange'">Orange</p>
+                      <p *ngIf="p == 'red'">Rouge</p>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="progress" *ngIf="this.memory_progress == 'blue' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.memory_progress == 'green' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.memory_progress == 'lightblue' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.memory_progress == 'orange' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.memory_progress == 'red' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- Etape du formulaire 3 -- Choix des textes -->
+          <div *ngIf="this.formStep == 2" style="text-align : center;">
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Paramètre 1</h2>
+                <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                  <mat-radio-button *ngIf="this.memory_settings[0] == 'image'" value="Image"
+                    (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px" checked>Image
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[0] != 'image'" value="Image"
+                    (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px">Image
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.memory_settings[0] == 'cursif'" value="Cursif"
+                    (change)="this.changeMemorySetting(0, 'cursif')"
+                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[0] != 'cursif'" value="Cursif"
+                    (change)="this.changeMemorySetting(0, 'cursif')"
+                    style="font-family: cursiveFont; font-size: 40px">
+                    Cursif</mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.memory_settings[0] == 'capital'" value="Capital"
+                    (change)="this.changeMemorySetting(0, 'capital')" style="font-size : 40px" checked>Capital
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[0] != 'capital'" value="Capital"
+                    (change)="this.changeMemorySetting(0, 'capital')" style="font-size : 40px">Capital
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.memory_settings[0] == 'script'" value="Script"
+                    (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px" checked>Script
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[0] != 'script'" value="Script"
+                    (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px">Script
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Paramètre 2</h2>
+                <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                  <mat-radio-button *ngIf="this.memory_settings[1] == 'image'" value="Image"
+                    (change)="this.changeMemorySetting(1, 'image')" style="font-size : 40px" checked>Image
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[1] != 'image'" value="Image"
+                    (change)="this.changeMemorySetting(1, 'image')" style="font-size : 40px">Image
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.memory_settings[1] == 'cursif'" value="Cursif"
+                    (change)="this.changeMemorySetting(1, 'cursif')"
+                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[1] != 'cursif'" value="Cursif"
+                    (change)="this.changeMemorySetting(1, 'cursif')"
+                    style="font-family: cursiveFont; font-size: 40px">
+                    Cursif</mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.memory_settings[1] == 'capital'" value="Capital"
+                    (change)="this.changeMemorySetting(1, 'capital')" style="font-size : 40px" checked>Capital
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[1] != 'capital'" value="Capital"
+                    (change)="this.changeMemorySetting(1, 'capital')" style="font-size : 40px">Capital
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.memory_settings[1] == 'script'" value="Script"
+                    (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px" checked>Script
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.memory_settings[1] != 'script'" value="Script"
+                    (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px">Script
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+
+            <!-- Bouton de création du jeu -->
+            <div class="form-row align-middle text-center" align="center">
+              <div class="col-md-12 text-center">
+                <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+                  jeu
+                  <i class="fa-solid fa-check"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!--Formulaire Abecedaire -  Menu de navigation par étape -->
+          <div class="align-bottom" style="margin : 10px">
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+              (click)="previousStep()">
+              <i class="fa-solid fa-angles-left"></i>
+              Etape précédente
+            </button>
+            <button type="button" class="btn btn-primary align-right"
+              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              Etape suivante
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <!-- Formulaire Memory - Prévisualisation -->
+      <div *ngIf="this.memory_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(false)"
+              mat-raised-button color="warn">Quitter la prévisualisation</button>
+          </div>
+        </div>
+        <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
+      </div>
+    </div>
+
 
   </div>
 </body>

@@ -13,6 +13,7 @@ import {BoyGirl } from '../boy-girl-game/BoygGirl'
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Abecedaire } from '../abecedaire/Abecedaire';
+import { Memory } from '../memory/Memory';
 
 
 export interface Fruit {
@@ -35,6 +36,7 @@ export class PanelComponent implements OnInit {
     this.puzzle = null;
     this.boygirl = null;
     this.abecedaire = null;
+    this.memory = null;
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -126,6 +128,17 @@ export class PanelComponent implements OnInit {
   abecedaire_isVocaliser : boolean = false;
   abecedaire_previsualiser : boolean = false;
 
+  //VARIABLE JEU MEMORY
+  memory : Memory | null;
+  memory_nbTile: number = 18;
+  memory_settings: string[] = ["cursif", "cursif"];
+  memory_bg_color: string = "#3bb8c9";
+  memory_text_color: string = "#ffffff";
+  memory_good_answer_color: string = "#3498db";
+  memory_wrong_answer_color: string = "#e74c3c";
+  memory_progress: Progress = Progress.Blue;
+  memory_previsualiser : boolean = false;
+
 
   // ETAPE D'AVANCEMENT FORMULAIRE
   formStep: number = 0;
@@ -134,7 +147,7 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
-
+    console.log(this.memory_settings);
     if(this.jeu != null) {
       if(this.optionGame.includes(this.jeu)) {
         this.selectedGame = this.jeu;
@@ -148,6 +161,15 @@ export class PanelComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   fruits: Fruit[] = [{name: 'Lemon'}, {name: 'Lime'}, {name: 'Apple'}];
+
+  changeMemorySetting(n: number, setting: string): void {
+    this.memory_settings[n] = setting;
+    console.log(this.memory_settings);
+  }
+
+  changeMemoryNbTile(n: number): void {
+    this.memory_nbTile = n;
+  }
 
   addMotsFille(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -250,6 +272,21 @@ export class PanelComponent implements OnInit {
     }
   }
 
+  setPrevisualiserMemory(prev: boolean): void {
+    if (prev == true) {
+      this.memory = new Memory(this.selectedImages, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress);
+      this.memory_previsualiser = true;
+    }
+    else {
+      this.memory = null;
+      this.memory_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      },0);
+    }
+  }
+
   isActive(button : HTMLButtonElement) : boolean {
     if(document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
       return true;
@@ -312,6 +349,24 @@ export class PanelComponent implements OnInit {
           break;
         case 'red':
           this.abecedaire_progress = Progress.Red;
+          break;
+      }
+    } else if (jeu == 'Memory') {
+      switch (element.value) {
+        case 'blue':
+          this.memory_progress = Progress.Blue;
+          break;
+        case 'green':
+          this.memory_progress = Progress.Green;
+          break;
+        case 'lightblue':
+          this.memory_progress = Progress.LightBlue;
+          break;
+        case 'orange':
+          this.memory_progress = Progress.Orange;
+          break;
+        case 'red':
+          this.memory_progress = Progress.Red;
           break;
       }
     }
