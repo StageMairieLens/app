@@ -82,6 +82,7 @@ export class PanelComponent implements OnInit {
   reconnaitre_button_text_color: string = "#ffffff";
   reconnaitre_progress: Progress = Progress.Blue;
   reconnaitre_type_ecriture = "SCRIPT";
+  reconnaitre_isVocaliser : boolean = true;
   reconnaitre_previsualiser : boolean = false;
 
   // VARIABLE JEU PUZZLE
@@ -221,7 +222,7 @@ export class PanelComponent implements OnInit {
 
   setPrevisualiserReconnaitre(prev: boolean): void {
     if (prev == true) {
-      this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color,this.reconnaitre_title_color,this.reconnaitre_text_color,this.reconnaitre_good_answer_color,this.reconnaitre_wrong_answer_color,this.reconnaitre_progress,this.reconnaitre_button_bg_color,this.reconnaitre_button_text_color,this.reconnaitre_type_ecriture);
+      this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color,this.reconnaitre_title_color,this.reconnaitre_text_color,this.reconnaitre_good_answer_color,this.reconnaitre_wrong_answer_color,this.reconnaitre_progress,this.reconnaitre_button_bg_color,this.reconnaitre_button_text_color,this.reconnaitre_type_ecriture,this.reconnaitre_isVocaliser);
       this.reconnaitre_previsualiser = true;
     }
     else {

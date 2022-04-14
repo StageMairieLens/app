@@ -19,8 +19,12 @@ export class Reconnaitre {
   color_progress_bar: Progress;
   liste_button:string[]=[];
   typeEcriture: string;
+  isVocaliser : boolean;
+
   taille = 0;
-  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string) {
+
+
+  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean) {
     this.id = Reconnaitre.nb++;
     this.images = liste_images;
     this.bg_color = bg_color;
@@ -32,14 +36,15 @@ export class Reconnaitre {
     this.button_text_color = button_text_color;
     this.text_color = text_color;
     this.typeEcriture = typeEcriture;
+    this.isVocaliser = isVocaliser;
     this.alea(this.images);
     this.alea2(this.liste_button);
-    
+
   }
 
   alea(li:Image[]){
     var m=li.length,name,src, i;
-    
+
     // While there remain elements to shuffle
     while (m) {
       // Pick a remaining element…
@@ -52,8 +57,8 @@ export class Reconnaitre {
       li[m].src=li[i].src;
       li[i].nom= name;
       li[i].src=src;
-      
-    
+
+
     }
   }
 
@@ -74,6 +79,6 @@ export class Reconnaitre {
       li[i] = t;
     }
   }
-  
+
 
 }

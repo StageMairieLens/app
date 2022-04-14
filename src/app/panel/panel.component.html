@@ -295,7 +295,7 @@
                 style="margin-right : 2%; color : #ff4083"></i>
               <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-              <mat-slide-toggle (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+              <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser" (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
               </mat-slide-toggle>
               <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
                 style="margin-left : 2%; color : #ff4083"></i>
@@ -387,7 +387,8 @@
 
           <div class="form-row">
             <div class="col-md-6">
-              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%" appearance="fill">
+              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
+                appearance="fill">
                 <mat-label>Mots pour fille</mat-label>
                 <mat-chip-list #listFille aria-label="Mots pour fille">
                   <mat-chip *ngFor="let mots of this.boygirl_listMotsFille" (removed)="removeFille(mots)">
@@ -404,7 +405,8 @@
             </div>
 
             <div class="col-md-6">
-              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%" appearance="fill">
+              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
+                appearance="fill">
                 <mat-label>Mots pour garçon</mat-label>
                 <mat-chip-list #listGarcon aria-label="Mots pour garçon">
                   <mat-chip *ngFor="let mots of this.boygirl_listMotsGarcon" (removed)="removeGarcon(mots)">
@@ -564,7 +566,7 @@
                   </label>
                 </div>
                 <div class="col-md-6">
-                  <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                  <label for="reconnaitre_wrong_answer_color_input" class="form-label align-middle">Couleur du message
                     mauvaise
                     réponse
                     <input type="color" class="form-control form-control-color"
@@ -682,6 +684,21 @@
                     (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
                   </mat-radio-button>
                 </mat-radio-group>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Vocalisation</h2>
+                <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+                  style="margin-right : 2%; color : #ff4083"></i>
+                <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+
+                <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser" (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                </mat-slide-toggle>
+                <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
+                  style="margin-left : 2%; color : #ff4083"></i>
+                <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
               </div>
             </div>
 
