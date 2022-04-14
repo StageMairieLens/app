@@ -170,17 +170,17 @@ export class PanelComponent implements OnInit {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
     this.panel = this.route.snapshot.paramMap.get('menu');
 
-    // if(this.panel == 'create') {
-    //   if(this.jeu != null) {
-    //     if(this.optionGame.includes(this.jeu)) {
-    //       this.selectedGame = this.jeu;
-    //     } else {
-    //       this.router.navigate(['/panel']);
-    //     }
-    //   } else {
-    //     this.selectedGame = "";
-    //   }
-    // }
+    if(this.panel == 'create') {
+      if(this.jeu != null) {
+        if(this.optionGame.includes(this.jeu)) {
+          this.selectedGame = this.jeu;
+        } else {
+          this.router.navigate(['/panel']);
+        }
+      } else {
+        this.selectedGame = "";
+      }
+    }
   }
 
   addOnBlur = true;
