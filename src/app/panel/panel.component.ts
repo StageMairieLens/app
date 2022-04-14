@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router'
 import {BoyGirl } from '../boy-girl-game/BoygGirl'
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { Abecedaire } from '../abecedaire/Abecedaire';
 
 
 export interface Fruit {
@@ -33,6 +34,7 @@ export class PanelComponent implements OnInit {
     this.reconnaitre = null;
     this.puzzle = null;
     this.boygirl = null;
+    this.abecedaire = null;
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -48,7 +50,7 @@ export class PanelComponent implements OnInit {
 
   previsualiser: boolean = false;
 
-  optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abécédaire', 'Fille&Garçon', 'Puzzle'];
+  optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abecedaire', 'Fille&Garçon', 'Puzzle'];
   selectedGame: string | null = "";
 
 
@@ -109,6 +111,19 @@ export class PanelComponent implements OnInit {
   boygirl_text_color_garcon : string = "#ffffff";
   boygirl_text_color_mot : string = "#ffffff";
   boygirl_previsualiser : boolean = false;
+
+  // VARIABLE JEU ABECEDAIRE
+  abecedaire : Abecedaire | null;
+  abecedaire_bg_color : string = "#3bb8c9";
+  abecedaire_text_color : string = "#ffffff";
+  abecedaire_good_answer_color : string = "#3498db";
+  abecedaire_wrong_answer_color : string = "#e74c3c";
+  abecedaire_progress : Progress = Progress.Blue;
+  abecedaire_button_bg_color : string = "#f39c12";
+  abecedaire_button_text_color : string = "#ffffff";
+  abecedaire_type_ecriture : string = "script";
+  abecedaire_isVocaliser : boolean = false;
+  abecedaire_previsualiser : boolean = false;
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -219,6 +234,21 @@ export class PanelComponent implements OnInit {
     }
   }
 
+  setPrevisualiserAbecedaire(prev: boolean): void {
+    if (prev == true) {
+      this.abecedaire = new Abecedaire(this.selectedImages,this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+      this.abecedaire_previsualiser = true;
+    }
+    else {
+      this.abecedaire = null;
+      this.abecedaire_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      },0);
+    }
+  }
+
   isActive(button : HTMLButtonElement) : boolean {
     if(document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
       return true;
@@ -263,6 +293,24 @@ export class PanelComponent implements OnInit {
           break;
         case 'red':
           this.reconnaitre_progress = Progress.Red;
+          break;
+      }
+    } else if (jeu == 'Abecedaire') {
+      switch (element.value) {
+        case 'blue':
+          this.abecedaire_progress = Progress.Blue;
+          break;
+        case 'green':
+          this.abecedaire_progress = Progress.Green;
+          break;
+        case 'lightblue':
+          this.abecedaire_progress = Progress.LightBlue;
+          break;
+        case 'orange':
+          this.abecedaire_progress = Progress.Orange;
+          break;
+        case 'red':
+          this.abecedaire_progress = Progress.Red;
           break;
       }
     }

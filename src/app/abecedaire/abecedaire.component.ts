@@ -11,6 +11,8 @@ import { Abecedaire } from './Abecedaire';
 export class AbecedaireComponent implements OnInit {
 
   @Input() game: Abecedaire | null;
+  @Input() showTitle: boolean = true;
+
   rightLetter = '';
   errors = 0;
   images: Image[] = [
@@ -23,13 +25,16 @@ export class AbecedaireComponent implements OnInit {
   finish = false;
 
   constructor() {
-    this.game = new Abecedaire(this.images, '#3bb8c9', 'red', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', "cursif");
-    //this.game = null;
+    this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
+    // this.game = null;
   }
 
   ngOnInit(): void {
-    this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
-    this.afficherMot = this.game!.typeEcriture;
+    if(this.game!.images.length != 0) {
+      this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
+      this.afficherMot = this.game!.typeEcriture;
+      this.sound = this.game!.isVocaliser;
+    }
   }
 
   nextImage() {
