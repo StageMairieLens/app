@@ -35,17 +35,19 @@
     <div *ngIf="this.prochaine_image != this.images.length" class="card align-middle container" id="container"
       style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
 
-      <p id="result" class="text-center"></p>
-
       <div class="row">
 
         <div class="col text-center">
-          <div class="col">
-            <p id="error" [ngStyle]="{background : this.r!.text_color}">Nombre d'erreur = {{ compteur }}</p>
+          <div class="col d-flex justify-content-center">
+            <!-- <p id="error" >Nombre d'erreur = {{ compteur }}</p> -->
+            <mat-card id="error"[ngStyle]="{color : this.r!.text_color}" style="width : 50%" class="text-center">Nombre d'erreur = {{compteur}}</mat-card>
             <!-- Affiche le nombre d'erreur -->
           </div>
           <img style="width:400px;" src="{{ this.r!.images[this.prochaine_image].src }}" class="card-img-top image ">
+          <p id="result" class="text-center"></p>
+
         </div>
+
 
         <div id="mot" class="text-center col-md-12">
           <!-- Centre les mots -->
@@ -58,6 +60,7 @@
             mat-fab color="primary" aria-label="Example icon button with a delete icon">
             {{mot}}
           </button>
+
           <!-- Crées des bouttons pour les mots en fonction du nombre d'image choissit et du nombre d'image total -->
         </div>
 
