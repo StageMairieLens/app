@@ -2,7 +2,8 @@
 
   <!-- Barre de navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/panel">Sessions</a>
+    <a class="navbar-brand" href="/panel/sessions"><span matBadge="{{this.dataSource.length}}"
+        matBadgeColor="warn">Sessions</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -19,529 +20,99 @@
             Créer un jeu
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/panel">Index</a>
+            <a class="dropdown-item" href="/panel/create">Index</a>
             <div class="dropdown-divider"></div>
             <a *ngFor="let g of this.optionGame" class="dropdown-item" href="/panel/create/{{g}}">{{g}}</a>
           </div>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"
+        <button mat-stroked-button color="primary" class="quit_button"
           (click)="redirect('Accueil')">Déconnexion</button>
       </form>
     </div>
   </nav>
 
-  <!-- Si aucun jeu n'est selectionné -->
-  <div class="card container" *ngIf="this.selectedGame === '' ">
-    <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
-    <div class="card-body">
-      <div align="center">
-        <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/create', c]" mat-raised-button
-          color="primary">{{c}}</button>
+  <div *ngIf="this.panel == 'create'">
+    <!-- Si aucun jeu n'est selectionné -->
+    <div class="card container" *ngIf="this.selectedGame === '' ">
+      <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
+      <div class="card-body">
+        <div align="center">
+          <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/create', c]" mat-raised-button
+            color="primary">{{c}}</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Si un jeu est selectionné -->
-  <div class="card container" *ngIf="this.selectedGame != '' && this.optionGame.includes(this.selectedGame!)">
+    <!-- Si un jeu est selectionné -->
+    <div class="card container" *ngIf="this.selectedGame != '' && this.optionGame.includes(this.selectedGame!)">
 
-    <!-- Affiche le nom du jeu sélectionné -->
-    <h5 class="card-header">{{this.selectedGame}}</h5>
+      <!-- Affiche le nom du jeu sélectionné -->
+      <h5 class="card-header">{{this.selectedGame}}</h5>
 
-    <!-- Formulaire Recopier -->
-    <div *ngIf="this.selectedGame == 'Recopier'" class="card-body">
+      <!-- Formulaire Recopier -->
+      <div *ngIf="this.selectedGame == 'Recopier'" class="card-body">
 
-      <!-- Formulaire Recopier - Bouton de prévisualisation -->
-      <div *ngIf="!this.recopier_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(true)"
-            mat-raised-button color="warn">Prévisualiser</button>
-        </div>
-
-        <!-- Menu de navigation dans le formulaire -->
-        <div class="stepMenu">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item">
-                <button title="Images" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Images" (click)="setFormStep(0)">
-                  <i class="fa-solid fa-images"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
-                  <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
-                  <i class="fa-solid fa-font"></i>
-                </button>
-              </li>
-            </ol>
-          </nav>
-        </div>
-
-
-
-        <!--Formulaire Recopier Etape du formulaire 1 -- Choix des images-->
-        <div *ngIf="this.formStep == 0">
-          <h2 class="card-title text-center">Choisissez les images</h2>
-          <div *ngIf="this.selectedGame == 'Recopier'">
-            <div class="card-body selectImage_container text-center align-top">
-              <h5 class="card-header" style="color : black">Listes des images</h5>
-              <figure class="figure" *ngFor="let image of this.liste_image">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-
-            </div>
-            <div class="card-body selectImage_container text-center">
-              <h5 class="card-header" style="color : black">Images selectionné</h5>
-              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
-                selectionné
-                aucune image</h6>
-              <figure class="figure" *ngFor="let image of this.selectedImages">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
-                  (click)="deleteImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
-
-        <!-- Etape du formulaire 2 -- Choix des couleurs -->
-        <div *ngIf="this.formStep == 1">
-          <h2 class="card-title">Choississez les couleurs du jeu</h2>
-
-          <form>
-
-            <div class="form-row">
-              <div class="col-md-4">
-                <label for="recopier_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_bg_color = recopier_bg_color_input.value " #recopier_bg_color_input
-                    value="{{this.recopier_bg_color}}" title="Choisissez la couleur d'arriére-plan">
-                </label>
-              </div>
-              <div class="col-md-4">
-                <label for="recopier_text_color_input" class="form-label align-middle">Couleur du texte
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_text_color = recopier_text_color_input.value " #recopier_text_color_input
-                    value="{{this.recopier_text_color}}" title="Choisissez la couleur du texte">
-                </label>
-              </div>
-
-              <div class="col-md-4">
-                <label for="recopier_title_color_input" class="form-label align-middle">Couleur du titre
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_title_color = recopier_title_color_input.value " #recopier_title_color_input
-                    value="{{this.recopier_title_color}}" title="Choisissez la couleur du titre">
-                </label>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="recopier_good_answer_color_input" class="form-label align-middle">Couleur du message bonne
-                  réponse
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_good_answer_color = recopier_good_answer_color_input.value "
-                    #recopier_good_answer_color_input value="{{this.recopier_good_answer_color}}"
-                    title="Choisissez la couleur du message de bonne réponse">
-                </label>
-              </div>
-              <div class="col-md-6">
-                <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message
-                  mauvaise
-                  réponse
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
-                    #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
-                    title="Choisissez la couleur du message de mauvaise réponse">
-                </label>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="recopier_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan du
-                  bouton
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_button_bg_color = recopier_button_bg_color_input.value "
-                    #recopier_button_bg_color_input value="{{this.recopier_button_bg_color}}"
-                    title="Choisissez la couleur d'arriére-plan du bouton">
-                </label>
-              </div>
-              <div class="col-md-6">
-                <label for="recopier_button_text_color_input" class="form-label align-middle">Couleur du texte du bouton
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_button_text_color = recopier_button_text_color_input.value "
-                    #recopier_button_text_color_input value="{{this.recopier_button_text_color}}"
-                    title="Choisissez la couleur du texte du bouton">
-                </label>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="recopier_input_bg_color_input" class="form-label align-middle">Couleur d'arriére plan de la
-                  zone d'entrée
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_input_bg_color = recopier_input_bg_color_input.value "
-                    #recopier_input_bg_color_input value="{{this.recopier_input_bg_color}}"
-                    title="Choisissez la couleur d'arriére-plan de la zone d'entrée">
-                </label>
-              </div>
-              <div class="col-md-6">
-                <label for="recopier_input_text_color_input" class="form-label align-middle">Couleur du texte de la zone
-                  d'entrée
-                  <input type="color" class="form-control form-control-color"
-                    (change)="this.recopier_input_text_color = recopier_input_text_color_input.value "
-                    #recopier_input_text_color_input value="{{this.recopier_input_text_color}}"
-                    title="Choisissez la couleur du texte du bouton">
-                </label>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-md-4">
-                <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
-
-              </div>
-              <div class="col-md-8">
-                <select class="form-control" aria-label="Default select example" #progressSelectValue
-                  (change)="changeProgressValue('Recopier',progressSelectValue)">
-                  <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
-                    ng-selected="p == this.recopier_progress" #progressValue>
-                    <p *ngIf="p == 'blue'">Bleu</p>
-                    <p *ngIf="p == 'green'">Vert</p>
-                    <p *ngIf="p == 'lightblue'">Bleu ciel</p>
-                    <p *ngIf="p == 'orange'">Orange</p>
-                    <p *ngIf="p == 'red'">Rouge</p>
-                  </option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="col-md-12">
-                <div class="progress" *ngIf="this.recopier_progress == 'blue' ">
-                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                  </div>
-                </div>
-
-                <div class="progress" *ngIf="this.recopier_progress == 'green' ">
-                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                  </div>
-                </div>
-
-                <div class="progress" *ngIf="this.recopier_progress == 'lightblue' ">
-                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                  </div>
-                </div>
-
-                <div class="progress" *ngIf="this.recopier_progress == 'orange' ">
-                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                  </div>
-                </div>
-
-                <div class="progress" *ngIf="this.recopier_progress == 'red' ">
-                  <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                    role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <!-- Etape du formulaire 3 -- Choix des textes -->
-        <div *ngIf="this.formStep == 2" style="text-align : center;">
-          <div class="form-row">
-            <div class="col-md-12">
-              <h2 class="card-title">Type d'écriture</h2>
-              <mat-radio-group aria-label="Choisissez un type d'écriture">
-
-                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
-                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-                  checked>Cursif</mat-radio-button>
-                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
-                  (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
-                  Cursif</mat-radio-button>
-
-                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
-                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
-                </mat-radio-button>
-                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
-                  (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
-
-                <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
-                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
-                </mat-radio-button>
-                <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
-                  (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-md-12">
-              <h2 class="card-title">Vocalisation</h2>
-              <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
-                style="margin-right : 2%; color : #ff4083"></i>
-              <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
-
-              <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
-                (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
-              </mat-slide-toggle>
-              <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
-                style="margin-left : 2%; color : #ff4083"></i>
-              <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
-            </div>
-          </div>
-
-
-          <!-- Bouton de création du jeu -->
-          <div class="form-row align-middle text-center" align="center">
-            <div class="col-md-12 text-center">
-              <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le jeu
-                <i class="fa-solid fa-check"></i>
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-
-
-
-
-        <!-- Formulaire Recopier - Menu de navigation par étape -->
-        <div class="align-bottom" style="margin : 10px">
-          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-            (click)="previousStep()">
-            <i class="fa-solid fa-angles-left"></i>
-            Etape précédente
-          </button>
-          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
-            (click)="nextStep()">
-            Etape suivante
-            <i class="fa-solid fa-angles-right"></i>
-          </button>
-        </div>
-      </div>
-
-
-
-      <!-- Formulaire Recopier - Prévisualisation -->
-      <div *ngIf="this.recopier_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <!-- Formulaire Recopier - Bouton de prévisualisation -->
+        <div *ngIf="!this.recopier_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
-              mat-raised-button color="warn">Quitter la prévisualisation</button>
-          </div>
-        </div>
-        <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
-      </div>
-
-    </div>
-
-
-    <!-- Formulaire Fille Garcon -->
-    <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <div *ngIf="!this.boygirl_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)" mat-raised-button
-            color="warn">Prévisualiser</button>
-        </div>
-
-        <!-- Formulaire Reconnaitre - Menu de navigation -->
-        <div class="stepMenu">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item">
-                <button title="Listes de mots" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Mots" (click)="setFormStepBoyGirl(0)">
-                  <i class="fa-solid fa-font"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStepBoyGirl(1)">
-                  <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-            </ol>
-          </nav>
-        </div>
-
-        <div *ngIf="this.boygirl_form_step == 0">
-          <h2 class="card-title text-center">Listes de mots</h2>
-
-          <div class="form-row">
-            <div class="col-md-6">
-              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
-                appearance="fill">
-                <mat-label>Mots pour fille</mat-label>
-                <mat-chip-list #listFille aria-label="Mots pour fille">
-                  <mat-chip *ngFor="let mots of this.boygirl_listMotsFille" (removed)="removeFille(mots)">
-                    {{mots}}
-                    <button matChipRemove>
-                      <mat-icon>cancel</mat-icon>
-                    </button>
-                  </mat-chip>
-                  <input placeholder="Entrez le mots ici" [matChipInputFor]="listFille"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="addMotsFille($event)">
-                </mat-chip-list>
-              </mat-form-field>
-            </div>
-
-            <div class="col-md-6">
-              <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
-                appearance="fill">
-                <mat-label>Mots pour garçon</mat-label>
-                <mat-chip-list #listGarcon aria-label="Mots pour garçon">
-                  <mat-chip *ngFor="let mots of this.boygirl_listMotsGarcon" (removed)="removeGarcon(mots)">
-                    {{mots}}
-                    <button matChipRemove>
-                      <mat-icon>cancel</mat-icon>
-                    </button>
-                  </mat-chip>
-                  <input placeholder="Entrez le mots ici" [matChipInputFor]="listGarcon"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="addMotsGarcon($event)">
-                </mat-chip-list>
-              </mat-form-field>
-            </div>
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(true)"
+              mat-raised-button color="warn">Prévisualiser</button>
           </div>
 
-          <div class="form-row text-center">
-            <div class="col-md-12">
-              <h2 class="card-title">Type d'écriture</h2>
-              <mat-radio-group aria-label="Choisissez un type d'écriture">
-
-                <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CURSIF'" value="Cursif"
-                  (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-                  checked>Cursif</mat-radio-button>
-                <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CURSIF'" value="Cursif"
-                  (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
-                  Cursif</mat-radio-button>
-
-                <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CAPITAL'" value="Capital"
-                  (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
-                </mat-radio-button>
-                <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CAPITAL'" value="Capital"
-                  (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL</mat-radio-button>
-
-                <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'SCRIPT'" value="Script"
-                  (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
-                </mat-radio-button>
-                <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'SCRIPT'" value="Script"
-                  (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
-              </mat-radio-group>
-            </div>
+          <!-- Menu de navigation dans le formulaire -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
           </div>
-        </div>
-
-
-      </div>
-
-      <!-- Formulaire Recopier - Menu de navigation par étape -->
-      <div class="align-bottom" style="margin : 10px">
-        <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-          (click)="previousStepBoyGirl()">
-          <i class="fa-solid fa-angles-left"></i>
-          Etape précédente
-        </button>
-        <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
-          (click)="nextStepBoyGirl()">
-          Etape suivante
-          <i class="fa-solid fa-angles-right"></i>
-        </button>
-      </div>
-
-      <!-- Formulaire Fille Garcon - Prévisualisation -->
-      <div *ngIf="this.boygirl_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(false)"
-              mat-raised-button color="warn">Quitter la prévisualisation</button>
-          </div>
-        </div>
-        <app-boy-girl-game [bg]="this.boygirl" [showTitle]="false"></app-boy-girl-game>
-      </div>
 
 
 
-    </div>
-
-    <!-- Formulaire Reconnaitre -->
-    <div class="card-body" *ngIf="this.selectedGame == 'Reconnaitre'">
-
-
-      <!-- Formulaire Reconnaitre - Bouton de prévisualisation -->
-      <div *ngIf="!this.reconnaitre_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
-            mat-raised-button color="warn">Prévisualiser</button>
-        </div>
-
-        <!-- Formulaire Reconnaitre - Menu de navigation -->
-        <div class="stepMenu">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item">
-                <button title="Images" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Images" (click)="setFormStep(0)">
-                  <i class="fa-solid fa-images"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
-                  <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
-                  <i class="fa-solid fa-font"></i>
-                </button>
-              </li>
-            </ol>
-          </nav>
-        </div>
-
-
-        <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
-        <div *ngIf="this.selectedGame == 'Reconnaitre'">
-
-          <!-- Etape 1 : Choix des images -->
+          <!--Formulaire Recopier Etape du formulaire 1 -- Choix des images-->
           <div *ngIf="this.formStep == 0">
             <h2 class="card-title text-center">Choisissez les images</h2>
-            <div class="card-body selectImage_container text-center align-top">
-              <h5 class="card-header" style="color : black">Listes des images</h5>
-              <figure class="figure" *ngFor="let image of this.liste_image">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
+            <div *ngIf="this.selectedGame == 'Recopier'">
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
 
-            <div class="card-body selectImage_container text-center">
-              <h5 class="card-header" style="color : black">Images selectionné</h5>
-              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
-                selectionné
-                aucune image</h6>
-              <figure class="figure" *ngFor="let image of this.selectedImages">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
-                  (click)="deleteImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
+              </div>
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
             </div>
           </div>
-
 
           <!-- Etape du formulaire 2 -- Choix des couleurs -->
           <div *ngIf="this.formStep == 1">
@@ -550,73 +121,98 @@
             <form>
 
               <div class="form-row">
-                <div class="col-md-4">
-                  <label for="reconnaitre_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                <div class="col-md-6">
+                  <label for="recopier_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_bg_color = reconnaitre_bg_color_input.value "
-                      #reconnaitre_bg_color_input value="{{this.reconnaitre_bg_color}}"
-                      title="Choisissez la couleur d'arriére-plan">
+                      (change)="this.recopier_bg_color = recopier_bg_color_input.value " #recopier_bg_color_input
+                      value="{{this.recopier_bg_color}}" title="Choisissez la couleur d'arriére-plan">
                   </label>
                 </div>
-                <div class="col-md-4">
-                  <label for="reconnaitre_text_color_input" class="form-label align-middle">Couleur du texte
+                <div class="col-md-6">
+                  <label for="recopier_text_color_input" class="form-label align-middle">Couleur du texte
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_text_color = reconnaitre_text_color_input.value "
-                      #reconnaitre_text_color_input value="{{this.reconnaitre_text_color}}"
-                      title="Choisissez la couleur du texte">
+                      (change)="this.recopier_text_color = recopier_text_color_input.value " #recopier_text_color_input
+                      value="{{this.recopier_text_color}}" title="Choisissez la couleur du texte">
                   </label>
                 </div>
 
-                <div class="col-md-4">
-                  <label for="reconnaitre_title_color_input" class="form-label align-middle">Couleur du titre
+
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="recopier_title_color_input" class="form-label align-middle">Couleur du titre
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_title_color = reconnaitre_title_color_input.value "
-                      #reconnaitre_title_color_input value="{{this.reconnaitre_title_color}}"
+                      (change)="this.recopier_title_color = recopier_title_color_input.value "
+                      #recopier_title_color_input value="{{this.recopier_title_color}}"
                       title="Choisissez la couleur du titre">
                   </label>
                 </div>
-              </div>
-
-              <div class="form-row">
                 <div class="col-md-6">
-                  <label for="reconnaitre_good_answer_color_input" class="form-label align-middle">Couleur du message
-                    bonne
+                  <label for="recopier_good_answer_color_input" class="form-label align-middle">Couleur du message bonne
                     réponse
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_good_answer_color = reconnaitre_good_answer_color_input.value "
-                      #reconnaitre_good_answer_color_input value="{{this.reconnaitre_good_answer_color}}"
+                      (change)="this.recopier_good_answer_color = recopier_good_answer_color_input.value "
+                      #recopier_good_answer_color_input value="{{this.recopier_good_answer_color}}"
                       title="Choisissez la couleur du message de bonne réponse">
                   </label>
                 </div>
+              </div>
+              <div class="form-row">
+
                 <div class="col-md-6">
-                  <label for="reconnaitre_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                  <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message
                     mauvaise
                     réponse
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_wrong_answer_color = reconnaitre_wrong_answer_color_input.value "
-                      #reconnaitre_wrong_answer_color_input value="{{this.reconnaitre_wrong_answer_color}}"
+                      (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
+                      #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
                       title="Choisissez la couleur du message de mauvaise réponse">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="recopier_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_button_bg_color = recopier_button_bg_color_input.value "
+                      #recopier_button_bg_color_input value="{{this.recopier_button_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan du bouton">
                   </label>
                 </div>
               </div>
 
               <div class="form-row">
+
                 <div class="col-md-6">
-                  <label for="reconnaitre_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
-                    du
+                  <label for="recopier_button_text_color_input" class="form-label align-middle">Couleur du texte du
                     bouton
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_button_bg_color = reconnaitre_button_bg_color_input.value "
-                      #reconnaitre_button_bg_color_input value="{{this.reconnaitre_button_bg_color}}"
-                      title="Choisissez la couleur d'arriére-plan du bouton">
+                      (change)="this.recopier_button_text_color = recopier_button_text_color_input.value "
+                      #recopier_button_text_color_input value="{{this.recopier_button_text_color}}"
+                      title="Choisissez la couleur du texte du bouton">
                   </label>
                 </div>
                 <div class="col-md-6">
-                  <label for="reconnaitre_button_text_color_input" class="form-label align-middle">Couleur du texte du
-                    bouton
+                  <label for="recopier_input_bg_color_input" class="form-label align-middle">Couleur d'arriére plan de
+                    la
+                    zone d'entrée
                     <input type="color" class="form-control form-control-color"
-                      (change)="this.reconnaitre_button_text_color = reconnaitre_button_text_color_input.value "
-                      #reconnaitre_button_text_color_input value="{{this.reconnaitre_button_text_color}}"
+                      (change)="this.recopier_input_bg_color = recopier_input_bg_color_input.value "
+                      #recopier_input_bg_color_input value="{{this.recopier_input_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan de la zone d'entrée">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="col-md-6">
+                  <label for="recopier_input_text_color_input" class="form-label align-middle">Couleur du texte de la
+                    zone
+                    d'entrée
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_input_text_color = recopier_input_text_color_input.value "
+                      #recopier_input_text_color_input value="{{this.recopier_input_text_color}}"
                       title="Choisissez la couleur du texte du bouton">
                   </label>
                 </div>
@@ -629,9 +225,9 @@
                 </div>
                 <div class="col-md-8">
                   <select class="form-control" aria-label="Default select example" #progressSelectValue
-                    (change)="changeProgressValue('Reconnaitre',progressSelectValue)">
+                    (change)="changeProgressValue('Recopier',progressSelectValue)">
                     <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
-                      ng-selected="p == this.reconnaitre_progress" #progressValue>
+                      ng-selected="p == this.recopier_progress" #progressValue>
                       <p *ngIf="p == 'blue'">Bleu</p>
                       <p *ngIf="p == 'green'">Vert</p>
                       <p *ngIf="p == 'lightblue'">Bleu ciel</p>
@@ -643,31 +239,31 @@
               </div>
               <div class="form-row">
                 <div class="col-md-12">
-                  <div class="progress" *ngIf="this.reconnaitre_progress == 'blue' ">
+                  <div class="progress" *ngIf="this.recopier_progress == 'blue' ">
                     <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
                       role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                     </div>
                   </div>
 
-                  <div class="progress" *ngIf="this.reconnaitre_progress == 'green' ">
+                  <div class="progress" *ngIf="this.recopier_progress == 'green' ">
                     <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                       role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                     </div>
                   </div>
 
-                  <div class="progress" *ngIf="this.reconnaitre_progress == 'lightblue' ">
+                  <div class="progress" *ngIf="this.recopier_progress == 'lightblue' ">
                     <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
                       role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                     </div>
                   </div>
 
-                  <div class="progress" *ngIf="this.reconnaitre_progress == 'orange' ">
+                  <div class="progress" *ngIf="this.recopier_progress == 'orange' ">
                     <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
                       role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                     </div>
                   </div>
 
-                  <div class="progress" *ngIf="this.reconnaitre_progress == 'red' ">
+                  <div class="progress" *ngIf="this.recopier_progress == 'red' ">
                     <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
                       role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                     </div>
@@ -676,7 +272,6 @@
               </div>
             </form>
           </div>
-
 
           <!-- Etape du formulaire 3 -- Choix des textes -->
           <div *ngIf="this.formStep == 2" style="text-align : center;">
@@ -685,44 +280,41 @@
                 <h2 class="card-title">Type d'écriture</h2>
                 <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CURSIF'" value="Cursif"
-                    (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
-                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
-                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CURSIF'" value="Cursif"
-                    (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
-                    style="font-family: cursiveFont; font-size: 40px">
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
+                    (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+                    checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
+                    (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
                     Cursif</mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CAPITAL'" value="Capital"
-                    (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
+                    (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CAPITAL'" value="Capital"
-                    (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
+                    (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
                   </mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'SCRIPT'" value="Script"
-                    (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
+                    (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'SCRIPT'" value="Script"
-                    (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
-                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
+                    (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
                 </mat-radio-group>
               </div>
             </div>
-
             <div class="form-row">
               <div class="col-md-12">
                 <h2 class="card-title">Vocalisation</h2>
-                <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+                <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
                   style="margin-right : 2%; color : #ff4083"></i>
-                <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+                <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-                <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser"
-                  (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
+                  (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
                 </mat-slide-toggle>
-                <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
+                <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
                   style="margin-left : 2%; color : #ff4083"></i>
-                <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+                <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
               </div>
             </div>
 
@@ -740,7 +332,10 @@
           </div>
 
 
-          <!--Formulaire Reconnaite -  Menu de navigation par étape -->
+
+
+
+          <!-- Formulaire Recopier - Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
             <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
               (click)="previousStep()">
@@ -753,266 +348,266 @@
               <i class="fa-solid fa-angles-right"></i>
             </button>
           </div>
-
         </div>
 
 
-      </div>
 
-      <!-- Formulaire Reconnaitre - Prévisualisation -->
-      <div *ngIf="this.reconnaitre_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <!-- Formulaire Recopier - Prévisualisation -->
+        <div *ngIf="this.recopier_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
-              mat-raised-button color="warn">Quitter la prévisualisation</button>
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
+                mat-raised-button color="warn">Quitter la prévisualisation</button>
+            </div>
           </div>
+          <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
         </div>
-        <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+
       </div>
-    </div>
-
-    <!-- Formulaire Abecedaire -->
-    <div class="card-body" *ngIf="this.selectedGame == 'Abecedaire'">
 
 
-      <!-- Formulaire Abecedaire - Bouton de prévisualisation -->
-      <div *ngIf="!this.abecedaire_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(true)"
-            mat-raised-button color="warn">Prévisualiser</button>
-        </div>
-
-        <!-- Formulaire Abecedaire - Menu de navigation -->
-        <div class="stepMenu">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item">
-                <button title="Images" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Images" (click)="setFormStep(0)">
-                  <i class="fa-solid fa-images"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
-                  <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
-                  <i class="fa-solid fa-font"></i>
-                </button>
-              </li>
-            </ol>
-          </nav>
-        </div>
-
-
-        <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
-        <div *ngIf="this.selectedGame == 'Abecedaire'">
-
-          <!-- Etape 1 : Choix des images -->
-          <div *ngIf="this.formStep == 0">
-            <h2 class="card-title text-center">Choisissez les images</h2>
-            <div class="card-body selectImage_container text-center align-top">
-              <h5 class="card-header" style="color : black">Listes des images</h5>
-              <figure class="figure" *ngFor="let image of this.liste_image">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
-
-            <div class="card-body selectImage_container text-center">
-              <h5 class="card-header" style="color : black">Images selectionné</h5>
-              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
-                selectionné
-                aucune image</h6>
-              <figure class="figure" *ngFor="let image of this.selectedImages">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
-                  (click)="deleteImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
+      <!-- Formulaire Fille Garcon -->
+      <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
+        <div *ngIf="!this.boygirl_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)"
+              mat-raised-button color="warn">Prévisualiser</button>
           </div>
 
-
-          <!-- Etape du formulaire 2 -- Choix des couleurs -->
-          <div *ngIf="this.formStep == 1">
-            <h2 class="card-title">Choississez les couleurs du jeu</h2>
-
-            <form>
-
-              <div class="form-row">
-                <div class="col-md-4">
-                  <label for="abecedaire_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value " #abecedaire_bg_color_input
-                      value="{{this.abecedaire_bg_color}}" title="Choisissez la couleur d'arriére-plan">
-                  </label>
-                </div>
-                <div class="col-md-4">
-                  <label for="abecedaire_text_color_input" class="form-label align-middle">Couleur du texte
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_text_color = abecedaire_text_color_input.value "
-                      #abecedaire_text_color_input value="{{this.abecedaire_text_color}}"
-                      title="Choisissez la couleur du texte">
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="abecedaire_good_answer_color_input" class="form-label align-middle">Couleur du message
-                    bonne
-                    réponse
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_good_answer_color = abecedaire_good_answer_color_input.value "
-                      #abecedaire_good_answer_color_input value="{{this.abecedaire_good_answer_color}}"
-                      title="Choisissez la couleur du message de bonne réponse">
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <label for="abecedaire_wrong_answer_color_input" class="form-label align-middle">Couleur du message
-                    mauvaise
-                    réponse
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_wrong_answer_color = abecedaire_wrong_answer_color_input.value "
-                      #abecedaire_wrong_answer_color_input value="{{this.abecedaire_wrong_answer_color}}"
-                      title="Choisissez la couleur du message de mauvaise réponse">
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="abecedaire_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
-                    du
-                    bouton
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_button_bg_color = abecedaire_button_bg_color_input.value "
-                      #abecedaire_button_bg_color_input value="{{this.abecedaire_button_bg_color}}"
-                      title="Choisissez la couleur d'arriére-plan du bouton">
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <label for="abecedaire_button_text_color_input" class="form-label align-middle">Couleur du texte du
-                    bouton
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.abecedaire_button_text_color = abecedaire_button_text_color_input.value "
-                      #abecedaire_button_text_color_input value="{{this.abecedaire_button_text_color}}"
-                      title="Choisissez la couleur du texte du bouton">
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-md-4">
-                  <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
-
-                </div>
-                <div class="col-md-8">
-                  <select class="form-control" aria-label="Default select example" #progressSelectValue
-                    (change)="changeProgressValue('Abecedaire',progressSelectValue)">
-                    <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
-                      ng-selected="p == this.abecedaire_progress" #progressValue>
-                      <p *ngIf="p == 'blue'">Bleu</p>
-                      <p *ngIf="p == 'green'">Vert</p>
-                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
-                      <p *ngIf="p == 'orange'">Orange</p>
-                      <p *ngIf="p == 'red'">Rouge</p>
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-md-12">
-                  <div class="progress" *ngIf="this.abecedaire_progress == 'blue' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
-
-                  <div class="progress" *ngIf="this.abecedaire_progress == 'green' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
-
-                  <div class="progress" *ngIf="this.abecedaire_progress == 'lightblue' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
-
-                  <div class="progress" *ngIf="this.abecedaire_progress == 'orange' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
-
-                  <div class="progress" *ngIf="this.abecedaire_progress == 'red' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
+          <!-- Formulaire Fille Garçon - Menu de navigation -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Listes de mots" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Mots" (click)="setFormStepBoyGirl(0)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs"
+                    (click)="setFormStepBoyGirl(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
           </div>
 
+          <div *ngIf="this.boygirl_form_step == 0">
+            <h2 class="card-title text-center">Listes de mots</h2>
 
-          <!-- Etape du formulaire 3 -- Choix des textes -->
-          <div *ngIf="this.formStep == 2" style="text-align : center;">
             <div class="form-row">
+              <div class="col-md-6">
+                <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
+                  appearance="fill">
+                  <mat-label>Mots pour fille</mat-label>
+                  <mat-chip-list #listFille aria-label="Mots pour fille">
+                    <mat-chip *ngFor="let mots of this.boygirl_listMotsFille" (removed)="removeFille(mots)">
+                      {{mots}}
+                      <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                    <input placeholder="Entrez le mots ici" [matChipInputFor]="listFille"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="addMotsFille($event)">
+                  </mat-chip-list>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
+                  appearance="fill">
+                  <mat-label>Mots pour garçon</mat-label>
+                  <mat-chip-list #listGarcon aria-label="Mots pour garçon">
+                    <mat-chip *ngFor="let mots of this.boygirl_listMotsGarcon" (removed)="removeGarcon(mots)">
+                      {{mots}}
+                      <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                    <input placeholder="Entrez le mots ici" [matChipInputFor]="listGarcon"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="addMotsGarcon($event)">
+                  </mat-chip-list>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="form-row text-center">
               <div class="col-md-12">
                 <h2 class="card-title">Type d'écriture</h2>
                 <mat-radio-group aria-label="Choisissez un type d'écriture">
 
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'none'" value="None"
-                    (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px" checked>Aucune
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'none'" value="None"
-                    (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px">Aucune
-                  </mat-radio-button>
-
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'cursif'" value="Cursif"
-                    (change)="this.abecedaire_type_ecriture = 'cursif'"
-                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'cursif'" value="Cursif"
-                    (change)="this.abecedaire_type_ecriture = 'cursif'"
-                    style="font-family: cursiveFont; font-size: 40px">
+                  <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CURSIF'" value="Cursif"
+                    (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+                    checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CURSIF'" value="Cursif"
+                    (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
                     Cursif</mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'capital'" value="Capital"
-                    (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px" checked>CAPITAL
+                  <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CAPITAL'" value="Capital"
+                    (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'capital'" value="Capital"
-                    (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px">CAPITAL
+                  <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CAPITAL'" value="Capital"
+                    (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
                   </mat-radio-button>
 
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'script'" value="Script"
-                    (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px" checked>Script
+                  <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'SCRIPT'" value="Script"
+                    (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
                   </mat-radio-button>
-                  <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'script'" value="Script"
-                    (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px">Script
-                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'SCRIPT'" value="Script"
+                    (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
                 </mat-radio-group>
               </div>
             </div>
-            <div class="form-row">
-              <div class="col-md-12">
-                <h2 class="card-title">Vocalisation</h2>
-                <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark"
-                  style="margin-right : 2%; color : #ff4083"></i>
-                <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+          </div>
 
-                <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput>
-                </mat-slide-toggle>
-                <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"
-                  style="margin-left : 2%; color : #ff4083"></i>
-                <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+          <div *ngIf="this.boygirl_form_step == 1">
+
+            <h2 class="card-title text-center">Choisissez les couleurs</h2>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="boygirl_bg_color_fille_input" class="form-label align-middle">Couleur de l'arriére-plan
+                  fille
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_bg_color_fille = boygirl_bg_color_fille_input.value "
+                    #boygirl_bg_color_fille_input value="{{this.boygirl_bg_color_fille}}"
+                    title="Choisissez la couleur de l'arriére-plan fille">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="boygirl_bg_color_garcon_input" class="form-label align-middle">Couleur de l'arriére-plan
+                  garçon
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_bg_color_garcon = boygirl_bg_color_garcon_input.value "
+                    #boygirl_bg_color_garcon_input value="{{this.boygirl_bg_color_garcon}}"
+                    title="Choisissez la couleur de l'arriére-plan garçon">
+                </label>
               </div>
             </div>
 
+            <div class="form-row">
+
+              <div class="col-md-6">
+                <label for="boygirl_bg_color_mot_input" class="form-label align-middle">Couleur de l'arriére-plan mots
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_bg_color_mot = boygirl_bg_color_mot_input.value " #boygirl_bg_color_mot_input
+                    value="{{this.boygirl_bg_color_mot}}" title="Choisissez la couleur de l'arriére-plan mots">
+                </label>
+              </div>
+
+              <div class="col-md-6">
+                <label for="boygirl_bg_color_container_input" class="form-label align-middle">Couleur de l'arriére-plan
+                  message de fin/erreur
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_bg_color_container = boygirl_bg_color_container_input.value "
+                    #boygirl_bg_color_container_input value="{{this.boygirl_bg_color_container}}"
+                    title="Choisissez la couleur de l'arriére-plan des mots dans la liste fille">
+                </label>
+              </div>
+
+
+            </div>
+
+            <div class="form-row">
+
+              <div class="col-md-6">
+                <label for="boygirl_word_color_fille_input" class="form-label align-middle">Couleur de l'arriére-plan
+                  des
+                  mots dans la liste fille
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_word_color_fille = boygirl_word_color_fille_input.value "
+                    #boygirl_word_color_fille_input value="{{this.boygirl_word_color_fille}}"
+                    title="Choisissez la couleur de l'arriére-plan des mots dans la liste fille">
+                </label>
+              </div>
+
+              <div class="col-md-6">
+                <label for="boygirl_word_color_garcon_input" class="form-label align-middle">Couleur de l'arriére-plan
+                  des
+                  mots dans la liste garçon
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_word_color_garcon = boygirl_word_color_garcon_input.value "
+                    #boygirl_word_color_garcon_input value="{{this.boygirl_word_color_garcon}}"
+                    title="Choisissez la couleur de l'arriére-plan des mots dans la liste garçon">
+                </label>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="boygirl_word_color_mots_input" class="form-label align-middle">Couleur de l'arriére-plan des
+                  mots dans la liste mots
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_word_color_mot = boygirl_word_color_mots_input.value "
+                    #boygirl_word_color_mots_input value="{{this.boygirl_word_color_mot}}"
+                    title="Choisissez la couleur de l'arriére-plan des mots dans la liste mots">
+                </label>
+              </div>
+
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="boygirl_title_color_fille_input" class="form-label align-middle">Couleur du titre fille
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_title_color_fille = boygirl_title_color_fille_input.value "
+                    #boygirl_title_color_fille_input value="{{this.boygirl_title_color_fille}}"
+                    title="Choisissez la couleur du titre fille">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="boygirl_text_color_fille_input" class="form-label align-middle">Couleur du texte fille
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_text_color_fille = boygirl_text_color_fille_input.value "
+                    #boygirl_text_color_fille_input value="{{this.boygirl_text_color_fille}}"
+                    title="Choisissez la couleur du texte fille">
+                </label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="boygirl_title_color_garcon_input" class="form-label align-middle">Couleur du titre garçon
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_title_color_garcon = boygirl_title_color_garcon_input.value "
+                    #boygirl_title_color_garcon_input value="{{this.boygirl_title_color_garcon}}"
+                    title="Choisissez la couleur du titre garçon">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="boygirl_text_color_garcon_input" class="form-label align-middle">Couleur du texte garçon
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_text_color_garcon = boygirl_text_color_garcon_input.value "
+                    #boygirl_text_color_garcon_input value="{{this.boygirl_text_color_garcon}}"
+                    title="Choisissez la couleur du texte garçon">
+                </label>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="boygirl_title_color_mot_input" class="form-label align-middle">Couleur du titre mots
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_title_color_mot = boygirl_title_color_mot_input.value "
+                    #boygirl_title_color_mot_input value="{{this.boygirl_title_color_mot}}"
+                    title="Choisissez la couleur du titre mots">
+                </label>
+              </div>
+              <div class="col-md-6">
+                <label for="boygirl_text_color_mot_input" class="form-label align-middle">Couleur du texte mots
+                  <input type="color" class="form-control form-control-color"
+                    (change)="this.boygirl_text_color_mot = boygirl_text_color_mot_input.value "
+                    #boygirl_text_color_mot_input value="{{this.boygirl_text_color_mot}}"
+                    title="Choisissez la couleur du texte mots">
+                </label>
+              </div>
+            </div>
 
             <!-- Bouton de création du jeu -->
             <div class="form-row align-middle text-center" align="center">
@@ -1024,323 +619,982 @@
               </div>
             </div>
 
+
+
           </div>
 
 
-          <!--Formulaire Abecedaire -  Menu de navigation par étape -->
+          <!-- Formulaire Fille Garçon - Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
             <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-              (click)="previousStep()">
+              (click)="previousStepBoyGirl()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right" (click)="nextStepBoyGirl()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
           </div>
-
         </div>
 
 
-      </div>
-
-      <!-- Formulaire abecedaire - Prévisualisation -->
-      <div *ngIf="this.abecedaire_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <!-- Formulaire Fille Garcon - Prévisualisation -->
+        <div *ngIf="this.boygirl_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(false)"
-              mat-raised-button color="warn">Quitter la prévisualisation</button>
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(false)"
+                mat-raised-button color="warn">Quitter la prévisualisation</button>
+            </div>
           </div>
+          <app-boy-girl-game [bg]="this.boygirl" [showTitle]="false"></app-boy-girl-game>
         </div>
-        <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
+
+
+
       </div>
-    </div>
 
-    <!-- Formulaire Memory -->
-    <div class="card-body" *ngIf="this.selectedGame == 'Memory'">
-
-
-      <!-- Formulaire Memory - Bouton de prévisualisation -->
-      <div *ngIf="!this.memory_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)" mat-raised-button
-            color="warn">Prévisualiser</button>
-        </div>
-
-        <!-- Formulaire Memory - Menu de navigation -->
-        <div class="stepMenu">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item">
-                <button title="Images" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Images" (click)="setFormStep(0)">
-                  <i class="fa-solid fa-images"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
-                  <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
-                  <i class="fa-solid fa-font"></i>
-                </button>
-              </li>
-            </ol>
-          </nav>
-        </div>
+      <!-- Formulaire Reconnaitre -->
+      <div class="card-body" *ngIf="this.selectedGame == 'Reconnaitre'">
 
 
-        <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
-        <div *ngIf="this.selectedGame == 'Memory'">
+        <!-- Formulaire Reconnaitre - Bouton de prévisualisation -->
+        <div *ngIf="!this.reconnaitre_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
+              mat-raised-button color="warn">Prévisualiser</button>
+          </div>
 
-          <!-- Etape 1 : Choix des images -->
-          <div *ngIf="this.formStep == 0">
-            <h2 class="card-title text-center">Choisissez les images (La première sera l'image pour le derrière des tuiles)</h2>
-            <div class="card-body selectImage_container text-center align-top">
-              <h5 class="card-header" style="color : black">Listes des images</h5>
-              <figure class="figure" *ngFor="let image of this.liste_image">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
-
-            <div class="card-body selectImage_container text-center">
-              <h5 class="card-header" style="color : black">Images selectionné</h5>
-              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
-                selectionné
-                aucune image</h6>
-              <figure class="figure" *ngFor="let image of this.selectedImages">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
-                  (click)="deleteImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
+          <!-- Formulaire Reconnaitre - Menu de navigation -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
           </div>
 
 
-          <!-- Etape du formulaire 2 -- Choix des couleurs -->
-          <div *ngIf="this.formStep == 1">
-            <h2 class="card-title">Choississez les couleurs du jeu</h2>
+          <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
+          <div *ngIf="this.selectedGame == 'Reconnaitre'">
 
-            <form>
+            <!-- Etape 1 : Choix des images -->
+            <div *ngIf="this.formStep == 0">
+              <h2 class="card-title text-center">Choisissez les images</h2>
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
 
-              <div class="form-row">
-                <div class="col-md-4">
-                  <label for="memory_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.memory_bg_color = memory_bg_color_input.value " #memory_bg_color_input
-                      value="{{this.memory_bg_color}}" title="Choisissez la couleur d'arriére-plan">
-                  </label>
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+            </div>
+
+
+            <!-- Etape du formulaire 2 -- Choix des couleurs -->
+            <div *ngIf="this.formStep == 1">
+              <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+              <form>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="reconnaitre_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_bg_color = reconnaitre_bg_color_input.value "
+                        #reconnaitre_bg_color_input value="{{this.reconnaitre_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="reconnaitre_text_color_input" class="form-label align-middle">Couleur du texte
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_text_color = reconnaitre_text_color_input.value "
+                        #reconnaitre_text_color_input value="{{this.reconnaitre_text_color}}"
+                        title="Choisissez la couleur du texte">
+                    </label>
+                  </div>
+
                 </div>
-                <div class="col-md-4">
-                  <label for="memory_text_color_input" class="form-label align-middle">Couleur du texte
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.memory_text_color = memory_text_color_input.value " #memory_text_color_input
-                      value="{{this.memory_text_color}}" title="Choisissez la couleur du texte">
-                  </label>
+
+                <div class="form-row">
+
+                  <div class="col-md-6">
+                    <label for="reconnaitre_title_color_input" class="form-label align-middle">Couleur du titre
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_title_color = reconnaitre_title_color_input.value "
+                        #reconnaitre_title_color_input value="{{this.reconnaitre_title_color}}"
+                        title="Choisissez la couleur du titre">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="reconnaitre_good_answer_color_input" class="form-label align-middle">Couleur du message
+                      bonne
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_good_answer_color = reconnaitre_good_answer_color_input.value "
+                        #reconnaitre_good_answer_color_input value="{{this.reconnaitre_good_answer_color}}"
+                        title="Choisissez la couleur du message de bonne réponse">
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+
+                  <div class="col-md-6">
+                    <label for="reconnaitre_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                      mauvaise
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_wrong_answer_color = reconnaitre_wrong_answer_color_input.value "
+                        #reconnaitre_wrong_answer_color_input value="{{this.reconnaitre_wrong_answer_color}}"
+                        title="Choisissez la couleur du message de mauvaise réponse">
+                    </label>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="reconnaitre_button_bg_color_input" class="form-label align-middle">Couleur d'arriére
+                      plan
+                      du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_button_bg_color = reconnaitre_button_bg_color_input.value "
+                        #reconnaitre_button_bg_color_input value="{{this.reconnaitre_button_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan du bouton">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="reconnaitre_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_button_text_color = reconnaitre_button_text_color_input.value "
+                        #reconnaitre_button_text_color_input value="{{this.reconnaitre_button_text_color}}"
+                        title="Choisissez la couleur du texte du bouton">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4">
+                    <label for="progressValue" class="form-label align-middle">Couleur de la barre de
+                      progression</label>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example" #progressSelectValue
+                      (change)="changeProgressValue('Reconnaitre',progressSelectValue)">
+                      <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                        ng-selected="p == this.reconnaitre_progress" #progressValue>
+                        <p *ngIf="p == 'blue'">Bleu</p>
+                        <p *ngIf="p == 'green'">Vert</p>
+                        <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                        <p *ngIf="p == 'orange'">Orange</p>
+                        <p *ngIf="p == 'red'">Rouge</p>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'blue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'green' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'lightblue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'orange' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'red' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+            <!-- Etape du formulaire 3 -- Choix des textes -->
+            <div *ngIf="this.formStep == 2" style="text-align : center;">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Type d'écriture</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CURSIF'" value="Cursif"
+                      (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+                      style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CURSIF'" value="Cursif"
+                      (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+                      style="font-family: cursiveFont; font-size: 40px">
+                      Cursif</mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CAPITAL'" value="Capital"
+                      (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CAPITAL'" value="Capital"
+                      (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                    </mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'SCRIPT'" value="Script"
+                      (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'SCRIPT'" value="Script"
+                      (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+                    </mat-radio-button>
+                  </mat-radio-group>
                 </div>
               </div>
 
               <div class="form-row">
-                <div class="col-md-6">
-                  <label for="memory_good_answer_color_input" class="form-label align-middle">Couleur du message
-                    bonne
-                    réponse
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.memory_good_answer_color = memory_good_answer_color_input.value "
-                      #memory_good_answer_color_input value="{{this.memory_good_answer_color}}"
-                      title="Choisissez la couleur du message de bonne réponse">
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <label for="memory_wrong_answer_color_input" class="form-label align-middle">Couleur du message
-                    mauvaise
-                    réponse
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.memory_wrong_answer_color = memory_wrong_answer_color_input.value "
-                      #memory_wrong_answer_color_input value="{{this.memory_wrong_answer_color}}"
-                      title="Choisissez la couleur du message de mauvaise réponse">
-                  </label>
+                <div class="col-md-12">
+                  <h2 class="card-title">Vocalisation</h2>
+                  <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+                    style="margin-right : 2%; color : #ff4083"></i>
+                  <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+                    style="margin-right : 2%"></i>
+
+                  <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser"
+                    (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                  </mat-slide-toggle>
+                  <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
+                    style="margin-left : 2%; color : #ff4083"></i>
+                  <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
                 </div>
               </div>
 
-              <div class="form-row">
-                <div class="col-md-4">
-                  <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
 
+              <!-- Bouton de création du jeu -->
+              <div class="form-row align-middle text-center" align="center">
+                <div class="col-md-12 text-center">
+                  <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+                    jeu
+                    <i class="fa-solid fa-check"></i>
+                  </button>
                 </div>
-                <div class="col-md-8">
-                  <select class="form-control" aria-label="Default select example" #progressSelectValue
-                    (change)="changeProgressValue('Memory',progressSelectValue)">
-                    <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
-                      ng-selected="p == this.memory_progress" #progressValue>
-                      <p *ngIf="p == 'blue'">Bleu</p>
-                      <p *ngIf="p == 'green'">Vert</p>
-                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
-                      <p *ngIf="p == 'orange'">Orange</p>
-                      <p *ngIf="p == 'red'">Rouge</p>
-                    </option>
-                  </select>
+              </div>
+
+            </div>
+
+
+            <!--Formulaire Reconnaite -  Menu de navigation par étape -->
+            <div class="align-bottom" style="margin : 10px">
+              <button type="button" class="btn btn-primary align-left"
+                style="background : rgb(13, 197, 13); float : left" (click)="previousStep()">
+                <i class="fa-solid fa-angles-left"></i>
+                Etape précédente
+              </button>
+              <button type="button" class="btn btn-primary align-right"
+                style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+                Etape suivante
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <!-- Formulaire Reconnaitre - Prévisualisation -->
+        <div *ngIf="this.reconnaitre_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
+                mat-raised-button color="warn">Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+        </div>
+      </div>
+
+      <!-- Formulaire Abecedaire -->
+      <div class="card-body" *ngIf="this.selectedGame == 'Abecedaire'">
+
+
+        <!-- Formulaire Abecedaire - Bouton de prévisualisation -->
+        <div *ngIf="!this.abecedaire_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(true)"
+              mat-raised-button color="warn">Prévisualiser</button>
+          </div>
+
+          <!-- Formulaire Abecedaire - Menu de navigation -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+
+          <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
+          <div *ngIf="this.selectedGame == 'Abecedaire'">
+
+            <!-- Etape 1 : Choix des images -->
+            <div *ngIf="this.formStep == 0">
+              <h2 class="card-title text-center">Choisissez les images</h2>
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+            </div>
+
+
+            <!-- Etape du formulaire 2 -- Choix des couleurs -->
+            <div *ngIf="this.formStep == 1">
+              <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+              <form>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="abecedaire_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value "
+                        #abecedaire_bg_color_input value="{{this.abecedaire_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="abecedaire_text_color_input" class="form-label align-middle">Couleur du texte
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_text_color = abecedaire_text_color_input.value "
+                        #abecedaire_text_color_input value="{{this.abecedaire_text_color}}"
+                        title="Choisissez la couleur du texte">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="abecedaire_good_answer_color_input" class="form-label align-middle">Couleur du message
+                      bonne
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_good_answer_color = abecedaire_good_answer_color_input.value "
+                        #abecedaire_good_answer_color_input value="{{this.abecedaire_good_answer_color}}"
+                        title="Choisissez la couleur du message de bonne réponse">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="abecedaire_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                      mauvaise
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_wrong_answer_color = abecedaire_wrong_answer_color_input.value "
+                        #abecedaire_wrong_answer_color_input value="{{this.abecedaire_wrong_answer_color}}"
+                        title="Choisissez la couleur du message de mauvaise réponse">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="abecedaire_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_button_bg_color = abecedaire_button_bg_color_input.value "
+                        #abecedaire_button_bg_color_input value="{{this.abecedaire_button_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan du bouton">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="abecedaire_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_button_text_color = abecedaire_button_text_color_input.value "
+                        #abecedaire_button_text_color_input value="{{this.abecedaire_button_text_color}}"
+                        title="Choisissez la couleur du texte du bouton">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4">
+                    <label for="progressValue" class="form-label align-middle">Couleur de la barre de
+                      progression</label>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example" #progressSelectValue
+                      (change)="changeProgressValue('Abecedaire',progressSelectValue)">
+                      <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                        ng-selected="p == this.abecedaire_progress" #progressValue>
+                        <p *ngIf="p == 'blue'">Bleu</p>
+                        <p *ngIf="p == 'green'">Vert</p>
+                        <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                        <p *ngIf="p == 'orange'">Orange</p>
+                        <p *ngIf="p == 'red'">Rouge</p>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'blue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'green' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'lightblue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'orange' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'red' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+            <!-- Etape du formulaire 3 -- Choix des textes -->
+            <div *ngIf="this.formStep == 2" style="text-align : center;">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Type d'écriture</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'none'" value="None"
+                      (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px" checked>Aucune
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'none'" value="None"
+                      (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px">Aucune
+                    </mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'cursif'" value="Cursif"
+                      (change)="this.abecedaire_type_ecriture = 'cursif'"
+                      style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'cursif'" value="Cursif"
+                      (change)="this.abecedaire_type_ecriture = 'cursif'"
+                      style="font-family: cursiveFont; font-size: 40px">
+                      Cursif</mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'capital'" value="Capital"
+                      (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px" checked>CAPITAL
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'capital'" value="Capital"
+                      (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px">CAPITAL
+                    </mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'script'" value="Script"
+                      (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px" checked>Script
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'script'" value="Script"
+                      (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px">Script
+                    </mat-radio-button>
+                  </mat-radio-group>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-md-12">
-                  <div class="progress" *ngIf="this.memory_progress == 'blue' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
+                  <h2 class="card-title">Vocalisation</h2>
+                  <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark"
+                    style="margin-right : 2%; color : #ff4083"></i>
+                  <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-                  <div class="progress" *ngIf="this.memory_progress == 'green' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
+                  <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                  </mat-slide-toggle>
+                  <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"
+                    style="margin-left : 2%; color : #ff4083"></i>
+                  <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+                </div>
+              </div>
 
-                  <div class="progress" *ngIf="this.memory_progress == 'lightblue' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
 
-                  <div class="progress" *ngIf="this.memory_progress == 'orange' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
-                    </div>
-                  </div>
+              <!-- Bouton de création du jeu -->
+              <div class="form-row align-middle text-center" align="center">
+                <div class="col-md-12 text-center">
+                  <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+                    jeu
+                    <i class="fa-solid fa-check"></i>
+                  </button>
+                </div>
+              </div>
 
-                  <div class="progress" *ngIf="this.memory_progress == 'red' ">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+            </div>
+
+
+            <!--Formulaire Abecedaire -  Menu de navigation par étape -->
+            <div class="align-bottom" style="margin : 10px">
+              <button type="button" class="btn btn-primary align-left"
+                style="background : rgb(13, 197, 13); float : left" (click)="previousStep()">
+                <i class="fa-solid fa-angles-left"></i>
+                Etape précédente
+              </button>
+              <button type="button" class="btn btn-primary align-right"
+                style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+                Etape suivante
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <!-- Formulaire abecedaire - Prévisualisation -->
+        <div *ngIf="this.abecedaire_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(false)"
+                mat-raised-button color="warn">Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
+        </div>
+      </div>
+
+      <!-- Formulaire Memory -->
+      <div class="card-body" *ngIf="this.selectedGame == 'Memory'">
+
+
+        <!-- Formulaire Memory - Bouton de prévisualisation -->
+        <div *ngIf="!this.memory_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)"
+              mat-raised-button color="warn">Prévisualiser</button>
+          </div>
+
+          <!-- Formulaire Memory - Menu de navigation -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+
+          <!-- Formulaire Reconnaitre - Etape 1 : choix des images -->
+          <div *ngIf="this.selectedGame == 'Memory'">
+
+            <!-- Etape 1 : Choix des images -->
+            <div *ngIf="this.formStep == 0">
+              <h2 class="card-title text-center">Choisissez les images (La première sera l'image pour le derrière des
+                tuiles)</h2>
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+            </div>
+
+
+            <!-- Etape du formulaire 2 -- Choix des couleurs -->
+            <div *ngIf="this.formStep == 1">
+              <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+              <form>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="memory_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.memory_bg_color = memory_bg_color_input.value " #memory_bg_color_input
+                        value="{{this.memory_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="memory_text_color_input" class="form-label align-middle">Couleur du texte
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.memory_text_color = memory_text_color_input.value " #memory_text_color_input
+                        value="{{this.memory_text_color}}" title="Choisissez la couleur du texte">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="memory_good_answer_color_input" class="form-label align-middle">Couleur du message
+                      bonne
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.memory_good_answer_color = memory_good_answer_color_input.value "
+                        #memory_good_answer_color_input value="{{this.memory_good_answer_color}}"
+                        title="Choisissez la couleur du message de bonne réponse">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="memory_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                      mauvaise
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.memory_wrong_answer_color = memory_wrong_answer_color_input.value "
+                        #memory_wrong_answer_color_input value="{{this.memory_wrong_answer_color}}"
+                        title="Choisissez la couleur du message de mauvaise réponse">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4">
+                    <label for="progressValue" class="form-label align-middle">Couleur de la barre de
+                      progression</label>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example" #progressSelectValue
+                      (change)="changeProgressValue('Memory',progressSelectValue)">
+                      <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                        ng-selected="p == this.memory_progress" #progressValue>
+                        <p *ngIf="p == 'blue'">Bleu</p>
+                        <p *ngIf="p == 'green'">Vert</p>
+                        <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                        <p *ngIf="p == 'orange'">Orange</p>
+                        <p *ngIf="p == 'red'">Rouge</p>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <div class="progress" *ngIf="this.memory_progress == 'blue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.memory_progress == 'green' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.memory_progress == 'lightblue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.memory_progress == 'orange' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.memory_progress == 'red' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
                     </div>
                   </div>
                 </div>
+              </form>
+            </div>
+
+
+            <!-- Etape du formulaire 3 -- Choix des textes -->
+            <div *ngIf="this.formStep == 2" style="text-align : center;">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Paramètre 1</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                    <mat-radio-button value="Image" (change)="this.changeMemorySetting(0, 'image')"
+                      style="font-size : 40px" [checked]="this.memory_settings[0] == 'image'">Image
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(0, 'cursif')"
+                      style="font-size : 40px" [checked]="this.memory_settings[0] == 'cursif'">Cursif
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Capital" (change)="this.changeMemorySetting(0, 'capital')"
+                      style="font-size : 40px" [checked]="this.memory_settings[0] == 'capital'">Capital
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Script" (change)="this.changeMemorySetting(0, 'script')"
+                      style="font-size : 40px" [checked]="this.memory_settings[0] == 'script'">Script
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
               </div>
-            </form>
+
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Paramètre 2</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+
+                    <mat-radio-button value="Image" (change)="this.changeMemorySetting(1, 'image')"
+                      style="font-size : 40px" [checked]="this.memory_settings[1] == 'image'">Image
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(1, 'cursif')"
+                      style="font-size : 40px" [checked]="this.memory_settings[1] == 'cursif'">Cursif
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Capital" (change)="this.changeMemorySetting(1, 'capital')"
+                      style="font-size : 40px" [checked]="this.memory_settings[1] == 'capital'">Capital
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')"
+                      style="font-size : 40px" [checked]="this.memory_settings[1] == 'script'">Script
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Nombre de tuiles</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+
+                    <mat-radio-button value="tile8" (change)="this.changeMemoryNbTile(8)" style="font-size : 40px"
+                      [checked]="this.memory_nbTile == 8">8
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Cursif" (change)="this.changeMemoryNbTile(12)" style="font-size : 40px"
+                      [checked]="this.memory_nbTile == 12">12
+                    </mat-radio-button>
+
+                    <mat-radio-button value="Capital" (change)="this.changeMemoryNbTile(18)" style="font-size : 40px"
+                      [checked]="this.memory_nbTile == 18">18
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+
+
+              <!-- Bouton de création du jeu -->
+              <div class="form-row align-middle text-center" align="center">
+                <div class="col-md-12 text-center">
+                  <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+                    jeu
+                    <i class="fa-solid fa-check"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
+            <!--Formulaire Abecedaire -  Menu de navigation par étape -->
+            <div class="align-bottom" style="margin : 10px">
+              <button type="button" class="btn btn-primary align-left"
+                style="background : rgb(13, 197, 13); float : left" (click)="previousStep()">
+                <i class="fa-solid fa-angles-left"></i>
+                Etape précédente
+              </button>
+              <button type="button" class="btn btn-primary align-right"
+                style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+                Etape suivante
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+
           </div>
 
-
-          <!-- Etape du formulaire 3 -- Choix des textes -->
-          <div *ngIf="this.formStep == 2" style="text-align : center;">
-            <div class="form-row">
-              <div class="col-md-12">
-                <h2 class="card-title">Paramètre 1</h2>
-                <mat-radio-group aria-label="Choisissez un type d'écriture">
-
-                  <mat-radio-button value="Image" (change)="this.changeMemorySetting(0, 'image')"
-                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'image'">Image
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(0, 'cursif')"
-                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'cursif'">Cursif
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Capital" (change)="this.changeMemorySetting(0, 'capital')"
-                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'capital'">Capital
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Script" (change)="this.changeMemorySetting(0, 'script')"
-                    style="font-size : 40px" [checked]="this.memory_settings[0] == 'script'">Script
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-md-12">
-                <h2 class="card-title">Paramètre 2</h2>
-                <mat-radio-group aria-label="Choisissez un type d'écriture">
-
-
-                  <mat-radio-button value="Image" (change)="this.changeMemorySetting(1, 'image')"
-                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'image'">Image
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(1, 'cursif')"
-                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'cursif'">Cursif
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Capital" (change)="this.changeMemorySetting(1, 'capital')"
-                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'capital'">Capital
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')"
-                    style="font-size : 40px" [checked]="this.memory_settings[1] == 'script'">Script
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col-md-12">
-                <h2 class="card-title">Nombre de tuiles</h2>
-                <mat-radio-group aria-label="Choisissez un type d'écriture">
-
-
-                  <mat-radio-button value="tile8" (change)="this.changeMemoryNbTile(8)"
-                    style="font-size : 40px" [checked]="this.memory_nbTile == 8">8
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Cursif" (change)="this.changeMemoryNbTile(12)"
-                    style="font-size : 40px" [checked]="this.memory_nbTile == 12">12
-                  </mat-radio-button>
-
-                  <mat-radio-button value="Capital" (change)="this.changeMemoryNbTile(18)"
-                    style="font-size : 40px" [checked]="this.memory_nbTile == 18">18
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>
-            </div>
-
-
-            <!-- Bouton de création du jeu -->
-            <div class="form-row align-middle text-center" align="center">
-              <div class="col-md-12 text-center">
-                <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
-                  jeu
-                  <i class="fa-solid fa-check"></i>
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-
-          <!--Formulaire Abecedaire -  Menu de navigation par étape -->
-          <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
-              (click)="previousStep()">
-              <i class="fa-solid fa-angles-left"></i>
-              Etape précédente
-            </button>
-            <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
-              Etape suivante
-              <i class="fa-solid fa-angles-right"></i>
-            </button>
-          </div>
 
         </div>
 
-
-      </div>
-
-      <!-- Formulaire Memory - Prévisualisation -->
-      <div *ngIf="this.memory_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <!-- Formulaire Memory - Prévisualisation -->
+        <div *ngIf="this.memory_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(false)"
-              mat-raised-button color="warn">Quitter la prévisualisation</button>
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(false)"
+                mat-raised-button color="warn">Quitter la prévisualisation</button>
+            </div>
           </div>
+          <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
         </div>
-        <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
       </div>
+
+
     </div>
-
-
   </div>
+
+  <div *ngIf="this.panel == 'sessions'">
+    <div class="card container">
+      <h5 class="card-header">Sessions</h5>
+      <div class="card-body text-center">
+        <h2 class="card-title">Liste des sessions</h2>
+
+        <div *ngIf="this.dataSource.length == 0">
+          <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
+        </div>
+
+        <div *ngIf="this.dataSource.length != 0" class="col-md-12">
+          <table cdk-table [dataSource]="dataSource" style="width : 100%">
+            <!-- Position Column -->
+            <ng-container cdkColumnDef="id">
+              <th cdk-header-cell *cdkHeaderCellDef> ID </th>
+              <td cdk-cell *cdkCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container cdkColumnDef="nom">
+              <th cdk-header-cell *cdkHeaderCellDef> Nom </th>
+              <td cdk-cell *cdkCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container cdkColumnDef="date">
+              <th cdk-header-cell *cdkHeaderCellDef> Date </th>
+              <td cdk-cell *cdkCellDef="let element"> {{parseDate(element.date)}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container cdkColumnDef="jeu">
+              <th cdk-header-cell *cdkHeaderCellDef> Jeu </th>
+              <td cdk-cell *cdkCellDef="let element"> {{element.jeu}} </td>
+            </ng-container>
+
+            <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+            <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>

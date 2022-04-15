@@ -32,7 +32,7 @@
     display: block;
 }
 
-.container {
+.boite {
     border-radius: 3%;
     padding: 10px;
     box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
@@ -44,9 +44,8 @@
     font-size: 0.75vw;
 }
 
-td {
-    width: 5%;
-    max-width: 5%;
+.row {
+  object-fit: fill;
 }
 
 .text {

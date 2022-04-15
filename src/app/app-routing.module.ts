@@ -18,11 +18,12 @@ const routes: Routes = [
   {path : 'recopier', component : RecopierGameComponent},
   { path: 'reconnaitre', component : ReconnaitreComponent},
   { path: 'boygirl', component : BoyGirlGameComponent},
-  { path: 'puzzle', component: PuzzleComponent}, 
+  { path: 'puzzle', component: PuzzleComponent},
   {path: 'abecedaire', component : AbecedaireComponent},
   {path: 'memory', component : MemoryComponent},
   {path: 'panel', component : PanelComponent},
-  {path: 'panel/create/:jeu', component : PanelComponent},
+  {path: 'panel/:menu/:jeu', component : PanelComponent},
+  {path: 'panel/:menu', component : PanelComponent},
 ];
 
 @NgModule({

@@ -63,7 +63,9 @@
 
 
 .join_session_button {
-  height : 50px;
+  height : 70px;
+  width : 200px;
+  font-size : 30px;
   margin-top : 15px;
   font-weight : bold;
 }

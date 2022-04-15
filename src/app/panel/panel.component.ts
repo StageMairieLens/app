@@ -14,11 +14,26 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
+import {DataSource} from '@angular/cdk/collections';
+import {BehaviorSubject, Observable} from 'rxjs';
 
-
-export interface Fruit {
-  name: string;
+export interface Session {
+  id : number;
+  name : string;
+  date : Date;
+  jeu : string;
 }
+
+const DATA_SESSION : Session[] = [
+  {
+    id : 0,
+    name : 'test',
+    date : new Date(),
+    jeu : 'Recopier'
+  }
+];
+
+
 
 @Component({
   selector: 'app-panel',
@@ -54,6 +69,10 @@ export class PanelComponent implements OnInit {
 
   optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abecedaire', 'Fille&Garçon', 'Puzzle'];
   selectedGame: string | null = "";
+  nbSessionsActive : number = 0;
+  panel : string | null = "";
+  displayedColumns: string[] = ['id','nom','date','jeu'];
+  dataSource = new SessionDataSource();
 
 
   // VARIABLE JEU RECOPIER
@@ -149,19 +168,23 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.jeu = this.route.snapshot.paramMap.get('jeu');
-    if(this.jeu != null) {
-      if(this.optionGame.includes(this.jeu)) {
-        this.selectedGame = this.jeu;
-      } else {
-        this.router.navigate(['/panel']);
-      }
+    this.panel = this.route.snapshot.paramMap.get('menu');
 
+    if(this.panel == 'create') {
+      if(this.jeu != null) {
+        if(this.optionGame.includes(this.jeu)) {
+          this.selectedGame = this.jeu;
+        } else {
+          this.router.navigate(['/panel']);
+        }
+      } else {
+        this.selectedGame = "";
+      }
     }
   }
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  fruits: Fruit[] = [{ name: 'Lemon' }, { name: 'Lime' }, { name: 'Apple' }];
 
   getMemorySetting(n: number): string {
     return this.memory_settings[n];
@@ -210,6 +233,13 @@ export class PanelComponent implements OnInit {
     if (index >= 0) {
       this.boygirl_listMotsGarcon.splice(index, 1);
     }
+  }
+
+  parseDate(date : Date) : string {
+    let month : string[] = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
+    let index : number = date.getMonth() - 1
+    return date.getUTCDate() + ' / ' + month[index] + ' / ' + date.getFullYear();
+
   }
 
 
@@ -456,4 +486,18 @@ export class PanelComponent implements OnInit {
 
   }
 
+}
+
+export class SessionDataSource extends DataSource<Session> {
+  /** Stream of data that is provided to the table. */
+  data = new BehaviorSubject<Session[]>(DATA_SESSION);
+
+  length : number = DATA_SESSION.length;
+
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  connect(): Observable<Session[]> {
+    return this.data;
+  }
+
+  disconnect() {}
 }
