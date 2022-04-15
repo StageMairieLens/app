@@ -147,6 +147,7 @@ export class PanelComponent implements OnInit {
   memory_wrong_answer_color: string = "#e74c3c";
   memory_progress: Progress = Progress.Blue;
   memory_previsualiser : boolean = false;
+  memory_tmp_affichage : string = "5";
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -323,7 +324,7 @@ export class PanelComponent implements OnInit {
 
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
-      this.memory = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress);
+      this.memory = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
       this.memory_previsualiser = true;
     }
     else {

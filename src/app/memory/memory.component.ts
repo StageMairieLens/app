@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { timeStamp } from 'console';
+import { throttleTime } from 'rxjs';
 import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Memory } from './Memory';
@@ -26,8 +26,11 @@ export class MemoryComponent implements OnInit {
     new Image("Panda", "../../assets/panda.png")
   ]
   @Input() showTitle: boolean = true;
+  started = false;
+  pressStart = false;
   nbTile = 18;
-  setting: string[] = ["image", "script"];
+  setting: string[] = ["cursif", "cursif"];
+  tmpAfficher: number = 5000;
   affichage: string[] = [];
   isImage: boolean[] = [];
   sound: boolean[] = [];
@@ -59,9 +62,9 @@ export class MemoryComponent implements OnInit {
   tiles: TileComponent[] = [];
 
   constructor() {
-    this.derriere = null;
-    // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue);
-    this.game = null;
+    this.derriere = new Image("Lapin", "../../assets/lapin.webp");
+    this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
+    // this.game = null;
   }
 
   ngOnInit(): void {
@@ -69,7 +72,8 @@ export class MemoryComponent implements OnInit {
     this.nbTile = this.game.nbTile;
     this.setting = this.game.setting;
     this.derriere = this.game.derriere;
-    this.start();
+    this.tmpAfficher = Number(this.game.tmpAffichage) * 1000;
+    this.set();
   }
 
   ngAfterViewInit(): void {
@@ -82,9 +86,10 @@ export class MemoryComponent implements OnInit {
       this.tiles[i].affichage = this.affichage[i];
       this.tiles[i].cursif = this.cursif[i];
     }
+    this.disable();
   }
 
-  start(): void {
+  set(): void {
     var val;
     var i = 0;
     var a;
@@ -140,6 +145,7 @@ export class MemoryComponent implements OnInit {
   }
 
   retourne(id: string): void {
+    if(!this.started) return;
     if(this.retourner == "0") {
       this.retourner = id;
     }
@@ -187,5 +193,27 @@ export class MemoryComponent implements OnInit {
     for(var i = 0; i < this.nbTile; i++) {
       this.tiles[i].disable = false;
     }
+  }
+
+  start(): void {
+    if(this.pressStart == true) return;
+    if(this.tmpAfficher == 0) {
+      this.pressStart = true;
+      this.enable();
+      this.started = true;
+      return;
+    }
+    this.pressStart = true;
+    for(var i = 0; i < this.nbTile; i++) {
+      console.log(i);
+      this.tiles[i].retourner = true;
+    }
+    setTimeout(() => {
+      for(var i = 0; i < this.nbTile; i++) {
+        this.tiles[i].cacher();
+      }
+      this.enable();
+      this.started = true;
+    }, this.tmpAfficher);
   }
 }

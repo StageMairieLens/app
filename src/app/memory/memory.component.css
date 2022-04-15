@@ -44,8 +44,20 @@
     font-size: 0.75vw;
 }
 
-.row {
-  object-fit: fill;
+td {
+  width: 17vw;
+  padding-top: 17%;
+  position: relative;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .text {

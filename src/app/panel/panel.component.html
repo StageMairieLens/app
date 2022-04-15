@@ -1525,6 +1525,15 @@
                 </div>
               </div>
 
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Temps memory dévoilé (en s)</h2>
+                  <input type="range" id="slider" class="form-range" min="0" max="10" step="0.1" style="width: 75%;" value="{{this.memory_tmp_affichage}}"
+                  #memory_tmp_affichage_input (change)="this.memory_tmp_affichage = memory_tmp_affichage_input.value">
+                  <h2 class="card-title">{{this.memory_tmp_affichage}} s</h2>
+                </div>
+              </div>
+
 
               <!-- Bouton de création du jeu -->
               <div class="form-row align-middle text-center" align="center">
