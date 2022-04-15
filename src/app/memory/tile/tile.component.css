@@ -1,14 +1,14 @@
 .image {
     height: 100%;
-    width: 100%;
-    max-width: 195px;;
+    max-width: 100%;
+    max-height: 195px;
     padding: 10px;
 }
 
 .mot {
     font-size: 1vw;
-    text-align: center;
-    padding-top: 5%;
+    text-align: middle;
+    padding-top: 25%;
     word-wrap: break-word;
     white-space: pre-wrap;
     word-break: break-word;
@@ -17,7 +17,7 @@
 .cursif {
     font-size: 1.5vw;
     text-align: center;
-    padding-top: 5%;
+    padding-top: 25%;
     word-wrap: break-word;
     white-space: pre-wrap;
     word-break: break-word;

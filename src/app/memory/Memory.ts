@@ -8,6 +8,8 @@ export class Memory {
   images: Image[];
   derriere: Image | null;
 
+  tmpAffichage: string;
+
   nbTile: number;
   setting: string[];
 
@@ -19,7 +21,7 @@ export class Memory {
 
   color_progress_bar: Progress;
   
-  constructor(images: Image[], derriere: Image | null, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress) {
+  constructor(images: Image[], derriere: Image | null, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, tmpAffichage: string) {
     this.id = Memory.nb++;
     this.images = images;
     this.derriere = derriere;
@@ -30,6 +32,7 @@ export class Memory {
     this.good_answer_color = good_answer_color;
     this.wrong_answer_color = wrong_answer_color;
     this.color_progress_bar = color_progress_bar;
+    this.tmpAffichage = tmpAffichage;
   }
 
 }
