@@ -1,38 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from './Game'
-import { Option } from './Option'
-import { Progress } from '../Progress'
-import { Image } from '../Image'
-import { Recopier } from './../recopier-game/Recopier'
+import { Game } from '../Game';
+import { Progress } from '../Progress';
+import { Image } from '../Image';
+import { Recopier } from './../recopier-game/Recopier';
 import { Router } from '@angular/router';
 import { ImagesComponent } from '../images/images.component';
 import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Puzzle } from '../puzzle/Puzzle';
-import { ActivatedRoute } from '@angular/router'
-import { BoyGirl } from '../boy-girl-game/BoygGirl'
+import { ActivatedRoute } from '@angular/router';
+import { BoyGirl } from '../boy-girl-game/BoygGirl';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
-import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject, Observable} from 'rxjs';
-
-export interface Session {
-  id : number;
-  name : string;
-  date : Date;
-  jeu : string;
-}
-
-const DATA_SESSION : Session[] = [
-  {
-    id : 0,
-    name : 'test',
-    date : new Date(),
-    jeu : 'Recopier'
-  }
-];
-
+import { Session } from '../sessions/Session';
+import { SessionsComponent } from '../sessions/sessions.component';
+import { join } from 'path';
 
 
 @Component({
@@ -71,8 +54,13 @@ export class PanelComponent implements OnInit {
   selectedGame: string | null = "";
   nbSessionsActive : number = 0;
   panel : string | null = "";
-  displayedColumns: string[] = ['id','nom','date','jeu'];
-  dataSource = new SessionDataSource();
+  displayedColumns: string[] = ['Active','Id','Nom','Date','Jeu','Nombre de joueurs','Actions'];
+  sessions : Session[] = SessionsComponent.data;
+  sessionActive : Session[] = [];
+  showActive : boolean = true;
+
+  session_id : number | null = null;
+  panel_option : string | null = "";
 
 
   // VARIABLE JEU RECOPIER
@@ -123,9 +111,9 @@ export class PanelComponent implements OnInit {
   boygirl_bg_color_fille: string = "#ffc0cb";
   boygirl_bg_color_garcon: string = "#add9e6";
   boygirl_bg_color_mot: string = "#fea500";
-  boygirl_word_color_fille: string = "#ffc0cb"
-  boygirl_word_color_garcon: string = "#0f73b1"
-  boygirl_word_color_mot: string = "#000000"
+  boygirl_word_color_fille: string = "#ffc0cb";
+  boygirl_word_color_garcon: string = "#0f73b1";
+  boygirl_word_color_mot: string = "#000000";
   boygirl_title_color_fille: string = "#000000";
   boygirl_title_color_garcon: string = "#000000";
   boygirl_title_color_mot: string = "#000000";
@@ -167,10 +155,10 @@ export class PanelComponent implements OnInit {
   // r2 : Recopier = new Recopier([],'blue','CAPITAL');
 
   ngOnInit(): void {
-    this.jeu = this.route.snapshot.paramMap.get('jeu');
-    this.panel = this.route.snapshot.paramMap.get('menu');
+    this.panel = this.route.snapshot.paramMap.get('param1');
 
     if(this.panel == 'create') {
+      this.jeu = this.route.snapshot.paramMap.get('param2');
       if(this.jeu != null) {
         if(this.optionGame.includes(this.jeu)) {
           this.selectedGame = this.jeu;
@@ -181,6 +169,32 @@ export class PanelComponent implements OnInit {
         this.selectedGame = "";
       }
     }
+
+    if(this.panel == 'sessions') {
+      this.panel_option = this.route.snapshot.paramMap.get('param2');
+
+      if(this.panel_option != null) {
+        if(this.route.snapshot.paramMap.get('param3') != null) {
+          if(this.panel_option == 'edit') {
+            this.session_id = +this.route.snapshot.paramMap.get('param3')!;
+            if(this.session_id == null) {
+              this.router.navigate(['/panel/sessions']);
+            }
+          } else {
+            this.router.navigate(['/panel/sessions']);
+          }
+        }else {
+          this.router.navigate(['/panel/sessions']);
+        }
+      }
+    }
+
+    for (let s of this.sessions) {
+      if(s.isActive) {
+        this.sessionActive.push(s);
+      }
+    }
+
   }
 
   addOnBlur = true;
@@ -237,8 +251,8 @@ export class PanelComponent implements OnInit {
 
   parseDate(date : Date) : string {
     let month : string[] = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
-    let index : number = date.getMonth() - 1
-    return date.getUTCDate() + ' / ' + month[index] + ' / ' + date.getFullYear();
+    let index : number = date.getMonth() - 1;
+    return date.getUTCDate() + ' / ' + month[index] + ' / ' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
   }
 
@@ -486,18 +500,68 @@ export class PanelComponent implements OnInit {
 
   }
 
-}
+  previsualiserGame(element : Session) : void {
 
-export class SessionDataSource extends DataSource<Session> {
-  /** Stream of data that is provided to the table. */
-  data = new BehaviorSubject<Session[]>(DATA_SESSION);
-
-  length : number = DATA_SESSION.length;
-
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Session[]> {
-    return this.data;
   }
 
-  disconnect() {}
+  editSession(session : Session) : void {
+    this.panel_option = 'edit';
+    this.session_id = session.id;
+  }
+
+  deleteSession(session : Session) : void {
+    let index = this.sessions.indexOf(session,0);
+    if(index > -1) {
+      this.sessions.splice(index,1);
+    }
+  }
+
+  getSession() : Session | null{
+    for(let session of this.sessions) {
+      if(session.id == this.session_id) {
+        return session;
+      }
+    }
+    return null;
+  }
+
+  join(s : Session) : void {
+    this.router.navigate(['/session/' + s.id]);
+  }
+
+  setSessionActive (s : Session) : void {
+    s.isActive = true;
+    this.sessionActive.push(s);
+  }
+
+  setSessionInactive (s : Session) : void {
+    s.isActive = false;
+    let index = this.sessionActive.indexOf(s,0);
+    if(index > -1) {
+      this.sessionActive.splice(index, 1);
+    }
+  }
+
+  sortSessionId() : void {
+    this.sessions.sort((s1 : Session,s2 : Session) => {
+      if(s1.id > s2.id) return 1;
+      if(s1.id < s2.id) return -1;
+      return 0;
+    })
+
+    this.sessionActive.sort((s1 : Session,s2 : Session) => {
+      if(s1.id > s2.id) return 1;
+      if(s1.id < s2.id) return -1;
+      return 0;
+    })
+  }
+
+  showSessionActive() : void {
+    this.showActive = true;
+  }
+
+  showSessionInactive() : void {
+    this.showActive = false;
+  }
 }
+

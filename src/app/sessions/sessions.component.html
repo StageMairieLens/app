@@ -1,0 +1,9 @@
+<div *ngIf="this.session_id != null">
+  <div *ngIf="!this.join">
+    La séssion que vous essayer de rejoindre n'est pas active
+  </div>
+
+  <div *ngIf="this.join">
+    Hello {{this.session_id}}
+  </div>
+</div>

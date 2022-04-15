@@ -2,7 +2,7 @@
 
   <!-- Barre de navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/panel/sessions"><span matBadge="{{this.dataSource.length}}"
+    <a class="navbar-brand" href="/panel/sessions"><span matBadge="{{this.sessionActive.length}}"
         matBadgeColor="warn">Sessions</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,11 @@
         <div *ngIf="!this.recopier_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(true)"
-              mat-raised-button color="warn">Prévisualiser</button>
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye" style="margin-bottom : 1px"></i>
+
+              Prévisualiser
+            </button>
           </div>
 
           <!-- Menu de navigation dans le formulaire -->
@@ -357,7 +361,9 @@
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
               <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
-                mat-raised-button color="warn">Quitter la prévisualisation</button>
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
             </div>
           </div>
           <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
@@ -371,7 +377,9 @@
         <div *ngIf="!this.boygirl_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)"
-              mat-raised-button color="warn">Prévisualiser</button>
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
+              Prévisualiser</button>
           </div>
 
           <!-- Formulaire Fille Garçon - Menu de navigation -->
@@ -645,7 +653,9 @@
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
               <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(false)"
-                mat-raised-button color="warn">Quitter la prévisualisation</button>
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
             </div>
           </div>
           <app-boy-girl-game [bg]="this.boygirl" [showTitle]="false"></app-boy-girl-game>
@@ -663,7 +673,10 @@
         <div *ngIf="!this.reconnaitre_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
-              mat-raised-button color="warn">Prévisualiser</button>
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
+
+              Prévisualiser</button>
           </div>
 
           <!-- Formulaire Reconnaitre - Menu de navigation -->
@@ -956,7 +969,9 @@
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
               <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
-                mat-raised-button color="warn">Quitter la prévisualisation</button>
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
             </div>
           </div>
           <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
@@ -971,7 +986,9 @@
         <div *ngIf="!this.abecedaire_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(true)"
-              mat-raised-button color="warn">Prévisualiser</button>
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
+              Prévisualiser</button>
           </div>
 
           <!-- Formulaire Abecedaire - Menu de navigation -->
@@ -1251,7 +1268,9 @@
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
               <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(false)"
-                mat-raised-button color="warn">Quitter la prévisualisation</button>
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
             </div>
           </div>
           <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
@@ -1266,7 +1285,9 @@
         <div *ngIf="!this.memory_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)"
-              mat-raised-button color="warn">Prévisualiser</button>
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
+              Prévisualiser</button>
           </div>
 
           <!-- Formulaire Memory - Menu de navigation -->
@@ -1542,7 +1563,9 @@
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
             <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
               <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(false)"
-                mat-raised-button color="warn">Quitter la prévisualisation</button>
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
             </div>
           </div>
           <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
@@ -1557,41 +1580,147 @@
     <div class="card container">
       <h5 class="card-header">Sessions</h5>
       <div class="card-body text-center">
-        <h2 class="card-title">Liste des sessions</h2>
+        <div *ngIf="this.panel_option == null || this.panel_option != 'edit'">
+          <h2 class="card-title">Liste des sessions</h2>
 
-        <div *ngIf="this.dataSource.length == 0">
-          <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
+          <div class="col-md-12 text-center sortButton">
+            <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
+              <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
+            <span>Trier par Id</span>
+            </button>
+            <button mat-raised-button style="background-color : red" color="primary">
+              <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
+              <span>Trier par date</span>
+            </button>
+
+            <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button style="background-color : red" color="primary">
+              <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
+              <span>Afficher uniquement les sessions actives</span>
+            </button>
+
+            <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button style="background-color : red" color="primary">
+              <i class="fa-solid fa-eye fa-xl" style=" margin-bottom : 2px "></i>
+              <span>Afficher toutes les sesssions</span>
+            </button>
+
+
+
+          </div>
+
+          <div *ngIf="this.sessions.length == 0">
+            <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
+          </div>
+
+          <div *ngIf="this.sessions.length != 0" class="col-md-12">
+            <table class="table table-hover" *ngIf="!this.showActive">
+              <thead>
+                <tr>
+                  <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let element of this.sessions">
+                  <th *ngIf="element.isActive">
+                    <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+                  </th>
+                  <th *ngIf="!element.isActive">
+                    <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+                  </th>
+                  <th>{{element.id}}</th>
+                  <th>{{element.nom}}</th>
+                  <th>{{this.parseDate(element.date)}}</th>
+                  <th>{{element.jeu}}</th>
+                  <th>{{element.joueur.length}}</th>
+                  <th class="button_actions">
+                    <button mat-raised-button matTooltip="Prévisualiser le jeu de la séssion" matTooltipPosition="left" (click)="previsualiserGame(element)" color="primary">
+                      <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
+                    </button>
+                    <button mat-raised-button matTooltip="Editer la séssion" matTooltipPosition="left" (click)="editSession(element)"
+                      style="background-color : rgb(223, 175, 18)" color="primary">
+                      <i class="fa-solid fa-pen" style=" margin-bottom : 2px"></i>
+                    </button>
+                    <button mat-raised-button matTooltip="Supprimer la séssion" matTooltipPosition="left" (click)="deleteSession(element)" style="background-color : red"
+                      color="primary">
+                      <i class="fa-solid fa-trash" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button mat-raised-button matTooltip="Rejoindre la séssion" matTooltipPosition="left" (click)="join(element)" style="background-color : rgb(77, 184, 44)"
+                      color="primary">
+                      <i class="fa-solid fa-right-to-bracket" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="!element.isActive" matTooltip="Démarrer la séssion" matTooltipPosition="left" mat-raised-button (click)="setSessionActive(element)"
+                      style="background-color : rgb(168, 14, 135)" color="primary">
+                      <i class="fa-solid fa-play" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="element.isActive" matTooltip="Eteindre la séssion" matTooltipPosition="left" mat-raised-button (click)="setSessionInactive(element)"
+                      style="background-color : rgb(168, 14, 135)" color="primary">
+                      <i class="fa-solid fa-stop" style=" margin-bottom : 2px "></i>
+                    </button>
+                  </th>
+
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="table table-hover" *ngIf="this.showActive">
+              <thead>
+                <tr>
+                  <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let element of this.sessionActive">
+                  <th *ngIf="element.isActive">
+                    <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+                  </th>
+                  <th *ngIf="!element.isActive">
+                    <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+                  </th>
+                  <th>{{element.id}}</th>
+                  <th>{{element.nom}}</th>
+                  <th>{{this.parseDate(element.date)}}</th>
+                  <th>{{element.jeu}}</th>
+                  <th>{{element.joueur.length}}</th>
+                  <th class="button_actions">
+                    <button mat-raised-button matTooltip="Prévisualiser le jeu de la séssion" matTooltipPosition="left" (click)="previsualiserGame(element)" color="primary">
+                      <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
+                    </button>
+                    <button mat-raised-button matTooltip="Editer la séssion"  matTooltipPosition="left" (click)="editSession(element)"
+                      style="background-color : rgb(223, 175, 18)" color="primary">
+                      <i class="fa-solid fa-pen" style=" margin-bottom : 2px"></i>
+                    </button>
+                    <button mat-raised-button matTooltip="Supprimer la séssion" matTooltipPosition="left" (click)="deleteSession(element)" style="background-color : red"
+                      color="primary">
+                      <i class="fa-solid fa-trash" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button mat-raised-button matTooltip="Rejoindre la séssion" matTooltipPosition="left" (click)="join(element)" style="background-color : rgb(77, 184, 44)"
+                      color="primary">
+                      <i class="fa-solid fa-right-to-bracket" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="!element.isActive" matTooltip="Démarrer la séssion"  matTooltipPosition="left" mat-raised-button (click)="setSessionActive(element)"
+                      style="background-color : rgb(168, 14, 135)" color="primary">
+                      <i class="fa-solid fa-play" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="element.isActive" matTooltip="Eteindre la séssion" matTooltipPosition="left" mat-raised-button (click)="setSessionInactive(element)"
+                      style="background-color : rgb(168, 14, 135)" color="primary">
+                      <i class="fa-solid fa-stop" style=" margin-bottom : 2px "></i>
+                    </button>
+                  </th>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <div *ngIf="this.dataSource.length != 0" class="col-md-12">
-          <table cdk-table [dataSource]="dataSource" style="width : 100%">
-            <!-- Position Column -->
-            <ng-container cdkColumnDef="id">
-              <th cdk-header-cell *cdkHeaderCellDef> ID </th>
-              <td cdk-cell *cdkCellDef="let element"> {{element.id}} </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container cdkColumnDef="nom">
-              <th cdk-header-cell *cdkHeaderCellDef> Nom </th>
-              <td cdk-cell *cdkCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-
-            <!-- Weight Column -->
-            <ng-container cdkColumnDef="date">
-              <th cdk-header-cell *cdkHeaderCellDef> Date </th>
-              <td cdk-cell *cdkCellDef="let element"> {{parseDate(element.date)}} </td>
-            </ng-container>
-
-            <!-- Symbol Column -->
-            <ng-container cdkColumnDef="jeu">
-              <th cdk-header-cell *cdkHeaderCellDef> Jeu </th>
-              <td cdk-cell *cdkCellDef="let element"> {{element.jeu}} </td>
-            </ng-container>
-
-            <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-            <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+        <div *ngIf="this.panel_option == 'edit'">
+          <div *ngIf="this.getSession() == null">
+            Erreur
+          </div>
+          <div *ngIf="this.getSession() != null">
+            {{this.getSession()!.id}}
+          </div>
         </div>
       </div>
     </div>

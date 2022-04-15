@@ -11,6 +11,7 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
 import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
+import { SessionsComponent } from './sessions/sessions.component';
 
 
 const routes: Routes = [
@@ -22,8 +23,12 @@ const routes: Routes = [
   {path: 'abecedaire', component : AbecedaireComponent},
   {path: 'memory', component : MemoryComponent},
   {path: 'panel', component : PanelComponent},
-  {path: 'panel/:menu/:jeu', component : PanelComponent},
-  {path: 'panel/:menu', component : PanelComponent},
+  {path: 'panel/:param1', component : PanelComponent},
+  {path: 'panel/:param1/:param2', component : PanelComponent},
+  {path: 'panel/:param1/:param2/:param3', component : PanelComponent},
+  {path : 'session', component : SessionsComponent},
+  {path : 'session/:id', component : SessionsComponent},
+
 ];
 
 @NgModule({
