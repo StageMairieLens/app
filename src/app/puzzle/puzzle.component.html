@@ -7,12 +7,9 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="512" height="512" 
-    style=" 
-    width: fit-content;"cdkDrag>
-    </canvas>
     
-    
+    <img #img src="{{src}}" (load)="afterLoading()" style='display: none;' />
+    <canvas #visualization width={{imgWidth}} height={{imgHeight}} style="background:lightgray;"></canvas>
     <div id="collage">
         <h2>Image Puzzle</h2>
         <hr />
@@ -60,6 +57,7 @@
         
         
     </div>
-      
+    
+    
 </body>
 </html>
