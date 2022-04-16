@@ -1528,8 +1528,9 @@
               <div class="form-row">
                 <div class="col-md-12">
                   <h2 class="card-title">Temps memory dévoilé (en s)</h2>
-                  <input type="range" id="slider" class="form-range" min="0" max="10" step="0.1" style="width: 75%;" value="{{this.memory_tmp_affichage}}"
-                  #memory_tmp_affichage_input (change)="this.memory_tmp_affichage = memory_tmp_affichage_input.value">
+                  <input type="range" id="slider" class="form-range" min="0" max="10" step="0.1" style="width: 75%;"
+                    value="{{this.memory_tmp_affichage}}" #memory_tmp_affichage_input
+                    (change)="this.memory_tmp_affichage = memory_tmp_affichage_input.value">
                   <h2 class="card-title">{{this.memory_tmp_affichage}} s</h2>
                 </div>
               </div>
@@ -1595,19 +1596,21 @@
           <div class="col-md-12 text-center sortButton">
             <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
               <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
-            <span>Trier par Id</span>
+              <span>Trier par Id</span>
             </button>
             <button mat-raised-button style="background-color : red" color="primary">
               <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
               <span>Trier par date</span>
             </button>
 
-            <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button style="background-color : red" color="primary">
+            <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
+              style="background-color : red" color="primary">
               <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
               <span>Afficher uniquement les sessions actives</span>
             </button>
 
-            <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button style="background-color : red" color="primary">
+            <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button
+              style="background-color : red" color="primary">
               <i class="fa-solid fa-eye fa-xl" style=" margin-bottom : 2px "></i>
               <span>Afficher toutes les sesssions</span>
             </button>
@@ -1642,27 +1645,29 @@
                   <th>{{element.jeu}}</th>
                   <th>{{element.joueur.length}}</th>
                   <th class="button_actions">
-                    <button mat-raised-button matTooltip="Prévisualiser le jeu de la séssion" matTooltipPosition="left" (click)="previsualiserGame(element)" color="primary">
+                    <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                      (click)="previsualiserGame(element)" color="primary">
                       <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
                     </button>
-                    <button mat-raised-button matTooltip="Editer la séssion" matTooltipPosition="left" (click)="editSession(element)"
+                    <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
                       style="background-color : rgb(223, 175, 18)" color="primary">
                       <i class="fa-solid fa-pen" style=" margin-bottom : 2px"></i>
                     </button>
-                    <button mat-raised-button matTooltip="Supprimer la séssion" matTooltipPosition="left" (click)="deleteSession(element)" style="background-color : red"
-                      color="primary">
+                    <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                      style="background-color : red" color="primary">
                       <i class="fa-solid fa-trash" style=" margin-bottom : 2px "></i>
                     </button>
-                    <button mat-raised-button matTooltip="Rejoindre la séssion" matTooltipPosition="left" (click)="join(element)" style="background-color : rgb(77, 184, 44)"
-                      color="primary">
+                    <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
+                      style="background-color : rgb(77, 184, 44)" color="primary">
                       <i class="fa-solid fa-right-to-bracket" style=" margin-bottom : 2px "></i>
                     </button>
-                    <button *ngIf="!element.isActive" matTooltip="Démarrer la séssion" matTooltipPosition="left" mat-raised-button (click)="setSessionActive(element)"
-                      style="background-color : rgb(168, 14, 135)" color="primary">
+                    <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                      (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                       <i class="fa-solid fa-play" style=" margin-bottom : 2px "></i>
                     </button>
-                    <button *ngIf="element.isActive" matTooltip="Eteindre la séssion" matTooltipPosition="left" mat-raised-button (click)="setSessionInactive(element)"
-                      style="background-color : rgb(168, 14, 135)" color="primary">
+                    <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                      (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
+                      color="primary">
                       <i class="fa-solid fa-stop" style=" margin-bottom : 2px "></i>
                     </button>
                   </th>
@@ -1692,27 +1697,29 @@
                   <th>{{element.jeu}}</th>
                   <th>{{element.joueur.length}}</th>
                   <th class="button_actions">
-                    <button mat-raised-button matTooltip="Prévisualiser le jeu de la séssion" matTooltipPosition="left" (click)="previsualiserGame(element)" color="primary">
+                    <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                      (click)="previsualiserGame(element)" color="primary">
                       <i class="fa-solid fa-eye" style="margin-bottom : 3px"></i>
                     </button>
-                    <button mat-raised-button matTooltip="Editer la séssion"  matTooltipPosition="left" (click)="editSession(element)"
+                    <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
                       style="background-color : rgb(223, 175, 18)" color="primary">
                       <i class="fa-solid fa-pen" style=" margin-bottom : 2px"></i>
                     </button>
-                    <button mat-raised-button matTooltip="Supprimer la séssion" matTooltipPosition="left" (click)="deleteSession(element)" style="background-color : red"
-                      color="primary">
+                    <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                      style="background-color : red" color="primary">
                       <i class="fa-solid fa-trash" style=" margin-bottom : 2px "></i>
                     </button>
-                    <button mat-raised-button matTooltip="Rejoindre la séssion" matTooltipPosition="left" (click)="join(element)" style="background-color : rgb(77, 184, 44)"
-                      color="primary">
+                    <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
+                      style="background-color : rgb(77, 184, 44)" color="primary">
                       <i class="fa-solid fa-right-to-bracket" style=" margin-bottom : 2px "></i>
                     </button>
-                    <button *ngIf="!element.isActive" matTooltip="Démarrer la séssion"  matTooltipPosition="left" mat-raised-button (click)="setSessionActive(element)"
-                      style="background-color : rgb(168, 14, 135)" color="primary">
+                    <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                      (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                       <i class="fa-solid fa-play" style=" margin-bottom : 2px "></i>
                     </button>
-                    <button *ngIf="element.isActive" matTooltip="Eteindre la séssion" matTooltipPosition="left" mat-raised-button (click)="setSessionInactive(element)"
-                      style="background-color : rgb(168, 14, 135)" color="primary">
+                    <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                      (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
+                      color="primary">
                       <i class="fa-solid fa-stop" style=" margin-bottom : 2px "></i>
                     </button>
                   </th>

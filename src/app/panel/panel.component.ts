@@ -515,6 +515,10 @@ export class PanelComponent implements OnInit {
     if(index > -1) {
       this.sessions.splice(index,1);
     }
+    index = this.sessionActive.indexOf(session,0);
+    if(index > -1) {
+      this.sessionActive.splice(index,1);
+    }
   }
 
   getSession() : Session | null{

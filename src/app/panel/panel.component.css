@@ -136,6 +136,12 @@ img {
   border: red solid 2px;
 }
 
+.quit_button:hover {
+  background :rgb(250, 58, 58);
+  color : white;
+  transition : all .5s
+}
+
 .quit_button:checked {
   border: red solid 2px;
 }
