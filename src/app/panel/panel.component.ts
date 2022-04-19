@@ -52,6 +52,7 @@ export class PanelComponent implements OnInit {
 
   optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abecedaire', 'Fille&Garçon', 'Puzzle'];
   selectedGame: string | null = "";
+  selectedGame_list = [];
   nbSessionsActive : number = 0;
   panel : string | null = "";
   displayedColumns: string[] = ['Active','Id','Nom','Date','Jeu','Nombre de joueurs','Actions'];
@@ -61,6 +62,7 @@ export class PanelComponent implements OnInit {
 
   session_id : number | null = null;
   panel_option : string | null = "";
+
 
 
   // VARIABLE JEU RECOPIER
@@ -78,6 +80,9 @@ export class PanelComponent implements OnInit {
   recopier_type_ecriture = "CURSIF";
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
+  recopier_list : Recopier[] = [
+    new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture,false)
+  ];
 
 
   // VARIABLE JEU RECONNAITRE
@@ -158,37 +163,55 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
     this.panel = this.route.snapshot.paramMap.get('param1');
 
-    if(this.panel == 'create') {
-      this.jeu = this.route.snapshot.paramMap.get('param2');
-      if(this.jeu != null) {
-        if(this.optionGame.includes(this.jeu)) {
-          this.selectedGame = this.jeu;
+    if(this.panel != null) {
+      if(this.panel == 'create') {
+        this.jeu = this.route.snapshot.paramMap.get('param2');
+        if(this.jeu != null) {
+          if(this.optionGame.includes(this.jeu)) {
+            this.selectedGame = this.jeu;
+          } else {
+            this.router.navigate(['/panel']);
+          }
         } else {
-          this.router.navigate(['/panel']);
+          this.selectedGame = "";
         }
-      } else {
-        this.selectedGame = "";
       }
-    }
 
-    if(this.panel == 'sessions') {
-      this.panel_option = this.route.snapshot.paramMap.get('param2');
+      if(this.panel == 'sessions') {
+        this.panel_option = this.route.snapshot.paramMap.get('param2');
 
-      if(this.panel_option != null) {
-        if(this.route.snapshot.paramMap.get('param3') != null) {
-          if(this.panel_option == 'edit') {
-            this.session_id = +this.route.snapshot.paramMap.get('param3')!;
-            if(this.session_id == null) {
+        if(this.panel_option != null) {
+          if(this.route.snapshot.paramMap.get('param3') != null) {
+            if(this.panel_option == 'edit') {
+              this.session_id = +this.route.snapshot.paramMap.get('param3')!;
+              if(this.session_id == null) {
+                this.router.navigate(['/panel/sessions']);
+              }
+            } else {
               this.router.navigate(['/panel/sessions']);
             }
-          } else {
+          }else {
             this.router.navigate(['/panel/sessions']);
           }
-        }else {
-          this.router.navigate(['/panel/sessions']);
+        }
+      }
+
+      if(this.optionGame.includes(this.panel!)) {
+        this.selectedGame = this.panel;
+        this.panel_option = this.route.snapshot.paramMap.get('param2');
+        if(this.panel_option == null) {
+          this.panel_option = 'showList';
+          switch(this.selectedGame) {
+            case 'Recopier' :
+              (<Recopier[]>this.selectedGame_list) = this.recopier_list;
+              break;
+          }
+        }else if (this.panel_option != 'create') {
+          this.router.navigate(['/panel/',this.selectedGame]);
         }
       }
     }
+
 
     for (let s of this.sessions) {
       if(s.isActive) {

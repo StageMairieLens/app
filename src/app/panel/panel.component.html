@@ -11,18 +11,23 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item">
+          <a class="nav-link" href="/panel/create" id="navbarDropdown" role="button" aria-haspopup="true"
+            aria-expanded="false">
             Créer un jeu
           </a>
+        </li>
+
+        <li class="nav-item dropdown" *ngFor="let g of this.optionGame">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{g}}
+          </a>
+
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/panel/create">Index</a>
+            <a class="dropdown-item" href="/panel/{{g}}">Listes des {{g}} créer</a>
             <div class="dropdown-divider"></div>
-            <a *ngFor="let g of this.optionGame" class="dropdown-item" href="/panel/create/{{g}}">{{g}}</a>
+            <a class="dropdown-item" href="/panel/{{g}}/create">Créer un jeu {{g}}</a>
           </div>
         </li>
       </ul>
@@ -33,23 +38,29 @@
     </div>
   </nav>
 
+  <!-- Si /panel/create -->
   <div *ngIf="this.panel == 'create'">
     <!-- Si aucun jeu n'est selectionné -->
     <div class="card container" *ngIf="this.selectedGame === '' ">
       <h5 class="card-header">Choisissez le jeu que vous souhaitez crée</h5>
       <div class="card-body">
         <div align="center">
-          <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/create', c]" mat-raised-button
-            color="primary">{{c}}</button>
+          <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/', c,'create']"
+            mat-raised-button color="primary">{{c}}</button>
         </div>
       </div>
     </div>
 
-    <!-- Si un jeu est selectionné -->
-    <div class="card container" *ngIf="this.selectedGame != '' && this.optionGame.includes(this.selectedGame!)">
+  </div>
 
+  <!-- Si un jeu est selectionné -->
+  <div class="card container" *ngIf="this.selectedGame != '' && this.optionGame.includes(this.selectedGame!)">
+
+    <div *ngIf="this.panel_option == 'create'">
       <!-- Affiche le nom du jeu sélectionné -->
       <h5 class="card-header">{{this.selectedGame}}</h5>
+
+
 
       <!-- Formulaire Recopier -->
       <div *ngIf="this.selectedGame == 'Recopier'" class="card-body">
@@ -1582,8 +1593,23 @@
         </div>
       </div>
 
+    </div>
+
+    <div *ngIf="this.panel_option == 'showList'">
+      <h5 class="card-header">Liste des jeu {{this.selectedGame}} créer</h5>
+
+      <div *ngIf="this.selectedGame_list.length != 0">
+        HEllo
+      </div>
+
+
+      <div *ngIf="this.selectedGame_list.length == 0">
+        Erreur liste vide
+      </div>
+
 
     </div>
+
   </div>
 
   <div *ngIf="this.panel == 'sessions'">

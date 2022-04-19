@@ -12,6 +12,7 @@ export class SessionsComponent implements OnInit {
 
   session_id: number | null = null;
   join: boolean = false;
+  timer_redirect : number = 5;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -22,6 +23,26 @@ export class SessionsComponent implements OnInit {
         if (this.getSession() != null) {
           if (this.getSession()!.isActive) {
             this.join = true;
+          }
+          else {
+            setTimeout(() => {
+              this.timer_redirect--
+            },1000);
+            setTimeout(() => {
+              this.timer_redirect--
+            },2000);
+            setTimeout(() => {
+              this.timer_redirect--
+            },3000);
+            setTimeout(() => {
+              this.timer_redirect--
+            },4000);
+            setTimeout(() => {
+              this.timer_redirect--
+            },5000);
+            setTimeout(() => {
+              this.router.navigate(['']);
+            },6000);
           }
         }
       }
