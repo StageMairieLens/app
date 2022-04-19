@@ -1,22 +1,22 @@
 
-import {Game } from '../Game'
+import { Game } from '../Game'
 
 export class Session {
-  id : number;
+  id: number;
   static number = 0;
-  nom : string;
-  date : Date;
-  jeu : Game;
-  joueur : string[];
-  isActive : boolean;
+  nom: string;
+  date: Date;
+  jeu: Game;
+  joueur: string[];
+  isActive: boolean;
 
-  constructor(nom : string, date : Date, jeu : Game, isActive : boolean) {
+  constructor(nom: string, date: Date, jeu: Game, isActive: boolean, joueur: string[],) {
     this.id = Session.number++;
     this.nom = nom;
     this.date = date;
     this.jeu = jeu;
     this.isActive = isActive;
-    this.joueur = [];
+    this.joueur = joueur;
   }
 
 }

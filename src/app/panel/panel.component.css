@@ -20,6 +20,10 @@
   font-size: 20px;
 }
 
+nav {
+  cursor : pointer;
+}
+
 img {
   margin: 5px;
 }

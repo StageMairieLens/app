@@ -253,7 +253,7 @@ export class PanelComponent implements OnInit {
   parseDate(date : Date) : string {
     let month : string[] = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
     let index : number = date.getMonth() - 1;
-    return date.getUTCDate() + ' / ' + month[index] + ' / ' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
   }
 
