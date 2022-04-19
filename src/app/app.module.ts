@@ -28,6 +28,8 @@ import { FormsModule } from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
 import {CdkTableModule} from '@angular/cdk/table';
 import { UsersComponent } from './users/users.component';
+import { SessionsComponent } from './sessions/sessions.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -44,7 +46,8 @@ import { UsersComponent } from './users/users.component';
     PanelComponent,
     TileComponent,
     ImagesComponent,
-    UsersComponent
+    UsersComponent,
+    SessionsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { UsersComponent } from './users/users.component';
     MatChipsModule,
     FormsModule,
     MatBadgeModule,
-    CdkTableModule
+    CdkTableModule,
+    MatTooltipModule,
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,

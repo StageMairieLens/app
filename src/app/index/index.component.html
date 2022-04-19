@@ -25,8 +25,8 @@
   </div>
 
   <div class="code-place container text-center">
-    <input type="text" name="" id="code" placeholder="Entrez votre code ici">
-    <button class="join_session_button" mat-raised-button color="primary">Rejoindre <i
+    <input type="text" name="" id="code" placeholder="Entrez votre code ici" #codeInput (keypress)="connectKey($event)">
+    <button class="join_session_button" mat-raised-button color="primary" (click)="connect(codeInput.value)">Rejoindre <i
         class="fa-solid fa-angles-right"></i>
     </button>
 
