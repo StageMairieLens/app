@@ -1,5 +1,6 @@
 
 import { Game } from '../Game'
+import { Users } from '../users/Users'
 
 export class Session {
   id: number;
@@ -7,10 +8,10 @@ export class Session {
   nom: string;
   date: Date;
   jeu: Game;
-  joueur: string[];
+  joueur: Users[];
   isActive: boolean;
 
-  constructor(nom: string, date: Date, jeu: Game, isActive: boolean, joueur: string[],) {
+  constructor(nom: string, date: Date, jeu: Game, isActive: boolean, joueur: Users[],) {
     this.id = Session.number++;
     this.nom = nom;
     this.date = date;

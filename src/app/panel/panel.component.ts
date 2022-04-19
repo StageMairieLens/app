@@ -52,16 +52,17 @@ export class PanelComponent implements OnInit {
 
   optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abecedaire', 'Fille&Garçon', 'Puzzle'];
   selectedGame: string | null = "";
-  selectedGame_list = [];
-  nbSessionsActive : number = 0;
-  panel : string | null = "";
-  displayedColumns: string[] = ['Active','Id','Nom','Date','Jeu','Nombre de joueurs','Actions'];
-  sessions : Session[] = SessionsComponent.data;
-  sessionActive : Session[] = [];
-  showActive : boolean = true;
+  nbSessionsActive: number = 0;
+  panel: string | null = "";
+  displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
+  sessions: Session[] = SessionsComponent.data;
+  sessionActive: Session[] = [];
+  showActive: boolean = true;
 
-  session_id : number | null = null;
-  panel_option : string | null = "";
+
+  id_game : number | null = null;
+  session_id: number | null = null;
+  panel_option: string | null = "";
 
 
 
@@ -80,8 +81,10 @@ export class PanelComponent implements OnInit {
   recopier_type_ecriture = "CURSIF";
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
-  recopier_list : Recopier[] = [
-    new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture,false)
+  recopier_list: Recopier[] = [
+    new Recopier([
+      this.liste_image[0], this.liste_image[1]
+    ], this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, false)
   ];
 
 
@@ -125,7 +128,7 @@ export class PanelComponent implements OnInit {
   boygirl_text_color_fille: string = "#ffffff";
   boygirl_text_color_garcon: string = "#ffffff";
   boygirl_text_color_mot: string = "#ffffff";
-  boygirl_type_ecriture : string = "SCRIPT";
+  boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
   boygirl_form_step: number = 0;
 
@@ -143,7 +146,7 @@ export class PanelComponent implements OnInit {
   abecedaire_previsualiser: boolean = false;
 
   //VARIABLE JEU MEMORY
-  memory : Memory | null;
+  memory: Memory | null;
   memory_nbTile: number = 18;
   memory_settings: string[] = ['image', 'image'];
   memory_bg_color: string = "#3bb8c9";
@@ -151,8 +154,11 @@ export class PanelComponent implements OnInit {
   memory_good_answer_color: string = "#3498db";
   memory_wrong_answer_color: string = "#e74c3c";
   memory_progress: Progress = Progress.Blue;
-  memory_previsualiser : boolean = false;
-  memory_tmp_affichage : string = "5";
+  memory_previsualiser: boolean = false;
+  memory_tmp_affichage: string = "5";
+  memory_list: Memory[] = [
+    new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
+  ];
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -163,11 +169,11 @@ export class PanelComponent implements OnInit {
   ngOnInit(): void {
     this.panel = this.route.snapshot.paramMap.get('param1');
 
-    if(this.panel != null) {
-      if(this.panel == 'create') {
+    if (this.panel != null) {
+      if (this.panel == 'create') {
         this.jeu = this.route.snapshot.paramMap.get('param2');
-        if(this.jeu != null) {
-          if(this.optionGame.includes(this.jeu)) {
+        if (this.jeu != null) {
+          if (this.optionGame.includes(this.jeu)) {
             this.selectedGame = this.jeu;
           } else {
             this.router.navigate(['/panel']);
@@ -177,48 +183,65 @@ export class PanelComponent implements OnInit {
         }
       }
 
-      if(this.panel == 'sessions') {
+      if (this.panel == 'sessions') {
         this.panel_option = this.route.snapshot.paramMap.get('param2');
 
-        if(this.panel_option != null) {
-          if(this.route.snapshot.paramMap.get('param3') != null) {
-            if(this.panel_option == 'edit') {
+        if (this.panel_option != null) {
+          if (this.route.snapshot.paramMap.get('param3') != null) {
+            if (this.panel_option == 'edit') {
               this.session_id = +this.route.snapshot.paramMap.get('param3')!;
-              if(this.session_id == null) {
+              if (this.session_id == null) {
                 this.router.navigate(['/panel/sessions']);
               }
             } else {
               this.router.navigate(['/panel/sessions']);
             }
-          }else {
+          } else {
             this.router.navigate(['/panel/sessions']);
           }
         }
       }
 
-      if(this.optionGame.includes(this.panel!)) {
+      if (this.optionGame.includes(this.panel!)) {
         this.selectedGame = this.panel;
         this.panel_option = this.route.snapshot.paramMap.get('param2');
-        if(this.panel_option == null) {
+        if (this.panel_option == null) {
           this.panel_option = 'showList';
-          switch(this.selectedGame) {
-            case 'Recopier' :
-              (<Recopier[]>this.selectedGame_list) = this.recopier_list;
-              break;
+        }else if(this.panel_option == 'edit'){
+          this.id_game = +this.route.snapshot.paramMap.get('param3')!;
+          if(this.id_game == null) {
+            this.router.navigate(['/panel/', this.selectedGame]);
           }
         }else if (this.panel_option != 'create') {
-          this.router.navigate(['/panel/',this.selectedGame]);
+          this.router.navigate(['/panel/', this.selectedGame]);
         }
       }
     }
 
 
     for (let s of this.sessions) {
-      if(s.isActive) {
+      if (s.isActive) {
         this.sessionActive.push(s);
       }
     }
 
+  }
+
+  previewRecopier(r: Recopier): void {
+    this.recopier = r;
+    this.recopier_previsualiser = true;
+  }
+
+  quitPreviewRecopier(): void {
+    this.recopier_previsualiser = false;
+  }
+
+  deleteGameRecopier(r: Recopier): void {
+    let index = this.recopier_list.indexOf(r, 0);
+
+    if (index > -1) {
+      this.recopier_list.splice(index, 1);
+    }
   }
 
   addOnBlur = true;
@@ -273,9 +296,9 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  parseDate(date : Date) : string {
-    let month : string[] = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
-    let index : number = date.getMonth() - 1;
+  parseDate(date: Date): string {
+    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    let index: number = date.getMonth() - 1;
     return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
   }
@@ -302,7 +325,7 @@ export class PanelComponent implements OnInit {
 
   setPrevisualiserBoyGirl(prev: boolean): void {
     if (prev == true) {
-      this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot,this.boygirl_type_ecriture);
+      this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
       this.boygirl_previsualiser = true;
     }
     else {
@@ -355,13 +378,13 @@ export class PanelComponent implements OnInit {
       this.memory_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-      this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      },0);
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
     }
   }
 
-  isActive(button : HTMLButtonElement) : boolean {
-    if(document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
+  isActive(button: HTMLButtonElement): boolean {
+    if (document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
       return true;
     } else {
       return false;
@@ -520,75 +543,87 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  create(): void {
+  previsualiserGame(element: Session): void {
 
   }
 
-  previsualiserGame(element : Session) : void {
-
+  create(jeu: string): void {
+    switch (jeu) {
+      case 'Recopier':
+        this.recopier_list.push(
+          new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
+        );
+        this.router.navigate(['/panel/Recopier']);
+        break;
+      case 'Memory':
+        this.memory_list.push(
+          new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
+        );
+        this.router.navigate(['/panel/Memory']);
+    }
   }
 
-  editSession(session : Session) : void {
+  editSession(session: Session): void {
     this.panel_option = 'edit';
     this.session_id = session.id;
   }
 
-  deleteSession(session : Session) : void {
-    let index = this.sessions.indexOf(session,0);
-    if(index > -1) {
-      this.sessions.splice(index,1);
+  deleteSession(session: Session): void {
+    let index = this.sessions.indexOf(session, 0);
+    if (index > -1) {
+      this.sessions.splice(index, 1);
     }
-    index = this.sessionActive.indexOf(session,0);
-    if(index > -1) {
-      this.sessionActive.splice(index,1);
+    index = this.sessionActive.indexOf(session, 0);
+    if (index > -1) {
+      this.sessionActive.splice(index, 1);
     }
   }
 
-  getSession() : Session | null{
-    for(let session of this.sessions) {
-      if(session.id == this.session_id) {
+  getSession(): Session | null {
+    for (let session of this.sessions) {
+      if (session.id == this.session_id) {
         return session;
       }
     }
     return null;
   }
 
-  join(s : Session) : void {
+  join(s: Session): void {
     this.router.navigate(['/session/' + s.id]);
   }
 
-  setSessionActive (s : Session) : void {
+  setSessionActive(s: Session): void {
     s.isActive = true;
     this.sessionActive.push(s);
   }
 
-  setSessionInactive (s : Session) : void {
+  setSessionInactive(s: Session): void {
     s.isActive = false;
-    let index = this.sessionActive.indexOf(s,0);
-    if(index > -1) {
+    let index = this.sessionActive.indexOf(s, 0);
+    if (index > -1) {
       this.sessionActive.splice(index, 1);
     }
   }
 
-  sortSessionId() : void {
-    this.sessions.sort((s1 : Session,s2 : Session) => {
-      if(s1.id > s2.id) return 1;
-      if(s1.id < s2.id) return -1;
+  sortSessionId(): void {
+    this.sessions.sort((s1: Session, s2: Session) => {
+      if (s1.id > s2.id) return 1;
+      if (s1.id < s2.id) return -1;
       return 0;
     })
 
-    this.sessionActive.sort((s1 : Session,s2 : Session) => {
-      if(s1.id > s2.id) return 1;
-      if(s1.id < s2.id) return -1;
+    this.sessionActive.sort((s1: Session, s2: Session) => {
+      if (s1.id > s2.id) return 1;
+      if (s1.id < s2.id) return -1;
       return 0;
     })
   }
 
-  showSessionActive() : void {
+  showSessionActive(): void {
     this.showActive = true;
   }
 
-  showSessionInactive() : void {
+  showSessionInactive(): void {
     this.showActive = false;
   }
 }

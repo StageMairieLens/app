@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Session } from './Session';
 import { Game } from '../Game'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Users } from '../users/Users'
 
 @Component({
   selector: 'app-sessions',
@@ -66,8 +67,12 @@ export class SessionsComponent implements OnInit {
 
   enterKey($event: KeyboardEvent): void {
     if ($event.key == 'Enter') {
-      this.getSession()!.joueur.push((<HTMLInputElement>$event.target!).value);
+      this.getSession()!.joueur.push((new Users((<HTMLInputElement>$event.target)!.value,Session.number,0,0)));
     }
+  }
+
+  addUser(name : string) : void {
+    this.getSession()!.joueur.push((new Users(name,Session.number,0,0)));
   }
 
   deleteUser(str : string): void {
@@ -76,7 +81,9 @@ export class SessionsComponent implements OnInit {
 
   static data: Session[] = [
     new Session('test', new Date(), Game.Recopier, false,[]),
-    new Session('test2', new Date(), Game.Memory, true,['test','test2']),
+    new Session('test2', new Date(), Game.Memory, true,[
+      new Users('test3',Session.number,0,0)
+    ]),
     new Session('test3', new Date('1978-4-11'), Game.Abecedaire, false,[]),
     new Session('test4', new Date(), Game.Memory, true,[]),
     new Session('test5', new Date(), Game.Memory, true,[]),

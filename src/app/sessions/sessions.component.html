@@ -24,7 +24,7 @@
           <input type="text" name="" id="" placeholder="Entrez votre nom ici" #input_name (keypress)="enterKey($event)">
 
           <button mat-raised-button color="primary" aria-label="Valider"
-            (click)="this.getSession()!.joueur.push(input_name.value)">
+            (click)="addUser(input_name.value)">
             <i class="fa fa-check"></i>
           </button>
         </div>

@@ -5,7 +5,6 @@
   padding: 5px;
   box-shadow: rgba(218, 216, 216, 0.548) 10px 10px;
 }
-
 .card-header {
   background-color: #ececec;
   color: #303030;
@@ -19,6 +18,7 @@
   box-shadow: rgba(0, 0, 0, 0.459) 5px 2px;
   font-size: 20px;
 }
+
 
 nav {
   cursor : pointer;
@@ -119,6 +119,14 @@ img {
 .prev-button button {
   background: rgb(209, 42, 12);
 }
+
+.create_button button{
+  background: rgb(209, 42, 12);
+  height : 50px;
+  font-size : 20px;
+}
+
+
 
 .validate_button {
   background: rgb(9, 209, 9);
