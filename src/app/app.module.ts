@@ -27,6 +27,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
 import {CdkTableModule} from '@angular/cdk/table';
+import { UsersComponent } from './users/users.component';
 
 
 
@@ -42,7 +43,8 @@ import {CdkTableModule} from '@angular/cdk/table';
     MemoryComponent,
     PanelComponent,
     TileComponent,
-    ImagesComponent
+    ImagesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
