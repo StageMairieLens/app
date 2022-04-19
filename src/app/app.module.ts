@@ -30,6 +30,8 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { UsersComponent } from './users/users.component';
 import { SessionsComponent } from './sessions/sessions.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 
@@ -47,7 +49,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     TileComponent,
     ImagesComponent,
     UsersComponent,
-    SessionsComponent
+    SessionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatBadgeModule,
     CdkTableModule,
     MatTooltipModule,
+    HttpClientModule,
+    NgxDropzoneModule,
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,

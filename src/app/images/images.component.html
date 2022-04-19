@@ -1,0 +1,17 @@
+<!--<div style="text-align:center">
+	<div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+	<div><img [src]="url" *ngIf="url"></div>
+	<p>
+		<input type="file" (change)="selectFile($event)">
+	</p>
+</div>-->
+<ngx-dropzone (change)="onSelect($event)" [expandable]="true"  [processDirectoryDrop]="true"  >
+	<ngx-dropzone-label>Drop it!</ngx-dropzone-label>
+	<ngx-dropzone-image-preview (click)="onRemove(f)" cdkDrag ngProjectAs="ngx-dropzone-preview"   *ngFor="let f of files" [file]="f"  (change)="onRemove(f)" >
+		<ngx-dropzone-label >{{ f.name }} ({{ f.type }})
+			
+
+		</ngx-dropzone-label>
+	  </ngx-dropzone-image-preview>
+</ngx-dropzone>
+<button (click)="onRemove(this.files[this.files.length])">ici</button>

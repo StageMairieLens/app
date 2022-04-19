@@ -12,6 +12,7 @@ import { AbecedaireComponent } from './abecedaire/abecedaire.component';
 import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
 import { SessionsComponent } from './sessions/sessions.component';
+import { ImagesComponent } from './images/images.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'panel/:param1/:param2/:param3', component : PanelComponent},
   {path : 'session', component : SessionsComponent},
   {path : 'session/:id', component : SessionsComponent},
+  {path: 'images',component : ImagesComponent },
 
 ];
 
