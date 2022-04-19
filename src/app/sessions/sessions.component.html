@@ -1,11 +1,12 @@
 <div *ngIf="this.session_id != null">
   <div *ngIf="!this.join">
-    <div class="card container align-middle">
+    <div class="card container error align-middle">
       <div class="card-body text-center">
         <img src="../../assets/images/error.png" class="card-img-top" alt="error_img">
         <h1 class="card-title text-center" style="color : red ; font-size : 50px">ERREUR</h1>
-        <p class="card-text text-center" style="font-size : 30px">La séssion que vous essayer de rejoindre n 'est
+        <p class="card-text text-center" style="font-size : 30px">La séssion que vous essayer de rejoindre n'est
           pas rejoignable</p>
+        <p class="card-text text-center" style="font-size : 25px">Vous allez être redirigée dans {{this.timer_redirect}} secondes</p>
       </div>
 
     </div>
@@ -23,16 +24,9 @@
           <input type="text" name="" id="" placeholder="Entrez votre nom ici" #input_name (keypress)="enterKey($event)">
 
           <button mat-raised-button color="primary" aria-label="Valider"
-            (click)="this.getSession()!.joueur.push(input_name.value)">
+            (click)="addUser(input_name.value)">
             <i class="fa fa-check"></i>
           </button>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <div style="margin-top : 2% ">
-          <h3 class="card-title text-center">Listes des participants</h3>
-          <button *ngFor="let j of this.getSession()!.joueur" mat-raised-button color="primary">{{j}}</button>
         </div>
       </div>
     </div>

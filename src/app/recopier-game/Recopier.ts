@@ -4,6 +4,7 @@ import { Progress } from '../Progress'
 export class Recopier {
   id: number;
   static nb: number = 0;
+  date : Date;
 
   images: Image[];
   bg_color: string;
@@ -26,6 +27,7 @@ export class Recopier {
 
   constructor(images: Image[], bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, input_bg_color: string, input_text_color: string, typeEcriture: string, isVocaliser : boolean) {
     this.id = Recopier.nb++;
+    this.date = new Date();
     this.images = images;
     this.bg_color = bg_color;
     this.text_color = text_color;
