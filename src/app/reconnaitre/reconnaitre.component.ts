@@ -4,6 +4,10 @@ import { Progress } from '../Progress'
 import { Image } from '../Image'
 import { MatButton } from '@angular/material/button';
 
+interface Erreur{
+  src : string;
+  erreur : number;
+}
 
 @Component({
   selector: 'app-reconnaitre',
@@ -36,10 +40,11 @@ export class ReconnaitreComponent implements OnInit {
     new Image('Fleur', '../../assets/fleur.jpg'),
     new Image('Lion', '../../assets/lion.jpg'),
     new Image('Chat', '../../assets/chat.jpg'),
-    new Image('Chien', '../../assets/chien.jpeg'),
-    new Image('Elephant', '../../assets/elephant.jpg'),
-    new Image('Voiture', '../../assets/voiture.png')
+    //new Image('Chien', '../../assets/chien.jpeg'),
+    //new Image('Elephant', '../../assets/elephant.jpg'),
+    //new Image('Voiture', '../../assets/voiture.png')
   ];
+  erreur_image : Erreur[]=[];
   //liste_images = [];
   prochaine_image = 0;
   taille_to = 0;
@@ -47,6 +52,7 @@ export class ReconnaitreComponent implements OnInit {
   //liste_mot: string[] = []; //Liste qui contient les noms des images
   liste_mot_boutton: string[] = [];
   compteur = 0; //Compte le nombre d'erreur
+  compteur_image = 0; //Compte erreur par image
   //variable: string = this.r!.images[this.prochaine_image].nom;
 
   async delay(ms: number) {
@@ -95,6 +101,11 @@ export class ReconnaitreComponent implements OnInit {
     if (varia == this.r!.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked = false;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
+      this.erreur_image.push({src:this.r!.images[this.prochaine_image].src,erreur:this.compteur_image});
+      
+
+      this.compteur_image=0;
+      console.log(this.erreur_image);
 
       setTimeout(() => {
         //this.variable = this.r!.images[this.prochaine_image].nom;
@@ -141,6 +152,7 @@ export class ReconnaitreComponent implements OnInit {
         document.getElementById(varia)!.style.color = '#999999';
         document.getElementById(varia)!.classList.add('disabled');
         this.compteur += 1;
+        this.compteur_image +=1;
 
         document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
 

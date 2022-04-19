@@ -8,12 +8,11 @@
 
 <body>
     
-    <img #img src="{{src}}" (load)="afterLoading()" style='display: none;' />
-    <canvas #visualization width={{imgWidth}} height={{imgHeight}} style="background:lightgray;"></canvas>
+    
     <div id="collage">
         <h2>Image Puzzle</h2>
         <hr />
-        <div id="playPanel" style="padding:5px ;"[ngStyle]="{background : this.r!.bg_color}">
+        <div id="playPanel" style="padding:5px ;background-image:'../../assets/' ;"[ngStyle]="{background : this.r!.bg_color}">
             <h3 id="imgTitle"></h3>
             <hr />
             <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;"[ngStyle]="{background : this.r!.bg_color}">
@@ -33,7 +32,7 @@
                         [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
                         <input type="radio" name="level" id="medium" value="4" onchange="imagePuzzle.startGame(images, this.value);" />                      <label for="medium">Medium</label>
                         <input type="radio" name="level" id="hard" value="5" onchange="imagePuzzle.startGame(images, this.value);" />                        <label for="hard">Hard</label>
-                        <!--mettre une variable dans value pour modifier la difficulter-->
+                        <!--mettre une variable dans value pour modifier la difficulter
                     </p>
                     <div>
                         <button id="btnRule" type="button" class="btn" onclick="rules();">Rules</button>
@@ -61,3 +60,48 @@
     
 </body>
 </html>
+<!--<html>
+<body>
+<style>
+</style>
+<div style="display: flex;">
+      <table>
+          <tr>
+              <td>a</td>
+              <td>b</td>
+          </tr>
+      </table>
+   
+  </div>
+
+<div class="card align-middle container"  id="container"style="width: 32rem; "  cdkDropList>
+    <img src="{{ this.img.src }}" style="opacity: 0.4;border: solid 1px black;display: block;margin-left:auto;margin-right: auto;">
+
+
+</div>
+<table id="table" width="{{ this.img.width }}" border="0" cellspacing="0" cellpadding="0" style="margin-left: 50%;" >
+ <tr id="1">
+  <td id="i1"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[0].a }} {{ donnee[0].b }} ;"  cdkDrag ></td>
+  <td id="i2"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[1].a }} {{ donnee[1].b }};" cdkDrag></td>
+  <td id="i3"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[2].a }} {{ donnee[2].b }};" cdkDrag></td>
+ </tr>
+ <tr id="2">
+  <td id="i4"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[3].a }} {{ donnee[3].b }};" cdkDrag></td>
+  <td id="i5"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[4].a }} {{ donnee[4].b }};" cdkDrag></td>
+  <td id="i6"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[5].a }} {{ donnee[5].b }};" cdkDrag></td>
+ </tr>
+ <tr id="3">
+  <td id="i7"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[6].a }} {{ donnee[6].b }};" cdkDrag></td>
+  <td id="i8"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[7].a }} {{ donnee[7].b }};" cdkDrag></td>
+  <td id="i9"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[8].a }} {{ donnee[8].b }};" cdkDrag></td>
+ 
+</tr>
+ 
+</table>
+
+
+
+
+
+</body>
+</html>-->
