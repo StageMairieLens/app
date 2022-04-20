@@ -337,9 +337,10 @@
             <!-- Bouton de création du jeu -->
             <div class="form-row align-middle text-center" align="center">
               <div class="col-md-12 text-center">
-                <button class="validate_button align-middle text-center" (click)="create('Recopier')" mat-raised-button>Créer le
+                <button class="validate_button align-middle text-center" (click)="create('Recopier')"
+                  mat-raised-button>Créer le
                   jeu
-                  <i class="fa-solid fa-check"></i>
+                  <i class="fa-solid fa-check fa-lg"></i>
                 </button>
               </div>
             </div>
@@ -631,9 +632,10 @@
             <!-- Bouton de création du jeu -->
             <div class="form-row align-middle text-center" align="center">
               <div class="col-md-12 text-center">
-                <button class="validate_button align-middle text-center" (click)="create('FilleGarcon')" mat-raised-button>Créer le
+                <button class="validate_button align-middle text-center" (click)="create('FilleGarcon')"
+                  mat-raised-button>Créer le
                   jeu
-                  <i class="fa-solid fa-check"></i>
+                  <i class="fa-solid fa-check fa-lg"></i>
                 </button>
               </div>
             </div>
@@ -946,9 +948,10 @@
               <!-- Bouton de création du jeu -->
               <div class="form-row align-middle text-center" align="center">
                 <div class="col-md-12 text-center">
-                  <button class="validate_button align-middle text-center" (click)="create('Reconnaitre')" mat-raised-button>Créer le
+                  <button class="validate_button align-middle text-center" (click)="create('Reconnaitre')"
+                    mat-raised-button>Créer le
                     jeu
-                    <i class="fa-solid fa-check"></i>
+                    <i class="fa-solid fa-check fa-lg"></i>
                   </button>
                 </div>
               </div>
@@ -1245,9 +1248,10 @@
               <!-- Bouton de création du jeu -->
               <div class="form-row align-middle text-center" align="center">
                 <div class="col-md-12 text-center">
-                  <button class="validate_button align-middle text-center" (click)="create('Abecedaire')" mat-raised-button>Créer le
+                  <button class="validate_button align-middle text-center" (click)="create('Abecedaire')"
+                    mat-raised-button>Créer le
                     jeu
-                    <i class="fa-solid fa-check"></i>
+                    <i class="fa-solid fa-check fa-lg"></i>
                   </button>
                 </div>
               </div>
@@ -1550,9 +1554,10 @@
               <!-- Bouton de création du jeu -->
               <div class="form-row align-middle text-center" align="center">
                 <div class="col-md-12 text-center">
-                  <button class="validate_button align-middle text-center" (click)="create('Memory')" mat-raised-button>Créer le
+                  <button class="validate_button align-middle text-center" (click)="create('Memory')"
+                    mat-raised-button>Créer le
                     jeu
-                    <i class="fa-solid fa-check"></i>
+                    <i class="fa-solid fa-check fa-lg"></i>
                   </button>
                 </div>
               </div>
@@ -1648,11 +1653,11 @@
                       <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 2px"></i>
                     </button>
                     <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
-                      color="primary">
+                      color="primary" (click)="redirectEditRecopier(element)">
                       <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
                     </button>
                     <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
-                    (click)="deleteGameRecopier(element)">
+                      (click)="deleteGameRecopier(element)">
                       <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
                     </button>
                     <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
@@ -1707,7 +1712,335 @@
     </div>
 
     <div *ngIf="this.panel_option == 'edit'">
-      Hello {{this.id_game}}
+
+      <h5 class="card-header">édition du jeu Recopier</h5>
+
+      <!-- Formulaire Recopier -->
+      <div *ngIf="this.getRecopier() != null" class="card-body">
+
+        <!-- Formulaire Recopier - Bouton de prévisualisation -->
+        <div *ngIf="!this.recopier_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" [routerLink]="['/panel/Recopier']" mat-raised-button
+              color="warn" style="float : left; position : absolute; display : block">
+              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+
+              Retour à la liste des jeux
+            </button>
+
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(true)"
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye" style="margin-bottom : 1px"></i>
+
+              Prévisualiser
+            </button>
+          </div>
+
+          <!-- Menu de navigation dans le formulaire -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+
+
+          <!--Formulaire Recopier Etape du formulaire 1 -- Choix des images-->
+          <div *ngIf="this.formStep == 0">
+            <h2 class="card-title text-center">Choisissez les images</h2>
+            <div *ngIf="this.selectedGame == 'Recopier'">
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+
+              </div>
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- Etape du formulaire 2 -- Choix des couleurs -->
+          <div *ngIf="this.formStep == 1">
+            <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+            <form>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="recopier_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_bg_color = recopier_bg_color_input.value " #recopier_bg_color_input
+                      value="{{this.recopier_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="recopier_text_color_input" class="form-label align-middle">Couleur du texte
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_text_color = recopier_text_color_input.value " #recopier_text_color_input
+                      value="{{this.recopier_text_color}}" title="Choisissez la couleur du texte">
+                  </label>
+                </div>
+
+
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="recopier_title_color_input" class="form-label align-middle">Couleur du titre
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_title_color = recopier_title_color_input.value "
+                      #recopier_title_color_input value="{{this.recopier_title_color}}"
+                      title="Choisissez la couleur du titre">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="recopier_good_answer_color_input" class="form-label align-middle">Couleur du message bonne
+                    réponse
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_good_answer_color = recopier_good_answer_color_input.value "
+                      #recopier_good_answer_color_input value="{{this.recopier_good_answer_color}}"
+                      title="Choisissez la couleur du message de bonne réponse">
+                  </label>
+                </div>
+              </div>
+              <div class="form-row">
+
+                <div class="col-md-6">
+                  <label for="recopier_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                    mauvaise
+                    réponse
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
+                      #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
+                      title="Choisissez la couleur du message de mauvaise réponse">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="recopier_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_button_bg_color = recopier_button_bg_color_input.value "
+                      #recopier_button_bg_color_input value="{{this.recopier_button_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan du bouton">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="col-md-6">
+                  <label for="recopier_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_button_text_color = recopier_button_text_color_input.value "
+                      #recopier_button_text_color_input value="{{this.recopier_button_text_color}}"
+                      title="Choisissez la couleur du texte du bouton">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="recopier_input_bg_color_input" class="form-label align-middle">Couleur d'arriére plan de
+                    la
+                    zone d'entrée
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_input_bg_color = recopier_input_bg_color_input.value "
+                      #recopier_input_bg_color_input value="{{this.recopier_input_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan de la zone d'entrée">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="col-md-6">
+                  <label for="recopier_input_text_color_input" class="form-label align-middle">Couleur du texte de la
+                    zone
+                    d'entrée
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.recopier_input_text_color = recopier_input_text_color_input.value "
+                      #recopier_input_text_color_input value="{{this.recopier_input_text_color}}"
+                      title="Choisissez la couleur du texte du bouton">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-4">
+                  <label for="progressValue" class="form-label align-middle">Couleur de la barre de progression</label>
+
+                </div>
+                <div class="col-md-8">
+                  <select class="form-control" aria-label="Default select example" #progressSelectValue
+                    (change)="changeProgressValue('Recopier',progressSelectValue)">
+                    <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                      ng-selected="p == this.recopier_progress" #progressValue>
+                      <p *ngIf="p == 'blue'">Bleu</p>
+                      <p *ngIf="p == 'green'">Vert</p>
+                      <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                      <p *ngIf="p == 'orange'">Orange</p>
+                      <p *ngIf="p == 'red'">Rouge</p>
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <div class="progress" *ngIf="this.recopier_progress == 'blue' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.recopier_progress == 'green' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.recopier_progress == 'lightblue' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.recopier_progress == 'orange' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+
+                  <div class="progress" *ngIf="this.recopier_progress == 'red' ">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                      role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Etape du formulaire 3 -- Choix des textes -->
+          <div *ngIf="this.formStep == 2" style="text-align : center;">
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Type d'écriture</h2>
+                <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
+                    (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+                    checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
+                    (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+                    Cursif</mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
+                    (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
+                    (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
+                    (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
+                    (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Vocalisation</h2>
+                <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
+                  style="margin-right : 2%; color : #ff4083"></i>
+                <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+
+                <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
+                  (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                </mat-slide-toggle>
+                <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
+                  style="margin-left : 2%; color : #ff4083"></i>
+                <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+              </div>
+            </div>
+
+
+            <!-- Bouton de création du jeu -->
+            <div class="form-row align-middle text-center" align="center">
+              <div class="col-md-12 text-center">
+                <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder le
+                  jeu
+                  <i class="fa-solid fa-floppy-disk" ></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+
+          <!-- Formulaire Recopier - Menu de navigation par étape -->
+          <div class="align-bottom" style="margin : 10px">
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+              (click)="previousStep()">
+              <i class="fa-solid fa-angles-left"></i>
+              Etape précédente
+            </button>
+            <button type="button" class="btn btn-primary align-right"
+              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              Etape suivante
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
+          </div>
+        </div>
+
+
+
+        <!-- Formulaire Recopier - Prévisualisation -->
+        <div *ngIf="this.recopier_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserRecopier(false)"
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -1745,7 +2078,7 @@
 
           </div>
 
-          <div *ngIf="this.sessions.length == 0">
+          <div *ngIf="this.sessions.length == 0 && !this.showActive">
             <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
           </div>
 
@@ -1801,8 +2134,14 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div *ngIf="this.showActive">
 
-            <table class="table table-hover" *ngIf="this.showActive">
+            <div *ngIf="this.sessionActive.length == 0">
+              <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
+            </div>
+
+            <table class="table table-hover" *ngIf="this.sessionActive.length != 0">
               <thead>
                 <tr>
                   <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
