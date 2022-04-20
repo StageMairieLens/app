@@ -2366,9 +2366,9 @@
               <div class="form-row align-middle text-center" align="center">
                 <div class="col-md-12 text-center">
                   <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder le
-                  jeu
-                  <i class="fa-solid fa-floppy-disk"></i>
-                </button>
+                    jeu
+                    <i class="fa-solid fa-floppy-disk"></i>
+                  </button>
                 </div>
               </div>
 
@@ -2391,167 +2391,169 @@
           <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
         </div>
       </div>
+    </div>
 
-      <div *ngIf="this.panel == 'sessions'">
-        <div class="card container">
-          <h5 class="card-header">Sessions</h5>
-          <div class="card-body text-center">
-            <div *ngIf="this.panel_option == null || this.panel_option != 'edit'">
-              <h2 class="card-title">Liste des sessions</h2>
+  </div>
+</div>
 
-              <div class="col-md-12 text-center sortButton">
-                <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
-                  <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
-                  <span>Trier par Id</span>
-                </button>
-                <button mat-raised-button style="background-color : red" color="primary">
-                  <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
-                  <span>Trier par date</span>
-                </button>
+  <div *ngIf="this.panel == 'sessions'">
+    <div class="card container">
+      <h5 class="card-header">Sessions</h5>
+      <div class="card-body text-center">
+        <div *ngIf="this.panel_option == null || this.panel_option != 'edit'">
+          <h2 class="card-title">Liste des sessions</h2>
 
-                <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
-                  style="background-color : red" color="primary">
-                  <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
-                  <span>Afficher uniquement les sessions actives</span>
-                </button>
+          <div class="col-md-12 text-center sortButton">
+            <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
+              <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
+              <span>Trier par Id</span>
+            </button>
+            <button mat-raised-button style="background-color : red" color="primary">
+              <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
+              <span>Trier par date</span>
+            </button>
 
-                <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button
-                  style="background-color : red" color="primary">
-                  <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
-                  <span>Afficher toutes les sesssions</span>
-                </button>
+            <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
+              style="background-color : red" color="primary">
+              <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
+              <span>Afficher uniquement les sessions actives</span>
+            </button>
+
+            <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button
+              style="background-color : red" color="primary">
+              <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
+              <span>Afficher toutes les sesssions</span>
+            </button>
 
 
 
-              </div>
+          </div>
 
-              <div *ngIf="this.sessions.length == 0 && !this.showActive">
-                <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
-              </div>
+          <div *ngIf="this.sessions.length == 0 && !this.showActive">
+            <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
+          </div>
 
-              <div *ngIf="this.sessions.length != 0" class="col-md-12">
-                <table class="table table-hover" *ngIf="!this.showActive">
-                  <thead>
-                    <tr>
-                      <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
-                    </tr>
-                  </thead>
+          <div *ngIf="this.sessions.length != 0" class="col-md-12">
+            <table class="table table-hover" *ngIf="!this.showActive">
+              <thead>
+                <tr>
+                  <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+                </tr>
+              </thead>
 
-                  <tbody>
-                    <tr *ngFor="let element of this.sessions">
-                      <th *ngIf="element.isActive">
-                        <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-                      </th>
-                      <th *ngIf="!element.isActive">
-                        <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-                      </th>
-                      <th>{{element.id}}</th>
-                      <th>{{element.nom}}</th>
-                      <th>{{this.parseDate(element.date)}}</th>
-                      <th>{{element.jeu}}</th>
-                      <th>{{element.joueur.length}}</th>
-                      <th class="button_actions">
-                        <button mat-raised-button title="Prévisualiser le jeu de la séssion"
-                          (click)="previsualiserGame(element)" color="primary">
-                          <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-                        </button>
-                        <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
-                          style="background-color : rgb(223, 175, 18)" color="primary">
-                          <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-                        </button>
-                        <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
-                          style="background-color : red" color="primary">
-                          <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                        <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
-                          style="background-color : rgb(77, 184, 44)" color="primary">
-                          <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                        <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
-                          (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)"
-                          color="primary">
-                          <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                        <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
-                          (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
-                          color="primary">
-                          <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                      </th>
+              <tbody>
+                <tr *ngFor="let element of this.sessions">
+                  <th *ngIf="element.isActive">
+                    <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+                  </th>
+                  <th *ngIf="!element.isActive">
+                    <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+                  </th>
+                  <th>{{element.id}}</th>
+                  <th>{{element.nom}}</th>
+                  <th>{{this.parseDate(element.date)}}</th>
+                  <th>{{element.jeu}}</th>
+                  <th>{{element.joueur.length}}</th>
+                  <th class="button_actions">
+                    <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                      (click)="previsualiserGame(element)" color="primary">
+                      <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
+                    </button>
+                    <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
+                      style="background-color : rgb(223, 175, 18)" color="primary">
+                      <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                    </button>
+                    <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                      style="background-color : red" color="primary">
+                      <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
+                      style="background-color : rgb(77, 184, 44)" color="primary">
+                      <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                      (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                      <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                      (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
+                      color="primary">
+                      <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                  </th>
 
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div *ngIf="this.showActive">
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="this.showActive">
 
-                <div *ngIf="this.sessionActive.length == 0">
-                  <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
-                </div>
-
-                <table class="table table-hover" *ngIf="this.sessionActive.length != 0">
-                  <thead>
-                    <tr>
-                      <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr *ngFor="let element of this.sessionActive">
-                      <th *ngIf="element.isActive">
-                        <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-                      </th>
-                      <th *ngIf="!element.isActive">
-                        <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-                      </th>
-                      <th>{{element.id}}</th>
-                      <th>{{element.nom}}</th>
-                      <th>{{this.parseDate(element.date)}}</th>
-                      <th>{{element.jeu}}</th>
-                      <th>{{element.joueur.length}}</th>
-                      <th class="button_actions">
-                        <button mat-raised-button title="Prévisualiser le jeu de la séssion"
-                          (click)="previsualiserGame(element)" color="primary">
-                          <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-                        </button>
-                        <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
-                          style="background-color : rgb(223, 175, 18)" color="primary">
-                          <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-                        </button>
-                        <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
-                          style="background-color : red" color="primary">
-                          <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                        <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
-                          style="background-color : rgb(77, 184, 44)" color="primary">
-                          <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                        <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
-                          (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)"
-                          color="primary">
-                          <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                        <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
-                          (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
-                          color="primary">
-                          <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-                        </button>
-                      </th>
-
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+            <div *ngIf="this.sessionActive.length == 0">
+              <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
             </div>
 
-            <div *ngIf="this.panel_option == 'edit'">
-              <div *ngIf="this.getSession() == null">
-                Erreur
-              </div>
-              <div *ngIf="this.getSession() != null">
-                {{this.getSession()!.id}}
-              </div>
-            </div>
+            <table class="table table-hover" *ngIf="this.sessionActive.length != 0">
+              <thead>
+                <tr>
+                  <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let element of this.sessionActive">
+                  <th *ngIf="element.isActive">
+                    <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+                  </th>
+                  <th *ngIf="!element.isActive">
+                    <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+                  </th>
+                  <th>{{element.id}}</th>
+                  <th>{{element.nom}}</th>
+                  <th>{{this.parseDate(element.date)}}</th>
+                  <th>{{element.jeu}}</th>
+                  <th>{{element.joueur.length}}</th>
+                  <th class="button_actions">
+                    <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                      (click)="previsualiserGame(element)" color="primary">
+                      <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
+                    </button>
+                    <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
+                      style="background-color : rgb(223, 175, 18)" color="primary">
+                      <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                    </button>
+                    <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                      style="background-color : red" color="primary">
+                      <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
+                      style="background-color : rgb(77, 184, 44)" color="primary">
+                      <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                      (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                      <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                    <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                      (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
+                      color="primary">
+                      <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
+                    </button>
+                  </th>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.panel_option == 'edit'">
+          <div *ngIf="this.getSession() == null">
+            Erreur
+          </div>
+          <div *ngIf="this.getSession() != null">
+            {{this.getSession()!.id}}
           </div>
         </div>
       </div>
+    </div>
+  </div>
