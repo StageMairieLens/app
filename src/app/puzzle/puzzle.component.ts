@@ -33,7 +33,7 @@ export class PuzzleComponent implements OnInit {
     { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
     
 ];
-  decoupe : number = 3;
+  decoupe : number = 2;
   img = new Image();
   donnee :donnee[]=[
     {src:this.img.src,nr:"no-repeat",a:"left",b:"top"},
@@ -79,6 +79,7 @@ export class PuzzleComponent implements OnInit {
   restar(){
     restart(this.decoupe,this.imagess);
   }
+  
   test(){
     // var table =document.getElementById('table')!.style.height;
     // table=this.img.height;
@@ -88,6 +89,7 @@ export class PuzzleComponent implements OnInit {
     
     
   }
+  
   alea(li: donnee[]): void {
 
     var m = li.length, name, src, i;

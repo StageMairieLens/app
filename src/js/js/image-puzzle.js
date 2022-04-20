@@ -1,5 +1,5 @@
 ﻿
-var images = [
+images = [
     { src: '../../assets/images/london-bridge.jpg', title: 'London Bridge' },
     { src: '../../assets/images/lotus-temple.JPG', title: 'Lotus Temple' },
     { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
@@ -7,16 +7,13 @@ var images = [
     { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
     
 ];
-var lien = '../../assets/chat.jpg';
-var titre = 'Chat';
 var prochaine_image=0;
-images.push({ src:lien, title: titre});
 function lance(gridSize,imagess) {
     //var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
     imagePuzzle.startGame(imagess, gridSize);
 };
-function restart(gridSize) {
-    var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
+function restart(gridSize,imagess) {
+    //var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
     imagePuzzle.startGame(imagess, gridSize);
 }
 function rules() {
@@ -96,7 +93,7 @@ var imagePuzzle = {
                         //helper.doc('actualImageBox').innerHTML = helper.doc('gameOver').innerHTML;
                         //helper.doc('stepCount').textContent = imagePuzzle.stepCount;
                         console.log(prochaine_image);
-                        restart();
+                        restart(gridSize,images);
                     }
                     else if(isSorted(vals) && prochaine_image>= images.length){
                         helper.doc('actualImageBox').innerHTML = helper.doc('gameOver').innerHTML;
