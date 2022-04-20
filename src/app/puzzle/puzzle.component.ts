@@ -2,9 +2,9 @@ import { Component, OnInit,ViewChild,Input, ElementRef,AfterViewInit } from '@an
 import {CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Puzzle } from './Puzzle'
 
-declare function restart():any;
+declare function restart(gridsize:number,imagess:any):any;
 declare function rules():any;
-declare function lance():any;
+declare function lance(gridsize:number,imagess:any):any;
 interface donnee{
   src:string;
   nr:string;
@@ -25,6 +25,15 @@ export class PuzzleComponent implements OnInit {
     this.r = null;
       
   }
+  imagess = [
+    { src: '../../assets/images/london-bridge.jpg', title: 'London Bridge' },
+    { src: '../../assets/images/lotus-temple.JPG', title: 'Lotus Temple' },
+    { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
+    { src: '../../assets/images/statue-of-liberty.jpg', title: 'Statue Of Liberty' },
+    { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
+    
+];
+  decoupe : number = 3;
   img = new Image();
   donnee :donnee[]=[
     {src:this.img.src,nr:"no-repeat",a:"left",b:"top"},
@@ -56,17 +65,20 @@ export class PuzzleComponent implements OnInit {
   //imgWidth: number
   //imgHeight: number
   ngOnInit(): void {
-    lance();
-    restart();
+    lance(this.decoupe,this.imagess);
+    //restart(this.decoupe);
     this.img.src='../../assets/lion.jpg';
     this.img.height;
     this.img.width;
+    this.decoupe;
     console.log(this.img.height);
     //this.test();
     //this.alea(this.donnee);
     //this.recup(this.donnee);
   }
-  
+  restar(){
+    restart(this.decoupe,this.imagess);
+  }
   test(){
     // var table =document.getElementById('table')!.style.height;
     // table=this.img.height;

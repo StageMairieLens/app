@@ -1,5 +1,5 @@
 import { Image } from '../Image'
-import { text } from 'express';
+
 
 export class Puzzle {
   id: number;
