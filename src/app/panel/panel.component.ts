@@ -60,7 +60,7 @@ export class PanelComponent implements OnInit {
   showActive: boolean = true;
 
 
-  id_game : number | null = null;
+  id_game: number | null = null;
   session_id: number | null = null;
   panel_option: string | null = "";
 
@@ -84,7 +84,7 @@ export class PanelComponent implements OnInit {
   recopier_list: Recopier[] = [
     new Recopier([
       this.liste_image[0], this.liste_image[1]
-    ], this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, false)
+    ], '#777777', this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, false)
   ];
 
 
@@ -99,7 +99,7 @@ export class PanelComponent implements OnInit {
   reconnaitre_button_text_color: string = "#ffffff";
   reconnaitre_progress: Progress = Progress.Blue;
   reconnaitre_type_ecriture = "SCRIPT";
-  reconnaitre_isVocaliser: boolean = true;
+  reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
 
   // VARIABLE JEU PUZZLE
@@ -207,12 +207,31 @@ export class PanelComponent implements OnInit {
         this.panel_option = this.route.snapshot.paramMap.get('param2');
         if (this.panel_option == null) {
           this.panel_option = 'showList';
-        }else if(this.panel_option == 'edit'){
-          this.id_game = +this.route.snapshot.paramMap.get('param3')!;
-          if(this.id_game == null) {
-            this.router.navigate(['/panel/', this.selectedGame]);
+        } else if (this.panel_option == 'edit') {
+          if (this.route.snapshot.paramMap.get('param3') != null) {
+            this.id_game = +this.route.snapshot.paramMap.get('param3')!;
+            if (this.id_game == null) {
+              this.router.navigate(['/panel/', this.selectedGame]);
+            } else {
+              if (this.selectedGame == 'Recopier') {
+                this.selectedImages = this.getRecopier()!.images;
+                this.recopier_bg_color = this.getRecopier()!.bg_color;
+                this.recopier_text_color = this.getRecopier()!.text_color;
+                this.recopier_title_color = this.getRecopier()!.title_color;
+                this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
+                this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
+                this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
+                this.recopier_button_text_color = this.getRecopier()!.button_text_color;
+                this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
+                this.recopier_input_text_color = this.getRecopier()!.input_text_color;
+                this.recopier_progress = this.getRecopier()!.color_progress_bar;
+                this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
+                this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
+              }
+            }
           }
-        }else if (this.panel_option != 'create') {
+        }
+        else if (this.panel_option != 'create') {
           this.router.navigate(['/panel/', this.selectedGame]);
         }
       }
@@ -625,6 +644,41 @@ export class PanelComponent implements OnInit {
 
   showSessionInactive(): void {
     this.showActive = false;
+  }
+
+  redirectEditRecopier(r: Recopier): void {
+    window.location.href = '/panel/Recopier/edit/' + r.id;
+  }
+
+  getRecopier(): Recopier | null {
+    console.log(this.recopier_list);
+    for (let r of this.recopier_list) {
+      if (r.id == this.id_game) {
+        return r;
+      }
+    }
+    return null;
+  }
+
+  save(): void {
+    switch (this.selectedGame) {
+      case 'Recopier':
+        this.getRecopier()!.images = this.selectedImages;
+        this.getRecopier()!.bg_color = this.recopier_bg_color;
+        this.getRecopier()!.text_color = this.recopier_text_color;
+        this.getRecopier()!.title_color = this.recopier_title_color;
+        this.getRecopier()!.good_answer_color = this.recopier_good_answer_color;
+        this.getRecopier()!.wrong_answer_color = this.recopier_wrong_answer_color;
+        this.getRecopier()!.button_bg_color = this.recopier_button_bg_color;
+        this.getRecopier()!.button_text_color = this.recopier_button_text_color;
+        this.getRecopier()!.input_bg_color = this.recopier_input_bg_color;
+        this.getRecopier()!.input_text_color = this.recopier_input_text_color;
+        this.getRecopier()!.color_progress_bar = this.recopier_progress;
+        this.getRecopier()!.typeEcriture = this.recopier_type_ecriture;
+        this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
+        this.router.navigate(['/panel/Recopier']);
+        break;
+    }
   }
 }
 
