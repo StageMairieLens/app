@@ -8,22 +8,35 @@
 
 <body>
     
-    
+<div class="text-center">
+    <h1 class="title" >
+        <span>I</span>
+        <span>M</span>
+        <span>A</span>
+        <span>G</span>
+        <span>E</span>
+        <span> </span>
+        <span>P</span>
+        <span>U</span>
+        <span>Z</span>
+        <span>Z</span>
+        <span>L</span>
+        <span>E</span>
+      </h1>
+</div>
+<div *ngIf="this.r == null" class="card align-middle container" id="card_error"
+  style="width: 32rem; background-color: #3bb8c9; color : black">
+  <img class="card-img-top image"
+    src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
+    alt="Card image cap">
+  <div class="card-body text-center">
+    <h5 class="card-title title_image_error">Erreur !</h5>
+    <p class="card-text">Il n'y a pas de jeu selectionné !</p>
+  </div>
+</div>
+<div *ngIf="this.r != null">
     <div id="collage"  class="text-center">
-        <h1 class="title" >
-            <span>I</span>
-            <span>M</span>
-            <span>A</span>
-            <span>G</span>
-            <span>E</span>
-            <span> </span>
-            <span>P</span>
-            <span>U</span>
-            <span>Z</span>
-            <span>Z</span>
-            <span>L</span>
-            <span>E</span>
-          </h1>
+        
         <hr />
         <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
             <h3 id="imgTitle"></h3>
@@ -43,16 +56,14 @@
                     <p id="levelPanel">
                         <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
                         [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.button_text_color}">Easy</label>
-                        <input type="radio" name="level" id="medium" value="4" onchange="imagePuzzle.startGame(images, this.value);" 
-                        [ngStyle]="{background : this.r!.button_bg_color}"/>                      <label for="medium" [ngStyle]="{background : this.r!.button_text_color}">Medium</label>
-                        <input type="radio" name="level" id="hard" value="5" onchange="imagePuzzle.startGame(images, this.value);" 
-                        [ngStyle]="{background : this.r!.button_bg_color}"/>                        <label for="hard"[ngStyle]="{background : this.r!.button_text_color}">Hard</label>
                         <!-- mettre une variable dans value pour modifier la difficulter-->
+
+                        
                     </p>
                     <div>
                         <button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
-                        <button id="newPhoto" type="button" class="btn" onclick="restart();"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-                        
+                        <!--<button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
+                        -->
                     </div>
                 </div>
             </div>
@@ -60,16 +71,17 @@
         <div id="gameOver" style="display:none;"[ngStyle]="{background : this.r!.bg_color}">
             <div style=" padding: 5px 10px 20px 10px; text-align: center; "[ngStyle]="{background : this.r!.bg_color}">
                 <h2 style="text-align:center"[ngStyle]="{background : this.r!.text_color}">Fin de partie!!</h2>
-                Félicitation!!<br /> Tu as compléter l'image.
+                Félicitation!!<br /> Tu as compléter toutes les  images.
                 <br /> Steps: <span id="stepCount" class="stepCount">0</span> steps.
                 <br /> Time Taken: <span class="timeCount">0</span> seconds<br />
                 <div>
-                    <button type="button" onclick="window.location.reload(true);">Joue encore</button>
+                    <button type="button" onclick="window.location.reload(true);">Recommencer</button>
                 </div>
             </div>
         </div>
         
         
+    </div>
     </div>
     
     
