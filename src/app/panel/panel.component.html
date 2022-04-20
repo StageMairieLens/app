@@ -1578,6 +1578,7 @@
 
     <h5 class="card-header">Liste des jeu {{this.selectedGame}} créer</h5>
 
+    <!-- Bouton création de jeu -->
     <div class="create_button align-middle text-center" style="margin-bottom : 10px; margin-top : 10px">
 
       <button class=" align-middle text-center" [routerLink]="['/panel/', this.selectedGame,'create']" mat-raised-button
@@ -1615,7 +1616,7 @@
           <table class="table table-hover text-center">
             <thead>
               <tr>
-                <th scope="col" *ngFor="let col of ['Id','Date','Nombre d\'image','Crée par','Actions']">{{col}}</th>
+                <th scope="col" *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">{{col}}</th>
               </tr>
             </thead>
 
@@ -1624,6 +1625,9 @@
                 <th>{{element.id}}</th> <!-- Id du jeu -->
                 <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
                 <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
                 <!-- Actions -->
@@ -1673,7 +1677,7 @@
 
     <!-- Liste des jeux Mémory -->
     <div *ngIf="this.selectedGame == 'Memory'">
-      <div *ngIf="this.recopier_list.length != 0">
+      <div *ngIf="this.memory_list.length != 0">
 
         <!-- Prévisualisation -->
         <div *ngIf="this.memory_previsualiser">
@@ -1748,6 +1752,90 @@
       </div>
 
       <!-- Si la liste des jeu Recopier est vide -->
+      <div class="text-center" *ngIf="this.memory_list.length == 0">
+        <h5 class="card-title" style="color : red">Il n'y a pas de jeu {{this.selectedGame}} créer</h5>
+      </div>
+
+    </div>
+
+    <!-- Liste des jeux Reconnaitre -->
+    <div *ngIf="this.selectedGame == 'Reconnaitre'">
+      <div *ngIf="this.reconnaitre_list.length != 0">
+
+        <!-- Prévisualisation -->
+        <div *ngIf="this.reconnaitre_previsualiser">
+
+          <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="quitPreviewReconnaitre()" mat-raised-button
+                color="warn">
+                <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+        </div>
+
+
+        <!-- Listes des jeux -->
+        <div *ngIf="!this.recopier_previsualiser">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col" *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">{{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.recopier_list">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+                <!-- Actions -->
+                <th class="button_actions">
+                  <!-- Prévisualiser le jeu -->
+                  <button mat-raised-button title="Prévisualiser le jeu" color="primary"
+                    (click)="previewRecopier(element)">
+                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Editer le jeu -->
+                  <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                    color="primary" (click)="redirectEditRecopier(element)">
+                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Supprimer le jeu -->
+                  <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                    (click)="deleteGameRecopier(element)">
+                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+                  <!-- Démarrer une séssion à partir de ce jeu -->
+                  <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                    style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+
+                </th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Si la liste des jeu Recopier est vide -->
       <div class="text-center" *ngIf="this.recopier_list.length == 0">
         <h5 class="card-title" style="color : red">Il n'y a pas de jeu {{this.selectedGame}} créer</h5>
       </div>
@@ -1755,7 +1843,89 @@
     </div>
 
 
+<!-- Liste des jeux Recopier -->
+<div *ngIf="this.selectedGame == 'Recopier'">
+  <div *ngIf="this.recopier_list.length != 0">
 
+    <!-- Prévisualisation -->
+    <div *ngIf="this.recopier_previsualiser">
+
+      <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="quitPreviewRecopier()" mat-raised-button
+            color="warn">
+            <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+            Quitter la prévisualisation</button>
+        </div>
+      </div>
+      <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
+    </div>
+
+
+    <!-- Listes des jeux -->
+    <div *ngIf="!this.recopier_previsualiser">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let element of this.recopier_list">
+            <th>{{element.id}}</th> <!-- Id du jeu -->
+            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+            <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+            <th *ngIf="element.isVocaliser">Oui</th>
+            <th *ngIf="!element.isVocaliser">Non</th>
+            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+            <!-- Actions -->
+            <th class="button_actions">
+              <!-- Prévisualiser le jeu -->
+              <button mat-raised-button title="Prévisualiser le jeu" color="primary"
+                (click)="previewRecopier(element)">
+                <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Editer le jeu -->
+              <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                color="primary" (click)="redirectEditRecopier(element)">
+                <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Supprimer le jeu -->
+              <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                (click)="deleteGameRecopier(element)">
+                <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+              <!-- Démarrer une séssion à partir de ce jeu -->
+              <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                style="background-color : rgb(168, 14, 135)" color="primary">
+                <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+
+            </th>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Si la liste des jeu Recopier est vide -->
+  <div class="text-center" *ngIf="this.recopier_list.length == 0">
+    <h5 class="card-title" style="color : red">Il n'y a pas de jeu {{this.selectedGame}} créer</h5>
+  </div>
+
+</div>
 
   </div>
 
