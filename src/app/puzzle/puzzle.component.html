@@ -3,11 +3,11 @@
 
 <head>
     <title>Image Puzzle</title>
-   
+
 </head>
 
 <body>
-    
+
 <div class="text-center">
     <h1 class="title" >
         <span>I</span>
@@ -34,9 +34,8 @@
     <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
 </div>
-<div *ngIf="this.r != null">
     <div id="collage"  class="text-center">
-        
+
         <hr />
         <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
             <h3 id="imgTitle"></h3>
@@ -58,12 +57,12 @@
                         [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.button_text_color}">Easy</label>
                         <!-- mettre une variable dans value pour modifier la difficulter-->
 
-                        
+
                     </p>
                     <div>
                         <button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
-                        <!--<button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-                        -->
+                        <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
+
                     </div>
                 </div>
             </div>
@@ -79,12 +78,11 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
     </div>
-    </div>
-    
-    
+
+
 </body>
 </html>
 <!--<html>
@@ -93,7 +91,7 @@
 </style>
 
 
-<div class="card align-middle container"  id="container"style="width: 32rem;"  
+<div class="card align-middle container"  id="container"style="width: 32rem;"
 >
 <table class="card-table table" id="table2" width="{{ this.img.width }}" border="0" cellspacing="0" cellpadding="0"
 cdkDropList
@@ -107,7 +105,7 @@ cdkDropList
         <td id="i1"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[0].a }} {{ donnee_non_alea[0].b }};opacity: 0.3"></td>
         <td id="i2"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[1].a }} {{ donnee_non_alea[1].b }};opacity: 0.3" ></td>
         <td id="i3"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[2].a }} {{ donnee_non_alea[2].b }};opacity: 0.3" ></td>
-        
+
       </tr>
        <tr id="2">
         <td id="i4"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[3].a }} {{ donnee_non_alea[3].b }};opacity: 0.3" ></td>
@@ -118,13 +116,13 @@ cdkDropList
         <td id="i7"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[6].a }} {{ donnee_non_alea[6].b }};opacity: 0.3" ></td>
         <td id="i8"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[7].a }} {{ donnee_non_alea[7].b }};opacity: 0.3" ></td>
         <td id="i9"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[8].a }} {{ donnee_non_alea[8].b }};opacity: 0.3" ></td>
-       
+
       </tr>
 </table>
 
 
 </div>
-<table id="table" width="{{ this.img.width }}" border="0" cellspacing="0" cellpadding="0" style="margin-left: 50%;" 
+<table id="table" width="{{ this.img.width }}" border="0" cellspacing="0" cellpadding="0" style="margin-left: 50%;"
 cdkDropList
 #todoList="cdkDropList"
 [cdkDropListData]="donnee"
@@ -136,7 +134,7 @@ cdkDropList
   <td id="i1"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[0].a }} {{ donnee[0].b }} ;" cdkDrag ></td>
   <td id="i2"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[1].a }} {{ donnee[1].b }};" cdkDrag></td>
   <td id="i3"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[2].a }} {{ donnee[2].b }};" cdkDrag></td>
-  
+
 </tr>
  <tr id="2">
   <td id="i4"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[3].a }} {{ donnee[3].b }};" cdkDrag></td>
@@ -147,9 +145,9 @@ cdkDropList
   <td id="i7"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[6].a }} {{ donnee[6].b }};" cdkDrag></td>
   <td id="i8"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[7].a }} {{ donnee[7].b }};" cdkDrag></td>
   <td id="i9"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[8].a }} {{ donnee[8].b }};" cdkDrag></td>
- 
+
 </tr>
- 
+
 </table>
 
 

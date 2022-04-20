@@ -103,6 +103,9 @@ export class PanelComponent implements OnInit {
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
+  reconnaitre_list : Reconnaitre[] = [
+    new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
+  ];
 
   // VARIABLE JEU PUZZLE
   puzzle: Puzzle | null;
@@ -286,6 +289,23 @@ export class PanelComponent implements OnInit {
   }
 
   deleteGameMemory(m: Memory): void {
+    let index = this.memory_list.indexOf(m, 0);
+
+    if (index > -1) {
+      this.memory_list.splice(index, 1);
+    }
+  }
+
+  previewReconnaitre(m: Memory): void {
+    this.memory = m;
+    this.memory_previsualiser = true;
+  }
+
+  quitPreviewReconnaitre(): void {
+    this.memory_previsualiser = false;
+  }
+
+  deleteGameReconnaitre(m: Memory): void {
     let index = this.memory_list.indexOf(m, 0);
 
     if (index > -1) {
