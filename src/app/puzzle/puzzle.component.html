@@ -34,7 +34,6 @@
     <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
 </div>
-<div *ngIf="this.r != null">
     <div id="collage"  class="text-center">
         
         <hr />
@@ -62,8 +61,8 @@
                     </p>
                     <div>
                         <button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
-                        <!--<button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-                        -->
+                        <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
+                        
                     </div>
                 </div>
             </div>
@@ -81,7 +80,6 @@
         </div>
         
         
-    </div>
     </div>
     
     
