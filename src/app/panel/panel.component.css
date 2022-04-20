@@ -129,7 +129,6 @@ img {
 .save_button {
   background: rgb(241, 238, 6);
   width: 50%;
-  margin-top: 10%;
   height: 50px;
   color: white;
   font-size: 32px;
@@ -146,7 +145,6 @@ img {
 .validate_button {
   background: rgb(9, 209, 9);
   width: 50%;
-  margin-top: 10%;
   height: 50px;
   color: white;
   font-size: 32px;
