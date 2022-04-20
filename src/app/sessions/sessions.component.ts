@@ -82,7 +82,7 @@ export class SessionsComponent implements OnInit {
   static data: Session[] = [
     new Session('test', new Date(), Game.Recopier, false,[]),
     new Session('test2', new Date(), Game.Memory, true,[
-      new Users('test3',Session.number,0,0)
+      new Users('test3',Session.number,0,50)
     ]),
     new Session('test3', new Date('1978-4-11'), Game.Abecedaire, false,[]),
     new Session('test4', new Date(), Game.Memory, true,[]),

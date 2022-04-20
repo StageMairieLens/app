@@ -35,6 +35,7 @@ export class PanelComponent implements OnInit {
     this.boygirl = null;
     this.abecedaire = null;
     this.memory = null;
+    this.selected_session = null;
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -60,6 +61,7 @@ export class PanelComponent implements OnInit {
   showActive: boolean = false;
 
 
+  selected_session: Session | null;
   id_game: number | null = null;
   session_id: number | null = null;
   panel_option: string | null = "";
@@ -322,6 +324,9 @@ export class PanelComponent implements OnInit {
 
   }
 
+  setPanelOption(option: string): void {
+    this.panel_option = option;
+  }
 
   setSelected(element: HTMLOptionElement): void {
     element.selected = true;
@@ -608,7 +613,8 @@ export class PanelComponent implements OnInit {
   }
 
   join(s: Session): void {
-    this.router.navigate(['/session/' + s.id]);
+    this.selected_session = s;
+    this.panel_option = "view";
   }
 
   setSessionActive(s: Session): void {

@@ -2049,7 +2049,7 @@
     <div class="card container">
       <h5 class="card-header">Sessions</h5>
       <div class="card-body text-center">
-        <div *ngIf="this.panel_option == null || this.panel_option != 'edit'">
+        <div *ngIf="this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')">
           <h2 class="card-title">Liste des sessions</h2>
 
           <div class="col-md-12 text-center sortButton">
@@ -2192,6 +2192,44 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.panel_option == 'view'">
+
+          <div class="col-md-12 text-center sortButton">
+            <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
+              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+              <span>Retourner sur les sessions</span>
+            </button>
+          </div>
+
+          <div *ngIf="this.selected_session!.isActive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Erreur(s)</th>
+                  <th scope="col">Progression</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let user of this.selected_session!.joueur">
+                  <th>{{user.nom}}</th>
+                  <th>{{user.compteur_erreur}}</th>
+                  <th>
+                    <div class="progress">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{width: user.progression.toString() + '%'}" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+                    </div>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div *ngIf="!this.selected_session!.isActive">
+            <h5 class="card-title" style="color : red">La session n'est pas active</h5>
           </div>
         </div>
 
