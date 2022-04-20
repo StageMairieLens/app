@@ -3,7 +3,8 @@
     { src: '../../assets/images/lotus-temple.JPG', title: 'Lotus Temple' },
     { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
     { src: '../../assets/images/statue-of-liberty.jpg', title: 'Statue Of Liberty' },
-    { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
+    { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' },
+    { src: '../../assets/chat.jpg', title: 'Chat' }
 ];
 function lance() {
     var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
@@ -49,6 +50,7 @@ var imagePuzzle = {
             li.id = i;
             li.setAttribute('data-value', i);
             li.style.backgroundImage = 'url(' + image.src + ')';
+            
             li.style.backgroundSize = (gridSize * 100) + '%';
             li.style.backgroundPosition = xpos + ' ' + ypos;
             li.style.width = 400 / gridSize + 'px';
@@ -92,6 +94,7 @@ var imagePuzzle = {
                 }
             };
             li.setAttribute('dragstart', 'true');
+            li.style.display= "inline-block";
             helper.doc('sortable').appendChild(li);
         }
         helper.shuffle('sortable');
