@@ -29,7 +29,7 @@ export class MemoryComponent implements OnInit {
   started = false;
   pressStart = false;
   nbTile = 18;
-  setting: string[] = ["cursif", "cursif"];
+  setting: string[] = ["image", "image"];
   tmpAfficher: number = 5000;
   affichage: string[] = [];
   isImage: boolean[] = [];
@@ -67,6 +67,7 @@ export class MemoryComponent implements OnInit {
     // this.game = null;
   }
 
+  // Initialisation
   ngOnInit(): void {
     if(this.game == null || this.game.derriere == null) return;
     this.nbTile = this.game.nbTile;
@@ -76,6 +77,7 @@ export class MemoryComponent implements OnInit {
     this.set();
   }
 
+  // Initialisation
   ngAfterViewInit(): void {
     if(this.game == null) return;
     this.tiles = [this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15, this.tile16, this.tile17, this.tile18];
@@ -89,6 +91,7 @@ export class MemoryComponent implements OnInit {
     this.disable();
   }
 
+  // Création du memory
   set(): void {
     var val;
     var i = 0;
@@ -134,6 +137,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
+  // Renvoie un nombre aléatoire et jamais 2 fois le même
   random(): number {
     var a = Math.floor(Math.random()*this.nbTile);
     while(this.hash[a] == 1) {
@@ -144,6 +148,7 @@ export class MemoryComponent implements OnInit {
     return a;
   }
 
+  // Logique du jeu
   retourne(id: string): void {
     if(!this.started) return;
     if(this.retourner == "0") {
@@ -195,6 +200,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
+  // Logique du bouton commencer
   start(): void {
     if(this.pressStart == true) return;
     if(this.tmpAfficher == 0) {

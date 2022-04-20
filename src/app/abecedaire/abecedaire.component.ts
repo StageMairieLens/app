@@ -29,6 +29,7 @@ export class AbecedaireComponent implements OnInit {
     // this.game = null;
   }
 
+  // Initialisation
   ngOnInit(): void {
     if(this.game!.images.length != 0) {
       this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
@@ -63,6 +64,7 @@ export class AbecedaireComponent implements OnInit {
     this.errors = 0;
   }
 
+  // Logique du jeu
   click($event: MouseEvent,letter:string): void {
     ($event.target as HTMLButtonElement).disabled = true;
     if(letter == this.rightLetter) {

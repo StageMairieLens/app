@@ -57,7 +57,7 @@ export class PanelComponent implements OnInit {
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   sessions: Session[] = SessionsComponent.data;
   sessionActive: Session[] = [];
-  showActive: boolean = true;
+  showActive: boolean = false;
 
 
   id_game : number | null = null;
