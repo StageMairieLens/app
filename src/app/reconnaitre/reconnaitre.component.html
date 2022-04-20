@@ -17,7 +17,7 @@
 <div *ngIf="this.r == null" class="card align-middle container" id="card_error"
   style="width: 32rem; background-color: #3bb8c9; color : black">
   <img class="card-img-top image"
-    src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
+    src="../../assets/images/error.png"
     alt="Card image cap">
   <div class="card-body text-center">
     <h5 class="card-title title_image_error">Erreur !</h5>
@@ -128,8 +128,8 @@
           !
         </p>
       </div>
-      
-      
+
+
     </div>
     <div  *ngIf="this.prochaine_image == this.r!.images.length" class="text-center" >
       <figure  class="figure" *ngFor="let items of this.erreur_image">
@@ -149,7 +149,7 @@
 <div *ngIf="this.r!.images.length == 0" class="card align-middle container" id="card_finish" style="width: 32rem;"
   [ngStyle]="{background : this.r!.bg_color}">
   <img class="card-img-top image"
-    src="https://imgs.search.brave.com/MgUCwWNi0ry-kFXmBqhVqb3wR7UR8ygkNSNV8wZkPAI/rs:fit:800:450:1/g:ce/aHR0cHM6Ly9taXJh/Y29tb3NlaGFjZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjAvMDYvZXJyb3It/d2ViLmpwZw"
+    src="../../assets/images/error.png"
     alt="Card image cap">
   <div class="card-body text-center">
     <h5 class="card-title title_image_error">Erreur !</h5>

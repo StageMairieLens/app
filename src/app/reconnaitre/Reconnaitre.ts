@@ -6,6 +6,7 @@ export class Reconnaitre {
   id: number;
   static nb: number = 0;
   images: Image[];
+  date : Date;
   bg_color: string;
   title_color: string;
   good_answer_color: string;
@@ -27,6 +28,7 @@ export class Reconnaitre {
   constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean) {
     this.id = Reconnaitre.nb++;
     this.images = liste_images;
+    this.date = new Date();
     this.bg_color = bg_color;
     this.title_color = title_color;
     this.good_answer_color = good_answer_color;

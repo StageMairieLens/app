@@ -296,20 +296,20 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  previewReconnaitre(m: Memory): void {
-    this.memory = m;
-    this.memory_previsualiser = true;
+  previewReconnaitre(r: Reconnaitre): void {
+    this.reconnaitre = r;
+    this.reconnaitre_previsualiser = true;
   }
 
   quitPreviewReconnaitre(): void {
-    this.memory_previsualiser = false;
+    this.reconnaitre_previsualiser = false;
   }
 
-  deleteGameReconnaitre(m: Memory): void {
-    let index = this.memory_list.indexOf(m, 0);
+  deleteGameReconnaitre(r: Reconnaitre): void {
+    let index = this.reconnaitre_list.indexOf(r, 0);
 
     if (index > -1) {
-      this.memory_list.splice(index, 1);
+      this.reconnaitre_list.splice(index, 1);
     }
   }
 
@@ -719,6 +719,10 @@ export class PanelComponent implements OnInit {
   }
   redirectEditMemory(m: Memory): void {
     window.location.href = '/panel/Memory/edit/' + m.id;
+  }
+
+  redirectEditReconnaitre(r: Reconnaitre): void {
+    window.location.href = '/panel/Reconnaitre/edit/' + r.id;
   }
 
   getRecopier(): Recopier | null {
