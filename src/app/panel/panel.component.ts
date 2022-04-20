@@ -159,7 +159,7 @@ export class PanelComponent implements OnInit {
   memory_previsualiser: boolean = false;
   memory_tmp_affichage: string = "5";
   memory_list: Memory[] = [
-    new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
+    new Memory(this.selectedImages.slice(1), this.selectedImages[0], 12, ['cursif', 'image'], this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
   ];
 
 
@@ -215,20 +215,31 @@ export class PanelComponent implements OnInit {
             if (this.id_game == null) {
               this.router.navigate(['/panel/', this.selectedGame]);
             } else {
-              if (this.selectedGame == 'Recopier') {
-                this.selectedImages = this.getRecopier()!.images;
-                this.recopier_bg_color = this.getRecopier()!.bg_color;
-                this.recopier_text_color = this.getRecopier()!.text_color;
-                this.recopier_title_color = this.getRecopier()!.title_color;
-                this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
-                this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
-                this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
-                this.recopier_button_text_color = this.getRecopier()!.button_text_color;
-                this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
-                this.recopier_input_text_color = this.getRecopier()!.input_text_color;
-                this.recopier_progress = this.getRecopier()!.color_progress_bar;
-                this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
-                this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
+              switch (this.selectedGame) {
+                case 'Recopier':
+                  this.selectedImages = this.getRecopier()!.images;
+                  this.recopier_bg_color = this.getRecopier()!.bg_color;
+                  this.recopier_text_color = this.getRecopier()!.text_color;
+                  this.recopier_title_color = this.getRecopier()!.title_color;
+                  this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
+                  this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
+                  this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
+                  this.recopier_button_text_color = this.getRecopier()!.button_text_color;
+                  this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
+                  this.recopier_input_text_color = this.getRecopier()!.input_text_color;
+                  this.recopier_progress = this.getRecopier()!.color_progress_bar;
+                  this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
+                  this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
+                  break;
+                case 'Memory':
+                  this.memory_nbTile = this.getMemory()!.nbTile;
+                  this.memory_settings = this.getMemory()!.setting;
+                  this.memory_bg_color = this.getMemory()!.bg_color;
+                  this.memory_text_color = this.getMemory()!.text_color;
+                  this.memory_good_answer_color = this.getMemory()!.good_answer_color;
+                  this.memory_wrong_answer_color = this.getMemory()!.wrong_answer_color;
+                  this.memory_progress = this.getMemory()!.color_progress_bar;
+                  this.memory_tmp_affichage = this.getMemory()!.tmpAffichage;
               }
             }
           }
@@ -262,6 +273,23 @@ export class PanelComponent implements OnInit {
 
     if (index > -1) {
       this.recopier_list.splice(index, 1);
+    }
+  }
+
+  previewMemory(m: Memory): void {
+    this.memory = m;
+    this.memory_previsualiser = true;
+  }
+
+  quitPreviewMemory(): void {
+    this.memory_previsualiser = false;
+  }
+
+  deleteGameMemory(m: Memory): void {
+    let index = this.memory_list.indexOf(m, 0);
+
+    if (index > -1) {
+      this.memory_list.splice(index, 1);
     }
   }
 
@@ -655,6 +683,9 @@ export class PanelComponent implements OnInit {
   redirectEditRecopier(r: Recopier): void {
     window.location.href = '/panel/Recopier/edit/' + r.id;
   }
+  redirectEditMemory(m: Memory): void {
+    window.location.href = '/panel/Memory/edit/' + m.id;
+  }
 
   getRecopier(): Recopier | null {
     console.log(this.recopier_list);
@@ -665,6 +696,18 @@ export class PanelComponent implements OnInit {
     }
     return null;
   }
+
+
+  getMemory(): Memory | null {
+    console.log(this.memory_list);
+    for (let m of this.memory_list) {
+      if (m.id == this.id_game) {
+        return m;
+      }
+    }
+    return null;
+  }
+
 
   save(): void {
     switch (this.selectedGame) {
@@ -684,7 +727,19 @@ export class PanelComponent implements OnInit {
         this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
         this.router.navigate(['/panel/Recopier']);
         break;
+      case 'Memory':
+        this.getMemory()!.nbTile = this.memory_nbTile;
+        this.getMemory()!.setting = this.memory_settings;
+        this.getMemory()!.bg_color = this.memory_bg_color;
+        this.getMemory()!.text_color = this.memory_text_color;
+        this.getMemory()!.good_answer_color = this.memory_good_answer_color;
+        this.getMemory()!.wrong_answer_color = this.memory_wrong_answer_color ;
+        this.getMemory()!.color_progress_bar = this.memory_progress;
+        this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
+        this.router.navigate(['/panel/Memory']);
+        break;
     }
+
   }
 }
 

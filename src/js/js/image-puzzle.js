@@ -1,17 +1,23 @@
-﻿var images = [
+﻿
+var images = [
     { src: '../../assets/images/london-bridge.jpg', title: 'London Bridge' },
     { src: '../../assets/images/lotus-temple.JPG', title: 'Lotus Temple' },
     { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
     { src: '../../assets/images/statue-of-liberty.jpg', title: 'Statue Of Liberty' },
     { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
+    
 ];
-function lance() {
-    var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
-    imagePuzzle.startGame(images, gridSize);
+var lien = '../../assets/chat.jpg';
+var titre = 'Chat';
+var prochaine_image=0;
+images.push({ src:lien, title: titre});
+function lance(gridSize,imagess) {
+    //var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
+    imagePuzzle.startGame(imagess, gridSize);
 };
-function restart() {
+function restart(gridSize) {
     var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
-    imagePuzzle.startGame(images, gridSize);
+    imagePuzzle.startGame(imagess, gridSize);
 }
 function rules() {
     alert('Réorganiser pour créer une image comme celle-ci');
@@ -35,9 +41,9 @@ var imagePuzzle = {
         helper.doc('timerPanel').textContent = elapsedTime;
         timerFunction = setTimeout(imagePuzzle.tick, 1000);
     },
-    setImage: function (images, gridSize = 4) {
+    setImage: function (images, gridSize ) {
         var percentage = 100 / (gridSize - 1);
-        var image = images[Math.floor(Math.random() * images.length)];
+        var image = images[prochaine_image++];
         helper.doc('imgTitle').innerHTML = image.title;
         helper.doc('actualImage').setAttribute('src', image.src);
         helper.doc('sortable').innerHTML = '';
@@ -49,6 +55,7 @@ var imagePuzzle = {
             li.id = i;
             li.setAttribute('data-value', i);
             li.style.backgroundImage = 'url(' + image.src + ')';
+            
             li.style.backgroundSize = (gridSize * 100) + '%';
             li.style.backgroundPosition = xpos + ' ' + ypos;
             li.style.width = 400 / gridSize + 'px';
@@ -83,15 +90,22 @@ var imagePuzzle = {
                     helper.doc('stepCount').textContent = ++imagePuzzle.stepCount;
                     document.querySelector('.timeCount').textContent = (parseInt((now - imagePuzzle.startTime) / 1000, 10));
 
-                    if (isSorted(vals)) {
+                    if (isSorted(vals) && prochaine_image < images.length) {
                         // helper.doc('actualImageBox').style.display = 'none';
                         // helper.doc('gameOver').style.display = 'block';
+                        //helper.doc('actualImageBox').innerHTML = helper.doc('gameOver').innerHTML;
+                        //helper.doc('stepCount').textContent = imagePuzzle.stepCount;
+                        console.log(prochaine_image);
+                        restart();
+                    }
+                    else if(isSorted(vals) && prochaine_image>= images.length){
                         helper.doc('actualImageBox').innerHTML = helper.doc('gameOver').innerHTML;
                         helper.doc('stepCount').textContent = imagePuzzle.stepCount;
                     }
                 }
             };
             li.setAttribute('dragstart', 'true');
+            li.style.display= "inline-block";
             helper.doc('sortable').appendChild(li);
         }
         helper.shuffle('sortable');
