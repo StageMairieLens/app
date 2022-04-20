@@ -672,6 +672,20 @@ export class PanelComponent implements OnInit {
     })
   }
 
+  sortSessionDate(): void {
+    this.sessions.sort((s1: Session, s2: Session) => {
+      if(s1.date > s2.date) return -1;
+      if(s1.date < s2.date) return 1;
+      return 0;
+    })
+
+    this.sessionActive.sort((s1: Session, s2: Session) => {
+      if (s1.date > s2.date) return -1;
+      if (s1.date < s2.date) return 1;
+      return 0;
+    })
+  }
+
   showSessionActive(): void {
     this.showActive = true;
   }
