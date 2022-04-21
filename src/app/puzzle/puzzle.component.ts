@@ -22,40 +22,40 @@ interface donnee{
 })
 
 export class PuzzleComponent implements OnInit {
-  
-  
-  constructor() { 
+
+
+  constructor() {
     this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL');
     //this.r = null;
-      
+
   }
-  
+
   imagess = [
     { src: '../../assets/fleur.jpg', title: 'London Bridge' },
     { src: '../../assets/lion.jpg', title: 'Lotus Temple' }
-  
-    
+
+
 ];
 
-  decoupe : number = 2;
-  
+  decoupe : number = 3;
+
   ngOnInit(): void {
-  
+
     lance(this.decoupe,this.imagess);
-    
-    
+
+
     this.decoupe;
     console.log(images[0].title);
-   
+
   }
   restar(){
     restart(this.decoupe,this.imagess);
   }
 
-  
 
-  
-  
+
+
+
 
 
   typeEcriture: string = "CAPITAL"; // default
@@ -66,4 +66,4 @@ export class PuzzleComponent implements OnInit {
   }
 
 
-  
+
