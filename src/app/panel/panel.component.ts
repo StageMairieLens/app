@@ -317,6 +317,28 @@ export class PanelComponent implements OnInit {
                 this.abecedaire_isVocaliser = this.getAbecedaire()!.isVocaliser;
               }
             }
+            else if (this.selectedGame == 'Fille&Garçon') {
+              if(this.getBoyGirl()! == null) {
+                this.router.navigate(['/panel/Fille&Garçon']);
+              }else {
+                this.boygirl_listMotsFille = this.getBoyGirl()!.listMotsFille;
+                this.boygirl_listMotsGarcon = this.getBoyGirl()!.listMotsGarcon;
+                this.boygirl_bg_color_container = this.getBoyGirl()!.bg_color_container;
+                this.boygirl_bg_color_fille = this.getBoyGirl()!.bg_color_fille;
+                this.boygirl_bg_color_garcon = this.getBoyGirl()!.bg_color_garcon;
+                this.boygirl_bg_color_mot = this.getBoyGirl()!.bg_color_mot;
+                this.boygirl_word_color_fille = this.getBoyGirl()!.word_color_fille;
+                this.boygirl_word_color_garcon = this.getBoyGirl()!.word_color_garcon;
+                this.boygirl_word_color_mot = this.getBoyGirl()!.word_color_mot;
+                this.boygirl_title_color_fille = this.getBoyGirl()!.title_color_fille;
+                this.boygirl_title_color_garcon = this.getBoyGirl()!.title_color_garcon;
+                this.boygirl_title_color_mot = this.getBoyGirl()!.title_color_mot;
+                this.boygirl_text_color_fille = this.getBoyGirl()!.text_color_fille;
+                this.boygirl_text_color_garcon = this.getBoyGirl()!.text_color_garcon;
+                this.boygirl_text_color_mot = this.getBoyGirl()!.text_color_mot;
+                this.boygirl_type_ecriture = this.getBoyGirl()!.type_ecriture;
+              }
+            }
           }
         }
         else if (this.panel_option != 'create') {
@@ -996,6 +1018,14 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
+  getBoyGirl() : BoyGirl | null {
+    for(let bg of this.boygirl_list) {
+      if(bg.id == this.id_game) {
+        return bg;
+      }
+    }
+    return null;
+  }
 
   save(): void {
     switch (this.selectedGame) {
@@ -1052,6 +1082,25 @@ export class PanelComponent implements OnInit {
         this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
         this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
         this.router.navigate(['/panel/Abecedaire']);
+        break;
+      case 'Fille&Garçon' :
+        this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
+        this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
+        this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
+        this.getBoyGirl()!.bg_color_fille = this.boygirl_bg_color_fille;
+        this.getBoyGirl()!.bg_color_garcon = this.boygirl_bg_color_garcon;
+        this.getBoyGirl()!.bg_color_mot = this.boygirl_bg_color_mot;
+        this.getBoyGirl()!.word_color_fille = this.boygirl_word_color_fille;
+        this.getBoyGirl()!.word_color_garcon = this.boygirl_word_color_garcon;
+        this.getBoyGirl()!.word_color_mot = this.boygirl_word_color_mot;
+        this.getBoyGirl()!.title_color_fille = this.boygirl_title_color_fille;
+        this.getBoyGirl()!.title_color_garcon = this.boygirl_title_color_garcon;
+        this.getBoyGirl()!.title_color_mot = this.boygirl_title_color_mot;
+        this.getBoyGirl()!.text_color_fille = this.boygirl_text_color_fille;
+        this.getBoyGirl()!.text_color_garcon = this.boygirl_text_color_garcon;
+        this.getBoyGirl()!.text_color_mot = this.boygirl_text_color_mot;
+        this.getBoyGirl()!.type_ecriture = this.boygirl_type_ecriture;
+        this.router.navigate(['/panel/Fille&Garçon']);
         break;
     }
 
