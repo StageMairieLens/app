@@ -549,8 +549,8 @@ export class PanelComponent implements OnInit {
   }
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      this.liste_image_puzzle=this.imgPuzzle(this.selectedImages)
-      new Puzzle(this.liste_image_puzzle,this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
+      this.liste_image_puzzle=this.imgPuzzle(this.selectedImages);
+      this.puzzle=new Puzzle(this.liste_image_puzzle,this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe));
       this.puzzle_previsualiser = true;
     }
     else {
