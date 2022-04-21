@@ -20,9 +20,9 @@ export class PuzzleComponent implements OnInit {
   
   
   constructor() { 
-    //this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL',this.r.decoupe);
-    this.r = null;
-      
+    this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL',this.decoupe);
+    //this.r = null;
+    
   }
   
   imagess = [
@@ -36,7 +36,7 @@ export class PuzzleComponent implements OnInit {
   
   ngOnInit(): void {
   
-    lance(this.decoupe,this.r?.liste_images);
+    lance(this.r!.decoupe,this.r!.liste_images);
     
     
     this.decoupe;
@@ -44,7 +44,7 @@ export class PuzzleComponent implements OnInit {
    
   }
   restar(){
-    restart(this.decoupe,this.imagess);
+    restart(this.r!.decoupe,this.r!.liste_images);
   }
 
   
