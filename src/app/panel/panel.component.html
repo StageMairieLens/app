@@ -3714,6 +3714,30 @@
           </div>
         </div>
 
+        <div *ngIf="jeu_session.value == 'Recopier'">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.recopier_list">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div class="col-md-12 text-center sortButton">
           <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
             <i class="fa-solid fa-plus" style="margin-bottom : 1px"></i>
