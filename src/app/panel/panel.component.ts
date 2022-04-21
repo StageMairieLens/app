@@ -36,7 +36,7 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
-    
+
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -72,6 +72,11 @@ export class PanelComponent implements OnInit {
   id_game: number | null = null;
   session_id: number | null = null;
   panel_option: string | null = "";
+  create_session: boolean = false;
+
+  sortById: boolean = true;
+  sortByDate: boolean = false;
+  sortByNbJoueur: boolean = false;
 
 
 
@@ -149,6 +154,9 @@ export class PanelComponent implements OnInit {
   boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
   boygirl_form_step: number = 0;
+  boygirl_list : BoyGirl[] = [
+    new BoyGirl(['girl','girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
+  ];
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
@@ -376,6 +384,7 @@ export class PanelComponent implements OnInit {
       this.reconnaitre_list.splice(index, 1);
     }
   }
+
   previewPuzzle(r: Puzzle): void {
     this.puzzle = r;
     this.puzzle_previsualiser = true;
@@ -407,6 +416,23 @@ export class PanelComponent implements OnInit {
 
     if (index > -1) {
       this.abecedaire_list.splice(index, 1);
+    }
+  }
+
+  previewBoyGirl(bg: BoyGirl): void {
+    this.boygirl = bg;
+    this.boygirl_previsualiser = true;
+  }
+
+  quitPreviewBoyGirl(): void {
+    this.boygirl_previsualiser = false;
+  }
+
+  deleteGameBoyGirl(bg: BoyGirl): void {
+    let index = this.boygirl_list.indexOf(bg, 0);
+
+    if (index > -1) {
+      this.boygirl_list.splice(index, 1);
     }
   }
 
@@ -798,31 +824,113 @@ export class PanelComponent implements OnInit {
   }
 
   sortSessionId(): void {
-    this.sessions.sort((s1: Session, s2: Session) => {
-      if (s1.id > s2.id) return 1;
-      if (s1.id < s2.id) return -1;
-      return 0;
-    })
+    if(!this.sortById) {
+      this.sortById = true;
+      this.sortByDate = false;
+      this.sortByNbJoueur = false;
 
-    this.sessionActive.sort((s1: Session, s2: Session) => {
-      if (s1.id > s2.id) return 1;
-      if (s1.id < s2.id) return -1;
-      return 0;
-    })
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return 1;
+        if (s1.id < s2.id) return -1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return 1;
+        if (s1.id < s2.id) return -1;
+        return 0;
+      })
+    }
+    else {
+      this.sortById = false;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return -1;
+        if (s1.id < s2.id) return 1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return -1;
+        if (s1.id < s2.id) return 1;
+        return 0;
+      })
+    }
   }
 
   sortSessionDate(): void {
-    this.sessions.sort((s1: Session, s2: Session) => {
-      if (s1.date > s2.date) return -1;
-      if (s1.date < s2.date) return 1;
-      return 0;
-    })
+    if(!this.sortByDate) {
+      this.sortByDate = true;
+      this.sortById = false;
+      this.sortByNbJoueur = false;
 
-    this.sessionActive.sort((s1: Session, s2: Session) => {
-      if (s1.date > s2.date) return -1;
-      if (s1.date < s2.date) return 1;
-      return 0;
-    })
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.date > s2.date) return -1;
+        if(s1.date < s2.date) return 1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.date > s2.date) return -1;
+        if (s1.date < s2.date) return 1;
+        return 0;
+      })
+    }
+    else {
+      this.sortByDate = false;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.date > s2.date) return 1;
+        if(s1.date < s2.date) return -1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.date > s2.date) return 1;
+        if (s1.date < s2.date) return -1;
+        return 0;
+      })
+    }
+  }
+
+  sortSessionNbJoueur(): void {
+    if(!this.sortByNbJoueur) {
+      this.sortByDate = false;
+      this.sortById = false;
+      this.sortByNbJoueur = true;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.joueur.length > s2.joueur.length) return -1;
+        if(s1.joueur.length < s2.joueur.length) return 1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.joueur.length > s2.joueur.length) return -1;
+        if (s1.joueur.length < s2.joueur.length) return 1;
+        return 0;
+      })
+    }
+    else {
+      this.sortByNbJoueur = false;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.joueur.length > s2.joueur.length) return 1;
+        if(s1.joueur.length < s2.joueur.length) return -1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.joueur.length > s2.joueur.length) return 1;
+        if (s1.joueur.length < s2.joueur.length) return -1;
+        return 0;
+      })
+    }
+  }
+
+  createSession(jeu: string, nom: string): void {
+    // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
+    this.create_session = false;
   }
 
   showSessionActive(): void {
@@ -845,6 +953,10 @@ export class PanelComponent implements OnInit {
   }
   redirectEditAbecedaire(a: Abecedaire): void {
     window.location.href = '/panel/Abecedaire/edit/' + a.id;
+  }
+
+  redirectEditBoyGirl(bg : BoyGirl) : void {
+    window.location.href= '/panel/Fille&Garçon/edit/' + bg.id;
   }
 
   getRecopier(): Recopier | null {
