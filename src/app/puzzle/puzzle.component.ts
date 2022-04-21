@@ -32,11 +32,11 @@ export class PuzzleComponent implements OnInit {
     
 ];
 
-  decoupe : number = 4;
+  decoupe : number = 2;
   
   ngOnInit(): void {
   
-    lance(this.decoupe,this.r!.liste_images);
+    lance(this.r!.decoupe,this.r!.liste_images);
     
     
     this.decoupe;
@@ -44,7 +44,7 @@ export class PuzzleComponent implements OnInit {
    
   }
   restar(){
-    restart(this.decoupe,this.r!.liste_images);
+    restart(this.r!.decoupe,this.r!.liste_images);
   }
 
   

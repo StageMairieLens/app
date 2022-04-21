@@ -54,7 +54,7 @@
 }
 
 #collage #playPanel {
-    background-color:#c2defc;
+    
     padding:10px 0px;
     margin: 10px auto;
     max-width:800px;
@@ -84,13 +84,13 @@
 
 #collage img#actualImage{
     display: inline-block;
-    border:2px solid #a46;
+    border:2px solid ;
     height:280px;
     width:280px;
 }
 
 #collage #sortable {
-    border:2px solid #a46;
+    border:2px solid ;
     list-style-type: none;
     display: inline-block;
     margin: 0;
@@ -110,8 +110,8 @@
     }
 
 #collage button  {
-    background-color:blue;
-    border:1px solid #cce;
+    
+    border:1px solid ;
     display: inline;
     font-size: 14px;
     height: auto;
