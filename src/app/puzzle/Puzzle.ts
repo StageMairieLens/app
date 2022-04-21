@@ -12,10 +12,10 @@ export class Puzzle {
   button_text_color: string;
 
   text_color : string;
-
+ 
   typeEcriture: string;
-
-  constructor(liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string) {
+  decoupe : number;
+  constructor(liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string,decoupe:number) {
     this.id = Puzzle.nb++;
     this.liste_images = liste_images;
     this.bg_color = bg_color;
@@ -25,6 +25,7 @@ export class Puzzle {
     this.button_text_color = button_text_color;
     this.text_color = text_color;
     this.typeEcriture = typeEcriture;
+    this.decoupe=decoupe;
   }
   
 

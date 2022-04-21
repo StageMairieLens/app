@@ -8,12 +8,7 @@ declare function restart(gridsize:number,imagess:any):any;
 declare function rules():any;
 declare function lance(gridsize:number,imagess:any):any;
 declare var images : any;
-interface donnee{
-  src:string;
-  nr:string;
-  a:string;
-  b:string;
-}
+
 @Component({
   selector: 'app-puzzle',
   templateUrl: './puzzle.component.html',
@@ -22,40 +17,40 @@ interface donnee{
 })
 
 export class PuzzleComponent implements OnInit {
-
-
-  constructor() {
-    this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL');
-    //this.r = null;
-
+  
+  
+  constructor() { 
+    //this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL',this.r.decoupe);
+    this.r = null;
+      
   }
-
+  
   imagess = [
     { src: '../../assets/fleur.jpg', title: 'London Bridge' },
     { src: '../../assets/lion.jpg', title: 'Lotus Temple' }
-
-
+  
+    
 ];
 
-  decoupe : number = 3;
-
+  decoupe : number = 2;
+  
   ngOnInit(): void {
-
-    lance(this.decoupe,this.imagess);
-
-
+  
+    lance(this.decoupe,this.r?.liste_images);
+    
+    
     this.decoupe;
     console.log(images[0].title);
-
+   
   }
   restar(){
     restart(this.decoupe,this.imagess);
   }
 
+  
 
-
-
-
+  
+  
 
 
   typeEcriture: string = "CAPITAL"; // default
@@ -66,4 +61,4 @@ export class PuzzleComponent implements OnInit {
   }
 
 
-
+  
