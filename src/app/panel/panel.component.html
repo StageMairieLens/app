@@ -359,12 +359,12 @@
 
         <!-- Formulaire Recopier - Menu de navigation par étape -->
         <div class="align-bottom" style="margin : 10px">
-          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
             (click)="previousStep()">
             <i class="fa-solid fa-angles-left"></i>
             Etape précédente
           </button>
-          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right ; border : none"
             (click)="nextStep()">
             Etape suivante
             <i class="fa-solid fa-angles-right"></i>
@@ -653,12 +653,12 @@
 
         <!-- Formulaire Fille Garçon - Menu de navigation par étape -->
         <div class="align-bottom" style="margin : 10px">
-          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
             (click)="previousStepBoyGirl()">
             <i class="fa-solid fa-angles-left"></i>
             Etape précédente
           </button>
-          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right ; border : none"
             (click)="nextStepBoyGirl()">
             Etape suivante
             <i class="fa-solid fa-angles-right"></i>
@@ -960,13 +960,13 @@
 
           <!--Formulaire Reconnaite -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -1253,13 +1253,13 @@
 
           <!--Formulaire Abecedaire -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -1553,13 +1553,13 @@
 
           <!--Formulaire Memory -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -1777,13 +1777,13 @@
 
           <!--Formulaire Puzzle -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -2167,7 +2167,91 @@
       </div>
     </div>
 
-    div
+    <!-- Liste des jeux Fille&Garçon -->
+    <div *ngIf="this.selectedGame == 'Fille&Garçon'">
+
+      <div *ngIf="this.boygirl_list.length != 0">
+
+        <!-- Prévisualisation -->
+        <div *ngIf="this.boygirl_previsualiser">
+
+          <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="quitPreviewBoyGirl()" mat-raised-button
+                color="warn">
+                <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-boy-girl-game [showTitle]="false" [bg]="this.boygirl"></app-boy-girl-game>
+        </div>
+
+
+        <!-- Listes des jeux -->
+        <div *ngIf="!this.boygirl_previsualiser">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par','Actions']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.boygirl_list">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
+                <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
+                <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+                <!-- Actions -->
+                <th class="button_actions">
+                  <!-- Prévisualiser le jeu -->
+                  <button mat-raised-button title="Prévisualiser le jeu" color="primary"
+                    (click)="previewBoyGirl(element)">
+                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Editer le jeu -->
+                  <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                    color="primary" (click)="redirectEditBoyGirl(element)">
+                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Supprimer le jeu -->
+                  <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                    (click)="deleteGameBoyGirl(element)">
+                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+                  <!-- Démarrer une séssion à partir de ce jeu -->
+                  <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                    style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+
+                </th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- Si la liste des jeu Fille&Garçon est vide -->
+      <div class="text-center" *ngIf="this.boygirl_list.length == 0">
+        <h5 class="card-title" style="color : red">Il n'y a pas de jeu {{this.selectedGame}} créer</h5>
+      </div>
+    </div>
+
 
 
 
@@ -2475,13 +2559,13 @@
 
           <!-- Formulaire Recopier - Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -3102,12 +3186,12 @@
             <!--Formulaire Reconnaite -  Menu de navigation par étape -->
             <div class="align-bottom" style="margin : 10px">
               <button type="button" class="btn btn-primary align-left"
-                style="background : rgb(13, 197, 13); float : left" (click)="previousStep()">
+                style="background : rgb(13, 197, 13); float : left; border : none" (click)="previousStep()">
                 <i class="fa-solid fa-angles-left"></i>
                 Etape précédente
               </button>
               <button type="button" class="btn btn-primary align-right"
-                style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+                style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
                 Etape suivante
                 <i class="fa-solid fa-angles-right"></i>
               </button>
@@ -3406,13 +3490,13 @@
 
             <!--Formulaire Abecedaire -  Menu de navigation par étape -->
             <div class="align-bottom" style="margin : 10px">
-              <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+              <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
                 (click)="previousStep()">
                 <i class="fa-solid fa-angles-left"></i>
                 Etape précédente
               </button>
               <button type="button" class="btn btn-primary align-right"
-                style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+                style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
                 Etape suivante
                 <i class="fa-solid fa-angles-right"></i>
               </button>

@@ -4,6 +4,7 @@ export class BoyGirl {
 
   listMotsFille : string[] = [];
   listMotsGarcon : string[] = [];
+  date : Date;
 
   bg_color_fille : string;
   bg_color_garcon: string;
@@ -28,6 +29,7 @@ export class BoyGirl {
 
   constructor(listMotsFille : string[], listMotsGarcon : string[],bg_color_container : string,bg_color_fille : string,bg_color_garcon : string,bg_color_mot : string, word_color_fille : string, word_color_garcon : string, word_color_mot : string,title_color_fille : string,title_color_garcon : string,title_color_mot : string,text_color_fille : string,text_color_garcon : string,text_color_mot : string,type_ecriture : string) {
     this.id = BoyGirl.nb++;
+    this.date = new Date();
     this.listMotsFille = listMotsFille;
     this.listMotsGarcon = listMotsGarcon;
     this.bg_color_container = bg_color_container;

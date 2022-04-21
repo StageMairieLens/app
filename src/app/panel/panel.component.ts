@@ -36,7 +36,7 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
-    
+
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -148,6 +148,9 @@ export class PanelComponent implements OnInit {
   boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
   boygirl_form_step: number = 0;
+  boygirl_list : BoyGirl[] = [
+    new BoyGirl(['girl','girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
+  ];
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
@@ -375,6 +378,7 @@ export class PanelComponent implements OnInit {
       this.reconnaitre_list.splice(index, 1);
     }
   }
+
   previewPuzzle(r: Puzzle): void {
     this.puzzle = r;
     this.puzzle_previsualiser = true;
@@ -406,6 +410,23 @@ export class PanelComponent implements OnInit {
 
     if (index > -1) {
       this.abecedaire_list.splice(index, 1);
+    }
+  }
+
+  previewBoyGirl(bg: BoyGirl): void {
+    this.boygirl = bg;
+    this.boygirl_previsualiser = true;
+  }
+
+  quitPreviewBoyGirl(): void {
+    this.boygirl_previsualiser = false;
+  }
+
+  deleteGameBoyGirl(bg: BoyGirl): void {
+    let index = this.boygirl_list.indexOf(bg, 0);
+
+    if (index > -1) {
+      this.boygirl_list.splice(index, 1);
     }
   }
 
@@ -843,6 +864,10 @@ export class PanelComponent implements OnInit {
   }
   redirectEditAbecedaire(a: Abecedaire): void {
     window.location.href = '/panel/Abecedaire/edit/' + a.id;
+  }
+
+  redirectEditBoyGirl(bg : BoyGirl) : void {
+    window.location.href= '/panel/Fille&Garçon/edit/' + bg.id;
   }
 
   getRecopier(): Recopier | null {
