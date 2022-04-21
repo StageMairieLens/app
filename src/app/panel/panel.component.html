@@ -2486,7 +2486,7 @@
     <div class="card container">
       <h5 class="card-header">Sessions</h5>
       <div class="card-body text-center">
-        <div *ngIf="this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')">
+        <div *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')) && !this.create_session">
           <h2 class="card-title">Liste des sessions</h2>
 
           <div class="col-md-12 text-center sortButton">
@@ -2497,6 +2497,10 @@
             <button mat-raised-button style="background-color : red" (click)="sortSessionDate()" color="primary">
               <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
               <span>Trier par date</span>
+            </button>
+            <button mat-raised-button style="background-color : red" (click)="sortSessionNbJoueur()" color="primary">
+              <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
+              <span>Trier par nombre de joueur</span>
             </button>
 
             <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
@@ -2511,7 +2515,10 @@
               <span>Afficher toutes les sesssions</span>
             </button>
 
-
+            <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true" color="primary">
+              <i class="fa-solid fa-plus fa-xl" style="margin-bottom : 2px"></i>
+              <span>Créer une session</span>
+            </button>
 
           </div>
 
@@ -2629,6 +2636,47 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <div *ngIf="this.create_session">
+          <div class="col-md-12 text-center sortButton">
+            <button mat-raised-button style="background-color : red" (click)="this.create_session = false" color="primary">
+              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+              <span>Retourner sur les sessions</span>
+            </button>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-2 text-center">
+              <label for="nom_session" class="form-label align-middle">Nom de la session</label>
+            </div>
+            <div class="col-md-10 text-center">
+              <input type="text" class="form-control" #nom_session title="Nom de la session">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-2 text-center">
+              <label for="jeu_session" class="form-label align-middle">Jeu</label>
+            </div>
+            <div class="col-md-10 text-center">
+              <select class="form-control" aria-label="Default select example" #jeu_session>
+                <option class="text-center">Recopier</option>
+                <option class="text-center">Memory</option>
+                <option class="text-center">Reconnaitre</option>
+                <option class="text-center">Abecedaire</option>
+                <option class="text-center">FilleEtGarcon</option>
+                <option class="text-center">Puzzle</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-12 text-center sortButton">
+            <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
+              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+              <span>Créer la sessions</span>
+            </button>
           </div>
         </div>
 
