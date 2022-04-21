@@ -14,33 +14,40 @@
   font-size: 32px;
 }
 
-.input-join input{
-  width : 75%;
-  height : 70px;
-  font-size : 32px;
-  text-align : center;
-  margin-top : 2%;
+.input-join input {
+  width: 75%;
+  height: 70px;
+  font-size: 32px;
+  text-align: center;
+  margin-top: 2%;
 }
 
 .input-join button {
-  border-radius : 10%;
-  width : 8%;
-  font-size : 40px;
-  height : 70px;
-  margin-left : 0.5%;
-  margin-bottom : 2%;
-  background : green;
+  border-radius: 10%;
+  width: 8%;
+  font-size: 40px;
+  height: 70px;
+  margin-left: 0.5%;
+  margin-bottom: 2%;
+  background: green;
 }
 
 .input-join {
-  width : 100%;
-  margin-bottom : 2%;
-  align-items : center;
-  text-align : center;
+  width: 100%;
+  margin-bottom: 2%;
+  align-items: center;
+  text-align: center;
 }
 
 .card-img-top {
-  width : 600px;
-  height : 300px;
-  border : grey solid 4px
+  width: 600px;
+  height: 300px;
+  border: grey solid 4px
+}
+
+
+.redirect_button button {
+  width: 500px;
+  height: 90px;
+  font-size: 40px;
 }

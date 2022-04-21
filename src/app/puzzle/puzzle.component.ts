@@ -18,7 +18,7 @@ interface donnee{
   selector: 'app-puzzle',
   templateUrl: './puzzle.component.html',
   styleUrls: ['./puzzle.component.css'],
-  
+
 })
 
 export class PuzzleComponent implements OnInit {
@@ -51,34 +51,19 @@ export class PuzzleComponent implements OnInit {
   restar(){
     restart(this.decoupe,this.imagess);
   }
-  
-  
-  
-  alea(li: donnee[]): void {
 
-    var m = li.length, name, src, i;
-
-    // While there remain elements to shuffle
-    while (m) {
-      // Pick a remaining element…
-      i = Math.floor(Math.random() * m--);
-
-      // And swap it with the current element.
-      name = li[m];
-      li[m] = li[i];
-      li[i] = name;
-    }
-  }
-    
   
+
+  
+  
+
+
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Puzzle | null;
   @Input() showTitle : boolean = true;
-  
-  
-  
+
+
   }
 
- 
 
- 
+  

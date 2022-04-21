@@ -6,6 +6,7 @@ export class Abecedaire {
     static nb: number = 0;
   
     images: Image[];
+    date : Date;
     bg_color: string;
     text_color: string;
   
@@ -24,6 +25,7 @@ export class Abecedaire {
     constructor(images: Image[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, isVocaliser: boolean, typeEcriture: string) {
       this.id = Abecedaire.nb++;
       this.images = images;
+      this.date = new Date();
       this.bg_color = bg_color;
       this.text_color = text_color;
       this.good_answer_color = good_answer_color;
