@@ -4,7 +4,7 @@ import { Image } from '../Image'
 export class Puzzle {
   id: number;
   static nb: number = 0;
-  liste_images: Image[];
+  liste_images: any = [];
   bg_color: string;
   title_color: string;
 
@@ -15,7 +15,7 @@ export class Puzzle {
 
   typeEcriture: string;
 
-  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string) {
+  constructor(liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string) {
     this.id = Puzzle.nb++;
     this.liste_images = liste_images;
     this.bg_color = bg_color;

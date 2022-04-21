@@ -34,6 +34,7 @@
     <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
 </div>
+    
     <div id="collage"  class="text-center">
 
         <hr />
@@ -51,10 +52,10 @@
                         Time Taken: <span id="timerPanel"></span> secs
                     </div>
                     <img id="actualImage" />
-                    <div [ngStyle]="{background : this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
+                    <div [ngStyle]="{background: this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
                     <p id="levelPanel">
                         <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
-                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.button_text_color}">Easy</label>
+                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
                         <!-- mettre une variable dans value pour modifier la difficulter-->
 
 
@@ -81,6 +82,7 @@
 
 
     </div>
+    
 
 
 </body>

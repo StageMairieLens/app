@@ -36,11 +36,18 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
+    
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
-
+  liste_image_puzzle:any=[];
+  imgPuzzle(li:Image[]):any{
+    for(var i=0;i<li.length;i++){
+      this.liste_image_puzzle.push({src:li[i].src,title:li[i].nom});
+    }
+    return this.liste_image_puzzle;
+  }
   progressValue: Progress[] = [
     Progress.Blue,
     Progress.Green,
@@ -115,7 +122,10 @@ export class PanelComponent implements OnInit {
   puzzle_button_text_color: string = "#ffffff";
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
-
+  puzzle_previsualiser: boolean = false;
+  puzzle_list:Puzzle[]=[
+  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+  ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
   boygirl_listMotsFille: string[] = [];
@@ -243,6 +253,7 @@ export class PanelComponent implements OnInit {
                   this.memory_wrong_answer_color = this.getMemory()!.wrong_answer_color;
                   this.memory_progress = this.getMemory()!.color_progress_bar;
                   this.memory_tmp_affichage = this.getMemory()!.tmpAffichage;
+                
               }
             }
           }
@@ -310,6 +321,22 @@ export class PanelComponent implements OnInit {
 
     if (index > -1) {
       this.reconnaitre_list.splice(index, 1);
+    }
+  }
+  previewPuzzle(r: Puzzle): void {
+    this.puzzle = r;
+    this.puzzle_previsualiser = true;
+  }
+
+  quitPreviewPuzzle(): void {
+    this.puzzle_previsualiser = false;
+  }
+
+  deleteGamePuzzle(r: Puzzle): void {
+    let index = this.puzzle_list.indexOf(r, 0);
+
+    if (index > -1) {
+      this.puzzle_list.splice(index, 1);
     }
   }
 
@@ -418,6 +445,20 @@ export class PanelComponent implements OnInit {
     else {
       this.reconnaitre = null;
       this.reconnaitre_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
+    }
+  }
+  setPrevisualiserPuzzle(prev: boolean): void {
+    if (prev == true) {
+      new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+      this.puzzle_previsualiser = true;
+    }
+    else {
+      this.puzzle = null;
+      this.puzzle_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
@@ -723,6 +764,9 @@ export class PanelComponent implements OnInit {
 
   redirectEditReconnaitre(r: Reconnaitre): void {
     window.location.href = '/panel/Reconnaitre/edit/' + r.id;
+  }
+  redirectEditPuzzle(r: Puzzle): void {
+    window.location.href = '/panel/Puzzle/edit/' + r.id;
   }
 
   getRecopier(): Recopier | null {
