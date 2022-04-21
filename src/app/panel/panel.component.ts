@@ -72,6 +72,11 @@ export class PanelComponent implements OnInit {
   id_game: number | null = null;
   session_id: number | null = null;
   panel_option: string | null = "";
+  create_session: boolean = false;
+
+  sortById: boolean = true;
+  sortByDate: boolean = false;
+  sortByNbJoueur: boolean = false;
 
 
 
@@ -125,8 +130,9 @@ export class PanelComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
+  decoupe:string='';
   puzzle_list:Puzzle[]=[
-  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
   ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
@@ -565,7 +571,8 @@ export class PanelComponent implements OnInit {
   }
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+      this.liste_image_puzzle=this.imgPuzzle(this.selectedImages)
+      new Puzzle(this.liste_image_puzzle,this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
       this.puzzle_previsualiser = true;
     }
     else {
@@ -839,31 +846,113 @@ export class PanelComponent implements OnInit {
   }
 
   sortSessionId(): void {
-    this.sessions.sort((s1: Session, s2: Session) => {
-      if (s1.id > s2.id) return 1;
-      if (s1.id < s2.id) return -1;
-      return 0;
-    })
+    if(!this.sortById) {
+      this.sortById = true;
+      this.sortByDate = false;
+      this.sortByNbJoueur = false;
 
-    this.sessionActive.sort((s1: Session, s2: Session) => {
-      if (s1.id > s2.id) return 1;
-      if (s1.id < s2.id) return -1;
-      return 0;
-    })
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return 1;
+        if (s1.id < s2.id) return -1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return 1;
+        if (s1.id < s2.id) return -1;
+        return 0;
+      })
+    }
+    else {
+      this.sortById = false;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return -1;
+        if (s1.id < s2.id) return 1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.id > s2.id) return -1;
+        if (s1.id < s2.id) return 1;
+        return 0;
+      })
+    }
   }
 
   sortSessionDate(): void {
-    this.sessions.sort((s1: Session, s2: Session) => {
-      if (s1.date > s2.date) return -1;
-      if (s1.date < s2.date) return 1;
-      return 0;
-    })
+    if(!this.sortByDate) {
+      this.sortByDate = true;
+      this.sortById = false;
+      this.sortByNbJoueur = false;
 
-    this.sessionActive.sort((s1: Session, s2: Session) => {
-      if (s1.date > s2.date) return -1;
-      if (s1.date < s2.date) return 1;
-      return 0;
-    })
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.date > s2.date) return -1;
+        if(s1.date < s2.date) return 1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.date > s2.date) return -1;
+        if (s1.date < s2.date) return 1;
+        return 0;
+      })
+    }
+    else {
+      this.sortByDate = false;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.date > s2.date) return 1;
+        if(s1.date < s2.date) return -1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.date > s2.date) return 1;
+        if (s1.date < s2.date) return -1;
+        return 0;
+      })
+    }
+  }
+
+  sortSessionNbJoueur(): void {
+    if(!this.sortByNbJoueur) {
+      this.sortByDate = false;
+      this.sortById = false;
+      this.sortByNbJoueur = true;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.joueur.length > s2.joueur.length) return -1;
+        if(s1.joueur.length < s2.joueur.length) return 1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.joueur.length > s2.joueur.length) return -1;
+        if (s1.joueur.length < s2.joueur.length) return 1;
+        return 0;
+      })
+    }
+    else {
+      this.sortByNbJoueur = false;
+
+      this.sessions.sort((s1: Session, s2: Session) => {
+        if(s1.joueur.length > s2.joueur.length) return 1;
+        if(s1.joueur.length < s2.joueur.length) return -1;
+        return 0;
+      })
+
+      this.sessionActive.sort((s1: Session, s2: Session) => {
+        if (s1.joueur.length > s2.joueur.length) return 1;
+        if (s1.joueur.length < s2.joueur.length) return -1;
+        return 0;
+      })
+    }
+  }
+
+  createSession(jeu: string, nom: string): void {
+    // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
+    this.create_session = false;
   }
 
   showSessionActive(): void {
