@@ -8,12 +8,7 @@ declare function restart(gridsize:number,imagess:any):any;
 declare function rules():any;
 declare function lance(gridsize:number,imagess:any):any;
 declare var images : any;
-interface donnee{
-  src:string;
-  nr:string;
-  a:string;
-  b:string;
-}
+
 @Component({
   selector: 'app-puzzle',
   templateUrl: './puzzle.component.html',
@@ -25,8 +20,8 @@ export class PuzzleComponent implements OnInit {
   
   
   constructor() { 
-    this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL');
-    //this.r = null;
+    //this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','CAPITAL',this.r.decoupe);
+    this.r = null;
       
   }
   
@@ -41,7 +36,7 @@ export class PuzzleComponent implements OnInit {
   
   ngOnInit(): void {
   
-    lance(this.decoupe,this.imagess);
+    lance(this.decoupe,this.r?.liste_images);
     
     
     this.decoupe;

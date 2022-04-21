@@ -125,8 +125,9 @@ export class PanelComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
+  decoupe:string='';
   puzzle_list:Puzzle[]=[
-  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
   ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
@@ -522,7 +523,8 @@ export class PanelComponent implements OnInit {
   }
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+      this.liste_image_puzzle=this.imgPuzzle(this.selectedImages)
+      new Puzzle(this.liste_image_puzzle,this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
       this.puzzle_previsualiser = true;
     }
     else {

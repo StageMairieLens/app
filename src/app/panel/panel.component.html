@@ -1653,7 +1653,7 @@
 
           <!-- Etape du formulaire 2 -- Choix des couleurs -->
           <div *ngIf="this.formStep == 1">
-            <h2 class="card-title">Choississez les couleurs du jeu</h2>
+            <h2 class="card-title">Choississez les couleurs du jeu et le nombre de decoupe</h2>
 
             <form>
 
@@ -1687,8 +1687,19 @@
                       title="Choisissez la couleur du titre">
                   </label>
                 </div>
+                
 
 
+              </div>
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="puzzle_decoupe" class="form-label align-middle">Nombre decoupe
+                    <input type="number" class="form-control form-control-color"
+                      (change)="this.decoupe = puzzle_decoupe.value "
+                      #puzzle_decoupe value="{{this.decoupe}}"
+                      title="Choisissez le nombre de decoupe">
+                  </label>
+                </div>
               </div>
 
               <div class="form-row">
