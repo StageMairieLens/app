@@ -13,7 +13,7 @@ export class SessionsComponent implements OnInit {
 
   session_id: number | null = null;
   join: boolean = false;
-  timer_redirect : number = 5;
+  timer_redirect: number = 5;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -28,22 +28,22 @@ export class SessionsComponent implements OnInit {
           else {
             setTimeout(() => {
               this.timer_redirect--
-            },1000);
+            }, 1000);
             setTimeout(() => {
               this.timer_redirect--
-            },2000);
+            }, 2000);
             setTimeout(() => {
               this.timer_redirect--
-            },3000);
+            }, 3000);
             setTimeout(() => {
               this.timer_redirect--
-            },4000);
+            }, 4000);
             setTimeout(() => {
               this.timer_redirect--
-            },5000);
+            }, 5000);
             setTimeout(() => {
               this.router.navigate(['']);
-            },6000);
+            }, 6000);
           }
         }
       }
@@ -67,28 +67,28 @@ export class SessionsComponent implements OnInit {
 
   enterKey($event: KeyboardEvent): void {
     if ($event.key == 'Enter') {
-      this.getSession()!.joueur.push((new Users((<HTMLInputElement>$event.target)!.value,Session.number,0,0)));
+      this.getSession()!.joueur.push((new Users((<HTMLInputElement>$event.target)!.value, Session.number, 0, 0)));
     }
   }
 
-  addUser(name : string) : void {
-    this.getSession()!.joueur.push((new Users(name,Session.number,0,0)));
+  addUser(name: string): void {
+    this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
   }
 
-  deleteUser(str : string): void {
+  deleteUser(str: string): void {
 
   }
 
   static data: Session[] = [
-    new Session('test', new Date(), Game.Recopier, false,[]),
-    new Session('test2', new Date(), Game.Memory, true,[
-      new Users('test3',Session.number,0,50),
+    new Session('test', new Date(), Game.Recopier, false, []),
+    new Session('test2', new Date(), Game.Memory, true, [
+      new Users('test3', Session.number, 0, 50),
       new Users('Timmy', Session.number, 20, 10)
     ]),
-    new Session('test3', new Date('1978-4-11'), Game.Abecedaire, false,[]),
-    new Session('test4', new Date(), Game.Memory, true,[]),
-    new Session('test5', new Date(), Game.Memory, true,[]),
-    new Session('test6', new Date(), Game.Memory, true,[]),
+    new Session('test3', new Date('1978-4-11'), Game.Abecedaire, false, []),
+    new Session('test4', new Date(), Game.Memory, true, []),
+    new Session('test5', new Date(), Game.Memory, true, []),
+    new Session('test6', new Date(), Game.Memory, true, []),
   ];
 
 }

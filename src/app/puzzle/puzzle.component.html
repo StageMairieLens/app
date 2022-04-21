@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head>
-    <title>Image Puzzle</title>
-
-</head>
-
 <body>
 
 <div class="text-center">
     <h1 class="title" >
-        <span>I</span>
-        <span>M</span>
-        <span>A</span>
-        <span>G</span>
-        <span>E</span>
-        <span> </span>
         <span>P</span>
         <span>U</span>
         <span>Z</span>
@@ -24,6 +13,8 @@
         <span>E</span>
       </h1>
 </div>
+
+
 <div *ngIf="this.r == null" class="card align-middle container" id="card_error"
   style="width: 32rem; background-color: #3bb8c9; color : black">
   <img class="card-img-top image"
@@ -34,9 +25,9 @@
     <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
 </div>
+
     <div id="collage"  class="text-center">
 
-        <hr />
         <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
             <h3 id="imgTitle"></h3>
             <hr />
@@ -51,10 +42,10 @@
                         Time Taken: <span id="timerPanel"></span> secs
                     </div>
                     <img id="actualImage" />
-                    <div [ngStyle]="{background : this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
+                    <div [ngStyle]="{background: this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
                     <p id="levelPanel">
                         <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
-                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.button_text_color}">Easy</label>
+                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
                         <!-- mettre une variable dans value pour modifier la difficulter-->
 
 
@@ -81,6 +72,7 @@
 
 
     </div>
+
 
 
 </body>

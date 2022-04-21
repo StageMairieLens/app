@@ -18,6 +18,7 @@ export class RecopierGameComponent implements OnInit {
   image: Image[] = [];
   showImageCpt: number = 0;
   typeEcriture: string = "CAPITAL"; // default
+  waitToSend: boolean = false;
   @Input() r: Recopier | null;
   @Input() showTitle: boolean = true;
 
@@ -62,62 +63,74 @@ export class RecopierGameComponent implements OnInit {
   }
 
   sendAnswer(text: string, img: Image): void {
-    if (this.r!.typeEcriture == 'CAPITAL') {
-      if (text.toUpperCase() === img.getNom().toUpperCase()) {
-        document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
+    if(!this.waitToSend) {
+      this.waitToSend = true;
 
-        setTimeout(() => {
-          document.getElementById('card')!.animate([{ opacity: 1 },
-          { opacity: 0.1, offset: 0.7 },
-          { opacity: 1 }],
-            800);
-        }, 1000);
+      if (this.r!.typeEcriture == 'CAPITAL') {
+        if (text.toUpperCase() === img.getNom().toUpperCase()) {
+          document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
 
-        setTimeout(() => {
-          this.showImageCpt++;
-          document.getElementById('result')!.innerHTML = '';
-          (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
-          document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
+          setTimeout(() => {
+            document.getElementById('card')!.animate([{ opacity: 1 },
+            { opacity: 0.1, offset: 0.7 },
+            { opacity: 1 }],
+              800);
+          }, 1000);
 
-        },
-          1600);
+          setTimeout(() => {
+            this.showImageCpt++;
+            document.getElementById('result')!.innerHTML = '';
+            (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
+            document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
+            this.waitToSend = false;
+
+          },
+            1600);
+
+        } else {
+          document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
+          document.getElementById('card')?.animate([
+            { transform: 'translateX(0px)' },
+            { transform: 'translateX(-50px)' },
+            { transform: 'translateX(50px)' }
+          ], { duration: 200 }
+          );
+          this.waitToSend = false;
+
+        }
       } else {
-        document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
-        document.getElementById('card')?.animate([
-          { transform: 'translateX(0px)' },
-          { transform: 'translateX(-50px)' },
-          { transform: 'translateX(50px)' }
-        ], { duration: 200 }
-        );
+        if (text === img.getNom()) {
+          document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
+
+          setTimeout(() => {
+            document.getElementById('card')!.animate([{ opacity: 1 },
+            { opacity: 0.1, offset: 0.7 },
+            { opacity: 1 }],
+              800);
+          }, 1000);
+
+          setTimeout(() => {
+            this.showImageCpt++;
+            document.getElementById('result')!.innerHTML = '';
+            (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
+            document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
+            this.waitToSend = false;
+
+          },
+            1600);
+        } else {
+          document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
+          document.getElementById('card')?.animate([
+            { transform: 'translateX(0px)' },
+            { transform: 'translateX(-50px)' },
+            { transform: 'translateX(50px)' }
+          ], { duration: 200 }
+          );
+          this.waitToSend = false;
+
+        }
       }
-    } else {
-      if (text === img.getNom()) {
-        document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
 
-        setTimeout(() => {
-          document.getElementById('card')!.animate([{ opacity: 1 },
-          { opacity: 0.1, offset: 0.7 },
-          { opacity: 1 }],
-            800);
-        }, 1000);
-
-        setTimeout(() => {
-          this.showImageCpt++;
-          document.getElementById('result')!.innerHTML = '';
-          (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
-          document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
-
-        },
-          1600);
-      } else {
-        document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
-        document.getElementById('card')?.animate([
-          { transform: 'translateX(0px)' },
-          { transform: 'translateX(-50px)' },
-          { transform: 'translateX(50px)' }
-        ], { duration: 200 }
-        );
-      }
     }
 
   }

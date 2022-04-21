@@ -1,5 +1,5 @@
 <!-- Barre de navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/panel/sessions"><span matBadge="{{this.sessionActive.length}}"
       matBadgeColor="warn">Sessions</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -9,6 +9,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+
       <li class="nav-item">
         <a class="nav-link" href="/panel/create" id="navbarDropdown" role="button" aria-haspopup="true"
           aria-expanded="false">
@@ -34,6 +35,16 @@
     </form>
   </div>
 </nav>
+
+<!-- Panel - Page d'accueil -->
+<div class="card container" *ngIf="this.panel == null">
+  <h5 class="card-header">Bonjour {{'{'}}USER{{'}'}}</h5>
+  <div class="card-body text-center">
+    <h2 class="card-title">Que souhaitez vous faire ?</h2>
+    <mat-divider style="background : #ececec ; width : 40%; display : inline-block"></mat-divider>
+  </div>
+
+</div>
 
 <!-- Si /panel/create -->
 <div *ngIf="this.panel == 'create'">
@@ -348,12 +359,12 @@
 
         <!-- Formulaire Recopier - Menu de navigation par étape -->
         <div class="align-bottom" style="margin : 10px">
-          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
             (click)="previousStep()">
             <i class="fa-solid fa-angles-left"></i>
             Etape précédente
           </button>
-          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right ; border : none"
             (click)="nextStep()">
             Etape suivante
             <i class="fa-solid fa-angles-right"></i>
@@ -381,6 +392,7 @@
 
     <!-- Formulaire Fille Garcon -->
     <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
+
       <div *ngIf="!this.boygirl_previsualiser">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
           <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)" mat-raised-button
@@ -641,12 +653,12 @@
 
         <!-- Formulaire Fille Garçon - Menu de navigation par étape -->
         <div class="align-bottom" style="margin : 10px">
-          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+          <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
             (click)="previousStepBoyGirl()">
             <i class="fa-solid fa-angles-left"></i>
             Etape précédente
           </button>
-          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right"
+          <button type="button" class="btn btn-primary align-right" style="background : rgb(13, 197, 13); float : right ; border : none"
             (click)="nextStepBoyGirl()">
             Etape suivante
             <i class="fa-solid fa-angles-right"></i>
@@ -948,13 +960,13 @@
 
           <!--Formulaire Reconnaite -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -1241,13 +1253,13 @@
 
           <!--Formulaire Abecedaire -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -1541,13 +1553,13 @@
 
           <!--Formulaire Memory -  Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -1569,6 +1581,230 @@
           </div>
         </div>
         <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
+      </div>
+    </div>
+
+    <!-- Formulaire Puzzle -->
+    <div class="card-body" *ngIf="this.selectedGame == 'Puzzle'">
+
+
+      <!-- Formulaire Puzzle - Bouton de prévisualisation -->
+      <div *ngIf="!this.puzzle_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(true)"
+            mat-raised-button color="warn">
+            <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
+
+            Prévisualiser</button>
+        </div>
+
+        <!-- Formulaire Puzzle - Menu de navigation -->
+        <div class="stepMenu">
+          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item">
+                <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                  aria-label="Images" (click)="setFormStep(0)">
+                  <i class="fa-solid fa-images"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                  <i class="fa-solid fa-brush"></i>
+                </button>
+              </li>
+              <li class="breadcrumb-item">
+                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                  <i class="fa-solid fa-font"></i>
+                </button>
+              </li>
+            </ol>
+          </nav>
+        </div>
+
+
+        <!-- Formulaire Puzzle - Etape 1 : choix des images -->
+        <div *ngIf="this.selectedGame == 'Puzzle'">
+
+          <!-- Etape 1 : Choix des images -->
+          <div *ngIf="this.formStep == 0">
+            <h2 class="card-title text-center">Choisissez les images</h2>
+            <div class="card-body selectImage_container text-center align-top">
+              <h5 class="card-header" style="color : black">Listes des images</h5>
+              <figure class="figure" *ngFor="let image of this.liste_image">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
+
+            <div class="card-body selectImage_container text-center">
+              <h5 class="card-header" style="color : black">Images selectionné</h5>
+              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                selectionné
+                aucune image</h6>
+              <figure class="figure" *ngFor="let image of this.selectedImages">
+                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                  (click)="deleteImage(image)">
+                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+              </figure>
+            </div>
+          </div>
+
+
+          <!-- Etape du formulaire 2 -- Choix des couleurs -->
+          <div *ngIf="this.formStep == 1">
+            <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+            <form>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="puzzle_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.puzzle_bg_color = puzzle_bg_color_input.value "
+                      #puzzle_bg_color_input value="{{this.puzzle_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan">
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <label for="puzzle_text_color_input" class="form-label align-middle">Couleur du texte
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.puzzle_text_color = puzzle_text_color_input.value "
+                      #puzzle_text_color_input value="{{this.puzzle_text_color}}"
+                      title="Choisissez la couleur du texte">
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="col-md-6">
+                  <label for="puzzle_title_color_input" class="form-label align-middle">Couleur du titre
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.puzzle_title_color = puzzle_title_color_input.value "
+                      #puzzle_title_color_input value="{{this.puzzle_title_color}}"
+                      title="Choisissez la couleur du titre">
+                  </label>
+                </div>
+
+
+              </div>
+
+              <div class="form-row">
+
+
+
+                <div class="col-md-6">
+                  <label for="puzzle_button_bg_color_input" class="form-label align-middle">Couleur d'arriére
+                    plan
+                    du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.puzzle_button_bg_color = puzzle_button_bg_color_input.value "
+                      #puzzle_button_bg_color_input value="{{this.puzzle_button_bg_color}}"
+                      title="Choisissez la couleur d'arriére-plan du bouton">
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="puzzle_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                    bouton
+                    <input type="color" class="form-control form-control-color"
+                      (change)="this.puzzle_button_text_color = puzzle_button_text_color_input.value "
+                      #puzzle_button_text_color_input value="{{this.puzzle_button_text_color}}"
+                      title="Choisissez la couleur du texte du bouton">
+                  </label>
+                </div>
+              </div>
+
+
+
+            </form>
+          </div>
+
+
+          <!-- Etape du formulaire 3 -- Choix des textes -->
+          <div *ngIf="this.formStep == 2" style="text-align : center;">
+            <div class="form-row">
+              <div class="col-md-12">
+                <h2 class="card-title">Type d'écriture</h2>
+                <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                  <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CURSIF'" value="Cursif"
+                    (change)="this.puzzle_type_ecriture = 'CURSIF'"
+                    style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                  <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CURSIF'" value="Cursif"
+                    (change)="this.puzzle_type_ecriture = 'CURSIF'"
+                    style="font-family: cursiveFont; font-size: 40px">
+                    Cursif</mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CAPITAL'" value="Capital"
+                    (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CAPITAL'" value="Capital"
+                    (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                  </mat-radio-button>
+
+                  <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'SCRIPT'" value="Script"
+                    (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                  </mat-radio-button>
+                  <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'SCRIPT'" value="Script"
+                    (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+
+
+
+            <!-- Bouton de création du jeu -->
+            <div class="form-row align-middle text-center" align="center">
+              <div class="col-md-12 text-center">
+                <button class="validate_button align-middle text-center" (click)="create('Puzzle')"
+                  mat-raised-button>Créer le
+                  jeu
+                  <i class="fa-solid fa-check fa-lg"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!--Formulaire Puzzle -  Menu de navigation par étape -->
+          <div class="align-bottom" style="margin : 10px">
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
+              (click)="previousStep()">
+              <i class="fa-solid fa-angles-left"></i>
+              Etape précédente
+            </button>
+            <button type="button" class="btn btn-primary align-right"
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
+              Etape suivante
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <!-- Formulaire Puzzle - Prévisualisation -->
+      <div *ngIf="this.puzzle_previsualiser">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(false)"
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+              Quitter la prévisualisation</button>
+          </div>
+        </div>
+        <app-puzzle [r]="this.puzzle" [showTitle]="false"></app-puzzle>
       </div>
     </div>
 
@@ -1616,7 +1852,9 @@
           <table class="table table-hover text-center">
             <thead>
               <tr>
-                <th scope="col" *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">{{col}}</th>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">
+                  {{col}}</th>
               </tr>
             </thead>
 
@@ -1672,8 +1910,6 @@
       </div>
 
     </div>
-
-
 
     <!-- Liste des jeux Mémory -->
     <div *ngIf="this.selectedGame == 'Memory'">
@@ -1786,7 +2022,9 @@
           <table class="table table-hover text-center">
             <thead>
               <tr>
-                <th scope="col" *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">{{col}}</th>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">
+                  {{col}}</th>
               </tr>
             </thead>
 
@@ -1843,12 +2081,186 @@
 
     </div>
 
+    <!-- Liste des jeux Abecedaire -->
+    <div *ngIf="this.selectedGame == 'Abecedaire'">
+
+      <div *ngIf="this.abecedaire_list.length != 0">
+
+        <!-- Prévisualisation -->
+        <div *ngIf="this.abecedaire_previsualiser">
+
+          <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="quitPreviewAbecedaire()" mat-raised-button
+                color="warn">
+                <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-abecedaire [showTitle]="false" [game]="this.abecedaire"></app-abecedaire>
+        </div>
+
+
+        <!-- Listes des jeux -->
+        <div *ngIf="!this.abecedaire_previsualiser">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','Actions']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.abecedaire_list">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+                <!-- Actions -->
+                <th class="button_actions">
+                  <!-- Prévisualiser le jeu -->
+                  <button mat-raised-button title="Prévisualiser le jeu" color="primary"
+                    (click)="previewAbecedaire(element)">
+                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Editer le jeu -->
+                  <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                    color="primary" (click)="redirectEditAbecedaire(element)">
+                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Supprimer le jeu -->
+                  <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                    (click)="deleteGameAbecedaire(element)">
+                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+                  <!-- Démarrer une séssion à partir de ce jeu -->
+                  <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                    style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+
+                </th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- Si la liste des jeu Abecedaire est vide -->
+      <div class="text-center" *ngIf="this.abecedaire_list.length == 0">
+        <h5 class="card-title" style="color : red">Il n'y a pas de jeu {{this.selectedGame}} créer</h5>
+      </div>
+    </div>
+
+    <!-- Liste des jeux Fille&Garçon -->
+    <div *ngIf="this.selectedGame == 'Fille&Garçon'">
+
+      <div *ngIf="this.boygirl_list.length != 0">
+
+        <!-- Prévisualisation -->
+        <div *ngIf="this.boygirl_previsualiser">
+
+          <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="quitPreviewBoyGirl()" mat-raised-button
+                color="warn">
+                <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-boy-girl-game [showTitle]="false" [bg]="this.boygirl"></app-boy-girl-game>
+        </div>
+
+
+        <!-- Listes des jeux -->
+        <div *ngIf="!this.boygirl_previsualiser">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par','Actions']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.boygirl_list">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
+                <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
+                <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+                <!-- Actions -->
+                <th class="button_actions">
+                  <!-- Prévisualiser le jeu -->
+                  <button mat-raised-button title="Prévisualiser le jeu" color="primary"
+                    (click)="previewBoyGirl(element)">
+                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Editer le jeu -->
+                  <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                    color="primary" (click)="redirectEditBoyGirl(element)">
+                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                  </button>
+
+                  <!-- Supprimer le jeu -->
+                  <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                    (click)="deleteGameBoyGirl(element)">
+                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+                  <!-- Démarrer une séssion à partir de ce jeu -->
+                  <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                    style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+
+
+                </th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- Si la liste des jeu Fille&Garçon est vide -->
+      <div class="text-center" *ngIf="this.boygirl_list.length == 0">
+        <h5 class="card-title" style="color : red">Il n'y a pas de jeu {{this.selectedGame}} créer</h5>
+      </div>
+    </div>
+
+
+
+
   </div>
 
   <div *ngIf="this.panel_option == 'edit'">
 
 
-    <!-- Formulaire Recopier -->
+    <!-- Formulaire édition Recopier -->
     <div *ngIf="this.selectedGame == 'Recopier'">
       <h5 class="card-header">édition du jeu Recopier</h5>
       <div *ngIf="this.getRecopier() != null" class="card-body">
@@ -2147,13 +2559,13 @@
 
           <!-- Formulaire Recopier - Menu de navigation par étape -->
           <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left"
+            <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
               (click)="previousStep()">
               <i class="fa-solid fa-angles-left"></i>
               Etape précédente
             </button>
             <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right" (click)="nextStep()">
+              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
               Etape suivante
               <i class="fa-solid fa-angles-right"></i>
             </button>
@@ -2178,7 +2590,7 @@
       </div>
     </div>
 
-    <!-- Formulaire Memory -->
+    <!-- Formulaire édition Memory -->
     <div *ngIf="this.selectedGame == 'Memory'">
       <h5 class="card-header">édition du jeu Memory</h5>
       <div *ngIf="this.getMemory() != null" class="card-body">
@@ -2479,253 +2891,885 @@
       </div>
     </div>
 
+    <!-- Formulaire édition Reconnaite -->
+    <div *ngIf="this.selectedGame == 'Reconnaitre'">
+      <h5 class="card-header">édition du jeu Reconnaitre</h5>
+      <div class="card-body" *ngIf="this.getReconnaitre() != null">
+
+
+        <!-- Formulaire Reconnaitre - Bouton de prévisualisation -->
+        <div *ngIf="!this.reconnaitre_previsualiser">
+
+          <!-- Bouton précvisualisation & retour en arriére -->
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" [routerLink]="['/panel/Memory']" mat-raised-button
+              color="warn" style="float : left; position : absolute; display : block">
+              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+
+              Retour à la liste des jeux
+            </button>            
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
+
+              Prévisualiser</button>
+          </div>
+
+          <!-- Formulaire Reconnaitre - Menu de navigation -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+
+          <!-- Formulaire Reconnaitre -->
+          <div *ngIf="this.selectedGame == 'Reconnaitre'">
+
+            <!-- Etape 1 : Choix des images -->
+            <div *ngIf="this.formStep == 0">
+              <h2 class="card-title text-center">Choisissez les images</h2>
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+            </div>
+
+
+            <!-- Etape du formulaire 2 -- Choix des couleurs -->
+            <div *ngIf="this.formStep == 1">
+              <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+              <form>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="reconnaitre_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_bg_color = reconnaitre_bg_color_input.value "
+                        #reconnaitre_bg_color_input value="{{this.reconnaitre_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="reconnaitre_text_color_input" class="form-label align-middle">Couleur du texte
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_text_color = reconnaitre_text_color_input.value "
+                        #reconnaitre_text_color_input value="{{this.reconnaitre_text_color}}"
+                        title="Choisissez la couleur du texte">
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+
+                  <div class="col-md-6">
+                    <label for="reconnaitre_title_color_input" class="form-label align-middle">Couleur du titre
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_title_color = reconnaitre_title_color_input.value "
+                        #reconnaitre_title_color_input value="{{this.reconnaitre_title_color}}"
+                        title="Choisissez la couleur du titre">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="reconnaitre_good_answer_color_input" class="form-label align-middle">Couleur du message
+                      bonne
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_good_answer_color = reconnaitre_good_answer_color_input.value "
+                        #reconnaitre_good_answer_color_input value="{{this.reconnaitre_good_answer_color}}"
+                        title="Choisissez la couleur du message de bonne réponse">
+                    </label>
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+
+                  <div class="col-md-6">
+                    <label for="reconnaitre_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                      mauvaise
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_wrong_answer_color = reconnaitre_wrong_answer_color_input.value "
+                        #reconnaitre_wrong_answer_color_input value="{{this.reconnaitre_wrong_answer_color}}"
+                        title="Choisissez la couleur du message de mauvaise réponse">
+                    </label>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="reconnaitre_button_bg_color_input" class="form-label align-middle">Couleur d'arriére
+                      plan
+                      du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_button_bg_color = reconnaitre_button_bg_color_input.value "
+                        #reconnaitre_button_bg_color_input value="{{this.reconnaitre_button_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan du bouton">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="reconnaitre_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.reconnaitre_button_text_color = reconnaitre_button_text_color_input.value "
+                        #reconnaitre_button_text_color_input value="{{this.reconnaitre_button_text_color}}"
+                        title="Choisissez la couleur du texte du bouton">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4">
+                    <label for="progressValue" class="form-label align-middle">Couleur de la barre de
+                      progression</label>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example" #progressSelectValue
+                      (change)="changeProgressValue('Reconnaitre',progressSelectValue)">
+                      <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                        ng-selected="p == this.reconnaitre_progress" #progressValue>
+                        <p *ngIf="p == 'blue'">Bleu</p>
+                        <p *ngIf="p == 'green'">Vert</p>
+                        <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                        <p *ngIf="p == 'orange'">Orange</p>
+                        <p *ngIf="p == 'red'">Rouge</p>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'blue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'green' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'lightblue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'orange' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.reconnaitre_progress == 'red' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'
+                        style="width : 50%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+            <!-- Etape du formulaire 3 -- Choix des textes -->
+            <div *ngIf="this.formStep == 2" style="text-align : center;">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Type d'écriture</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CURSIF'" value="Cursif"
+                      (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+                      style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CURSIF'" value="Cursif"
+                      (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+                      style="font-family: cursiveFont; font-size: 40px">
+                      Cursif</mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CAPITAL'" value="Capital"
+                      (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CAPITAL'" value="Capital"
+                      (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                    </mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'SCRIPT'" value="Script"
+                      (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'SCRIPT'" value="Script"
+                      (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Vocalisation</h2>
+                  <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+                    style="margin-right : 2%; color : #ff4083"></i>
+                  <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+                    style="margin-right : 2%"></i>
+
+                  <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser"
+                    (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                  </mat-slide-toggle>
+                  <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
+                    style="margin-left : 2%; color : #ff4083"></i>
+                  <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+                </div>
+              </div>
+
+
+              <!-- Bouton de sauvegarde du jeu -->
+              <div class="form-row align-middle text-center" align="center">
+                <div class="col-md-12 text-center">
+                  <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder le
+                    jeu
+                    <i class="fa-solid fa-floppy-disk"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
+            <!--Formulaire Reconnaite -  Menu de navigation par étape -->
+            <div class="align-bottom" style="margin : 10px">
+              <button type="button" class="btn btn-primary align-left"
+                style="background : rgb(13, 197, 13); float : left; border : none" (click)="previousStep()">
+                <i class="fa-solid fa-angles-left"></i>
+                Etape précédente
+              </button>
+              <button type="button" class="btn btn-primary align-right"
+                style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
+                Etape suivante
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <!-- Formulaire Reconnaitre - Prévisualisation -->
+        <div *ngIf="this.reconnaitre_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(false)"
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire édition Abecedaire -->
+    <div *ngIf="this.selectedGame == 'Abecedaire'">
+      <h5 class="card-header">édition du jeu Abecedaire</h5>
+
+      <div class="card-body" *ngIf="this.getAbecedaire()! != null">
+
+
+        <!-- Formulaire Abecedaire - Bouton de prévisualisation -->
+        <div *ngIf="!this.abecedaire_previsualiser">
+
+          <!-- Bouton prévisualiser & retour en arrière -->
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <button class="prev-button align-middle text-center" [routerLink]="['/panel/Abecedaire']" mat-raised-button
+            color="warn" style="float : left; position : absolute; display : block">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+
+            Retour à la liste des jeux
+          </button>
+
+            <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(true)"
+              mat-raised-button color="warn">
+              <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
+              Prévisualiser</button>
+          </div>
+
+          <!-- Formulaire Abecedaire - Menu de navigation -->
+          <div class="stepMenu">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item">
+                  <button title="Images" style="background : white; color : black" mat-fab color="primary"
+                    aria-label="Images" (click)="setFormStep(0)">
+                    <i class="fa-solid fa-images"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+                    <i class="fa-solid fa-brush"></i>
+                  </button>
+                </li>
+                <li class="breadcrumb-item">
+                  <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+                    <i class="fa-solid fa-font"></i>
+                  </button>
+                </li>
+              </ol>
+            </nav>
+          </div>
+
+
+          <!-- Formulaire Reconnaitre -->
+          <div *ngIf="this.selectedGame == 'Abecedaire'">
+
+            <!-- Etape 1 : Choix des images -->
+            <div *ngIf="this.formStep == 0">
+              <h2 class="card-title text-center">Choisissez les images</h2>
+              <div class="card-body selectImage_container text-center align-top">
+                <h5 class="card-header" style="color : black">Listes des images</h5>
+                <figure class="figure" *ngFor="let image of this.liste_image">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+
+              <div class="card-body selectImage_container text-center">
+                <h5 class="card-header" style="color : black">Images selectionné</h5>
+                <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+                  selectionné
+                  aucune image</h6>
+                <figure class="figure" *ngFor="let image of this.selectedImages">
+                  <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
+                    (click)="deleteImage(image)">
+                  <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+                </figure>
+              </div>
+            </div>
+
+
+            <!-- Etape du formulaire 2 -- Choix des couleurs -->
+            <div *ngIf="this.formStep == 1">
+              <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+              <form>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="abecedaire_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value " #abecedaire_bg_color_input
+                        value="{{this.abecedaire_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="abecedaire_text_color_input" class="form-label align-middle">Couleur du texte
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_text_color = abecedaire_text_color_input.value "
+                        #abecedaire_text_color_input value="{{this.abecedaire_text_color}}"
+                        title="Choisissez la couleur du texte">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="abecedaire_good_answer_color_input" class="form-label align-middle">Couleur du message
+                      bonne
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_good_answer_color = abecedaire_good_answer_color_input.value "
+                        #abecedaire_good_answer_color_input value="{{this.abecedaire_good_answer_color}}"
+                        title="Choisissez la couleur du message de bonne réponse">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="abecedaire_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+                      mauvaise
+                      réponse
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_wrong_answer_color = abecedaire_wrong_answer_color_input.value "
+                        #abecedaire_wrong_answer_color_input value="{{this.abecedaire_wrong_answer_color}}"
+                        title="Choisissez la couleur du message de mauvaise réponse">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="abecedaire_button_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+                      du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_button_bg_color = abecedaire_button_bg_color_input.value "
+                        #abecedaire_button_bg_color_input value="{{this.abecedaire_button_bg_color}}"
+                        title="Choisissez la couleur d'arriére-plan du bouton">
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="abecedaire_button_text_color_input" class="form-label align-middle">Couleur du texte du
+                      bouton
+                      <input type="color" class="form-control form-control-color"
+                        (change)="this.abecedaire_button_text_color = abecedaire_button_text_color_input.value "
+                        #abecedaire_button_text_color_input value="{{this.abecedaire_button_text_color}}"
+                        title="Choisissez la couleur du texte du bouton">
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-md-4">
+                    <label for="progressValue" class="form-label align-middle">Couleur de la barre de
+                      progression</label>
+
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control" aria-label="Default select example" #progressSelectValue
+                      (change)="changeProgressValue('Abecedaire',progressSelectValue)">
+                      <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                        ng-selected="p == this.abecedaire_progress" #progressValue>
+                        <p *ngIf="p == 'blue'">Bleu</p>
+                        <p *ngIf="p == 'green'">Vert</p>
+                        <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                        <p *ngIf="p == 'orange'">Orange</p>
+                        <p *ngIf="p == 'red'">Rouge</p>
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="col-md-12">
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'blue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'green' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'lightblue' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'orange' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                      </div>
+                    </div>
+
+                    <div class="progress" *ngIf="this.abecedaire_progress == 'red' ">
+                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                        role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+            <!-- Etape du formulaire 3 -- Choix des textes -->
+            <div *ngIf="this.formStep == 2" style="text-align : center;">
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Type d'écriture</h2>
+                  <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'none'" value="None"
+                      (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px" checked>Aucune
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'none'" value="None"
+                      (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px">Aucune
+                    </mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'cursif'" value="Cursif"
+                      (change)="this.abecedaire_type_ecriture = 'cursif'"
+                      style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'cursif'" value="Cursif"
+                      (change)="this.abecedaire_type_ecriture = 'cursif'"
+                      style="font-family: cursiveFont; font-size: 40px">
+                      Cursif</mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'capital'" value="Capital"
+                      (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px" checked>CAPITAL
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'capital'" value="Capital"
+                      (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px">CAPITAL
+                    </mat-radio-button>
+
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'script'" value="Script"
+                      (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px" checked>Script
+                    </mat-radio-button>
+                    <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'script'" value="Script"
+                      (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px">Script
+                    </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-12">
+                  <h2 class="card-title">Vocalisation</h2>
+                  <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark"
+                    style="margin-right : 2%; color : #ff4083"></i>
+                  <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+
+                  <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+                  </mat-slide-toggle>
+                  <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"
+                    style="margin-left : 2%; color : #ff4083"></i>
+                  <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+                </div>
+              </div>
+
+
+              <!-- Bouton de création du jeu -->
+              <div class="form-row align-middle text-center" align="center">
+                <div class="col-md-12 text-center">
+                  <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder le
+                    jeu Chat
+                    <i class="fa-solid fa-floppy-disk"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+
+            <!--Formulaire Abecedaire -  Menu de navigation par étape -->
+            <div class="align-bottom" style="margin : 10px">
+              <button type="button" class="btn btn-primary align-left" style="background : rgb(13, 197, 13); float : left; border : none"
+                (click)="previousStep()">
+                <i class="fa-solid fa-angles-left"></i>
+                Etape précédente
+              </button>
+              <button type="button" class="btn btn-primary align-right"
+                style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
+                Etape suivante
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <!-- Formulaire abecedaire - Prévisualisation -->
+        <div *ngIf="this.abecedaire_previsualiser">
+          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+            <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+              <button class="prev-button align-middle text-center" (click)="setPrevisualiserAbecedaire(false)"
+                mat-raised-button color="warn">
+                <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+                Quitter la prévisualisation</button>
+            </div>
+          </div>
+          <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-  <div *ngIf="this.panel == 'sessions'">
-    <div class="card container">
-      <h5 class="card-header">Sessions</h5>
-      <div class="card-body text-center">
-        <div *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')) && !this.create_session">
-          <h2 class="card-title">Liste des sessions</h2>
+<!-- SESSIONS -->
+<div *ngIf="this.panel == 'sessions'">
 
-          <div class="col-md-12 text-center sortButton">
-            <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
-              <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
-              <span>Trier par Id</span>
-            </button>
-            <button mat-raised-button style="background-color : red" (click)="sortSessionDate()" color="primary">
-              <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
-              <span>Trier par date</span>
-            </button>
-            <button mat-raised-button style="background-color : red" (click)="sortSessionNbJoueur()" color="primary">
-              <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
-              <span>Trier par nombre de joueur</span>
-            </button>
+  <div class="card container">
+    <h5 class="card-header">Sessions</h5>
+    <div class="card-body text-center">
 
-            <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
-              style="background-color : red" color="primary">
-              <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
-              <span>Afficher uniquement les sessions actives</span>
-            </button>
+      <!-- Affiche la liste des séssions -->
+      <div *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')) && !this.create_session">
+        <h2 class="card-title">Liste des sessions</h2>
 
-            <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button
-              style="background-color : red" color="primary">
-              <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
-              <span>Afficher toutes les sesssions</span>
-            </button>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
+            <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
+            <span>Trier par Id</span>
+          </button>
+          <button mat-raised-button style="background-color : red" (click)="sortSessionDate()" color="primary">
+            <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
+            <span>Trier par date</span>
+          </button>
+          <button mat-raised-button style="background-color : red" (click)="sortSessionNbJoueur()" color="primary">
+            <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
+            <span>Trier par nombre de joueur</span>
+          </button>
 
-            <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true" color="primary">
-              <i class="fa-solid fa-plus fa-xl" style="margin-bottom : 2px"></i>
-              <span>Créer une session</span>
-            </button>
+          <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
+            style="background-color : red" color="primary">
+            <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
+            <span>Afficher uniquement les sessions actives</span>
+          </button>
 
+          <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button
+            style="background-color : red" color="primary">
+            <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
+            <span>Afficher toutes les sesssions</span>
+          </button>
+
+          <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true" color="primary">
+            <i class="fa-solid fa-plus fa-xl" style="margin-bottom : 2px"></i>
+            <span>Créer une session</span>
+          </button>
+
+        </div>
+
+        <div *ngIf="this.sessions.length == 0 && !this.showActive">
+          <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
+        </div>
+
+        <div *ngIf="this.sessions.length != 0" class="col-md-12">
+          <table class="table table-hover" *ngIf="!this.showActive">
+            <thead>
+              <tr>
+                <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.sessions">
+                <th *ngIf="element.isActive">
+                  <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+                </th>
+                <th *ngIf="!element.isActive">
+                  <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+                </th>
+                <th>{{element.id}}</th>
+                <th>{{element.nom}}</th>
+                <th>{{this.parseDate(element.date)}}</th>
+                <th>{{element.jeu}}</th>
+                <th>{{element.joueur.length}}</th>
+                <th class="button_actions">
+                  <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                    (click)="previsualiserGame(element)" color="primary">
+                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
+                  </button>
+                  <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
+                    style="background-color : rgb(223, 175, 18)" color="primary">
+                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                  </button>
+                  <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                    style="background-color : red" color="primary">
+                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                  <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
+                    style="background-color : rgb(77, 184, 44)" color="primary">
+                    <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                  <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                    (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                  <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                    (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                </th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="this.showActive">
+
+          <div *ngIf="this.sessionActive.length == 0">
+            <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
           </div>
 
-          <div *ngIf="this.sessions.length == 0 && !this.showActive">
-            <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
+          <table class="table table-hover" *ngIf="this.sessionActive.length != 0">
+            <thead>
+              <tr>
+                <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.sessionActive">
+                <th *ngIf="element.isActive">
+                  <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+                </th>
+                <th *ngIf="!element.isActive">
+                  <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+                </th>
+                <th>{{element.id}}</th>
+                <th>{{element.nom}}</th>
+                <th>{{this.parseDate(element.date)}}</th>
+                <th>{{element.jeu}}</th>
+                <th>{{element.joueur.length}}</th>
+                <th class="button_actions">
+                  <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                    (click)="previsualiserGame(element)" color="primary">
+                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
+                  </button>
+                  <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
+                    style="background-color : rgb(223, 175, 18)" color="primary">
+                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                  </button>
+                  <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                    style="background-color : red" color="primary">
+                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                  <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
+                    style="background-color : rgb(77, 184, 44)" color="primary">
+                    <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                  <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                    (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                  <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                    (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                    <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
+                  </button>
+                </th>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div *ngIf="this.create_session">
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red" (click)="this.create_session = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Retourner sur les sessions</span>
+          </button>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-2 text-center">
+            <label for="nom_session" class="form-label align-middle">Nom de la session</label>
           </div>
-
-          <div *ngIf="this.sessions.length != 0" class="col-md-12">
-            <table class="table table-hover" *ngIf="!this.showActive">
-              <thead>
-                <tr>
-                  <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr *ngFor="let element of this.sessions">
-                  <th *ngIf="element.isActive">
-                    <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-                  </th>
-                  <th *ngIf="!element.isActive">
-                    <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-                  </th>
-                  <th>{{element.id}}</th>
-                  <th>{{element.nom}}</th>
-                  <th>{{this.parseDate(element.date)}}</th>
-                  <th>{{element.jeu}}</th>
-                  <th>{{element.joueur.length}}</th>
-                  <th class="button_actions">
-                    <button mat-raised-button title="Prévisualiser le jeu de la séssion"
-                      (click)="previsualiserGame(element)" color="primary">
-                      <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-                    </button>
-                    <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
-                      style="background-color : rgb(223, 175, 18)" color="primary">
-                      <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-                    </button>
-                    <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
-                      style="background-color : red" color="primary">
-                      <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                    <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
-                      style="background-color : rgb(77, 184, 44)" color="primary">
-                      <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                    <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
-                      (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                      <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                    <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
-                      (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
-                      color="primary">
-                      <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                  </th>
-
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div *ngIf="this.showActive">
-
-            <div *ngIf="this.sessionActive.length == 0">
-              <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
-            </div>
-
-            <table class="table table-hover" *ngIf="this.sessionActive.length != 0">
-              <thead>
-                <tr>
-                  <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr *ngFor="let element of this.sessionActive">
-                  <th *ngIf="element.isActive">
-                    <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-                  </th>
-                  <th *ngIf="!element.isActive">
-                    <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-                  </th>
-                  <th>{{element.id}}</th>
-                  <th>{{element.nom}}</th>
-                  <th>{{this.parseDate(element.date)}}</th>
-                  <th>{{element.jeu}}</th>
-                  <th>{{element.joueur.length}}</th>
-                  <th class="button_actions">
-                    <button mat-raised-button title="Prévisualiser le jeu de la séssion"
-                      (click)="previsualiserGame(element)" color="primary">
-                      <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-                    </button>
-                    <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
-                      style="background-color : rgb(223, 175, 18)" color="primary">
-                      <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-                    </button>
-                    <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
-                      style="background-color : red" color="primary">
-                      <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                    <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
-                      style="background-color : rgb(77, 184, 44)" color="primary">
-                      <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                    <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
-                      (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                      <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                    <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
-                      (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)"
-                      color="primary">
-                      <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-                    </button>
-                  </th>
-
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-md-10 text-center">
+            <input type="text" class="form-control" #nom_session title="Nom de la session">
           </div>
         </div>
 
-        <div *ngIf="this.create_session">
-          <div class="col-md-12 text-center sortButton">
-            <button mat-raised-button style="background-color : red" (click)="this.create_session = false" color="primary">
-              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-              <span>Retourner sur les sessions</span>
-            </button>
+        <div class="form-row">
+          <div class="col-md-2 text-center">
+            <label for="jeu_session" class="form-label align-middle">Jeu</label>
           </div>
-
-          <div class="form-row">
-            <div class="col-md-2 text-center">
-              <label for="nom_session" class="form-label align-middle">Nom de la session</label>
-            </div>
-            <div class="col-md-10 text-center">
-              <input type="text" class="form-control" #nom_session title="Nom de la session">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-md-2 text-center">
-              <label for="jeu_session" class="form-label align-middle">Jeu</label>
-            </div>
-            <div class="col-md-10 text-center">
-              <select class="form-control" aria-label="Default select example" #jeu_session>
-                <option class="text-center">Recopier</option>
-                <option class="text-center">Memory</option>
-                <option class="text-center">Reconnaitre</option>
-                <option class="text-center">Abecedaire</option>
-                <option class="text-center">FilleEtGarcon</option>
-                <option class="text-center">Puzzle</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="col-md-12 text-center sortButton">
-            <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
-              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-              <span>Créer la sessions</span>
-            </button>
+          <div class="col-md-10 text-center">
+            <select class="form-control" aria-label="Default select example" #jeu_session>
+              <option class="text-center">Recopier</option>
+              <option class="text-center">Memory</option>
+              <option class="text-center">Reconnaitre</option>
+              <option class="text-center">Abecedaire</option>
+              <option class="text-center">FilleEtGarcon</option>
+              <option class="text-center">Puzzle</option>
+            </select>
           </div>
         </div>
 
-        <div *ngIf="this.panel_option == 'view'">
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
+            <i class="fa-solid fa-plus" style="margin-bottom : 1px"></i>
+            <span>Créer la sessions</span>
+          </button>
+        </div>
+      </div>
 
-          <div class="col-md-12 text-center sortButton">
-            <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
-              <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-              <span>Retourner sur les sessions</span>
-            </button>
-          </div>
+      <div *ngIf="this.panel_option == 'view'">
 
-          <div *ngIf="this.selected_session!.isActive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Nom</th>
-                  <th scope="col">Erreur(s)</th>
-                  <th scope="col">Progression</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr *ngFor="let user of this.selected_session!.joueur">
-                  <th>{{user.nom}}</th>
-                  <th>{{user.compteur_erreur}}</th>
-                  <th>
-                    <div class="progress">
-                      <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{width: user.progression.toString() + '%'}" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-                    </div>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div *ngIf="!this.selected_session!.isActive">
-            <h5 class="card-title" style="color : red">La session n'est pas active</h5>
-          </div>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Retourner sur les sessions</span>
+          </button>
         </div>
 
-        <div *ngIf="this.panel_option == 'edit'">
-          <div *ngIf="this.getSession() == null">
-            Erreur
-          </div>
-          <div *ngIf="this.getSession() != null">
-            {{this.getSession()!.id}}
-          </div>
+        <div *ngIf="this.selected_session!.isActive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Erreur(s)</th>
+                <th scope="col">Progression</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let user of this.selected_session!.joueur">
+                <th>{{user.nom}}</th>
+                <th>{{user.compteur_erreur}}</th>
+                <th>
+                  <div class="progress">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
+                      role="progressbar" [ngStyle]="{width: user.progression.toString() + '%'}" aria-valuenow=" 50"
+                      aria-valuemin="0" aria-valuemax='100'></div>
+                  </div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="!this.selected_session!.isActive">
+          <h5 class="card-title" style="color : red">La session n'est pas active</h5>
+        </div>
+      </div>
+
+      <div *ngIf="this.panel_option == 'edit'">
+        <div *ngIf="this.getSession() == null">
+          Erreur
+        </div>
+        <div *ngIf="this.getSession() != null">
+          {{this.getSession()!.id}}
         </div>
       </div>
     </div>
   </div>
+</div>

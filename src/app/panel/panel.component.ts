@@ -36,11 +36,18 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
+
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
-
+  liste_image_puzzle:any=[];
+  imgPuzzle(li:Image[]):any{
+    for(var i=0;i<li.length;i++){
+      this.liste_image_puzzle.push({src:li[i].src,title:li[i].nom});
+    }
+    return this.liste_image_puzzle;
+  }
   progressValue: Progress[] = [
     Progress.Blue,
     Progress.Green,
@@ -108,8 +115,10 @@ export class PanelComponent implements OnInit {
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
-  reconnaitre_list : Reconnaitre[] = [
-    new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
+  reconnaitre_list: Reconnaitre[] = [
+    new Reconnaitre([
+      this.liste_image[0]
+    ], this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
   ];
 
   // VARIABLE JEU PUZZLE
@@ -120,7 +129,10 @@ export class PanelComponent implements OnInit {
   puzzle_button_text_color: string = "#ffffff";
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
-
+  puzzle_previsualiser: boolean = false;
+  puzzle_list:Puzzle[]=[
+  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+  ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
   boygirl_listMotsFille: string[] = [];
@@ -141,6 +153,9 @@ export class PanelComponent implements OnInit {
   boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
   boygirl_form_step: number = 0;
+  boygirl_list : BoyGirl[] = [
+    new BoyGirl(['girl','girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
+  ];
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
@@ -154,6 +169,11 @@ export class PanelComponent implements OnInit {
   abecedaire_type_ecriture: string = "script";
   abecedaire_isVocaliser: boolean = false;
   abecedaire_previsualiser: boolean = false;
+  abecedaire_list: Abecedaire[] = [
+    new Abecedaire([
+      this.liste_image[0], this.liste_image[1]
+    ], '#745154', this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture)
+  ];
 
   //VARIABLE JEU MEMORY
   memory: Memory | null;
@@ -215,39 +235,85 @@ export class PanelComponent implements OnInit {
       if (this.optionGame.includes(this.panel!)) {
         this.selectedGame = this.panel;
         this.panel_option = this.route.snapshot.paramMap.get('param2');
+
         if (this.panel_option == null) {
           this.panel_option = 'showList';
-        } else if (this.panel_option == 'edit') {
+        }
+        else if (this.panel_option == 'edit') {
+
           if (this.route.snapshot.paramMap.get('param3') != null) {
             this.id_game = +this.route.snapshot.paramMap.get('param3')!;
+
             if (this.id_game == null) {
               this.router.navigate(['/panel/', this.selectedGame]);
-            } else {
-              switch (this.selectedGame) {
-                case 'Recopier':
-                  this.selectedImages = this.getRecopier()!.images;
-                  this.recopier_bg_color = this.getRecopier()!.bg_color;
-                  this.recopier_text_color = this.getRecopier()!.text_color;
-                  this.recopier_title_color = this.getRecopier()!.title_color;
-                  this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
-                  this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
-                  this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
-                  this.recopier_button_text_color = this.getRecopier()!.button_text_color;
-                  this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
-                  this.recopier_input_text_color = this.getRecopier()!.input_text_color;
-                  this.recopier_progress = this.getRecopier()!.color_progress_bar;
-                  this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
-                  this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
-                  break;
-                case 'Memory':
-                  this.memory_nbTile = this.getMemory()!.nbTile;
-                  this.memory_settings = this.getMemory()!.setting;
-                  this.memory_bg_color = this.getMemory()!.bg_color;
-                  this.memory_text_color = this.getMemory()!.text_color;
-                  this.memory_good_answer_color = this.getMemory()!.good_answer_color;
-                  this.memory_wrong_answer_color = this.getMemory()!.wrong_answer_color;
-                  this.memory_progress = this.getMemory()!.color_progress_bar;
-                  this.memory_tmp_affichage = this.getMemory()!.tmpAffichage;
+            }
+            else if (this.selectedGame == 'Recopier') {
+              if (this.getRecopier()! == null) {
+                this.router.navigate(['/panel/Recopier']);
+              }else {
+                this.selectedImages = this.getRecopier()!.images;
+                this.recopier_bg_color = this.getRecopier()!.bg_color;
+                this.recopier_text_color = this.getRecopier()!.text_color;
+                this.recopier_title_color = this.getRecopier()!.title_color;
+                this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
+                this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
+                this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
+                this.recopier_button_text_color = this.getRecopier()!.button_text_color;
+                this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
+                this.recopier_input_text_color = this.getRecopier()!.input_text_color;
+                this.recopier_progress = this.getRecopier()!.color_progress_bar;
+                this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
+                this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
+              }
+            }
+
+            else if (this.selectedGame == 'Memory') {
+              if (this.getMemory()! == null) {
+                this.router.navigate(['/panel/Memory']);
+              } else {
+                this.memory_nbTile = this.getMemory()!.nbTile;
+                this.memory_settings = this.getMemory()!.setting;
+                this.memory_bg_color = this.getMemory()!.bg_color;
+                this.memory_text_color = this.getMemory()!.text_color;
+                this.memory_good_answer_color = this.getMemory()!.good_answer_color;
+                this.memory_wrong_answer_color = this.getMemory()!.wrong_answer_color;
+                this.memory_progress = this.getMemory()!.color_progress_bar;
+                this.memory_tmp_affichage = this.getMemory()!.tmpAffichage;
+              }
+            }
+
+            else if (this.selectedGame == 'Reconnaitre') {
+              if (this.getReconnaitre()! == null) {
+                this.router.navigate(['/panel/Reconnaitre']);
+              }else {
+                this.selectedImages = this.getReconnaitre()!.images;
+                this.reconnaitre_bg_color = this.getReconnaitre()!.bg_color;
+                this.reconnaitre_title_color = this.getReconnaitre()!.title_color;
+                this.reconnaitre_text_color = this.getReconnaitre()!.text_color;
+                this.reconnaitre_good_answer_color = this.getReconnaitre()!.good_answer_color;
+                this.reconnaitre_wrong_answer_color = this.getReconnaitre()!.wrong_answer_color;
+                this.reconnaitre_button_bg_color = this.getReconnaitre()!.button_bg_color;
+                this.reconnaitre_button_text_color = this.getReconnaitre()!.button_text_color;
+                this.reconnaitre_progress = this.getReconnaitre()!.color_progress_bar;
+                this.reconnaitre_type_ecriture = this.getReconnaitre()!.typeEcriture;
+                this.reconnaitre_isVocaliser = this.getReconnaitre()!.isVocaliser;
+              }
+            }
+
+            else if (this.selectedGame == 'Abecedaire') {
+              if (this.getAbecedaire()! == null) {
+                this.router.navigate(['/panel/Abecedaire']);
+              }else {
+                this.selectedImages = this.getAbecedaire()!.images;
+                this.abecedaire_bg_color = this.getAbecedaire()!.bg_color;
+                this.abecedaire_text_color = this.getAbecedaire()!.text_color;
+                this.abecedaire_good_answer_color = this.getAbecedaire()!.good_answer_color;
+                this.abecedaire_wrong_answer_color = this.getAbecedaire()!.wrong_answer_color;
+                this.abecedaire_progress = this.getAbecedaire()!.color_progress_bar;
+                this.abecedaire_button_bg_color = this.getAbecedaire()!.button_bg_color;
+                this.abecedaire_button_text_color = this.getAbecedaire()!.button_text_color;
+                this.abecedaire_type_ecriture = this.getAbecedaire()!.typeEcriture;
+                this.abecedaire_isVocaliser = this.getAbecedaire()!.isVocaliser;
               }
             }
           }
@@ -315,6 +381,57 @@ export class PanelComponent implements OnInit {
 
     if (index > -1) {
       this.reconnaitre_list.splice(index, 1);
+    }
+  }
+
+  previewPuzzle(r: Puzzle): void {
+    this.puzzle = r;
+    this.puzzle_previsualiser = true;
+  }
+
+  quitPreviewPuzzle(): void {
+    this.puzzle_previsualiser = false;
+  }
+
+  deleteGamePuzzle(r: Puzzle): void {
+    let index = this.puzzle_list.indexOf(r, 0);
+
+    if (index > -1) {
+      this.puzzle_list.splice(index, 1);
+    }
+  }
+
+  previewAbecedaire(a: Abecedaire): void {
+    this.abecedaire = a;
+    this.abecedaire_previsualiser = true;
+  }
+
+  quitPreviewAbecedaire(): void {
+    this.abecedaire_previsualiser = false;
+  }
+
+  deleteGameAbecedaire(a: Abecedaire): void {
+    let index = this.abecedaire_list.indexOf(a, 0);
+
+    if (index > -1) {
+      this.abecedaire_list.splice(index, 1);
+    }
+  }
+
+  previewBoyGirl(bg: BoyGirl): void {
+    this.boygirl = bg;
+    this.boygirl_previsualiser = true;
+  }
+
+  quitPreviewBoyGirl(): void {
+    this.boygirl_previsualiser = false;
+  }
+
+  deleteGameBoyGirl(bg: BoyGirl): void {
+    let index = this.boygirl_list.indexOf(bg, 0);
+
+    if (index > -1) {
+      this.boygirl_list.splice(index, 1);
     }
   }
 
@@ -423,6 +540,20 @@ export class PanelComponent implements OnInit {
     else {
       this.reconnaitre = null;
       this.reconnaitre_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
+    }
+  }
+  setPrevisualiserPuzzle(prev: boolean): void {
+    if (prev == true) {
+      new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture)
+      this.puzzle_previsualiser = true;
+    }
+    else {
+      this.puzzle = null;
+      this.puzzle_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
@@ -637,6 +768,13 @@ export class PanelComponent implements OnInit {
           new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
         );
         this.router.navigate(['/panel/Memory']);
+        break;
+      case 'Reconnaitre':
+        this.reconnaitre_list.push(
+          new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
+        );
+        this.router.navigate(['/panel/Reconnaitre']);
+        break;
     }
   }
 
@@ -811,9 +949,15 @@ export class PanelComponent implements OnInit {
   redirectEditReconnaitre(r: Reconnaitre): void {
     window.location.href = '/panel/Reconnaitre/edit/' + r.id;
   }
+  redirectEditAbecedaire(a: Abecedaire): void {
+    window.location.href = '/panel/Abecedaire/edit/' + a.id;
+  }
+
+  redirectEditBoyGirl(bg : BoyGirl) : void {
+    window.location.href= '/panel/Fille&Garçon/edit/' + bg.id;
+  }
 
   getRecopier(): Recopier | null {
-    console.log(this.recopier_list);
     for (let r of this.recopier_list) {
       if (r.id == this.id_game) {
         return r;
@@ -824,10 +968,27 @@ export class PanelComponent implements OnInit {
 
 
   getMemory(): Memory | null {
-    console.log(this.memory_list);
     for (let m of this.memory_list) {
       if (m.id == this.id_game) {
         return m;
+      }
+    }
+    return null;
+  }
+
+  getReconnaitre(): Reconnaitre | null {
+    for (let r of this.reconnaitre_list) {
+      if (r.id == this.id_game) {
+        return r;
+      }
+    }
+    return null;
+  }
+
+  getAbecedaire(): Abecedaire | null {
+    for (let a of this.abecedaire_list) {
+      if (a.id == this.id_game) {
+        return a;
       }
     }
     return null;
@@ -858,10 +1019,37 @@ export class PanelComponent implements OnInit {
         this.getMemory()!.bg_color = this.memory_bg_color;
         this.getMemory()!.text_color = this.memory_text_color;
         this.getMemory()!.good_answer_color = this.memory_good_answer_color;
-        this.getMemory()!.wrong_answer_color = this.memory_wrong_answer_color ;
+        this.getMemory()!.wrong_answer_color = this.memory_wrong_answer_color;
         this.getMemory()!.color_progress_bar = this.memory_progress;
         this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
         this.router.navigate(['/panel/Memory']);
+        break;
+      case 'Reconnaitre':
+        this.getReconnaitre()!.images = this.selectedImages;
+        this.getReconnaitre()!.bg_color = this.reconnaitre_bg_color;
+        this.getReconnaitre()!.title_color = this.reconnaitre_title_color;
+        this.getReconnaitre()!.text_color = this.reconnaitre_text_color;
+        this.getReconnaitre()!.good_answer_color = this.reconnaitre_good_answer_color;
+        this.getReconnaitre()!.wrong_answer_color = this.reconnaitre_wrong_answer_color;
+        this.getReconnaitre()!.button_bg_color = this.reconnaitre_button_bg_color;
+        this.getReconnaitre()!.button_text_color = this.reconnaitre_button_text_color;
+        this.getReconnaitre()!.color_progress_bar = this.reconnaitre_progress;
+        this.getReconnaitre()!.typeEcriture = this.reconnaitre_type_ecriture;
+        this.getReconnaitre()!.isVocaliser = this.reconnaitre_isVocaliser;
+        this.router.navigate(['/panel/Reconnaitre']);
+        break;
+      case 'Abecedaire':
+        this.getAbecedaire()!.images = this.selectedImages;
+        this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
+        this.getAbecedaire()!.text_color = this.abecedaire_text_color;
+        this.getAbecedaire()!.good_answer_color = this.abecedaire_good_answer_color;
+        this.getAbecedaire()!.wrong_answer_color = this.abecedaire_wrong_answer_color;
+        this.getAbecedaire()!.color_progress_bar = this.abecedaire_progress;
+        this.getAbecedaire()!.button_bg_color = this.abecedaire_button_bg_color;
+        this.getAbecedaire()!.button_text_color = this.abecedaire_button_text_color;
+        this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
+        this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
+        this.router.navigate(['/panel/Abecedaire']);
         break;
     }
 
