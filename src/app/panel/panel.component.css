@@ -19,10 +19,12 @@
   font-size: 20px;
 }
 
+#nav {
+  border-bottom : solid rgb(63, 63, 63) 7px;
+}
 
 nav {
   cursor : pointer;
-  border-bottom : solid rgb(63, 63, 63) 7px;
 }
 
 img {

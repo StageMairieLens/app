@@ -15,23 +15,24 @@ interface donnee{
   selector: 'app-puzzle',
   templateUrl: './puzzle.component.html',
   styleUrls: ['./puzzle.component.css'],
-  
+
 })
 
 export class PuzzleComponent implements OnInit {
-  
-  
-  constructor() { 
+
+
+  constructor() {
     this.r = null;
-      
+
   }
+
   imagess = [
     { src: '../../assets/images/london-bridge.jpg', title: 'London Bridge' },
     { src: '../../assets/images/lotus-temple.JPG', title: 'Lotus Temple' },
     { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
     { src: '../../assets/images/statue-of-liberty.jpg', title: 'Statue Of Liberty' },
     { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
-    
+
 ];
   decoupe : number = 2;
   img = new Image();
@@ -79,17 +80,17 @@ export class PuzzleComponent implements OnInit {
   restar(){
     restart(this.decoupe,this.imagess);
   }
-  
+
   test(){
     // var table =document.getElementById('table')!.style.height;
     // table=this.img.height;
     //(<HTMLTableElement>document.getElementById('table'))!.setAttribute('height',this.img.height.toString());
     //(<HTMLTableElement>document.getElementById('table2'))!.setAttribute('height',this.img.height.toString());
 
-    
-    
+
+
   }
-  
+
   alea(li: donnee[]): void {
 
     var m = li.length, name, src, i;
@@ -132,15 +133,14 @@ export class PuzzleComponent implements OnInit {
     }
   }
 */
-  
+
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Puzzle | null;
   @Input() showTitle : boolean = true;
-  
-  
-  
+
+
+
   }
 
- 
 
- 
+
