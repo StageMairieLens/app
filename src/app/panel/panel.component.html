@@ -4003,7 +4003,7 @@
 
       <div *ngIf="this.create_session">
         <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red" (click)="this.create_session = false" color="primary">
+          <button mat-raised-button style="background-color : red" (click)="this.create_session = false; this.jeuSession = ''" color="primary">
             <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
             <span>Retourner sur les sessions</span>
           </button>
@@ -4023,7 +4023,8 @@
             <label for="jeu_session" class="form-label align-middle">Jeu</label>
           </div>
           <div class="col-md-10 text-center">
-            <select class="form-control" aria-label="Default select example" #jeu_session>
+            <select class="form-control" aria-label="Default select example" (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
+              <option class="text-center"></option>
               <option class="text-center">Recopier</option>
               <option class="text-center">Memory</option>
               <option class="text-center">Reconnaitre</option>
@@ -4034,7 +4035,57 @@
           </div>
         </div>
 
-        <div *ngIf="jeu_session.value == 'Recopier'">
+        <div *ngIf="jeuSession == 'Recopier'">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.recopier_list" (click)="changeJeuId(element.id)">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="jeuSession == 'Memory'">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.memory_list" (click)="changeJeuId(element.id)">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
+                <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="jeuSession == 'Reconnaitre'">
           <table class="table table-hover text-center">
             <thead>
               <tr>
@@ -4045,7 +4096,7 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let element of this.recopier_list">
+              <tr *ngFor="let element of this.reconnaitre_list" (click)="changeJeuId(element.id)">
                 <th>{{element.id}}</th> <!-- Id du jeu -->
                 <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
                 <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
@@ -4053,6 +4104,59 @@
                 <th *ngIf="element.isVocaliser">Oui</th>
                 <th *ngIf="!element.isVocaliser">Non</th>
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="jeuSession == 'Abecedaire'">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.abecedaire_list" (click)="changeJeuId(element.id)">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="jeuSession == 'FilleEtGarcon'">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col"
+                  *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par']">
+                  {{col}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let element of this.boygirl_list" (click)="changeJeuId(element.id)">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+                <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
+                <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
+                <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
+                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
               </tr>
             </tbody>
           </table>

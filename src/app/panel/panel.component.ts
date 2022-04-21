@@ -73,6 +73,8 @@ export class PanelComponent implements OnInit {
   session_id: number | null = null;
   panel_option: string | null = "";
   create_session: boolean = false;
+  jeuSession: string = "";
+  jeuId: number = -1;
 
   sortById: boolean = true;
   sortByDate: boolean = false;
@@ -951,8 +953,20 @@ export class PanelComponent implements OnInit {
   }
 
   createSession(jeu: string, nom: string): void {
-    // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
-    this.create_session = false;
+    if(jeu != "" && nom != "" && this.jeuId != -1) {
+      // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
+      this.create_session = false;
+      this.jeuSession = "";
+    }
+  }
+
+  changeJeuSession(jeu: string) {
+    this.jeuSession = jeu;
+    this.jeuId = -1;
+  }
+
+  changeJeuId(id: number) {
+    this.jeuId = id;
   }
 
   showSessionActive(): void {
