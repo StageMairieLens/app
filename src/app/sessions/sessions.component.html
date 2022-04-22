@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div *ngIf="this.join">
+  <div *ngIf="this.join && !this.connected">
     <div class="card container align-middle">
       <div class="card-header">
         Séssion N ° : {{this.getSession()!.id }}
@@ -30,12 +30,16 @@
         <div class="input-join align-middle">
           <input type="text" name="" id="" placeholder="Entrez votre nom ici" #input_name (keypress)="enterKey($event)">
 
-          <button mat-raised-button color="primary" aria-label="Valider" (click)="addUser(input_name.value)">
+          <button mat-raised-button color="primary" aria-label="Valider" (click)="connect(input_name.value)">
             <i class="fa fa-check"></i>
           </button>
         </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="this.connected">
+    
   </div>
 
 </div>
