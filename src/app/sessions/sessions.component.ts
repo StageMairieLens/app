@@ -15,9 +15,10 @@ export class SessionsComponent implements OnInit {
   join: boolean = false;
   timer_redirect: number = 5;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.timer_redirect = 5;
     if (this.route.snapshot.paramMap.get('id') != null) {
       this.session_id = +this.route.snapshot.paramMap.get('id')!;
       if (this.session_id != null) {
@@ -45,6 +46,26 @@ export class SessionsComponent implements OnInit {
               this.router.navigate(['']);
             }, 6000);
           }
+        }
+        else {
+          setTimeout(() => {
+            this.timer_redirect--
+          }, 1000);
+          setTimeout(() => {
+            this.timer_redirect--
+          }, 2000);
+          setTimeout(() => {
+            this.timer_redirect--
+          }, 3000);
+          setTimeout(() => {
+            this.timer_redirect--
+          }, 4000);
+          setTimeout(() => {
+            this.timer_redirect--
+          }, 5000);
+          setTimeout(() => {
+            this.router.navigate(['']);
+          }, 6000);
         }
       }
     }
