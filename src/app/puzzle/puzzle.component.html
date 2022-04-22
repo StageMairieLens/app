@@ -26,7 +26,7 @@
   </div>
 </div>
     
-    <div id="collage"  class="text-center" *ngIf="this.r!.typeEcriture == 'CURSIF'">
+    <div id="collage"  class="text-center"   >
 
         <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
             <h3 id="imgTitle"></h3>
@@ -72,98 +72,7 @@
 
 
     </div>
-    <div id="collage"  class="text-center" *ngIf="this.r!.typeEcriture == 'CAPITAL'">
-
-        <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
-            <h3 id="imgTitle"></h3>
-            <hr />
-            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;"[ngStyle]="{background : this.r!.bg_color}">
-                <ul id="sortable" class="sortable"[ngStyle]="{background : this.r!.bg_color}"></ul>
-                <div id="actualImageBox" >
-                    <div id="stepBox" >
-                        <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background : this.r!.text_color}">Steps:</div>
-                        <div style="font-family : cursiveFont; font-size : 28px" id="stepCount" class="stepCount"[ngStyle]="{background : this.r!.text_color}">0</div>
-                    </div>
-                    <div id="timeBox">
-                        Temps: <span style="font-family : cursiveFont; font-size : 28px" id="timerPanel"></span> secondes
-                    </div>
-                    <img id="actualImage" />
-                    <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background: this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
-                    <p id="levelPanel">
-                        <!--<input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
-                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
-                         mettre une variable dans value pour modifier la difficulter-->
-
-
-                    </p>
-                    <div>
-                        <!--<button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
-                        <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-                        -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="gameOver" style="display:none;"[ngStyle]="{background : this.r!.bg_color}">
-            <div style=" padding: 5px 10px 20px 10px; text-align: center; "[ngStyle]="{background : this.r!.bg_color}">
-                <h2 style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}">Fin de partie!!</h2>
-                Félicitation!!<br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/> Tu as compléter toutes les  images.
-                <br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/> Nombre de mouvement: <span id="stepCount" class="stepCount">0</span> .
-                <br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/> Temps: <span class="timeCount">0</span> seconds<br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/>
-                <div>
-                    <button type="button" onclick="window.location.reload(true);"[ngStyle]="{background : this.r!.button_bg_color}">Recommencer</button>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <div id="collage"  class="text-center" *ngIf="this.r!.typeEcriture == 'SCRIPT'">
-
-        <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
-            <h3 id="imgTitle"></h3>
-            <hr />
-            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;"[ngStyle]="{background : this.r!.bg_color}">
-                <ul id="sortable" class="sortable"[ngStyle]="{background : this.r!.bg_color}"></ul>
-                <div id="actualImageBox" >
-                    <div id="stepBox" >
-                        <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background : this.r!.text_color}">Steps:</div>
-                        <div style="font-family : cursiveFont; font-size : 28px" id="stepCount" class="stepCount"[ngStyle]="{background : this.r!.text_color}">0</div>
-                    </div>
-                    <div id="timeBox">
-                        Temps: <span style="font-family : cursiveFont; font-size : 28px" id="timerPanel"></span> secondes
-                    </div>
-                    <img id="actualImage" />
-                    <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background: this.r!.text_color}">Réorganiser pour créer une image comme celle-ci.</div>
-                    <p id="levelPanel">
-                        <!--<input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
-                        [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
-                         mettre une variable dans value pour modifier la difficulter-->
-
-
-                    </p>
-                    <div>
-                        <!--<button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
-                        <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-                        -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="gameOver" style="display:none;"[ngStyle]="{background : this.r!.bg_color}">
-            <div style=" padding: 5px 10px 20px 10px; text-align: center; "[ngStyle]="{background : this.r!.bg_color}">
-                <h2 style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}">Fin de partie!!</h2>
-                Félicitation!!<br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/> Tu as compléter toutes les  images.
-                <br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/> Nombre de mouvement: <span id="stepCount" class="stepCount">0</span> .
-                <br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/> Temps: <span class="timeCount">0</span> seconds<br style="font-family : cursiveFont; font-size : 28px;text-align:center" [ngStyle]="{text : this.r!.text_color}"/>
-                <div>
-                    <button type="button" onclick="window.location.reload(true);"[ngStyle]="{background : this.r!.button_bg_color}">Recommencer</button>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+    
 
 
 
