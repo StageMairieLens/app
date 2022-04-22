@@ -5,6 +5,7 @@
   padding: 5px;
   box-shadow: rgba(218, 216, 216, 0.548) 10px 10px;
 }
+
 .card-header {
   background-color: #ececec;
   color: #303030;
@@ -19,12 +20,20 @@
   font-size: 20px;
 }
 
+.choice span {
+  margin-left : 10px;
+}
+
+.choice i {
+  margin-bottom : 2%;
+}
+
 #nav {
-  border-bottom : solid rgb(63, 63, 63) 7px;
+  border-bottom: solid rgb(63, 63, 63) 7px;
 }
 
 nav {
-  cursor : pointer;
+  cursor: pointer;
 }
 
 img {
@@ -123,10 +132,10 @@ img {
   background: rgb(209, 42, 12);
 }
 
-.create_button button{
+.create_button button {
   background: rgb(209, 42, 12);
-  height : 50px;
-  font-size : 20px;
+  height: 50px;
+  font-size: 20px;
 }
 
 .save_button {
@@ -135,12 +144,13 @@ img {
   height: 50px;
   color: white;
   font-size: 32px;
-  color : black;
+  color: black;
 }
 
-.save_button i , .validate_button i {
-  margin-bottom : 1%;
-  margin-left : 5%;
+.save_button i,
+.validate_button i {
+  margin-bottom: 1%;
+  margin-left: 5%;
 }
 
 
@@ -165,9 +175,9 @@ img {
 }
 
 .quit_button:hover {
-  background :rgb(250, 58, 58);
-  color : white;
-  transition : all .5s
+  background: rgb(250, 58, 58);
+  color: white;
+  transition: all .5s
 }
 
 .quit_button:checked {
@@ -191,4 +201,34 @@ img {
 
 .sortButton button i {
   margin-right: 10%;
+}
+
+.panel-choice {
+  width: 40%;
+  margin-right: 10%;
+  margin-bottom: 3%;
+  background :rgb(22, 158, 22);
+}
+
+.panel-choice span {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.panel-choice i {
+  margin-bottom: 2%;
+}
+
+.session_choice {
+  width : 80%;
+  margin-bottom : 3%
+}
+
+.session_choice span {
+  font-size : 25px;
+  margin-left : 10px;
+}
+
+.session_choice i {
+
 }

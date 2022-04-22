@@ -11,6 +11,12 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
+        <a class="nav-link" href="/panel" role="">
+          Accueil
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="/panel/create" id="navbarDropdown" role="button" aria-haspopup="true"
           aria-expanded="false">
           Créer un jeu
@@ -44,6 +50,72 @@
     <mat-divider style="background : #ececec ; width : 40%; display : inline-block"></mat-divider>
   </div>
 
+  <div class="row text-center">
+
+
+    <!-- Session -->
+    <div class="col-md-6">
+      <h3 class="card-title" style="margin-bottom : -10px">Séssion</h3>
+      <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
+      </mat-divider>
+
+      <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions']">
+        <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
+        <span>Afficher toutes les séssions</span>
+
+      </button>
+
+
+      <button *ngIf="this.sessionActive.length != 0" mat-raised-button color="primary" class="session_choice"
+        [routerLink]="['/panel/sessions/active']">
+        <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
+
+        <span>Afficher les séssions actives</span>
+      </button>
+
+      <button *ngIf="this.sessionActive.length == 0" mat-raised-button disabled color="primary" class="session_choice"
+        [routerLink]="['/panel/sessions/active']">
+
+        <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
+        <span>Afficher les séssions actives</span>
+      </button>
+
+
+      <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions/create']">
+        <i class="fa-solid fa-circle-plus fa-xl"></i>
+        <span>Créer une séssions</span>
+      </button>
+
+    </div>
+
+
+    <!-- Jeux -->
+    <div class="col-md-6">
+      <h3 class="card-title" style="margin-bottom : -10px">Jeux</h3>
+      <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
+      </mat-divider>
+
+      <button class="panel-choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/', c]" mat-raised-button
+        color="primary">
+
+        <i *ngIf="c == 'Recopier'" class="fa-solid fa-pen fa-lg"></i>
+        <i *ngIf="c == 'Memory'" class="fa-solid fa-brain fa-lg"></i>
+        <i *ngIf="c == 'Reconnaitre'" class="fa-solid fa-eye fa-lg"></i>
+        <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-a fa-lg"></i>
+        <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-minus fa-lg"></i>
+        <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-z fa-lg"></i>
+        <i *ngIf="c == 'Fille&Garçon'" class="fa-solid fa-children fa-lg"></i>
+        <i *ngIf="c == 'Puzzle'" class="fa-solid fa-puzzle-piece fa-lg"></i>
+
+        <span>{{c}}</span>
+
+
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
 
 <!-- Si /panel/create -->
@@ -54,7 +126,18 @@
     <div class="card-body">
       <div align="center">
         <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/', c,'create']"
-          mat-raised-button color="primary">{{c}}</button>
+          mat-raised-button color="primary">
+          <i *ngIf="c == 'Recopier'" class="fa-solid fa-pen "></i>
+          <i *ngIf="c == 'Memory'" class="fa-solid fa-brain "></i>
+          <i *ngIf="c == 'Reconnaitre'" class="fa-solid fa-eye "></i>
+          <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-a "></i>
+          <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-minus "></i>
+          <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-z "></i>
+          <i *ngIf="c == 'Fille&Garçon'" class="fa-solid fa-children "></i>
+          <i *ngIf="c == 'Puzzle'" class="fa-solid fa-puzzle-piece "></i>
+
+          <span>{{c}}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1684,7 +1767,7 @@
                       value="{{this.puzzle_title_color}}" title="Choisissez la couleur du titre">
                   </label>
                 </div>
-                
+
 
 
               </div>
@@ -1692,8 +1775,7 @@
                 <div class="col-md-6">
                   <label for="puzzle_decoupe" class="form-label align-middle">Nombre decoupe
                     <input type="number" class="form-control form-control-color"
-                      (change)="this.decoupe = puzzle_decoupe.value "
-                      #puzzle_decoupe value="{{this.decoupe}}"
+                      (change)="this.decoupe = puzzle_decoupe.value " #puzzle_decoupe value="{{this.decoupe}}"
                       title="Choisissez le nombre de decoupe">
                   </label>
                 </div>
@@ -2914,7 +2996,7 @@
               <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
 
               Retour à la liste des jeux
-            </button>            
+            </button>
             <button class="prev-button align-middle text-center" (click)="setPrevisualiserReconnaitre(true)"
               mat-raised-button color="warn">
               <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
@@ -3542,8 +3624,8 @@
 
         <div *ngIf="!this.boygirl_previsualiser">
           <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" [routerLink]="['/panel/Fille&Garçon']" mat-raised-button
-              color="warn" style="float : left; position : absolute; display : block">
+            <button class="prev-button align-middle text-center" [routerLink]="['/panel/Fille&Garçon']"
+              mat-raised-button color="warn" style="float : left; position : absolute; display : block">
               <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
 
               Retour à la liste des jeux
@@ -3850,7 +3932,8 @@
     <div class="card-body text-center">
 
       <!-- Affiche la liste des séssions -->
-      <div *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')) && !this.create_session">
+      <div
+        *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')) && !this.create_session">
         <h2 class="card-title">Liste des sessions</h2>
 
         <div class="col-md-12 text-center sortButton">
@@ -3879,8 +3962,9 @@
             <span>Afficher toutes les sesssions</span>
           </button>
 
-          <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true" color="primary">
-            <i class="fa-solid fa-plus fa-xl" style="margin-bottom : 2px"></i>
+          <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true"
+            color="primary">
+            <i class="fa-solid fa-circle-plus fa-xl"></i>
             <span>Créer une session</span>
           </button>
 
@@ -4001,9 +4085,11 @@
         </div>
       </div>
 
+      <!-- Créer une séssion -->
       <div *ngIf="this.create_session">
         <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red" (click)="this.create_session = false; this.jeuSession = ''" color="primary">
+          <button mat-raised-button style="background-color : red"
+            (click)="this.create_session = false; this.jeuSession = ''" color="primary">
             <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
             <span>Retourner sur les sessions</span>
           </button>
@@ -4023,7 +4109,8 @@
             <label for="jeu_session" class="form-label align-middle">Jeu</label>
           </div>
           <div class="col-md-10 text-center">
-            <select class="form-control" aria-label="Default select example" (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
+            <select class="form-control" aria-label="Default select example"
+              (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
               <option class="text-center"></option>
               <option class="text-center">Recopier</option>
               <option class="text-center">Memory</option>
@@ -4054,8 +4141,8 @@
                 <th *ngIf="element.isVocaliser">Oui</th>
                 <th *ngIf="!element.isVocaliser">Non</th>
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
               </tr>
             </tbody>
           </table>
@@ -4065,8 +4152,7 @@
           <table class="table table-hover text-center">
             <thead>
               <tr>
-                <th scope="col"
-                  *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par']">
+                <th scope="col" *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par']">
                   {{col}}</th>
               </tr>
             </thead>
@@ -4078,8 +4164,8 @@
                 <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
                 <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
               </tr>
             </tbody>
           </table>
@@ -4104,8 +4190,8 @@
                 <th *ngIf="element.isVocaliser">Oui</th>
                 <th *ngIf="!element.isVocaliser">Non</th>
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
               </tr>
             </tbody>
           </table>
@@ -4130,8 +4216,8 @@
                 <th *ngIf="element.isVocaliser">Oui</th>
                 <th *ngIf="!element.isVocaliser">Non</th>
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
               </tr>
             </tbody>
           </table>
@@ -4155,21 +4241,23 @@
                 <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
                 <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
                 <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square"></i></th>
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
+          <button mat-raised-button style="background-color : rgb(12, 202, 12)"
+            (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
             <i class="fa-solid fa-plus" style="margin-bottom : 1px"></i>
             <span>Créer la sessions</span>
           </button>
         </div>
       </div>
 
+      <!-- Superviser une séssion -->
       <div *ngIf="this.panel_option == 'view'">
 
         <div class="col-md-12 text-center sortButton">
@@ -4210,6 +4298,7 @@
         </div>
       </div>
 
+      <!-- Editer une séssion -->
       <div *ngIf="this.panel_option == 'edit'">
         <div *ngIf="this.getSession() == null">
           Erreur

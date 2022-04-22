@@ -44,6 +44,8 @@ var imagePuzzle = {
         helper.doc('imgTitle').innerHTML = image.title;
         helper.doc('actualImage').setAttribute('src', image.src);
         helper.doc('sortable').innerHTML = '';
+        
+
         for (var i = 0; i < gridSize * gridSize; i++) {
             var xpos = (percentage * (i % gridSize)) + '%';
             var ypos = (percentage * Math.floor(i / gridSize)) + '%';
@@ -55,8 +57,15 @@ var imagePuzzle = {
             
             li.style.backgroundSize = (gridSize * 100) + '%';
             li.style.backgroundPosition = xpos + ' ' + ypos;
-            li.style.width = 400 / gridSize + 'px';
-            li.style.height = 400 / gridSize + 'px';
+            
+                
+                li.style.width = 400 / gridSize + 'px';
+
+            
+
+                li.style.height = 400 / gridSize + 'px';
+
+            
 
             li.setAttribute('draggable', 'true');
             li.ondragstart = (event) => event.dataTransfer.setData('data', event.target.id);
@@ -104,6 +113,13 @@ var imagePuzzle = {
             li.setAttribute('dragstart', 'true');
             li.style.display= "inline-block";
             helper.doc('sortable').appendChild(li);
+            
+            
+            helper.doc('sortable').style.maxWidth='404px';
+            helper.doc('sortable').style.maxHeight='404px';
+            helper.doc('playPanel').style.maxWidth = '800px';
+            helper.doc('playPanel').style.maxHeight= '800px';
+            
         }
         helper.shuffle('sortable');
     }

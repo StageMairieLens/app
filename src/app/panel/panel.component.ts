@@ -41,10 +41,10 @@ export class PanelComponent implements OnInit {
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
-  liste_image_puzzle:any=[];
-  imgPuzzle(li:Image[]):any{
-    for(var i=0;i<li.length;i++){
-      this.liste_image_puzzle.push({src:li[i].src,title:li[i].nom});
+  liste_image_puzzle: any = [];
+  imgPuzzle(li: Image[]): any {
+    for (var i = 0; i < li.length; i++) {
+      this.liste_image_puzzle.push({ src: li[i].src, title: li[i].nom });
     }
     return this.liste_image_puzzle;
   }
@@ -60,7 +60,6 @@ export class PanelComponent implements OnInit {
 
   optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abecedaire', 'Fille&Garçon', 'Puzzle'];
   selectedGame: string | null = "";
-  nbSessionsActive: number = 0;
   panel: string | null = "";
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   sessions: Session[] = SessionsComponent.data;
@@ -132,9 +131,9 @@ export class PanelComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
-  decoupe:string='';
-  puzzle_list:Puzzle[]=[
-  new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
+  decoupe: string = '3';
+  puzzle_list: Puzzle[] = [
+    new Puzzle(this.liste_image_puzzle = this.imgPuzzle(this.selectedImages), this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe))
   ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
@@ -156,8 +155,8 @@ export class PanelComponent implements OnInit {
   boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
   boygirl_form_step: number = 0;
-  boygirl_list : BoyGirl[] = [
-    new BoyGirl(['girl','girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
+  boygirl_list: BoyGirl[] = [
+    new BoyGirl(['girl', 'girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
   ];
 
   // VARIABLE JEU ABECEDAIRE
@@ -220,18 +219,27 @@ export class PanelComponent implements OnInit {
         this.panel_option = this.route.snapshot.paramMap.get('param2');
 
         if (this.panel_option != null) {
-          if (this.route.snapshot.paramMap.get('param3') != null) {
-            if (this.panel_option == 'edit') {
+          if (this.panel_option == 'edit') {
+            if (this.route.snapshot.paramMap.get('param3') != null) {
               this.session_id = +this.route.snapshot.paramMap.get('param3')!;
               if (this.session_id == null) {
                 this.router.navigate(['/panel/sessions']);
               }
-            } else {
-              this.router.navigate(['/panel/sessions']);
             }
-          } else {
+          }
+          else if (this.panel_option == 'active') {
+            this.showActive = true;
+          }
+
+          else if (this.panel_option == 'create') {
+            this.create_session = true;
+          }
+
+          else {
             this.router.navigate(['/panel/sessions']);
           }
+        } else {
+          this.router.navigate(['/panel/sessions']);
         }
       }
 
@@ -253,7 +261,7 @@ export class PanelComponent implements OnInit {
             else if (this.selectedGame == 'Recopier') {
               if (this.getRecopier()! == null) {
                 this.router.navigate(['/panel/Recopier']);
-              }else {
+              } else {
                 this.selectedImages = this.getRecopier()!.images;
                 this.recopier_bg_color = this.getRecopier()!.bg_color;
                 this.recopier_text_color = this.getRecopier()!.text_color;
@@ -288,7 +296,7 @@ export class PanelComponent implements OnInit {
             else if (this.selectedGame == 'Reconnaitre') {
               if (this.getReconnaitre()! == null) {
                 this.router.navigate(['/panel/Reconnaitre']);
-              }else {
+              } else {
                 this.selectedImages = this.getReconnaitre()!.images;
                 this.reconnaitre_bg_color = this.getReconnaitre()!.bg_color;
                 this.reconnaitre_title_color = this.getReconnaitre()!.title_color;
@@ -302,11 +310,24 @@ export class PanelComponent implements OnInit {
                 this.reconnaitre_isVocaliser = this.getReconnaitre()!.isVocaliser;
               }
             }
-
+            else if (this.selectedGame == 'Puzzle') {
+              if (this.getPuzzle() != null) {
+                this.router.navigate(['/panel/Puzzle']);
+              } else {
+                this.selectedImages = this.getPuzzle()!.liste_images;
+                this.puzzle_bg_color = this.getPuzzle()!.bg_color;
+                this.puzzle_title_color = this.getPuzzle()!.title_color;
+                this.puzzle_text_color = this.getPuzzle()!.text_color;
+                this.puzzle_button_bg_color = this.getPuzzle()!.button_bg_color;
+                this.puzzle_button_text_color = this.getPuzzle()!.button_text_color;
+                this.puzzle_type_ecriture = this.getPuzzle()!.typeEcriture;
+                this.decoupe = this.getPuzzle()!.decoupe.toString();
+              }
+            }
             else if (this.selectedGame == 'Abecedaire') {
               if (this.getAbecedaire()! == null) {
                 this.router.navigate(['/panel/Abecedaire']);
-              }else {
+              } else {
                 this.selectedImages = this.getAbecedaire()!.images;
                 this.abecedaire_bg_color = this.getAbecedaire()!.bg_color;
                 this.abecedaire_text_color = this.getAbecedaire()!.text_color;
@@ -320,9 +341,9 @@ export class PanelComponent implements OnInit {
               }
             }
             else if (this.selectedGame == 'Fille&Garçon') {
-              if(this.getBoyGirl()! == null) {
+              if (this.getBoyGirl()! == null) {
                 this.router.navigate(['/panel/Fille&Garçon']);
-              }else {
+              } else {
                 this.boygirl_listMotsFille = this.getBoyGirl()!.listMotsFille;
                 this.boygirl_listMotsGarcon = this.getBoyGirl()!.listMotsGarcon;
                 this.boygirl_bg_color_container = this.getBoyGirl()!.bg_color_container;
@@ -341,6 +362,7 @@ export class PanelComponent implements OnInit {
                 this.boygirl_type_ecriture = this.getBoyGirl()!.type_ecriture;
               }
             }
+
           }
         }
         else if (this.panel_option != 'create') {
@@ -573,8 +595,8 @@ export class PanelComponent implements OnInit {
   }
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      this.liste_image_puzzle=this.imgPuzzle(this.selectedImages);
-      this.puzzle=new Puzzle(this.liste_image_puzzle,this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe));
+      this.liste_image_puzzle = this.imgPuzzle(this.selectedImages);
+      this.puzzle = new Puzzle(this.liste_image_puzzle, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
       this.puzzle_previsualiser = true;
     }
     else {
@@ -805,8 +827,7 @@ export class PanelComponent implements OnInit {
   }
 
   editSession(session: Session): void {
-    this.panel_option = 'edit';
-    this.session_id = session.id;
+    this.router.navigate(['/panel/sessions/edit', session.id]);
   }
 
   deleteSession(session: Session): void {
@@ -848,7 +869,7 @@ export class PanelComponent implements OnInit {
   }
 
   sortSessionId(): void {
-    if(!this.sortById) {
+    if (!this.sortById) {
       this.sortById = true;
       this.sortByDate = false;
       this.sortByNbJoueur = false;
@@ -883,14 +904,14 @@ export class PanelComponent implements OnInit {
   }
 
   sortSessionDate(): void {
-    if(!this.sortByDate) {
+    if (!this.sortByDate) {
       this.sortByDate = true;
       this.sortById = false;
       this.sortByNbJoueur = false;
 
       this.sessions.sort((s1: Session, s2: Session) => {
-        if(s1.date > s2.date) return -1;
-        if(s1.date < s2.date) return 1;
+        if (s1.date > s2.date) return -1;
+        if (s1.date < s2.date) return 1;
         return 0;
       })
 
@@ -904,8 +925,8 @@ export class PanelComponent implements OnInit {
       this.sortByDate = false;
 
       this.sessions.sort((s1: Session, s2: Session) => {
-        if(s1.date > s2.date) return 1;
-        if(s1.date < s2.date) return -1;
+        if (s1.date > s2.date) return 1;
+        if (s1.date < s2.date) return -1;
         return 0;
       })
 
@@ -918,14 +939,14 @@ export class PanelComponent implements OnInit {
   }
 
   sortSessionNbJoueur(): void {
-    if(!this.sortByNbJoueur) {
+    if (!this.sortByNbJoueur) {
       this.sortByDate = false;
       this.sortById = false;
       this.sortByNbJoueur = true;
 
       this.sessions.sort((s1: Session, s2: Session) => {
-        if(s1.joueur.length > s2.joueur.length) return -1;
-        if(s1.joueur.length < s2.joueur.length) return 1;
+        if (s1.joueur.length > s2.joueur.length) return -1;
+        if (s1.joueur.length < s2.joueur.length) return 1;
         return 0;
       })
 
@@ -939,8 +960,8 @@ export class PanelComponent implements OnInit {
       this.sortByNbJoueur = false;
 
       this.sessions.sort((s1: Session, s2: Session) => {
-        if(s1.joueur.length > s2.joueur.length) return 1;
-        if(s1.joueur.length < s2.joueur.length) return -1;
+        if (s1.joueur.length > s2.joueur.length) return 1;
+        if (s1.joueur.length < s2.joueur.length) return -1;
         return 0;
       })
 
@@ -953,7 +974,7 @@ export class PanelComponent implements OnInit {
   }
 
   createSession(jeu: string, nom: string): void {
-    if(jeu != "" && nom != "" && this.jeuId != -1) {
+    if (jeu != "" && nom != "" && this.jeuId != -1) {
       // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
       this.create_session = false;
       this.jeuSession = "";
@@ -991,8 +1012,8 @@ export class PanelComponent implements OnInit {
     window.location.href = '/panel/Abecedaire/edit/' + a.id;
   }
 
-  redirectEditBoyGirl(bg : BoyGirl) : void {
-    window.location.href= '/panel/Fille&Garçon/edit/' + bg.id;
+  redirectEditBoyGirl(bg: BoyGirl): void {
+    window.location.href = '/panel/Fille&Garçon/edit/' + bg.id;
   }
 
   getRecopier(): Recopier | null {
@@ -1032,14 +1053,23 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getBoyGirl() : BoyGirl | null {
-    for(let bg of this.boygirl_list) {
-      if(bg.id == this.id_game) {
+  getBoyGirl(): BoyGirl | null {
+    for (let bg of this.boygirl_list) {
+      if (bg.id == this.id_game) {
         return bg;
       }
     }
     return null;
   }
+  getPuzzle(): Puzzle | null {
+    for (let p of this.puzzle_list) {
+      if (p.id == this.id_game) {
+        return p;
+      }
+    }
+    return null;
+  }
+
 
   save(): void {
     switch (this.selectedGame) {
@@ -1084,6 +1114,16 @@ export class PanelComponent implements OnInit {
         this.getReconnaitre()!.isVocaliser = this.reconnaitre_isVocaliser;
         this.router.navigate(['/panel/Reconnaitre']);
         break;
+      case 'Puzzle':
+        this.getPuzzle()!.liste_images = this.liste_image_puzzle;
+        this.getPuzzle()!.bg_color = this.puzzle_bg_color;
+        this.getPuzzle()!.title_color = this.puzzle_title_color;
+        this.getPuzzle()!.text_color = this.puzzle_text_color;
+        this.getPuzzle()!.button_bg_color = this.puzzle_button_bg_color;
+        this.getPuzzle()!.button_text_color = this.puzzle_button_text_color;
+        this.getPuzzle()!.typeEcriture = this.puzzle_type_ecriture;
+        this.getPuzzle()!.decoupe = Number(this.decoupe);
+        break;
       case 'Abecedaire':
         this.getAbecedaire()!.images = this.selectedImages;
         this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
@@ -1097,7 +1137,7 @@ export class PanelComponent implements OnInit {
         this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
         this.router.navigate(['/panel/Abecedaire']);
         break;
-      case 'Fille&Garçon' :
+      case 'Fille&Garçon':
         this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
         this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
         this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
