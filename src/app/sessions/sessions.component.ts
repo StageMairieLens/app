@@ -13,7 +13,7 @@ export class SessionsComponent implements OnInit {
 
   session_id: number | null = null;
   join: boolean = false;
-  timer_redirect: number = 5;
+  timer_redirect: number = 6;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -27,45 +27,33 @@ export class SessionsComponent implements OnInit {
             this.join = true;
           }
           else {
-            setTimeout(() => {
-              this.timer_redirect--
-            }, 1000);
-            setTimeout(() => {
-              this.timer_redirect--
-            }, 2000);
-            setTimeout(() => {
-              this.timer_redirect--
-            }, 3000);
-            setTimeout(() => {
-              this.timer_redirect--
-            }, 4000);
-            setTimeout(() => {
-              this.timer_redirect--
-            }, 5000);
-            setTimeout(() => {
-              this.router.navigate(['']);
-            }, 6000);
+
+            for(let i = 1 ; i <= this.timer_redirect + 1 ; i++) {
+              if(i != this.timer_redirect + 1) {
+                setTimeout(() => {
+                  this.timer_redirect--
+                }, 1000 * i);
+              }else {
+                setTimeout(() => {
+                  this.router.navigate(['']);
+                }, 1000 * i);
+              }
+            }
           }
         }
         else {
-          setTimeout(() => {
-            this.timer_redirect--
-          }, 1000);
-          setTimeout(() => {
-            this.timer_redirect--
-          }, 2000);
-          setTimeout(() => {
-            this.timer_redirect--
-          }, 3000);
-          setTimeout(() => {
-            this.timer_redirect--
-          }, 4000);
-          setTimeout(() => {
-            this.timer_redirect--
-          }, 5000);
-          setTimeout(() => {
-            this.router.navigate(['']);
-          }, 6000);
+
+          for(let i = 1 ; i <= this.timer_redirect ; i++) {
+            if(i != this.timer_redirect + 1) {
+              setTimeout(() => {
+                this.timer_redirect--
+              }, 1000 * i);
+            }else {
+              setTimeout(() => {
+                this.router.navigate(['']);
+              }, 1000 * i);
+            }
+          }
         }
       }
     }
