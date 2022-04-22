@@ -3933,7 +3933,7 @@
 
       <!-- Affiche la liste des séssions -->
       <div
-        *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view')) && !this.create_session">
+        *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view' && this.panel_option != 'preview')) && !this.create_session">
         <h2 class="card-title">Liste des sessions</h2>
 
         <div class="col-md-12 text-center sortButton">
@@ -4305,6 +4305,37 @@
         </div>
         <div *ngIf="this.getSession() != null">
           {{this.getSession()!.id}}
+        </div>
+      </div>
+
+      <!-- Prévisualisr le jeu d'une séssion -->
+      <div *ngIf="this.panel_option == 'preview'">
+
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Retourner sur les sessions</span>
+          </button>
+        </div>
+
+        <div *ngIf="this.selected_session!.jeu == 'Recopier'">
+          <app-recopier-game [r]="this.getSessionRecopier(this.selected_session!)" [showTitle]="false"></app-recopier-game>
+        </div>
+        <div *ngIf="this.selected_session!.jeu == 'Memory'">
+          <app-memory [showTitle]="false" [game]="this.getSessionMemory(this.selected_session!)"></app-memory>
+        </div>
+        <div *ngIf="this.selected_session!.jeu == 'Reconnaitre'">
+          <app-reconnaitre [r]="this.getSessionReconnaitre(this.selected_session!)" [showTitle]="false"></app-reconnaitre>
+        </div>
+        <div *ngIf="this.selected_session!.jeu == 'Abecedaire'">
+          <app-abecedaire [showTitle]="false" [game]="this.getSessionAbecedaire(this.selected_session!)"></app-abecedaire>
+        </div>
+        <div *ngIf="this.selected_session!.jeu == 'Fille&Garçon'">
+          <app-boy-girl-game [showTitle]="false" [bg]="this.getSessionBoyGirl(this.selected_session!)"></app-boy-girl-game>
+        </div>
+        <div *ngIf="this.selected_session!.jeu == 'Puzzle'">
+          <app-puzzle [r]="this.getSessionPuzzle(this.selected_session!)" [showTitle]="false"></app-puzzle>
+
         </div>
       </div>
     </div>

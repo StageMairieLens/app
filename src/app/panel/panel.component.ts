@@ -800,7 +800,8 @@ export class PanelComponent implements OnInit {
   }
 
   previsualiserGame(element: Session): void {
-
+    this.panel_option = 'preview';
+    this.selected_session = element;
   }
 
   create(jeu: string): void {
@@ -1025,6 +1026,11 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
+  getSessionRecopier(s : Session) : Recopier | null {
+    this.id_game = s.jeuId;
+    return this.getRecopier();
+  }
+
 
   getMemory(): Memory | null {
     for (let m of this.memory_list) {
@@ -1035,6 +1041,12 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
+  getSessionMemory(s : Session) : Memory | null {
+    this.id_game = s.jeuId;
+    return this.getMemory();
+  }
+
+
   getReconnaitre(): Reconnaitre | null {
     for (let r of this.reconnaitre_list) {
       if (r.id == this.id_game) {
@@ -1043,6 +1055,12 @@ export class PanelComponent implements OnInit {
     }
     return null;
   }
+
+  getSessionReconnaitre(s : Session) : Reconnaitre | null {
+    this.id_game = s.jeuId;
+    return this.getReconnaitre();
+  }
+
 
   getAbecedaire(): Abecedaire | null {
     for (let a of this.abecedaire_list) {
@@ -1053,6 +1071,12 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
+  getSessionAbecedaire(s : Session) : Abecedaire | null {
+    this.id_game = s.jeuId;
+    return this.getAbecedaire();
+  }
+
+
   getBoyGirl(): BoyGirl | null {
     for (let bg of this.boygirl_list) {
       if (bg.id == this.id_game) {
@@ -1061,6 +1085,12 @@ export class PanelComponent implements OnInit {
     }
     return null;
   }
+
+  getSessionBoyGirl(s : Session) : BoyGirl | null {
+    this.id_game = s.jeuId;
+    return this.getBoyGirl();
+  }
+
   getPuzzle(): Puzzle | null {
     for (let p of this.puzzle_list) {
       if (p.id == this.id_game) {
@@ -1069,6 +1099,12 @@ export class PanelComponent implements OnInit {
     }
     return null;
   }
+
+  getSessionPuzzle(s : Session) : Puzzle | null {
+    this.id_game = s.jeuId;
+    return this.getPuzzle();
+  }
+
 
 
   save(): void {
