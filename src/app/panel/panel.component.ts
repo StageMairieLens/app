@@ -132,7 +132,7 @@ export class PanelComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
-  decoupe:string='';
+  decoupe:string='3';
   puzzle_list:Puzzle[]=[
   new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
   ];

@@ -25,7 +25,7 @@
     <p class="card-text">Il n'y a pas de jeu selectionné !</p>
   </div>
 </div>
-
+    
     <div id="collage"  class="text-center">
 
         <div id="playPanel" style="padding:5px; "[ngStyle]="{background : this.r!.bg_color}">
@@ -51,9 +51,9 @@
 
                     </p>
                     <div>
-                        <button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
+                        <!--<button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
                         <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-
+                        -->
                     </div>
                 </div>
             </div>
@@ -62,8 +62,8 @@
             <div style=" padding: 5px 10px 20px 10px; text-align: center; "[ngStyle]="{background : this.r!.bg_color}">
                 <h2 style="text-align:center"[ngStyle]="{background : this.r!.text_color}">Fin de partie!!</h2>
                 Félicitation!!<br /> Tu as compléter toutes les  images.
-                <br /> Steps: <span id="stepCount" class="stepCount">0</span> steps.
-                <br /> Time Taken: <span class="timeCount">0</span> seconds<br />
+                <br /> Nombre de mouvement: <span id="stepCount" class="stepCount">0</span> .
+                <br /> Temps: <span class="timeCount">0</span> seconds<br />
                 <div>
                     <button type="button" onclick="window.location.reload(true);">Recommencer</button>
                 </div>

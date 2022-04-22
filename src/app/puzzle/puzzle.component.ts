@@ -31,7 +31,8 @@ export class PuzzleComponent implements OnInit {
   
     
 ];
-
+  taille_w:any=[];
+  taille_h:any=[];
   decoupe : number = 2;
   
   ngOnInit(): void {
@@ -48,7 +49,6 @@ export class PuzzleComponent implements OnInit {
   }
 
   
-
   
   
 
