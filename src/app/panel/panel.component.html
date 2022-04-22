@@ -58,22 +58,33 @@
       <h3 class="card-title" style="margin-bottom : -10px">Séssion</h3>
       <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
       </mat-divider>
-      <button mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions']">Afficher toutes
-        les
-        séssions</button>
+
+      <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions']">
+        <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
+        <span>Afficher toutes les séssions</span>
+
+      </button>
 
 
-      <button *ngIf="this.sessionActive.length != 0" mat-raised-button color="primary"
-        style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions/active']">Afficher les
-        séssions actives</button>
+      <button *ngIf="this.sessionActive.length != 0" mat-raised-button color="primary" class="session_choice"
+        [routerLink]="['/panel/sessions/active']">
+        <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
 
-      <button *ngIf="this.sessionActive.length == 0" mat-raised-button disabled color="primary"
-        style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions/active']">Afficher les
-        séssions actives</button>
+        <span>Afficher les séssions actives</span>
+      </button>
+
+      <button *ngIf="this.sessionActive.length == 0" mat-raised-button disabled color="primary" class="session_choice"
+        [routerLink]="['/panel/sessions/active']">
+
+        <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
+        <span>Afficher les séssions actives</span>
+      </button>
 
 
-      <button mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions/create']">Créer une
-        séssions</button>
+      <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions/create']">
+        <i class="fa-solid fa-circle-plus fa-xl"></i>
+        <span>Créer une séssions</span>
+      </button>
 
     </div>
 
@@ -3953,7 +3964,7 @@
 
           <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true"
             color="primary">
-            <i class="fa-solid fa-circle-plus fa-lg" style="margin-bottom : 2%"></i>
+            <i class="fa-solid fa-circle-plus fa-xl"></i>
             <span>Créer une session</span>
           </button>
 

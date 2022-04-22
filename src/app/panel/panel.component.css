@@ -218,3 +218,17 @@ img {
 .panel-choice i {
   margin-bottom: 2%;
 }
+
+.session_choice {
+  width : 80%;
+  margin-bottom : 3%
+}
+
+.session_choice span {
+  font-size : 25px;
+  margin-left : 10px;
+}
+
+.session_choice i {
+
+}
