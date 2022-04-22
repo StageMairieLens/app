@@ -36,9 +36,9 @@ export class PuzzleComponent implements OnInit {
   decoupe : number = 2;
   
   ngOnInit(): void {
-  
+    console.log(this.r!.typeEcriture);
+
     lance(this.r!.decoupe,this.r!.liste_images);
-    
     
     this.decoupe;
     console.log(images[0].title);
