@@ -22,17 +22,17 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatChipsModule } from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
-import {MatBadgeModule} from '@angular/material/badge';
-import {CdkTableModule} from '@angular/cdk/table';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CdkTableModule } from '@angular/cdk/table';
 import { UsersComponent } from './users/users.component';
 import { SessionsComponent } from './sessions/sessions.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -71,6 +71,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MatTooltipModule,
     HttpClientModule,
     NgxDropzoneModule,
+    MatCheckboxModule
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,

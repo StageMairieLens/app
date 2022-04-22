@@ -60,7 +60,6 @@ export class PanelComponent implements OnInit {
 
   optionGame: string[] = ['Recopier', 'Memory', 'Reconnaitre', 'Abecedaire', 'Fille&Garçon', 'Puzzle'];
   selectedGame: string | null = "";
-  nbSessionsActive: number = 0;
   panel: string | null = "";
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   sessions: Session[] = SessionsComponent.data;
