@@ -31,13 +31,14 @@ export class PuzzleComponent implements OnInit {
   
     
 ];
-
+  taille_w:any=[];
+  taille_h:any=[];
   decoupe : number = 2;
   
   ngOnInit(): void {
-  
+    console.log(this.r!.typeEcriture);
+
     lance(this.r!.decoupe,this.r!.liste_images);
-    
     
     this.decoupe;
     console.log(images[0].title);
@@ -48,7 +49,6 @@ export class PuzzleComponent implements OnInit {
   }
 
   
-
   
   
 

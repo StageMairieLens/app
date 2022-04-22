@@ -131,7 +131,7 @@ export class PanelComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
-  decoupe:string='';
+  decoupe:string='3';
   puzzle_list:Puzzle[]=[
   new Puzzle(this.liste_image_puzzle=this.imgPuzzle(this.selectedImages),this.puzzle_bg_color,this.puzzle_title_color,this.puzzle_text_color,this.puzzle_button_bg_color,this.puzzle_button_text_color,this.puzzle_type_ecriture,Number(this.decoupe))
   ];
@@ -301,7 +301,20 @@ export class PanelComponent implements OnInit {
                 this.reconnaitre_isVocaliser = this.getReconnaitre()!.isVocaliser;
               }
             }
-
+            else if(this.selectedGame == 'Puzzle'){
+              if(this.getPuzzle()!= null){
+                this.router.navigate(['/panel/Puzzle']);
+              }else{
+                this.selectedImages = this.getPuzzle()!.liste_images;
+                this.puzzle_bg_color = this.getPuzzle()!.bg_color;
+                this.puzzle_title_color = this.getPuzzle()!.title_color;
+                this.puzzle_text_color = this.getPuzzle()!.text_color;
+                this.puzzle_button_bg_color = this.getPuzzle()!.button_bg_color;
+                this.puzzle_button_text_color = this.getPuzzle()!.button_text_color;
+                this.puzzle_type_ecriture = this.getPuzzle()!.typeEcriture;
+                this.decoupe = this.getPuzzle()!.decoupe.toString();
+              }
+            }
             else if (this.selectedGame == 'Abecedaire') {
               if (this.getAbecedaire()! == null) {
                 this.router.navigate(['/panel/Abecedaire']);
@@ -340,6 +353,7 @@ export class PanelComponent implements OnInit {
                 this.boygirl_type_ecriture = this.getBoyGirl()!.type_ecriture;
               }
             }
+            
           }
         }
         else if (this.panel_option != 'create') {
@@ -1039,6 +1053,15 @@ export class PanelComponent implements OnInit {
     }
     return null;
   }
+  getPuzzle() : Puzzle | null {
+    for(let p of this.puzzle_list) {
+      if(p.id == this.id_game) {
+        return p;
+      }
+    }
+    return null;
+  }
+  
 
   save(): void {
     switch (this.selectedGame) {
@@ -1082,6 +1105,16 @@ export class PanelComponent implements OnInit {
         this.getReconnaitre()!.typeEcriture = this.reconnaitre_type_ecriture;
         this.getReconnaitre()!.isVocaliser = this.reconnaitre_isVocaliser;
         this.router.navigate(['/panel/Reconnaitre']);
+        break;
+      case 'Puzzle':
+        this.getPuzzle()!.liste_images = this.liste_image_puzzle;
+        this.getPuzzle()!.bg_color = this.puzzle_bg_color;
+        this.getPuzzle()!.title_color= this.puzzle_title_color;
+        this.getPuzzle()!.text_color= this.puzzle_text_color;
+        this.getPuzzle()!.button_bg_color= this.puzzle_button_bg_color;
+        this.getPuzzle()!.button_text_color= this.puzzle_button_text_color;
+        this.getPuzzle()!.typeEcriture= this.puzzle_type_ecriture;
+        this.getPuzzle()!.decoupe=Number(this.decoupe);
         break;
       case 'Abecedaire':
         this.getAbecedaire()!.images = this.selectedImages;
