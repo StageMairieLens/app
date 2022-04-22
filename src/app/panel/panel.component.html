@@ -51,23 +51,58 @@
   </div>
 
   <div class="row text-center">
+
+
+    <!-- Session -->
     <div class="col-md-6">
-      <h4 class="card-title">Séssion</h4>
-      <mat-divider style="background : #ececec ; width : 80%; display : inline-block"></mat-divider>
-      <button mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%">Afficher toutes les
+      <h3 class="card-title" style="margin-bottom : -10px">Séssion</h3>
+      <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
+      </mat-divider>
+      <button mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions']">Afficher toutes
+        les
         séssions</button>
-      <button *ngIf="this.sessionActive.length != 0" mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%">Afficher les
-        séssions actives</button>      
-        <button *ngIf="this.sessionActive.length == 0" mat-raised-button disabled color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%">Afficher les
+
+
+      <button *ngIf="this.sessionActive.length != 0" mat-raised-button color="primary"
+        style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions/active']">Afficher les
         séssions actives</button>
-      <button mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%">Créer une séssions</button>
+
+      <button *ngIf="this.sessionActive.length == 0" mat-raised-button disabled color="primary"
+        style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions/active']">Afficher les
+        séssions actives</button>
+
+
+      <button mat-raised-button color="primary" style="width : 80%;font-size : 25px;margin-bottom : 3%" [routerLink]="['/panel/sessions/create']">Créer une
+        séssions</button>
 
     </div>
 
+
+    <!-- Jeux -->
     <div class="col-md-6">
-      <h4 class="card-title">Jeux</h4>
-      <mat-divider style="background : #ececec ; width : 80%; display : inline-block"></mat-divider>
+      <h3 class="card-title" style="margin-bottom : -10px">Jeux</h3>
+      <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
+      </mat-divider>
+
+      <button class="panel-choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/', c]" mat-raised-button
+        color="primary">
+
+        <i *ngIf="c == 'Recopier'" class="fa-solid fa-pen fa-lg"></i>
+        <i *ngIf="c == 'Memory'" class="fa-solid fa-brain fa-lg"></i>
+        <i *ngIf="c == 'Reconnaitre'" class="fa-solid fa-eye fa-lg"></i>
+        <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-a fa-lg"></i>
+        <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-minus fa-lg"></i>
+        <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-z fa-lg"></i>
+        <i *ngIf="c == 'Fille&Garçon'" class="fa-solid fa-children fa-lg"></i>
+        <i *ngIf="c == 'Puzzle'" class="fa-solid fa-puzzle-piece fa-lg"></i>
+
+        <span>{{c}}</span>
+
+
+      </button>
+
     </div>
+
   </div>
 
 </div>
@@ -80,7 +115,18 @@
     <div class="card-body">
       <div align="center">
         <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/', c,'create']"
-          mat-raised-button color="primary">{{c}}</button>
+          mat-raised-button color="primary">
+          <i *ngIf="c == 'Recopier'" class="fa-solid fa-pen "></i>
+          <i *ngIf="c == 'Memory'" class="fa-solid fa-brain "></i>
+          <i *ngIf="c == 'Reconnaitre'" class="fa-solid fa-eye "></i>
+          <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-a "></i>
+          <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-minus "></i>
+          <i *ngIf="c == 'Abecedaire'" class="fa-solid fa-z "></i>
+          <i *ngIf="c == 'Fille&Garçon'" class="fa-solid fa-children "></i>
+          <i *ngIf="c == 'Puzzle'" class="fa-solid fa-puzzle-piece "></i>
+
+          <span>{{c}}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -3907,7 +3953,7 @@
 
           <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true"
             color="primary">
-            <i class="fa-solid fa-plus fa-xl" style="margin-bottom : 2px"></i>
+            <i class="fa-solid fa-circle-plus fa-lg" style="margin-bottom : 2%"></i>
             <span>Créer une session</span>
           </button>
 
