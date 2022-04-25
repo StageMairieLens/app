@@ -88,22 +88,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU RECONNAITRE
   reconnaitre: Reconnaitre | null;
-  reconnaitre_bg_color: string = "#3bb8c9";
-  reconnaitre_title_color: string = "#ffffff";
-  reconnaitre_text_color: string = "#000000";
-  reconnaitre_good_answer_color: string = "#0dff00";
-  reconnaitre_wrong_answer_color: string = "#ff0000";
-  reconnaitre_button_bg_color: string = "#0f73b1";
-  reconnaitre_button_text_color: string = "#ffffff";
-  reconnaitre_progress: Progress = Progress.Blue;
-  reconnaitre_type_ecriture = "SCRIPT";
-  reconnaitre_isVocaliser: boolean = false;
-  reconnaitre_previsualiser: boolean = false;
-  reconnaitre_list: Reconnaitre[] = [
-    new Reconnaitre([
-      this.liste_image[0]
-    ], this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
-  ];
+  reconnaitre_list: Reconnaitre[] = SessionsComponent.reconnaitre_list;
 
   // VARIABLE JEU PUZZLE
   puzzle: Puzzle | null;
@@ -267,17 +252,7 @@ export class PanelComponent implements OnInit {
               if (this.getReconnaitre()! == null) {
                 this.router.navigate(['/panel/Reconnaitre']);
               } else {
-                this.selectedImages = this.getReconnaitre()!.images;
-                this.reconnaitre_bg_color = this.getReconnaitre()!.bg_color;
-                this.reconnaitre_title_color = this.getReconnaitre()!.title_color;
-                this.reconnaitre_text_color = this.getReconnaitre()!.text_color;
-                this.reconnaitre_good_answer_color = this.getReconnaitre()!.good_answer_color;
-                this.reconnaitre_wrong_answer_color = this.getReconnaitre()!.wrong_answer_color;
-                this.reconnaitre_button_bg_color = this.getReconnaitre()!.button_bg_color;
-                this.reconnaitre_button_text_color = this.getReconnaitre()!.button_text_color;
-                this.reconnaitre_progress = this.getReconnaitre()!.color_progress_bar;
-                this.reconnaitre_type_ecriture = this.getReconnaitre()!.typeEcriture;
-                this.reconnaitre_isVocaliser = this.getReconnaitre()!.isVocaliser;
+                this.reconnaitre = this.getReconnaitre();
               }
             }
             else if (this.selectedGame == 'Puzzle') {
@@ -381,23 +356,6 @@ export class PanelComponent implements OnInit {
 
     if (index > -1) {
       this.memory_list.splice(index, 1);
-    }
-  }
-
-  previewReconnaitre(r: Reconnaitre): void {
-    this.reconnaitre = r;
-    this.reconnaitre_previsualiser = true;
-  }
-
-  quitPreviewReconnaitre(): void {
-    this.reconnaitre_previsualiser = false;
-  }
-
-  deleteGameReconnaitre(r: Reconnaitre): void {
-    let index = this.reconnaitre_list.indexOf(r, 0);
-
-    if (index > -1) {
-      this.reconnaitre_list.splice(index, 1);
     }
   }
 
@@ -549,7 +507,7 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  setPrevisualiserReconnaitre(prev: boolean): void {
+  /* setPrevisualiserReconnaitre(prev: boolean): void {
     if (prev == true) {
       this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser);
       this.reconnaitre_previsualiser = true;
@@ -562,7 +520,7 @@ export class PanelComponent implements OnInit {
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
       }, 0);
     }
-  }
+  } */
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
       this.liste_image_puzzle = this.imgPuzzle(this.selectedImages);
@@ -638,7 +596,7 @@ export class PanelComponent implements OnInit {
         //   break;
       }
     } else if (jeu == 'Reconnaitre') {
-      switch (element.value) {
+/*       switch (element.value) {
         case 'blue':
           this.reconnaitre_progress = Progress.Blue;
           break;
@@ -654,7 +612,7 @@ export class PanelComponent implements OnInit {
         case 'red':
           this.reconnaitre_progress = Progress.Red;
           break;
-      }
+      } */
     } else if (jeu == 'Abecedaire') {
       switch (element.value) {
         case 'blue':
@@ -788,12 +746,12 @@ export class PanelComponent implements OnInit {
         );
         this.router.navigate(['/panel/Memory']);
         break;
-      case 'Reconnaitre':
+/*       case 'Reconnaitre':
         this.reconnaitre_list.push(
           new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
         );
         this.router.navigate(['/panel/Reconnaitre']);
-        break;
+        break; */
     }
   }
 
@@ -996,7 +954,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionRecopier(s : Session) : Recopier | null {
+  getSessionRecopier(s: Session): Recopier | null {
     this.id_game = s.jeuId;
     return this.getRecopier();
   }
@@ -1011,7 +969,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionMemory(s : Session) : Memory | null {
+  getSessionMemory(s: Session): Memory | null {
     this.id_game = s.jeuId;
     return this.getMemory();
   }
@@ -1026,7 +984,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionReconnaitre(s : Session) : Reconnaitre | null {
+  getSessionReconnaitre(s: Session): Reconnaitre | null {
     this.id_game = s.jeuId;
     return this.getReconnaitre();
   }
@@ -1041,7 +999,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionAbecedaire(s : Session) : Abecedaire | null {
+  getSessionAbecedaire(s: Session): Abecedaire | null {
     this.id_game = s.jeuId;
     return this.getAbecedaire();
   }
@@ -1056,7 +1014,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionBoyGirl(s : Session) : BoyGirl | null {
+  getSessionBoyGirl(s: Session): BoyGirl | null {
     this.id_game = s.jeuId;
     return this.getBoyGirl();
   }
@@ -1070,7 +1028,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionPuzzle(s : Session) : Puzzle | null {
+  getSessionPuzzle(s: Session): Puzzle | null {
     this.id_game = s.jeuId;
     return this.getPuzzle();
   }
@@ -1106,7 +1064,7 @@ export class PanelComponent implements OnInit {
         this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
         this.router.navigate(['/panel/Memory']);
         break;
-      case 'Reconnaitre':
+/*       case 'Reconnaitre':
         this.getReconnaitre()!.images = this.selectedImages;
         this.getReconnaitre()!.bg_color = this.reconnaitre_bg_color;
         this.getReconnaitre()!.title_color = this.reconnaitre_title_color;
@@ -1119,7 +1077,7 @@ export class PanelComponent implements OnInit {
         this.getReconnaitre()!.typeEcriture = this.reconnaitre_type_ecriture;
         this.getReconnaitre()!.isVocaliser = this.reconnaitre_isVocaliser;
         this.router.navigate(['/panel/Reconnaitre']);
-        break;
+        break; */
       case 'Puzzle':
         this.getPuzzle()!.liste_images = this.liste_image_puzzle;
         this.getPuzzle()!.bg_color = this.puzzle_bg_color;

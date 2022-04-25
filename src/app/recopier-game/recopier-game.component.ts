@@ -305,7 +305,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  create(jeu: string): void {
+  create(): void {
     this.recopier_list.push(
       new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
     );
