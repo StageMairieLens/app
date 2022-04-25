@@ -1,6 +1,5 @@
 import { Image } from '../Image'
 
-
 export class Puzzle {
   id: number;
   static nb: number = 0;
@@ -26,6 +25,7 @@ export class Puzzle {
     this.text_color = text_color;
     this.typeEcriture = typeEcriture;
     this.decoupe=decoupe;
+
   }
   
 
