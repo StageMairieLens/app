@@ -16,6 +16,7 @@ import { Memory } from '../memory/Memory';
 import { Session } from '../sessions/Session';
 import { SessionsComponent } from '../sessions/sessions.component';
 import { join } from 'path';
+import { RecopierGameComponent } from '../recopier-game/recopier-game.component';
 
 
 @Component({
@@ -83,24 +84,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU RECOPIER
   recopier: Recopier | null;
-  recopier_bg_color: string = "#3bb8c9";
-  recopier_text_color: string = "#000000";
-  recopier_title_color: string = "#ffffff";
-  recopier_good_answer_color: string = "#0dff00";
-  recopier_wrong_answer_color: string = "#ff0000";
-  recopier_button_bg_color: string = "#0f73b1";
-  recopier_button_text_color: string = "#ffffff";
-  recopier_input_bg_color: string = "#ffffff";
-  recopier_input_text_color: string = "#000000";
-  recopier_progress: Progress = Progress.Blue;
-  recopier_type_ecriture = "CURSIF";
-  recopier_isVocaliser: boolean = false;
-  recopier_previsualiser: boolean = false;
-  recopier_list: Recopier[] = [
-    new Recopier([
-      this.liste_image[0], this.liste_image[1]
-    ], '#777777', this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, false)
-  ];
+
 
 
   // VARIABLE JEU RECONNAITRE
@@ -258,25 +242,25 @@ export class PanelComponent implements OnInit {
             if (this.id_game == null) {
               this.router.navigate(['/panel/', this.selectedGame]);
             }
-            else if (this.selectedGame == 'Recopier') {
-              if (this.getRecopier()! == null) {
-                this.router.navigate(['/panel/Recopier']);
-              } else {
-                this.selectedImages = this.getRecopier()!.images;
-                this.recopier_bg_color = this.getRecopier()!.bg_color;
-                this.recopier_text_color = this.getRecopier()!.text_color;
-                this.recopier_title_color = this.getRecopier()!.title_color;
-                this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
-                this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
-                this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
-                this.recopier_button_text_color = this.getRecopier()!.button_text_color;
-                this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
-                this.recopier_input_text_color = this.getRecopier()!.input_text_color;
-                this.recopier_progress = this.getRecopier()!.color_progress_bar;
-                this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
-                this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
-              }
-            }
+            // else if (this.selectedGame == 'Recopier') {
+            //   if (this.getRecopier()! == null) {
+            //     this.router.navigate(['/panel/Recopier']);
+            //   } else {
+            //     this.selectedImages = this.getRecopier()!.images;
+            //     this.recopier_bg_color = this.getRecopier()!.bg_color;
+            //     this.recopier_text_color = this.getRecopier()!.text_color;
+            //     this.recopier_title_color = this.getRecopier()!.title_color;
+            //     this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
+            //     this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
+            //     this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
+            //     this.recopier_button_text_color = this.getRecopier()!.button_text_color;
+            //     this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
+            //     this.recopier_input_text_color = this.getRecopier()!.input_text_color;
+            //     this.recopier_progress = this.getRecopier()!.color_progress_bar;
+            //     this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
+            //     this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
+            //   }
+            // }
 
             else if (this.selectedGame == 'Memory') {
               if (this.getMemory()! == null) {
@@ -380,22 +364,22 @@ export class PanelComponent implements OnInit {
 
   }
 
-  previewRecopier(r: Recopier): void {
-    this.recopier = r;
-    this.recopier_previsualiser = true;
-  }
+  // previewRecopier(r: Recopier): void {
+  //   this.recopier = r;
+  //   this.recopier_previsualiser = true;
+  // }
 
-  quitPreviewRecopier(): void {
-    this.recopier_previsualiser = false;
-  }
+  // quitPreviewRecopier(): void {
+  //   this.recopier_previsualiser = false;
+  // }
 
-  deleteGameRecopier(r: Recopier): void {
-    let index = this.recopier_list.indexOf(r, 0);
+  // deleteGameRecopier(r: Recopier): void {
+  //   let index = this.recopier_list.indexOf(r, 0);
 
-    if (index > -1) {
-      this.recopier_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.recopier_list.splice(index, 1);
+  //   }
+  // }
 
   previewMemory(m: Memory): void {
     this.memory = m;
@@ -549,20 +533,20 @@ export class PanelComponent implements OnInit {
     element.selected = true;
   }
 
-  setPrevisualiserRecopier(prev: boolean): void {
-    if (prev == true) {
-      this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
-      this.recopier_previsualiser = true;
-    }
-    else {
-      this.recopier = null;
-      this.recopier_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      }, 0);
-    }
-  }
+  // setPrevisualiserRecopier(prev: boolean): void {
+  //   if (prev == true) {
+  //     this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
+  //     this.recopier_previsualiser = true;
+  //   }
+  //   else {
+  //     this.recopier = null;
+  //     this.recopier_previsualiser = false;
+  //     setTimeout(() => {
+  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+  //     }, 0);
+  //   }
+  // }
 
   setPrevisualiserBoyGirl(prev: boolean): void {
     if (prev == true) {
@@ -651,21 +635,21 @@ export class PanelComponent implements OnInit {
 
     if (jeu == 'Recopier') {
       switch (element.value) {
-        case 'blue':
-          this.recopier_progress = Progress.Blue;
-          break;
-        case 'green':
-          this.recopier_progress = Progress.Green;
-          break;
-        case 'lightblue':
-          this.recopier_progress = Progress.LightBlue;
-          break;
-        case 'orange':
-          this.recopier_progress = Progress.Orange;
-          break;
-        case 'red':
-          this.recopier_progress = Progress.Red;
-          break;
+        // case 'blue':
+        //   this.recopier_progress = Progress.Blue;
+        //   break;
+        // case 'green':
+        //   this.recopier_progress = Progress.Green;
+        //   break;
+        // case 'lightblue':
+        //   this.recopier_progress = Progress.LightBlue;
+        //   break;
+        // case 'orange':
+        //   this.recopier_progress = Progress.Orange;
+        //   break;
+        // case 'red':
+        //   this.recopier_progress = Progress.Red;
+        //   break;
       }
     } else if (jeu == 'Reconnaitre') {
       switch (element.value) {
@@ -806,12 +790,12 @@ export class PanelComponent implements OnInit {
 
   create(jeu: string): void {
     switch (jeu) {
-      case 'Recopier':
-        this.recopier_list.push(
-          new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
-        );
-        this.router.navigate(['/panel/Recopier']);
-        break;
+      // case 'Recopier':
+      //   this.recopier_list.push(
+      //     new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
+      //   );
+      //   this.router.navigate(['/panel/Recopier']);
+      //   break;
       case 'Memory':
         this.memory_list.push(
           new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
@@ -1109,22 +1093,22 @@ export class PanelComponent implements OnInit {
 
   save(): void {
     switch (this.selectedGame) {
-      case 'Recopier':
-        this.getRecopier()!.images = this.selectedImages;
-        this.getRecopier()!.bg_color = this.recopier_bg_color;
-        this.getRecopier()!.text_color = this.recopier_text_color;
-        this.getRecopier()!.title_color = this.recopier_title_color;
-        this.getRecopier()!.good_answer_color = this.recopier_good_answer_color;
-        this.getRecopier()!.wrong_answer_color = this.recopier_wrong_answer_color;
-        this.getRecopier()!.button_bg_color = this.recopier_button_bg_color;
-        this.getRecopier()!.button_text_color = this.recopier_button_text_color;
-        this.getRecopier()!.input_bg_color = this.recopier_input_bg_color;
-        this.getRecopier()!.input_text_color = this.recopier_input_text_color;
-        this.getRecopier()!.color_progress_bar = this.recopier_progress;
-        this.getRecopier()!.typeEcriture = this.recopier_type_ecriture;
-        this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
-        this.router.navigate(['/panel/Recopier']);
-        break;
+      // case 'Recopier':
+      //   this.getRecopier()!.images = this.selectedImages;
+      //   this.getRecopier()!.bg_color = this.recopier_bg_color;
+      //   this.getRecopier()!.text_color = this.recopier_text_color;
+      //   this.getRecopier()!.title_color = this.recopier_title_color;
+      //   this.getRecopier()!.good_answer_color = this.recopier_good_answer_color;
+      //   this.getRecopier()!.wrong_answer_color = this.recopier_wrong_answer_color;
+      //   this.getRecopier()!.button_bg_color = this.recopier_button_bg_color;
+      //   this.getRecopier()!.button_text_color = this.recopier_button_text_color;
+      //   this.getRecopier()!.input_bg_color = this.recopier_input_bg_color;
+      //   this.getRecopier()!.input_text_color = this.recopier_input_text_color;
+      //   this.getRecopier()!.color_progress_bar = this.recopier_progress;
+      //   this.getRecopier()!.typeEcriture = this.recopier_type_ecriture;
+      //   this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
+      //   this.router.navigate(['/panel/Recopier']);
+      //   break;
       case 'Memory':
         this.getMemory()!.nbTile = this.memory_nbTile;
         this.getMemory()!.setting = this.memory_settings;
