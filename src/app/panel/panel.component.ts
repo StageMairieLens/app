@@ -14,10 +14,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
 import { Session } from '../sessions/Session';
-import { SessionsComponent } from '../sessions/sessions.component';
 import { join } from 'path';
-import { RecopierGameComponent } from '../recopier-game/recopier-game.component';
-
+import { SessionsComponent } from '../sessions/sessions.component';
 
 @Component({
   selector: 'app-panel',
@@ -84,6 +82,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU RECOPIER
   recopier: Recopier | null;
+  recopier_list = SessionsComponent.recopier_list;
 
 
 
@@ -242,26 +241,13 @@ export class PanelComponent implements OnInit {
             if (this.id_game == null) {
               this.router.navigate(['/panel/', this.selectedGame]);
             }
-            // else if (this.selectedGame == 'Recopier') {
-            //   if (this.getRecopier()! == null) {
-            //     this.router.navigate(['/panel/Recopier']);
-            //   } else {
-            //     this.selectedImages = this.getRecopier()!.images;
-            //     this.recopier_bg_color = this.getRecopier()!.bg_color;
-            //     this.recopier_text_color = this.getRecopier()!.text_color;
-            //     this.recopier_title_color = this.getRecopier()!.title_color;
-            //     this.recopier_good_answer_color = this.getRecopier()!.good_answer_color;
-            //     this.recopier_wrong_answer_color = this.getRecopier()!.wrong_answer_color;
-            //     this.recopier_button_bg_color = this.getRecopier()!.button_bg_color;
-            //     this.recopier_button_text_color = this.getRecopier()!.button_text_color;
-            //     this.recopier_input_bg_color = this.getRecopier()!.input_bg_color;
-            //     this.recopier_input_text_color = this.getRecopier()!.input_text_color;
-            //     this.recopier_progress = this.getRecopier()!.color_progress_bar;
-            //     this.recopier_type_ecriture = this.getRecopier()!.typeEcriture;
-            //     this.recopier_isVocaliser = this.getRecopier()!.isVocaliser;
-            //   }
-            // }
-
+            else if (this.selectedGame == 'Recopier') {
+              if (this.getRecopier()! == null) {
+                this.router.navigate(['/panel/Recopier']);
+              } else {
+                this.recopier = this.getRecopier();
+              }
+            }
             else if (this.selectedGame == 'Memory') {
               if (this.getMemory()! == null) {
                 this.router.navigate(['/panel/Memory']);

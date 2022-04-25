@@ -4,6 +4,7 @@ import { Recopier } from './Recopier'
 import { Progress } from '../Progress'
 import { ImagesComponent } from '../images/images.component'
 import { Router } from '@angular/router';
+import { SessionsComponent } from '../sessions/sessions.component'
 
 @Component({
   selector: 'app-recopier-game',
@@ -15,11 +16,6 @@ export class RecopierGameComponent implements OnInit {
   constructor(private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     // this.r = null;
-    this.recopier_list = [
-      new Recopier([
-        this.images[0], this.images[1]
-      ], '#777777', this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, false)
-    ]
     this.r = this.recopier_list[0];
   }
 
@@ -52,7 +48,7 @@ export class RecopierGameComponent implements OnInit {
   recopier_type_ecriture = "CURSIF";
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
-  recopier_list: Recopier[] = [];
+  recopier_list: Recopier[] = SessionsComponent.recopier_list;
 
   formStep: number = 0;
 
@@ -87,6 +83,22 @@ export class RecopierGameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.edit) {
+      this.create_game = true;
+      this.selectedImages = this.r!.images;
+      this.recopier_bg_color = this.r!.bg_color;
+      this.recopier_text_color = this.r!.text_color;
+      this.recopier_title_color = this.r!.title_color;
+      this.recopier_good_answer_color = this.r!.good_answer_color;
+      this.recopier_wrong_answer_color = this.r!.wrong_answer_color;
+      this.recopier_button_bg_color = this.r!.button_bg_color;
+      this.recopier_button_text_color = this.r!.button_text_color;
+      this.recopier_input_bg_color = this.r!.input_bg_color;
+      this.recopier_input_text_color = this.r!.input_text_color;
+      this.recopier_progress = this.r!.color_progress_bar;
+      this.recopier_type_ecriture = this.r!.typeEcriture;
+      this.recopier_isVocaliser = this.r!.isVocaliser;
+    }
   }
 
 
@@ -294,13 +306,27 @@ export class RecopierGameComponent implements OnInit {
   }
 
   create(jeu: string): void {
-    switch (jeu) {
-      case 'Recopier':
-        this.recopier_list.push(
-          new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
-        );
-        this.router.navigate(['/panel/Recopier']);
-        break;
-    }
+    this.recopier_list.push(
+      new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
+    );
+    this.router.navigate(['/panel/Recopier']);
   }
+
+
+save(): void {
+  this.r!.images = this.selectedImages;
+  this.r!.bg_color = this.recopier_bg_color;
+  this.r!.text_color = this.recopier_text_color;
+  this.r!.title_color = this.recopier_title_color;
+  this.r!.good_answer_color = this.recopier_good_answer_color;
+  this.r!.wrong_answer_color = this.recopier_wrong_answer_color;
+  this.r!.button_bg_color = this.recopier_button_bg_color;
+  this.r!.button_text_color = this.recopier_button_text_color;
+  this.r!.input_bg_color = this.recopier_input_bg_color;
+  this.r!.input_text_color = this.recopier_input_text_color;
+  this.r!.color_progress_bar = this.recopier_progress;
+  this.r!.typeEcriture = this.recopier_type_ecriture;
+  this.r!.isVocaliser = this.recopier_isVocaliser;
+  this.router.navigate(['/panel/Recopier']);
+}
 }
