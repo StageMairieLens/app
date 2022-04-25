@@ -5,9 +5,9 @@ import { Image } from '../Image'
 import { MatButton } from '@angular/material/button';
 import { JeuxService } from '../jeux.service';
 
-interface Erreur{
-  src : string;
-  erreur : number;
+interface Erreur {
+  src: string;
+  erreur: number;
 }
 
 @Component({
@@ -16,33 +16,30 @@ interface Erreur{
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-  reponse =""
-  constructor(private jeuxService : JeuxService) {
-    // this.r = null;
-    this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
-    this.alea(this.r!.images);
-    this.alea2(this.liste_mot_boutton);
+  reponse = ""
+  constructor(private jeuxService: JeuxService) {
+    this.r = null;
+    // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
   }
-  
 
-  onSend(list:any){
-    const formData :FormData = new FormData();
-    formData.append('liste',list);
-    this.jeuxService.onSendReco(formData).subscribe(res =>{
+
+  onSend(list: any) {
+    const formData: FormData = new FormData();
+    formData.append('liste', list);
+    this.jeuxService.onSendReco(formData).subscribe(res => {
       console.log(res);
-      this.reponse=res;
+      this.reponse = res;
     },
-    err =>{
-      console.log(err,"err");
-    }
-    ) 
+      err => {
+        console.log(err, "err");
+      }
+    )
   }
   ngOnInit(): void {
-    //Zthis.alea(this.liste_images);
-    // console.log(this.liste_images);
-    //this.variable = this.r!.images[this.prochaine_image].src;
-    this.alea(this.r!.images);
-    //this.alea2(this.liste_mot_boutton);
+    if (this.r != null) {
+      this.alea(this.r!.images);
+
+    }
 
 
   }
@@ -59,7 +56,7 @@ export class ReconnaitreComponent implements OnInit {
     //new Image('Elephant', '../../assets/elephant.jpg'),
     //new Image('Voiture', '../../assets/voiture.png')
   ];
-  erreur_image : Erreur[]=[];
+  erreur_image: Erreur[] = [];
   //liste_images = [];
   prochaine_image = 0;
   taille_to = 0;
@@ -116,10 +113,10 @@ export class ReconnaitreComponent implements OnInit {
     if (varia == this.r!.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked = false;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
-      this.erreur_image.push({src:this.r!.images[this.prochaine_image].src,erreur:this.compteur_image});
-      
+      this.erreur_image.push({ src: this.r!.images[this.prochaine_image].src, erreur: this.compteur_image });
 
-      this.compteur_image=0;
+
+      this.compteur_image = 0;
       console.log(this.erreur_image);
 
       setTimeout(() => {
@@ -167,7 +164,7 @@ export class ReconnaitreComponent implements OnInit {
         document.getElementById(varia)!.style.color = '#999999';
         document.getElementById(varia)!.classList.add('disabled');
         this.compteur += 1;
-        this.compteur_image +=1;
+        this.compteur_image += 1;
 
         document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
 

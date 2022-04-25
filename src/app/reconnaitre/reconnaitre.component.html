@@ -16,9 +16,7 @@
 <!-- Si le jeu est null -->
 <div *ngIf="this.r == null" class="card align-middle container" id="card_error"
   style="width: 32rem; background-color: #3bb8c9; color : black">
-  <img class="card-img-top image"
-    src="../../assets/images/error.png"
-    alt="Card image cap">
+  <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
   <div class="card-body text-center">
     <h5 class="card-title title_image_error">Erreur !</h5>
     <p class="card-text">Il n'y a pas de jeu selectionné !</p>
@@ -75,8 +73,8 @@
 
           <div *ngIf="this.r!.typeEcriture == 'SCRIPT'">
             <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
-              *ngFor="let mot of this.r!.liste_button" id="{{mot}}"
-              (click)="change($event,mot)" mat-fab color="primary" aria-label="Example icon button with a delete icon">
+              *ngFor="let mot of this.r!.liste_button" id="{{mot}}" (click)="change($event,mot)" mat-fab color="primary"
+              aria-label="Example icon button with a delete icon">
               {{mot}}
             </button>
           </div>
@@ -119,9 +117,7 @@
     <!-- Carte félicitation -->
     <div *ngIf="this.prochaine_image == this.r!.images.length" class="card align-middle container" id="container2"
       style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
-      <img class="card-img-top image"
-      src="../../assets/images/congratulations.png"
-      alt="Card image cap">
+      <img class="card-img-top image" src="../../assets/images/congratulations.png" alt="Card image cap">
       <div class="card-body text-center">
         <h5 class="card-title title_image" [ngStyle]="{color : this.r!.title_color}">Félicitation !</h5>
         <p class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous avez reconnue correctement touts les mots
@@ -131,28 +127,27 @@
 
 
     </div>
-    <div  *ngIf="this.prochaine_image == this.r!.images.length" class="text-center" >
-      <figure  class="figure" *ngFor="let items of this.erreur_image">
+    <div *ngIf="this.prochaine_image == this.r!.images.length" class="text-center">
+      <figure class="figure" *ngFor="let items of this.erreur_image">
         <img src="{{ items.src }}" width="200" height="200">
-        <figcaption  *ngIf="items.erreur == 0" style="color: green;"> {{ items.erreur }}</figcaption>
-        <figcaption  *ngIf="items.erreur > 0" style="color: red;"> {{ items.erreur }}</figcaption>
+        <figcaption *ngIf="items.erreur == 0" style="color: green;"> {{ items.erreur }}</figcaption>
+        <figcaption *ngIf="items.erreur > 0" style="color: red;"> {{ items.erreur }}</figcaption>
 
       </figure>
     </div>
 
 
   </div>
-</div>
 
-
-<!-- Si la liste d'image est vide -->
-<div *ngIf="this.r!.images.length == 0" class="card align-middle container" id="card_finish" style="width: 32rem;"
-  [ngStyle]="{background : this.r!.bg_color}">
-  <img class="card-img-top image"
-    src="../../assets/images/error.png"
-    alt="Card image cap">
-  <div class="card-body text-center">
-    <h5 class="card-title title_image_error">Erreur !</h5>
-    <p class="card-text" style="color : black">Il n'y a pas d'image selectionné</p>
+  <!-- Si la liste d'image est vide -->
+  <div *ngIf="this.r!.images.length == 0" class="card align-middle container" id="card_finish" style="width: 32rem;"
+    [ngStyle]="{background : this.r!.bg_color}">
+    <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image_error">Erreur !</h5>
+      <p class="card-text" style="color : black">Il n'y a pas d'image selectionné</p>
+    </div>
   </div>
+
+
 </div>
