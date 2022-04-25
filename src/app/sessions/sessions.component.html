@@ -43,7 +43,24 @@
   </div>
 
   <div *ngIf="this.connected">
-    
+    <div *ngIf="this.jeu == 'abecedaire'">
+      <app-abecedaire [game]="this.abecedaire"></app-abecedaire>
+    </div>
+    <div *ngIf="this.jeu == 'memory'">
+      <app-memory [game]="this.memory"></app-memory>
+    </div>
+    <div *ngIf="this.jeu == 'fillegarcon'">
+      <app-boy-girl-game [bg]="this.boyGirl"></app-boy-girl-game>
+    </div>
+    <div *ngIf="this.jeu == 'puzzle'">
+      <app-puzzle [r]="this.puzzle"></app-puzzle>
+    </div>
+    <div *ngIf="this.jeu == 'reconnaitre'">
+      <app-reconnaitre [r]="this.reconnaitre"></app-reconnaitre>
+    </div>
+    <div *ngIf="this.jeu == 'recopier'">
+      <app-recopier-game [r]="this.recopier"></app-recopier-game>
+    </div>
   </div>
 
 </div>
