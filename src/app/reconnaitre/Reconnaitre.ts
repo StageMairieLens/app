@@ -24,7 +24,7 @@ export class Reconnaitre {
 
   taille = 0;
 
-
+  liste:any=[];
   constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean) {
     this.id = Reconnaitre.nb++;
     this.images = liste_images;
@@ -41,8 +41,11 @@ export class Reconnaitre {
     this.isVocaliser = isVocaliser;
     this.alea(this.images);
     this.alea2(this.liste_button);
+    this.liste.push(this.images,this.bg_color,this.title_color,this.good_answer_color,this.wrong_answer_color,this.color_progress_bar,
+      this.button_bg_color,this.button_text_color,this.text_color,this.typeEcriture,this.isVocaliser);
 
   }
+  
 
   alea(li:Image[]){
     var m=li.length,name,src, i;

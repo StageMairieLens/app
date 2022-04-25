@@ -3,6 +3,7 @@ import { Reconnaitre } from './Reconnaitre'
 import { Progress } from '../Progress'
 import { Image } from '../Image'
 import { MatButton } from '@angular/material/button';
+import { JeuxService } from '../jeux.service';
 
 interface Erreur{
   src : string;
@@ -15,12 +16,26 @@ interface Erreur{
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-
-  constructor() {
+  reponse =""
+  constructor(private jeuxService : JeuxService) {
     // this.r = null;
     this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
     this.alea(this.r!.images);
     this.alea2(this.liste_mot_boutton);
+  }
+  
+
+  onSend(list:any){
+    const formData :FormData = new FormData();
+    formData.append('liste',list);
+    this.jeuxService.onSendReco(formData).subscribe(res =>{
+      console.log(res);
+      this.reponse=res;
+    },
+    err =>{
+      console.log(err,"err");
+    }
+    ) 
   }
   ngOnInit(): void {
     //Zthis.alea(this.liste_images);

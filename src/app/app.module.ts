@@ -33,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { JeuxService } from './jeux.service';
 
 
 @NgModule({
@@ -76,7 +77,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'accent' },
-  }
+   
+  },
+  JeuxService,
   ],
   bootstrap: [AppComponent]
 })
