@@ -147,18 +147,7 @@ export class PanelComponent implements OnInit {
 
   //VARIABLE JEU MEMORY
   memory: Memory | null;
-  memory_nbTile: number = 18;
-  memory_settings: string[] = ['image', 'image'];
-  memory_bg_color: string = "#3bb8c9";
-  memory_text_color: string = "#ffffff";
-  memory_good_answer_color: string = "#3498db";
-  memory_wrong_answer_color: string = "#e74c3c";
-  memory_progress: Progress = Progress.Blue;
-  memory_previsualiser: boolean = false;
-  memory_tmp_affichage: string = "5";
-  memory_list: Memory[] = [
-    new Memory(this.selectedImages.slice(1), this.selectedImages[0], 12, ['cursif', 'image'], this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
-  ];
+  memory_list: Memory[] = SessionsComponent.memory_list;
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -237,14 +226,7 @@ export class PanelComponent implements OnInit {
               if (this.getMemory()! == null) {
                 this.router.navigate(['/panel/Memory']);
               } else {
-                this.memory_nbTile = this.getMemory()!.nbTile;
-                this.memory_settings = this.getMemory()!.setting;
-                this.memory_bg_color = this.getMemory()!.bg_color;
-                this.memory_text_color = this.getMemory()!.text_color;
-                this.memory_good_answer_color = this.getMemory()!.good_answer_color;
-                this.memory_wrong_answer_color = this.getMemory()!.wrong_answer_color;
-                this.memory_progress = this.getMemory()!.color_progress_bar;
-                this.memory_tmp_affichage = this.getMemory()!.tmpAffichage;
+                this.memory = this.getMemory();
               }
             }
 
@@ -342,22 +324,22 @@ export class PanelComponent implements OnInit {
   //   }
   // }
 
-  previewMemory(m: Memory): void {
-    this.memory = m;
-    this.memory_previsualiser = true;
-  }
+  // previewMemory(m: Memory): void {
+  //   this.memory = m;
+  //   this.memory_previsualiser = true;
+  // }
 
-  quitPreviewMemory(): void {
-    this.memory_previsualiser = false;
-  }
+  // quitPreviewMemory(): void {
+  //   this.memory_previsualiser = false;
+  // }
 
-  deleteGameMemory(m: Memory): void {
-    let index = this.memory_list.indexOf(m, 0);
+  // deleteGameMemory(m: Memory): void {
+  //   let index = this.memory_list.indexOf(m, 0);
 
-    if (index > -1) {
-      this.memory_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.memory_list.splice(index, 1);
+  //   }
+  // }
 
   previewPuzzle(r: Puzzle): void {
     this.puzzle = r;
@@ -413,7 +395,7 @@ export class PanelComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  getMemorySetting(n: number): string {
+/*   getMemorySetting(n: number): string {
     return this.memory_settings[n];
   }
 
@@ -424,7 +406,7 @@ export class PanelComponent implements OnInit {
 
   changeMemoryNbTile(n: number): void {
     this.memory_nbTile = n;
-  }
+  } */
 
   addMotsFille(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -551,7 +533,7 @@ export class PanelComponent implements OnInit {
       }, 0);
     }
   }
-
+/*
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
       this.memory = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
@@ -565,7 +547,7 @@ export class PanelComponent implements OnInit {
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
       }, 0);
     }
-  }
+  } */
 
   isActive(button: HTMLButtonElement): boolean {
     if (document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
@@ -632,7 +614,7 @@ export class PanelComponent implements OnInit {
           break;
       }
     } else if (jeu == 'Memory') {
-      switch (element.value) {
+/*       switch (element.value) {
         case 'blue':
           this.memory_progress = Progress.Blue;
           break;
@@ -648,7 +630,7 @@ export class PanelComponent implements OnInit {
         case 'red':
           this.memory_progress = Progress.Red;
           break;
-      }
+      } */
     }
   }
 
@@ -740,12 +722,12 @@ export class PanelComponent implements OnInit {
       //   );
       //   this.router.navigate(['/panel/Recopier']);
       //   break;
-      case 'Memory':
+      /* case 'Memory':
         this.memory_list.push(
           new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
         );
         this.router.navigate(['/panel/Memory']);
-        break;
+        break; */
 /*       case 'Reconnaitre':
         this.reconnaitre_list.push(
           new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
@@ -1053,7 +1035,7 @@ export class PanelComponent implements OnInit {
       //   this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
       //   this.router.navigate(['/panel/Recopier']);
       //   break;
-      case 'Memory':
+      /* case 'Memory':
         this.getMemory()!.nbTile = this.memory_nbTile;
         this.getMemory()!.setting = this.memory_settings;
         this.getMemory()!.bg_color = this.memory_bg_color;
@@ -1062,8 +1044,9 @@ export class PanelComponent implements OnInit {
         this.getMemory()!.wrong_answer_color = this.memory_wrong_answer_color;
         this.getMemory()!.color_progress_bar = this.memory_progress;
         this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
+        this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
         this.router.navigate(['/panel/Memory']);
-        break;
+        break; */
 /*       case 'Reconnaitre':
         this.getReconnaitre()!.images = this.selectedImages;
         this.getReconnaitre()!.bg_color = this.reconnaitre_bg_color;
