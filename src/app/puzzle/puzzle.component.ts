@@ -21,7 +21,7 @@ export class PuzzleComponent implements OnInit {
 
   constructor() {
     this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','SCRIPT',this.decoupe);
-    //this.r = null;
+    // this.r = null;
 
   }
 
@@ -35,12 +35,13 @@ export class PuzzleComponent implements OnInit {
   decoupe : number = 2;
 
   ngOnInit(): void {
-    console.log(this.r!.typeEcriture);
 
-    lance(this.r!.decoupe,this.r!.liste_images);
+    if(this.r != null) {
+      lance(this.r!.decoupe,this.r!.liste_images);
+    }
 
 
-   
+
   }
   restar(){
     restart(this.r!.decoupe,this.r!.liste_images);
