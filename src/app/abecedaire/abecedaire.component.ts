@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Image } from '../Image';
+import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
+import { SessionsComponent } from '../sessions/sessions.component';
 import { Abecedaire } from './Abecedaire';
 
 @Component({
@@ -12,6 +15,23 @@ export class AbecedaireComponent implements OnInit {
 
   @Input() game: Abecedaire | null;
   @Input() showTitle: boolean = true;
+  @Input() play: boolean = true;
+  @Input() showList: boolean = false;
+  @Input() create_game: boolean = false;
+  @Input() edit: boolean = false;
+
+
+  liste_image: Image[] = ImagesComponent.list_image;
+  selectedImages: Image[] = [];
+  progressValue: Progress[] = [
+    Progress.Blue,
+    Progress.Green,
+    Progress.LightBlue,
+    Progress.Orange,
+    Progress.Red
+  ];
+  formStep: number = 0;
+
 
   rightLetter = '';
   errors = 0;
@@ -24,24 +44,53 @@ export class AbecedaireComponent implements OnInit {
   afficherMot = "cursif";
   finish = false;
 
-  constructor() {
-    this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
-    // this.game = null;
+  abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
+  abecedaire_bg_color: string = "#3bb8c9";
+  abecedaire_text_color: string = "#ffffff";
+  abecedaire_good_answer_color: string = "#3498db";
+  abecedaire_wrong_answer_color: string = "#e74c3c";
+  abecedaire_progress: Progress = Progress.Blue;
+  abecedaire_button_bg_color: string = "#f39c12";
+  abecedaire_button_text_color: string = "#ffffff";
+  abecedaire_type_ecriture: string = "script";
+  abecedaire_isVocaliser: boolean = false;
+  abecedaire_previsualiser: boolean = false;
+
+  constructor(private router: Router) {
+    // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
+    this.game = null;
   }
 
   // Initialisation
   ngOnInit(): void {
-    if(this.game!.images.length != 0) {
-      this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
-      this.afficherMot = this.game!.typeEcriture;
-      this.sound = this.game!.isVocaliser;
+    if(this.game != null) {
+      if (this.game!.images.length != 0) {
+        this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
+        this.afficherMot = this.game!.typeEcriture;
+        this.sound = this.game!.isVocaliser;
+      }
+
+    }
+
+    if (this.edit) {
+      this.create_game = true;
+      this.selectedImages = this.game!.images;
+      this.abecedaire_bg_color = this.game!.bg_color;
+      this.abecedaire_text_color = this.game!.text_color;
+      this.abecedaire_good_answer_color = this.game!.good_answer_color;
+      this.abecedaire_wrong_answer_color = this.game!.wrong_answer_color;
+      this.abecedaire_progress = this.game!.color_progress_bar;
+      this.abecedaire_button_bg_color = this.game!.button_bg_color;
+      this.abecedaire_button_text_color = this.game!.button_text_color;
+      this.abecedaire_type_ecriture = this.game!.typeEcriture;
+      this.abecedaire_isVocaliser = this.game!.isVocaliser;
     }
   }
 
   nextImage() {
-    if(this.nbEntries == this.game!.images.length) {
+    if (this.nbEntries == this.game!.images.length) {
       var buttons = document.getElementsByClassName("button");
-      for(var i = 0; i < buttons.length; i++) {
+      for (var i = 0; i < buttons.length; i++) {
         (buttons.item(i) as HTMLButtonElement).style.backgroundColor = this.game!.button_bg_color;
       }
       this.finish = true;
@@ -65,12 +114,12 @@ export class AbecedaireComponent implements OnInit {
   }
 
   // Logique du jeu
-  click($event: MouseEvent,letter:string): void {
+  click($event: MouseEvent, letter: string): void {
     ($event.target as HTMLButtonElement).disabled = true;
-    if(letter == this.rightLetter) {
+    if (letter == this.rightLetter) {
       ($event.target as HTMLButtonElement).style.backgroundColor = this.game!.good_answer_color;
       var buttons = document.getElementsByClassName("button");
-      for(var i = 0; i < buttons.length; i++) {
+      for (var i = 0; i < buttons.length; i++) {
         (buttons.item(i) as HTMLButtonElement).disabled = true;
       }
       setTimeout(() => {
@@ -87,10 +136,141 @@ export class AbecedaireComponent implements OnInit {
 
   resetButton() {
     var buttons = document.getElementsByClassName("button");
-    for(var i = 0; i < buttons.length; i++) {
+    for (var i = 0; i < buttons.length; i++) {
       (buttons.item(i) as HTMLButtonElement).style.backgroundColor = this.game!.button_bg_color;
       (buttons.item(i) as HTMLButtonElement).disabled = false;
     }
   }
 
+  previewAbecedaire(a: Abecedaire): void {
+    this.game = a;
+    this.abecedaire_previsualiser = true;
+  }
+
+  quitPreviewAbecedaire(): void {
+    this.abecedaire_previsualiser = false;
+  }
+
+  deleteGameAbecedaire(a: Abecedaire): void {
+    let index = this.abecedaire_list.indexOf(a, 0);
+
+    if (index > -1) {
+      this.abecedaire_list.splice(index, 1);
+    }
+  }
+
+  parseDate(date: Date): string {
+    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    let index: number = date.getMonth() - 1;
+    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+
+  }
+
+  redirectEditAbecedaire(a: Abecedaire): void {
+    window.location.href = '/panel/Abecedaire/edit/' + a.id;
+  }
+
+  setPrevisualiserAbecedaire(prev: boolean): void {
+    if (prev == true) {
+      this.game = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+      this.abecedaire_previsualiser = true;
+    }
+    else {
+      this.game = null;
+      this.abecedaire_previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
+    }
+  }
+
+
+  setActive(element: Element | null): void {
+    (<HTMLButtonElement>element!).style.background = 'white';
+    (<HTMLButtonElement>element!).style.color = 'black';
+  }
+
+  setInactive(element: Element | null) {
+    (<HTMLButtonElement>element!).style.background = '';
+    (<HTMLButtonElement>element!).style.color = 'white';
+  }
+
+  nextStep(): void {
+    let step = this.formStep;
+    if (this.formStep < 2) {
+      step++;
+      this.setFormStep(step);
+    }
+  }
+  previousStep(): void {
+    let step = this.formStep;
+    if (this.formStep > 0) {
+      step--;
+      this.setFormStep(step);
+    }
+  }
+
+  setFormStep(step: number): void {
+    this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+    this.formStep = step;
+    this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
+
+  }
+
+  addImageSelected(img: Image): void {
+    if (this.selectedImages.indexOf(img) == -1) {
+      this.selectedImages.push(img);
+    }
+  }
+
+  deleteImage(i: Image): void {
+    let index = this.selectedImages.indexOf(i, 0);
+    if (index > -1) {
+      this.selectedImages.splice(index, 1);
+    }
+  }
+
+  changeProgressValue(jeu: string, element: HTMLSelectElement): void {
+    switch (element.value) {
+      case 'blue':
+        this.abecedaire_progress = Progress.Blue;
+        break;
+      case 'green':
+        this.abecedaire_progress = Progress.Green;
+        break;
+      case 'lightblue':
+        this.abecedaire_progress = Progress.LightBlue;
+        break;
+      case 'orange':
+        this.abecedaire_progress = Progress.Orange;
+        break;
+      case 'red':
+        this.abecedaire_progress = Progress.Red;
+        break;
+    }
+  }
+
+  create(): void {
+
+    this.abecedaire_list.push(
+      new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture)
+    );
+    this.router.navigate(['/panel/Abecedaire']);
+
+  }
+
+  save(): void {
+    this.game!.images = this.selectedImages;
+    this.game!.bg_color = this.abecedaire_bg_color;
+    this.game!.text_color = this.abecedaire_text_color;
+    this.game!.good_answer_color = this.abecedaire_good_answer_color;
+    this.game!.wrong_answer_color = this.abecedaire_wrong_answer_color;
+    this.game!.color_progress_bar = this.abecedaire_progress;
+    this.game!.button_bg_color = this.abecedaire_button_bg_color;
+    this.game!.button_text_color = this.abecedaire_button_text_color;
+    this.game!.typeEcriture = this.abecedaire_type_ecriture;
+    this.game!.isVocaliser = this.abecedaire_isVocaliser;
+    this.router.navigate(['/panel/Abecedaire']);
+  }
 }

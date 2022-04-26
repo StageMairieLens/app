@@ -88,22 +88,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU RECONNAITRE
   reconnaitre: Reconnaitre | null;
-  reconnaitre_bg_color: string = "#3bb8c9";
-  reconnaitre_title_color: string = "#ffffff";
-  reconnaitre_text_color: string = "#000000";
-  reconnaitre_good_answer_color: string = "#0dff00";
-  reconnaitre_wrong_answer_color: string = "#ff0000";
-  reconnaitre_button_bg_color: string = "#0f73b1";
-  reconnaitre_button_text_color: string = "#ffffff";
-  reconnaitre_progress: Progress = Progress.Blue;
-  reconnaitre_type_ecriture = "SCRIPT";
-  reconnaitre_isVocaliser: boolean = false;
-  reconnaitre_previsualiser: boolean = false;
-  reconnaitre_list: Reconnaitre[] = [
-    new Reconnaitre([
-      this.liste_image[0]
-    ], this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
-  ];
+  reconnaitre_list: Reconnaitre[] = SessionsComponent.reconnaitre_list;
 
   // VARIABLE JEU PUZZLE
   puzzle: Puzzle | null;
@@ -120,60 +105,16 @@ export class PanelComponent implements OnInit {
   ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
-  boygirl_listMotsFille: string[] = [];
-  boygirl_listMotsGarcon: string[] = [];
-  boygirl_bg_color_container: string = "#3bb8c9";
-  boygirl_bg_color_fille: string = "#ffc0cb";
-  boygirl_bg_color_garcon: string = "#add9e6";
-  boygirl_bg_color_mot: string = "#fea500";
-  boygirl_word_color_fille: string = "#ffc0cb";
-  boygirl_word_color_garcon: string = "#0f73b1";
-  boygirl_word_color_mot: string = "#000000";
-  boygirl_title_color_fille: string = "#000000";
-  boygirl_title_color_garcon: string = "#000000";
-  boygirl_title_color_mot: string = "#000000";
-  boygirl_text_color_fille: string = "#ffffff";
-  boygirl_text_color_garcon: string = "#ffffff";
-  boygirl_text_color_mot: string = "#ffffff";
-  boygirl_type_ecriture: string = "SCRIPT";
-  boygirl_previsualiser: boolean = false;
-  boygirl_form_step: number = 0;
-  boygirl_list: BoyGirl[] = [
-    new BoyGirl(['girl', 'girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
-  ];
+  boygirl_list: BoyGirl[] = SessionsComponent.boygirl_list;
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
-  abecedaire_bg_color: string = "#3bb8c9";
-  abecedaire_text_color: string = "#ffffff";
-  abecedaire_good_answer_color: string = "#3498db";
-  abecedaire_wrong_answer_color: string = "#e74c3c";
-  abecedaire_progress: Progress = Progress.Blue;
-  abecedaire_button_bg_color: string = "#f39c12";
-  abecedaire_button_text_color: string = "#ffffff";
-  abecedaire_type_ecriture: string = "script";
-  abecedaire_isVocaliser: boolean = false;
-  abecedaire_previsualiser: boolean = false;
-  abecedaire_list: Abecedaire[] = [
-    new Abecedaire([
-      this.liste_image[0], this.liste_image[1]
-    ], '#745154', this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture)
-  ];
+
+  abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
 
   //VARIABLE JEU MEMORY
   memory: Memory | null;
-  memory_nbTile: number = 18;
-  memory_settings: string[] = ['image', 'image'];
-  memory_bg_color: string = "#3bb8c9";
-  memory_text_color: string = "#ffffff";
-  memory_good_answer_color: string = "#3498db";
-  memory_wrong_answer_color: string = "#e74c3c";
-  memory_progress: Progress = Progress.Blue;
-  memory_previsualiser: boolean = false;
-  memory_tmp_affichage: string = "5";
-  memory_list: Memory[] = [
-    new Memory(this.selectedImages.slice(1), this.selectedImages[0], 12, ['cursif', 'image'], this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
-  ];
+  memory_list: Memory[] = SessionsComponent.memory_list;
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -252,14 +193,7 @@ export class PanelComponent implements OnInit {
               if (this.getMemory()! == null) {
                 this.router.navigate(['/panel/Memory']);
               } else {
-                this.memory_nbTile = this.getMemory()!.nbTile;
-                this.memory_settings = this.getMemory()!.setting;
-                this.memory_bg_color = this.getMemory()!.bg_color;
-                this.memory_text_color = this.getMemory()!.text_color;
-                this.memory_good_answer_color = this.getMemory()!.good_answer_color;
-                this.memory_wrong_answer_color = this.getMemory()!.wrong_answer_color;
-                this.memory_progress = this.getMemory()!.color_progress_bar;
-                this.memory_tmp_affichage = this.getMemory()!.tmpAffichage;
+                this.memory = this.getMemory();
               }
             }
 
@@ -267,17 +201,7 @@ export class PanelComponent implements OnInit {
               if (this.getReconnaitre()! == null) {
                 this.router.navigate(['/panel/Reconnaitre']);
               } else {
-                this.selectedImages = this.getReconnaitre()!.images;
-                this.reconnaitre_bg_color = this.getReconnaitre()!.bg_color;
-                this.reconnaitre_title_color = this.getReconnaitre()!.title_color;
-                this.reconnaitre_text_color = this.getReconnaitre()!.text_color;
-                this.reconnaitre_good_answer_color = this.getReconnaitre()!.good_answer_color;
-                this.reconnaitre_wrong_answer_color = this.getReconnaitre()!.wrong_answer_color;
-                this.reconnaitre_button_bg_color = this.getReconnaitre()!.button_bg_color;
-                this.reconnaitre_button_text_color = this.getReconnaitre()!.button_text_color;
-                this.reconnaitre_progress = this.getReconnaitre()!.color_progress_bar;
-                this.reconnaitre_type_ecriture = this.getReconnaitre()!.typeEcriture;
-                this.reconnaitre_isVocaliser = this.getReconnaitre()!.isVocaliser;
+                this.reconnaitre = this.getReconnaitre();
               }
             }
             else if (this.selectedGame == 'Puzzle') {
@@ -298,38 +222,14 @@ export class PanelComponent implements OnInit {
               if (this.getAbecedaire()! == null) {
                 this.router.navigate(['/panel/Abecedaire']);
               } else {
-                this.selectedImages = this.getAbecedaire()!.images;
-                this.abecedaire_bg_color = this.getAbecedaire()!.bg_color;
-                this.abecedaire_text_color = this.getAbecedaire()!.text_color;
-                this.abecedaire_good_answer_color = this.getAbecedaire()!.good_answer_color;
-                this.abecedaire_wrong_answer_color = this.getAbecedaire()!.wrong_answer_color;
-                this.abecedaire_progress = this.getAbecedaire()!.color_progress_bar;
-                this.abecedaire_button_bg_color = this.getAbecedaire()!.button_bg_color;
-                this.abecedaire_button_text_color = this.getAbecedaire()!.button_text_color;
-                this.abecedaire_type_ecriture = this.getAbecedaire()!.typeEcriture;
-                this.abecedaire_isVocaliser = this.getAbecedaire()!.isVocaliser;
+                this.abecedaire = this.getAbecedaire();
               }
             }
             else if (this.selectedGame == 'Fille&Garçon') {
               if (this.getBoyGirl()! == null) {
                 this.router.navigate(['/panel/Fille&Garçon']);
               } else {
-                this.boygirl_listMotsFille = this.getBoyGirl()!.listMotsFille;
-                this.boygirl_listMotsGarcon = this.getBoyGirl()!.listMotsGarcon;
-                this.boygirl_bg_color_container = this.getBoyGirl()!.bg_color_container;
-                this.boygirl_bg_color_fille = this.getBoyGirl()!.bg_color_fille;
-                this.boygirl_bg_color_garcon = this.getBoyGirl()!.bg_color_garcon;
-                this.boygirl_bg_color_mot = this.getBoyGirl()!.bg_color_mot;
-                this.boygirl_word_color_fille = this.getBoyGirl()!.word_color_fille;
-                this.boygirl_word_color_garcon = this.getBoyGirl()!.word_color_garcon;
-                this.boygirl_word_color_mot = this.getBoyGirl()!.word_color_mot;
-                this.boygirl_title_color_fille = this.getBoyGirl()!.title_color_fille;
-                this.boygirl_title_color_garcon = this.getBoyGirl()!.title_color_garcon;
-                this.boygirl_title_color_mot = this.getBoyGirl()!.title_color_mot;
-                this.boygirl_text_color_fille = this.getBoyGirl()!.text_color_fille;
-                this.boygirl_text_color_garcon = this.getBoyGirl()!.text_color_garcon;
-                this.boygirl_text_color_mot = this.getBoyGirl()!.text_color_mot;
-                this.boygirl_type_ecriture = this.getBoyGirl()!.type_ecriture;
+                this.boygirl = this.getBoyGirl();
               }
             }
 
@@ -367,39 +267,22 @@ export class PanelComponent implements OnInit {
   //   }
   // }
 
-  previewMemory(m: Memory): void {
-    this.memory = m;
-    this.memory_previsualiser = true;
-  }
+  // previewMemory(m: Memory): void {
+  //   this.memory = m;
+  //   this.memory_previsualiser = true;
+  // }
 
-  quitPreviewMemory(): void {
-    this.memory_previsualiser = false;
-  }
+  // quitPreviewMemory(): void {
+  //   this.memory_previsualiser = false;
+  // }
 
-  deleteGameMemory(m: Memory): void {
-    let index = this.memory_list.indexOf(m, 0);
+  // deleteGameMemory(m: Memory): void {
+  //   let index = this.memory_list.indexOf(m, 0);
 
-    if (index > -1) {
-      this.memory_list.splice(index, 1);
-    }
-  }
-
-  previewReconnaitre(r: Reconnaitre): void {
-    this.reconnaitre = r;
-    this.reconnaitre_previsualiser = true;
-  }
-
-  quitPreviewReconnaitre(): void {
-    this.reconnaitre_previsualiser = false;
-  }
-
-  deleteGameReconnaitre(r: Reconnaitre): void {
-    let index = this.reconnaitre_list.indexOf(r, 0);
-
-    if (index > -1) {
-      this.reconnaitre_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.memory_list.splice(index, 1);
+  //   }
+  // }
 
   previewPuzzle(r: Puzzle): void {
     this.puzzle = r;
@@ -418,44 +301,44 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  previewAbecedaire(a: Abecedaire): void {
-    this.abecedaire = a;
-    this.abecedaire_previsualiser = true;
-  }
+  // previewAbecedaire(a: Abecedaire): void {
+  //   this.abecedaire = a;
+  //   this.abecedaire_previsualiser = true;
+  // }
 
-  quitPreviewAbecedaire(): void {
-    this.abecedaire_previsualiser = false;
-  }
+  // quitPreviewAbecedaire(): void {
+  //   this.abecedaire_previsualiser = false;
+  // }
 
-  deleteGameAbecedaire(a: Abecedaire): void {
-    let index = this.abecedaire_list.indexOf(a, 0);
+  // deleteGameAbecedaire(a: Abecedaire): void {
+  //   let index = this.abecedaire_list.indexOf(a, 0);
 
-    if (index > -1) {
-      this.abecedaire_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.abecedaire_list.splice(index, 1);
+  //   }
+  // }
 
-  previewBoyGirl(bg: BoyGirl): void {
-    this.boygirl = bg;
-    this.boygirl_previsualiser = true;
-  }
+  // previewBoyGirl(bg: BoyGirl): void {
+  //   this.boygirl = bg;
+  //   this.boygirl_previsualiser = true;
+  // }
 
-  quitPreviewBoyGirl(): void {
-    this.boygirl_previsualiser = false;
-  }
+  // quitPreviewBoyGirl(): void {
+  //   this.boygirl_previsualiser = false;
+  // }
 
-  deleteGameBoyGirl(bg: BoyGirl): void {
-    let index = this.boygirl_list.indexOf(bg, 0);
+  // deleteGameBoyGirl(bg: BoyGirl): void {
+  //   let index = this.boygirl_list.indexOf(bg, 0);
 
-    if (index > -1) {
-      this.boygirl_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.boygirl_list.splice(index, 1);
+  //   }
+  // }
 
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  // addOnBlur = true;
+  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  getMemorySetting(n: number): string {
+/*   getMemorySetting(n: number): string {
     return this.memory_settings[n];
   }
 
@@ -466,43 +349,43 @@ export class PanelComponent implements OnInit {
 
   changeMemoryNbTile(n: number): void {
     this.memory_nbTile = n;
-  }
+  } */
 
-  addMotsFille(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+  // addMotsFille(event: MatChipInputEvent): void {
+  //   const value = (event.value || '').trim();
 
-    if (value) {
-      this.boygirl_listMotsFille.push(value);
-    }
+  //   if (value) {
+  //     this.boygirl_listMotsFille.push(value);
+  //   }
 
-    event.chipInput!.clear();
-  }
+  //   event.chipInput!.clear();
+  // }
 
-  removeFille(str: string): void {
-    const index = this.boygirl_listMotsFille.indexOf(str);
+  // removeFille(str: string): void {
+  //   const index = this.boygirl_listMotsFille.indexOf(str);
 
-    if (index >= 0) {
-      this.boygirl_listMotsFille.splice(index, 1);
-    }
-  }
+  //   if (index >= 0) {
+  //     this.boygirl_listMotsFille.splice(index, 1);
+  //   }
+  // }
 
-  addMotsGarcon(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+  // addMotsGarcon(event: MatChipInputEvent): void {
+  //   const value = (event.value || '').trim();
 
-    if (value) {
-      this.boygirl_listMotsGarcon.push(value);
-    }
+  //   if (value) {
+  //     this.boygirl_listMotsGarcon.push(value);
+  //   }
 
-    event.chipInput!.clear();
-  }
+  //   event.chipInput!.clear();
+  // }
 
-  removeGarcon(str: string): void {
-    const index = this.boygirl_listMotsGarcon.indexOf(str);
+  // removeGarcon(str: string): void {
+  //   const index = this.boygirl_listMotsGarcon.indexOf(str);
 
-    if (index >= 0) {
-      this.boygirl_listMotsGarcon.splice(index, 1);
-    }
-  }
+  //   if (index >= 0) {
+  //     this.boygirl_listMotsGarcon.splice(index, 1);
+  //   }
+  // }
 
   parseDate(date: Date): string {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -534,22 +417,22 @@ export class PanelComponent implements OnInit {
   //   }
   // }
 
-  setPrevisualiserBoyGirl(prev: boolean): void {
-    if (prev == true) {
-      this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
-      this.boygirl_previsualiser = true;
-    }
-    else {
-      this.boygirl = null;
-      this.boygirl_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
-      }, 0);
-    }
-  }
+  // setPrevisualiserBoyGirl(prev: boolean): void {
+  //   if (prev == true) {
+  //     this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
+  //     this.boygirl_previsualiser = true;
+  //   }
+  //   else {
+  //     this.boygirl = null;
+  //     this.boygirl_previsualiser = false;
+  //     setTimeout(() => {
+  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
+  //     }, 0);
+  //   }
+  // }
 
-  setPrevisualiserReconnaitre(prev: boolean): void {
+  /* setPrevisualiserReconnaitre(prev: boolean): void {
     if (prev == true) {
       this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser);
       this.reconnaitre_previsualiser = true;
@@ -562,7 +445,7 @@ export class PanelComponent implements OnInit {
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
       }, 0);
     }
-  }
+  } */
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
       this.liste_image_puzzle = this.imgPuzzle(this.selectedImages);
@@ -579,21 +462,21 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  setPrevisualiserAbecedaire(prev: boolean): void {
-    if (prev == true) {
-      this.abecedaire = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
-      this.abecedaire_previsualiser = true;
-    }
-    else {
-      this.abecedaire = null;
-      this.abecedaire_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      }, 0);
-    }
-  }
-
+  // setPrevisualiserAbecedaire(prev: boolean): void {
+  //   if (prev == true) {
+  //     this.abecedaire = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+  //     this.abecedaire_previsualiser = true;
+  //   }
+  //   else {
+  //     this.abecedaire = null;
+  //     this.abecedaire_previsualiser = false;
+  //     setTimeout(() => {
+  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+  //     }, 0);
+  //   }
+  // }
+/*
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
       this.memory = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
@@ -607,7 +490,7 @@ export class PanelComponent implements OnInit {
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
       }, 0);
     }
-  }
+  } */
 
   isActive(button: HTMLButtonElement): boolean {
     if (document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
@@ -638,7 +521,7 @@ export class PanelComponent implements OnInit {
         //   break;
       }
     } else if (jeu == 'Reconnaitre') {
-      switch (element.value) {
+/*       switch (element.value) {
         case 'blue':
           this.reconnaitre_progress = Progress.Blue;
           break;
@@ -654,27 +537,27 @@ export class PanelComponent implements OnInit {
         case 'red':
           this.reconnaitre_progress = Progress.Red;
           break;
-      }
+      } */
     } else if (jeu == 'Abecedaire') {
-      switch (element.value) {
-        case 'blue':
-          this.abecedaire_progress = Progress.Blue;
-          break;
-        case 'green':
-          this.abecedaire_progress = Progress.Green;
-          break;
-        case 'lightblue':
-          this.abecedaire_progress = Progress.LightBlue;
-          break;
-        case 'orange':
-          this.abecedaire_progress = Progress.Orange;
-          break;
-        case 'red':
-          this.abecedaire_progress = Progress.Red;
-          break;
-      }
+      // switch (element.value) {
+      //   case 'blue':
+      //     this.abecedaire_progress = Progress.Blue;
+      //     break;
+      //   case 'green':
+      //     this.abecedaire_progress = Progress.Green;
+      //     break;
+      //   case 'lightblue':
+      //     this.abecedaire_progress = Progress.LightBlue;
+      //     break;
+      //   case 'orange':
+      //     this.abecedaire_progress = Progress.Orange;
+      //     break;
+      //   case 'red':
+      //     this.abecedaire_progress = Progress.Red;
+      //     break;
+      // }
     } else if (jeu == 'Memory') {
-      switch (element.value) {
+/*       switch (element.value) {
         case 'blue':
           this.memory_progress = Progress.Blue;
           break;
@@ -690,7 +573,7 @@ export class PanelComponent implements OnInit {
         case 'red':
           this.memory_progress = Progress.Red;
           break;
-      }
+      } */
     }
   }
 
@@ -712,13 +595,13 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  nextStepBoyGirl(): void {
-    let step = this.boygirl_form_step;
-    if (this.boygirl_form_step < 1) {
-      step++;
-      this.setFormStepBoyGirl(step);
-    }
-  }
+  // nextStepBoyGirl(): void {
+  //   let step = this.boygirl_form_step;
+  //   if (this.boygirl_form_step < 1) {
+  //     step++;
+  //     this.setFormStepBoyGirl(step);
+  //   }
+  // }
 
   setFormStep(step: number): void {
     this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
@@ -727,12 +610,12 @@ export class PanelComponent implements OnInit {
 
   }
 
-  setFormStepBoyGirl(step: number): void {
-    this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
-    this.boygirl_form_step = step;
-    this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
+  // setFormStepBoyGirl(step: number): void {
+  //   this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
+  //   this.boygirl_form_step = step;
+  //   this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
 
-  }
+  // }
 
   previousStep(): void {
     let step = this.formStep;
@@ -742,13 +625,13 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  previousStepBoyGirl(): void {
-    let step = this.boygirl_form_step;
-    if (this.boygirl_form_step > 0) {
-      step--;
-      this.setFormStepBoyGirl(step);
-    }
-  }
+  // previousStepBoyGirl(): void {
+  //   let step = this.boygirl_form_step;
+  //   if (this.boygirl_form_step > 0) {
+  //     step--;
+  //     this.setFormStepBoyGirl(step);
+  //   }
+  // }
 
   redirect(str: string): void {
     if (str == 'Accueil') {
@@ -782,18 +665,18 @@ export class PanelComponent implements OnInit {
       //   );
       //   this.router.navigate(['/panel/Recopier']);
       //   break;
-      case 'Memory':
+      /* case 'Memory':
         this.memory_list.push(
           new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
         );
         this.router.navigate(['/panel/Memory']);
-        break;
-      case 'Reconnaitre':
+        break; */
+/*       case 'Reconnaitre':
         this.reconnaitre_list.push(
           new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
         );
         this.router.navigate(['/panel/Reconnaitre']);
-        break;
+        break; */
     }
   }
 
@@ -996,7 +879,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionRecopier(s : Session) : Recopier | null {
+  getSessionRecopier(s: Session): Recopier | null {
     this.id_game = s.jeuId;
     return this.getRecopier();
   }
@@ -1011,7 +894,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionMemory(s : Session) : Memory | null {
+  getSessionMemory(s: Session): Memory | null {
     this.id_game = s.jeuId;
     return this.getMemory();
   }
@@ -1026,7 +909,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionReconnaitre(s : Session) : Reconnaitre | null {
+  getSessionReconnaitre(s: Session): Reconnaitre | null {
     this.id_game = s.jeuId;
     return this.getReconnaitre();
   }
@@ -1041,7 +924,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionAbecedaire(s : Session) : Abecedaire | null {
+  getSessionAbecedaire(s: Session): Abecedaire | null {
     this.id_game = s.jeuId;
     return this.getAbecedaire();
   }
@@ -1056,7 +939,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionBoyGirl(s : Session) : BoyGirl | null {
+  getSessionBoyGirl(s: Session): BoyGirl | null {
     this.id_game = s.jeuId;
     return this.getBoyGirl();
   }
@@ -1070,7 +953,7 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionPuzzle(s : Session) : Puzzle | null {
+  getSessionPuzzle(s: Session): Puzzle | null {
     this.id_game = s.jeuId;
     return this.getPuzzle();
   }
@@ -1095,7 +978,7 @@ export class PanelComponent implements OnInit {
       //   this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
       //   this.router.navigate(['/panel/Recopier']);
       //   break;
-      case 'Memory':
+      /* case 'Memory':
         this.getMemory()!.nbTile = this.memory_nbTile;
         this.getMemory()!.setting = this.memory_settings;
         this.getMemory()!.bg_color = this.memory_bg_color;
@@ -1104,9 +987,10 @@ export class PanelComponent implements OnInit {
         this.getMemory()!.wrong_answer_color = this.memory_wrong_answer_color;
         this.getMemory()!.color_progress_bar = this.memory_progress;
         this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
+        this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
         this.router.navigate(['/panel/Memory']);
-        break;
-      case 'Reconnaitre':
+        break; */
+/*       case 'Reconnaitre':
         this.getReconnaitre()!.images = this.selectedImages;
         this.getReconnaitre()!.bg_color = this.reconnaitre_bg_color;
         this.getReconnaitre()!.title_color = this.reconnaitre_title_color;
@@ -1119,7 +1003,7 @@ export class PanelComponent implements OnInit {
         this.getReconnaitre()!.typeEcriture = this.reconnaitre_type_ecriture;
         this.getReconnaitre()!.isVocaliser = this.reconnaitre_isVocaliser;
         this.router.navigate(['/panel/Reconnaitre']);
-        break;
+        break; */
       case 'Puzzle':
         this.getPuzzle()!.liste_images = this.liste_image_puzzle;
         this.getPuzzle()!.bg_color = this.puzzle_bg_color;
@@ -1130,38 +1014,38 @@ export class PanelComponent implements OnInit {
         this.getPuzzle()!.typeEcriture = this.puzzle_type_ecriture;
         this.getPuzzle()!.decoupe = Number(this.decoupe);
         break;
-      case 'Abecedaire':
-        this.getAbecedaire()!.images = this.selectedImages;
-        this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
-        this.getAbecedaire()!.text_color = this.abecedaire_text_color;
-        this.getAbecedaire()!.good_answer_color = this.abecedaire_good_answer_color;
-        this.getAbecedaire()!.wrong_answer_color = this.abecedaire_wrong_answer_color;
-        this.getAbecedaire()!.color_progress_bar = this.abecedaire_progress;
-        this.getAbecedaire()!.button_bg_color = this.abecedaire_button_bg_color;
-        this.getAbecedaire()!.button_text_color = this.abecedaire_button_text_color;
-        this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
-        this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
-        this.router.navigate(['/panel/Abecedaire']);
-        break;
-      case 'Fille&Garçon':
-        this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
-        this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
-        this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
-        this.getBoyGirl()!.bg_color_fille = this.boygirl_bg_color_fille;
-        this.getBoyGirl()!.bg_color_garcon = this.boygirl_bg_color_garcon;
-        this.getBoyGirl()!.bg_color_mot = this.boygirl_bg_color_mot;
-        this.getBoyGirl()!.word_color_fille = this.boygirl_word_color_fille;
-        this.getBoyGirl()!.word_color_garcon = this.boygirl_word_color_garcon;
-        this.getBoyGirl()!.word_color_mot = this.boygirl_word_color_mot;
-        this.getBoyGirl()!.title_color_fille = this.boygirl_title_color_fille;
-        this.getBoyGirl()!.title_color_garcon = this.boygirl_title_color_garcon;
-        this.getBoyGirl()!.title_color_mot = this.boygirl_title_color_mot;
-        this.getBoyGirl()!.text_color_fille = this.boygirl_text_color_fille;
-        this.getBoyGirl()!.text_color_garcon = this.boygirl_text_color_garcon;
-        this.getBoyGirl()!.text_color_mot = this.boygirl_text_color_mot;
-        this.getBoyGirl()!.type_ecriture = this.boygirl_type_ecriture;
-        this.router.navigate(['/panel/Fille&Garçon']);
-        break;
+      // case 'Abecedaire':
+      //   this.getAbecedaire()!.images = this.selectedImages;
+      //   this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
+      //   this.getAbecedaire()!.text_color = this.abecedaire_text_color;
+      //   this.getAbecedaire()!.good_answer_color = this.abecedaire_good_answer_color;
+      //   this.getAbecedaire()!.wrong_answer_color = this.abecedaire_wrong_answer_color;
+      //   this.getAbecedaire()!.color_progress_bar = this.abecedaire_progress;
+      //   this.getAbecedaire()!.button_bg_color = this.abecedaire_button_bg_color;
+      //   this.getAbecedaire()!.button_text_color = this.abecedaire_button_text_color;
+      //   this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
+      //   this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
+      //   this.router.navigate(['/panel/Abecedaire']);
+      //   break;
+      // case 'Fille&Garçon':
+      //   this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
+      //   this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
+      //   this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
+      //   this.getBoyGirl()!.bg_color_fille = this.boygirl_bg_color_fille;
+      //   this.getBoyGirl()!.bg_color_garcon = this.boygirl_bg_color_garcon;
+      //   this.getBoyGirl()!.bg_color_mot = this.boygirl_bg_color_mot;
+      //   this.getBoyGirl()!.word_color_fille = this.boygirl_word_color_fille;
+      //   this.getBoyGirl()!.word_color_garcon = this.boygirl_word_color_garcon;
+      //   this.getBoyGirl()!.word_color_mot = this.boygirl_word_color_mot;
+      //   this.getBoyGirl()!.title_color_fille = this.boygirl_title_color_fille;
+      //   this.getBoyGirl()!.title_color_garcon = this.boygirl_title_color_garcon;
+      //   this.getBoyGirl()!.title_color_mot = this.boygirl_title_color_mot;
+      //   this.getBoyGirl()!.text_color_fille = this.boygirl_text_color_fille;
+      //   this.getBoyGirl()!.text_color_garcon = this.boygirl_text_color_garcon;
+      //   this.getBoyGirl()!.text_color_mot = this.boygirl_text_color_mot;
+      //   this.getBoyGirl()!.type_ecriture = this.boygirl_type_ecriture;
+      //   this.router.navigate(['/panel/Fille&Garçon']);
+      //   break;
     }
 
   }

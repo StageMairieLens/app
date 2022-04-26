@@ -24,7 +24,7 @@
 
 
   <div *ngIf="this.r != null">
-    <div *ngIf="this.showImageCpt != this.r!.images.length" class="card_play align-middle container" id="card"
+    <div *ngIf="this.showImageCpt != this.r!.images.length" class="card_play align-middle text-center container" id="card"
       style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
       <img class="card-img-top image_play" src="{{ this.r!.images[this.showImageCpt].getSrc() }}" alt="Card image cap">
       <div class="card-body text-center">
@@ -513,7 +513,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="create('Recopier')" mat-raised-button>Créer
+          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer
             le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>

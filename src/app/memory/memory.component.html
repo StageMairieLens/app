@@ -1,119 +1,561 @@
 <div *ngIf="this.showTitle" class="text-center">
-    <h1 class="title">
-        <span>M</span>
-        <span>E</span>
-        <span>M</span>
-        <span>O</span>
-        <span>R</span>
-        <span>Y</span>
-    </h1>
+  <h1 class="title">
+    <span>M</span>
+    <span>E</span>
+    <span>M</span>
+    <span>O</span>
+    <span>R</span>
+    <span>Y</span>
+  </h1>
 </div>
 
-<div *ngIf="game == null" class="card align-middle container boite" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
+<div *ngIf="this.play">
+  <div *ngIf="game == null" class="card align-middle container boite" id="card_error"
+    style="width: 32rem; background-color: #3bb8c9; color : black">
     <img class="card-img-top img-fluid" src="../../assets/images/error.png" alt="Card image cap">
     <div class="card-body text-center">
-        <h5 class="card-title" style="color: red">Erreur !</h5>
-        <p class="card-text">Il n'y a pas de jeu selectionné !</p>
+      <h5 class="card-title" style="color: red">Erreur !</h5>
+      <p class="card-text">Il n'y a pas de jeu selectionné !</p>
     </div>
-</div>
+  </div>
 
-<div *ngIf="game != null && game!.images.length < (game!.nbTile/2)" class="card align-middle container boite" id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
+  <div *ngIf="game != null && game!.images.length < (game!.nbTile/2)" class="card align-middle container boite"
+    id="card_error" style="width: 32rem; background-color: #3bb8c9; color : black">
     <img class="card-img-top img-fluid" src="../../assets/images/error.png" alt="Card image cap">
     <div class="card-body text-center">
-        <h5 class="card-title" style="color: red">Erreur !</h5>
-        <p class="card-text">Pas assez d'images sélectionnées !</p>
+      <h5 class="card-title" style="color: red">Erreur !</h5>
+      <p class="card-text">Pas assez d'images sélectionnées !</p>
     </div>
-</div>
+  </div>
 
-<div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2) && game.derriere != null" class="plateau container boite" [ngStyle]="{background: game!.bg_color}">
-<table>
-    <tr >
-        <td  id="1" *ngIf="nbTile >= 1">
-            <app-tile class="tile text-center" #tile1 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+  <div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2) && game.derriere != null"
+    class="plateau container boite" [ngStyle]="{background: game!.bg_color}">
+    <table>
+      <tr>
+        <td id="1" *ngIf="nbTile >= 1">
+          <app-tile class="tile text-center" #tile1 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="2" *ngIf="nbTile >= 2">
-            <app-tile class="tile text-center" #tile2 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="2" *ngIf="nbTile >= 2">
+          <app-tile class="tile text-center" #tile2 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="5" *ngIf="nbTile >= 5">
-            <app-tile class="tile text-center" #tile5 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="5" *ngIf="nbTile >= 5">
+          <app-tile class="tile text-center" #tile5 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="7" *ngIf="nbTile >= 7">
-            <app-tile class="tile text-center" #tile7 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="7" *ngIf="nbTile >= 7">
+          <app-tile class="tile text-center" #tile7 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="13" *ngIf="nbTile >= 13">
-            <app-tile class="tile text-center" #tile13 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="13" *ngIf="nbTile >= 13">
+          <app-tile class="tile text-center" #tile13 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="14" *ngIf="nbTile >= 14">
-            <app-tile class="tile text-center" #tile14 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="14" *ngIf="nbTile >= 14">
+          <app-tile class="tile text-center" #tile14 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-    </tr>
-    <tr >
-        <td  id="3" *ngIf="nbTile >= 3">
-            <app-tile class="tile text-center" #tile3 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+      </tr>
+      <tr>
+        <td id="3" *ngIf="nbTile >= 3">
+          <app-tile class="tile text-center" #tile3 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="4" *ngIf="nbTile >= 4">
-            <app-tile class="tile text-center" #tile4 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="4" *ngIf="nbTile >= 4">
+          <app-tile class="tile text-center" #tile4 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="6" *ngIf="nbTile >= 6">
-            <app-tile class="tile text-center" #tile6 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="6" *ngIf="nbTile >= 6">
+          <app-tile class="tile text-center" #tile6 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="8" *ngIf="nbTile >= 8">
-            <app-tile class="tile text-center" #tile8 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="8" *ngIf="nbTile >= 8">
+          <app-tile class="tile text-center" #tile8 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="15" *ngIf="nbTile >= 15">
-            <app-tile class="tile text-center" #tile15 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="15" *ngIf="nbTile >= 15">
+          <app-tile class="tile text-center" #tile15 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="16" *ngIf="nbTile >= 16">
-            <app-tile class="tile text-center" #tile16 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="16" *ngIf="nbTile >= 16">
+          <app-tile class="tile text-center" #tile16 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-    </tr>
-    <tr >
+      </tr>
+      <tr>
         <td id="9" *ngIf="nbTile >= 9">
-            <app-tile class="tile text-center" #tile9 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+          <app-tile class="tile text-center" #tile9 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="10" *ngIf="nbTile >= 10">
-            <app-tile class="tile text-center" #tile10 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="10" *ngIf="nbTile >= 10">
+          <app-tile class="tile text-center" #tile10 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="11" *ngIf="nbTile >= 11">
-            <app-tile class="tile text-center" #tile11 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="11" *ngIf="nbTile >= 11">
+          <app-tile class="tile text-center" #tile11 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="12" *ngIf="nbTile >= 12">
-            <app-tile class="tile text-center" #tile12 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="12" *ngIf="nbTile >= 12">
+          <app-tile class="tile text-center" #tile12 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="17" *ngIf="nbTile >= 17">
-            <app-tile class="tile text-center" #tile17 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="17" *ngIf="nbTile >= 17">
+          <app-tile class="tile text-center" #tile17 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-        <td  id="18" *ngIf="nbTile >= 18">
-            <app-tile class="tile text-center" #tile18 [derriere]="derriere!.getSrc()" [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
+        <td id="18" *ngIf="nbTile >= 18">
+          <app-tile class="tile text-center" #tile18 [derriere]="derriere!.getSrc()"
+            [ngStyle]="{color: this.game.text_color}" (_id)="retourne($event)"></app-tile>
         </td>
-    </tr>
-</table>
-<div style="margin: 20px;">
-<div class="progress" *ngIf="this.game!.color_progress_bar == 'blue' ">
-    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-</div>
+      </tr>
+    </table>
+    <div style="margin: 20px;">
+      <div class="progress" *ngIf="this.game!.color_progress_bar == 'blue' ">
+        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+          aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+      </div>
 
-<div class="progress" *ngIf="this.game!.color_progress_bar == 'green' ">
-    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-</div>
+      <div class="progress" *ngIf="this.game!.color_progress_bar == 'green' ">
+        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+          role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+      </div>
 
-<div class="progress" *ngIf="this.game!.color_progress_bar == 'lightblue' ">
-    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-</div>
+      <div class="progress" *ngIf="this.game!.color_progress_bar == 'lightblue' ">
+        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar"
+          aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+      </div>
 
-<div class="progress" *ngIf="this.game!.color_progress_bar == 'orange' ">
-    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-</div>
+      <div class="progress" *ngIf="this.game!.color_progress_bar == 'orange' ">
+        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+          role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+      </div>
 
-<div class="progress" *ngIf="this.game!.color_progress_bar == 'red' ">
-    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
-</div>
-</div>
+      <div class="progress" *ngIf="this.game!.color_progress_bar == 'red' ">
+        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+          role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
+      </div>
+    </div>
 
-<div *ngIf="pressStart == false" class="text start" (click)="this.start()">Commencer</div>
-</div>
+    <div *ngIf="pressStart == false" class="text start" (click)="this.start()">Commencer</div>
+  </div>
 
-<div *ngIf="finish" class="container boite" style="background-color: white; margin-top: 10%;" [ngStyle]="{background: game!.bg_color}">
+  <div *ngIf="finish" class="container boite" style="background-color: white; margin-top: 10%;"
+    [ngStyle]="{background: game!.bg_color}">
     <img class="img-fluid" src="../../assets/images/congratulations.png">
     <div class="text" style="color: black;">Félicitation !</div>
+  </div>
+</div>
+
+
+<div class="container container_list card" *ngIf="this.showList">
+  <h5 class="card-header">List des jeux Memory</h5>
+
+
+  <div *ngIf="!this.memory_previsualiser" class="create_button align-middle text-center"
+    style="margin-bottom : 10px; margin-top : 10px">
+
+    <button class=" align-middle text-center" [routerLink]="['/panel/Memory/create']" mat-raised-button color="warn">
+      <i class="fa-solid fa-circle-plus fa-lg" style="margin-bottom : 2%"></i>
+
+      Créer un Memory
+    </button>
+
+    <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+  </div>
+
+
+  <div *ngIf="this.memory_list.length != 0">
+
+    <!-- Prévisualisation -->
+    <div *ngIf="this.memory_previsualiser">
+
+
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px;margin-top : 20px">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="quitPreviewMemory()" mat-raised-button
+            color="warn">
+            <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+            Quitter la prévisualisation</button>
+        </div>
+      </div>
+      <app-memory [showTitle]=false [showList]="false" [game]="this.game"></app-memory>
+    </div>
+
+
+    <!-- Listes des jeux -->
+    <div *ngIf="!this.memory_previsualiser">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par','Actions']">
+              {{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let element of this.memory_list">
+            <th>{{element.id}}</th> <!-- Id du jeu -->
+            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
+            <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
+            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+            <!-- Actions -->
+            <th class="button_actions">
+              <!-- Prévisualiser le jeu -->
+              <button mat-raised-button title="Prévisualiser le jeu" color="primary" (click)="previewMemory(element)">
+                <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Editer le jeu -->
+              <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                color="primary" (click)="redirectEditMemory(element)">
+                <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Supprimer le jeu -->
+              <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                (click)="deleteGameMemory(element)">
+                <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+              <!-- Démarrer une séssion à partir de ce jeu -->
+              <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                style="background-color : rgb(168, 14, 135)" color="primary">
+                <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+
+            </th>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Si la liste des jeu Memory est vide -->
+  <div class="text-center" *ngIf="this.memory_list.length == 0">
+    <h5 class="card-title" style="color : red">Il n'y a pas de jeu Memory créer</h5>
+  </div>
+</div>
+
+<div class="container container_list card" *ngIf="this.create_game">
+  <h5 *ngIf="!this.edit" class="card-header">Création d'un memory</h5>
+  <h5 *ngIf="this.edit" class="card-header">édition d'un memory</h5>
+
+
+  <!-- Formulaire Memory - Bouton de prévisualisation -->
+  <div *ngIf="!this.memory_previsualiser">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px; margin-top : 10px">
+
+      <button *ngIf="this.edit" class="prev-button align-middle text-center" [routerLink]="['/panel/Memory']" mat-raised-button
+      color="warn" style="float : left; position : absolute; display : block">
+      <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+
+      Retour à la liste des jeux
+    </button>
+
+      <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(true)" mat-raised-button
+        color="warn">
+        <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
+        Prévisualiser</button>
+    </div>
+
+    <!-- Formulaire Memory - Menu de navigation -->
+    <div class="stepMenu">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center">
+          <li class="breadcrumb-item">
+            <button title="Images" style="background : white; color : black" mat-fab color="primary" aria-label="Images"
+              (click)="setFormStep(0)">
+              <i class="fa-solid fa-images"></i>
+            </button>
+          </li>
+          <li class="breadcrumb-item">
+            <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+              <i class="fa-solid fa-brush"></i>
+            </button>
+          </li>
+          <li class="breadcrumb-item">
+            <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+              <i class="fa-solid fa-font"></i>
+            </button>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+
+    <!-- Formulaire Memory - Etape 1 : choix des images -->
+
+
+    <!-- Etape 1 : Choix des images -->
+    <div *ngIf="this.formStep == 0">
+      <h2 class="card-title text-center">Choisissez les images (La première sera l'image pour le derrière des
+        tuiles)</h2>
+      <div class="card-body selectImage_container text-center align-top">
+        <h5 class="card-header" style="color : black">Listes des images</h5>
+        <figure class="figure" *ngFor="let image of this.liste_image">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+          <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+        </figure>
+      </div>
+
+      <div class="card-body selectImage_container text-center">
+        <h5 class="card-header" style="color : black">Images selectionné</h5>
+        <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+          selectionné
+          aucune image</h6>
+        <figure class="figure" *ngFor="let image of this.selectedImages">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
+          <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+        </figure>
+      </div>
+    </div>
+
+
+    <!-- Etape du formulaire 2 -- Choix des couleurs -->
+    <div *ngIf="this.formStep == 1">
+      <h2 class="card-title">Choississez les couleurs du jeu</h2>
+
+      <form>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="memory_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+              <input type="color" class="form-control form-control-color"
+                (change)="this.memory_bg_color = memory_bg_color_input.value " #memory_bg_color_input
+                value="{{this.memory_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label for="memory_text_color_input" class="form-label align-middle">Couleur du texte
+              <input type="color" class="form-control form-control-color"
+                (change)="this.memory_text_color = memory_text_color_input.value " #memory_text_color_input
+                value="{{this.memory_text_color}}" title="Choisissez la couleur du texte">
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="memory_good_answer_color_input" class="form-label align-middle">Couleur du message
+              bonne
+              réponse
+              <input type="color" class="form-control form-control-color"
+                (change)="this.memory_good_answer_color = memory_good_answer_color_input.value "
+                #memory_good_answer_color_input value="{{this.memory_good_answer_color}}"
+                title="Choisissez la couleur du message de bonne réponse">
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label for="memory_wrong_answer_color_input" class="form-label align-middle">Couleur du message
+              mauvaise
+              réponse
+              <input type="color" class="form-control form-control-color"
+                (change)="this.memory_wrong_answer_color = memory_wrong_answer_color_input.value "
+                #memory_wrong_answer_color_input value="{{this.memory_wrong_answer_color}}"
+                title="Choisissez la couleur du message de mauvaise réponse">
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-4">
+            <label for="progressValue" class="form-label align-middle">Couleur de la barre de
+              progression</label>
+
+          </div>
+          <div class="col-md-8">
+            <select class="form-control" aria-label="Default select example" #progressSelectValue
+              (change)="changeProgressValue('Memory',progressSelectValue)">
+              <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                ng-selected="p == this.memory_progress" #progressValue>
+                <p *ngIf="p == 'blue'">Bleu</p>
+                <p *ngIf="p == 'green'">Vert</p>
+                <p *ngIf="p == 'lightblue'">Bleu ciel</p>
+                <p *ngIf="p == 'orange'">Orange</p>
+                <p *ngIf="p == 'red'">Rouge</p>
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-12">
+            <div class="progress" *ngIf="this.memory_progress == 'blue' ">
+              <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+              </div>
+            </div>
+
+            <div class="progress" *ngIf="this.memory_progress == 'green' ">
+              <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+              </div>
+            </div>
+
+            <div class="progress" *ngIf="this.memory_progress == 'lightblue' ">
+              <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+                role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+              </div>
+            </div>
+
+            <div class="progress" *ngIf="this.memory_progress == 'orange' ">
+              <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+              </div>
+            </div>
+
+            <div class="progress" *ngIf="this.memory_progress == 'red' ">
+              <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Etape du formulaire 3 -- Choix des textes -->
+    <div *ngIf="this.formStep == 2" style="text-align : center;">
+      <div class="form-row">
+        <div class="col-md-12">
+          <h2 class="card-title">Paramètre 1</h2>
+          <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+            <mat-radio-button value="Image" (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px"
+              [checked]="this.memory_settings[0] == 'image'">Image
+            </mat-radio-button>
+
+            <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(0, 'cursif')" style="font-size : 40px"
+              [checked]="this.memory_settings[0] == 'cursif'">Cursif
+            </mat-radio-button>
+
+            <mat-radio-button value="Capital" (change)="this.changeMemorySetting(0, 'capital')" style="font-size : 40px"
+              [checked]="this.memory_settings[0] == 'capital'">Capital
+            </mat-radio-button>
+
+            <mat-radio-button value="Script" (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px"
+              [checked]="this.memory_settings[0] == 'script'">Script
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <h2 class="card-title">Paramètre 2</h2>
+          <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+
+            <mat-radio-button value="Image" (change)="this.changeMemorySetting(1, 'image')" style="font-size : 40px"
+              [checked]="this.memory_settings[1] == 'image'">Image
+            </mat-radio-button>
+
+            <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(1, 'cursif')" style="font-size : 40px"
+              [checked]="this.memory_settings[1] == 'cursif'">Cursif
+            </mat-radio-button>
+
+            <mat-radio-button value="Capital" (change)="this.changeMemorySetting(1, 'capital')" style="font-size : 40px"
+              [checked]="this.memory_settings[1] == 'capital'">Capital
+            </mat-radio-button>
+
+            <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px"
+              [checked]="this.memory_settings[1] == 'script'">Script
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <h2 class="card-title">Nombre de tuiles</h2>
+          <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+
+            <mat-radio-button value="tile8" (change)="this.changeMemoryNbTile(8)" style="font-size : 40px"
+              [checked]="this.memory_nbTile == 8">8
+            </mat-radio-button>
+
+            <mat-radio-button value="Cursif" (change)="this.changeMemoryNbTile(12)" style="font-size : 40px"
+              [checked]="this.memory_nbTile == 12">12
+            </mat-radio-button>
+
+            <mat-radio-button value="Capital" (change)="this.changeMemoryNbTile(18)" style="font-size : 40px"
+              [checked]="this.memory_nbTile == 18">18
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <h2 class="card-title">Temps memory dévoilé (en s)</h2>
+          <input type="range" id="slider" class="form-range" min="0" max="10" step="0.1" style="width: 75%;"
+            value="{{this.memory_tmp_affichage}}" #memory_tmp_affichage_input
+            (change)="this.memory_tmp_affichage = memory_tmp_affichage_input.value">
+          <h2 class="card-title">{{this.memory_tmp_affichage}} s</h2>
+        </div>
+      </div>
+
+
+      <!-- Bouton de création du jeu -->
+      <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+            jeu
+            <i class="fa-solid fa-check fa-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bouton de sauvegarde du jeu -->
+      <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
+            le
+            jeu
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!--Formulaire Memory -  Menu de navigation par étape -->
+    <div class="align-bottom" style="margin : 10px">
+      <button type="button" class="btn btn-primary align-left"
+        style="background : rgb(13, 197, 13); float : left; border : none" (click)="previousStep()">
+        <i class="fa-solid fa-angles-left"></i>
+        Etape précédente
+      </button>
+      <button type="button" class="btn btn-primary align-right"
+        style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
+        Etape suivante
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- Formulaire Memory - Prévisualisation -->
+  <div *ngIf="this.memory_previsualiser">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <button class="prev-button align-middle text-center" (click)="setPrevisualiserMemory(false)" mat-raised-button
+          color="warn">
+          <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+          Quitter la prévisualisation</button>
+      </div>
+    </div>
+    <app-memory [game]="this.game" [showTitle]="false"></app-memory>
+  </div>
 </div>
