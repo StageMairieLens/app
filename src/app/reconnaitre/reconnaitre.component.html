@@ -143,7 +143,9 @@
 
   </div>
 </div>
-
+<button
+(click)="onSend(this.r!.liste)"
+></button>
 
 <!-- Si la liste d'image est vide -->
 <div *ngIf="this.r!.images.length == 0" class="card align-middle container" id="card_finish" style="width: 32rem;"
