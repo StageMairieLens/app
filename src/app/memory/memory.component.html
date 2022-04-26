@@ -163,17 +163,17 @@
 
     <mat-divider style="background : grey; margin : 2%"></mat-divider>
 
+
   </div>
+
 
   <div *ngIf="this.memory_list.length != 0">
 
     <!-- Prévisualisation -->
     <div *ngIf="this.memory_previsualiser">
 
-      <mat-divider style="background : grey; margin : 2%"></mat-divider>
 
-
-      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px;margin-top : 20px">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
           <button class="prev-button align-middle text-center" (click)="quitPreviewMemory()" mat-raised-button
             color="warn">
@@ -506,11 +506,22 @@
 
 
       <!-- Bouton de création du jeu -->
-      <div class="form-row align-middle text-center" align="center">
+      <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
           <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bouton de sauvegarde du jeu -->
+      <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
+            le
+            jeu
+            <i class="fa-solid fa-floppy-disk"></i>
           </button>
         </div>
       </div>

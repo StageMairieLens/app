@@ -95,9 +95,10 @@ export class MemoryComponent implements OnInit {
   tiles: TileComponent[] = [];
 
   constructor(private router: Router) {
-    this.derriere = new Image("Lapin", "../../assets/lapin.webp");
-    this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
-    // this.game = null;
+    // this.derriere = new Image("Lapin", "../../assets/lapin.webp");
+    // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
+    this.game = null;
+    this.derriere = null;
   }
 
   // Initialisation
@@ -400,6 +401,19 @@ export class MemoryComponent implements OnInit {
     this.memory_list.push(
       new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
     );
+    this.router.navigate(['/panel/Memory']);
+  }
+
+  save() : void {
+    this.game!.images= this.selectedImages;
+    this.game!.nbTile = this.memory_nbTile;
+    this.game!.setting = this.memory_settings;
+    this.game!.bg_color = this.memory_bg_color;
+    this.game!.text_color = this.memory_text_color;
+    this.game!.good_answer_color = this.memory_good_answer_color;
+    this.game!.wrong_answer_color = this.memory_wrong_answer_color;
+    this.game!.color_progress_bar = this.memory_progress;
+    this.game!.tmpAffichage = this.memory_tmp_affichage;
     this.router.navigate(['/panel/Memory']);
   }
 }
