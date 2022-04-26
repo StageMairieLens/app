@@ -246,7 +246,6 @@ export class ReconnaitreComponent implements OnInit {
       this.reconnaitre_previsualiser = true;
     }
     else {
-      this.r = null;
       this.reconnaitre_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));

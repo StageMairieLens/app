@@ -206,7 +206,6 @@ export class RecopierGameComponent implements OnInit {
       this.recopier_previsualiser = true;
     }
     else {
-      this.r = null;
       this.recopier_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));

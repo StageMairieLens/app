@@ -375,7 +375,6 @@ export class MemoryComponent implements OnInit {
       this.memory_previsualiser = true;
     }
     else {
-      this.game = null;
       this.memory_previsualiser = false;
       setTimeout(() => {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));

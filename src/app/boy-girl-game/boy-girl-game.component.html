@@ -7,136 +7,547 @@
 </div>
 
 
-<div *ngIf="this.bg != null">
-  <div *ngIf="this.taille_ini != 0">
-    <div *ngIf="this.mots.length != 0 || !this.finish">
-      <div class="container" id="content">
-        <div class="row">
-          <div class="card align-self-left col" id="girlContainer" [ngStyle]="{background : this.bg!.bg_color_fille}"
-            style="width: 32rem">
-            <div class="card-body text-center">
-              <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_fille}">FILLE</h5>
-              <p class="card-text" [ngStyle]="{color : this.bg!.text_color_fille}">Déplacer les éléments associé au fille
-                ci-dessous</p>
+<div *ngIf="this.play">
+  <div *ngIf="this.bg != null">
+    <div *ngIf="this.taille_ini != 0">
+      <div *ngIf="this.mots.length != 0 || !this.finish">
+        <div class="container" id="content">
+          <div class="row">
+            <div class="card_play align-self-left col" id="girlContainer"
+              [ngStyle]="{background : this.bg!.bg_color_fille}" style="width: 32rem">
+              <div class="card-body text-center">
+                <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_fille}">FILLE</h5>
+                <p class="card-text" [ngStyle]="{color : this.bg!.text_color_fille}">Déplacer les éléments associé au
+                  fille
+                  ci-dessous</p>
 
-              <div cdkDropList #girlList="cdkDropList" id='girlList' [cdkDropListData]="girl"
-                [cdkDropListConnectedTo]="[boyList,motList]" class="align-bottom dropZone container"
-                (cdkDropListDropped)="drop($event)">
-                <div class="drop_content" *ngFor="let mot of girl" cdkDrag
-                  [ngStyle]="{background : this.bg!.word_color_fille , color : this.bg!.text_color_fille}">
-                  <span *ngIf="this.bg!.type_ecriture == 'CURSIF'" style="font-family : cursiveFont ; font-size: 31px">
-                    {{mot}}
-                  </span>
+                <div cdkDropList #girlList="cdkDropList" id='girlList' [cdkDropListData]="girl"
+                  [cdkDropListConnectedTo]="[boyList,motList]" class="align-bottom dropZone container"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="drop_content" *ngFor="let mot of girl" cdkDrag
+                    [ngStyle]="{background : this.bg!.word_color_fille , color : this.bg!.text_color_fille}">
+                    <span *ngIf="this.bg!.type_ecriture == 'CURSIF'"
+                      style="font-family : cursiveFont ; font-size: 31px">
+                      {{mot}}
+                    </span>
 
-                  <span *ngIf="this.bg!.type_ecriture == 'CAPITAL'" style="text-transform : uppercase">
-                    {{mot}}
-                  </span>
+                    <span *ngIf="this.bg!.type_ecriture == 'CAPITAL'" style="text-transform : uppercase">
+                      {{mot}}
+                    </span>
 
-                  <span *ngIf="this.bg!.type_ecriture == 'SCRIPT'">
-                    {{mot}}
-                  </span>
+                    <span *ngIf="this.bg!.type_ecriture == 'SCRIPT'">
+                      {{mot}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card_play align-self-right col" id="boyContainer"
+              [ngStyle]="{background : this.bg!.bg_color_garcon}" style="width: 32rem;">
+              <div class="card-body text-center">
+                <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_garcon}">Garcon</h5>
+                <p class="card-text" [ngStyle]="{color : this.bg!.text_color_garcon}">Déplacer les éléments associé au
+                  garçon
+                  ci-dessous</p>
+
+                <div cdkDropList #boyList="cdkDropList" id='boyList' [cdkDropListData]="boy"
+                  [cdkDropListConnectedTo]="[girlList,motList]" class="align-bottom dropZone"
+                  (cdkDropListDropped)="drop($event)">
+
+                  <div class="drop_content" *ngFor="let mot of boy" cdkDrag
+                    [ngStyle]="{background : this.bg!.word_color_garcon , color : this.bg!.text_color_garcon}">
+                    <span *ngIf="this.bg!.type_ecriture == 'CURSIF'"
+                      style="font-family : cursiveFont ; font-size: 31px">
+                      {{mot}}
+                    </span>
+
+                    <span *ngIf="this.bg!.type_ecriture == 'CAPITAL'" style="text-transform : uppercase">
+                      {{mot}}
+                    </span>
+
+                    <span *ngIf="this.bg!.type_ecriture == 'SCRIPT'">
+                      {{mot}}
+                    </span>
+                  </div>
+
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="card align-self-right col" id="boyContainer" [ngStyle]="{background : this.bg!.bg_color_garcon}"
-            style="width: 32rem;">
-            <div class="card-body text-center">
-              <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_garcon}">Garcon</h5>
-              <p class="card-text" [ngStyle]="{color : this.bg!.text_color_garcon}">Déplacer les éléments associé au
-                garçon
-                ci-dessous</p>
 
-              <div cdkDropList #boyList="cdkDropList" id='boyList' [cdkDropListData]="boy"
-                [cdkDropListConnectedTo]="[girlList,motList]" class="align-bottom dropZone"
-                (cdkDropListDropped)="drop($event)">
+        <div class="card_play align-middle container" id="container" [ngStyle]="{background : this.bg!.bg_color_mot}"
+          style="width: 32rem;margin-top : 5%">
+          <div class="card-body text-center">
+            <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_mot}">Liste de mots</h5>
+            <div cdkDropList #motList="cdkDropList" [cdkDropListData]="mots"
+              [cdkDropListConnectedTo]="[girlList, boyList]" class="align-bottom dropZone align-middle"
+              (cdkDropListDropped)="drop($event)">
 
-                <div class="drop_content" *ngFor="let mot of boy" cdkDrag
-                  [ngStyle]="{background : this.bg!.word_color_garcon , color : this.bg!.text_color_garcon}">
-                  <span *ngIf="this.bg!.type_ecriture == 'CURSIF'" style="font-family : cursiveFont ; font-size: 31px">
-                    {{mot}}
-                  </span>
+              <div class="drop_content" *ngFor="let mot of mots" cdkDrag
+                [ngStyle]="{background : this.bg!.word_color_mot , color : this.bg!.text_color_mot}">
+                <span *ngIf="this.bg!.type_ecriture == 'CURSIF'" style="font-family : cursiveFont ; font-size: 31px">
+                  {{mot}}
+                </span>
 
-                  <span *ngIf="this.bg!.type_ecriture == 'CAPITAL'" style="text-transform : uppercase">
-                    {{mot}}
-                  </span>
+                <span *ngIf="this.bg!.type_ecriture == 'CAPITAL'" style="text-transform : uppercase">
+                  {{mot}}
+                </span>
 
-                  <span *ngIf="this.bg!.type_ecriture == 'SCRIPT'">
-                    {{mot}}
-                  </span>
-                </div>
-
+                <span *ngIf="this.bg!.type_ecriture == 'SCRIPT'">
+                  {{mot}}
+                </span>
               </div>
+
             </div>
           </div>
         </div>
+
+
       </div>
-
-
-      <div class="card align-middle container" id="container" [ngStyle]="{background : this.bg!.bg_color_mot}"
-        style="width: 32rem;margin-top : 5%">
-        <div class="card-body text-center">
-          <h5 class="card-title title_image" [ngStyle]="{color : this.bg!.title_color_mot}">Liste de mots</h5>
-          <div cdkDropList #motList="cdkDropList" [cdkDropListData]="mots" [cdkDropListConnectedTo]="[girlList, boyList]"
-            class="align-bottom dropZone align-middle" (cdkDropListDropped)="drop($event)">
-
-            <div class="drop_content" *ngFor="let mot of mots" cdkDrag
-              [ngStyle]="{background : this.bg!.word_color_mot , color : this.bg!.text_color_mot}">
-              <span *ngIf="this.bg!.type_ecriture == 'CURSIF'" style="font-family : cursiveFont ; font-size: 31px">
-                {{mot}}
-              </span>
-
-              <span *ngIf="this.bg!.type_ecriture == 'CAPITAL'" style="text-transform : uppercase">
-                {{mot}}
-              </span>
-
-              <span *ngIf="this.bg!.type_ecriture == 'SCRIPT'">
-                {{mot}}
-              </span>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
     </div>
+
+    <div *ngIf="this.mots.length == 0 && this.finish" class="card_play align-middle container" id="finish"
+      style="width: 32rem;" [ngStyle]="{background : this.bg!.bg_color_container}">
+      <img class="card-img-top image" src="../../assets/images/congratulations.png" alt="Card image cap">
+      <div class="card-body text-center">
+        <h5 class="card-title title_image">Félicitation !</h5>
+        <p class="card-text">Vous avez classé correctement touts les mots !</p>
+      </div>
+    </div>
+
+    <div *ngIf="this.taille_ini == 0" class="card_play align-middle container" id="card_error"
+      style="width: 32rem; color : black " [ngStyle]="{background : this.bg!.bg_color_container}">
+
+      <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
+      <div class="card-body text-center">
+        <h5 class="card-title title_image_error">Erreur !</h5>
+        <p class="card-text">La liste de mots est vide !</p>
+      </div>
+    </div>
+
+
+
   </div>
 
-  <div *ngIf="this.mots.length == 0 && this.finish" class="card align-middle container" id="finish"
-    style="width: 32rem;" [ngStyle]="{background : this.bg!.bg_color_container}">
-    <img class="card-img-top image"
-      src="../../assets/images/congratulations.png"
-      alt="Card image cap">
-    <div class="card-body text-center">
-      <h5 class="card-title title_image">Félicitation !</h5>
-      <p class="card-text">Vous avez classé correctement touts les mots !</p>
-    </div>
-  </div>
-
-  <div *ngIf="this.taille_ini == 0" class="card align-middle container" id="card_error"
-    style="width: 32rem; color : black " [ngStyle]="{background : this.bg!.bg_color_container}">
+  <div *ngIf="this.bg == null" class="card_play align-middle container" id="card_error"
+    style="width: 32rem; color : black ; background : #3bb8c9">
 
     <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
     <div class="card-body text-center">
       <h5 class="card-title title_image_error">Erreur !</h5>
-      <p class="card-text">La liste de mots est vide !</p>
+      <p class="card-text">Il n'y a pas de jeu selectionné !</p>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="card container container_list" *ngIf="this.showList">
+  <h5 class="card-header">Liste des jeux Fille&Garçon</h5>
+
+  <div *ngIf="!this.boygirl_previsualiser" class="create_button align-middle text-center"
+    style="margin-bottom : 10px; margin-top : 10px">
+
+    <button class=" align-middle text-center" [routerLink]="['/panel/Fille&Garçon/create']" mat-raised-button color="warn">
+      <i class="fa-solid fa-circle-plus fa-lg" style="margin-bottom : 2%"></i>
+
+      Créer un Fille&Garçon
+    </button>
+
+    <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+
+  </div>
+
+
+  <div *ngIf="this.boygirl_list.length != 0">
+
+    <!-- Prévisualisation -->
+    <div *ngIf="this.boygirl_previsualiser">
+
+
+
+
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="quitPreviewBoyGirl()" mat-raised-button
+            color="warn">
+            <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+            Quitter la prévisualisation</button>
+        </div>
+      </div>
+      <app-boy-girl-game [showTitle]="false" [bg]="this.bg"></app-boy-girl-game>
+    </div>
+
+
+    <!-- Listes des jeux -->
+    <div *ngIf="!this.boygirl_previsualiser">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col"
+              *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par','Actions']">
+              {{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let element of this.boygirl_list">
+            <th>{{element.id}}</th> <!-- Id du jeu -->
+            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
+            <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
+            <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
+            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+            <!-- Actions -->
+            <th class="button_actions">
+              <!-- Prévisualiser le jeu -->
+              <button mat-raised-button title="Prévisualiser le jeu" color="primary" (click)="previewBoyGirl(element)">
+                <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Editer le jeu -->
+              <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                color="primary" (click)="redirectEditBoyGirl(element)">
+                <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Supprimer le jeu -->
+              <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                (click)="deleteGameBoyGirl(element)">
+                <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+              <!-- Démarrer une séssion à partir de ce jeu -->
+              <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                style="background-color : rgb(168, 14, 135)" color="primary">
+                <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+
+            </th>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <!-- Si la liste des jeu Fille&Garçon est vide -->
+  <div class="text-center" *ngIf="this.boygirl_list.length == 0">
+    <h5 class="card-title" style="color : red">Il n'y a pas de jeu Fille&Garçon créer</h5>
+  </div>
+
+</div>
+
+<div class="container card container_list" *ngIf="this.create_game">
+
+  <h5 *ngIf="!this.edit" class="card-header">Création d'un jeu Fille&Garçon</h5>
+  <h5 *ngIf="this.edit" class="card-header">édition d'un jeu Fille&Garçon</h5>
+
+  <div *ngIf="!this.boygirl_previsualiser">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
+      <button *ngIf="this.edit" class="prev-button align-middle text-center" [routerLink]="['/panel/Fille&Garçon']" mat-raised-button
+      color="warn" style="float : left; position : absolute; display : block">
+      <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+
+      Retour à la liste des jeux
+    </button>
+
+      <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(true)" mat-raised-button
+        color="warn">
+        <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
+        Prévisualiser</button>
+    </div>
+
+    <!-- Formulaire Fille Garçon - Menu de navigation -->
+    <div class="stepMenu">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center">
+          <li class="breadcrumb-item">
+            <button title="Listes de mots" style="background : white; color : black" mat-fab color="primary"
+              aria-label="Mots" (click)="setFormStep(0)">
+              <i class="fa-solid fa-font"></i>
+            </button>
+          </li>
+          <li class="breadcrumb-item">
+            <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+              <i class="fa-solid fa-brush"></i>
+            </button>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div *ngIf="this.formStep == 0">
+      <h2 class="card-title text-center">Listes de mots</h2>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
+            appearance="fill">
+            <mat-label>Mots pour fille</mat-label>
+            <mat-chip-list #listFille aria-label="Mots pour fille">
+              <mat-chip *ngFor="let mots of this.boygirl_listMotsFille" (removed)="removeFille(mots)">
+                {{mots}}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input placeholder="Entrez le mots ici" [matChipInputFor]="listFille"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addMotsFille($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+          <mat-form-field style="width : 100%; background-color : white; color : black; border-radius : 1%"
+            appearance="fill">
+            <mat-label>Mots pour garçon</mat-label>
+            <mat-chip-list #listGarcon aria-label="Mots pour garçon">
+              <mat-chip *ngFor="let mots of this.boygirl_listMotsGarcon" (removed)="removeGarcon(mots)">
+                {{mots}}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+              <input placeholder="Entrez le mots ici" [matChipInputFor]="listGarcon"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addMotsGarcon($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-row text-center">
+        <div class="col-md-12">
+          <h2 class="card-title">Type d'écriture</h2>
+          <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+            <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CURSIF'" value="Cursif"
+              (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+              checked>Cursif</mat-radio-button>
+            <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CURSIF'" value="Cursif"
+              (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+              Cursif</mat-radio-button>
+
+            <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CAPITAL'" value="Capital"
+              (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+            </mat-radio-button>
+            <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CAPITAL'" value="Capital"
+              (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+            </mat-radio-button>
+
+            <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'SCRIPT'" value="Script"
+              (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+            </mat-radio-button>
+            <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'SCRIPT'" value="Script"
+              (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="this.formStep == 1">
+
+      <h2 class="card-title text-center">Choisissez les couleurs</h2>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="boygirl_bg_color_fille_input" class="form-label align-middle">Couleur de l'arriére-plan
+            fille
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_bg_color_fille = boygirl_bg_color_fille_input.value " #boygirl_bg_color_fille_input
+              value="{{this.boygirl_bg_color_fille}}" title="Choisissez la couleur de l'arriére-plan fille">
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label for="boygirl_bg_color_garcon_input" class="form-label align-middle">Couleur de l'arriére-plan
+            garçon
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_bg_color_garcon = boygirl_bg_color_garcon_input.value "
+              #boygirl_bg_color_garcon_input value="{{this.boygirl_bg_color_garcon}}"
+              title="Choisissez la couleur de l'arriére-plan garçon">
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+
+        <div class="col-md-6">
+          <label for="boygirl_bg_color_mot_input" class="form-label align-middle">Couleur de l'arriére-plan mots
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_bg_color_mot = boygirl_bg_color_mot_input.value " #boygirl_bg_color_mot_input
+              value="{{this.boygirl_bg_color_mot}}" title="Choisissez la couleur de l'arriére-plan mots">
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label for="boygirl_bg_color_container_input" class="form-label align-middle">Couleur de l'arriére-plan
+            message de fin/erreur
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_bg_color_container = boygirl_bg_color_container_input.value "
+              #boygirl_bg_color_container_input value="{{this.boygirl_bg_color_container}}"
+              title="Choisissez la couleur de l'arriére-plan des mots dans la liste fille">
+          </label>
+        </div>
+
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="col-md-6">
+          <label for="boygirl_word_color_fille_input" class="form-label align-middle">Couleur de l'arriére-plan
+            des
+            mots dans la liste fille
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_word_color_fille = boygirl_word_color_fille_input.value "
+              #boygirl_word_color_fille_input value="{{this.boygirl_word_color_fille}}"
+              title="Choisissez la couleur de l'arriére-plan des mots dans la liste fille">
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label for="boygirl_word_color_garcon_input" class="form-label align-middle">Couleur de l'arriére-plan
+            des
+            mots dans la liste garçon
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_word_color_garcon = boygirl_word_color_garcon_input.value "
+              #boygirl_word_color_garcon_input value="{{this.boygirl_word_color_garcon}}"
+              title="Choisissez la couleur de l'arriére-plan des mots dans la liste garçon">
+          </label>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="boygirl_word_color_mots_input" class="form-label align-middle">Couleur de l'arriére-plan des
+            mots dans la liste mots
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_word_color_mot = boygirl_word_color_mots_input.value "
+              #boygirl_word_color_mots_input value="{{this.boygirl_word_color_mot}}"
+              title="Choisissez la couleur de l'arriére-plan des mots dans la liste mots">
+          </label>
+        </div>
+
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="boygirl_title_color_fille_input" class="form-label align-middle">Couleur du titre fille
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_title_color_fille = boygirl_title_color_fille_input.value "
+              #boygirl_title_color_fille_input value="{{this.boygirl_title_color_fille}}"
+              title="Choisissez la couleur du titre fille">
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label for="boygirl_text_color_fille_input" class="form-label align-middle">Couleur du texte fille
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_text_color_fille = boygirl_text_color_fille_input.value "
+              #boygirl_text_color_fille_input value="{{this.boygirl_text_color_fille}}"
+              title="Choisissez la couleur du texte fille">
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="boygirl_title_color_garcon_input" class="form-label align-middle">Couleur du titre garçon
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_title_color_garcon = boygirl_title_color_garcon_input.value "
+              #boygirl_title_color_garcon_input value="{{this.boygirl_title_color_garcon}}"
+              title="Choisissez la couleur du titre garçon">
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label for="boygirl_text_color_garcon_input" class="form-label align-middle">Couleur du texte garçon
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_text_color_garcon = boygirl_text_color_garcon_input.value "
+              #boygirl_text_color_garcon_input value="{{this.boygirl_text_color_garcon}}"
+              title="Choisissez la couleur du texte garçon">
+          </label>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <label for="boygirl_title_color_mot_input" class="form-label align-middle">Couleur du titre mots
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_title_color_mot = boygirl_title_color_mot_input.value "
+              #boygirl_title_color_mot_input value="{{this.boygirl_title_color_mot}}"
+              title="Choisissez la couleur du titre mots">
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label for="boygirl_text_color_mot_input" class="form-label align-middle">Couleur du texte mots
+            <input type="color" class="form-control form-control-color"
+              (change)="this.boygirl_text_color_mot = boygirl_text_color_mot_input.value " #boygirl_text_color_mot_input
+              value="{{this.boygirl_text_color_mot}}" title="Choisissez la couleur du texte mots">
+          </label>
+        </div>
+      </div>
+
+      <!-- Bouton de création du jeu -->
+      <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+            jeu
+            <i class="fa-solid fa-check fa-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bouton de sauvegarde du jeu -->
+      <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
+            le
+            jeu
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+    <!-- Formulaire Fille Garçon - Menu de navigation par étape -->
+    <div class="align-bottom" style="margin : 10px">
+      <button type="button" class="btn btn-primary align-left"
+        style="background : rgb(13, 197, 13); float : left; border : none" (click)="previousStep()">
+        <i class="fa-solid fa-angles-left"></i>
+        Etape précédente
+      </button>
+      <button type="button" class="btn btn-primary align-right"
+        style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
+        Etape suivante
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
     </div>
   </div>
 
 
-
-</div>
-
-<div *ngIf="this.bg == null" class="card align-middle container" id="card_error"
-  style="width: 32rem; color : black ; background : #3bb8c9">
-
-  <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
-  <div class="card-body text-center">
-    <h5 class="card-title title_image_error">Erreur !</h5>
-    <p class="card-text">Il n'y a pas de jeu selectionné !</p>
+  <!-- Formulaire Fille Garcon - Prévisualisation -->
+  <div *ngIf="this.boygirl_previsualiser">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <button class="prev-button align-middle text-center" (click)="setPrevisualiserBoyGirl(false)" mat-raised-button
+          color="warn">
+          <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+          Quitter la prévisualisation</button>
+      </div>
+    </div>
+    <app-boy-girl-game [bg]="this.bg" [showTitle]="false"></app-boy-girl-game>
   </div>
-
-
 </div>

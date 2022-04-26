@@ -105,27 +105,7 @@ export class PanelComponent implements OnInit {
   ];
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
-  boygirl_listMotsFille: string[] = [];
-  boygirl_listMotsGarcon: string[] = [];
-  boygirl_bg_color_container: string = "#3bb8c9";
-  boygirl_bg_color_fille: string = "#ffc0cb";
-  boygirl_bg_color_garcon: string = "#add9e6";
-  boygirl_bg_color_mot: string = "#fea500";
-  boygirl_word_color_fille: string = "#ffc0cb";
-  boygirl_word_color_garcon: string = "#0f73b1";
-  boygirl_word_color_mot: string = "#000000";
-  boygirl_title_color_fille: string = "#000000";
-  boygirl_title_color_garcon: string = "#000000";
-  boygirl_title_color_mot: string = "#000000";
-  boygirl_text_color_fille: string = "#ffffff";
-  boygirl_text_color_garcon: string = "#ffffff";
-  boygirl_text_color_mot: string = "#ffffff";
-  boygirl_type_ecriture: string = "SCRIPT";
-  boygirl_previsualiser: boolean = false;
-  boygirl_form_step: number = 0;
-  boygirl_list: BoyGirl[] = [
-    new BoyGirl(['girl', 'girl'], this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
-  ];
+  boygirl_list: BoyGirl[] = SessionsComponent.boygirl_list;
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
@@ -249,22 +229,7 @@ export class PanelComponent implements OnInit {
               if (this.getBoyGirl()! == null) {
                 this.router.navigate(['/panel/Fille&Garçon']);
               } else {
-                this.boygirl_listMotsFille = this.getBoyGirl()!.listMotsFille;
-                this.boygirl_listMotsGarcon = this.getBoyGirl()!.listMotsGarcon;
-                this.boygirl_bg_color_container = this.getBoyGirl()!.bg_color_container;
-                this.boygirl_bg_color_fille = this.getBoyGirl()!.bg_color_fille;
-                this.boygirl_bg_color_garcon = this.getBoyGirl()!.bg_color_garcon;
-                this.boygirl_bg_color_mot = this.getBoyGirl()!.bg_color_mot;
-                this.boygirl_word_color_fille = this.getBoyGirl()!.word_color_fille;
-                this.boygirl_word_color_garcon = this.getBoyGirl()!.word_color_garcon;
-                this.boygirl_word_color_mot = this.getBoyGirl()!.word_color_mot;
-                this.boygirl_title_color_fille = this.getBoyGirl()!.title_color_fille;
-                this.boygirl_title_color_garcon = this.getBoyGirl()!.title_color_garcon;
-                this.boygirl_title_color_mot = this.getBoyGirl()!.title_color_mot;
-                this.boygirl_text_color_fille = this.getBoyGirl()!.text_color_fille;
-                this.boygirl_text_color_garcon = this.getBoyGirl()!.text_color_garcon;
-                this.boygirl_text_color_mot = this.getBoyGirl()!.text_color_mot;
-                this.boygirl_type_ecriture = this.getBoyGirl()!.type_ecriture;
+                this.boygirl = this.getBoyGirl();
               }
             }
 
@@ -353,25 +318,25 @@ export class PanelComponent implements OnInit {
   //   }
   // }
 
-  previewBoyGirl(bg: BoyGirl): void {
-    this.boygirl = bg;
-    this.boygirl_previsualiser = true;
-  }
+  // previewBoyGirl(bg: BoyGirl): void {
+  //   this.boygirl = bg;
+  //   this.boygirl_previsualiser = true;
+  // }
 
-  quitPreviewBoyGirl(): void {
-    this.boygirl_previsualiser = false;
-  }
+  // quitPreviewBoyGirl(): void {
+  //   this.boygirl_previsualiser = false;
+  // }
 
-  deleteGameBoyGirl(bg: BoyGirl): void {
-    let index = this.boygirl_list.indexOf(bg, 0);
+  // deleteGameBoyGirl(bg: BoyGirl): void {
+  //   let index = this.boygirl_list.indexOf(bg, 0);
 
-    if (index > -1) {
-      this.boygirl_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.boygirl_list.splice(index, 1);
+  //   }
+  // }
 
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  // addOnBlur = true;
+  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
 /*   getMemorySetting(n: number): string {
     return this.memory_settings[n];
@@ -386,41 +351,41 @@ export class PanelComponent implements OnInit {
     this.memory_nbTile = n;
   } */
 
-  addMotsFille(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+  // addMotsFille(event: MatChipInputEvent): void {
+  //   const value = (event.value || '').trim();
 
-    if (value) {
-      this.boygirl_listMotsFille.push(value);
-    }
+  //   if (value) {
+  //     this.boygirl_listMotsFille.push(value);
+  //   }
 
-    event.chipInput!.clear();
-  }
+  //   event.chipInput!.clear();
+  // }
 
-  removeFille(str: string): void {
-    const index = this.boygirl_listMotsFille.indexOf(str);
+  // removeFille(str: string): void {
+  //   const index = this.boygirl_listMotsFille.indexOf(str);
 
-    if (index >= 0) {
-      this.boygirl_listMotsFille.splice(index, 1);
-    }
-  }
+  //   if (index >= 0) {
+  //     this.boygirl_listMotsFille.splice(index, 1);
+  //   }
+  // }
 
-  addMotsGarcon(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+  // addMotsGarcon(event: MatChipInputEvent): void {
+  //   const value = (event.value || '').trim();
 
-    if (value) {
-      this.boygirl_listMotsGarcon.push(value);
-    }
+  //   if (value) {
+  //     this.boygirl_listMotsGarcon.push(value);
+  //   }
 
-    event.chipInput!.clear();
-  }
+  //   event.chipInput!.clear();
+  // }
 
-  removeGarcon(str: string): void {
-    const index = this.boygirl_listMotsGarcon.indexOf(str);
+  // removeGarcon(str: string): void {
+  //   const index = this.boygirl_listMotsGarcon.indexOf(str);
 
-    if (index >= 0) {
-      this.boygirl_listMotsGarcon.splice(index, 1);
-    }
-  }
+  //   if (index >= 0) {
+  //     this.boygirl_listMotsGarcon.splice(index, 1);
+  //   }
+  // }
 
   parseDate(date: Date): string {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -452,20 +417,20 @@ export class PanelComponent implements OnInit {
   //   }
   // }
 
-  setPrevisualiserBoyGirl(prev: boolean): void {
-    if (prev == true) {
-      this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
-      this.boygirl_previsualiser = true;
-    }
-    else {
-      this.boygirl = null;
-      this.boygirl_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
-      }, 0);
-    }
-  }
+  // setPrevisualiserBoyGirl(prev: boolean): void {
+  //   if (prev == true) {
+  //     this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
+  //     this.boygirl_previsualiser = true;
+  //   }
+  //   else {
+  //     this.boygirl = null;
+  //     this.boygirl_previsualiser = false;
+  //     setTimeout(() => {
+  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
+  //     }, 0);
+  //   }
+  // }
 
   /* setPrevisualiserReconnaitre(prev: boolean): void {
     if (prev == true) {
@@ -630,13 +595,13 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  nextStepBoyGirl(): void {
-    let step = this.boygirl_form_step;
-    if (this.boygirl_form_step < 1) {
-      step++;
-      this.setFormStepBoyGirl(step);
-    }
-  }
+  // nextStepBoyGirl(): void {
+  //   let step = this.boygirl_form_step;
+  //   if (this.boygirl_form_step < 1) {
+  //     step++;
+  //     this.setFormStepBoyGirl(step);
+  //   }
+  // }
 
   setFormStep(step: number): void {
     this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
@@ -645,12 +610,12 @@ export class PanelComponent implements OnInit {
 
   }
 
-  setFormStepBoyGirl(step: number): void {
-    this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
-    this.boygirl_form_step = step;
-    this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
+  // setFormStepBoyGirl(step: number): void {
+  //   this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
+  //   this.boygirl_form_step = step;
+  //   this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
 
-  }
+  // }
 
   previousStep(): void {
     let step = this.formStep;
@@ -660,13 +625,13 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  previousStepBoyGirl(): void {
-    let step = this.boygirl_form_step;
-    if (this.boygirl_form_step > 0) {
-      step--;
-      this.setFormStepBoyGirl(step);
-    }
-  }
+  // previousStepBoyGirl(): void {
+  //   let step = this.boygirl_form_step;
+  //   if (this.boygirl_form_step > 0) {
+  //     step--;
+  //     this.setFormStepBoyGirl(step);
+  //   }
+  // }
 
   redirect(str: string): void {
     if (str == 'Accueil') {
@@ -1062,25 +1027,25 @@ export class PanelComponent implements OnInit {
       //   this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
       //   this.router.navigate(['/panel/Abecedaire']);
       //   break;
-      case 'Fille&Garçon':
-        this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
-        this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
-        this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
-        this.getBoyGirl()!.bg_color_fille = this.boygirl_bg_color_fille;
-        this.getBoyGirl()!.bg_color_garcon = this.boygirl_bg_color_garcon;
-        this.getBoyGirl()!.bg_color_mot = this.boygirl_bg_color_mot;
-        this.getBoyGirl()!.word_color_fille = this.boygirl_word_color_fille;
-        this.getBoyGirl()!.word_color_garcon = this.boygirl_word_color_garcon;
-        this.getBoyGirl()!.word_color_mot = this.boygirl_word_color_mot;
-        this.getBoyGirl()!.title_color_fille = this.boygirl_title_color_fille;
-        this.getBoyGirl()!.title_color_garcon = this.boygirl_title_color_garcon;
-        this.getBoyGirl()!.title_color_mot = this.boygirl_title_color_mot;
-        this.getBoyGirl()!.text_color_fille = this.boygirl_text_color_fille;
-        this.getBoyGirl()!.text_color_garcon = this.boygirl_text_color_garcon;
-        this.getBoyGirl()!.text_color_mot = this.boygirl_text_color_mot;
-        this.getBoyGirl()!.type_ecriture = this.boygirl_type_ecriture;
-        this.router.navigate(['/panel/Fille&Garçon']);
-        break;
+      // case 'Fille&Garçon':
+      //   this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
+      //   this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
+      //   this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
+      //   this.getBoyGirl()!.bg_color_fille = this.boygirl_bg_color_fille;
+      //   this.getBoyGirl()!.bg_color_garcon = this.boygirl_bg_color_garcon;
+      //   this.getBoyGirl()!.bg_color_mot = this.boygirl_bg_color_mot;
+      //   this.getBoyGirl()!.word_color_fille = this.boygirl_word_color_fille;
+      //   this.getBoyGirl()!.word_color_garcon = this.boygirl_word_color_garcon;
+      //   this.getBoyGirl()!.word_color_mot = this.boygirl_word_color_mot;
+      //   this.getBoyGirl()!.title_color_fille = this.boygirl_title_color_fille;
+      //   this.getBoyGirl()!.title_color_garcon = this.boygirl_title_color_garcon;
+      //   this.getBoyGirl()!.title_color_mot = this.boygirl_title_color_mot;
+      //   this.getBoyGirl()!.text_color_fille = this.boygirl_text_color_fille;
+      //   this.getBoyGirl()!.text_color_garcon = this.boygirl_text_color_garcon;
+      //   this.getBoyGirl()!.text_color_mot = this.boygirl_text_color_mot;
+      //   this.getBoyGirl()!.type_ecriture = this.boygirl_type_ecriture;
+      //   this.router.navigate(['/panel/Fille&Garçon']);
+      //   break;
     }
 
   }
