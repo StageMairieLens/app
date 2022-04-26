@@ -24,20 +24,32 @@ export class ReconnaitreComponent implements OnInit {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
   }
-
-
-  onSend(list: any) {
-    const formData: FormData = new FormData();
-    formData.append('liste', list);
-    this.jeuxService.onSendReco(formData).subscribe(res => {
-      console.log(res);
-      this.reponse = res;
+  
+  list:any = {};
+  onSend(list:any){
+    /*list={id:this.r!.id,images:this.r!.images,bg_color:this.r?.bg_color,title_color:this.r?.title_color,
+    gaw:this.r?.good_answer_color,waw:this.r?.wrong_answer_color,bar:this.r?.color_progress_bar,
+    button_bg:this.r?.button_bg_color,button_text:this.r?.button_text_color,text:this.r?.text_color,ecri:this.r?.typeEcriture,
+    voc:this.r?.isVocaliser};*/
+    console.log(this.list);
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('list',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSendReco(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+   
+    error  :err =>{
+      console.log(err);
     },
-      err => {
-        console.log(err, "err");
-      }
-    )
-  }
+      
+  });
+}
   ngOnInit(): void {
     if (this.r != null) {
       this.alea(this.r!.images);
