@@ -129,21 +129,8 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
-  abecedaire_bg_color: string = "#3bb8c9";
-  abecedaire_text_color: string = "#ffffff";
-  abecedaire_good_answer_color: string = "#3498db";
-  abecedaire_wrong_answer_color: string = "#e74c3c";
-  abecedaire_progress: Progress = Progress.Blue;
-  abecedaire_button_bg_color: string = "#f39c12";
-  abecedaire_button_text_color: string = "#ffffff";
-  abecedaire_type_ecriture: string = "script";
-  abecedaire_isVocaliser: boolean = false;
-  abecedaire_previsualiser: boolean = false;
-  abecedaire_list: Abecedaire[] = [
-    new Abecedaire([
-      this.liste_image[0], this.liste_image[1]
-    ], '#745154', this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture)
-  ];
+
+  abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
 
   //VARIABLE JEU MEMORY
   memory: Memory | null;
@@ -255,16 +242,7 @@ export class PanelComponent implements OnInit {
               if (this.getAbecedaire()! == null) {
                 this.router.navigate(['/panel/Abecedaire']);
               } else {
-                this.selectedImages = this.getAbecedaire()!.images;
-                this.abecedaire_bg_color = this.getAbecedaire()!.bg_color;
-                this.abecedaire_text_color = this.getAbecedaire()!.text_color;
-                this.abecedaire_good_answer_color = this.getAbecedaire()!.good_answer_color;
-                this.abecedaire_wrong_answer_color = this.getAbecedaire()!.wrong_answer_color;
-                this.abecedaire_progress = this.getAbecedaire()!.color_progress_bar;
-                this.abecedaire_button_bg_color = this.getAbecedaire()!.button_bg_color;
-                this.abecedaire_button_text_color = this.getAbecedaire()!.button_text_color;
-                this.abecedaire_type_ecriture = this.getAbecedaire()!.typeEcriture;
-                this.abecedaire_isVocaliser = this.getAbecedaire()!.isVocaliser;
+                this.abecedaire = this.getAbecedaire();
               }
             }
             else if (this.selectedGame == 'Fille&Garçon') {
@@ -358,22 +336,22 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  previewAbecedaire(a: Abecedaire): void {
-    this.abecedaire = a;
-    this.abecedaire_previsualiser = true;
-  }
+  // previewAbecedaire(a: Abecedaire): void {
+  //   this.abecedaire = a;
+  //   this.abecedaire_previsualiser = true;
+  // }
 
-  quitPreviewAbecedaire(): void {
-    this.abecedaire_previsualiser = false;
-  }
+  // quitPreviewAbecedaire(): void {
+  //   this.abecedaire_previsualiser = false;
+  // }
 
-  deleteGameAbecedaire(a: Abecedaire): void {
-    let index = this.abecedaire_list.indexOf(a, 0);
+  // deleteGameAbecedaire(a: Abecedaire): void {
+  //   let index = this.abecedaire_list.indexOf(a, 0);
 
-    if (index > -1) {
-      this.abecedaire_list.splice(index, 1);
-    }
-  }
+  //   if (index > -1) {
+  //     this.abecedaire_list.splice(index, 1);
+  //   }
+  // }
 
   previewBoyGirl(bg: BoyGirl): void {
     this.boygirl = bg;
@@ -519,20 +497,20 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  setPrevisualiserAbecedaire(prev: boolean): void {
-    if (prev == true) {
-      this.abecedaire = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
-      this.abecedaire_previsualiser = true;
-    }
-    else {
-      this.abecedaire = null;
-      this.abecedaire_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      }, 0);
-    }
-  }
+  // setPrevisualiserAbecedaire(prev: boolean): void {
+  //   if (prev == true) {
+  //     this.abecedaire = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+  //     this.abecedaire_previsualiser = true;
+  //   }
+  //   else {
+  //     this.abecedaire = null;
+  //     this.abecedaire_previsualiser = false;
+  //     setTimeout(() => {
+  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+  //     }, 0);
+  //   }
+  // }
 /*
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
@@ -596,23 +574,23 @@ export class PanelComponent implements OnInit {
           break;
       } */
     } else if (jeu == 'Abecedaire') {
-      switch (element.value) {
-        case 'blue':
-          this.abecedaire_progress = Progress.Blue;
-          break;
-        case 'green':
-          this.abecedaire_progress = Progress.Green;
-          break;
-        case 'lightblue':
-          this.abecedaire_progress = Progress.LightBlue;
-          break;
-        case 'orange':
-          this.abecedaire_progress = Progress.Orange;
-          break;
-        case 'red':
-          this.abecedaire_progress = Progress.Red;
-          break;
-      }
+      // switch (element.value) {
+      //   case 'blue':
+      //     this.abecedaire_progress = Progress.Blue;
+      //     break;
+      //   case 'green':
+      //     this.abecedaire_progress = Progress.Green;
+      //     break;
+      //   case 'lightblue':
+      //     this.abecedaire_progress = Progress.LightBlue;
+      //     break;
+      //   case 'orange':
+      //     this.abecedaire_progress = Progress.Orange;
+      //     break;
+      //   case 'red':
+      //     this.abecedaire_progress = Progress.Red;
+      //     break;
+      // }
     } else if (jeu == 'Memory') {
 /*       switch (element.value) {
         case 'blue':
@@ -1071,19 +1049,19 @@ export class PanelComponent implements OnInit {
         this.getPuzzle()!.typeEcriture = this.puzzle_type_ecriture;
         this.getPuzzle()!.decoupe = Number(this.decoupe);
         break;
-      case 'Abecedaire':
-        this.getAbecedaire()!.images = this.selectedImages;
-        this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
-        this.getAbecedaire()!.text_color = this.abecedaire_text_color;
-        this.getAbecedaire()!.good_answer_color = this.abecedaire_good_answer_color;
-        this.getAbecedaire()!.wrong_answer_color = this.abecedaire_wrong_answer_color;
-        this.getAbecedaire()!.color_progress_bar = this.abecedaire_progress;
-        this.getAbecedaire()!.button_bg_color = this.abecedaire_button_bg_color;
-        this.getAbecedaire()!.button_text_color = this.abecedaire_button_text_color;
-        this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
-        this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
-        this.router.navigate(['/panel/Abecedaire']);
-        break;
+      // case 'Abecedaire':
+      //   this.getAbecedaire()!.images = this.selectedImages;
+      //   this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
+      //   this.getAbecedaire()!.text_color = this.abecedaire_text_color;
+      //   this.getAbecedaire()!.good_answer_color = this.abecedaire_good_answer_color;
+      //   this.getAbecedaire()!.wrong_answer_color = this.abecedaire_wrong_answer_color;
+      //   this.getAbecedaire()!.color_progress_bar = this.abecedaire_progress;
+      //   this.getAbecedaire()!.button_bg_color = this.abecedaire_button_bg_color;
+      //   this.getAbecedaire()!.button_text_color = this.abecedaire_button_text_color;
+      //   this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
+      //   this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
+      //   this.router.navigate(['/panel/Abecedaire']);
+      //   break;
       case 'Fille&Garçon':
         this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
         this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
