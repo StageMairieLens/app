@@ -113,7 +113,7 @@ export class MemoryComponent implements OnInit {
 
     if (this.edit) {
       this.create_game = true
-      this.selectedImages= this.game!.images;
+      this.selectedImages = [this.game!.derriere].concat(this.game!.images);
       this.memory_nbTile = this.game!.nbTile;
       this.memory_settings = this.game!.setting;
       this.memory_bg_color = this.game!.bg_color;
