@@ -109,7 +109,6 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
-
   abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
 
   //VARIABLE JEU MEMORY
@@ -119,8 +118,7 @@ export class PanelComponent implements OnInit {
 
   // ETAPE D'AVANCEMENT FORMULAIRE
   formStep: number = 0;
-  // r1 : Recopier = new Recopier([],'red','CAPITAL');
-  // r2 : Recopier = new Recopier([],'blue','CAPITAL');
+
 
   ngOnInit(): void {
     this.panel = this.route.snapshot.paramMap.get('param1');
@@ -250,39 +248,6 @@ export class PanelComponent implements OnInit {
 
   }
 
-  // previewRecopier(r: Recopier): void {
-  //   this.recopier = r;
-  //   this.recopier_previsualiser = true;
-  // }
-
-  // quitPreviewRecopier(): void {
-  //   this.recopier_previsualiser = false;
-  // }
-
-  // deleteGameRecopier(r: Recopier): void {
-  //   let index = this.recopier_list.indexOf(r, 0);
-
-  //   if (index > -1) {
-  //     this.recopier_list.splice(index, 1);
-  //   }
-  // }
-
-  // previewMemory(m: Memory): void {
-  //   this.memory = m;
-  //   this.memory_previsualiser = true;
-  // }
-
-  // quitPreviewMemory(): void {
-  //   this.memory_previsualiser = false;
-  // }
-
-  // deleteGameMemory(m: Memory): void {
-  //   let index = this.memory_list.indexOf(m, 0);
-
-  //   if (index > -1) {
-  //     this.memory_list.splice(index, 1);
-  //   }
-  // }
 
   previewPuzzle(r: Puzzle): void {
     this.puzzle = r;
@@ -301,91 +266,6 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  // previewAbecedaire(a: Abecedaire): void {
-  //   this.abecedaire = a;
-  //   this.abecedaire_previsualiser = true;
-  // }
-
-  // quitPreviewAbecedaire(): void {
-  //   this.abecedaire_previsualiser = false;
-  // }
-
-  // deleteGameAbecedaire(a: Abecedaire): void {
-  //   let index = this.abecedaire_list.indexOf(a, 0);
-
-  //   if (index > -1) {
-  //     this.abecedaire_list.splice(index, 1);
-  //   }
-  // }
-
-  // previewBoyGirl(bg: BoyGirl): void {
-  //   this.boygirl = bg;
-  //   this.boygirl_previsualiser = true;
-  // }
-
-  // quitPreviewBoyGirl(): void {
-  //   this.boygirl_previsualiser = false;
-  // }
-
-  // deleteGameBoyGirl(bg: BoyGirl): void {
-  //   let index = this.boygirl_list.indexOf(bg, 0);
-
-  //   if (index > -1) {
-  //     this.boygirl_list.splice(index, 1);
-  //   }
-  // }
-
-  // addOnBlur = true;
-  // readonly separatorKeysCodes = [ENTER, COMMA] as const;
-
-/*   getMemorySetting(n: number): string {
-    return this.memory_settings[n];
-  }
-
-  changeMemorySetting(n: number, setting: string): void {
-    this.memory_settings[n] = setting;
-    console.log(this.memory_settings);
-  }
-
-  changeMemoryNbTile(n: number): void {
-    this.memory_nbTile = n;
-  } */
-
-  // addMotsFille(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
-
-  //   if (value) {
-  //     this.boygirl_listMotsFille.push(value);
-  //   }
-
-  //   event.chipInput!.clear();
-  // }
-
-  // removeFille(str: string): void {
-  //   const index = this.boygirl_listMotsFille.indexOf(str);
-
-  //   if (index >= 0) {
-  //     this.boygirl_listMotsFille.splice(index, 1);
-  //   }
-  // }
-
-  // addMotsGarcon(event: MatChipInputEvent): void {
-  //   const value = (event.value || '').trim();
-
-  //   if (value) {
-  //     this.boygirl_listMotsGarcon.push(value);
-  //   }
-
-  //   event.chipInput!.clear();
-  // }
-
-  // removeGarcon(str: string): void {
-  //   const index = this.boygirl_listMotsGarcon.indexOf(str);
-
-  //   if (index >= 0) {
-  //     this.boygirl_listMotsGarcon.splice(index, 1);
-  //   }
-  // }
 
   parseDate(date: Date): string {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -398,54 +278,7 @@ export class PanelComponent implements OnInit {
     this.panel_option = option;
   }
 
-  setSelected(element: HTMLOptionElement): void {
-    element.selected = true;
-  }
 
-  // setPrevisualiserRecopier(prev: boolean): void {
-  //   if (prev == true) {
-  //     this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
-  //     this.recopier_previsualiser = true;
-  //   }
-  //   else {
-  //     this.recopier = null;
-  //     this.recopier_previsualiser = false;
-  //     setTimeout(() => {
-  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-  //     }, 0);
-  //   }
-  // }
-
-  // setPrevisualiserBoyGirl(prev: boolean): void {
-  //   if (prev == true) {
-  //     this.boygirl = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
-  //     this.boygirl_previsualiser = true;
-  //   }
-  //   else {
-  //     this.boygirl = null;
-  //     this.boygirl_previsualiser = false;
-  //     setTimeout(() => {
-  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
-  //     }, 0);
-  //   }
-  // }
-
-  /* setPrevisualiserReconnaitre(prev: boolean): void {
-    if (prev == true) {
-      this.reconnaitre = new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser);
-      this.reconnaitre_previsualiser = true;
-    }
-    else {
-      this.reconnaitre = null;
-      this.reconnaitre_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      }, 0);
-    }
-  } */
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
       this.liste_image_puzzle = this.imgPuzzle(this.selectedImages);
@@ -459,121 +292,6 @@ export class PanelComponent implements OnInit {
         this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
         this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
       }, 0);
-    }
-  }
-
-  // setPrevisualiserAbecedaire(prev: boolean): void {
-  //   if (prev == true) {
-  //     this.abecedaire = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
-  //     this.abecedaire_previsualiser = true;
-  //   }
-  //   else {
-  //     this.abecedaire = null;
-  //     this.abecedaire_previsualiser = false;
-  //     setTimeout(() => {
-  //       this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-  //       this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-  //     }, 0);
-  //   }
-  // }
-/*
-  setPrevisualiserMemory(prev: boolean): void {
-    if (prev == true) {
-      this.memory = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
-      this.memory_previsualiser = true;
-    }
-    else {
-      this.memory = null;
-      this.memory_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      }, 0);
-    }
-  } */
-
-  isActive(button: HTMLButtonElement): boolean {
-    if (document.getElementsByClassName('breadcrumb-item').item(this.formStep)!.children.item(0) == button) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  changeProgressValue(jeu: string, element: HTMLSelectElement): void {
-
-    if (jeu == 'Recopier') {
-      switch (element.value) {
-        // case 'blue':
-        //   this.recopier_progress = Progress.Blue;
-        //   break;
-        // case 'green':
-        //   this.recopier_progress = Progress.Green;
-        //   break;
-        // case 'lightblue':
-        //   this.recopier_progress = Progress.LightBlue;
-        //   break;
-        // case 'orange':
-        //   this.recopier_progress = Progress.Orange;
-        //   break;
-        // case 'red':
-        //   this.recopier_progress = Progress.Red;
-        //   break;
-      }
-    } else if (jeu == 'Reconnaitre') {
-/*       switch (element.value) {
-        case 'blue':
-          this.reconnaitre_progress = Progress.Blue;
-          break;
-        case 'green':
-          this.reconnaitre_progress = Progress.Green;
-          break;
-        case 'lightblue':
-          this.reconnaitre_progress = Progress.LightBlue;
-          break;
-        case 'orange':
-          this.reconnaitre_progress = Progress.Orange;
-          break;
-        case 'red':
-          this.reconnaitre_progress = Progress.Red;
-          break;
-      } */
-    } else if (jeu == 'Abecedaire') {
-      // switch (element.value) {
-      //   case 'blue':
-      //     this.abecedaire_progress = Progress.Blue;
-      //     break;
-      //   case 'green':
-      //     this.abecedaire_progress = Progress.Green;
-      //     break;
-      //   case 'lightblue':
-      //     this.abecedaire_progress = Progress.LightBlue;
-      //     break;
-      //   case 'orange':
-      //     this.abecedaire_progress = Progress.Orange;
-      //     break;
-      //   case 'red':
-      //     this.abecedaire_progress = Progress.Red;
-      //     break;
-      // }
-    } else if (jeu == 'Memory') {
-/*       switch (element.value) {
-        case 'blue':
-          this.memory_progress = Progress.Blue;
-          break;
-        case 'green':
-          this.memory_progress = Progress.Green;
-          break;
-        case 'lightblue':
-          this.memory_progress = Progress.LightBlue;
-          break;
-        case 'orange':
-          this.memory_progress = Progress.Orange;
-          break;
-        case 'red':
-          this.memory_progress = Progress.Red;
-          break;
-      } */
     }
   }
 
@@ -595,13 +313,6 @@ export class PanelComponent implements OnInit {
     }
   }
 
-  // nextStepBoyGirl(): void {
-  //   let step = this.boygirl_form_step;
-  //   if (this.boygirl_form_step < 1) {
-  //     step++;
-  //     this.setFormStepBoyGirl(step);
-  //   }
-  // }
 
   setFormStep(step: number): void {
     this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
@@ -610,12 +321,7 @@ export class PanelComponent implements OnInit {
 
   }
 
-  // setFormStepBoyGirl(step: number): void {
-  //   this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(this.boygirl_form_step)!.children.item(0));
-  //   this.boygirl_form_step = step;
-  //   this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(step)!.children.item(0));
 
-  // }
 
   previousStep(): void {
     let step = this.formStep;
@@ -624,14 +330,6 @@ export class PanelComponent implements OnInit {
       this.setFormStep(step);
     }
   }
-
-  // previousStepBoyGirl(): void {
-  //   let step = this.boygirl_form_step;
-  //   if (this.boygirl_form_step > 0) {
-  //     step--;
-  //     this.setFormStepBoyGirl(step);
-  //   }
-  // }
 
   redirect(str: string): void {
     if (str == 'Accueil') {
@@ -655,29 +353,6 @@ export class PanelComponent implements OnInit {
   previsualiserGame(element: Session): void {
     this.panel_option = 'preview';
     this.selected_session = element;
-  }
-
-  create(jeu: string): void {
-    switch (jeu) {
-      // case 'Recopier':
-      //   this.recopier_list.push(
-      //     new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
-      //   );
-      //   this.router.navigate(['/panel/Recopier']);
-      //   break;
-      /* case 'Memory':
-        this.memory_list.push(
-          new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
-        );
-        this.router.navigate(['/panel/Memory']);
-        break; */
-/*       case 'Reconnaitre':
-        this.reconnaitre_list.push(
-          new Reconnaitre(this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser)
-        );
-        this.router.navigate(['/panel/Reconnaitre']);
-        break; */
-    }
   }
 
   editSession(session: Session): void {
@@ -852,23 +527,6 @@ export class PanelComponent implements OnInit {
     this.showActive = false;
   }
 
-  redirectEditRecopier(r: Recopier): void {
-    window.location.href = '/panel/Recopier/edit/' + r.id;
-  }
-  redirectEditMemory(m: Memory): void {
-    window.location.href = '/panel/Memory/edit/' + m.id;
-  }
-
-  redirectEditReconnaitre(r: Reconnaitre): void {
-    window.location.href = '/panel/Reconnaitre/edit/' + r.id;
-  }
-  redirectEditAbecedaire(a: Abecedaire): void {
-    window.location.href = '/panel/Abecedaire/edit/' + a.id;
-  }
-
-  redirectEditBoyGirl(bg: BoyGirl): void {
-    window.location.href = '/panel/Fille&Garçon/edit/' + bg.id;
-  }
 
   getRecopier(): Recopier | null {
     for (let r of this.recopier_list) {
@@ -958,52 +616,14 @@ export class PanelComponent implements OnInit {
     return this.getPuzzle();
   }
 
+  create(jeu: string): void {
+    //TO DO
+  }
+
 
 
   save(): void {
     switch (this.selectedGame) {
-      // case 'Recopier':
-      //   this.getRecopier()!.images = this.selectedImages;
-      //   this.getRecopier()!.bg_color = this.recopier_bg_color;
-      //   this.getRecopier()!.text_color = this.recopier_text_color;
-      //   this.getRecopier()!.title_color = this.recopier_title_color;
-      //   this.getRecopier()!.good_answer_color = this.recopier_good_answer_color;
-      //   this.getRecopier()!.wrong_answer_color = this.recopier_wrong_answer_color;
-      //   this.getRecopier()!.button_bg_color = this.recopier_button_bg_color;
-      //   this.getRecopier()!.button_text_color = this.recopier_button_text_color;
-      //   this.getRecopier()!.input_bg_color = this.recopier_input_bg_color;
-      //   this.getRecopier()!.input_text_color = this.recopier_input_text_color;
-      //   this.getRecopier()!.color_progress_bar = this.recopier_progress;
-      //   this.getRecopier()!.typeEcriture = this.recopier_type_ecriture;
-      //   this.getRecopier()!.isVocaliser = this.recopier_isVocaliser;
-      //   this.router.navigate(['/panel/Recopier']);
-      //   break;
-      /* case 'Memory':
-        this.getMemory()!.nbTile = this.memory_nbTile;
-        this.getMemory()!.setting = this.memory_settings;
-        this.getMemory()!.bg_color = this.memory_bg_color;
-        this.getMemory()!.text_color = this.memory_text_color;
-        this.getMemory()!.good_answer_color = this.memory_good_answer_color;
-        this.getMemory()!.wrong_answer_color = this.memory_wrong_answer_color;
-        this.getMemory()!.color_progress_bar = this.memory_progress;
-        this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
-        this.getMemory()!.tmpAffichage = this.memory_tmp_affichage;
-        this.router.navigate(['/panel/Memory']);
-        break; */
-/*       case 'Reconnaitre':
-        this.getReconnaitre()!.images = this.selectedImages;
-        this.getReconnaitre()!.bg_color = this.reconnaitre_bg_color;
-        this.getReconnaitre()!.title_color = this.reconnaitre_title_color;
-        this.getReconnaitre()!.text_color = this.reconnaitre_text_color;
-        this.getReconnaitre()!.good_answer_color = this.reconnaitre_good_answer_color;
-        this.getReconnaitre()!.wrong_answer_color = this.reconnaitre_wrong_answer_color;
-        this.getReconnaitre()!.button_bg_color = this.reconnaitre_button_bg_color;
-        this.getReconnaitre()!.button_text_color = this.reconnaitre_button_text_color;
-        this.getReconnaitre()!.color_progress_bar = this.reconnaitre_progress;
-        this.getReconnaitre()!.typeEcriture = this.reconnaitre_type_ecriture;
-        this.getReconnaitre()!.isVocaliser = this.reconnaitre_isVocaliser;
-        this.router.navigate(['/panel/Reconnaitre']);
-        break; */
       case 'Puzzle':
         this.getPuzzle()!.liste_images = this.liste_image_puzzle;
         this.getPuzzle()!.bg_color = this.puzzle_bg_color;
@@ -1014,38 +634,6 @@ export class PanelComponent implements OnInit {
         this.getPuzzle()!.typeEcriture = this.puzzle_type_ecriture;
         this.getPuzzle()!.decoupe = Number(this.decoupe);
         break;
-      // case 'Abecedaire':
-      //   this.getAbecedaire()!.images = this.selectedImages;
-      //   this.getAbecedaire()!.bg_color = this.abecedaire_bg_color;
-      //   this.getAbecedaire()!.text_color = this.abecedaire_text_color;
-      //   this.getAbecedaire()!.good_answer_color = this.abecedaire_good_answer_color;
-      //   this.getAbecedaire()!.wrong_answer_color = this.abecedaire_wrong_answer_color;
-      //   this.getAbecedaire()!.color_progress_bar = this.abecedaire_progress;
-      //   this.getAbecedaire()!.button_bg_color = this.abecedaire_button_bg_color;
-      //   this.getAbecedaire()!.button_text_color = this.abecedaire_button_text_color;
-      //   this.getAbecedaire()!.typeEcriture = this.abecedaire_type_ecriture;
-      //   this.getAbecedaire()!.isVocaliser = this.abecedaire_isVocaliser;
-      //   this.router.navigate(['/panel/Abecedaire']);
-      //   break;
-      // case 'Fille&Garçon':
-      //   this.getBoyGirl()!.listMotsFille = this.boygirl_listMotsFille;
-      //   this.getBoyGirl()!.listMotsGarcon = this.boygirl_listMotsGarcon;
-      //   this.getBoyGirl()!.bg_color_container = this.boygirl_bg_color_container;
-      //   this.getBoyGirl()!.bg_color_fille = this.boygirl_bg_color_fille;
-      //   this.getBoyGirl()!.bg_color_garcon = this.boygirl_bg_color_garcon;
-      //   this.getBoyGirl()!.bg_color_mot = this.boygirl_bg_color_mot;
-      //   this.getBoyGirl()!.word_color_fille = this.boygirl_word_color_fille;
-      //   this.getBoyGirl()!.word_color_garcon = this.boygirl_word_color_garcon;
-      //   this.getBoyGirl()!.word_color_mot = this.boygirl_word_color_mot;
-      //   this.getBoyGirl()!.title_color_fille = this.boygirl_title_color_fille;
-      //   this.getBoyGirl()!.title_color_garcon = this.boygirl_title_color_garcon;
-      //   this.getBoyGirl()!.title_color_mot = this.boygirl_title_color_mot;
-      //   this.getBoyGirl()!.text_color_fille = this.boygirl_text_color_fille;
-      //   this.getBoyGirl()!.text_color_garcon = this.boygirl_text_color_garcon;
-      //   this.getBoyGirl()!.text_color_mot = this.boygirl_text_color_mot;
-      //   this.getBoyGirl()!.type_ecriture = this.boygirl_type_ecriture;
-      //   this.router.navigate(['/panel/Fille&Garçon']);
-      //   break;
     }
 
   }
