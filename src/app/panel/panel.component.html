@@ -460,7 +460,9 @@
 
 
     <!-- Formulaire Abecedaire -->
-
+    <div *ngIf="this.selectedGame == 'Abecedaire'">
+      <app-abecedaire [create_game]="true" [play]="false" [showTitle]="false"></app-abecedaire>
+    </div>
 
     <!-- Formulaire Memory -->
     <div *ngIf="this.selectedGame =='Memory'">
@@ -722,11 +724,7 @@
 
     <!-- Liste des jeux Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-
-      <div *ngIf="this.abecedaire_list.length != 0">
-
         <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
-      </div>
     </div>
 
     <!-- Liste des jeux Fille&Garçon -->
@@ -839,7 +837,9 @@
     </div>
 
     <!-- Formulaire édition Abecedaire -->
-
+    <div *ngIf="this.selectedGame == 'Abecedaire'">
+      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire" ></app-abecedaire>
+    </div>
 
     <!-- Formulaire édition Fille&Garçon -->
     <div *ngIf="this.selectedGame == 'Fille&Garçon'">
