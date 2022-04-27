@@ -18,9 +18,14 @@ export class IndexComponent implements OnInit {
   }
 
   form(): void {
-    this.login.open(LoginComponent, {
-      width: '30%'
-    });
+    if(localStorage.getItem("connect") == "true") {
+      this.router.navigate(['panel']);
+    }
+    else {
+      this.login.open(LoginComponent, {
+        width: '30%'
+      });
+    }
   }
 
   redirect(): void {
