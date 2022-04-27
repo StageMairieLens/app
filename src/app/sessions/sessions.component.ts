@@ -225,6 +225,8 @@ export class SessionsComponent implements OnInit {
     new Memory(ImagesComponent.list_image.slice(1), ImagesComponent.list_image[0], 18, ['image', 'image'], "#3bb8c9", "#ffffff", "#3498db", "#e74c3c", Progress.Blue, "5")
   ];
 
-  static puzzle_list: Puzzle[] = [];
+  static puzzle_list: Puzzle[] = [
+    new Puzzle([ImagesComponent.list_image[0], ImagesComponent.list_image[1]], "#3bb8c9", "#ffffff", "#000000", "#0dff00", "#ff0000" , 'CAPITAL' , 3)
+  ];
 
 }

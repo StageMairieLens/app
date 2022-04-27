@@ -1,134 +1,318 @@
 .title {
-    text-transform: uppercase;
-    font-size: 105px;
-    font-weight: bold;
-    letter-spacing: 6px;
-    text-shadow: rgb(0, 0, 0, 0.7) 5px 8px;
-  }
+  text-transform: uppercase;
+  font-size: 105px;
+  font-weight: bold;
+  letter-spacing: 6px;
+  text-shadow: rgb(0, 0, 0, 0.7) 5px 8px;
+}
 
-  .title :nth-child(1n) {
-    color: #835ba7;
-  }
+.title :nth-child(1n) {
+  color: #835ba7;
+}
 
-  .title :nth-child(2n) {
-    color: #3e4194;
-  }
+.title :nth-child(2n) {
+  color: #3e4194;
+}
 
-  .title :nth-child(3n) {
-    color: #01afee;
-  }
+.title :nth-child(3n) {
+  color: #01afee;
+}
 
-  .title :nth-child(4n) {
-    color: #00a656;
-  }
+.title :nth-child(4n) {
+  color: #00a656;
+}
 
-  .title :nth-child(5n) {
-    color: #fff116;
-  }
+.title :nth-child(5n) {
+  color: #fff116;
+}
 
-  .title :nth-child(6n) {
-    color: #f68635;
-  }
+.title :nth-child(6n) {
+  color: #f68635;
+}
 
-  .title :nth-child(7n) {
-    color: #ec3238;
-  }
+.title :nth-child(7n) {
+  color: #ec3238;
+}
 
-  .title :nth-child(8n) {
-    color: #00a656;
-  }
+.title :nth-child(8n) {
+  color: #00a656;
+}
 
-  .title :nth-child(9n) {
-    color: #01afee;
-  }
+.title :nth-child(9n) {
+  color: #01afee;
+}
 
-  .title :nth-child(10n) {
-    color: #835ba7;
-  }
+.title :nth-child(10n) {
+  color: #835ba7;
+}
 
 
-#collage hr{
-    border:none;
-    border-top:2px solid #f5f2f2;
-    height:1px;
+#collage hr {
+  border: none;
+  border-top: 2px solid #f5f2f2;
+  height: 1px;
 }
 
 #collage #playPanel {
-    
-    padding:10px 0px;
-    margin: 10px auto;
-    max-width:800px;
-    width:95%;
+
+  padding: 10px 0px;
+  margin: 10px auto;
+  max-width: 800px;
+  width: 95%;
 }
 
 #collage #actualImageBox {
-    display: inline-block;
-    font-size:0.8em;
-    margin: 10px 10px;
-    vertical-align: top;
-    width:280px;
+  display: inline-block;
+  font-size: 0.8em;
+  margin: 10px 10px;
+  vertical-align: top;
+  width: 280px;
 }
 
-#collage #stepBox, #collage #timeBox {
-    display:inline-block;
-    width:48%;
+#collage #stepBox,
+#collage #timeBox {
+  display: inline-block;
+  width: 48%;
 }
 
 #collage #stepBox div {
-    background-color:#c2defc;
-    display:inline-block;
-    padding:1px 4px;
-    margin: 0px auto;
-    max-width:800px;
+  background-color: #c2defc;
+  display: inline-block;
+  padding: 1px 4px;
+  margin: 0px auto;
+  max-width: 800px;
 }
 
-#collage img#actualImage{
-    display: inline-block;
-    border:2px solid ;
-    height:280px;
-    width:280px;
+#collage img#actualImage {
+  display: inline-block;
+  border: 2px solid;
+  height: 280px;
+  width: 280px;
 }
 
 #collage #sortable {
-    border:2px solid ;
-    list-style-type: none;
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-   
+  border: 2px solid;
+  list-style-type: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+
 }
 
-    #collage #sortable li  {
-        background-size: 400% 400%;
-        border: none;
-        cursor: progress;
-        margin: 0;
-        padding: 0;
-        float: left;
-        width: 25px;
-        height: 100px;
-    }
-
-#collage button  {
-    
-    border:1px solid ;
-    display: inline;
-    font-size: 14px;
-    height: auto;
-    width: auto;
-    padding: 3px 8px;
+#collage #sortable li {
+  background-size: 400% 400%;
+  border: none;
+  cursor: progress;
+  margin: 0;
+  padding: 0;
+  float: left;
+  width: 25px;
+  height: 100px;
 }
 
-body {
-    font-family: 'Segoe UI', Calibri, Arial;
-    margin:0;
+#collage button {
+
+  border: 1px solid;
+  display: inline;
+  font-size: 14px;
+  height: auto;
+  width: auto;
+  padding: 3px 8px;
 }
-h2{
-    font-weight:normal;
-    text-align:center;
+
+
+
+#error {
+  color: red;
 }
-h3{
-    font-weight:normal;
-    margin:3px 0px;
-    text-align:center;
+
+.card_play p {
+  margin-left: 4px;
+  border-radius: 3%;
+  padding: 1px;
+}
+
+.card_play {
+  width: 30%;
+  background: yellowgreen;
+  border-radius: 3%;
+  padding: 10px;
+  box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+  color: white;
+}
+
+.image {
+  display: inline;
+  border: solid grey 2px;
+
+  margin-top: 10px;
+}
+
+
+
+
+.card_play button {
+  margin-top: 5px;
+  min-width: 70px;
+  min-height: 70px;
+  width: auto;
+  height: auto;
+  /* width : 70px;
+  height : 70px; */
+  border-radius: 50%;
+  border: 1px solid #000;
+  text-align: center;
+  margin-right: 3px;
+  background: rgb(201, 140, 7);
+  padding: 5px;
+  box-shadow: rgba(92, 8, 8, 0.4) 10px 15px;
+  margin-right: 7px;
+}
+
+
+
+.container_list {
+  background-color: #303030;
+  color: white;
+  margin-top: 5%;
+  padding: 5px;
+  box-shadow: rgba(218, 216, 216, 0.548) 10px 10px;
+}
+
+.card-header {
+  background-color: #ececec;
+  color: #303030;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 32px;
+}
+
+.prev-button button {
+  background: rgb(209, 42, 12);
+}
+
+.selectImage_container {
+  display: inline-block;
+  width: 45%;
+  background: rgba(255, 255, 255, 0.74);
+  margin-right: 5%;
+  border-radius: 3%;
+}
+
+.figure-caption {
+  color: black;
+}
+
+figure img:hover {
+  cursor: pointer;
+  border: 3px solid #fff;
+}
+
+/* #container1 {
+  float: left;
+}
+
+#container2 {
+  float: right;
+}
+ */
+.image {
+  position: relative;
+  /* width: 25%; */
+  /* max-width: 400px; */
+  display: inline-block;
+}
+
+.image_add {
+  position: relative;
+  width: 25%;
+  max-width: 400px;
+  display: inline-block;
+  color: black;
+  text-align: center;
+}
+
+
+figure img {
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
+
+.image button:hover {
+  border: black solid 2px;
+}
+
+
+.stepMenu {
+  align-items: center;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.form-control-color {
+  height: 40px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.form-row input {
+  float: right;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}
+
+.mat-radio-button~.mat-radio-button {
+  margin-left: 25px;
+}
+
+.prev-button button {
+  background: rgb(209, 42, 12);
+}
+
+.create_button button {
+  background: rgb(209, 42, 12);
+  height: 50px;
+  font-size: 20px;
+}
+
+.save_button {
+  background: rgb(241, 238, 6);
+  width: 50%;
+  height: 50px;
+  color: white;
+  font-size: 32px;
+  color: black;
+}
+
+.save_button i,
+.validate_button i {
+  margin-bottom: 1%;
+  margin-left: 5%;
+}
+
+
+
+.validate_button {
+  background: rgb(9, 209, 9);
+  width: 50%;
+  height: 50px;
+  color: white;
+  font-size: 32px;
+}
+
+
+.form-row input {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+button {
+  margin-left: 5px;
 }
