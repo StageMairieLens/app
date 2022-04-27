@@ -18,7 +18,7 @@ export class BoyGirlGameComponent implements OnInit {
     this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
   }
   ngOnInit(): void {
-    if(this.bg != null) {
+    if (this.bg != null) {
       this.boy = this.bg!.listMotsGarcon;
       this.girl = this.bg!.listMotsFille;
 
@@ -276,7 +276,10 @@ export class BoyGirlGameComponent implements OnInit {
 
 
   create(): void {
-
+    this.boygirl_list.push(
+      new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
+    );
+    this.router.navigate(['/panel/Fille&Garçon']);
   }
 
   save(): void {

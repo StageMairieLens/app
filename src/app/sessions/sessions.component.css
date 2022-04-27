@@ -51,3 +51,69 @@
   height: 90px;
   font-size: 40px;
 }
+
+
+.button_actions button {
+  margin-left: 5px;
+  width: 40px;
+}
+
+.sortButton button {
+  margin-top: 2%;
+  margin-bottom: 3%;
+  margin-right: 5%;
+  margin-left: 5%;
+  padding-right: 4%;
+  padding-left: 3%;
+  text-align: center;
+}
+
+.sortButton button i {
+  margin-right: 10%;
+}
+
+.panel-choice {
+  width: 40%;
+  margin-right: 10%;
+  margin-bottom: 3%;
+  background :rgb(22, 158, 22);
+}
+
+.panel-choice span {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.panel-choice i {
+  margin-bottom: 2%;
+}
+
+.session_choice {
+  width : 80%;
+  margin-bottom : 3%
+}
+
+.session_choice span {
+  font-size : 25px;
+  margin-left : 10px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.form-control-color {
+  height: 40px;
+  width: 80px;
+  margin-left: 10px;
+}
+
+.form-row input {
+  float: right;
+}
+
+.form-row {
+  margin-bottom: 20px;
+}

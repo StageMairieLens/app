@@ -444,6 +444,10 @@
             <mat-radio-button value="Script" (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px"
               [checked]="this.memory_settings[0] == 'script'">Script
             </mat-radio-button>
+
+            <mat-radio-button value="Sound" (change)="this.changeMemorySetting(0, 'sound')" style="font-size : 40px"
+              [checked]="this.memory_settings[0] == 'sound'">Vocalisation
+            </mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
@@ -468,6 +472,10 @@
 
             <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px"
               [checked]="this.memory_settings[1] == 'script'">Script
+            </mat-radio-button>
+
+            <mat-radio-button value="Sound" (change)="this.changeMemorySetting(1, 'sound')" style="font-size : 40px"
+              [checked]="this.memory_settings[1] == 'sound'">Vocalisation
             </mat-radio-button>
           </mat-radio-group>
         </div>

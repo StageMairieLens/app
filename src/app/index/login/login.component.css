@@ -1,3 +1,8 @@
 .form-row {
     margin-top: 20px;
 }
+
+.link {
+    background: none;
+    border: none;
+}

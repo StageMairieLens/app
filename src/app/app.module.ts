@@ -35,6 +35,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JeuxService } from './jeux.service';
 import { LoginComponent } from './index/login/login.component';
+import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { LoginComponent } from './index/login/login.component';
     UsersComponent,
     SessionsComponent,
     LoginComponent,
+    AuthGuardComponent,
   ],
   imports: [
     BrowserModule,
