@@ -45,7 +45,7 @@ export class SessionsComponent implements OnInit {
 
 
 
-  selected_session: Session | null;
+  @Input() selected_session: Session | null;
   id_game: number | null = null;
   jeuSession: string = "";
   jeuId: number = -1;
@@ -53,6 +53,10 @@ export class SessionsComponent implements OnInit {
   sortById: boolean = true;
   sortByDate: boolean = false;
   sortByNbJoueur: boolean = false;
+
+
+  session_nom : string = "";
+
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.abecedaire = null;
@@ -81,6 +85,14 @@ export class SessionsComponent implements OnInit {
         this.router.navigate(['']);
 
       }
+    }
+
+    if(this.edit) {
+      this.create_session = true;
+      this.session_nom = this.selected_session!.nom;
+      this.jeuSession = this.selected_session!.jeu;
+      this.jeuId = this.selected_session!.jeuId;
+
     }
   }
 
@@ -282,6 +294,7 @@ export class SessionsComponent implements OnInit {
   joinSession(s: Session): void {
     this.selected_session = s;
     this.view = true;
+    this.showList = false;
   }
 
   setSessionActive(s: Session): void {
@@ -405,9 +418,17 @@ export class SessionsComponent implements OnInit {
   createSession(jeu: string, nom: string): void {
     if (jeu != "" && nom != "" && this.jeuId != -1) {
       // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
-      this.create_session = false;
+      this.showList = true;
       this.jeuSession = "";
+      this.router.navigate(['/panel/sessions']);
     }
+  }
+
+  save() : void {
+    this.selected_session!.nom = this.session_nom;
+    this.selected_session!.jeu = (<any>Game)[this.jeuSession]
+    this.selected_session!.jeuId = this.jeuId;
+    this.router.navigate(['/panel/sessions']);
   }
 
   changeJeuSession(jeu: string) {
