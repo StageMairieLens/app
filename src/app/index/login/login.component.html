@@ -16,21 +16,21 @@
         <label for="mdp" class="form-label align-middle">Mot de passe :</label>
     </div>
     <div class="col-md-9 text-center">
-        <input type="text" class="form-control" #mdp title="mdp">
+        <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passea">
     </div>
 </div>
 
 <div class="form-row">
     <div class="col-md-12 text-center">
-        <button>Se connecter</button>
+        <button (click)="login(email.value, mdp.value)" mat-raised-button color="primary" aria-label="Valider"><i class="fa-solid fa-check"></i> Se connecter</button>
     </div>
 </div>
 
 <div class="form-row">
     <div class="col-md-6 text-center">
-        <a>Mot de passe oublié?</a>
+        <a href="">Mot de passe oublié?</a>
     </div>
     <div class="col-md-6 text-center">
-        <a>Pas de compte?</a>
+        <a href="account">Pas de compte?</a>
     </div>
 </div>

@@ -16,6 +16,7 @@ import { Memory } from '../memory/Memory';
 import { Session } from '../sessions/Session';
 import { join } from 'path';
 import { SessionsComponent } from '../sessions/sessions.component';
+import { LoginComponent } from '../index/login/login.component';
 
 @Component({
   selector: 'app-panel',
@@ -280,6 +281,7 @@ export class PanelComponent implements OnInit {
 
   redirect(str: string): void {
     if (str == 'Accueil') {
+      LoginComponent.logout();
       this.router.navigate(['/']);
     }
   }

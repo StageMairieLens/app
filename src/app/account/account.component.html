@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="align-middle text-center redirect_button">
+        <button mat-raised-button color="primary" aria-label="Valider" [routerLink]="['']">
+          <i class="fa-solid fa-angles-left fa-xl"></i>
+          Retourner à l'acceuil
+        </button>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="Email" class="form-label align-middle">Email :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input type="text" class="form-control" #email title="Email">
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="mdp" class="form-label align-middle">Mot de passe :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="mdp2" class="form-label align-middle">Confirmer mot de passe :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp2 title="Confirmer">
+        </div>
+    </div>
+
+    <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" aria-label="Valider">
+            <i class="fa-solid fa-check"></i>
+            Créer compte
+        </button>
+    </div>
+</div>
