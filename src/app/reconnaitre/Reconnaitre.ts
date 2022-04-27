@@ -42,7 +42,7 @@ export class Reconnaitre {
     this.alea(this.images);
     this.alea2(this.liste_button);
     this.liste.push(this.images,this.bg_color,this.title_color,this.good_answer_color,this.wrong_answer_color,this.color_progress_bar,
-      this.button_bg_color,this.button_text_color,this.text_color,this.typeEcriture,this.isVocaliser);
+    this.button_bg_color,this.button_text_color,this.text_color,this.typeEcriture,this.isVocaliser);
 
   }
   
