@@ -54,7 +54,7 @@
 }
 
 #collage #playPanel {
-    
+
     padding:10px 0px;
     margin: 10px auto;
     max-width:800px;
@@ -95,7 +95,7 @@
     display: inline-block;
     margin: 0;
     padding: 0;
-   
+
 }
 
     #collage #sortable li  {
@@ -110,7 +110,7 @@
     }
 
 #collage button  {
-    
+
     border:1px solid ;
     display: inline;
     font-size: 14px;
@@ -131,4 +131,51 @@ h3{
     font-weight:normal;
     margin:3px 0px;
     text-align:center;
+}
+
+#error {
+  color: red;
+}
+
+.card_play p {
+  margin-left: 4px;
+  border-radius: 3%;
+  padding: 1px;
+}
+
+.card_play {
+  width: 30%;
+  background: yellowgreen;
+  border-radius: 3%;
+  padding: 10px;
+  box-shadow: hsl(0deg 0% 0% / 40%) 10px 15px;
+  color: white;
+}
+
+.image {
+  display: inline;
+  border: solid grey 2px;
+
+  margin-top: 10px;
+}
+
+
+
+
+.card_play button {
+  margin-top: 5px;
+  min-width: 70px;
+  min-height: 70px;
+  width : auto;
+  height : auto;
+  /* width : 70px;
+  height : 70px; */
+  border-radius: 50%;
+  border: 1px solid #000;
+  text-align: center;
+  margin-right: 3px;
+  background: rgb(201, 140, 7);
+  padding: 5px;
+  box-shadow: rgba(92, 8, 8, 0.4) 10px 15px;
+  margin-right : 7px;
 }

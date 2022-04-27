@@ -20,8 +20,8 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor() {
-    this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','SCRIPT',this.decoupe);
-    // this.r = null;
+    // this.r = new Puzzle(images, 'yellow', 'blue', 'black', 'green', 'red','SCRIPT',this.decoupe);
+    this.r = null;
 
   }
 
@@ -36,8 +36,11 @@ export class PuzzleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.r != null) {
-      lance(this.r!.decoupe,this.r!.liste_images);
+    if(this.r != null && this.play) {
+      setTimeout(() => {
+        lance(this.r!.decoupe,this.r!.liste_images);
+
+      });
     }
 
 
@@ -55,6 +58,10 @@ export class PuzzleComponent implements OnInit {
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Puzzle | null;
   @Input() showTitle : boolean = true;
+  @Input() play : boolean = true;
+  @Input() showList : boolean = false;
+  @Input() create_game : boolean = false;
+  @Input() edit : boolean = false;
 
 
   }
