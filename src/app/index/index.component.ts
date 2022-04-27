@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionsComponent} from '../sessions/sessions.component'
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-index',
@@ -9,10 +11,16 @@ import { SessionsComponent} from '../sessions/sessions.component'
 })
 export class IndexComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public login: MatDialog) {
    }
 
   ngOnInit(): void {
+  }
+
+  form(): void {
+    this.login.open(LoginComponent, {
+      width: '30%'
+    });
   }
 
   redirect() : void {

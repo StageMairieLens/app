@@ -34,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JeuxService } from './jeux.service';
+import { LoginComponent } from './index/login/login.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { JeuxService } from './jeux.service';
     ImagesComponent,
     UsersComponent,
     SessionsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
