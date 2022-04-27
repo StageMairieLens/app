@@ -56,7 +56,7 @@ export class PanelComponent implements OnInit {
   panel: string | null = "";
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   sessions: Session[] = SessionsComponent.data;
-  sessionActive: Session[] = [];
+  sessionActive: Session[] = SessionsComponent.sessionActive;
   showActive: boolean = false;
 
 
@@ -107,6 +107,7 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.panel = this.route.snapshot.paramMap.get('param1');
 
     if (this.panel != null) {
@@ -218,12 +219,12 @@ export class PanelComponent implements OnInit {
       }
     }
 
-
-    for (let s of this.sessions) {
+    for (let s of SessionsComponent.data) {
       if (s.isActive) {
-        this.sessionActive.push(s);
+        SessionsComponent.sessionActive.push(s);
       }
     }
+
 
   }
 
@@ -561,10 +562,6 @@ export class PanelComponent implements OnInit {
   getSessionPuzzle(s: Session): Puzzle | null {
     this.id_game = s.jeuId;
     return this.getPuzzle();
-  }
-
-  create(jeu: string): void {
-    //TO DO
   }
 
 
