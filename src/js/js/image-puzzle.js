@@ -5,7 +5,7 @@ images = [
     { src: '../../assets/images/qutub-minar.jpg', title: 'Qutub Minar' },
     { src: '../../assets/images/statue-of-liberty.jpg', title: 'Statue Of Liberty' },
     { src: '../../assets/images/taj-mahal.jpg', title: 'Taj Mahal' }
-    
+
 ];
 var prochaine_image=0;
 function lance(gridSize,imagess) {
@@ -44,7 +44,7 @@ var imagePuzzle = {
         helper.doc('imgTitle').innerHTML = image.title;
         helper.doc('actualImage').setAttribute('src', image.src);
         helper.doc('sortable').innerHTML = '';
-        
+
 
         for (var i = 0; i < gridSize * gridSize; i++) {
             var xpos = (percentage * (i % gridSize)) + '%';
@@ -54,18 +54,18 @@ var imagePuzzle = {
             li.id = i;
             li.setAttribute('data-value', i);
             li.style.backgroundImage = 'url(' + image.src + ')';
-            
+
             li.style.backgroundSize = (gridSize * 100) + '%';
             li.style.backgroundPosition = xpos + ' ' + ypos;
-            
-                
+
+
                 li.style.width = 400 / gridSize + 'px';
 
-            
+
 
                 li.style.height = 400 / gridSize + 'px';
 
-            
+
 
             li.setAttribute('draggable', 'true');
             li.ondragstart = (event) => event.dataTransfer.setData('data', event.target.id);
@@ -74,7 +74,7 @@ var imagePuzzle = {
                 let origin = helper.doc(event.dataTransfer.getData('data'));
                 let dest = helper.doc(event.target.id);
                 let p = dest.parentNode;
-
+              
                 if (origin && dest && p) {
                     let temp = dest.nextSibling;
                     let x_diff = origin.offsetLeft-dest.offsetLeft;
@@ -113,13 +113,13 @@ var imagePuzzle = {
             li.setAttribute('dragstart', 'true');
             li.style.display= "inline-block";
             helper.doc('sortable').appendChild(li);
-            
-            
+
+
             helper.doc('sortable').style.maxWidth='404px';
             helper.doc('sortable').style.maxHeight='404px';
             helper.doc('playPanel').style.maxWidth = '800px';
             helper.doc('playPanel').style.maxHeight= '800px';
-            
+
         }
         helper.shuffle('sortable');
     }

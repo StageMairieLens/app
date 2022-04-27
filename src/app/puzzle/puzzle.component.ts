@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit } from '@angular/core';
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Puzzle } from './Puzzle';
-import { Image } from '../Image';
+import { Image as ImageImport } from '../Image';
 import { SessionsComponent } from '../sessions/sessions.component'
 import { Progress } from '../Progress';
 import { ImagesComponent } from '../images/images.component';
@@ -12,6 +12,12 @@ declare function restart(gridsize: number, imagess: any): any;
 declare function rules(): any;
 declare function lance(gridsize: number, imagess: any): any;
 declare var images: any;
+
+
+interface tuile {
+  x: number;
+  y: number;
+}
 
 @Component({
   selector: 'app-puzzle',
@@ -24,19 +30,20 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private router: Router) {
-    // this.r = new Puzzle([this.liste_image[0], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', this.decoupe);
-    this.r = null;
+    this.r = new Puzzle([this.liste_image[2], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', this.decoupe);
+    // this.r = null;
 
   }
 
 
-  liste_image: Image[] = ImagesComponent.list_image;
-  selectedImages: Image[] = [];
+  liste_image: ImageImport[] = ImagesComponent.list_image;
+  selectedImages: ImageImport[] = [];
   images = this.liste_image;
 
 
   ngOnInit(): void {
 
+    this.decoupageImage();
     if (this.r != null && this.play && this.r!.liste_images.length != 0) {
       setTimeout(() => {
         lance(this.r!.decoupe, this.r!.liste_images);
@@ -68,7 +75,7 @@ export class PuzzleComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
-  decoupe: number = 3;
+  decoupe: number = 2;
   formStep: number = 0;
 
 
@@ -80,6 +87,17 @@ export class PuzzleComponent implements OnInit {
   @Input() create_game: boolean = false;
   @Input() edit: boolean = false;
 
+  decoupage: tuile[] = [];
+
+  decoupageImage(): void {
+    let img = new Image();
+    img.src = this.liste_image[0].src;
+    for (let i = 0; i < this.decoupe * this.decoupe; i++) {
+      this.decoupage.push(
+        { x: ((100 / (this.decoupe - 1)) * (i % this.decoupe)), y: ((100 / (this.decoupe - 1)) * Math.floor(i / this.decoupe)) }
+      )
+    }
+  }
 
   previewPuzzle(r: Puzzle): void {
     this.r = r;
@@ -100,7 +118,7 @@ export class PuzzleComponent implements OnInit {
 
 
   liste_image_puzzle: any = [];
-  imgPuzzle(li: Image[]): any {
+  imgPuzzle(li: ImageImport[]): any {
     for (var i = 0; i < li.length; i++) {
       this.liste_image_puzzle.push({ src: li[i].src, title: li[i].nom });
     }
@@ -188,13 +206,13 @@ export class PuzzleComponent implements OnInit {
     this.router.navigate(['/panel/Puzzle']);
   }
 
-  addImage(img: Image): void {
+  addImage(img: ImageImport): void {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
     }
   }
 
-  deleteImage(i: Image): void {
+  deleteImage(i: ImageImport): void {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
