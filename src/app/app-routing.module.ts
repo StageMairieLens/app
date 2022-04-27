@@ -13,6 +13,8 @@ import { MemoryComponent } from './memory/memory.component';
 import { PanelComponent } from './panel/panel.component';
 import { SessionsComponent } from './sessions/sessions.component';
 import { ImagesComponent } from './images/images.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
@@ -34,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), MatDialogModule, BrowserAnimationsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -161,7 +161,7 @@
 
     <!-- Formulaire Fille Garcon -->
     <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <app-boy-girl-game [play]="false" [showTitle]="false" [create_game]="true"  ></app-boy-girl-game>
+      <app-boy-girl-game [play]="false" [showTitle]="false" [create_game]="true"></app-boy-girl-game>
     </div>
 
     <!-- Formulaire Reconnaitre -->
@@ -182,232 +182,7 @@
 
     <!-- Formulaire Puzzle -->
     <div class="card-body" *ngIf="this.selectedGame == 'Puzzle'">
-
-
-      <!-- Formulaire Puzzle - Bouton de prévisualisation -->
-      <div *ngIf="!this.puzzle_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(true)" mat-raised-button
-            color="warn">
-            <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
-
-            Prévisualiser</button>
-        </div>
-
-        <!-- Formulaire Puzzle - Menu de navigation -->
-        <div class="stepMenu">
-          <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb justify-content-center">
-              <li class="breadcrumb-item">
-                <button title="Images" style="background : white; color : black" mat-fab color="primary"
-                  aria-label="Images" (click)="setFormStep(0)">
-                  <i class="fa-solid fa-images"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
-                  <i class="fa-solid fa-brush"></i>
-                </button>
-              </li>
-              <li class="breadcrumb-item">
-                <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
-                  <i class="fa-solid fa-font"></i>
-                </button>
-              </li>
-            </ol>
-          </nav>
-        </div>
-
-
-        <!-- Formulaire Puzzle - Etape 1 : choix des images -->
-        <div *ngIf="this.selectedGame == 'Puzzle'">
-
-          <!-- Etape 1 : Choix des images -->
-          <div *ngIf="this.formStep == 0">
-            <h2 class="card-title text-center">Choisissez les images</h2>
-            <div class="card-body selectImage_container text-center align-top">
-              <h5 class="card-header" style="color : black">Listes des images</h5>
-              <figure class="figure" *ngFor="let image of this.liste_image">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
-
-            <div class="card-body selectImage_container text-center">
-              <h5 class="card-header" style="color : black">Images selectionné</h5>
-              <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
-                selectionné
-                aucune image</h6>
-              <figure class="figure" *ngFor="let image of this.selectedImages">
-                <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..."
-                  (click)="deleteImage(image)">
-                <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
-              </figure>
-            </div>
-          </div>
-
-
-          <!-- Etape du formulaire 2 -- Choix des couleurs -->
-          <div *ngIf="this.formStep == 1">
-            <h2 class="card-title">Choississez les couleurs du jeu et le nombre de decoupe</h2>
-
-            <form>
-
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="puzzle_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.puzzle_bg_color = puzzle_bg_color_input.value " #puzzle_bg_color_input
-                      value="{{this.puzzle_bg_color}}" title="Choisissez la couleur d'arriére-plan">
-                  </label>
-                </div>
-                <div class="col-md-6">
-                  <label for="puzzle_text_color_input" class="form-label align-middle">Couleur du texte
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.puzzle_text_color = puzzle_text_color_input.value " #puzzle_text_color_input
-                      value="{{this.puzzle_text_color}}" title="Choisissez la couleur du texte">
-                  </label>
-                </div>
-
-              </div>
-
-              <div class="form-row">
-
-                <div class="col-md-6">
-                  <label for="puzzle_title_color_input" class="form-label align-middle">Couleur du titre
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.puzzle_title_color = puzzle_title_color_input.value " #puzzle_title_color_input
-                      value="{{this.puzzle_title_color}}" title="Choisissez la couleur du titre">
-                  </label>
-                </div>
-
-
-
-              </div>
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="puzzle_decoupe" class="form-label align-middle">Nombre decoupe
-                    <input type="number" class="form-control form-control-color"
-                      (change)="this.decoupe = puzzle_decoupe.value " #puzzle_decoupe value="{{this.decoupe}}"
-                      title="Choisissez le nombre de decoupe">
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-row">
-
-
-
-                <div class="col-md-6">
-                  <label for="puzzle_button_bg_color_input" class="form-label align-middle">Couleur d'arriére
-                    plan
-                    du
-                    bouton
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.puzzle_button_bg_color = puzzle_button_bg_color_input.value "
-                      #puzzle_button_bg_color_input value="{{this.puzzle_button_bg_color}}"
-                      title="Choisissez la couleur d'arriére-plan du bouton">
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="puzzle_button_text_color_input" class="form-label align-middle">Couleur du texte du
-                    bouton
-                    <input type="color" class="form-control form-control-color"
-                      (change)="this.puzzle_button_text_color = puzzle_button_text_color_input.value "
-                      #puzzle_button_text_color_input value="{{this.puzzle_button_text_color}}"
-                      title="Choisissez la couleur du texte du bouton">
-                  </label>
-                </div>
-              </div>
-
-
-
-            </form>
-          </div>
-
-
-          <!-- Etape du formulaire 3 -- Choix des textes -->
-          <div *ngIf="this.formStep == 2" style="text-align : center;">
-            <div class="form-row">
-              <div class="col-md-12">
-                <h2 class="card-title">Type d'écriture</h2>
-                <mat-radio-group aria-label="Choisissez un type d'écriture">
-
-                  <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CURSIF'" value="Cursif"
-                    (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-                    checked>Cursif</mat-radio-button>
-                  <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CURSIF'" value="Cursif"
-                    (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
-                    Cursif</mat-radio-button>
-
-                  <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CAPITAL'" value="Capital"
-                    (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CAPITAL'" value="Capital"
-                    (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
-                  </mat-radio-button>
-
-                  <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'SCRIPT'" value="Script"
-                    (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
-                  </mat-radio-button>
-                  <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'SCRIPT'" value="Script"
-                    (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
-                  </mat-radio-button>
-                </mat-radio-group>
-              </div>
-            </div>
-
-
-
-
-            <!-- Bouton de création du jeu -->
-            <div class="form-row align-middle text-center" align="center">
-              <div class="col-md-12 text-center">
-                <button class="validate_button align-middle text-center" (click)="create('Puzzle')"
-                  mat-raised-button>Créer le
-                  jeu
-                  <i class="fa-solid fa-check fa-lg"></i>
-                </button>
-              </div>
-            </div>
-
-          </div>
-
-
-          <!--Formulaire Puzzle -  Menu de navigation par étape -->
-          <div class="align-bottom" style="margin : 10px">
-            <button type="button" class="btn btn-primary align-left"
-              style="background : rgb(13, 197, 13); float : left; border : none" (click)="previousStep()">
-              <i class="fa-solid fa-angles-left"></i>
-              Etape précédente
-            </button>
-            <button type="button" class="btn btn-primary align-right"
-              style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
-              Etape suivante
-              <i class="fa-solid fa-angles-right"></i>
-            </button>
-          </div>
-
-        </div>
-
-
-      </div>
-
-      <!-- Formulaire Puzzle - Prévisualisation -->
-      <div *ngIf="this.puzzle_previsualiser">
-        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-          <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-            <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(false)"
-              mat-raised-button color="warn">
-              <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
-              Quitter la prévisualisation</button>
-          </div>
-        </div>
-        <app-puzzle [r]="this.puzzle" [showTitle]="false"></app-puzzle>
-      </div>
+      <app-puzzle [play]="false" [showTitle]="false" [create_game]="true"></app-puzzle>
     </div>
 
   </div>
@@ -435,18 +210,17 @@
 
     <!-- Liste des jeux Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-        <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
+      <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
     </div>
 
     <!-- Liste des jeux Fille&Garçon -->
     <div *ngIf="this.selectedGame == 'Fille&Garçon'">
       <app-boy-girl-game [play]="false" [showTitle]="false" [showList]="true"></app-boy-girl-game>
-
-
     </div>
 
-
-
+    <div *ngIf="this.selectedGame == 'Puzzle'">
+      <app-puzzle [play]="false" [showTitle]="false" [showList]="true"></app-puzzle>
+    </div>
 
   </div>
 
@@ -471,12 +245,17 @@
 
     <!-- Formulaire édition Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire" ></app-abecedaire>
+      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire"></app-abecedaire>
     </div>
 
     <!-- Formulaire édition Fille&Garçon -->
     <div *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <app-boy-girl-game [play]="false" [showTitle]="false" [edit]="true" [bg]="this.boygirl" ></app-boy-girl-game>
+      <app-boy-girl-game [play]="false" [showTitle]="false" [edit]="true" [bg]="this.boygirl"></app-boy-girl-game>
+    </div>
+
+    <!-- Formulaire édition Puzzle -->
+    <div *ngIf="this.selectedGame == 'Puzzle'">
+      <app-puzzle [play]="false" [showTitle]="false" [edit]="true" [r]="this.puzzle"></app-puzzle>
     </div>
 
   </div>
@@ -680,7 +459,7 @@
           </div>
         </div>
 
-        <!-- <div *ngIf="jeuSession == 'Recopier'">
+        <div *ngIf="jeuSession == 'Recopier'">
           <table class="table table-hover text-center">
             <thead>
               <tr>
@@ -691,20 +470,20 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let element of this.recopier_list" (click)="changeJeuId(element.id)"> -->
-        <!-- <th>{{element.id}}</th> Id du jeu -->
-        <!-- <th>{{this.parseDate(element.date)}}</th> Date de création du jeu -->
-        <!-- <th>{{element.images.length}}</th> Nombre d'image qui compose le jeu -->
-        <!-- <th>{{element.typeEcriture}}</th> Type d'écriture du jeu -->
-        <!-- <th *ngIf="element.isVocaliser">Oui</th> -->
-        <!-- <th *ngIf="!element.isVocaliser">Non</th> -->
-        <!-- <th>Aucun</th> Nom de l'utilisateur qui à créer le jeu -->
-        <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th> -->
-        <!-- <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
-        <!-- </tr>
+              <tr *ngFor="let element of this.recopier_list" (click)="changeJeuId(element.id)">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!--Date de création du jeu-->
+                <th>{{element.images.length}}</th> <!--Nombre d'image qui compose le jeu-->
+                <th>{{element.typeEcriture}}</th> <!--Type d'écriture du jeu-->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!--Nom de l'utilisateur qui à créer le jeu-->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+              </tr>
             </tbody>
           </table>
-        </div> -->
+        </div>
 
         <div *ngIf="jeuSession == 'Memory'">
           <table class="table table-hover text-center">
@@ -717,7 +496,8 @@
 
             <tbody>
               <tr *ngFor="let element of this.memory_list" (click)="changeJeuId(element.id)">
-                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{element.id}}</th>
+                <!-- Id du jeu
                 <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
                 <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
                 <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
