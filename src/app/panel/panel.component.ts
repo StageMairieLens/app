@@ -40,13 +40,7 @@ export class PanelComponent implements OnInit {
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
-  liste_image_puzzle: any = [];
-  imgPuzzle(li: Image[]): any {
-    for (var i = 0; i < li.length; i++) {
-      this.liste_image_puzzle.push({ src: li[i].src, title: li[i].nom });
-    }
-    return this.liste_image_puzzle;
-  }
+
   progressValue: Progress[] = [
     Progress.Blue,
     Progress.Green,
@@ -92,17 +86,9 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU PUZZLE
   puzzle: Puzzle | null;
-  puzzle_bg_color: string = "#3bb8c9";
-  puzzle_title_color: string = "#ffffff";
-  puzzle_button_bg_color: string = "#0f73b1";
-  puzzle_button_text_color: string = "#ffffff";
-  puzzle_type_ecriture = "SCRIPT";
-  puzzle_text_color: string = "#000000";
-  puzzle_previsualiser: boolean = false;
-  decoupe: string = '3';
-  puzzle_list: Puzzle[] = [
-    new Puzzle(this.liste_image_puzzle = this.imgPuzzle(this.selectedImages), this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe))
-  ];
+  puzzle_list: Puzzle[] = SessionsComponent.puzzle_list;
+
+
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
   boygirl_list: BoyGirl[] = SessionsComponent.boygirl_list;
@@ -203,17 +189,10 @@ export class PanelComponent implements OnInit {
               }
             }
             else if (this.selectedGame == 'Puzzle') {
-              if (this.getPuzzle() != null) {
+              if (this.getPuzzle()! == null) {
                 this.router.navigate(['/panel/Puzzle']);
               } else {
-                this.selectedImages = this.getPuzzle()!.liste_images;
-                this.puzzle_bg_color = this.getPuzzle()!.bg_color;
-                this.puzzle_title_color = this.getPuzzle()!.title_color;
-                this.puzzle_text_color = this.getPuzzle()!.text_color;
-                this.puzzle_button_bg_color = this.getPuzzle()!.button_bg_color;
-                this.puzzle_button_text_color = this.getPuzzle()!.button_text_color;
-                this.puzzle_type_ecriture = this.getPuzzle()!.typeEcriture;
-                this.decoupe = this.getPuzzle()!.decoupe.toString();
+                this.puzzle = this.getPuzzle();
               }
             }
             else if (this.selectedGame == 'Abecedaire') {
@@ -249,24 +228,6 @@ export class PanelComponent implements OnInit {
   }
 
 
-  previewPuzzle(r: Puzzle): void {
-    this.puzzle = r;
-    this.puzzle_previsualiser = true;
-  }
-
-  quitPreviewPuzzle(): void {
-    this.puzzle_previsualiser = false;
-  }
-
-  deleteGamePuzzle(r: Puzzle): void {
-    let index = this.puzzle_list.indexOf(r, 0);
-
-    if (index > -1) {
-      this.puzzle_list.splice(index, 1);
-    }
-  }
-
-
   parseDate(date: Date): string {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     let index: number = date.getMonth() - 1;
@@ -279,21 +240,7 @@ export class PanelComponent implements OnInit {
   }
 
 
-  setPrevisualiserPuzzle(prev: boolean): void {
-    if (prev == true) {
-      this.liste_image_puzzle = this.imgPuzzle(this.selectedImages);
-      this.puzzle = new Puzzle(this.liste_image_puzzle, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
-      this.puzzle_previsualiser = true;
-    }
-    else {
-      this.puzzle = null;
-      this.puzzle_previsualiser = false;
-      setTimeout(() => {
-        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
-        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
-      }, 0);
-    }
-  }
+
 
   setActive(element: Element | null): void {
     (<HTMLButtonElement>element!).style.background = 'white';
@@ -622,20 +569,6 @@ export class PanelComponent implements OnInit {
 
 
 
-  save(): void {
-    switch (this.selectedGame) {
-      case 'Puzzle':
-        this.getPuzzle()!.liste_images = this.liste_image_puzzle;
-        this.getPuzzle()!.bg_color = this.puzzle_bg_color;
-        this.getPuzzle()!.title_color = this.puzzle_title_color;
-        this.getPuzzle()!.text_color = this.puzzle_text_color;
-        this.getPuzzle()!.button_bg_color = this.puzzle_button_bg_color;
-        this.getPuzzle()!.button_text_color = this.puzzle_button_text_color;
-        this.getPuzzle()!.typeEcriture = this.puzzle_type_ecriture;
-        this.getPuzzle()!.decoupe = Number(this.decoupe);
-        break;
-    }
 
-  }
 }
 

@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-
-
 <div class="text-center" *ngIf="this.showTitle">
   <h1 class="title">
     <span>P</span>
@@ -28,139 +23,421 @@
 
   <div *ngIf="this.r! != null" id="collage" class="text-center">
 
-    <div id="playPanel" style="padding:5px; " [ngStyle]="{background : this.r!.bg_color}">
-      <h3 id="imgTitle"></h3>
-      <hr />
-      <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;"
-        [ngStyle]="{background : this.r!.bg_color}">
-        <ul id="sortable" class="sortable" [ngStyle]="{background : this.r!.bg_color}"></ul>
-        <div id="actualImageBox">
-          <div id="stepBox">
-            <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background : this.r!.text_color}">
-              Steps:
+    <div *ngIf="this.r!.liste_images.length != 0">
+
+      <div id="playPanel" style="padding:5px; " [ngStyle]="{background : this.r!.bg_color}">
+        <h3 id="imgTitle"></h3>
+        <hr />
+        <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;"
+          [ngStyle]="{background : this.r!.bg_color}">
+          <ul id="sortable" class="sortable" [ngStyle]="{background : this.r!.bg_color}"></ul>
+          <div id="actualImageBox">
+            <div id="stepBox">
+              <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background : this.r!.text_color}">
+                Steps:
+              </div>
+              <div style="font-family : cursiveFont; font-size : 28px" id="stepCount" class="stepCount"
+                [ngStyle]="{background : this.r!.text_color}">0</div>
             </div>
-            <div style="font-family : cursiveFont; font-size : 28px" id="stepCount" class="stepCount"
-              [ngStyle]="{background : this.r!.text_color}">0</div>
-          </div>
-          <div id="timeBox">
-            Temps: <span style="font-family : cursiveFont; font-size : 28px" id="timerPanel"></span> secondes
-          </div>
-          <img id="actualImage" />
-          <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background: this.r!.text_color}">
-            Réorganiser pour créer une image comme celle-ci.</div>
-          <p id="levelPanel">
-            <!--<input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
+            <div id="timeBox">
+              Temps: <span style="font-family : cursiveFont; font-size : 28px" id="timerPanel"></span> secondes
+            </div>
+            <img id="actualImage" />
+            <div style="font-family : cursiveFont; font-size : 28px" [ngStyle]="{background: this.r!.text_color}">
+              Réorganiser pour créer une image comme celle-ci.</div>
+            <p id="levelPanel">
+              <!--<input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
                         [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
                          mettre une variable dans value pour modifier la difficulter-->
 
 
-          </p>
-          <div>
-            <!--<button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
+            </p>
+            <div>
+              <!--<button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
                         <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
                         -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="gameOver" style="display:none;" [ngStyle]="{background : this.r!.bg_color}">
+        <div style=" padding: 5px 10px 20px 10px; text-align: center; " [ngStyle]="{background : this.r!.bg_color}">
+          <h2 style="font-family : cursiveFont; font-size : 28px;text-align:center"
+            [ngStyle]="{text : this.r!.text_color}">
+            Fin de partie!!</h2>
+          Félicitation!!<br style="font-family : cursiveFont; font-size : 28px;text-align:center"
+            [ngStyle]="{text : this.r!.text_color}" /> Tu as compléter toutes les images.
+          <br style="font-family : cursiveFont; font-size : 28px;text-align:center"
+            [ngStyle]="{text : this.r!.text_color}" /> Nombre de mouvement: <span id="stepCount"
+            class="stepCount">0</span>
+          .
+          <br style="font-family : cursiveFont; font-size : 28px;text-align:center"
+            [ngStyle]="{text : this.r!.text_color}" /> Temps: <span class="timeCount">0</span> seconds<br
+            style="font-family : cursiveFont; font-size : 28px;text-align:center"
+            [ngStyle]="{text : this.r!.text_color}" />
+          <div>
+            <button type="button" onclick="window.location.reload(true);"
+              [ngStyle]="{background : this.r!.button_bg_color}">Recommencer</button>
           </div>
         </div>
       </div>
     </div>
-    <div id="gameOver" style="display:none;" [ngStyle]="{background : this.r!.bg_color}">
-      <div style=" padding: 5px 10px 20px 10px; text-align: center; " [ngStyle]="{background : this.r!.bg_color}">
-        <h2 style="font-family : cursiveFont; font-size : 28px;text-align:center"
-          [ngStyle]="{text : this.r!.text_color}">
-          Fin de partie!!</h2>
-        Félicitation!!<br style="font-family : cursiveFont; font-size : 28px;text-align:center"
-          [ngStyle]="{text : this.r!.text_color}" /> Tu as compléter toutes les images.
-        <br style="font-family : cursiveFont; font-size : 28px;text-align:center"
-          [ngStyle]="{text : this.r!.text_color}" /> Nombre de mouvement: <span id="stepCount"
-          class="stepCount">0</span>
-        .
-        <br style="font-family : cursiveFont; font-size : 28px;text-align:center"
-          [ngStyle]="{text : this.r!.text_color}" /> Temps: <span class="timeCount">0</span> seconds<br
-          style="font-family : cursiveFont; font-size : 28px;text-align:center"
-          [ngStyle]="{text : this.r!.text_color}" />
-        <div>
-          <button type="button" onclick="window.location.reload(true);"
-            [ngStyle]="{background : this.r!.button_bg_color}">Recommencer</button>
-        </div>
-      </div>
-    </div>
 
+  <!-- Si la liste d'image est vide -->
+  <div *ngIf="this.r!.liste_images.length == 0" class="card_play align-middle container" id="card_finish"
+    style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
+    <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
+    <div class="card-body text-center">
+      <h5 class="card-title title_image_error">Erreur !</h5>
+      <p class="card-text" style="color : black">Il n'y a pas d'image selectionné</p>
+    </div>
+  </div>
 
   </div>
 </div>
 
 
+<div class="container card container_list" *ngIf="this.showList">
+  <h5 class="card-header">Listes des puzzle</h5>
 
 
-</html>
-<!--<html>
-<body>
-<style>
-</style>
+  <div *ngIf="!this.puzzle_previsualiser" class="create_button align-middle text-center"
+    style="margin-bottom : 10px; margin-top : 10px">
+
+    <button class=" align-middle text-center" [routerLink]="['/panel/Puzzle/create']" mat-raised-button color="warn">
+      <i class="fa-solid fa-circle-plus fa-lg" style="margin-bottom : 2%"></i>
+
+      Créer un Puzzle
+    </button>
+
+    <mat-divider style="background : grey; margin : 2%"></mat-divider>
+
+  </div>
+
+  <div *ngIf="this.puzzle_list.length != 0">
+    <!-- Prévisualisation -->
+    <div *ngIf="this.puzzle_previsualiser">
 
 
-<div class="card align-middle container"  id="container"style="width: 32rem;"
->
-<table class="card-table table" id="table2" width="{{ this.img.width }}" border="0" cellspacing="0" cellpadding="0"
-cdkDropList
-#doneList="cdkDropList"
-[cdkDropListData]="donnee_vide"
-[cdkDropListConnectedTo]="[todoList]"
-
-(cdkDropListDropped)="drop($event)"
->
-    <tr id="1" >
-        <td id="i1"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[0].a }} {{ donnee_non_alea[0].b }};opacity: 0.3"></td>
-        <td id="i2"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[1].a }} {{ donnee_non_alea[1].b }};opacity: 0.3" ></td>
-        <td id="i3"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[2].a }} {{ donnee_non_alea[2].b }};opacity: 0.3" ></td>
-
-      </tr>
-       <tr id="2">
-        <td id="i4"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[3].a }} {{ donnee_non_alea[3].b }};opacity: 0.3" ></td>
-        <td id="i5"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[4].a }} {{ donnee_non_alea[4].b }};opacity: 0.3" ></td>
-        <td id="i6"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[5].a }} {{ donnee_non_alea[5].b }};opacity: 0.3" ></td>
-       </tr>
-       <tr id="3">
-        <td id="i7"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[6].a }} {{ donnee_non_alea[6].b }};opacity: 0.3" ></td>
-        <td id="i8"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[7].a }} {{ donnee_non_alea[7].b }};opacity: 0.3" ></td>
-        <td id="i9"style="background: url('{{ this.img.src }}') no-repeat {{ donnee_non_alea[8].a }} {{ donnee_non_alea[8].b }};opacity: 0.3" ></td>
-
-      </tr>
-</table>
 
 
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 20px">
+        <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+          <button class="prev-button align-middle text-center" (click)="quitPreviewPuzzle()" mat-raised-button
+            color="warn">
+            <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+            Quitter la prévisualisation</button>
+        </div>
+      </div>
+      <app-puzzle [r]="this.r" [play]="true" [showTitle]="false" [showList]="false"></app-puzzle>
+    </div>
+
+
+    <!-- Listes des jeux -->
+    <div *ngIf="!this.puzzle_previsualiser">
+      <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col"
+              *ngFor="let col of ['ID','Date','Nombre d\'image','Nombre de découpe','Type d\'écriture','Crée par','Actions']">
+              {{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let element of this.puzzle_list">
+            <th>{{element.id}}</th> <!-- Id du jeu -->
+            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.liste_images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+            <th>{{element.decoupe}}</th> <!-- Type d'écriture du jeu -->
+            <th>{{element.typeEcriture}}</th>
+            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+
+            <!-- Actions -->
+            <th class="button_actions">
+              <!-- Prévisualiser le jeu -->
+              <button mat-raised-button title="Prévisualiser le jeu" color="primary" (click)="previewPuzzle(element)">
+                <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Editer le jeu -->
+              <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                color="primary" (click)="redirectEditPuzzle(element)">
+                <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Supprimer le jeu -->
+              <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                (click)="deleteGamePuzzle(element)">
+                <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+              <!-- Démarrer une séssion à partir de ce jeu -->
+              <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+                style="background-color : rgb(168, 14, 135)" color="primary">
+                <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
+
+            </th>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- Si la liste des jeu Puzzle est vide -->
+  <div class="text-center" *ngIf="this.puzzle_list.length == 0">
+    <h5 class="card-title" style="color : red">Il n'y a pas de jeu Puzzle créer</h5>
+  </div>
 </div>
-<table id="table" width="{{ this.img.width }}" border="0" cellspacing="0" cellpadding="0" style="margin-left: 50%;"
-cdkDropList
-#todoList="cdkDropList"
-[cdkDropListData]="donnee"
-[cdkDropListConnectedTo]="[doneList]"
 
-(cdkDropListDropped)="drop($event)">
-
- <tr id="1" >
-  <td id="i1"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[0].a }} {{ donnee[0].b }} ;" cdkDrag ></td>
-  <td id="i2"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[1].a }} {{ donnee[1].b }};" cdkDrag></td>
-  <td id="i3"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[2].a }} {{ donnee[2].b }};" cdkDrag></td>
-
-</tr>
- <tr id="2">
-  <td id="i4"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[3].a }} {{ donnee[3].b }};" cdkDrag></td>
-  <td id="i5"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[4].a }} {{ donnee[4].b }};" cdkDrag></td>
-  <td id="i6"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[5].a }} {{ donnee[5].b }};" cdkDrag></td>
- </tr>
- <tr id="3">
-  <td id="i7"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[6].a }} {{ donnee[6].b }};" cdkDrag></td>
-  <td id="i8"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[7].a }} {{ donnee[7].b }};" cdkDrag></td>
-  <td id="i9"style="background: url('{{ this.img.src }}') no-repeat {{ donnee[8].a }} {{ donnee[8].b }};" cdkDrag></td>
-
-</tr>
-
-</table>
+<div class="container card container_list" *ngIf="this.create_game">
+  <h5 *ngIf="!this.edit" class="card-header">Création d'un Puzzle</h5>
+  <h5 *ngIf="this.edit" class="card-header">édition d'un Puzzle</h5>
 
 
+  <!-- Formulaire Puzzle - Bouton de prévisualisation -->
+  <div *ngIf="!this.puzzle_previsualiser">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
+      <button *ngIf="this.edit" class="prev-button align-middle text-center" [routerLink]="['/panel/Puzzle']" mat-raised-button
+      color="warn" style="float : left; position : absolute; display : block">
+      <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+
+      Retour à la liste des jeux
+    </button>
+
+      <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(true)" mat-raised-button
+        color="warn">
+        <i class="fa-solid fa-eye fa-lg" style="margin-bottom : 3px"></i>
+
+        Prévisualiser</button>
+    </div>
+
+    <!-- Formulaire Puzzle - Menu de navigation -->
+    <div class="stepMenu">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb justify-content-center">
+          <li class="breadcrumb-item">
+            <button title="Images" style="background : white; color : black" mat-fab color="primary" aria-label="Images"
+              (click)="setFormStep(0)">
+              <i class="fa-solid fa-images"></i>
+            </button>
+          </li>
+          <li class="breadcrumb-item">
+            <button title="Couleurs" mat-fab color="primary" aria-label="Couleurs" (click)="setFormStep(1)">
+              <i class="fa-solid fa-brush"></i>
+            </button>
+          </li>
+          <li class="breadcrumb-item">
+            <button title="Texte" mat-fab color="primary" aria-label="Texte" (click)="setFormStep(2)">
+              <i class="fa-solid fa-font"></i>
+            </button>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+
+    <!-- Formulaire Puzzle - Etape 1 : choix des images -->
+
+    <!-- Etape 1 : Choix des images -->
+    <div *ngIf="this.formStep == 0">
+      <h2 class="card-title text-center">Choisissez les images</h2>
+      <div class="card-body selectImage_container text-center align-top">
+        <h5 class="card-header" style="color : black">Listes des images</h5>
+        <figure class="figure" *ngFor="let image of this.liste_image">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+          <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+        </figure>
+      </div>
+
+      <div class="card-body selectImage_container text-center">
+        <h5 class="card-header" style="color : black">Images selectionné</h5>
+        <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+          selectionné
+          aucune image</h6>
+        <figure class="figure" *ngFor="let image of this.selectedImages">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
+          <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+        </figure>
+      </div>
+    </div>
+
+
+    <!-- Etape du formulaire 2 -- Choix des couleurs -->
+    <div *ngIf="this.formStep == 1">
+      <h2 class="card-title">Choississez les couleurs du jeu et le nombre de decoupe</h2>
+
+      <form>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="puzzle_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
+              <input type="color" class="form-control form-control-color"
+                (change)="this.puzzle_bg_color = puzzle_bg_color_input.value " #puzzle_bg_color_input
+                value="{{this.puzzle_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label for="puzzle_text_color_input" class="form-label align-middle">Couleur du texte
+              <input type="color" class="form-control form-control-color"
+                (change)="this.puzzle_text_color = puzzle_text_color_input.value " #puzzle_text_color_input
+                value="{{this.puzzle_text_color}}" title="Choisissez la couleur du texte">
+            </label>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+
+          <div class="col-md-6">
+            <label for="puzzle_title_color_input" class="form-label align-middle">Couleur du titre
+              <input type="color" class="form-control form-control-color"
+                (change)="this.puzzle_title_color = puzzle_title_color_input.value " #puzzle_title_color_input
+                value="{{this.puzzle_title_color}}" title="Choisissez la couleur du titre">
+            </label>
+          </div>
 
 
 
-</body>
-</html>-->
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="puzzle_decoupe" class="form-label align-middle">Nombre decoupe
+              <input type="number" class="form-control form-control-color"
+                (change)="this.decoupe = +puzzle_decoupe.value" #puzzle_decoupe value="{{this.decoupe}}"
+                title="Choisissez le nombre de decoupe">
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+
+
+
+          <div class="col-md-6">
+            <label for="puzzle_button_bg_color_input" class="form-label align-middle">Couleur d'arriére
+              plan
+              du
+              bouton
+              <input type="color" class="form-control form-control-color"
+                (change)="this.puzzle_button_bg_color = puzzle_button_bg_color_input.value "
+                #puzzle_button_bg_color_input value="{{this.puzzle_button_bg_color}}"
+                title="Choisissez la couleur d'arriére-plan du bouton">
+            </label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <label for="puzzle_button_text_color_input" class="form-label align-middle">Couleur du texte du
+              bouton
+              <input type="color" class="form-control form-control-color"
+                (change)="this.puzzle_button_text_color = puzzle_button_text_color_input.value "
+                #puzzle_button_text_color_input value="{{this.puzzle_button_text_color}}"
+                title="Choisissez la couleur du texte du bouton">
+            </label>
+          </div>
+        </div>
+
+
+
+      </form>
+    </div>
+
+
+    <!-- Etape du formulaire 3 -- Choix des textes -->
+    <div *ngIf="this.formStep == 2" style="text-align : center;">
+      <div class="form-row">
+        <div class="col-md-12">
+          <h2 class="card-title">Type d'écriture</h2>
+          <mat-radio-group aria-label="Choisissez un type d'écriture">
+
+            <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CURSIF'" value="Cursif"
+              (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px" checked>
+              Cursif</mat-radio-button>
+            <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CURSIF'" value="Cursif"
+              (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+              Cursif</mat-radio-button>
+
+            <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CAPITAL'" value="Capital"
+              (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+            </mat-radio-button>
+            <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CAPITAL'" value="Capital"
+              (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+            </mat-radio-button>
+
+            <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'SCRIPT'" value="Script"
+              (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+            </mat-radio-button>
+            <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'SCRIPT'" value="Script"
+              (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+
+
+
+      <!-- Bouton de création du jeu -->
+      <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer
+            le
+            jeu
+            <i class="fa-solid fa-check fa-lg"></i>
+          </button>
+        </div>
+      </div>
+
+       <!-- Bouton de sauvegarde du jeu -->
+       <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
+        <div class="col-md-12 text-center">
+          <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
+            le
+            jeu
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!--Formulaire Puzzle -  Menu de navigation par étape -->
+    <div class="align-bottom" style="margin : 10px">
+      <button type="button" class="btn btn-primary align-left"
+        style="background : rgb(13, 197, 13); float : left; border : none" (click)="previousStep()">
+        <i class="fa-solid fa-angles-left"></i>
+        Etape précédente
+      </button>
+      <button type="button" class="btn btn-primary align-right"
+        style="background : rgb(13, 197, 13); float : right ; border : none" (click)="nextStep()">
+        Etape suivante
+        <i class="fa-solid fa-angles-right"></i>
+      </button>
+    </div>
+
+
+
+  </div>
+
+  <!-- Formulaire Puzzle - Prévisualisation -->
+  <div *ngIf="this.puzzle_previsualiser">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px; margin-top : 10px">
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+        <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(false)" mat-raised-button
+          color="warn">
+          <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+          Quitter la prévisualisation</button>
+      </div>
+    </div>
+    <app-puzzle [r]="this.r" [showTitle]="false"></app-puzzle>
+  </div>
+</div>
