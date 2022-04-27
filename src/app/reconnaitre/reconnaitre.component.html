@@ -343,14 +343,16 @@
           <div class="col-md-6">
             <label for="reconnaitre_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
               <input type="color" class="form-control form-control-color"
-                (change)="this.reconnaitre_bg_color = reconnaitre_bg_color_input.value " #reconnaitre_bg_color_input
-                value="{{this.reconnaitre_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+                (change)="this.reconnaitre_bg_color = reconnaitre_bg_color_input.value  "  #reconnaitre_bg_color_input
+                value="{{this.reconnaitre_bg_color}}" title="Choisissez la couleur d'arriére-plan"
+                (change)="this.list['bg_color']=reconnaitre_bg_color_input.value">
             </label>
           </div>
           <div class="col-md-6">
             <label for="reconnaitre_text_color_input" class="form-label align-middle">Couleur du texte
               <input type="color" class="form-control form-control-color"
                 (change)="this.reconnaitre_text_color = reconnaitre_text_color_input.value "
+                (change)="this.list['text_color']=reconnaitre_text_color_input.value"
                 #reconnaitre_text_color_input value="{{this.reconnaitre_text_color}}"
                 title="Choisissez la couleur du texte">
             </label>
@@ -364,6 +366,7 @@
             <label for="reconnaitre_title_color_input" class="form-label align-middle">Couleur du titre
               <input type="color" class="form-control form-control-color"
                 (change)="this.reconnaitre_title_color = reconnaitre_title_color_input.value "
+                (change)="this.list['title_color']=reconnaitre_title_color_input.value"
                 #reconnaitre_title_color_input value="{{this.reconnaitre_title_color}}"
                 title="Choisissez la couleur du titre">
             </label>
@@ -374,6 +377,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.reconnaitre_good_answer_color = reconnaitre_good_answer_color_input.value "
+                (change)="this.list['gaw_color']=reconnaitre_good_answer_color_input.value"
                 #reconnaitre_good_answer_color_input value="{{this.reconnaitre_good_answer_color}}"
                 title="Choisissez la couleur du message de bonne réponse">
             </label>
@@ -389,6 +393,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.reconnaitre_wrong_answer_color = reconnaitre_wrong_answer_color_input.value "
+                (change)="this.list['waw_color']=reconnaitre_wrong_answer_color_input.value"
                 #reconnaitre_wrong_answer_color_input value="{{this.reconnaitre_wrong_answer_color}}"
                 title="Choisissez la couleur du message de mauvaise réponse">
             </label>
@@ -401,6 +406,7 @@
               bouton
               <input type="color" class="form-control form-control-color"
                 (change)="this.reconnaitre_button_bg_color = reconnaitre_button_bg_color_input.value "
+                (change)="this.list['button_bg_color']=reconnaitre_button_bg_color_input.value"
                 #reconnaitre_button_bg_color_input value="{{this.reconnaitre_button_bg_color}}"
                 title="Choisissez la couleur d'arriére-plan du bouton">
             </label>
@@ -413,6 +419,7 @@
               bouton
               <input type="color" class="form-control form-control-color"
                 (change)="this.reconnaitre_button_text_color = reconnaitre_button_text_color_input.value "
+                (change)="this.list['button_text_color']=reconnaitre_button_text_color_input.value"
                 #reconnaitre_button_text_color_input value="{{this.reconnaitre_button_text_color}}"
                 title="Choisissez la couleur du texte du bouton">
             </label>
@@ -442,30 +449,35 @@
         <div class="form-row">
           <div class="col-md-12">
             <div class="progress" *ngIf="this.reconnaitre_progress == 'blue' ">
+              (change)="this.list['progress']='blue' "
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                 aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
             <div class="progress" *ngIf="this.reconnaitre_progress == 'green' ">
+              (change)="this.list['progress']='green' "
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
             <div class="progress" *ngIf="this.reconnaitre_progress == 'lightblue' ">
+              (change)="this.list['progress']='lightblue' "
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
             <div class="progress" *ngIf="this.reconnaitre_progress == 'orange' ">
+              (change)="this.list['progress']='orange' "
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
             <div class="progress" *ngIf="this.reconnaitre_progress == 'red' ">
+              (change)="this.list['progress']='red' "
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
@@ -485,22 +497,28 @@
 
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CURSIF'" value="Cursif"
               (change)="this.reconnaitre_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+              (change)="this.list['ecri']='CURSIF' "
               checked>Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CURSIF'" value="Cursif"
+              (change)="this.list['ecri']='CURSIF' "
               (change)="this.reconnaitre_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CAPITAL'" value="Capital"
+              (change)="this.list['ecri']='CAPITAL' "
               (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CAPITAL'" value="Capital"
+              (change)="this.list['ecri']='CAPITAL' "
               (change)="this.reconnaitre_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'SCRIPT'" value="Script"
+              (change)="this.list['ecri']='SCRIPT' "
               (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'SCRIPT'" value="Script"
+              (change)="this.list['ecri']='SCRIPT' "
               (change)="this.reconnaitre_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
             </mat-radio-button>
           </mat-radio-group>
@@ -511,10 +529,12 @@
         <div class="col-md-12">
           <h2 class="card-title">Vocalisation</h2>
           <i *ngIf="!this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark"
+            (change)="this.list['voca']=false "
             style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
           <mat-slide-toggle [(ngModel)]="this.reconnaitre_isVocaliser"
+            (change)="this.list['voca']=true "
             (change)="this.reconnaitre_isVocaliser = vocaliserInput.checked" #vocaliserInput>
           </mat-slide-toggle>
           <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
@@ -527,7 +547,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+          <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()"  mat-raised-button>Créer le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>
           </button>
