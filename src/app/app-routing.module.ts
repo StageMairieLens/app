@@ -15,7 +15,6 @@ import { SessionsComponent } from './sessions/sessions.component';
 import { ImagesComponent } from './images/images.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AccountComponent } from './account/account.component';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 
 
@@ -31,10 +30,9 @@ const routes: Routes = [
   {path: 'panel/:param1', component : PanelComponent, canActivate: [AuthGuardComponent]},
   {path: 'panel/:param1/:param2', component : PanelComponent, canActivate: [AuthGuardComponent]},
   {path: 'panel/:param1/:param2/:param3', component : PanelComponent, canActivate: [AuthGuardComponent]},
-  {path : 'session', component : SessionsComponent, canActivate: [AuthGuardComponent]},
-  {path : 'session/:id', component : SessionsComponent, canActivate: [AuthGuardComponent]},
+  {path : 'session', component : SessionsComponent},
+  {path : 'session/:id', component : SessionsComponent},
   {path: 'images',component : ImagesComponent },
-  {path: 'account', component : AccountComponent},
 
 ];
 

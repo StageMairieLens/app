@@ -1,36 +1,100 @@
-<div class="col-md-12 text-right">
-    <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
+<div *ngIf="!inscript && !oublie">
+    <div class="col-md-12 text-right">
+        <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="Email" class="form-label align-middle">Email :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input type="text" class="form-control" #email title="Email">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="mdp" class="form-label align-middle">Mot de passe :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passea">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-12 text-center">
+            <button (click)="login(email.value, mdp.value)" mat-raised-button color="primary" aria-label="Valider"><i class="fa-solid fa-check"></i> Se connecter</button>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6 text-center">
+            <button class="link" mat-raised-button (click)="oublie = true">Mot de passe oublié?</button>
+        </div>
+        <div class="col-md-6 text-center">
+            <button class="link" mat-raised-button (click)="inscript = true">Pas de compte?</button>
+        </div>
+    </div>
 </div>
 
-<div class="form-row">
-    <div class="col-md-3 text-center align-middle">
-        <label for="Email" class="form-label align-middle">Email :</label>
+<div *ngIf="inscript">
+    <div class="col-md-12 text-right">
+        <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
-    <div class="col-md-9 text-center">
-        <input type="text" class="form-control" #email title="Email">
+
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="Email" class="form-label align-middle">Email :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input type="text" class="form-control" #email title="Email">
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="mdp" class="form-label align-middle">Mot de passe :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="mdp2" class="form-label align-middle">Confirmer mot de passe :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp2 title="Confirmer">
+        </div>
+    </div>
+
+    <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" aria-label="Valider">
+            <i class="fa-solid fa-check"></i>
+            Créer compte
+        </button>
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-md-3 text-center align-middle">
-        <label for="mdp" class="form-label align-middle">Mot de passe :</label>
+<div *ngIf="oublie">
+    <div class="col-md-12 text-right">
+        <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
-    <div class="col-md-9 text-center">
-        <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passea">
-    </div>
-</div>
 
-<div class="form-row">
-    <div class="col-md-12 text-center">
-        <button (click)="login(email.value, mdp.value)" mat-raised-button color="primary" aria-label="Valider"><i class="fa-solid fa-check"></i> Se connecter</button>
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="Email" class="form-label align-middle">Email :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input type="text" class="form-control" #email title="Email">
+        </div>
     </div>
-</div>
 
-<div class="form-row">
-    <div class="col-md-6 text-center">
-        <a href="">Mot de passe oublié?</a>
-    </div>
-    <div class="col-md-6 text-center">
-        <a href="account">Pas de compte?</a>
+    <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
+        <button mat-raised-button color="primary" aria-label="Valider">
+            <i class="fa-solid fa-check"></i>
+            Envoyer
+        </button>
     </div>
 </div>

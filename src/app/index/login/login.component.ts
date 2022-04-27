@@ -10,6 +10,8 @@ import { Login } from './Login';
 })
 export class LoginComponent implements OnInit {
 
+  inscript = false;
+  oublie = false;
 
   constructor( public dialogRef: MatDialogRef<LoginComponent>, private router: Router) {}
 
