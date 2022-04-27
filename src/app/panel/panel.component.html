@@ -161,7 +161,7 @@
 
     <!-- Formulaire Fille Garcon -->
     <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <app-boy-girl-game [play]="false" [showTitle]="false" [create_game]="true"  ></app-boy-girl-game>
+      <app-boy-girl-game [play]="false" [showTitle]="false" [create_game]="true"></app-boy-girl-game>
     </div>
 
     <!-- Formulaire Reconnaitre -->
@@ -182,7 +182,7 @@
 
     <!-- Formulaire Puzzle -->
     <div class="card-body" *ngIf="this.selectedGame == 'Puzzle'">
-        <app-puzzle [play]="false" [showTitle]="false" [create_game]="true"></app-puzzle>
+      <app-puzzle [play]="false" [showTitle]="false" [create_game]="true"></app-puzzle>
     </div>
 
   </div>
@@ -210,7 +210,7 @@
 
     <!-- Liste des jeux Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-        <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
+      <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
     </div>
 
     <!-- Liste des jeux Fille&Garçon -->
@@ -245,17 +245,17 @@
 
     <!-- Formulaire édition Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire" ></app-abecedaire>
+      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire"></app-abecedaire>
     </div>
 
     <!-- Formulaire édition Fille&Garçon -->
     <div *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <app-boy-girl-game [play]="false" [showTitle]="false" [edit]="true" [bg]="this.boygirl" ></app-boy-girl-game>
+      <app-boy-girl-game [play]="false" [showTitle]="false" [edit]="true" [bg]="this.boygirl"></app-boy-girl-game>
     </div>
 
     <!-- Formulaire édition Puzzle -->
     <div *ngIf="this.selectedGame == 'Puzzle'">
-      <app-puzzle [play]="false" [showTitle]="false" [edit]="true" [r]="this.puzzle" ></app-puzzle>
+      <app-puzzle [play]="false" [showTitle]="false" [edit]="true" [r]="this.puzzle"></app-puzzle>
     </div>
 
   </div>
@@ -264,420 +264,74 @@
 <!-- SESSIONS -->
 <div *ngIf="this.panel == 'sessions'">
 
-  <div class="card container">
-    <h5 class="card-header">Sessions</h5>
-    <div class="card-body text-center">
+  <!-- Affiche la liste des séssions -->
+  <div
+    *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view' && this.panel_option != 'preview')) && !this.create_session">
+    <div *ngIf="!this.showActive">
+      <app-sessions [play]="false" [showList]="true"></app-sessions>
 
-      <!-- Affiche la liste des séssions -->
-      <div
-        *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view' && this.panel_option != 'preview')) && !this.create_session">
-        <h2 class="card-title">Liste des sessions</h2>
+    </div>
+    <div *ngIf="this.showActive">
+      <app-sessions [play]="false" [showActive]="true" [showList]="true"></app-sessions>
 
-        <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
-            <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
-            <span>Trier par Id</span>
-          </button>
-          <button mat-raised-button style="background-color : red" (click)="sortSessionDate()" color="primary">
-            <i class="fa-solid fa-sort-down fa-xl" style="margin-bottom : 2px"></i>
-            <span>Trier par date</span>
-          </button>
-          <button mat-raised-button style="background-color : red" (click)="sortSessionNbJoueur()" color="primary">
-            <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
-            <span>Trier par nombre de joueur</span>
-          </button>
-
-          <button *ngIf="!this.showActive" (click)="this.showActive = true" mat-raised-button
-            style="background-color : red" color="primary">
-            <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
-            <span>Afficher uniquement les sessions actives</span>
-          </button>
-
-          <button *ngIf="this.showActive" (click)="this.showActive = false" mat-raised-button
-            style="background-color : red" color="primary">
-            <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
-            <span>Afficher toutes les sesssions</span>
-          </button>
-
-          <button mat-raised-button style="background-color : rgb(12, 202, 12)" (click)="this.create_session = true"
-            color="primary">
-            <i class="fa-solid fa-circle-plus fa-xl"></i>
-            <span>Créer une session</span>
-          </button>
-
-        </div>
-
-        <div *ngIf="this.sessions.length == 0 && !this.showActive">
-          <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
-        </div>
-
-        <div *ngIf="this.sessions.length != 0" class="col-md-12">
-          <table class="table table-hover" *ngIf="!this.showActive">
-            <thead>
-              <tr>
-                <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.sessions">
-                <th *ngIf="element.isActive">
-                  <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-                </th>
-                <th *ngIf="!element.isActive">
-                  <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-                </th>
-                <th>{{element.id}}</th>
-                <th>{{element.nom}}</th>
-                <th>{{this.parseDate(element.date)}}</th>
-                <th>{{element.jeu}}</th>
-                <th>{{element.joueur.length}}</th>
-                <th class="button_actions">
-                  <button mat-raised-button title="Prévisualiser le jeu de la séssion"
-                    (click)="previsualiserGame(element)" color="primary">
-                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-                  </button>
-                  <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
-                    style="background-color : rgb(223, 175, 18)" color="primary">
-                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-                  </button>
-                  <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
-                    style="background-color : red" color="primary">
-                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                  <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
-                    style="background-color : rgb(77, 184, 44)" color="primary">
-                    <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                  <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
-                    (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                  <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
-                    (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                    <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                </th>
-
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div *ngIf="this.showActive">
-
-          <div *ngIf="this.sessionActive.length == 0">
-            <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
-          </div>
-
-          <table class="table table-hover" *ngIf="this.sessionActive.length != 0">
-            <thead>
-              <tr>
-                <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.sessionActive">
-                <th *ngIf="element.isActive">
-                  <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-                </th>
-                <th *ngIf="!element.isActive">
-                  <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-                </th>
-                <th>{{element.id}}</th>
-                <th>{{element.nom}}</th>
-                <th>{{this.parseDate(element.date)}}</th>
-                <th>{{element.jeu}}</th>
-                <th>{{element.joueur.length}}</th>
-                <th class="button_actions">
-                  <button mat-raised-button title="Prévisualiser le jeu de la séssion"
-                    (click)="previsualiserGame(element)" color="primary">
-                    <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-                  </button>
-                  <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
-                    style="background-color : rgb(223, 175, 18)" color="primary">
-                    <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-                  </button>
-                  <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
-                    style="background-color : red" color="primary">
-                    <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                  <button mat-raised-button title="Rejoindre la séssion" (click)="join(element)"
-                    style="background-color : rgb(77, 184, 44)" color="primary">
-                    <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                  <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
-                    (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                    <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                  <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
-                    (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                    <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-                  </button>
-                </th>
-
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Créer une séssion -->
-      <div *ngIf="this.create_session">
-        <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red"
-            (click)="this.create_session = false; this.jeuSession = ''" color="primary">
-            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-            <span>Retourner sur les sessions</span>
-          </button>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-2 text-center">
-            <label for="nom_session" class="form-label align-middle">Nom de la session</label>
-          </div>
-          <div class="col-md-10 text-center">
-            <input type="text" class="form-control" #nom_session title="Nom de la session">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col-md-2 text-center">
-            <label for="jeu_session" class="form-label align-middle">Jeu</label>
-          </div>
-          <div class="col-md-10 text-center">
-            <select class="form-control" aria-label="Default select example"
-              (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
-              <option class="text-center"></option>
-              <option class="text-center">Recopier</option>
-              <option class="text-center">Memory</option>
-              <option class="text-center">Reconnaitre</option>
-              <option class="text-center">Abecedaire</option>
-              <option class="text-center">FilleEtGarcon</option>
-              <option class="text-center">Puzzle</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- <div *ngIf="jeuSession == 'Recopier'">
-          <table class="table table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col"
-                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','']">
-                  {{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.recopier_list" (click)="changeJeuId(element.id)"> -->
-        <!-- <th>{{element.id}}</th> Id du jeu -->
-        <!-- <th>{{this.parseDate(element.date)}}</th> Date de création du jeu -->
-        <!-- <th>{{element.images.length}}</th> Nombre d'image qui compose le jeu -->
-        <!-- <th>{{element.typeEcriture}}</th> Type d'écriture du jeu -->
-        <!-- <th *ngIf="element.isVocaliser">Oui</th> -->
-        <!-- <th *ngIf="!element.isVocaliser">Non</th> -->
-        <!-- <th>Aucun</th> Nom de l'utilisateur qui à créer le jeu -->
-        <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th> -->
-        <!-- <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
-        <!-- </tr>
-            </tbody>
-          </table>
-        </div> -->
-
-        <div *ngIf="jeuSession == 'Memory'">
-          <table class="table table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col" *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par']">
-                  {{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.memory_list" (click)="changeJeuId(element.id)">
-                <th>{{element.id}}</th> <!-- Id du jeu -->
-                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
-                <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
-                <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
-                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="jeuSession == 'Reconnaitre'">
-          <table class="table table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col"
-                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
-                  {{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.reconnaitre_list" (click)="changeJeuId(element.id)">
-                <th>{{element.id}}</th> <!-- Id du jeu -->
-                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
-                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
-                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-                <th *ngIf="element.isVocaliser">Oui</th>
-                <th *ngIf="!element.isVocaliser">Non</th>
-                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="jeuSession == 'Abecedaire'">
-          <table class="table table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col"
-                  *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
-                  {{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.abecedaire_list" (click)="changeJeuId(element.id)">
-                <th>{{element.id}}</th> <!-- Id du jeu -->
-                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
-                <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
-                <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-                <th *ngIf="element.isVocaliser">Oui</th>
-                <th *ngIf="!element.isVocaliser">Non</th>
-                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="jeuSession == 'FilleEtGarcon'">
-          <table class="table table-hover text-center">
-            <thead>
-              <tr>
-                <th scope="col"
-                  *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par']">
-                  {{col}}</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let element of this.boygirl_list" (click)="changeJeuId(element.id)">
-                <th>{{element.id}}</th> <!-- Id du jeu -->
-                <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
-                <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
-                <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
-                <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
-                <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : rgb(12, 202, 12)"
-            (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
-            <i class="fa-solid fa-plus" style="margin-bottom : 1px"></i>
-            <span>Créer la sessions</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Superviser une séssion -->
-      <div *ngIf="this.panel_option == 'view'">
-
-        <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
-            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-            <span>Retourner sur les sessions</span>
-          </button>
-        </div>
-
-        <div *ngIf="this.selected_session!.isActive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Erreur(s)</th>
-                <th scope="col">Progression</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr *ngFor="let user of this.selected_session!.joueur">
-                <th>{{user.nom}}</th>
-                <th>{{user.compteur_erreur}}</th>
-                <th>
-                  <div class="progress">
-                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
-                      role="progressbar" [ngStyle]="{width: user.progression.toString() + '%'}" aria-valuenow=" 50"
-                      aria-valuemin="0" aria-valuemax='100'></div>
-                  </div>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="!this.selected_session!.isActive">
-          <h5 class="card-title" style="color : red">La session n'est pas active</h5>
-        </div>
-      </div>
-
-      <!-- Editer une séssion -->
-      <div *ngIf="this.panel_option == 'edit'">
-        <div *ngIf="this.getSession() == null">
-          Erreur
-        </div>
-        <div *ngIf="this.getSession() != null">
-          {{this.getSession()!.id}}
-        </div>
-      </div>
-
-      <!-- Prévisualisr le jeu d'une séssion -->
-      <div *ngIf="this.panel_option == 'preview'">
-
-        <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
-            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-            <span>Retourner sur les sessions</span>
-          </button>
-        </div>
-
-        <!-- <div *ngIf="this.selected_session!.jeu == 'Recopier'">
-          <app-recopier-game [r]="this.getSessionRecopier(this.selected_session!)" [showTitle]="false"></app-recopier-game>
-        </div> -->
-        <div *ngIf="this.selected_session!.jeu == 'Memory'">
-          <app-memory [showTitle]="false" [game]="this.getSessionMemory(this.selected_session!)"></app-memory>
-        </div>
-        <div *ngIf="this.selected_session!.jeu == 'Reconnaitre'">
-          <app-reconnaitre [r]="this.getSessionReconnaitre(this.selected_session!)" [showTitle]="false">
-          </app-reconnaitre>
-        </div>
-        <div *ngIf="this.selected_session!.jeu == 'Abecedaire'">
-          <app-abecedaire [showTitle]="false" [game]="this.getSessionAbecedaire(this.selected_session!)">
-          </app-abecedaire>
-        </div>
-        <div *ngIf="this.selected_session!.jeu == 'Fille&Garçon'">
-          <app-boy-girl-game [showTitle]="false" [bg]="this.getSessionBoyGirl(this.selected_session!)">
-          </app-boy-girl-game>
-        </div>
-        <div *ngIf="this.selected_session!.jeu == 'Puzzle'">
-          <app-puzzle [r]="this.getSessionPuzzle(this.selected_session!)" [showTitle]="false"></app-puzzle>
-
-        </div>
-      </div>
     </div>
   </div>
+
+
+  <!-- Créer une séssion -->
+  <div *ngIf="this.create_session">
+    <app-sessions [play]="false" [create_session]="true"></app-sessions>
+  </div>
+
+  <!-- Superviser une séssion -->
+  <div *ngIf="this.panel_option == 'view'">
+
+    <div class="col-md-12 text-center sortButton">
+      <button mat-raised-button style="background-color : red" (click)="setPanelOption('')" color="primary">
+        <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+        <span>Retourner sur les sessions</span>
+      </button>
+    </div>
+
+    <div *ngIf="this.selected_session!.isActive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Erreur(s)</th>
+            <th scope="col">Progression</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let user of this.selected_session!.joueur">
+            <th>{{user.nom}}</th>
+            <th>{{user.compteur_erreur}}</th>
+            <th>
+              <div class="progress">
+                <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                  [ngStyle]="{width: user.progression.toString() + '%'}" aria-valuenow=" 50" aria-valuemin="0"
+                  aria-valuemax='100'></div>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!this.selected_session!.isActive">
+      <h5 class="card-title" style="color : red">La session n'est pas active</h5>
+    </div>
+  </div>
+
+  <!-- Editer une séssion -->
+  <div *ngIf="this.panel_option == 'edit'">
+    <div *ngIf="this.getSession() == null">
+      Erreur
+    </div>
+    <div *ngIf="this.getSession() != null">
+      {{this.getSession()!.id}}
+    </div>
+  </div>
+
 </div>

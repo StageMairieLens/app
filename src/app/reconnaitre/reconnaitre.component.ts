@@ -25,18 +25,13 @@ export class ReconnaitreComponent implements OnInit {
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
   }
   
-  list:any = {};
   onSend(list:any){
-    /*list={id:this.r!.id,images:this.r!.images,bg_color:this.r?.bg_color,title_color:this.r?.title_color,
-    gaw:this.r?.good_answer_color,waw:this.r?.wrong_answer_color,bar:this.r?.color_progress_bar,
-    button_bg:this.r?.button_bg_color,button_text:this.r?.button_text_color,text:this.r?.text_color,ecri:this.r?.typeEcriture,
-    voc:this.r?.isVocaliser};*/
-    console.log(this.list);
+    
     const formData : FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('list',JSON.stringify(list));
+    formData.append('reconnaitre',JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSendReco(formData).subscribe({
       next:res=>{
@@ -53,6 +48,7 @@ export class ReconnaitreComponent implements OnInit {
   ngOnInit(): void {
     if (this.r != null) {
       this.alea(this.r!.images);
+      
 
     }
 
@@ -69,6 +65,7 @@ export class ReconnaitreComponent implements OnInit {
       this.reconnaitre_progress = this.r!.color_progress_bar;
       this.reconnaitre_type_ecriture = this.r!.typeEcriture;
       this.reconnaitre_isVocaliser = this.r!.isVocaliser;
+      
     }
 
 
@@ -116,6 +113,7 @@ export class ReconnaitreComponent implements OnInit {
   reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
   reconnaitre_list: Reconnaitre[] = SessionsComponent.reconnaitre_list;
+  list:any = {bg_color:this.reconnaitre_bg_color,text_color:this.reconnaitre_text_color,title_color:this.reconnaitre_title_color,gaw_color:this.reconnaitre_good_answer_color,waw_color:this.reconnaitre_wrong_answer_color,button_bg_color:this.reconnaitre_button_bg_color,button_text_color:this.reconnaitre_button_text_color,progress:'blue',ecri:this.reconnaitre_type_ecriture,voca:0};
 
   formStep: number = 0;
 
