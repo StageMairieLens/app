@@ -161,7 +161,7 @@
 
     <!-- Formulaire Fille Garcon -->
     <div class="card-body" *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <app-boy-girl-game [play]="false" [showTitle]="false" [create_game]="true"  ></app-boy-girl-game>
+      <app-boy-girl-game [play]="false" [showTitle]="false" [create_game]="true"></app-boy-girl-game>
     </div>
 
     <!-- Formulaire Reconnaitre -->
@@ -182,7 +182,7 @@
 
     <!-- Formulaire Puzzle -->
     <div class="card-body" *ngIf="this.selectedGame == 'Puzzle'">
-        <app-puzzle [play]="false" [showTitle]="false" [create_game]="true"></app-puzzle>
+      <app-puzzle [play]="false" [showTitle]="false" [create_game]="true"></app-puzzle>
     </div>
 
   </div>
@@ -210,7 +210,7 @@
 
     <!-- Liste des jeux Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-        <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
+      <app-abecedaire [play]="false" [showList]="true" [showTitle]="false"></app-abecedaire>
     </div>
 
     <!-- Liste des jeux Fille&Garçon -->
@@ -245,17 +245,17 @@
 
     <!-- Formulaire édition Abecedaire -->
     <div *ngIf="this.selectedGame == 'Abecedaire'">
-      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire" ></app-abecedaire>
+      <app-abecedaire [play]="false" [edit]="true" [showTitle]="false" [game]="this.abecedaire"></app-abecedaire>
     </div>
 
     <!-- Formulaire édition Fille&Garçon -->
     <div *ngIf="this.selectedGame == 'Fille&Garçon'">
-      <app-boy-girl-game [play]="false" [showTitle]="false" [edit]="true" [bg]="this.boygirl" ></app-boy-girl-game>
+      <app-boy-girl-game [play]="false" [showTitle]="false" [edit]="true" [bg]="this.boygirl"></app-boy-girl-game>
     </div>
 
     <!-- Formulaire édition Puzzle -->
     <div *ngIf="this.selectedGame == 'Puzzle'">
-      <app-puzzle [play]="false" [showTitle]="false" [edit]="true" [r]="this.puzzle" ></app-puzzle>
+      <app-puzzle [play]="false" [showTitle]="false" [edit]="true" [r]="this.puzzle"></app-puzzle>
     </div>
 
   </div>
@@ -459,7 +459,7 @@
           </div>
         </div>
 
-        <!-- <div *ngIf="jeuSession == 'Recopier'">
+        <div *ngIf="jeuSession == 'Recopier'">
           <table class="table table-hover text-center">
             <thead>
               <tr>
@@ -470,20 +470,20 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let element of this.recopier_list" (click)="changeJeuId(element.id)"> -->
-        <!-- <th>{{element.id}}</th> Id du jeu -->
-        <!-- <th>{{this.parseDate(element.date)}}</th> Date de création du jeu -->
-        <!-- <th>{{element.images.length}}</th> Nombre d'image qui compose le jeu -->
-        <!-- <th>{{element.typeEcriture}}</th> Type d'écriture du jeu -->
-        <!-- <th *ngIf="element.isVocaliser">Oui</th> -->
-        <!-- <th *ngIf="!element.isVocaliser">Non</th> -->
-        <!-- <th>Aucun</th> Nom de l'utilisateur qui à créer le jeu -->
-        <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th> -->
-        <!-- <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
-        <!-- </tr>
+              <tr *ngFor="let element of this.recopier_list" (click)="changeJeuId(element.id)">
+                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{this.parseDate(element.date)}}</th> <!--Date de création du jeu-->
+                <th>{{element.images.length}}</th> <!--Nombre d'image qui compose le jeu-->
+                <th>{{element.typeEcriture}}</th> <!--Type d'écriture du jeu-->
+                <th *ngIf="element.isVocaliser">Oui</th>
+                <th *ngIf="!element.isVocaliser">Non</th>
+                <th>Aucun</th> <!--Nom de l'utilisateur qui à créer le jeu-->
+                <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+                <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+              </tr>
             </tbody>
           </table>
-        </div> -->
+        </div>
 
         <div *ngIf="jeuSession == 'Memory'">
           <table class="table table-hover text-center">
@@ -496,7 +496,8 @@
 
             <tbody>
               <tr *ngFor="let element of this.memory_list" (click)="changeJeuId(element.id)">
-                <th>{{element.id}}</th> <!-- Id du jeu -->
+                <th>{{element.id}}</th>
+                <!-- Id du jeu
                 <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
                 <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
                 <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
