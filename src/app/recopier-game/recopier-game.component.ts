@@ -5,6 +5,8 @@ import { Progress } from '../Progress'
 import { ImagesComponent } from '../images/images.component'
 import { Router } from '@angular/router';
 import { SessionsComponent } from '../sessions/sessions.component'
+import { JeuxService } from '../jeux.service';
+
 
 @Component({
   selector: 'app-recopier-game',
@@ -13,13 +15,32 @@ import { SessionsComponent } from '../sessions/sessions.component'
 })
 export class RecopierGameComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     // this.r = null;
     this.r = this.recopier_list[0];
   }
-
-
+  reponse:any;
+  onSend(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('recopier',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+   
+    error  :err =>{
+      console.log(err);
+    },
+      
+  });
+}
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
   image: Image[] = [];
@@ -49,6 +70,7 @@ export class RecopierGameComponent implements OnInit {
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
   recopier_list: Recopier[] = SessionsComponent.recopier_list;
+  list:any = {i_bg_co:this.recopier_input_bg_color,i_text_co:this.recopier_input_text_color,bg_color:this.recopier_bg_color,text_color:this.recopier_text_color,title_color:this.recopier_title_color,gaw_color:this.recopier_good_answer_color,waw_color:this.recopier_wrong_answer_color,button_bg_color:this.recopier_button_bg_color,button_text_color:this.recopier_button_text_color,progress:'blue',ecri:this.recopier_type_ecriture,voca:0};
 
   formStep: number = 0;
 

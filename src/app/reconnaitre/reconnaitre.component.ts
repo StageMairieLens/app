@@ -33,7 +33,7 @@ export class ReconnaitreComponent implements OnInit {
     }*/
     formData.append('reconnaitre',JSON.stringify(list));
     console.log(formData);
-    this.jeuxService.onSendReco(formData).subscribe({
+    this.jeuxService.onSend(formData).subscribe({
       next:res=>{
         console.log(res.name);
         this.reponse = res;

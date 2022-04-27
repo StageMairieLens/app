@@ -7,6 +7,7 @@ import { TileComponent } from './tile/tile.component';
 import { SessionsComponent } from '../sessions/sessions.component';
 import { ImagesComponent } from '../images/images.component';
 import { Router } from '@angular/router';
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-memory',
@@ -45,6 +46,7 @@ export class MemoryComponent implements OnInit {
   memory_previsualiser: boolean = false;
   memory_tmp_affichage: string = "5";
   memory_list: Memory[] = SessionsComponent.memory_list;
+  list:any = {bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],voca:0};
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
@@ -94,12 +96,33 @@ export class MemoryComponent implements OnInit {
   @ViewChild("tile18") tile18!: TileComponent;
   tiles: TileComponent[] = [];
 
-  constructor(private router: Router) {
+  constructor(private jeuxService: JeuxService,private router: Router) {
     // this.derriere = new Image("Lapin", "../../assets/lapin.webp");
     // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
     this.game = null;
     this.derriere = null;
   }
+  reponse:any;
+  onSend(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('memory',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+   
+    error  :err =>{
+      console.log(err);
+    },
+      
+  });
+}
 
   // Initialisation
   ngOnInit(): void {

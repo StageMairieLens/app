@@ -320,13 +320,16 @@
                 <label for="abecedaire_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value " #abecedaire_bg_color_input
-                    value="{{this.abecedaire_bg_color}}" title="Choisissez la couleur d'arriére-plan">
+                    value="{{this.abecedaire_bg_color}}" title="Choisissez la couleur d'arriére-plan"
+                    (change)="this.list['bg_color']=abecedaire_bg_color_input.value">
+                    
                 </label>
               </div>
               <div class="col-md-6">
                 <label for="abecedaire_text_color_input" class="form-label align-middle">Couleur du texte
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_text_color = abecedaire_text_color_input.value "
+                    (change)="this.list['text_color']=abecedaire_bg_color_input.value"
                     #abecedaire_text_color_input value="{{this.abecedaire_text_color}}"
                     title="Choisissez la couleur du texte">
                 </label>
@@ -340,6 +343,7 @@
                   réponse
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_good_answer_color = abecedaire_good_answer_color_input.value "
+                    (change)="this.list['gaw_color']=abecedaire_good_answer_color_input.value"
                     #abecedaire_good_answer_color_input value="{{this.abecedaire_good_answer_color}}"
                     title="Choisissez la couleur du message de bonne réponse">
                 </label>
@@ -350,6 +354,7 @@
                   réponse
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_wrong_answer_color = abecedaire_wrong_answer_color_input.value "
+                    (change)="this.list['waw_color']=abecedaire_wrong_answer_color_input.value"
                     #abecedaire_wrong_answer_color_input value="{{this.abecedaire_wrong_answer_color}}"
                     title="Choisissez la couleur du message de mauvaise réponse">
                 </label>
@@ -363,6 +368,7 @@
                   bouton
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_button_bg_color = abecedaire_button_bg_color_input.value "
+                    (change)="this.list['button_bg_color']=abecedaire_button_bg_color_input.value"
                     #abecedaire_button_bg_color_input value="{{this.abecedaire_button_bg_color}}"
                     title="Choisissez la couleur d'arriére-plan du bouton">
                 </label>
@@ -372,6 +378,7 @@
                   bouton
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_button_text_color = abecedaire_button_text_color_input.value "
+                    (change)="this.list['button_text_color']=abecedaire_button_text_color_input.value"
                     #abecedaire_button_text_color_input value="{{this.abecedaire_button_text_color}}"
                     title="Choisissez la couleur du texte du bouton">
                 </label>
@@ -400,31 +407,31 @@
             </div>
             <div class="form-row">
               <div class="col-md-12">
-                <div class="progress" *ngIf="this.abecedaire_progress == 'blue' ">
+                <div class="progress" *ngIf="this.abecedaire_progress == 'blue' "(change)="this.list['progress']='blue' ">
                   <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                   </div>
                 </div>
 
-                <div class="progress" *ngIf="this.abecedaire_progress == 'green' ">
+                <div class="progress" *ngIf="this.abecedaire_progress == 'green' "(change)="this.list['progress']='green'">
                   <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                     role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                   </div>
                 </div>
 
-                <div class="progress" *ngIf="this.abecedaire_progress == 'lightblue' ">
+                <div class="progress" *ngIf="this.abecedaire_progress == 'lightblue' "(change)="this.list['progress']='lightblue' ">
                   <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
                     role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                   </div>
                 </div>
 
-                <div class="progress" *ngIf="this.abecedaire_progress == 'orange' ">
+                <div class="progress" *ngIf="this.abecedaire_progress == 'orange' "(change)="this.list['progress']='orange' ">
                   <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
                     role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                   </div>
                 </div>
 
-                <div class="progress" *ngIf="this.abecedaire_progress == 'red' ">
+                <div class="progress" *ngIf="this.abecedaire_progress == 'red' "(change)="this.list['progress']='red'">
                   <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
                     role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
                   </div>
@@ -443,32 +450,36 @@
               <mat-radio-group aria-label="Choisissez un type d'écriture">
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'none'" value="None"
-                  (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px" checked>Aucune
+                  (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px" checked
+                  (change)="this.list['ecri']='none' ">Aucune
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'none'" value="None"
-                  (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px">Aucune
+                  (change)="this.abecedaire_type_ecriture = 'none'" 
+                  (change)="this.list['ecri']='none' "
+                  style="font-size : 40px">Aucune
                 </mat-radio-button>
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'cursif'" value="Cursif"
-                  (change)="this.abecedaire_type_ecriture = 'cursif'"
+                  (change)="this.abecedaire_type_ecriture = 'cursif'"(change)="this.list['ecri']='CURSIF' "
                   style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'cursif'" value="Cursif"
-                  (change)="this.abecedaire_type_ecriture = 'cursif'"
+                  (change)="this.abecedaire_type_ecriture = 'cursif'"(change)="this.list['ecri']='CURSIF' "
                   style="font-family: cursiveFont; font-size: 40px">
                   Cursif</mat-radio-button>
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'capital'" value="Capital"
-                  (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px" checked>CAPITAL
+                  (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px" checked
+                  (change)="this.list['ecri']='CAPITAL' ">CAPITAL
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'capital'" value="Capital"
-                  (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px">CAPITAL
+                (change)="this.list['ecri']='CAPITAL' "(change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px">CAPITAL
                 </mat-radio-button>
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'script'" value="Script"
-                  (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px" checked>Script
+                (change)="this.list['ecri']='script' "(change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px" checked>Script
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'script'" value="Script"
-                  (change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px">Script
+                (change)="this.list['ecri']='script' "(change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px">Script
                 </mat-radio-button>
               </mat-radio-group>
             </div>
@@ -477,10 +488,13 @@
             <div class="col-md-12">
               <h2 class="card-title">Vocalisation</h2>
               <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark"
-                style="margin-right : 2%; color : #ff4083"></i>
+              (change)="this.list['voca']=0 "    
+              style="margin-right : 2%; color : #ff4083"></i>
               <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-              <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+              <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput
+              (change)="this.list['voca']=true " 
+              >
               </mat-slide-toggle>
               <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"
                 style="margin-left : 2%; color : #ff4083"></i>
@@ -492,7 +506,7 @@
           <!-- Bouton de création du jeu -->
           <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
             <div class="col-md-12 text-center">
-              <button class="validate_button align-middle text-center" (click)="create()"
+              <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()"
                 mat-raised-button>Créer le
                 jeu
                 <i class="fa-solid fa-check fa-lg"></i>

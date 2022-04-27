@@ -317,6 +317,8 @@
             <label for="recopier_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_bg_color = recopier_bg_color_input.value " #recopier_bg_color_input
+                (change)="this.list['bg_color']=recopier_bg_color_input.value"
+
                 value="{{this.recopier_bg_color}}" title="Choisissez la couleur d'arriére-plan">
             </label>
           </div>
@@ -324,6 +326,7 @@
             <label for="recopier_text_color_input" class="form-label align-middle">Couleur du texte
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_text_color = recopier_text_color_input.value " #recopier_text_color_input
+                (change)="this.list['text_color']=recopier_text_color_input.value"
                 value="{{this.recopier_text_color}}" title="Choisissez la couleur du texte">
             </label>
           </div>
@@ -336,6 +339,7 @@
             <label for="recopier_title_color_input" class="form-label align-middle">Couleur du titre
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_title_color = recopier_title_color_input.value " #recopier_title_color_input
+                (change)="this.list['title_color']=recopier_title_color_input.value"
                 value="{{this.recopier_title_color}}" title="Choisissez la couleur du titre">
             </label>
           </div>
@@ -344,6 +348,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_good_answer_color = recopier_good_answer_color_input.value "
+                (change)="this.list['gaw_color']=recopier_good_answer_color_input.value"
                 #recopier_good_answer_color_input value="{{this.recopier_good_answer_color}}"
                 title="Choisissez la couleur du message de bonne réponse">
             </label>
@@ -357,6 +362,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
+                (change)="this.list['waw_color']=recopier_wrong_answer_color_input.value"
                 #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
                 title="Choisissez la couleur du message de mauvaise réponse">
             </label>
@@ -366,6 +372,7 @@
               bouton
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_button_bg_color = recopier_button_bg_color_input.value "
+                (change)="this.list['button_bg_color']=recopier_button_bg_color_input.value"
                 #recopier_button_bg_color_input value="{{this.recopier_button_bg_color}}"
                 title="Choisissez la couleur d'arriére-plan du bouton">
             </label>
@@ -379,6 +386,7 @@
               bouton
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_button_text_color = recopier_button_text_color_input.value "
+                (change)="this.list['button_text_color']=recopier_button_text_color_input.value"
                 #recopier_button_text_color_input value="{{this.recopier_button_text_color}}"
                 title="Choisissez la couleur du texte du bouton">
             </label>
@@ -389,6 +397,7 @@
               zone d'entrée
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_input_bg_color = recopier_input_bg_color_input.value "
+                (change)="this.list['i_bg_co']=recopier_input_bg_color_input.value"
                 #recopier_input_bg_color_input value="{{this.recopier_input_bg_color}}"
                 title="Choisissez la couleur d'arriére-plan de la zone d'entrée">
             </label>
@@ -403,6 +412,7 @@
               d'entrée
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_input_text_color = recopier_input_text_color_input.value "
+                (change)="this.list['i_text_co']=recopier_input_text_color_input.value"
                 #recopier_input_text_color_input value="{{this.recopier_input_text_color}}"
                 title="Choisissez la couleur du texte du bouton">
             </label>
@@ -430,31 +440,31 @@
         </div>
         <div class="form-row">
           <div class="col-md-12">
-            <div class="progress" *ngIf="this.recopier_progress == 'blue' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'blue' "(change)="this.list['progress']='blue' ">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                 aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'green' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'green' "(change)="this.list['progress']='green' ">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'lightblue' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'lightblue' "(change)="this.list['progress']='lightblue' ">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'orange' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'orange' "(change)="this.list['progress']='orange' ">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'red' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'red' "(change)="this.list['progress']='red' ">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
@@ -473,35 +483,49 @@
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
               (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+              (change)="this.list['ecri']='CURSIF' "
               checked>Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
-              (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+              (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+              (change)="this.list['ecri']='CURSIF' ">
+              
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
-              (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+              (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
+              (change)="this.list['ecri']='CAPITAL' "
+              >CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
-              (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+              (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px"
+              (change)="this.list['ecri']='CAPITAL' "
+              >CAPITAL
+
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
-              (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+              (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked
+              (change)="this.list['ecri']='SCRIPT' "
+              >Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
-              (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
-          </mat-radio-group>
+              (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px"
+              (change)="this.list['ecri']='SCRIPT' "
+              >Script</mat-radio-button>
+            </mat-radio-group>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-12">
           <h2 class="card-title">Vocalisation</h2>
           <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
-            style="margin-right : 2%; color : #ff4083"></i>
+          (change)="this.list['voca']=0 "  
+          style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
-
+          
           <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
-            (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+          (change)="this.list['voca']=true "  
+          (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
           </mat-slide-toggle>
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
             style="margin-left : 2%; color : #ff4083"></i>
@@ -513,7 +537,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer
+          <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()" mat-raised-button>Créer
             le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>

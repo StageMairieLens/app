@@ -5,6 +5,7 @@ import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
 import { SessionsComponent } from '../sessions/sessions.component';
 import { Abecedaire } from './Abecedaire';
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-abecedaire',
@@ -55,12 +56,33 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_type_ecriture: string = "script";
   abecedaire_isVocaliser: boolean = false;
   abecedaire_previsualiser: boolean = false;
+  list:any = {bg_color:this.abecedaire_bg_color,text_color:this.abecedaire_text_color,gaw_color:this.abecedaire_good_answer_color,waw_color:this.abecedaire_wrong_answer_color,button_bg_color:this.abecedaire_button_bg_color,button_text_color:this.abecedaire_button_text_color,progress:'blue',ecri:this.abecedaire_type_ecriture,voca:0};
 
-  constructor(private router: Router) {
+  constructor(private jeuxService: JeuxService,private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
   }
-
+  reponse:any;
+  onSend(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('abcd',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+   
+    error  :err =>{
+      console.log(err);
+    },
+      
+  });
+}
   // Initialisation
   ngOnInit(): void {
     if(this.game != null) {

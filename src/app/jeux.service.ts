@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class JeuxService {
 
   constructor(private http:HttpClient) { }
-  onSendReco(formData:any):Observable<any>{
+  onSend(formData:any):Observable<any>{
     return this.http.post<any>('http://92.154.61.105:8080/~nacer/co.php',formData);
   }
 }
