@@ -10,8 +10,8 @@
 </div>
 
 
-<div *ngIf="this.play">
-  <!-- Si le jeu est null -->
+<!-- <div *ngIf="this.play">
+  <!-- Si le jeu est null
   <div *ngIf="this.r == null" class="card_play align-middle container text-center" id="card_error"
     style="width: 32rem; background-color: #3bb8c9; color : black">
     <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
@@ -48,14 +48,14 @@
             <p id="levelPanel">
               <!--<input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"
                         [ngStyle]="{background : this.r!.bg_color}"/> <label for="easy" [ngStyle]="{background : this.r!.text_color}">Easy</label>
-                         mettre une variable dans value pour modifier la difficulter-->
+                         mettre une variable dans value pour modifier la difficulter
 
 
             </p>
             <div>
               <!--<button id="btnRule" type="button" class="btn" onclick="rules();"[ngStyle]="{background : this.r!.button_bg_color}">Rules</button>
                         <button id="newPhoto" type="button" class="btn" (click)="restar()"[ngStyle]="{background : this.r!.button_bg_color}">Another Photo</button>
-                        -->
+
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-  <!-- Si la liste d'image est vide -->
+  <!-- Si la liste d'image est vide
   <div *ngIf="this.r!.liste_images.length == 0" class="card_play align-middle container" id="card_finish"
     style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
     <img class="card-img-top image" src="../../assets/images/error.png" alt="Card image cap">
@@ -96,8 +96,20 @@
   </div>
 
   </div>
-</div>
+</div> -->
 
+
+<div *ngIf="this.play">
+  <div class="card container container_list" [ngStyle]="{background : this.r!.bg_color}">
+
+    <div class="example-box" *ngFor="let t of this.decoupage" cdkDrag [ngStyle]="{'background-image' : 'url(' + this.r!.liste_images[0].src + ')' , 'background-position' :  t.x + '%' + t.y + '%' , 'background-size' : (this.decoupe * 100) + '%' , display : 'inline-block'}">
+
+    </div>
+
+    <!-- <img src="{{this.r!.liste_images[0].src}}" alt=""> -->
+
+  </div>
+</div>
 
 <div class="container card container_list" *ngIf="this.showList">
   <h5 class="card-header">Listes des puzzle</h5>

@@ -1,6 +1,6 @@
 <div *ngIf="!inscript && !oublie">
     <div class="col-md-12 text-right">
-        <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <button mat-button mat-dialog-close (click)="close()" style="background-color: rgb(221, 221, 221);"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
 
     <div class="form-row">
@@ -17,7 +17,7 @@
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passea">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe">
         </div>
     </div>
 
@@ -39,7 +39,7 @@
 
 <div *ngIf="inscript">
     <div class="col-md-12 text-right">
-        <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <button mat-button mat-dialog-close (click)="close()" style="background-color: rgb(221, 221, 221);"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
 
     <div class="form-row">
@@ -79,7 +79,7 @@
 
 <div *ngIf="oublie">
     <div class="col-md-12 text-right">
-        <button mat-button mat-dialog-close (click)="close()"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <button mat-button mat-dialog-close (click)="close()" style="background-color: rgb(221, 221, 221);"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
 
     <div class="form-row">
