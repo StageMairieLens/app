@@ -42,8 +42,12 @@
         class="mot">{{this.game!.images[this.nbEntries].getNom()}}</p>
       <div *ngIf="this.afficherMot == 'cursif'" style="font-family: cursiveFont;" [ngStyle]="{color: game!.text_color}"
         class="mot">{{this.game!.images[this.nbEntries].getNom()}}</div>
-      <img *ngIf="this.sound" class="sound" src="../../assets/sound.png">
-    </div>
+        <div *ngIf="this.game!.isVocaliser" class="text-center">
+          <button mat-button style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;" (click)="vocalise()">
+            <i class="fa-solid fa-volume-high" style="color: black"></i>
+          </button>
+        </div>  
+  </div>
     <div class="container container_play col-md-12 text-center">
       <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}"
         (click)="click($event, 'A')">A</button>

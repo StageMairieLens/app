@@ -38,6 +38,7 @@ export class MemoryComponent implements OnInit {
 
   memory_nbTile: number = 18;
   memory_settings: string[] = ['image', 'image'];
+  memory_isVocaliser: boolean = false;
   memory_bg_color: string = "#3bb8c9";
   memory_text_color: string = "#ffffff";
   memory_good_answer_color: string = "#3498db";
@@ -67,8 +68,9 @@ export class MemoryComponent implements OnInit {
   setting: string[] = ["image", "image"];
   tmpAfficher: number = 5000;
   affichage: string[] = [];
+  nom: string[] = [];
   isImage: boolean[] = [];
-  sound: boolean[] = [];
+  sound: boolean = false;
   cursif: boolean[] = [];
   sets: number[] = [];
   hash: number[] = [];
@@ -76,6 +78,10 @@ export class MemoryComponent implements OnInit {
   essaie: number = 0;
   nbBon: number = 0;
   finish: boolean = false;
+  static synthesis: SpeechSynthesis | null = window.speechSynthesis;;
+  static voice: SpeechSynthesisVoice | null = MemoryComponent.synthesis!.getVoices().filter(function (voice) {
+    return voice.lang === 'fr';
+  })[0];;
   @ViewChild("tile1") tile1!: TileComponent;
   @ViewChild("tile2") tile2!: TileComponent;
   @ViewChild("tile3") tile3!: TileComponent;
@@ -130,6 +136,7 @@ export class MemoryComponent implements OnInit {
     this.nbTile = this.game.nbTile;
     this.setting = this.game.setting;
     this.derriere = this.game.derriere;
+    this.sound = this.game.isVocaliser;
     this.tmpAfficher = Number(this.game.tmpAffichage) * 1000;
     this.set();
 
@@ -155,9 +162,10 @@ export class MemoryComponent implements OnInit {
     this.tiles = [this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15, this.tile16, this.tile17, this.tile18];
     for (var i = 0; i < this.nbTile; i++) {
       this.tiles[i].isImage = this.isImage[i];
-      this.tiles[i].sound = this.sound[i];
+      this.tiles[i].sound = this.sound;
       this.tiles[i].id = (i + 1).toString();
       this.tiles[i].affichage = this.affichage[i];
+      this.tiles[i].nom = this.nom[i];
       this.tiles[i].cursif = this.cursif[i];
     }
     this.disable();
@@ -175,32 +183,32 @@ export class MemoryComponent implements OnInit {
         switch (this.setting[x]) {
           case "image":
             this.affichage[a] = this.game!.images[i].getSrc();
+            this.nom[a] = this.game!.images[i].getNom();
             this.isImage[a] = true;
-            this.sound[a] = false;
             this.cursif[a] = false;
             break;
           case "cursif":
             this.affichage[a] = this.game!.images[i].getNom();
+            this.nom[a] = this.game!.images[i].getNom();
             this.isImage[a] = false;
-            this.sound[a] = false;
             this.cursif[a] = true;
             break;
           case "script":
             this.affichage[a] = this.game!.images[i].getNom();
+            this.nom[a] = this.game!.images[i].getNom();
             this.isImage[a] = false;
-            this.sound[a] = false;
             this.cursif[a] = false;
             break;
           case "capital":
             this.affichage[a] = this.game!.images[i].getNom().toUpperCase();
+            this.nom[a] = this.game!.images[i].getNom();
             this.isImage[a] = false;
-            this.sound[a] = false;
             this.cursif[a] = false;
             break;
           case "sound":
             this.affichage[a] = this.game!.images[i].getSrc();
+            this.nom[a] = this.game!.images[i].getNom();
             this.isImage[a] = true;
-            this.sound[a] = true;
             this.cursif[a] = false;
             break;
         }
@@ -394,7 +402,7 @@ export class MemoryComponent implements OnInit {
 
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
-      this.game = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
+      this.game = new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
       this.memory_previsualiser = true;
     }
     else {
@@ -421,7 +429,7 @@ export class MemoryComponent implements OnInit {
 
   create(): void {
     this.memory_list.push(
-      new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
+      new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
     );
     this.router.navigate(['/panel/Memory']);
   }
@@ -430,6 +438,7 @@ export class MemoryComponent implements OnInit {
     this.game!.images= this.selectedImages;
     this.game!.nbTile = this.memory_nbTile;
     this.game!.setting = this.memory_settings;
+    this.game!.isVocaliser = this.memory_isVocaliser;
     this.game!.bg_color = this.memory_bg_color;
     this.game!.text_color = this.memory_text_color;
     this.game!.good_answer_color = this.memory_good_answer_color;

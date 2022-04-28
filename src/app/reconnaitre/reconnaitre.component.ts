@@ -101,6 +101,11 @@ export class ReconnaitreComponent implements OnInit {
     Progress.Red
   ];
 
+  synthesis: SpeechSynthesis | null = window.speechSynthesis;;
+  voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
+    return voice.lang === 'fr';
+  })[0];;
+
   reconnaitre_bg_color: string = "#3bb8c9";
   reconnaitre_title_color: string = "#ffffff";
   reconnaitre_text_color: string = "#000000";
@@ -346,6 +351,15 @@ export class ReconnaitreComponent implements OnInit {
     if (index > -1) {
       this.selectedImages.splice(index, 1);
     }
+  }
+
+  vocalise(): void {
+    this.synthesis!.cancel();
+    var utterance = new SpeechSynthesisUtterance(this.r!.images[this.prochaine_image].getNom());
+    utterance.voice = this.voice;
+    utterance.pitch = 1;
+    utterance.rate = 0.7;
+    this.synthesis!.speak(utterance);
   }
 
   save(): void {

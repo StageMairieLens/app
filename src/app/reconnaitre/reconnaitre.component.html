@@ -50,6 +50,12 @@
 
           </div>
 
+          <div *ngIf="this.r!.isVocaliser">
+            <button mat-button style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;" (click)="vocalise()">
+              <i class="fa-solid fa-volume-high" style="color: black"></i>
+            </button>
+          </div>  
+
 
           <div id="mot" class="text-center col-md-12">
             <!-- Centre les mots -->

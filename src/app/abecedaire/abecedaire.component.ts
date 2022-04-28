@@ -45,6 +45,11 @@ export class AbecedaireComponent implements OnInit {
   afficherMot = "cursif";
   finish = false;
 
+  synthesis: SpeechSynthesis | null = window.speechSynthesis;;
+  voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
+    return voice.lang === 'fr';
+  })[0];;
+
   abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
   abecedaire_bg_color: string = "#3bb8c9";
   abecedaire_text_color: string = "#ffffff";
@@ -107,6 +112,15 @@ export class AbecedaireComponent implements OnInit {
       this.abecedaire_type_ecriture = this.game!.typeEcriture;
       this.abecedaire_isVocaliser = this.game!.isVocaliser;
     }
+  }
+
+  vocalise(): void {
+    this.synthesis!.cancel();
+    var utterance = new SpeechSynthesisUtterance(this.game!.images[this.nbEntries].getNom());
+    utterance.voice = this.voice;
+    utterance.pitch = 1;
+    utterance.rate = 0.7;
+    this.synthesis!.speak(utterance);
   }
 
   nextImage() {
