@@ -45,6 +45,7 @@ export class MemoryComponent implements OnInit {
   memory_wrong_answer_color: string = "#e74c3c";
   memory_progress: Progress = Progress.Blue;
   memory_previsualiser: boolean = false;
+  sound: boolean = false;
   memory_tmp_affichage: string = "5";
   memory_list: Memory[] = SessionsComponent.memory_list;
   list:any = {bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],pair:this.memory_nbTile,tmps:this.memory_tmp_affichage,voca:0};
@@ -70,7 +71,7 @@ export class MemoryComponent implements OnInit {
   affichage: string[] = [];
   nom: string[] = [];
   isImage: boolean[] = [];
-  sound: boolean = false;
+ 
   cursif: boolean[] = [];
   sets: number[] = [];
   hash: number[] = [];

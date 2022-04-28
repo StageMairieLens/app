@@ -36,7 +36,7 @@ export class ReconnaitreComponent implements OnInit {
         donne.push(data[i]);
       }
       
-      console.log(donne[0]);
+      console.log(donne[0].bg_color);
       console.log(data[0]);
     })
     
@@ -63,7 +63,7 @@ export class ReconnaitreComponent implements OnInit {
   }
   ngOnInit(): void {
     this.recup(this.data);
-    console.log(this.data[1]);
+    console.log(this.data);
     if (this.r != null) {
       this.alea(this.r!.images);
       
