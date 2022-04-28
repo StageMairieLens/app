@@ -7,6 +7,7 @@ import { JeuxService } from '../jeux.service';
 import { SessionsComponent } from '../sessions/sessions.component'
 import { ImagesComponent } from '../images/images.component';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 interface Erreur {
   src: string;
@@ -19,12 +20,27 @@ interface Erreur {
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-  
-  constructor(private jeuxService: JeuxService, private router: Router) {
+  data = [];
+  constructor(private jeuxService: JeuxService, private router: Router,private http:HttpClient) {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
+    /*this.http.get<any>('http://92.154.61.105:8080/~nacer/vue.php').subscribe(data =>{
+      //this.data.push(data);
+      console.log(data[0]);
+    })*/
   }
   reponse = "";
+  recup(donne:any){
+    this.jeuxService.recup(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(data[i]);
+      }
+      
+      console.log(donne[0]);
+      console.log(data[0]);
+    })
+    
+  }
   onSend(list:any){
     
     const formData : FormData = new FormData();
@@ -46,6 +62,8 @@ export class ReconnaitreComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.recup(this.data);
+    console.log(this.data[1]);
     if (this.r != null) {
       this.alea(this.r!.images);
       
