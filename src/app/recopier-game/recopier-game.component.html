@@ -37,6 +37,12 @@
         <h5 *ngIf="this.r!.typeEcriture == 'SCRIPT'" class="card-title title_image" id="image_title"
           [ngStyle]="{color : this.r!.title_color}">{{this.r!.images[this.showImageCpt].getNom()}}</h5>
 
+        <div *ngIf="this.r!.isVocaliser">
+          <button mat-button style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;" (click)="vocalise()">
+            <i class="fa-solid fa-volume-high" style="color: black"></i>
+          </button>
+        </div>
+
         <div *ngIf="this.r!.typeEcriture == 'CURSIF'">
           <input type="text" name="input_recopier"
             [ngStyle]="{background : this.r!.input_bg_color , color : this.r!.input_text_color}"
@@ -517,7 +523,7 @@
       </div>
       <div class="form-row">
         <div class="col-md-12">
-          <h2 class="card-title">Vocalisation</h2>
+          <h2 class="card-title"> lisation</h2>
           <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
           (change)="this.list['voca']=0 "  
           style="margin-right : 2%; color : #ff4083"></i>

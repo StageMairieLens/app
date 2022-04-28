@@ -468,14 +468,6 @@
               (change)="this.list['ecri1']='script'"
               >Script
             </mat-radio-button>
-
-            <mat-radio-button value="Sound" (change)="this.changeMemorySetting(0, 'sound')" style="font-size : 40px"
-              [checked]="this.memory_settings[0] == 'sound'"
-              (change)="this.list['ecri1']='sound'"
-              (change)="this.list['voca']=true"
-
-              >Vocalisation
-            </mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
@@ -509,15 +501,25 @@
               (change)="this.list['ecri2']='script'"
               >Script
             </mat-radio-button>
-
-            <mat-radio-button value="Sound" (change)="this.changeMemorySetting(1, 'sound')" style="font-size : 40px"
-              [checked]="this.memory_settings[1] == 'sound'"
-              (change)="this.list['ecri2']='sound'"
-              (change)="this.list['voca']=true"
-
-              >Vocalisation
-            </mat-radio-button>
           </mat-radio-group>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
+          <h2 class="card-title">Vocalisation</h2>
+          <i *ngIf="!this.memory_isVocaliser" class="fa-solid fa-volume-xmark"
+          (change)="this.sound = false"  
+          style="margin-right : 2%; color : #ff4083"></i>
+          <i *ngIf="this.memory_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+          
+          <mat-slide-toggle [(ngModel)]="this.memory_isVocaliser"
+          (change)="this.sound = true "  
+          (change)="this.memory_isVocaliser = vocaliserInput.checked" #vocaliserInput>
+          </mat-slide-toggle>
+          <i *ngIf="this.memory_isVocaliser" class="fa-solid fa-volume-high"
+            style="margin-left : 2%; color : #ff4083"></i>
+          <i *ngIf="!this.memory_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
         </div>
       </div>
 

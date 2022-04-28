@@ -100,15 +100,43 @@
 
 
 <div *ngIf="this.play">
-  <div class="card container container_list" [ngStyle]="{background : this.r!.bg_color}">
 
-    <div class="example-box" *ngFor="let t of this.decoupage" cdkDrag [ngStyle]="{'background-image' : 'url(' + this.r!.liste_images[0].src + ')' , 'background-position' :  t.x + '%' + t.y + '%' , 'background-size' : (this.decoupe * 100) + '%' , display : 'inline-block'}">
 
+  <div *ngIf="!this.checkPuzzle()" class="card container container_list text-center"
+    [ngStyle]="{background : this.r!.bg_color, 'width' : (210 * this.decoupe) + 'px', 'height' : 210 * this.decoupe + 'px'}">
+
+
+    <img *ngIf="this.showModel" src="{{this.selected_image.src}}" alt="" style="z-index:2; position : absolute; opacity : 0.8" [ngStyle]="{'width' : (210 * this.decoupe) + 'px', 'height' : (210 * this.decoupe) + 'px'}">
+
+
+    <div class="row text-center" style="margin : auto">
+
+      <div *ngFor="let i of this.nombre">
+        <div cdkDropList id="{{'plateau_list_' + i}}" [cdkDropListData]="this.plateau[i]"
+          [cdkDropListConnectedTo]="this.dragList" (cdkDropListDropped)="drop($event)"
+          style="height : 200px; width : 200px">
+          <div  *ngFor="let t of this.plateau[i]">
+            <div cdkDrag class="example-box"
+              [ngStyle]="{'background-image' : 'url(' + this.r!.liste_images[0].src + ')' , 'background-position' :  t.x + '%' + t.y + '%' , 'background-size' : (this.decoupe * 100) + '%' , display : 'inline-block','transform': 'translate3d(' + 0 + 'px, ' + 0 + 'px, ' +  0  + 'px)' }">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- <img src="{{this.r!.liste_images[0].src}}" alt=""> -->
-
   </div>
+
+
+  <button *ngIf="!this.showModel && !this.checkPuzzle()" mat-raised-button color="primary" (click)="this.showModel = true">Afficher le modéle du puzzle</button>
+  <button *ngIf="this.showModel && !this.checkPuzzle()" mat-raised-button color="primary" (click)="this.showModel = false">Cacher le modéle du puzzle</button>
+
+
+
+  <div *ngIf="this.checkPuzzle()" class="card container container_list">
+    Victoire
+  </div>
+
+  <!-- <img src="{{this.r!.liste_images[0].src}}" alt=""> -->
+
 </div>
 
 <div class="container card container_list" *ngIf="this.showList">
@@ -216,12 +244,12 @@
   <!-- Formulaire Puzzle - Bouton de prévisualisation -->
   <div *ngIf="!this.puzzle_previsualiser">
     <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
-      <button *ngIf="this.edit" class="prev-button align-middle text-center" [routerLink]="['/panel/Puzzle']" mat-raised-button
-      color="warn" style="float : left; position : absolute; display : block">
-      <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+      <button *ngIf="this.edit" class="prev-button align-middle text-center" [routerLink]="['/panel/Puzzle']"
+        mat-raised-button color="warn" style="float : left; position : absolute; display : block">
+        <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
 
-      Retour à la liste des jeux
-    </button>
+        Retour à la liste des jeux
+      </button>
 
       <button class="prev-button align-middle text-center" (click)="setPrevisualiserPuzzle(true)" mat-raised-button
         color="warn">
@@ -408,8 +436,8 @@
         </div>
       </div>
 
-       <!-- Bouton de sauvegarde du jeu -->
-       <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
+      <!-- Bouton de sauvegarde du jeu -->
+      <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
           <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
             le

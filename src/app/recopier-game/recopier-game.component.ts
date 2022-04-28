@@ -74,6 +74,10 @@ export class RecopierGameComponent implements OnInit {
 
   formStep: number = 0;
 
+  synthesis: SpeechSynthesis | null = window.speechSynthesis;;
+  voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
+    return voice.lang === 'fr';
+  })[0];;
 
 
   images: Image[] = [
@@ -123,6 +127,14 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
+  vocalise(): void {
+    this.synthesis!.cancel();
+    var utterance = new SpeechSynthesisUtterance(this.r!.images[this.showImageCpt].getNom());
+    utterance.voice = this.voice;
+    utterance.pitch = 1;
+    utterance.rate = 0.7;
+    this.synthesis!.speak(utterance);
+  }
 
   changeTypeEcritureToCapital(): void {
     if (this.typeEcriture != 'CAPITAL') {

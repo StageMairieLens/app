@@ -8,6 +8,7 @@ export class Memory {
 
   images: Image[];
   derriere: Image | null;
+  isVocaliser: boolean;
 
   tmpAffichage: string;
 
@@ -22,11 +23,12 @@ export class Memory {
 
   color_progress_bar: Progress;
 
-  constructor(images: Image[], derriere: Image | null, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, tmpAffichage: string) {
+  constructor(images: Image[], derriere: Image | null, isVocaliser: boolean, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, tmpAffichage: string) {
     this.id = Memory.nb++;
     this.date = new Date();
     this.images = images;
     this.derriere = derriere;
+    this.isVocaliser = isVocaliser;
     this.nbTile = nbTile;
     this.setting = setting;
     this.bg_color = bg_color;
