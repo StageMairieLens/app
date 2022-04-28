@@ -19,12 +19,12 @@ interface Erreur {
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-  reponse = ""
+  
   constructor(private jeuxService: JeuxService, private router: Router) {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
   }
-  
+  reponse = "";
   onSend(list:any){
     
     const formData : FormData = new FormData();
@@ -38,13 +38,13 @@ export class ReconnaitreComponent implements OnInit {
         console.log(res.name);
         this.reponse = res;
       },
-   
-    error  :err =>{
-      console.log(err);
-    },
+    
+      error  :err =>{
+        console.log(err);
+      },
       
-  });
-}
+    });
+  }
   ngOnInit(): void {
     if (this.r != null) {
       this.alea(this.r!.images);

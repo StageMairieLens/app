@@ -5,6 +5,7 @@ import { BoyGirl } from './BoygGirl'
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-boy-girl-game',
@@ -13,9 +14,30 @@ import { Router } from '@angular/router';
 })
 export class BoyGirlGameComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private jeuxService: JeuxService,private router: Router) {
     // this.bg = null;
     this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
+  }
+  reponse = "";
+  onSend(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('bg',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+   
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
   }
   ngOnInit(): void {
     if (this.bg != null) {
@@ -31,7 +53,25 @@ export class BoyGirlGameComponent implements OnInit {
       this.girl = [];
       this.shuffle();
     }
-
+    /*elseif($_POST['bg']){
+  $nom2=json_decode($_POST['bg'],TRUE);
+  try {
+    $conn = new PDO("mysql:host=$servername;dbname=Application", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "INSERT INTO girlsandboys (type_ecri, id_image,bg_color,bg_color_f,bg_color_m, word_f,word_b,word_m,title_f, title_b,title_m, text_f,text_b,text_m)
+    VALUES('$nom2[ecri]','text','$nom2[bg_color]','$nom2[bg_color_f]','$nom2[bg_color_f]','$nom2[bg_color_m]','$nom2[word_f]','$nom2[word_b]','$nom2[word_m]','$nom2[title_f]','$nom2[title_b]','$nom2[title_m]','$nom2[text_f]','$nom2[text_b]','$nom2[text_m]')";
+                  
+    $conn->exec($sql);
+    echo 'Entrée ajoutée dans la table';
+      
+  
+  } catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
+  }
+  
+  echo "\n";
+}*/
 
     if (this.edit) {
       this.create_game = true;
@@ -81,6 +121,13 @@ export class BoyGirlGameComponent implements OnInit {
   boygirl_text_color_mot: string = "#ffffff";
   boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
+  list:any = {bg_color:this.boygirl_bg_color_container,
+    bg_color_b:this.boygirl_bg_color_garcon,bg_color_f:this.boygirl_bg_color_fille,bg_color_m:this.boygirl_bg_color_mot,
+    word_f:this.boygirl_word_color_fille,word_b:this.boygirl_word_color_garcon,word_m:this.boygirl_word_color_mot,
+    title_f:this.boygirl_title_color_fille,title_b:this.boygirl_title_color_garcon,title_m:this.boygirl_title_color_mot,
+    text_f:this.boygirl_text_color_fille,text_b:this.boygirl_text_color_garcon,text_m:this.boygirl_text_color_mot,
+    ecri:this.boygirl_type_ecriture};
+
 
   formStep: number = 0;
 

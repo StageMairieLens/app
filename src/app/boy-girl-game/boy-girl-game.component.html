@@ -331,28 +331,34 @@
 
             <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CURSIF'" value="Cursif"
               (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-              checked>Cursif</mat-radio-button>
+              checked
+              (change)="this.list['ecri']='CURSIF' ">Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CURSIF'" value="Cursif"
-              (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+              (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+              (change)="this.list['ecri']='CURSIF' ">
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CAPITAL'" value="Capital"
-              (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+              (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
+              (change)="this.list['ecri']='CAPITAL' ">CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CAPITAL'" value="Capital"
-              (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+              (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px"
+              (change)="this.list['ecri']='CAPITAL' ">CAPITAL
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'SCRIPT'" value="Script"
-              (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+              (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked
+              (change)="this.list['ecri']='SCRIPT' ">Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'SCRIPT'" value="Script"
-              (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script</mat-radio-button>
+              (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px"
+              (change)="this.list['ecri']='SCRIPT' ">Script</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
     </div>
-
+    <!-- etape 2-->
     <div *ngIf="this.formStep == 1">
 
       <h2 class="card-title text-center">Choisissez les couleurs</h2>
@@ -363,6 +369,7 @@
             fille
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_bg_color_fille = boygirl_bg_color_fille_input.value " #boygirl_bg_color_fille_input
+              (change)="this.list['bg_color_f']= boygirl_bg_color_fille_input.value"
               value="{{this.boygirl_bg_color_fille}}" title="Choisissez la couleur de l'arriére-plan fille">
           </label>
         </div>
@@ -371,6 +378,7 @@
             garçon
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_bg_color_garcon = boygirl_bg_color_garcon_input.value "
+              (change)="this.list['bg_color_b']= boygirl_bg_color_garcon_input.value"
               #boygirl_bg_color_garcon_input value="{{this.boygirl_bg_color_garcon}}"
               title="Choisissez la couleur de l'arriére-plan garçon">
           </label>
@@ -383,6 +391,7 @@
           <label for="boygirl_bg_color_mot_input" class="form-label align-middle">Couleur de l'arriére-plan mots
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_bg_color_mot = boygirl_bg_color_mot_input.value " #boygirl_bg_color_mot_input
+              (change)="this.list['bg_color_m']= boygirl_bg_color_mot_input.value"
               value="{{this.boygirl_bg_color_mot}}" title="Choisissez la couleur de l'arriére-plan mots">
           </label>
         </div>
@@ -392,6 +401,7 @@
             message de fin/erreur
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_bg_color_container = boygirl_bg_color_container_input.value "
+              (change)="this.list['bg_color']= boygirl_bg_color_container_input.value"
               #boygirl_bg_color_container_input value="{{this.boygirl_bg_color_container}}"
               title="Choisissez la couleur de l'arriére-plan des mots dans la liste fille">
           </label>
@@ -408,6 +418,7 @@
             mots dans la liste fille
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_word_color_fille = boygirl_word_color_fille_input.value "
+              (change)="this.list['word_f']= boygirl_word_color_fille_input.value "
               #boygirl_word_color_fille_input value="{{this.boygirl_word_color_fille}}"
               title="Choisissez la couleur de l'arriére-plan des mots dans la liste fille">
           </label>
@@ -419,6 +430,7 @@
             mots dans la liste garçon
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_word_color_garcon = boygirl_word_color_garcon_input.value "
+              (change)="this.list['word_b']= boygirl_word_color_garcon_input.value "
               #boygirl_word_color_garcon_input value="{{this.boygirl_word_color_garcon}}"
               title="Choisissez la couleur de l'arriére-plan des mots dans la liste garçon">
           </label>
@@ -432,6 +444,7 @@
             mots dans la liste mots
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_word_color_mot = boygirl_word_color_mots_input.value "
+              (change)="this.list['word_m']= boygirl_word_color_mots_input.value "
               #boygirl_word_color_mots_input value="{{this.boygirl_word_color_mot}}"
               title="Choisissez la couleur de l'arriére-plan des mots dans la liste mots">
           </label>
@@ -444,6 +457,7 @@
           <label for="boygirl_title_color_fille_input" class="form-label align-middle">Couleur du titre fille
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_title_color_fille = boygirl_title_color_fille_input.value "
+              (change)="this.list['title_f']= boygirl_title_color_fille_input.value "
               #boygirl_title_color_fille_input value="{{this.boygirl_title_color_fille}}"
               title="Choisissez la couleur du titre fille">
           </label>
@@ -452,6 +466,7 @@
           <label for="boygirl_text_color_fille_input" class="form-label align-middle">Couleur du texte fille
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_text_color_fille = boygirl_text_color_fille_input.value "
+              (change)="this.list['text_f']= boygirl_text_color_fille_input.value "
               #boygirl_text_color_fille_input value="{{this.boygirl_text_color_fille}}"
               title="Choisissez la couleur du texte fille">
           </label>
@@ -463,6 +478,7 @@
           <label for="boygirl_title_color_garcon_input" class="form-label align-middle">Couleur du titre garçon
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_title_color_garcon = boygirl_title_color_garcon_input.value "
+              (change)="this.list['title_b']= boygirl_title_color_garcon_input.value "
               #boygirl_title_color_garcon_input value="{{this.boygirl_title_color_garcon}}"
               title="Choisissez la couleur du titre garçon">
           </label>
@@ -471,6 +487,7 @@
           <label for="boygirl_text_color_garcon_input" class="form-label align-middle">Couleur du texte garçon
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_text_color_garcon = boygirl_text_color_garcon_input.value "
+              (change)="this.list['text_b']= boygirl_text_color_garcon_input.value "
               #boygirl_text_color_garcon_input value="{{this.boygirl_text_color_garcon}}"
               title="Choisissez la couleur du texte garçon">
           </label>
@@ -483,6 +500,7 @@
           <label for="boygirl_title_color_mot_input" class="form-label align-middle">Couleur du titre mots
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_title_color_mot = boygirl_title_color_mot_input.value "
+              (change)="this.list['title_m']= boygirl_title_color_mot_input.value "
               #boygirl_title_color_mot_input value="{{this.boygirl_title_color_mot}}"
               title="Choisissez la couleur du titre mots">
           </label>
@@ -491,6 +509,7 @@
           <label for="boygirl_text_color_mot_input" class="form-label align-middle">Couleur du texte mots
             <input type="color" class="form-control form-control-color"
               (change)="this.boygirl_text_color_mot = boygirl_text_color_mot_input.value " #boygirl_text_color_mot_input
+              (change)="this.list['text_m']= boygirl_text_color_mot_input.value "
               value="{{this.boygirl_text_color_mot}}" title="Choisissez la couleur du texte mots">
           </label>
         </div>
@@ -499,7 +518,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
+          <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()" mat-raised-button>Créer le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>
           </button>
