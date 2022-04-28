@@ -197,8 +197,6 @@ export class BoyGirlGameComponent implements OnInit {
         event.currentIndex,
       );
     }
-    console.log(this.boyFinish);
-    console.log(this.boy);
     if ((this.checkBoy() && this.checkGirl()) && this.mots.length == 0) {
       this.finish = true;
       document.getElementById('content')!.style.display = 'none';

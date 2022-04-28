@@ -30,7 +30,7 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private router: Router) {
-    this.r = new Puzzle([this.liste_image[2], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', this.decoupe);
+    this.r = new Puzzle([this.liste_image[10], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', this.decoupe);
     // this.r = null;
 
   }
@@ -44,6 +44,21 @@ export class PuzzleComponent implements OnInit {
   ngOnInit(): void {
 
     this.decoupageImage();
+    this.selected_image.src = this.r!.liste_images[0].src;
+    for (let i = 0; i < this.decoupe * this.decoupe; i++) {
+      this.nombre.push(i);
+      this.plateau[i] = [];
+      this.dragList.push(('plateau_list_' + i));
+    }
+
+    for (let i of this.nombre) {
+      this.plateau[i].push(this.decoupage[i])
+    }
+
+    this.shuffle();
+
+
+
     if (this.r != null && this.play && this.r!.liste_images.length != 0) {
       setTimeout(() => {
         lance(this.r!.decoupe, this.r!.liste_images);
@@ -75,7 +90,7 @@ export class PuzzleComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
-  decoupe: number = 2;
+  decoupe: number = 4 ;
   formStep: number = 0;
 
 
@@ -88,6 +103,31 @@ export class PuzzleComponent implements OnInit {
   @Input() edit: boolean = false;
 
   decoupage: tuile[] = [];
+  nombre: number[] = [];
+  plateau: [tuile[]] = [[]];
+  dragList: string[] = [];
+  selected_image = new Image();
+  showModel : boolean = true;
+
+
+  checkPuzzle() : boolean{
+    for (let i = 0 ; i< this.decoupe * this.decoupe; i++) {
+      if(this.decoupage[i] != this.plateau[i][0]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  shuffle() : void {
+    var j, x, i;
+    for (i = this.plateau.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = this.plateau[i];
+        this.plateau[i] = this.plateau[j];
+        this.plateau[j] = x;
+    }
+  }
 
   decoupageImage(): void {
     let img = new Image();
@@ -98,6 +138,66 @@ export class PuzzleComponent implements OnInit {
       )
     }
   }
+
+  // switch(t1: tuile[], t2: tuile[]): void {
+  //   let tmp = t1[0];
+  //   t1[0] = t2[0];
+  //   t2[0] = tmp;
+  // }
+
+  drop(event: CdkDragDrop<tuile[]>) {
+
+    if (event.container.data.length == 0) {
+      if (event.previousContainer === event.container) {
+        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+      }
+    }
+    else if (event.container.data.length == 1) {
+
+      console.log(event.previousContainer.id)
+      if (event.previousContainer.id != 'decoupage_list') {
+        let i = +event.container.id.split('_')[2];
+        let iprime = +event.previousContainer.id.split('_')[2];
+
+        let el = event.container.data[0];
+
+        this.plateau[i].splice(0);
+        this.plateau[iprime].push(el);
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+
+      }
+      else {
+        let i = +event.container.id.split('_')[2];
+
+        let el = event.container.data[0];
+        this.plateau[i].splice(0);
+        this.decoupage.push(el);
+
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+      }
+
+
+    }
+  }
+
+
 
   previewPuzzle(r: Puzzle): void {
     this.r = r;
