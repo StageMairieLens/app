@@ -6,7 +6,7 @@ import { SessionsComponent } from '../sessions/sessions.component'
 import { Progress } from '../Progress';
 import { ImagesComponent } from '../images/images.component';
 import { Router } from '@angular/router';
-
+import { JeuxService } from '../jeux.service';
 
 declare function restart(gridsize: number, imagess: any): any;
 declare function rules(): any;
@@ -35,7 +35,37 @@ export class PuzzleComponent implements OnInit {
 
   }
 
+  /*reponse = "";
+  data = [];
+  recup(donne:any){
+    this.jeuxService.recup_puzzle(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(data[i]);
+      }
 
+      console.log(donne[0].bg_color);
+      console.log(data[0]);
+    })
+
+  }
+  onSend(list:any){
+
+    const formData : FormData = new FormData();
+
+    formData.append('puzzle',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+
+      error  :err =>{
+        console.log(err);
+      },
+
+    });
+  }*/
   liste_image: ImageImport[] = ImagesComponent.list_image;
   selectedImages: ImageImport[] = [];
   images = this.liste_image;

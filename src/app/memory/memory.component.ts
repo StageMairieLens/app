@@ -109,6 +109,18 @@ export class MemoryComponent implements OnInit {
     this.game = null;
     this.derriere = null;
   }
+  data=[];
+  recup(donne:any){
+    this.jeuxService.recup_memory(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(data[i]);
+      }
+      
+      console.log(donne[0].bg_color);
+      console.log(data[0]);
+    })
+    
+  }
   reponse:any;
   onSend(list:any){
     
@@ -133,6 +145,8 @@ export class MemoryComponent implements OnInit {
 
   // Initialisation
   ngOnInit(): void {
+    this.recup(this.data);
+    console.log(this.data);
     if (this.game == null || this.game.derriere == null) return;
     this.nbTile = this.game.nbTile;
     this.setting = this.game.setting;

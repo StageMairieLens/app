@@ -20,8 +20,8 @@ interface Erreur {
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-  data = [];
-  constructor(private jeuxService: JeuxService, private router: Router,private http:HttpClient) {
+  
+  constructor(private jeuxService: JeuxService, private router: Router) {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
     /*this.http.get<any>('http://92.154.61.105:8080/~nacer/vue.php').subscribe(data =>{
@@ -29,9 +29,11 @@ export class ReconnaitreComponent implements OnInit {
       console.log(data[0]);
     })*/
   }
+  
   reponse = "";
+  data = [];
   recup(donne:any){
-    this.jeuxService.recup(donne).subscribe(data =>{
+    this.jeuxService.recup_reconnaitre(donne).subscribe(data =>{
       for(var i = 0;data[i]!= null;i++){
         donne.push(data[i]);
       }
