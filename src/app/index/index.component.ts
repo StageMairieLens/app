@@ -34,12 +34,7 @@ export class IndexComponent implements OnInit {
 
   connect(id: string): void {
     if (id != "") {
-      let id_connect = +id;
-      for (let s of SessionsComponent.data) {
-        if (s.id === id_connect) {
-          this.router.navigate(['/session/' + s.id]);
-        }
-      }
+      this.router.navigate(['/session/' + id]);
     }
   }
 

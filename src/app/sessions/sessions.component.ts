@@ -70,7 +70,7 @@ export class SessionsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(this.join) {
+    if(this.play) {
       if (this.route.snapshot.paramMap.get('id') != null) {
         this.session_id = +this.route.snapshot.paramMap.get('id')!;
         if (this.session_id != null) {

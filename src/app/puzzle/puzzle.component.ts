@@ -30,7 +30,7 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private router: Router) {
-    this.r = new Puzzle([this.liste_image[10], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', this.decoupe);
+    this.r = new Puzzle([this.liste_image[10], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 2);
     // this.r = null;
 
   }
@@ -43,28 +43,22 @@ export class PuzzleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.decoupageImage();
-    this.selected_image.src = this.r!.liste_images[0].src;
-    for (let i = 0; i < this.decoupe * this.decoupe; i++) {
-      this.nombre.push(i);
-      this.plateau[i] = [];
-      this.dragList.push(('plateau_list_' + i));
+    if(this.r != null && this.play) {
+      this.decoupageImage();
+      this.selected_image.src = this.r!.liste_images[0].src;
+      for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
+        this.nombre.push(i);
+        this.plateau[i] = [];
+        this.dragList.push(('plateau_list_' + i));
+      }
+
+      for (let i of this.nombre) {
+        this.plateau[i].push(this.decoupage[i])
+      }
+
+      this.shuffle();
     }
 
-    for (let i of this.nombre) {
-      this.plateau[i].push(this.decoupage[i])
-    }
-
-    this.shuffle();
-
-
-
-    if (this.r != null && this.play && this.r!.liste_images.length != 0) {
-      setTimeout(() => {
-        lance(this.r!.decoupe, this.r!.liste_images);
-
-      });
-    }
 
     if (this.edit) {
       this.create_game = true;
@@ -111,7 +105,7 @@ export class PuzzleComponent implements OnInit {
 
 
   checkPuzzle() : boolean{
-    for (let i = 0 ; i< this.decoupe * this.decoupe; i++) {
+    for (let i = 0 ; i< this.r!.decoupe * this.r!.decoupe; i++) {
       if(this.decoupage[i] != this.plateau[i][0]) {
         return false;
       }
@@ -132,9 +126,9 @@ export class PuzzleComponent implements OnInit {
   decoupageImage(): void {
     let img = new Image();
     img.src = this.liste_image[0].src;
-    for (let i = 0; i < this.decoupe * this.decoupe; i++) {
+    for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
       this.decoupage.push(
-        { x: ((100 / (this.decoupe - 1)) * (i % this.decoupe)), y: ((100 / (this.decoupe - 1)) * Math.floor(i / this.decoupe)) }
+        { x: ((100 / (this.r!.decoupe - 1)) * (i % this.r!.decoupe)), y: ((100 / (this.r!.decoupe - 1)) * Math.floor(i / this.r!.decoupe)) }
       )
     }
   }
