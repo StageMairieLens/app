@@ -30,7 +30,7 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private router: Router) {
-    this.r = new Puzzle([this.liste_image[10], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 2);
+    this.r = new Puzzle([this.liste_image[5], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5);
     // this.r = null;
 
   }
