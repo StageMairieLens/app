@@ -14,11 +14,22 @@ import { JeuxService } from '../jeux.service';
   styleUrls: ['./recopier-game.component.css']
 })
 export class RecopierGameComponent implements OnInit {
-
+  data =[];
   constructor(private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     // this.r = null;
     this.r = this.recopier_list[0];
+  }
+  recup(donne:any){
+    this.jeuxService.recup_recopier(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(data[i]);
+      }
+      
+      console.log(donne[0].bg_color);
+      console.log(data[0]);
+    })
+    
   }
   reponse:any;
   onSend(list:any){
@@ -109,6 +120,8 @@ export class RecopierGameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.recup(this.data);
+    console.log(this.data);
     if (this.edit) {
       this.create_game = true;
       this.selectedImages = this.r!.images;

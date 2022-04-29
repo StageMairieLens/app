@@ -39,7 +39,21 @@ export class BoyGirlGameComponent implements OnInit {
       
     });
   }
+  data = [];
+  recup(donne:any){
+    this.jeuxService.recup_bg(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(data[i]);
+      }
+      
+      console.log(donne[0].bg_color);
+      console.log(data[0]);
+    })
+    
+  }
   ngOnInit(): void {
+    this.recup(this.data);
+    console.log(this.data);
     if (this.bg != null) {
       this.boy = this.bg!.listMotsGarcon;
       this.girl = this.bg!.listMotsFille;

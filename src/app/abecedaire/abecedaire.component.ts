@@ -82,14 +82,29 @@ export class AbecedaireComponent implements OnInit {
         this.reponse = res;
       },
    
-    error  :err =>{
-      console.log(err);
-    },
+      error  :err =>{
+        console.log(err);
+      },
       
-  });
-}
+    });
+  }
+  data = [];
+  recup(donne:any){
+    this.jeuxService.recup_abcd(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(data[i]);
+      }
+      
+      console.log(donne[0].bg_color);
+      console.log(data[0]);
+    })
+    
+  }
+
   // Initialisation
   ngOnInit(): void {
+    this.recup(this.data);
+    console.log(this.data);
     if(this.game != null) {
       if (this.game!.images.length != 0) {
         this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
