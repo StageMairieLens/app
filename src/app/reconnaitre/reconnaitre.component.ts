@@ -121,7 +121,7 @@ export class ReconnaitreComponent implements OnInit {
     Progress.Red
   ];
 
-  synthesis: SpeechSynthesis | null = window.speechSynthesis;;
+  synthesis: SpeechSynthesis | null = window.speechSynthesis;
   voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
     return voice.lang === 'fr';
   })[0];;
