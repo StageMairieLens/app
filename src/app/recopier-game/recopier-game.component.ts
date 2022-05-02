@@ -52,9 +52,20 @@ export class RecopierGameComponent implements OnInit {
   });
 }
 
-  getImage(s : string) : Image[] {
-    return [];
+getImage(s: string): Image[] {
+  let res = [];
+  let tab = s.split(',');
+  for(let i of tab) {
+    for(let j of ImagesComponent.list_image) {
+      if(+i == j.id) {
+        res.push(j);
+        break;
+      }
+    }
   }
+  return res;
+ }
+
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];

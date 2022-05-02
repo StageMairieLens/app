@@ -4,7 +4,7 @@ import { Progress } from '../Progress'
 export class Memory {
   id: number;
   static nb: number = 0;
-  date : Date;
+  date : string;
 
   images: Image[];
   derriere: Image | null;
@@ -23,9 +23,9 @@ export class Memory {
 
   color_progress_bar: Progress;
 
-  constructor(images: Image[], derriere: Image | null, isVocaliser: boolean, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, tmpAffichage: string) {
-    this.id = Memory.nb++;
-    this.date = new Date();
+  constructor(id : number , date : string,images: Image[], derriere: Image | null, isVocaliser: boolean, nbTile: number, setting: string[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, tmpAffichage: string) {
+    this.id = id;
+    this.date = date;
     this.images = images;
     this.derriere = derriere;
     this.isVocaliser = isVocaliser;
