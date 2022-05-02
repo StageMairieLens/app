@@ -61,7 +61,7 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_type_ecriture: string = "script";
   abecedaire_isVocaliser: boolean = false;
   abecedaire_previsualiser: boolean = false;
-  list:any = {bg_color:this.abecedaire_bg_color,text_color:this.abecedaire_text_color,gaw_color:this.abecedaire_good_answer_color,waw_color:this.abecedaire_wrong_answer_color,button_bg_color:this.abecedaire_button_bg_color,button_text_color:this.abecedaire_button_text_color,progress:'blue',ecri:this.abecedaire_type_ecriture,voca:0};
+  list:any = {id:1,bg_color:this.abecedaire_bg_color,text_color:this.abecedaire_text_color,gaw_color:this.abecedaire_good_answer_color,waw_color:this.abecedaire_wrong_answer_color,button_bg_color:this.abecedaire_button_bg_color,button_text_color:this.abecedaire_button_text_color,progress:'blue',ecri:this.abecedaire_type_ecriture,voca:0};
 
   constructor(private jeuxService: JeuxService,private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
@@ -100,6 +100,26 @@ export class AbecedaireComponent implements OnInit {
       next:res=>{
         console.log(res);
         
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
+  onSend_update(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('abcd_update',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
       },
     
       error  :err =>{
@@ -306,18 +326,23 @@ export class AbecedaireComponent implements OnInit {
     switch (element.value) {
       case 'blue':
         this.abecedaire_progress = Progress.Blue;
+        this.list['progress']='Blue';
         break;
       case 'green':
         this.abecedaire_progress = Progress.Green;
+        this.list['progress']='Green';
         break;
       case 'lightblue':
         this.abecedaire_progress = Progress.LightBlue;
+        this.list['progress']='LightBlue';
         break;
       case 'orange':
         this.abecedaire_progress = Progress.Orange;
+        this.list['progress']='Orange';
         break;
       case 'red':
         this.abecedaire_progress = Progress.Red;
+        this.list['progress']='Red';
         break;
     }
   }

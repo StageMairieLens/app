@@ -84,10 +84,31 @@ export class ReconnaitreComponent implements OnInit {
       
     });
   }
+  onSend_update(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('reconnaitre_update',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
   ngOnInit(): void {
     //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
     this.recup(this.data);
     console.log(this.data);
+    
     if (this.r != null) {
       this.alea(this.r!.images);
       
@@ -160,7 +181,7 @@ export class ReconnaitreComponent implements OnInit {
   reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
   reconnaitre_list: Reconnaitre[] = SessionsComponent.reconnaitre_list;
-  list:any = {bg_color:this.reconnaitre_bg_color,text_color:this.reconnaitre_text_color,title_color:this.reconnaitre_title_color,gaw_color:this.reconnaitre_good_answer_color,waw_color:this.reconnaitre_wrong_answer_color,button_bg_color:this.reconnaitre_button_bg_color,button_text_color:this.reconnaitre_button_text_color,progress:'blue',ecri:this.reconnaitre_type_ecriture,voca:0};
+  list:any = {id:10,bg_color:this.reconnaitre_bg_color,text_color:this.reconnaitre_text_color,title_color:this.reconnaitre_title_color,gaw_color:this.reconnaitre_good_answer_color,waw_color:this.reconnaitre_wrong_answer_color,button_bg_color:this.reconnaitre_button_bg_color,button_text_color:this.reconnaitre_button_text_color,progress:'blue',ecri:this.reconnaitre_type_ecriture,voca:0};
 
   formStep: number = 0;
 
@@ -349,18 +370,23 @@ export class ReconnaitreComponent implements OnInit {
     switch (element.value) {
       case 'blue':
         this.reconnaitre_progress = Progress.Blue;
+        this.list['progress']='Blue';
         break;
       case 'green':
         this.reconnaitre_progress = Progress.Green;
+        this.list['progress']='Green';
         break;
       case 'lightblue':
         this.reconnaitre_progress = Progress.LightBlue;
+        this.list['progress']='LightBlue';
         break;
       case 'orange':
         this.reconnaitre_progress = Progress.Orange;
+        this.list['progress']='Orange';
         break;
       case 'red':
         this.reconnaitre_progress = Progress.Red;
+        this.list['progress']='Red';
         break;
     }
   }

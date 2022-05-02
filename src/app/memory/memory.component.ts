@@ -48,7 +48,7 @@ export class MemoryComponent implements OnInit {
   sound: boolean = false;
   memory_tmp_affichage: string = "5";
   memory_list: Memory[] = SessionsComponent.memory_list;
-  list:any = {bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],pair:this.memory_nbTile,tmps:this.memory_tmp_affichage,voca:0};
+  list:any = {id:1,bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],pair:this.memory_nbTile,tmps:this.memory_tmp_affichage,voca:0};
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
@@ -133,6 +133,26 @@ export class MemoryComponent implements OnInit {
       next:res=>{
         console.log(res);
         
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
+  onSend_update(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('memory_update',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
       },
     
       error  :err =>{
@@ -405,18 +425,23 @@ export class MemoryComponent implements OnInit {
     switch (element.value) {
       case 'blue':
         this.memory_progress = Progress.Blue;
+        this.list['progress']='Blue';
         break;
       case 'green':
         this.memory_progress = Progress.Green;
+        this.list['progress']='Green';
         break;
       case 'lightblue':
         this.memory_progress = Progress.LightBlue;
+        this.list['progress']='LightBlue';
         break;
       case 'orange':
         this.memory_progress = Progress.Orange;
+        this.list['progress']='Orange';
         break;
       case 'red':
         this.memory_progress = Progress.Red;
+        this.list['progress']='Red';
         break;
     }
   }
