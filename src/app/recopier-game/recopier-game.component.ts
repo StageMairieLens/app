@@ -132,7 +132,7 @@ getImage(s: string): Image[] {
     }
   }
   onSend_delete(id:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
@@ -142,13 +142,13 @@ getImage(s: string): Image[] {
     this.jeuxService.onSend(formData).subscribe({
       next:res=>{
         console.log(res);
-        
+
       },
-    
+
       error  :err =>{
         console.log(err);
       },
-      
+
     });
   }
   ngOnInit(): void {
@@ -304,7 +304,11 @@ getImage(s: string): Image[] {
   }
 
   deleteGameRecopier(r: Recopier): void {
-    /* TO DO */
+    this.onSend_delete(r.id);
+    setTimeout(() => {
+      this.data = [];
+    this.recup(this.data);
+    },200)
   }
 
   redirectEditRecopier(r: Recopier): void {
@@ -381,9 +385,7 @@ getImage(s: string): Image[] {
   }
 
   create(): void {
-    /* this.recopier_list.push(
-      // new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
-    ); */
+    this.onSend(this.list);
     this.router.navigate(['/panel/Recopier']);
   }
 

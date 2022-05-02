@@ -193,8 +193,8 @@
             <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th *ngIf="element.isVocaliser">Oui</th>
-            <th *ngIf="!element.isVocaliser">Non</th>
+            <th *ngIf="+element.isVocaliser">Oui</th>
+            <th *ngIf="!+element.isVocaliser">Non</th>
             <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
             <!-- Actions -->

@@ -363,11 +363,7 @@ export class MemoryComponent implements OnInit {
   }
 
   deleteGameMemory(m: Memory): void {
-    let index = this.memory_list.indexOf(m, 0);
-
-    if (index > -1) {
-      this.memory_list.splice(index, 1);
-    }
+    this.onSend_delete(m.id);
   }
 
   parseDate(date: Date): string {
