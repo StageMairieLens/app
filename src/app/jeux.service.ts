@@ -70,4 +70,7 @@ export class JeuxService {
       
     })*/
   }
+  /*deletePost(id:any){
+    return this.http.delete(+'http://92.154.61.105:8080/~nacer/co.php'+id);
+  }*/
 }

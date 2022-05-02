@@ -118,7 +118,26 @@ export class RecopierGameComponent implements OnInit {
       this.sendAnswer((<HTMLInputElement>$event.target).value, this.r!.images[this.showImageCpt]);
     }
   }
-
+  onSend_delete(id:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<id.lenght;i++){
+      formData.append('id[]',id[i]);
+    }*/
+    formData.append('recopier_delete',id);
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res);
+        
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
   ngOnInit(): void {
     this.recup(this.data);
     console.log(this.data);
