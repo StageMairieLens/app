@@ -156,7 +156,8 @@ export class PuzzleComponent implements OnInit {
   puzzle_previsualiser: boolean = false;
   decoupe: number = 4 ;
   formStep: number = 0;
-  list:any = {id:1,bg_color:this.puzzle_bg_color,text_color:this.puzzle_text_color,title_color:this.puzzle_title_color,button_bg_color:this.puzzle_button_bg_color,button_text_color:this.puzzle_button_text_color,ecri:this.puzzle_type_ecriture,decoupe:this.decoupe};
+  image:any=[];
+  list:any = {image:this.image.toString(),id:1,bg_color:this.puzzle_bg_color,text_color:this.puzzle_text_color,title_color:this.puzzle_title_color,button_bg_color:this.puzzle_button_bg_color,button_text_color:this.puzzle_button_text_color,ecri:this.puzzle_type_ecriture,decoupe:this.decoupe};
 
 
 
@@ -375,6 +376,8 @@ export class PuzzleComponent implements OnInit {
   addImage(img: ImageImport): void {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
+      this.image.push(img.id);
+      this.list['image']=this.image.toString();
     }
   }
 
@@ -382,6 +385,8 @@ export class PuzzleComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
+      this.image.splice(index,1);
+      this.list['image']=this.image.toString();
     }
   }
 

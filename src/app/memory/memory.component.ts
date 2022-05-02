@@ -46,14 +46,10 @@ export class MemoryComponent implements OnInit {
   memory_progress: Progress = Progress.Blue;
   memory_previsualiser: boolean = false;
   sound: boolean = false;
+  image:any=[];
   memory_tmp_affichage: string = "5";
-<<<<<<< HEAD
   memory_list: Memory[] = SessionsComponent.memory_list;
-  list:any = {id:1,bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],pair:this.memory_nbTile,tmps:this.memory_tmp_affichage,voca:0};
-=======
-  memory_list: Memory[] = []
-  list: any = { bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: 0 };
->>>>>>> ecffa2fa729e05d24481273d76802775fdf8b6f2
+  list:any = {image:this.image.toString(),id:1,bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],pair:this.memory_nbTile,tmps:this.memory_tmp_affichage,voca:0};
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
@@ -468,6 +464,8 @@ export class MemoryComponent implements OnInit {
   addImage(img: Image): void {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
+      this.image.push(img.id);
+      this.list['image']=this.image.toString();
     }
   }
 
@@ -475,6 +473,8 @@ export class MemoryComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
+      this.image.splice(index,1);
+      this.list['image']=this.image.toString();
     }
   }
 
