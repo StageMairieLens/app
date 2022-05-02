@@ -39,6 +39,26 @@ export class BoyGirlGameComponent implements OnInit {
       
     });
   }
+  onSend_delete(id:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<id.lenght;i++){
+      formData.append('id[]',id[i]);
+    }*/
+    formData.append('bg_delete',id);
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res);
+        
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
   data = [];
   recup(donne:any){
     this.jeuxService.recup_bg(donne).subscribe(data =>{

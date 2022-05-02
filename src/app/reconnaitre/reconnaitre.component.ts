@@ -63,7 +63,29 @@ export class ReconnaitreComponent implements OnInit {
       
     });
   }
+ 
+  onSend_delete(id:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<id.lenght;i++){
+      formData.append('id[]',id[i]);
+    }*/
+    formData.append('reconnaitre_delete',id);
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res);
+        
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
   ngOnInit(): void {
+    //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
     this.recup(this.data);
     console.log(this.data);
     if (this.r != null) {

@@ -120,10 +120,30 @@ export class MemoryComponent implements OnInit {
     })
 
   }
-  reponse: any;
-  onSend(list: any) {
+  onSend_delete(id:any){
 
-    const formData: FormData = new FormData();
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<id.lenght;i++){
+      formData.append('id[]',id[i]);
+    }*/
+    formData.append('memory_delete',id);
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res);
+
+      },
+
+      error  :err =>{
+        console.log(err);
+      },
+
+    });
+  }
+  reponse:any;
+  onSend(list:any){
+
+    const formData : FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
