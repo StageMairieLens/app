@@ -245,6 +245,7 @@
             <label for="puzzle_bg_color_input" class="form-label align-middle">Couleur d'arriére plan
               <input type="color" class="form-control form-control-color"
                 (change)="this.puzzle_bg_color = puzzle_bg_color_input.value " #puzzle_bg_color_input
+                (change)="this.list['bg_color']=puzzle_bg_color_input.value">
                 value="{{this.puzzle_bg_color}}" title="Choisissez la couleur d'arriére-plan">
             </label>
           </div>
@@ -252,6 +253,7 @@
             <label for="puzzle_text_color_input" class="form-label align-middle">Couleur du texte
               <input type="color" class="form-control form-control-color"
                 (change)="this.puzzle_text_color = puzzle_text_color_input.value " #puzzle_text_color_input
+                (change)="this.list['text_color']=puzzle_text_color_input.value">
                 value="{{this.puzzle_text_color}}" title="Choisissez la couleur du texte">
             </label>
           </div>
@@ -264,6 +266,8 @@
             <label for="puzzle_title_color_input" class="form-label align-middle">Couleur du titre
               <input type="color" class="form-control form-control-color"
                 (change)="this.puzzle_title_color = puzzle_title_color_input.value " #puzzle_title_color_input
+                (change)="this.list['title_color']=puzzle_title_color_input.value">
+
                 value="{{this.puzzle_title_color}}" title="Choisissez la couleur du titre">
             </label>
           </div>
@@ -276,6 +280,7 @@
             <label for="puzzle_decoupe" class="form-label align-middle">Nombre decoupe
               <input type="number" class="form-control form-control-color"
                 (change)="this.decoupe = +puzzle_decoupe.value" #puzzle_decoupe value="{{this.decoupe}}"
+                (change)="this.list['decoupe']=puzzle_decoupe.value">
                 title="Choisissez le nombre de decoupe">
             </label>
           </div>
@@ -293,6 +298,8 @@
               <input type="color" class="form-control form-control-color"
                 (change)="this.puzzle_button_bg_color = puzzle_button_bg_color_input.value "
                 #puzzle_button_bg_color_input value="{{this.puzzle_button_bg_color}}"
+                (change)="this.list['button_bg_color']=puzzle_button_bg_color_input.value">
+
                 title="Choisissez la couleur d'arriére-plan du bouton">
             </label>
           </div>
@@ -305,6 +312,7 @@
               <input type="color" class="form-control form-control-color"
                 (change)="this.puzzle_button_text_color = puzzle_button_text_color_input.value "
                 #puzzle_button_text_color_input value="{{this.puzzle_button_text_color}}"
+                (change)="this.list['button_text_color']=puzzle_button_text_color_input.value">
                 title="Choisissez la couleur du texte du bouton">
             </label>
           </div>
@@ -324,24 +332,30 @@
           <mat-radio-group aria-label="Choisissez un type d'écriture">
 
             <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CURSIF'" value="Cursif"
-              (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px" checked>
+              (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px" checked
+              (change)="this.list['ecri']='CURSIF' ">
               Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CURSIF'" value="Cursif"
-              (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px">
+              (change)="this.puzzle_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
+              (change)="this.list['ecri']='CURSIF' ">
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'CAPITAL'" value="Capital"
-              (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked>CAPITAL
+              (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
+              (change)="this.list['ecri']='CAPITAL' ">CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'CAPITAL'" value="Capital"
-              (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+              (change)="this.puzzle_type_ecriture = 'CAPITAL'" style="font-size : 40px"
+              (change)="this.list['ecri']='CAPITAL' ">CAPITAL
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.puzzle_type_ecriture == 'SCRIPT'" value="Script"
-              (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+              (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked
+              (change)="this.list['ecri']='SCRIPT' ">Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.puzzle_type_ecriture != 'SCRIPT'" value="Script"
-              (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+              (change)="this.puzzle_type_ecriture = 'SCRIPT'" style="font-size : 40px"
+              (change)="this.list['ecri']='SCRIPT' ">Script
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -353,7 +367,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer
+          <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()" mat-raised-button>Créer
             le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>
