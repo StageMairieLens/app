@@ -321,7 +321,7 @@
       <div class="card-body selectImage_container text-center align-top">
         <h5 class="card-header" style="color : black">Listes des images</h5>
         <figure class="figure" *ngFor="let image of this.liste_image">
-          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image) ">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)  ">
           
           <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
         </figure>

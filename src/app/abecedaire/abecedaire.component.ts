@@ -60,8 +60,9 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_button_text_color: string = "#ffffff";
   abecedaire_type_ecriture: string = "script";
   abecedaire_isVocaliser: boolean = false;
+  image:any=[];
   abecedaire_previsualiser: boolean = false;
-  list:any = {id:1,bg_color:this.abecedaire_bg_color,text_color:this.abecedaire_text_color,gaw_color:this.abecedaire_good_answer_color,waw_color:this.abecedaire_wrong_answer_color,button_bg_color:this.abecedaire_button_bg_color,button_text_color:this.abecedaire_button_text_color,progress:'blue',ecri:this.abecedaire_type_ecriture,voca:0};
+  list:any = {image:this.image.toString(),id:1,bg_color:this.abecedaire_bg_color,text_color:this.abecedaire_text_color,gaw_color:this.abecedaire_good_answer_color,waw_color:this.abecedaire_wrong_answer_color,button_bg_color:this.abecedaire_button_bg_color,button_text_color:this.abecedaire_button_text_color,progress:'blue',ecri:this.abecedaire_type_ecriture,voca:0};
 
   constructor(private jeuxService: JeuxService,private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
@@ -312,6 +313,8 @@ export class AbecedaireComponent implements OnInit {
   addImageSelected(img: Image): void {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
+      this.image.push(img.id);
+      this.list['image']=this.image.toString();
     }
   }
 
@@ -319,6 +322,8 @@ export class AbecedaireComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
+      this.image.splice(index,1);
+      this.list['image']=this.image.toString();
     }
   }
 

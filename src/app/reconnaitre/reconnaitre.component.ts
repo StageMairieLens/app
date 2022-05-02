@@ -180,8 +180,9 @@ export class ReconnaitreComponent implements OnInit {
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
+  image:any=[];
   reconnaitre_list: Reconnaitre[] = SessionsComponent.reconnaitre_list;
-  list:any = {id:10,bg_color:this.reconnaitre_bg_color,text_color:this.reconnaitre_text_color,title_color:this.reconnaitre_title_color,gaw_color:this.reconnaitre_good_answer_color,waw_color:this.reconnaitre_wrong_answer_color,button_bg_color:this.reconnaitre_button_bg_color,button_text_color:this.reconnaitre_button_text_color,progress:'blue',ecri:this.reconnaitre_type_ecriture,voca:0};
+  list:any = {image:this.image.toString(),id:10,bg_color:this.reconnaitre_bg_color,text_color:this.reconnaitre_text_color,title_color:this.reconnaitre_title_color,gaw_color:this.reconnaitre_good_answer_color,waw_color:this.reconnaitre_wrong_answer_color,button_bg_color:this.reconnaitre_button_bg_color,button_text_color:this.reconnaitre_button_text_color,progress:'blue',ecri:this.reconnaitre_type_ecriture,voca:0};
 
   formStep: number = 0;
 
@@ -411,6 +412,9 @@ export class ReconnaitreComponent implements OnInit {
   addImage(img: Image): void {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
+      this.image.push(img.id);
+      this.list['image']=this.image.toString();
+
     }
   }
 
@@ -418,6 +422,8 @@ export class ReconnaitreComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
+      this.image.splice(index,1);
+      this.list['image']=this.image.toString();
     }
   }
 
