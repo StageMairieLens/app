@@ -85,14 +85,34 @@ export class PuzzleComponent implements OnInit {
       
     });
   }
+  onSend_update(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('puzzle_update',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
+    });
+  }
   liste_image: ImageImport[] = ImagesComponent.list_image;
   selectedImages: ImageImport[] = [];
   images = this.liste_image;
 
 
   ngOnInit(): void {
-    //this.recup(this.data);
-    //console.log(this.data);
+    this.recup(this.data);
+    console.log(this.data);
     if(this.r != null && this.play) {
       this.decoupageImage();
       this.selected_image.src = this.r!.liste_images[0].src;
@@ -136,7 +156,7 @@ export class PuzzleComponent implements OnInit {
   puzzle_previsualiser: boolean = false;
   decoupe: number = 4 ;
   formStep: number = 0;
-  list:any = {bg_color:this.puzzle_bg_color,text_color:this.puzzle_text_color,title_color:this.puzzle_title_color,button_bg_color:this.puzzle_button_bg_color,button_text_color:this.puzzle_button_text_color,ecri:this.puzzle_type_ecriture,decoupe:this.decoupe};
+  list:any = {id:1,bg_color:this.puzzle_bg_color,text_color:this.puzzle_text_color,title_color:this.puzzle_title_color,button_bg_color:this.puzzle_button_bg_color,button_text_color:this.puzzle_button_text_color,ecri:this.puzzle_type_ecriture,decoupe:this.decoupe};
 
 
 

@@ -95,7 +95,7 @@ getImage(s: string): Image[] {
   recopier_type_ecriture = "CURSIF";
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
-  list:any = {i_bg_co:this.recopier_input_bg_color,i_text_co:this.recopier_input_text_color,bg_color:this.recopier_bg_color,text_color:this.recopier_text_color,title_color:this.recopier_title_color,gaw_color:this.recopier_good_answer_color,waw_color:this.recopier_wrong_answer_color,button_bg_color:this.recopier_button_bg_color,button_text_color:this.recopier_button_text_color,progress:'blue',ecri:this.recopier_type_ecriture,voca:0};
+  list:any = {id:1,i_bg_co:this.recopier_input_bg_color,i_text_co:this.recopier_input_text_color,bg_color:this.recopier_bg_color,text_color:this.recopier_text_color,title_color:this.recopier_title_color,gaw_color:this.recopier_good_answer_color,waw_color:this.recopier_wrong_answer_color,button_bg_color:this.recopier_button_bg_color,button_text_color:this.recopier_button_text_color,progress:'blue',ecri:this.recopier_type_ecriture,voca:0};
 
   formStep: number = 0;
 
@@ -149,6 +149,26 @@ getImage(s: string): Image[] {
         console.log(err);
       },
 
+    });
+  }
+  onSend_update(list:any){
+    
+    const formData : FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('recopier_update',JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next:res=>{
+        console.log(res.name);
+        this.reponse = res;
+      },
+    
+      error  :err =>{
+        console.log(err);
+      },
+      
     });
   }
   ngOnInit(): void {
@@ -355,18 +375,23 @@ getImage(s: string): Image[] {
     switch (element.value) {
       case 'blue':
         this.recopier_progress = Progress.Blue;
+        this.list['progress']='Blue'
         break;
       case 'green':
         this.recopier_progress = Progress.Green;
+        this.list['progress']='Green';
         break;
       case 'lightblue':
         this.recopier_progress = Progress.LightBlue;
+        this.list['progress']='LightBlue';
         break;
       case 'orange':
         this.recopier_progress = Progress.Orange;
+        this.list['progress']='Orange';
         break;
       case 'red':
         this.recopier_progress = Progress.Red;
+        this.list['progress']='Red';
         break;
     }
   }
