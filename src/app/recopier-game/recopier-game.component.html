@@ -193,8 +193,8 @@
             <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th *ngIf="+element.isVocaliser">Oui</th>
-            <th *ngIf="!+element.isVocaliser">Non</th>
+            <th *ngIf="+element.isVocaliser == 1">Oui</th>
+            <th *ngIf="+element.isVocaliser == 0">Non</th>
             <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
             <!-- Actions -->
@@ -524,18 +524,17 @@
       <div class="form-row">
         <div class="col-md-12">
           <h2 class="card-title">Vocalisation</h2>
-          <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
-          (change)="this.list['voca']=0 "
+          <i *ngIf="+this.recopier_isVocaliser == 0" class="fa-solid fa-volume-xmark"
           style="margin-right : 2%; color : #ff4083"></i>
-          <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+          <i *ngIf="+this.recopier_isVocaliser == 1" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
           <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
-          (change)="this.list['voca']=true "
           (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
           </mat-slide-toggle>
-          <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
+
+          <i *ngIf="+this.recopier_isVocaliser == 1" class="fa-solid fa-volume-high"
             style="margin-left : 2%; color : #ff4083"></i>
-          <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+          <i *ngIf="+this.recopier_isVocaliser == 0" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
         </div>
       </div>
 
