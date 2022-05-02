@@ -3,7 +3,7 @@ import { Image } from '../Image'
 import { Recopier } from './Recopier'
 import { Progress } from '../Progress'
 import { ImagesComponent } from '../images/images.component'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SessionsComponent } from '../sessions/sessions.component'
 import { JeuxService } from '../jeux.service';
 
@@ -14,26 +14,25 @@ import { JeuxService } from '../jeux.service';
   styleUrls: ['./recopier-game.component.css']
 })
 export class RecopierGameComponent implements OnInit {
-  data =[];
-  constructor(private jeuxService: JeuxService, private router: Router) {
+  data : Recopier[] = [];
+  constructor(private route: ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
-    // this.r = null;
-    this.r = this.recopier_list[0];
+    this.r = null;
   }
-  recup(donne:any){
-    this.jeuxService.recup_recopier(donne).subscribe(data =>{
+  recup(tab:any){
+    this.jeuxService.recup_recopier(tab).subscribe(data =>{
       for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
+         tab.push(
+           new Recopier(data[i].id_recopier,data[i].date_recopier,this.getImage(data[i].id_image),data[i].bg_color,data[i].text_color,data[i].title_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_bo,data[i].bu_text_co,data[i].i_bg_co,data[i].i_text_co,data[i].type_ecri,data[i].isVoca)
+        );
       }
-      
-      console.log(donne[0].bg_color);
-      console.log(data[0]);
+
     })
-    
+
   }
   reponse:any;
   onSend(list:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
@@ -45,13 +44,18 @@ export class RecopierGameComponent implements OnInit {
         console.log(res.name);
         this.reponse = res;
       },
-   
+
     error  :err =>{
       console.log(err);
     },
-      
+
   });
 }
+
+  getImage(s : string) : Image[] {
+    return [];
+  }
+
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
   image: Image[] = [];
@@ -80,7 +84,6 @@ export class RecopierGameComponent implements OnInit {
   recopier_type_ecriture = "CURSIF";
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
-  recopier_list: Recopier[] = SessionsComponent.recopier_list;
   list:any = {i_bg_co:this.recopier_input_bg_color,i_text_co:this.recopier_input_text_color,bg_color:this.recopier_bg_color,text_color:this.recopier_text_color,title_color:this.recopier_title_color,gaw_color:this.recopier_good_answer_color,waw_color:this.recopier_wrong_answer_color,button_bg_color:this.recopier_button_bg_color,button_text_color:this.recopier_button_text_color,progress:'blue',ecri:this.recopier_type_ecriture,voca:0};
 
   formStep: number = 0;
@@ -107,7 +110,6 @@ export class RecopierGameComponent implements OnInit {
     Progress.Orange,
     Progress.Red
   ];
-
 
   async delay(ms: number) {
     await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
@@ -140,7 +142,8 @@ export class RecopierGameComponent implements OnInit {
   }
   ngOnInit(): void {
     this.recup(this.data);
-    console.log(this.data);
+
+
     if (this.edit) {
       this.create_game = true;
       this.selectedImages = this.r!.images;
@@ -268,7 +271,7 @@ export class RecopierGameComponent implements OnInit {
 
   setPrevisualiserRecopier(prev: boolean): void {
     if (prev == true) {
-      this.r = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
+      this.r = new Recopier(0,'',this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
       this.recopier_previsualiser = true;
     }
     else {
@@ -290,11 +293,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   deleteGameRecopier(r: Recopier): void {
-    let index = this.recopier_list.indexOf(r, 0);
-
-    if (index > -1) {
-      this.recopier_list.splice(index, 1);
-    }
+    /* TO DO */
   }
 
   redirectEditRecopier(r: Recopier): void {
@@ -371,9 +370,9 @@ export class RecopierGameComponent implements OnInit {
   }
 
   create(): void {
-    this.recopier_list.push(
-      new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
-    );
+    /* this.recopier_list.push(
+      // new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser)
+    ); */
     this.router.navigate(['/panel/Recopier']);
   }
 
