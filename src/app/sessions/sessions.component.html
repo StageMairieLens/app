@@ -331,7 +331,7 @@
       <tbody>
         <tr *ngFor="let element of this.getRecopierList()" (click)="changeJeuId(element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
-          <th>{{this.parseDate(element.date)}}</th>
+          <th>{{element.date}}</th>
           <!--Date de création du jeu-->
           <th>{{element.images.length}}</th>
           <!--Nombre d'image qui compose le jeu-->

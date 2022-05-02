@@ -159,7 +159,7 @@
 
   </div>
 
-  <div *ngIf="this.recopier_list.length != 0">
+  <div *ngIf="this.data.length != 0">
 
     <!-- Prévisualisation -->
     <div *ngIf="this.recopier_previsualiser">
@@ -188,9 +188,9 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of this.recopier_list">
+          <tr *ngFor="let element of this.data">
             <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
             <th *ngIf="element.isVocaliser">Oui</th>
@@ -233,7 +233,7 @@
   </div>
 
   <!-- Si la liste des jeu Recopier est vide -->
-  <div class="text-center" *ngIf="this.recopier_list.length == 0">
+  <div class="text-center" *ngIf="this.data.length == 0">
     <h5 class="card-title" style="color : red">Il n'y a pas de jeu Recopier créer</h5>
   </div>
 </div>
@@ -494,7 +494,7 @@
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
               (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
               (change)="this.list['ecri']='CURSIF' ">
-              
+
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
@@ -525,12 +525,12 @@
         <div class="col-md-12">
           <h2 class="card-title">Vocalisation</h2>
           <i *ngIf="!this.recopier_isVocaliser" class="fa-solid fa-volume-xmark"
-          (change)="this.list['voca']=0 "  
+          (change)="this.list['voca']=0 "
           style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
-          
+
           <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"
-          (change)="this.list['voca']=true "  
+          (change)="this.list['voca']=true "
           (change)="this.recopier_isVocaliser = vocaliserInput.checked" #vocaliserInput>
           </mat-slide-toggle>
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"

@@ -17,7 +17,7 @@ export class JeuxService {
         donne.push(data[i]);
       }
       //donne.push(data[0]);
-      
+
     })*/
   }
   recup_recopier(donne:any){
@@ -27,7 +27,7 @@ export class JeuxService {
         donne.push(data[i]);
       }
       //donne.push(data[0]);
-      
+
     })*/
   }
   recup_memory(donne:any){
@@ -37,7 +37,7 @@ export class JeuxService {
         donne.push(data[i]);
       }
       //donne.push(data[0]);
-      
+
     })*/
   }
   recup_abcd(donne:any){
@@ -47,7 +47,7 @@ export class JeuxService {
         donne.push(data[i]);
       }
       //donne.push(data[0]);
-      
+
     })*/
   }
   recup_bg(donne:any){
@@ -57,7 +57,7 @@ export class JeuxService {
         donne.push(data[i]);
       }
       //donne.push(data[0]);
-      
+
     })*/
   }
   recup_puzzle(donne:any){
@@ -67,7 +67,7 @@ export class JeuxService {
         donne.push(data[i]);
       }
       //donne.push(data[0]);
-      
+
     })*/
   }
 }

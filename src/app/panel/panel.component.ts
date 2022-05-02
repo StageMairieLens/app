@@ -17,6 +17,7 @@ import { Session } from '../sessions/Session';
 import { join } from 'path';
 import { SessionsComponent } from '../sessions/sessions.component';
 import { LoginComponent } from '../index/login/login.component';
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-panel',
@@ -27,7 +28,18 @@ export class PanelComponent implements OnInit {
 
   jeu: string | null = "";
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  recup(tab:any){
+    this.jeuxService.recup_recopier(tab).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+         tab.push(
+           new Recopier(data[i].id_recopier,data[i].date_recopier,this.getImage(data[i].id_image),data[i].bg_color,data[i].text_color,data[i].title_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_bo,data[i].bu_text_co,data[i].i_bg_co,data[i].i_text_co,data[i].type_ecri,data[i].isVoca)
+        );
+      }
+
+    })
+  }
+
+  constructor(private jeuxService: JeuxService,private router: Router, private route: ActivatedRoute) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
@@ -77,7 +89,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU RECOPIER
   recopier: Recopier | null;
-  recopier_list = SessionsComponent.recopier_list;
+  recopier_list : Recopier[] = [];
 
 
 
@@ -108,8 +120,11 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.recup(this.recopier_list)
 
-    this.panel = this.route.snapshot.paramMap.get('param1');
+
+    setTimeout(() => {
+      this.panel = this.route.snapshot.paramMap.get('param1');
 
     if (this.panel != null) {
       if (this.panel == 'create') {
@@ -225,9 +240,12 @@ export class PanelComponent implements OnInit {
         SessionsComponent.sessionActive.push(s);
       }
     }
+    },250)
 
 
   }
+
+  getImage(s : string) : Image[] { return []}
 
 
   parseDate(date: Date): string {
