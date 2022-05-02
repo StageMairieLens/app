@@ -14,57 +14,57 @@ import { JeuxService } from '../jeux.service';
   styleUrls: ['./recopier-game.component.css']
 })
 export class RecopierGameComponent implements OnInit {
-  data : Recopier[] = [];
-  constructor(private route: ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
+  data: Recopier[] = [];
+  constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
   }
-  recup(tab:any){
-    this.jeuxService.recup_recopier(tab).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
-         tab.push(
-           new Recopier(data[i].id_recopier,data[i].date_recopier,this.getImage(data[i].id_image),data[i].bg_color,data[i].text_color,data[i].title_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_bo,data[i].bu_text_co,data[i].i_bg_co,data[i].i_text_co,data[i].type_ecri,data[i].isVoca)
+  recup(tab: any) {
+    this.jeuxService.recup_recopier(tab).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        tab.push(
+          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca)
         );
       }
 
     })
 
   }
-  reponse:any;
-  onSend(list:any){
+  reponse: any;
+  onSend(list: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('recopier',JSON.stringify(list));
+    formData.append('recopier', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
 
-    error  :err =>{
-      console.log(err);
-    },
+      error: err => {
+        console.log(err);
+      },
 
-  });
-}
+    });
+  }
 
-getImage(s: string): Image[] {
-  let res = [];
-  let tab = s.split(',');
-  for(let i of tab) {
-    for(let j of ImagesComponent.list_image) {
-      if(+i == j.id) {
-        res.push(j);
-        break;
+  getImage(s: string): Image[] {
+    let res = [];
+    let tab = s.split(',');
+    for (let i of tab) {
+      for (let j of ImagesComponent.list_image) {
+        if (+i == j.id) {
+          res.push(j);
+          break;
+        }
       }
     }
+    return res;
   }
-  return res;
- }
 
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -74,6 +74,7 @@ getImage(s: string): Image[] {
   typeEcriture: string = "CAPITAL"; // default
   waitToSend: boolean = false;
   @Input() r: Recopier | null;
+  id_game: number | null = null;
   @Input() showTitle: boolean = true;
   @Input() play: boolean = true;
   @Input() showList: boolean = false;
@@ -95,7 +96,7 @@ getImage(s: string): Image[] {
   recopier_type_ecriture = "CURSIF";
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
-  list:any = {id:1,i_bg_co:this.recopier_input_bg_color,i_text_co:this.recopier_input_text_color,bg_color:this.recopier_bg_color,text_color:this.recopier_text_color,title_color:this.recopier_title_color,gaw_color:this.recopier_good_answer_color,waw_color:this.recopier_wrong_answer_color,button_bg_color:this.recopier_button_bg_color,button_text_color:this.recopier_button_text_color,progress:'blue',ecri:this.recopier_type_ecriture,voca:0};
+  list: any = { id: this.id_game, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: 0 };
 
   formStep: number = 0;
 
@@ -131,44 +132,44 @@ getImage(s: string): Image[] {
       this.sendAnswer((<HTMLInputElement>$event.target).value, this.r!.images[this.showImageCpt]);
     }
   }
-  onSend_delete(id:any){
+  onSend_delete(id: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
     }*/
-    formData.append('recopier_delete',id);
+    formData.append('recopier_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res);
 
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  onSend_update(list:any){
-    
-    const formData : FormData = new FormData();
+  onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('recopier_update',JSON.stringify(list));
+    formData.append('recopier_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
-    
-      error  :err =>{
+
+      error: err => {
         console.log(err);
       },
-      
+
     });
   }
   ngOnInit(): void {
@@ -190,6 +191,8 @@ getImage(s: string): Image[] {
       this.recopier_progress = this.r!.color_progress_bar;
       this.recopier_type_ecriture = this.r!.typeEcriture;
       this.recopier_isVocaliser = this.r!.isVocaliser;
+      this.list = { id: +this.r!.id, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: 0 };
+
     }
   }
 
@@ -302,7 +305,7 @@ getImage(s: string): Image[] {
 
   setPrevisualiserRecopier(prev: boolean): void {
     if (prev == true) {
-      this.r = new Recopier(0,'',this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
+      this.r = new Recopier(0, '', this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser);
       this.recopier_previsualiser = true;
     }
     else {
@@ -327,8 +330,8 @@ getImage(s: string): Image[] {
     this.onSend_delete(r.id);
     setTimeout(() => {
       this.data = [];
-    this.recup(this.data);
-    },200)
+      this.recup(this.data);
+    }, 200)
   }
 
   redirectEditRecopier(r: Recopier): void {
@@ -375,23 +378,23 @@ getImage(s: string): Image[] {
     switch (element.value) {
       case 'blue':
         this.recopier_progress = Progress.Blue;
-        this.list['progress']='Blue'
+        this.list['progress'] = 'Blue'
         break;
       case 'green':
         this.recopier_progress = Progress.Green;
-        this.list['progress']='Green';
+        this.list['progress'] = 'Green';
         break;
       case 'lightblue':
         this.recopier_progress = Progress.LightBlue;
-        this.list['progress']='LightBlue';
+        this.list['progress'] = 'LightBlue';
         break;
       case 'orange':
         this.recopier_progress = Progress.Orange;
-        this.list['progress']='Orange';
+        this.list['progress'] = 'Orange';
         break;
       case 'red':
         this.recopier_progress = Progress.Red;
-        this.list['progress']='Red';
+        this.list['progress'] = 'Red';
         break;
     }
   }
@@ -415,20 +418,8 @@ getImage(s: string): Image[] {
   }
 
 
-save(): void {
-  this.r!.images = this.selectedImages;
-  this.r!.bg_color = this.recopier_bg_color;
-  this.r!.text_color = this.recopier_text_color;
-  this.r!.title_color = this.recopier_title_color;
-  this.r!.good_answer_color = this.recopier_good_answer_color;
-  this.r!.wrong_answer_color = this.recopier_wrong_answer_color;
-  this.r!.button_bg_color = this.recopier_button_bg_color;
-  this.r!.button_text_color = this.recopier_button_text_color;
-  this.r!.input_bg_color = this.recopier_input_bg_color;
-  this.r!.input_text_color = this.recopier_input_text_color;
-  this.r!.color_progress_bar = this.recopier_progress;
-  this.r!.typeEcriture = this.recopier_type_ecriture;
-  this.r!.isVocaliser = this.recopier_isVocaliser;
-  this.router.navigate(['/panel/Recopier']);
-}
+  save(): void {
+    this.onSend_update(this.list);
+    this.router.navigate(['/panel/Recopier']);
+  }
 }
