@@ -198,7 +198,7 @@
         <tbody>
           <tr *ngFor="let element of this.memory_list">
             <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
             <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
             <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->

@@ -256,7 +256,7 @@ export class SessionsComponent implements OnInit {
 
 
   static memory_list: Memory[] = [
-    new Memory(ImagesComponent.list_image.slice(1), ImagesComponent.list_image[0], true, 18, ['image', 'image'], "#3bb8c9", "#ffffff", "#3498db", "#e74c3c", Progress.Blue, "5")
+    // new Memory(ImagesComponent.list_image.slice(1), ImagesComponent.list_image[0], true, 18, ['image', 'image'], "#3bb8c9", "#ffffff", "#3498db", "#e74c3c", Progress.Blue, "5")
   ];
 
   getMemoryList() : Memory[] { return SessionsComponent.memory_list}

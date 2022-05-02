@@ -33,8 +33,6 @@ const routes: Routes = [
   { path: 'session', component: SessionsComponent },
   { path: 'session/:id', component: SessionsComponent },
   { path: 'images', component: ImagesComponent },
-  { path: 'panel/Recopier/:param1/:id', component: RecopierGameComponent },
-
 ];
 
 @NgModule({

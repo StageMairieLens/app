@@ -28,18 +28,18 @@ export class PanelComponent implements OnInit {
 
   jeu: string | null = "";
 
-  recup(tab:any){
-    this.jeuxService.recup_recopier(tab).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
-         tab.push(
-           new Recopier(data[i].id_recopier,data[i].date_recopier,this.getImage(data[i].id_image),data[i].bg_color,data[i].text_color,data[i].title_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_bo,data[i].bu_text_co,data[i].i_bg_co,data[i].i_text_co,data[i].type_ecri,data[i].isVoca)
+  recup(tab: any) {
+    this.jeuxService.recup_recopier(tab).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        tab.push(
+          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca)
         );
       }
 
     })
   }
 
-  constructor(private jeuxService: JeuxService,private router: Router, private route: ActivatedRoute) {
+  constructor(private jeuxService: JeuxService, private router: Router, private route: ActivatedRoute) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
@@ -89,7 +89,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU RECOPIER
   recopier: Recopier | null;
-  recopier_list : Recopier[] = [];
+  recopier_list: Recopier[] = [];
 
 
 
@@ -126,126 +126,138 @@ export class PanelComponent implements OnInit {
     setTimeout(() => {
       this.panel = this.route.snapshot.paramMap.get('param1');
 
-    if (this.panel != null) {
-      if (this.panel == 'create') {
-        this.jeu = this.route.snapshot.paramMap.get('param2');
-        if (this.jeu != null) {
-          if (this.optionGame.includes(this.jeu)) {
-            this.selectedGame = this.jeu;
+      if (this.panel != null) {
+        if (this.panel == 'create') {
+          this.jeu = this.route.snapshot.paramMap.get('param2');
+          if (this.jeu != null) {
+            if (this.optionGame.includes(this.jeu)) {
+              this.selectedGame = this.jeu;
+            } else {
+              this.router.navigate(['/panel']);
+            }
           } else {
-            this.router.navigate(['/panel']);
+            this.selectedGame = "";
           }
-        } else {
-          this.selectedGame = "";
         }
-      }
 
-      if (this.panel == 'sessions') {
-        this.panel_option = this.route.snapshot.paramMap.get('param2');
+        if (this.panel == 'sessions') {
+          this.panel_option = this.route.snapshot.paramMap.get('param2');
 
-        if (this.panel_option != null) {
-          if (this.panel_option == 'edit') {
-            if (this.route.snapshot.paramMap.get('param3') != null) {
-              this.session_id = +this.route.snapshot.paramMap.get('param3')!;
-              if (this.session_id == null) {
-                this.router.navigate(['/panel/sessions']);
+          if (this.panel_option != null) {
+            if (this.panel_option == 'edit') {
+              if (this.route.snapshot.paramMap.get('param3') != null) {
+                this.session_id = +this.route.snapshot.paramMap.get('param3')!;
+                if (this.session_id == null) {
+                  this.router.navigate(['/panel/sessions']);
+                }
               }
             }
-          }
-          else if (this.panel_option == 'active') {
-            this.showActive = true;
-          }
+            else if (this.panel_option == 'active') {
+              this.showActive = true;
+            }
 
-          else if (this.panel_option == 'create') {
-            this.create_session = true;
-          }
+            else if (this.panel_option == 'create') {
+              this.create_session = true;
+            }
 
-          else {
+            else {
+              this.router.navigate(['/panel/sessions']);
+            }
+          } else {
             this.router.navigate(['/panel/sessions']);
           }
-        } else {
-          this.router.navigate(['/panel/sessions']);
         }
-      }
 
-      if (this.optionGame.includes(this.panel!)) {
-        this.selectedGame = this.panel;
-        this.panel_option = this.route.snapshot.paramMap.get('param2');
+        if (this.optionGame.includes(this.panel!)) {
+          this.selectedGame = this.panel;
+          this.panel_option = this.route.snapshot.paramMap.get('param2');
 
-        if (this.panel_option == null) {
-          this.panel_option = 'showList';
-        }
-        else if (this.panel_option == 'edit') {
+          if (this.panel_option == null) {
+            this.panel_option = 'showList';
+          }
+          else if (this.panel_option == 'edit') {
 
-          if (this.route.snapshot.paramMap.get('param3') != null) {
-            this.id_game = +this.route.snapshot.paramMap.get('param3')!;
+              if (this.route.snapshot.paramMap.get('param3') != null) {
+                this.id_game = +this.route.snapshot.paramMap.get('param3')!;
 
-            if (this.id_game == null) {
-              this.router.navigate(['/panel/', this.selectedGame]);
-            }
-            else if (this.selectedGame == 'Recopier') {
-              if (this.getRecopier()! == null) {
-                this.router.navigate(['/panel/Recopier']);
-              } else {
-                this.recopier = this.getRecopier();
-              }
-            }
-            else if (this.selectedGame == 'Memory') {
-              if (this.getMemory()! == null) {
-                this.router.navigate(['/panel/Memory']);
-              } else {
-                this.memory = this.getMemory();
-              }
-            }
+                if (this.id_game == null) {
+                  this.router.navigate(['/panel/', this.selectedGame]);
+                }
+                else if (this.selectedGame == 'Recopier') {
+                  if (this.getRecopier()! == null) {
+                    this.router.navigate(['/panel/Recopier']);
+                  } else {
+                    this.recopier = this.getRecopier();
+                  }
+                }
+                else if (this.selectedGame == 'Memory') {
+                  if (this.getMemory()! == null) {
+                    this.router.navigate(['/panel/Memory']);
+                  } else {
+                    this.memory = this.getMemory();
+                  }
+                }
 
-            else if (this.selectedGame == 'Reconnaitre') {
-              if (this.getReconnaitre()! == null) {
-                this.router.navigate(['/panel/Reconnaitre']);
-              } else {
-                this.reconnaitre = this.getReconnaitre();
-              }
-            }
-            else if (this.selectedGame == 'Puzzle') {
-              if (this.getPuzzle()! == null) {
-                this.router.navigate(['/panel/Puzzle']);
-              } else {
-                this.puzzle = this.getPuzzle();
-              }
-            }
-            else if (this.selectedGame == 'Abecedaire') {
-              if (this.getAbecedaire()! == null) {
-                this.router.navigate(['/panel/Abecedaire']);
-              } else {
-                this.abecedaire = this.getAbecedaire();
-              }
-            }
-            else if (this.selectedGame == 'Fille&Garçon') {
-              if (this.getBoyGirl()! == null) {
-                this.router.navigate(['/panel/Fille&Garçon']);
-              } else {
-                this.boygirl = this.getBoyGirl();
-              }
-            }
+                else if (this.selectedGame == 'Reconnaitre') {
+                  if (this.getReconnaitre()! == null) {
+                    this.router.navigate(['/panel/Reconnaitre']);
+                  } else {
+                    this.reconnaitre = this.getReconnaitre();
+                  }
+                }
+                else if (this.selectedGame == 'Puzzle') {
+                  if (this.getPuzzle()! == null) {
+                    this.router.navigate(['/panel/Puzzle']);
+                  } else {
+                    this.puzzle = this.getPuzzle();
+                  }
+                }
+                else if (this.selectedGame == 'Abecedaire') {
+                  if (this.getAbecedaire()! == null) {
+                    this.router.navigate(['/panel/Abecedaire']);
+                  } else {
+                    this.abecedaire = this.getAbecedaire();
+                  }
+                }
+                else if (this.selectedGame == 'Fille&Garçon') {
+                  if (this.getBoyGirl()! == null) {
+                    this.router.navigate(['/panel/Fille&Garçon']);
+                  } else {
+                    this.boygirl = this.getBoyGirl();
+                  }
+                }
 
+              }
+          }
+          else if (this.panel_option != 'create') {
+            this.router.navigate(['/panel/', this.selectedGame]);
           }
         }
-        else if (this.panel_option != 'create') {
-          this.router.navigate(['/panel/', this.selectedGame]);
+      }
+
+      for (let s of SessionsComponent.data) {
+        if (s.isActive) {
+          SessionsComponent.sessionActive.push(s);
         }
       }
-    }
-
-    for (let s of SessionsComponent.data) {
-      if (s.isActive) {
-        SessionsComponent.sessionActive.push(s);
-      }
-    }
-    },250)
+    },100)
 
 
   }
 
-  getImage(s : string) : Image[] { return []}
+  getImage(s: string): Image[] {
+    let res = [];
+    let tab = s.split(',');
+    for(let i of tab) {
+      for(let j of ImagesComponent.list_image) {
+        if(+i == j.id) {
+          res.push(j);
+          break;
+        }
+      }
+    }
+    return res;
+   }
 
 
   parseDate(date: Date): string {
