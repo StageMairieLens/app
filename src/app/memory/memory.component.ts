@@ -202,8 +202,9 @@ export class MemoryComponent implements OnInit {
 
   // Initialisation
   ngOnInit(): void {
-    this.recup(this.data);
-    console.log(this.data);
+    if (!this.play) {
+      this.recup(this.data);
+    }
 
 
     if (this.game == null || this.game.derriere == null) return;
@@ -233,7 +234,7 @@ export class MemoryComponent implements OnInit {
       }
     }
 
-    for(let i of this.selectedImages) {
+    for (let i of this.selectedImages) {
       this.image.push(i.id);
     }
 
@@ -404,7 +405,7 @@ export class MemoryComponent implements OnInit {
     setTimeout(() => {
       this.data = []
       this.recup(this.data);
-    },200)
+    }, 200)
   }
 
   parseDate(date: Date): string {

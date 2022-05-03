@@ -227,11 +227,7 @@ export class SessionsComponent implements OnInit {
 
   getRecopierList() : Recopier[] { return SessionsComponent.recopier_list}
 
-  static reconnaitre_list: Reconnaitre[] = [
-    new Reconnaitre([
-      ImagesComponent.list_image[0]
-    ], "#3bb8c9", "#ffffff", "#000000", "#0dff00", "#ff0000", Progress.Blue, "#0f73b1", "#ffffff", "SCRIPT", false)
-  ];
+  static reconnaitre_list: Reconnaitre[] = [];
 
   getReconnaitreList() : Reconnaitre[] { return SessionsComponent.reconnaitre_list}
 

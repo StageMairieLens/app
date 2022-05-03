@@ -55,7 +55,7 @@ export class RecopierGameComponent implements OnInit {
   getImage(s: string): Image[] {
     let res = [];
     let tab = s.split(',');
-    if(s.length != 0) {
+    if (s.length != 0) {
       for (let i of tab) {
         for (let j of ImagesComponent.list_image) {
           if (+i == j.id) {
@@ -66,6 +66,8 @@ export class RecopierGameComponent implements OnInit {
       }
     }
     return res;
+
+
   }
 
 
@@ -176,7 +178,10 @@ export class RecopierGameComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.recup(this.data);
+
+    if (!this.play) {
+      this.recup(this.data);
+    }
 
 
     if (this.edit) {
@@ -199,7 +204,7 @@ export class RecopierGameComponent implements OnInit {
         this.recopier_isVocaliser = false;
       }
 
-      for(let i of this.selectedImages) {
+      for (let i of this.selectedImages) {
         this.image2.push(i.id);
       }
 
@@ -428,7 +433,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   create(): void {
-    this.list = { image : this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser };
+    this.list = { image: this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser };
     this.onSend(this.list);
     this.router.navigate(['/panel/Recopier']);
   }
