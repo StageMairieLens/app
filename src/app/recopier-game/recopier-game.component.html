@@ -433,7 +433,7 @@
           <div class="col-md-8">
             <select class="form-control" aria-label="Default select example" #progressSelectValue
               (change)="changeProgressValue('Recopier',progressSelectValue)">
-              <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+              <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}" [selected]=" p === this.recopier_progress"
                 ng-selected="p == this.recopier_progress" #progressValue>
                 <p *ngIf="p == 'blue'">Bleu</p>
                 <p *ngIf="p == 'green'">Vert</p>
@@ -446,31 +446,31 @@
         </div>
         <div class="form-row">
           <div class="col-md-12">
-            <div class="progress" *ngIf="this.recopier_progress == 'blue' "(change)="this.list['progress']='blue' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'blue'">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                 aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'green' "(change)="this.list['progress']='green' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'green'">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'lightblue' "(change)="this.list['progress']='lightblue' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'lightblue'">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-info"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'orange' "(change)="this.list['progress']='orange' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'orange'">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
             </div>
 
-            <div class="progress" *ngIf="this.recopier_progress == 'red' "(change)="this.list['progress']='red' ">
+            <div class="progress" *ngIf="this.recopier_progress == 'red'">
               <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
                 role="progressbar" aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100' style="width : 50%">
               </div>
@@ -528,7 +528,7 @@
           style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-          <mat-slide-toggle [(ngModel)]="this.recopier_isVocaliser"></mat-slide-toggle>
+          <mat-slide-toggle (change)="this.list['voca']=+this.recopier_isVocaliser" [(ngModel)]="this.recopier_isVocaliser"></mat-slide-toggle>
 
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
             style="margin-left : 2%; color : #ff4083"></i>

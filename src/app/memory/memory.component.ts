@@ -186,16 +186,18 @@ export class MemoryComponent implements OnInit {
   getImage(s: string): Image[] {
     let res = [];
     let tab = s.split(',');
-    for(let i of tab) {
-      for(let j of ImagesComponent.list_image) {
-        if(+i == j.id) {
-          res.push(j);
-          break;
+    if(s.length != 0) {
+      for (let i of tab) {
+        for (let j of ImagesComponent.list_image) {
+          if (+i == j.id) {
+            res.push(j);
+            break;
+          }
         }
       }
     }
     return res;
-   }
+  }
 
 
   // Initialisation
