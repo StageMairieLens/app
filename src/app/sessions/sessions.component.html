@@ -436,7 +436,7 @@
       <tbody>
         <tr *ngFor="let element of this.getBoyGirlList()" (click)="changeJeuId(element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
-          <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
           <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
           <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->

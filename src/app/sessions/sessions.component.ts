@@ -232,7 +232,7 @@ export class SessionsComponent implements OnInit {
   getReconnaitreList() : Reconnaitre[] { return SessionsComponent.reconnaitre_list}
 
   static boygirl_list: BoyGirl[] = [
-    new BoyGirl(['girl', 'girl'], [], "#3bb8c9", "#ffc0cb", "#add9e6", "#fea500", "#ffc0cb", "#0f73b1", "#000000", "#000000", "#000000", "#000000", "#ffffff", "#ffffff", "#ffffff", "SCRIPT")
+    new BoyGirl(0,'',['girl', 'girl'], [], "#3bb8c9", "#ffc0cb", "#add9e6", "#fea500", "#ffc0cb", "#0f73b1", "#000000", "#000000", "#000000", "#000000", "#ffffff", "#ffffff", "#ffffff", "SCRIPT")
   ];
 
   getBoyGirlList() : BoyGirl[] { return SessionsComponent.boygirl_list}
