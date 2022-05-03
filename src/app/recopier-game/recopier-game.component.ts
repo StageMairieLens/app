@@ -433,7 +433,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   create(): void {
-    this.list = { image: this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser };
+    this.list = { image: this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: this.recopier_progress, ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser };
     this.onSend(this.list);
     this.router.navigate(['/panel/Recopier']);
   }

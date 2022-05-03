@@ -63,6 +63,18 @@ export class PanelComponent implements OnInit {
 
   }
 
+  recupAbecedaire(donne:any){
+    this.jeuxService.recup_abcd(donne).subscribe(data =>{
+      for(var i = 0;data[i]!= null;i++){
+        donne.push(
+          new Abecedaire(data[i].id_abcdr,data[i].date_abcdr,this.getImage(data[i].id_image),data[i].bg_color,data[i].text_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_co,data[i].bu_txt_co,data[i].isVoca,data[i].type_ecri)
+        );
+      }
+    })
+
+  }
+
+
   constructor(private jeuxService: JeuxService, private router: Router, private route: ActivatedRoute) {
     // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
@@ -132,7 +144,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
-  abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
+  abecedaire_list: Abecedaire[] = [];
 
   //VARIABLE JEU MEMORY
   memory: Memory | null;
@@ -147,7 +159,7 @@ export class PanelComponent implements OnInit {
     this.recupRecopier(this.recopier_list)
     this.recupMemory(this.memory_list)
     this.recupReconnaitre(this.reconnaitre_list)
-
+    this.recupAbecedaire(this.abecedaire_list)
 
     setTimeout(() => {
       this.panel = this.route.snapshot.paramMap.get('param1');

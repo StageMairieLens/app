@@ -238,11 +238,8 @@ export class SessionsComponent implements OnInit {
   getBoyGirlList() : BoyGirl[] { return SessionsComponent.boygirl_list}
 
 
-  static abecedaire_list: Abecedaire[] = [
-    new Abecedaire([
-      ImagesComponent.list_image[0], ImagesComponent.list_image[1]
-    ], '#745154', "#ffffff", "#3498db", "#e74c3c", Progress.Blue, "#f39c12", "#ffffff", false, "script")
-  ];
+  static abecedaire_list: Abecedaire[] = []
+
 
   getAbecedaireList() : Abecedaire[] { return SessionsComponent.abecedaire_list}
 

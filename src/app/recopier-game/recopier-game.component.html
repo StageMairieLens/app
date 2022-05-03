@@ -37,7 +37,7 @@
         <h5 *ngIf="this.r!.typeEcriture == 'SCRIPT'" class="card-title title_image" id="image_title"
           [ngStyle]="{color : this.r!.title_color}">{{this.r!.images[this.showImageCpt].getNom()}}</h5>
 
-        <div *ngIf="this.r!.isVocaliser">
+        <div *ngIf="+this.r!.isVocaliser == 1">
           <button mat-button style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;" (click)="vocalise()">
             <i class="fa-solid fa-volume-high" style="color: black"></i>
           </button>
