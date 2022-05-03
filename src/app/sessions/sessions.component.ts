@@ -223,34 +223,23 @@ export class SessionsComponent implements OnInit {
     new Session('test6', new Date(), Game.Memory, 0, true, []),
   ];
 
-  static recopier_list: Recopier[] = [
-    // new Recopier([
-    //   ImagesComponent.list_image[0], ImagesComponent.list_image[1]
-    // ], '#777777', "#ffffff", "#000000", "#0dff00", "#ff0000", Progress.Blue, "#0f73b1", "#ffffff", "#ffffff", "#000000", "CURSIF", false)
-  ];
+  static recopier_list: Recopier[] = [];
 
   getRecopierList() : Recopier[] { return SessionsComponent.recopier_list}
 
-  static reconnaitre_list: Reconnaitre[] = [
-    new Reconnaitre([
-      ImagesComponent.list_image[0]
-    ], "#3bb8c9", "#ffffff", "#000000", "#0dff00", "#ff0000", Progress.Blue, "#0f73b1", "#ffffff", "SCRIPT", false)
-  ];
+  static reconnaitre_list: Reconnaitre[] = [];
 
   getReconnaitreList() : Reconnaitre[] { return SessionsComponent.reconnaitre_list}
 
   static boygirl_list: BoyGirl[] = [
-    new BoyGirl(['girl', 'girl'], [], "#3bb8c9", "#ffc0cb", "#add9e6", "#fea500", "#ffc0cb", "#0f73b1", "#000000", "#000000", "#000000", "#000000", "#ffffff", "#ffffff", "#ffffff", "SCRIPT")
+    new BoyGirl(0,'',['girl', 'girl'], [], "#3bb8c9", "#ffc0cb", "#add9e6", "#fea500", "#ffc0cb", "#0f73b1", "#000000", "#000000", "#000000", "#000000", "#ffffff", "#ffffff", "#ffffff", "SCRIPT")
   ];
 
   getBoyGirlList() : BoyGirl[] { return SessionsComponent.boygirl_list}
 
 
-  static abecedaire_list: Abecedaire[] = [
-    new Abecedaire([
-      ImagesComponent.list_image[0], ImagesComponent.list_image[1]
-    ], '#745154', "#ffffff", "#3498db", "#e74c3c", Progress.Blue, "#f39c12", "#ffffff", false, "script")
-  ];
+  static abecedaire_list: Abecedaire[] = []
+
 
   getAbecedaireList() : Abecedaire[] { return SessionsComponent.abecedaire_list}
 

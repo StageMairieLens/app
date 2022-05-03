@@ -4,28 +4,28 @@ import { Progress } from '../Progress'
 export class Abecedaire {
     id: number;
     static nb: number = 0;
-  
+
     images: Image[];
-    date : Date;
+    date : string;
     bg_color: string;
     text_color: string;
-  
+
     good_answer_color: string;
     wrong_answer_color: string;
-  
+
     button_bg_color: string;
     button_text_color: string;
-  
+
     isVocaliser: boolean;
 
     color_progress_bar: Progress;
-  
+
     typeEcriture: string;
-  
-    constructor(images: Image[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, isVocaliser: boolean, typeEcriture: string) {
-      this.id = Abecedaire.nb++;
+
+    constructor(id : number , date : string,images: Image[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, isVocaliser: boolean, typeEcriture: string) {
+      this.id = id;
       this.images = images;
-      this.date = new Date();
+      this.date = date;
       this.bg_color = bg_color;
       this.text_color = text_color;
       this.good_answer_color = good_answer_color;
@@ -36,5 +36,5 @@ export class Abecedaire {
       this.isVocaliser = isVocaliser;
       this.typeEcriture = typeEcriture;
     }
-  
+
   }

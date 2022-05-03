@@ -46,10 +46,10 @@ export class MemoryComponent implements OnInit {
   memory_progress: Progress = Progress.Blue;
   memory_previsualiser: boolean = false;
   sound: boolean = false;
-  image:any=[];
+  image: any = [];
   memory_tmp_affichage: string = "5";
   memory_list: Memory[] = SessionsComponent.memory_list;
-  list:any = {image:this.image.toString(),id:1,bg_color:this.memory_bg_color,text_color:this.memory_text_color,gaw_color:this.memory_good_answer_color,waw_color:this.memory_wrong_answer_color,progress:'blue',ecri1:this.memory_settings[0],ecri2:this.memory_settings[1],pair:this.memory_nbTile,tmps:this.memory_tmp_affichage,voca:0};
+  list: any = { image: this.image.toString(), id: 1, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: 0 };
 
   liste_image: Image[] = ImagesComponent.list_image;
   selectedImages: Image[] = [];
@@ -110,61 +110,61 @@ export class MemoryComponent implements OnInit {
     this.game = null;
     this.derriere = null;
   }
-  data : Memory[] = [];
+  data: Memory[] = [];
   recup(donne: any) {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0,data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
         );
-        }
+      }
     })
 
   }
-  onSend_delete(id:any){
+  onSend_delete(id: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
     }*/
-    formData.append('memory_delete',id);
+    formData.append('memory_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res);
 
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  onSend_update(list:any){
+  onSend_update(list: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('memory_update',JSON.stringify(list));
+    formData.append('memory_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  reponse:any;
-  onSend(list:any){
+  reponse: any;
+  onSend(list: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
@@ -186,22 +186,27 @@ export class MemoryComponent implements OnInit {
   getImage(s: string): Image[] {
     let res = [];
     let tab = s.split(',');
-    for(let i of tab) {
-      for(let j of ImagesComponent.list_image) {
-        if(+i == j.id) {
-          res.push(j);
-          break;
+    if (s.length != 0) {
+      for (let i of tab) {
+        for (let j of ImagesComponent.list_image) {
+          if (+i == j.id) {
+            res.push(j);
+            break;
+          }
         }
       }
     }
     return res;
-   }
+  }
 
 
   // Initialisation
   ngOnInit(): void {
-    this.recup(this.memory_list);
-    console.log(this.memory_list);
+    if (!this.play) {
+      this.recup(this.data);
+    }
+
+
     if (this.game == null || this.game.derriere == null) return;
     this.nbTile = this.game.nbTile;
     this.setting = this.game.setting;
@@ -222,13 +227,25 @@ export class MemoryComponent implements OnInit {
       this.memory_wrong_answer_color = this.game!.wrong_answer_color;
       this.memory_progress = this.game!.color_progress_bar;
       this.memory_tmp_affichage = this.game!.tmpAffichage;
+      if (+this.game!.isVocaliser == 1) {
+        this.memory_isVocaliser = true;
+      } else {
+        this.memory_isVocaliser = false;
+      }
     }
+
+    for (let i of this.selectedImages) {
+      this.image.push(i.id);
+    }
+
+    this.list = { image: this.image.toString(), id: this.game!.id, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: +this.memory_isVocaliser };
+
 
   }
 
   // Initialisation
   ngAfterViewInit(): void {
-    if (this.game == null) return;
+    if (this.game == null || this.game!.images.length == 0) return;
     this.tiles = [this.tile1, this.tile2, this.tile3, this.tile4, this.tile5, this.tile6, this.tile7, this.tile8, this.tile9, this.tile10, this.tile11, this.tile12, this.tile13, this.tile14, this.tile15, this.tile16, this.tile17, this.tile18];
     for (var i = 0; i < this.nbTile; i++) {
       this.tiles[i].isImage = this.isImage[i];
@@ -385,6 +402,10 @@ export class MemoryComponent implements OnInit {
 
   deleteGameMemory(m: Memory): void {
     this.onSend_delete(m.id);
+    setTimeout(() => {
+      this.data = []
+      this.recup(this.data);
+    }, 200)
   }
 
   parseDate(date: Date): string {
@@ -436,23 +457,23 @@ export class MemoryComponent implements OnInit {
     switch (element.value) {
       case 'blue':
         this.memory_progress = Progress.Blue;
-        this.list['progress']='Blue';
+        this.list['progress'] = 'blue';
         break;
       case 'green':
         this.memory_progress = Progress.Green;
-        this.list['progress']='Green';
+        this.list['progress'] = 'green';
         break;
       case 'lightblue':
         this.memory_progress = Progress.LightBlue;
-        this.list['progress']='LightBlue';
+        this.list['progress'] = 'lightblue';
         break;
       case 'orange':
         this.memory_progress = Progress.Orange;
-        this.list['progress']='Orange';
+        this.list['progress'] = 'orange';
         break;
       case 'red':
         this.memory_progress = Progress.Red;
-        this.list['progress']='Red';
+        this.list['progress'] = 'red';
         break;
     }
   }
@@ -461,7 +482,7 @@ export class MemoryComponent implements OnInit {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
-      this.list['image']=this.image.toString();
+      this.list['image'] = this.image.toString();
     }
   }
 
@@ -469,15 +490,15 @@ export class MemoryComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
-      this.image.splice(index,1);
-      this.list['image']=this.image.toString();
+      this.image.splice(index, 1);
+      this.list['image'] = this.image.toString();
     }
   }
 
 
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
-      this.game = new Memory(0,"",this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
+      this.game = new Memory(0, "", this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
       this.memory_previsualiser = true;
     }
     else {
@@ -503,23 +524,12 @@ export class MemoryComponent implements OnInit {
   }
 
   create(): void {
-    this.memory_list.push(
-      // new Memory(this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage)
-    );
+    this.onSend(this.list);
     this.router.navigate(['/panel/Memory']);
   }
 
   save(): void {
-    this.game!.images = this.selectedImages;
-    this.game!.nbTile = this.memory_nbTile;
-    this.game!.setting = this.memory_settings;
-    this.game!.isVocaliser = this.memory_isVocaliser;
-    this.game!.bg_color = this.memory_bg_color;
-    this.game!.text_color = this.memory_text_color;
-    this.game!.good_answer_color = this.memory_good_answer_color;
-    this.game!.wrong_answer_color = this.memory_wrong_answer_color;
-    this.game!.color_progress_bar = this.memory_progress;
-    this.game!.tmpAffichage = this.memory_tmp_affichage;
+    this.onSend_update(this.list)
     this.router.navigate(['/panel/Memory']);
   }
 }
