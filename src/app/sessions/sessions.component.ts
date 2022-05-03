@@ -223,11 +223,7 @@ export class SessionsComponent implements OnInit {
     new Session('test6', new Date(), Game.Memory, 0, true, []),
   ];
 
-  static recopier_list: Recopier[] = [
-    // new Recopier([
-    //   ImagesComponent.list_image[0], ImagesComponent.list_image[1]
-    // ], '#777777', "#ffffff", "#000000", "#0dff00", "#ff0000", Progress.Blue, "#0f73b1", "#ffffff", "#ffffff", "#000000", "CURSIF", false)
-  ];
+  static recopier_list: Recopier[] = [];
 
   getRecopierList() : Recopier[] { return SessionsComponent.recopier_list}
 

@@ -28,7 +28,7 @@ export class PanelComponent implements OnInit {
 
   jeu: string | null = "";
 
-  recup(tab: any) {
+  recupRecopier(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         tab.push(
@@ -37,6 +37,17 @@ export class PanelComponent implements OnInit {
       }
 
     })
+  }
+
+  recupMemory(donne: any) {
+    this.jeuxService.recup_memory(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0,data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
+        );
+        }
+    })
+
   }
 
   constructor(private jeuxService: JeuxService, private router: Router, private route: ActivatedRoute) {
@@ -112,7 +123,7 @@ export class PanelComponent implements OnInit {
 
   //VARIABLE JEU MEMORY
   memory: Memory | null;
-  memory_list: Memory[] = SessionsComponent.memory_list;
+  memory_list: Memory[] = []
 
 
   // ETAPE D'AVANCEMENT FORMULAIRE
@@ -120,7 +131,8 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.recup(this.recopier_list)
+    this.recupRecopier(this.recopier_list)
+    this.recupMemory(this.memory_list)
 
 
     setTimeout(() => {
