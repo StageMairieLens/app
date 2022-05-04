@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Image } from '../Image'
 import { JeuxService } from '../jeux.service';
+//import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-images',
@@ -11,7 +12,7 @@ import { JeuxService } from '../jeux.service';
 export class ImagesComponent implements OnInit {
   [x: string]: any;
   pro_img=0;
-  constructor(private jeuxService: JeuxService) {}
+  constructor(private jeuxService: JeuxService/*,public _DomSanitizationService: DomSanitizer*/) {}
 
   static list_image: Image[] = [
     new Image('Fleur', '../../assets/fleur.jpg'),
@@ -29,7 +30,7 @@ export class ImagesComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.recup(this.data);
   }
 
   public getListImages(): Image[] {
@@ -111,4 +112,28 @@ onSend2(){
     this.onSend(i);
   }
 }
+/*imageUrl:any = null;
+showImage(){
+
+  this.jeuxService.getImage().subscribe((res) => { 
+    var img:Blob = res;
+    var myReader:FileReader = new FileReader();
+    myReader.onloadend = (e) => {
+      this.imageUrl = this._DomSanitizationService.bypassSecurityTrustUrl(<string>myReader.result);
+    }
+    myReader.readAsDataURL(img);   
+  });
+}*/
+data :any=[];
+recup(donne: any) {
+  this.jeuxService.recup_image(donne).subscribe(data => {
+    console.log(data);
+    for (var i = 0; data[i] != null; i++) {
+      console.log(data);
+      donne.push(data[i]);
+    }
+  })
+  
+
+}    
 }

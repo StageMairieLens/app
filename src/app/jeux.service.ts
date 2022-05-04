@@ -70,7 +70,17 @@ export class JeuxService {
 
     })*/
   }
-  getImage(): Observable<Blob> {
-    return this.http.get( 'http://localhost:4000/files/getImage.php', { responseType: 'blob' });      
- }
+  /*getImage(): Observable<Blob> {
+    return this.http.get( 'http://localhost:4000/vue_image.php', { responseType: 'blob' });      
+ }*/
+ recup_image(donne:any){
+  return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_image.php');/*.subscribe(data =>{
+    console.log(data);
+    for(var i = 0;data[i]!= null;i++){
+      donne.push(data[i]);
+    }
+    //donne.push(data[0]);
+
+  })*/
+}
 }
