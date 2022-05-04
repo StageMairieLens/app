@@ -408,12 +408,16 @@ export class BoyGirlGameComponent implements OnInit {
 
   create(): void {
     this.onSend(this.list)
-    this.router.navigate(['/panel/Fille&Garçon']);
+    setTimeout(() => {
+      this.router.navigate(['/panel/Fille&Garçon']);
+    },200)
   }
 
   save(): void {
     this.onSend_update(this.list)
-    this.router.navigate(['/panel/Fille&Garçon']);
+    setTimeout(() => {
+      this.router.navigate(['/panel/Fille&Garçon']);
+    },200)
   }
 
 }
