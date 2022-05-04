@@ -79,16 +79,26 @@ export class BoyGirlGameComponent implements OnInit {
 
     });
   }
-  data = [];
+  data : BoyGirl[] = [];
   recup(donne:any){
     this.jeuxService.recup_bg(donne).subscribe(data =>{
       for(var i = 0;data[i]!= null;i++){
         donne.push(
+          new BoyGirl(data[i].id_gb,data[i].date_gb,this.getMots(data[i].l_m_f),this.getMots(data[i].l_m_b),data[i].bg_color,data[i].bg_color_f,data[i].bg_color_b,data[i].bg_color_m,data[i].word_f,data[i].word_b,data[i].word_m,data[i].title_f,data[i].title_b,data[i].title_m,data[i].text_f,data[i].text_b,data[i].text_m,data[i].type_ecri)
         );
       }
     })
-
   }
+
+  getMots(s : string) : string[] {
+    let tab = s.split(',');
+    let res : string[] = []
+    for(let mot of tab) {
+      res.push(mot)
+    }
+    return res;
+  }
+
   ngOnInit(): void {
     this.recup(this.data);
     console.log(this.data);
@@ -267,11 +277,11 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
   deleteGameBoyGirl(bg: BoyGirl): void {
-    let index = this.boygirl_list.indexOf(bg, 0);
-
-    if (index > -1) {
-      this.boygirl_list.splice(index, 1);
-    }
+    this.onSend_delete(bg.id);
+    setTimeout(() => {
+      this.data = [];
+      this.recup(this.data)
+    },200)
   }
 
   redirectEditBoyGirl(bg: BoyGirl): void {
@@ -373,9 +383,7 @@ export class BoyGirlGameComponent implements OnInit {
 
 
   create(): void {
-    // this.boygirl_list.push(
-    //   new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
-    // );
+    this.onSend(this.list)
     this.router.navigate(['/panel/Fille&Garçon']);
   }
 

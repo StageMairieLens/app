@@ -163,7 +163,7 @@
   </div>
 
 
-  <div *ngIf="this.boygirl_list.length != 0">
+  <div *ngIf="this.data.length != 0">
 
     <!-- Prévisualisation -->
     <div *ngIf="this.boygirl_previsualiser">
@@ -195,7 +195,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of this.boygirl_list">
+          <tr *ngFor="let element of this.data">
             <th>{{element.id}}</th> <!-- Id du jeu -->
             <th>{{(element.date)}}</th> <!-- Date de création du jeu -->
             <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
@@ -238,7 +238,7 @@
 
   </div>
   <!-- Si la liste des jeu Fille&Garçon est vide -->
-  <div class="text-center" *ngIf="this.boygirl_list.length == 0">
+  <div class="text-center" *ngIf="this.data.length == 0">
     <h5 class="card-title" style="color : red">Il n'y a pas de jeu Fille&Garçon créer</h5>
   </div>
 
