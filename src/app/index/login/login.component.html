@@ -8,7 +8,7 @@
             <label for="Email" class="form-label align-middle">Email :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input type="text" class="form-control" #email title="Email">
+            <input type="text" class="form-control" #email title="Email" (keypress)="enterKey($event, email.value, mdp.value)">
         </div>
     </div>
 
@@ -17,7 +17,7 @@
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe" (keypress)="enterKey($event, email.value, mdp.value)">
         </div>
     </div>
 
