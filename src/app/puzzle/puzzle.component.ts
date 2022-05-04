@@ -19,6 +19,7 @@ interface tuile {
   y: number;
 }
 
+
 @Component({
   selector: 'app-puzzle',
   templateUrl: './puzzle.component.html',
@@ -26,11 +27,13 @@ interface tuile {
 
 })
 
+
+
 export class PuzzleComponent implements OnInit {
 
 
   constructor(private jeuxService: JeuxService,private router: Router) {
-    this.r = new Puzzle([this.liste_image[5], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 3);
+    this.r = new Puzzle([this.liste_image[5], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 6);
     // this.r = null;
 
   }
@@ -110,12 +113,14 @@ export class PuzzleComponent implements OnInit {
   images = this.liste_image;
 
 
+
+
   ngOnInit(): void {
     this.recup(this.data);
-    console.log(this.data);
     if(this.r != null && this.play) {
       this.decoupageImage();
-      this.selected_image.src = this.r!.liste_images[0].src;
+
+
       for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
         this.nombre.push(i);
         this.plateau[i] = [];
@@ -158,7 +163,7 @@ export class PuzzleComponent implements OnInit {
   formStep: number = 0;
   image:any=[];
   list:any = {image:this.image.toString(),id:1,bg_color:this.puzzle_bg_color,text_color:this.puzzle_text_color,title_color:this.puzzle_title_color,button_bg_color:this.puzzle_button_bg_color,button_text_color:this.puzzle_button_text_color,ecri:this.puzzle_type_ecriture,decoupe:this.decoupe};
-
+  prochaine_image = 0;
 
 
   typeEcriture: string = "CAPITAL"; // default
@@ -173,8 +178,8 @@ export class PuzzleComponent implements OnInit {
   nombre: number[] = [];
   plateau: [tuile[]] = [[]];
   dragList: string[] = [];
-  selected_image = new Image();
-  showModel : boolean = true;
+  selected_image : HTMLImageElement[] = [];
+  showModel : boolean = false;
 
 
   checkPuzzle() : boolean{
@@ -197,8 +202,7 @@ export class PuzzleComponent implements OnInit {
   }
 
   decoupageImage(): void {
-    let img = new Image();
-    img.src = this.liste_image[0].src;
+    this.decoupage = [];
     for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
       this.decoupage.push(
         { x: ((100 / (this.r!.decoupe - 1)) * (i % this.r!.decoupe)), y: ((100 / (this.r!.decoupe - 1)) * Math.floor(i / this.r!.decoupe)) }
@@ -228,7 +232,6 @@ export class PuzzleComponent implements OnInit {
     }
     else if (event.container.data.length == 1) {
 
-      console.log(event.previousContainer.id)
       if (event.previousContainer.id != 'decoupage_list') {
         let i = +event.container.id.split('_')[2];
         let iprime = +event.previousContainer.id.split('_')[2];
@@ -262,6 +265,30 @@ export class PuzzleComponent implements OnInit {
 
 
     }
+
+    if(this.checkPuzzle()) {
+      this.prochaine_image++;
+      this.plateau = [[]];
+      this.nombre = [];
+      this.dragList = [];
+      this.decoupageImage();
+
+
+      for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
+        this.nombre.push(i);
+        this.plateau[i] = [];
+        this.dragList.push(('plateau_list_' + i));
+      }
+
+      for (let i of this.nombre) {
+        this.plateau[i].push(this.decoupage[i])
+      }
+
+      this.shuffle();
+
+    }
+    console.log(this.prochaine_image , this.r!.liste_images)
+
   }
 
 
@@ -294,8 +321,7 @@ export class PuzzleComponent implements OnInit {
 
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      this.puzzle_list = this.imgPuzzle(this.selectedImages);
-      this.r = new Puzzle(this.liste_image_puzzle, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
+      this.r = new Puzzle(this.selectedImages, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
       this.puzzle_previsualiser = true;
     }
     else {
