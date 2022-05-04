@@ -30,7 +30,7 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private jeuxService: JeuxService,private router: Router) {
-    this.r = new Puzzle([this.liste_image[5], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5);
+    this.r = new Puzzle([this.liste_image[5], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 3);
     // this.r = null;
 
   }
@@ -66,7 +66,7 @@ export class PuzzleComponent implements OnInit {
 
     });
   }onSend_delete(id:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
@@ -76,17 +76,17 @@ export class PuzzleComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next:res=>{
         console.log(res);
-        
+
       },
-    
+
       error  :err =>{
         console.log(err);
       },
-      
+
     });
   }
   onSend_update(list:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
@@ -98,11 +98,11 @@ export class PuzzleComponent implements OnInit {
         console.log(res.name);
         this.reponse = res;
       },
-    
+
       error  :err =>{
         console.log(err);
       },
-      
+
     });
   }
   liste_image: ImageImport[] = ImagesComponent.list_image;
