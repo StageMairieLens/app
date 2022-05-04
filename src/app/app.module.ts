@@ -36,7 +36,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { JeuxService } from './jeux.service';
 import { LoginComponent } from './index/login/login.component';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
-
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -76,12 +76,13 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
     MatTooltipModule,
     HttpClientModule,
     NgxDropzoneModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSliderModule
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,
     useValue: { color: 'accent' },
-   
+
   },
   JeuxService,
   ],

@@ -532,4 +532,8 @@ export class MemoryComponent implements OnInit {
     this.onSend_update(this.list)
     this.router.navigate(['/panel/Memory']);
   }
+
+  formatLabel(value: number) {
+    return value + 's';
+  }
 }

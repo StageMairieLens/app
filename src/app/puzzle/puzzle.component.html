@@ -53,13 +53,16 @@
       </div>
 
       <!-- Carte félicitation -->
-      <div *ngIf="this.prochaine_image == this.r!.liste_images.length" class="card_play align-middle container text-center"
-        id="card_finish" style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
+      <div *ngIf="this.prochaine_image == this.r!.liste_images.length"
+        class="card_play align-middle container text-center" id="card_finish" style="width: 32rem;"
+        [ngStyle]="{background : this.r!.bg_color}">
         <img class="card-img-top image_play" src="../../assets/images/congratulations.png" alt="Card image cap">
         <div class="card-body text-center">
           <h5 class="card-title title_image" [ngStyle]="{color : this.r!.title_color}">Félicitation !</h5>
-          <p *ngIf="this.r!.liste_images.length == 1" class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous avez résolu le puzzle !</p>
-          <p *ngIf="this.r!.liste_images.length > 1" class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous avez résolu tous les puzzles !</p>
+          <p *ngIf="this.r!.liste_images.length == 1" class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous
+            avez résolu le puzzle !</p>
+          <p *ngIf="this.r!.liste_images.length > 1" class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous
+            avez résolu tous les puzzles !</p>
         </div>
 
 
@@ -372,9 +375,11 @@
       <div class="form-row">
         <div class="col-md-12">
           <h2 class="card-title">Nombre de pièces</h2>
-          <input type="range" id="slider" class="form-range" min="2" max="5" step="1" style="width: 75%;"
-            value="{{this.decoupe}}" #puzzle_decoupe (change)="this.decoupe = +puzzle_decoupe.value"
-            (change)="this.list['tmps']= puzzle_decoupe.value">
+          <div>
+            <b>4</b> <mat-slider thumbLabel [(ngModel)]="this.decoupe" [displayWith]="formatLabel" tickInterval="1" step="1"
+              min="2" max="5" aria-label="units" style="width : 50%"></mat-slider> <b>25</b>
+          </div>
+
           <h2 class="card-title">{{this.decoupe * this.decoupe}} pièces</h2>
         </div>
       </div>

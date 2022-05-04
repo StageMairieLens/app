@@ -416,6 +416,15 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
+  formatLabel(value: number) {
+    if (value >= 2) {
+      this.decoupe = value * value
+      return Math.round(value * value);
+    }
+
+    return value;
+  }
+
 
 
 }

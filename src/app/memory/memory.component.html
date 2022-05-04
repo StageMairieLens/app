@@ -554,11 +554,8 @@
       <div class="form-row">
         <div class="col-md-12">
           <h2 class="card-title">Temps memory dévoilé (en s)</h2>
-          <input type="range" id="slider" class="form-range" min="0" max="10" step="0.1" style="width: 75%;"
-            value="{{this.memory_tmp_affichage}}" #memory_tmp_affichage_input
-            (change)="this.memory_tmp_affichage = memory_tmp_affichage_input.value"
-            (change)="this.list['tmps']= memory_tmp_affichage_input.value"
-            >
+            <b>0s</b><mat-slider id="slider" thumbLabel [(ngModel)]="this.memory_tmp_affichage" [displayWith]="formatLabel" tickInterval="0.1" step="0.1"
+              min="0" (change)="this.list['tmps']= memory_tmp_affichage_input.value" #memory_tmp_affichage_input max="10" aria-label="units" style="width : 75%"></mat-slider><b>10s</b>
           <h2 class="card-title">{{this.memory_tmp_affichage}} s</h2>
         </div>
       </div>
