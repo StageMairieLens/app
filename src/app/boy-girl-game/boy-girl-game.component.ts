@@ -14,89 +14,94 @@ import { JeuxService } from '../jeux.service';
 })
 export class BoyGirlGameComponent implements OnInit {
 
-  constructor(private jeuxService: JeuxService,private router: Router) {
+  constructor(private jeuxService: JeuxService, private router: Router) {
     this.bg = null;
     // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
   }
   reponse = "";
-  onSend(list:any){
+  onSend(list: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('bg',JSON.stringify(list));
+    formData.append('bg', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  onSend_delete(id:any){
+  onSend_delete(id: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
     }*/
-    formData.append('bg_delete',id);
+    formData.append('bg_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res);
 
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  onSend_update(list:any){
+  onSend_update(list: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('bg_update',JSON.stringify(list));
+    formData.append('bg_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  data : BoyGirl[] = [];
-  recup(donne:any){
-    this.jeuxService.recup_bg(donne).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
+  data: BoyGirl[] = [];
+  recup(donne: any) {
+    this.jeuxService.recup_bg(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new BoyGirl(data[i].id_gb,data[i].date_gb,this.getMots(data[i].l_m_f),this.getMots(data[i].l_m_b),data[i].bg_color,data[i].bg_color_f,data[i].bg_color_b,data[i].bg_color_m,data[i].word_f,data[i].word_b,data[i].word_m,data[i].title_f,data[i].title_b,data[i].title_m,data[i].text_f,data[i].text_b,data[i].text_m,data[i].type_ecri)
+          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri)
         );
       }
     })
   }
 
-  getMots(s : string) : string[] {
-    let tab = s.split(',');
-    let res : string[] = []
-    for(let mot of tab) {
-      res.push(mot)
+  getMots(s: string): string[] {
+    if (s.length != 0) {
+      let tab = s.split(',');
+      let res: string[] = []
+      for (let mot of tab) {
+        res.push(mot)
+      }
+      return res;
     }
-    return res;
+    else {
+      return []
+    }
   }
 
   ngOnInit(): void {
@@ -153,6 +158,15 @@ export class BoyGirlGameComponent implements OnInit {
       this.boygirl_text_color_garcon = this.bg!.text_color_garcon;
       this.boygirl_text_color_mot = this.bg!.text_color_mot;
       this.boygirl_type_ecriture = this.bg!.type_ecriture;
+
+      this.list = {
+        id: this.bg!.id , bg_color: this.boygirl_bg_color_container,
+        bg_color_b: this.boygirl_bg_color_garcon, bg_color_f: this.boygirl_bg_color_fille, bg_color_m: this.boygirl_bg_color_mot,
+        word_f: this.boygirl_word_color_fille, word_b: this.boygirl_word_color_garcon, word_m: this.boygirl_word_color_mot,
+        title_f: this.boygirl_title_color_fille, title_b: this.boygirl_title_color_garcon, title_m: this.boygirl_title_color_mot,
+        text_f: this.boygirl_text_color_fille, text_b: this.boygirl_text_color_garcon, text_m: this.boygirl_text_color_mot,
+        ecri: this.boygirl_type_ecriture, l_m_f: this.boygirl_listMotsFille.toString(), l_m_b: this.boygirl_listMotsGarcon.toString()
+      };
     }
 
   }
@@ -183,12 +197,14 @@ export class BoyGirlGameComponent implements OnInit {
   boygirl_text_color_mot: string = "#ffffff";
   boygirl_type_ecriture: string = "SCRIPT";
   boygirl_previsualiser: boolean = false;
-  list:any = {id:1,bg_color:this.boygirl_bg_color_container,
-    bg_color_b:this.boygirl_bg_color_garcon,bg_color_f:this.boygirl_bg_color_fille,bg_color_m:this.boygirl_bg_color_mot,
-    word_f:this.boygirl_word_color_fille,word_b:this.boygirl_word_color_garcon,word_m:this.boygirl_word_color_mot,
-    title_f:this.boygirl_title_color_fille,title_b:this.boygirl_title_color_garcon,title_m:this.boygirl_title_color_mot,
-    text_f:this.boygirl_text_color_fille,text_b:this.boygirl_text_color_garcon,text_m:this.boygirl_text_color_mot,
-    ecri:this.boygirl_type_ecriture,l_m_f:this.boygirl_listMotsFille.toString(),l_m_b:this.boygirl_listMotsGarcon.toString()};
+  list: any = {
+    id: 1, bg_color: this.boygirl_bg_color_container,
+    bg_color_b: this.boygirl_bg_color_garcon, bg_color_f: this.boygirl_bg_color_fille, bg_color_m: this.boygirl_bg_color_mot,
+    word_f: this.boygirl_word_color_fille, word_b: this.boygirl_word_color_garcon, word_m: this.boygirl_word_color_mot,
+    title_f: this.boygirl_title_color_fille, title_b: this.boygirl_title_color_garcon, title_m: this.boygirl_title_color_mot,
+    text_f: this.boygirl_text_color_fille, text_b: this.boygirl_text_color_garcon, text_m: this.boygirl_text_color_mot,
+    ecri: this.boygirl_type_ecriture, l_m_f: this.boygirl_listMotsFille.toString(), l_m_b: this.boygirl_listMotsGarcon.toString()
+  };
 
 
   formStep: number = 0;
@@ -281,7 +297,7 @@ export class BoyGirlGameComponent implements OnInit {
     setTimeout(() => {
       this.data = [];
       this.recup(this.data)
-    },200)
+    }, 200)
   }
 
   redirectEditBoyGirl(bg: BoyGirl): void {
@@ -301,7 +317,7 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (value) {
       this.boygirl_listMotsFille.push(value);
-      this.list['l_m_f']=this.boygirl_listMotsFille.toString();
+      this.list['l_m_f'] = this.boygirl_listMotsFille.toString();
       console.log(this.list['l_m_f']);
     }
 
@@ -313,7 +329,7 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (index >= 0) {
       this.boygirl_listMotsFille.splice(index, 1);
-      this.list['l_m_f']=this.boygirl_listMotsFille.toString();
+      this.list['l_m_f'] = this.boygirl_listMotsFille.toString();
       console.log(this.list['l_m_f']);
     }
   }
@@ -323,7 +339,7 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (value) {
       this.boygirl_listMotsGarcon.push(value);
-      this.list['l_m_b']=this.boygirl_listMotsGarcon.toString();
+      this.list['l_m_b'] = this.boygirl_listMotsGarcon.toString();
       console.log(this.list['l_m_b']);
     }
 
@@ -335,14 +351,14 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (index >= 0) {
       this.boygirl_listMotsGarcon.splice(index, 1);
-      this.list['l_m_b']=this.boygirl_listMotsGarcon.toString();
+      this.list['l_m_b'] = this.boygirl_listMotsGarcon.toString();
       console.log(this.list['l_m_b']);
     }
   }
 
   setPrevisualiserBoyGirl(prev: boolean): void {
     if (prev == true) {
-      this.bg = new BoyGirl(0,'',this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
+      this.bg = new BoyGirl(0, '', this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
       this.boygirl_previsualiser = true;
     }
     else {
@@ -396,22 +412,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
   save(): void {
-    this.bg!.listMotsFille = this.boygirl_listMotsFille;
-    this.bg!.listMotsGarcon = this.boygirl_listMotsGarcon;
-    this.bg!.bg_color_container = this.boygirl_bg_color_container;
-    this.bg!.bg_color_fille = this.boygirl_bg_color_fille;
-    this.bg!.bg_color_garcon = this.boygirl_bg_color_garcon;
-    this.bg!.bg_color_mot = this.boygirl_bg_color_mot;
-    this.bg!.word_color_fille = this.boygirl_word_color_fille;
-    this.bg!.word_color_garcon = this.boygirl_word_color_garcon;
-    this.bg!.word_color_mot = this.boygirl_word_color_mot;
-    this.bg!.title_color_fille = this.boygirl_title_color_fille;
-    this.bg!.title_color_garcon = this.boygirl_title_color_garcon;
-    this.bg!.title_color_mot = this.boygirl_title_color_mot;
-    this.bg!.text_color_fille = this.boygirl_text_color_fille;
-    this.bg!.text_color_garcon = this.boygirl_text_color_garcon;
-    this.bg!.text_color_mot = this.boygirl_text_color_mot;
-    this.bg!.type_ecriture = this.boygirl_type_ecriture;
+    this.onSend_update(this.list)
     this.router.navigate(['/panel/Fille&Garçon']);
   }
 

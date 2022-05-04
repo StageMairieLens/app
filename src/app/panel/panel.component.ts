@@ -43,36 +43,61 @@ export class PanelComponent implements OnInit {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0,data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
         );
-        }
+      }
     })
 
   }
 
-  recupReconnaitre(donne:any){
-    this.jeuxService.recup_reconnaitre(donne).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
+  recupReconnaitre(donne: any) {
+    this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
         console.log(data[i].id_images)
 
         donne.push(
-          new Reconnaitre(data[i].id_reco,data[i].date_reco,this.getImage(data[i].id_images),data[i].bg_color,data[i].title_color,data[i].text_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_co,data[i].bu_txt_co,data[i].type_ecri,data[i].isVoca)
+          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca)
         );
       }
     })
 
   }
 
-  recupAbecedaire(donne:any){
-    this.jeuxService.recup_abcd(donne).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
+  recupAbecedaire(donne: any) {
+    this.jeuxService.recup_abcd(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Abecedaire(data[i].id_abcdr,data[i].date_abcdr,this.getImage(data[i].id_image),data[i].bg_color,data[i].text_color,data[i].gaw,data[i].waw,data[i].progress,data[i].bu_bg_co,data[i].bu_txt_co,data[i].isVoca,data[i].type_ecri)
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri)
         );
       }
     })
 
   }
+
+  recupBoyGirl(donne: any) {
+    this.jeuxService.recup_bg(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri)
+        );
+      }
+    })
+  }
+
+  getMots(s: string): string[] {
+    if (s.length != 0) {
+      let tab = s.split(',');
+      let res: string[] = []
+      for (let mot of tab) {
+        res.push(mot)
+      }
+      return res;
+    }
+    else {
+      return []
+    }
+  }
+
 
 
   constructor(private jeuxService: JeuxService, private router: Router, private route: ActivatedRoute) {
@@ -140,7 +165,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU BOY&GIRL
   boygirl: BoyGirl | null;
-  boygirl_list: BoyGirl[] = SessionsComponent.boygirl_list;
+  boygirl_list: BoyGirl[] = []
 
   // VARIABLE JEU ABECEDAIRE
   abecedaire: Abecedaire | null;
@@ -156,10 +181,11 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.recupRecopier(this.recopier_list)
-    this.recupMemory(this.memory_list)
-    this.recupReconnaitre(this.reconnaitre_list)
-    this.recupAbecedaire(this.abecedaire_list)
+    this.recupRecopier(this.recopier_list);
+    this.recupMemory(this.memory_list);
+    this.recupReconnaitre(this.reconnaitre_list);
+    this.recupAbecedaire(this.abecedaire_list);
+    this.recupBoyGirl(this.boygirl_list);
 
     setTimeout(() => {
       this.panel = this.route.snapshot.paramMap.get('param1');
@@ -215,57 +241,57 @@ export class PanelComponent implements OnInit {
           }
           else if (this.panel_option == 'edit') {
 
-              if (this.route.snapshot.paramMap.get('param3') != null) {
-                this.id_game = +this.route.snapshot.paramMap.get('param3')!;
+            if (this.route.snapshot.paramMap.get('param3') != null) {
+              this.id_game = +this.route.snapshot.paramMap.get('param3')!;
 
-                if (this.id_game == null) {
-                  this.router.navigate(['/panel/', this.selectedGame]);
-                }
-                else if (this.selectedGame == 'Recopier') {
-                  if (this.getRecopier()! == null) {
-                    this.router.navigate(['/panel/Recopier']);
-                  } else {
-                    this.recopier = this.getRecopier();
-                  }
-                }
-                else if (this.selectedGame == 'Memory') {
-                  if (this.getMemory()! == null) {
-                    this.router.navigate(['/panel/Memory']);
-                  } else {
-                    this.memory = this.getMemory();
-                  }
-                }
-
-                else if (this.selectedGame == 'Reconnaitre') {
-                  if (this.getReconnaitre()! == null) {
-                    this.router.navigate(['/panel/Reconnaitre']);
-                  } else {
-                    this.reconnaitre = this.getReconnaitre();
-                  }
-                }
-                else if (this.selectedGame == 'Puzzle') {
-                  if (this.getPuzzle()! == null) {
-                    this.router.navigate(['/panel/Puzzle']);
-                  } else {
-                    this.puzzle = this.getPuzzle();
-                  }
-                }
-                else if (this.selectedGame == 'Abecedaire') {
-                  if (this.getAbecedaire()! == null) {
-                    this.router.navigate(['/panel/Abecedaire']);
-                  } else {
-                    this.abecedaire = this.getAbecedaire();
-                  }
-                }
-                else if (this.selectedGame == 'Fille&Garçon') {
-                  if (this.getBoyGirl()! == null) {
-                    this.router.navigate(['/panel/Fille&Garçon']);
-                  } else {
-                    this.boygirl = this.getBoyGirl();
-                  }
-                }
-
+              if (this.id_game == null) {
+                this.router.navigate(['/panel/', this.selectedGame]);
               }
+              else if (this.selectedGame == 'Recopier') {
+                if (this.getRecopier()! == null) {
+                  this.router.navigate(['/panel/Recopier']);
+                } else {
+                  this.recopier = this.getRecopier();
+                }
+              }
+              else if (this.selectedGame == 'Memory') {
+                if (this.getMemory()! == null) {
+                  this.router.navigate(['/panel/Memory']);
+                } else {
+                  this.memory = this.getMemory();
+                }
+              }
+
+              else if (this.selectedGame == 'Reconnaitre') {
+                if (this.getReconnaitre()! == null) {
+                  this.router.navigate(['/panel/Reconnaitre']);
+                } else {
+                  this.reconnaitre = this.getReconnaitre();
+                }
+              }
+              else if (this.selectedGame == 'Puzzle') {
+                if (this.getPuzzle()! == null) {
+                  this.router.navigate(['/panel/Puzzle']);
+                } else {
+                  this.puzzle = this.getPuzzle();
+                }
+              }
+              else if (this.selectedGame == 'Abecedaire') {
+                if (this.getAbecedaire()! == null) {
+                  this.router.navigate(['/panel/Abecedaire']);
+                } else {
+                  this.abecedaire = this.getAbecedaire();
+                }
+              }
+              else if (this.selectedGame == 'Fille&Garçon') {
+                if (this.getBoyGirl()! == null) {
+                  this.router.navigate(['/panel/Fille&Garçon']);
+                } else {
+                  this.boygirl = this.getBoyGirl();
+                }
+              }
+
+            }
           }
           else if (this.panel_option != 'create') {
             this.router.navigate(['/panel/', this.selectedGame]);
@@ -278,7 +304,7 @@ export class PanelComponent implements OnInit {
           SessionsComponent.sessionActive.push(s);
         }
       }
-    },100)
+    }, 100)
 
 
   }
@@ -286,7 +312,7 @@ export class PanelComponent implements OnInit {
   getImage(s: string): Image[] {
     let res = [];
     let tab = s.split(',');
-    if(s.length != 0) {
+    if (s.length != 0) {
       for (let i of tab) {
         for (let j of ImagesComponent.list_image) {
           if (+i == j.id) {
