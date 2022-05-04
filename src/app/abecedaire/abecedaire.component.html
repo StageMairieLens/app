@@ -42,11 +42,11 @@
         class="mot">{{this.game!.images[this.nbEntries].getNom()}}</p>
       <div *ngIf="this.afficherMot == 'cursif'" style="font-family: cursiveFont;" [ngStyle]="{color: game!.text_color}"
         class="mot">{{this.game!.images[this.nbEntries].getNom()}}</div>
-        <div *ngIf="this.game!.isVocaliser" class="text-center">
+        <div *ngIf="+this.game!.isVocaliser == 1" class="text-center">
           <button mat-button style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;" (click)="vocalise()">
             <i class="fa-solid fa-volume-high" style="color: black"></i>
           </button>
-        </div>  
+        </div>
   </div>
     <div class="container container_play col-md-12 text-center">
       <button class="button" [ngStyle]="{background: game!.button_bg_color, color: game!.button_text_color}"
@@ -154,16 +154,14 @@
   </div>
 
 
-  <div *ngIf="this.abecedaire_list.length != 0">
+  <div *ngIf="this.data.length != 0">
 
     <!-- Prévisualisation -->
     <div *ngIf="this.abecedaire_previsualiser">
 
-      <mat-divider style="background : grey; margin : 2%"></mat-divider>
 
 
-
-      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+      <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 10px">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
           <button class="prev-button align-middle text-center" (click)="quitPreviewAbecedaire()" mat-raised-button
             color="warn">
@@ -187,13 +185,13 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of this.abecedaire_list">
+          <tr *ngFor="let element of this.data">
             <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th *ngIf="element.isVocaliser">Oui</th>
-            <th *ngIf="!element.isVocaliser">Non</th>
+            <th *ngIf="+element.isVocaliser == 1">Oui</th>
+            <th *ngIf="+element.isVocaliser == 0">Non</th>
             <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
             <!-- Actions -->
@@ -233,7 +231,7 @@
   </div>
 
   <!-- Si la liste des jeu Abecedaire est vide -->
-  <div class="text-center" *ngIf="this.abecedaire_list.length == 0">
+  <div class="text-center" *ngIf="this.data.length == 0">
     <h5 class="card-title" style="color : red">Il n'y a pas de jeu Abécédaire créer</h5>
   </div>
 
@@ -326,7 +324,7 @@
                     (change)="this.abecedaire_bg_color = abecedaire_bg_color_input.value " #abecedaire_bg_color_input
                     value="{{this.abecedaire_bg_color}}" title="Choisissez la couleur d'arriére-plan"
                     (change)="this.list['bg_color']=abecedaire_bg_color_input.value">
-                    
+
                 </label>
               </div>
               <div class="col-md-6">
@@ -398,7 +396,7 @@
               <div class="col-md-8">
                 <select class="form-control" aria-label="Default select example" #progressSelectValue
                   (change)="changeProgressValue('Abecedaire',progressSelectValue)">
-                  <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+                  <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}" [selected]="p === this.abecedaire_progress"
                     ng-selected="p == this.abecedaire_progress" #progressValue>
                     <p *ngIf="p == 'blue'">Bleu</p>
                     <p *ngIf="p == 'green'">Vert</p>
@@ -458,32 +456,32 @@
                   (change)="this.list['ecri']='none' ">Aucune
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'none'" value="None"
-                  (change)="this.abecedaire_type_ecriture = 'none'" 
+                  (change)="this.abecedaire_type_ecriture = 'none'"
                   (change)="this.list['ecri']='none' "
                   style="font-size : 40px">Aucune
                 </mat-radio-button>
 
-                <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'cursif'" value="Cursif"
-                  (change)="this.abecedaire_type_ecriture = 'cursif'"(change)="this.list['ecri']='CURSIF' "
+                <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'CURSIF'" value="Cursif"
+                  (change)="this.abecedaire_type_ecriture = 'CURSIF'"(change)="this.list['ecri']='CURSIF' "
                   style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
-                <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'cursif'" value="Cursif"
-                  (change)="this.abecedaire_type_ecriture = 'cursif'"(change)="this.list['ecri']='CURSIF' "
+                <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'CURSIF'" value="Cursif"
+                  (change)="this.abecedaire_type_ecriture = 'CURSIF'"(change)="this.list['ecri']='CURSIF' "
                   style="font-family: cursiveFont; font-size: 40px">
                   Cursif</mat-radio-button>
 
-                <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'capital'" value="Capital"
-                  (change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px" checked
+                <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'CAPITAL'" value="CAPITAL"
+                  (change)="this.abecedaire_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
                   (change)="this.list['ecri']='CAPITAL' ">CAPITAL
                 </mat-radio-button>
-                <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'capital'" value="Capital"
-                (change)="this.list['ecri']='CAPITAL' "(change)="this.abecedaire_type_ecriture = 'capital'" style="font-size : 40px">CAPITAL
+                <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'CAPITAL'" value="CAPITAL"
+                (change)="this.list['ecri']='CAPITAL' "(change)="this.abecedaire_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
                 </mat-radio-button>
 
-                <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'script'" value="Script"
-                (change)="this.list['ecri']='script' "(change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px" checked>Script
+                <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'SCRIPT'" value="SCRIPT"
+                (change)="this.list['ecri']='SCRIPT' "(change)="this.abecedaire_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
                 </mat-radio-button>
-                <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'script'" value="Script"
-                (change)="this.list['ecri']='script' "(change)="this.abecedaire_type_ecriture = 'script'" style="font-size : 40px">Script
+                <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'SCRIPT'" value="SCRIPT"
+                (change)="this.list['ecri']='SCRIPT' "(change)="this.abecedaire_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
                 </mat-radio-button>
               </mat-radio-group>
             </div>
@@ -492,14 +490,11 @@
             <div class="col-md-12">
               <h2 class="card-title">Vocalisation</h2>
               <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark"
-              (change)="this.list['voca']=0 "    
               style="margin-right : 2%; color : #ff4083"></i>
               <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-              <mat-slide-toggle (change)="this.abecedaire_isVocaliser = vocaliserInput.checked" #vocaliserInput
-              (change)="this.list['voca']=true " 
-              >
-              </mat-slide-toggle>
+              <mat-slide-toggle (change)="this.list['voca']=+this.abecedaire_isVocaliser" [(ngModel)]="this.abecedaire_isVocaliser"></mat-slide-toggle>
+
               <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"
                 style="margin-left : 2%; color : #ff4083"></i>
               <i *ngIf="!this.abecedaire_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
@@ -510,7 +505,7 @@
           <!-- Bouton de création du jeu -->
           <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
             <div class="col-md-12 text-center">
-              <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()"
+              <button class="validate_button align-middle text-center" (click)="create()"
                 mat-raised-button>Créer le
                 jeu
                 <i class="fa-solid fa-check fa-lg"></i>
@@ -521,7 +516,7 @@
           <!-- Bouton de création du jeu -->
           <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
             <div class="col-md-12 text-center">
-              <button class="save_button align-middle text-center" (click)="onSend_update(this.list)" (click)="save()" mat-raised-button>Sauvegarder le
+              <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder le
                 jeu
                 <i class="fa-solid fa-floppy-disk"></i>
               </button>

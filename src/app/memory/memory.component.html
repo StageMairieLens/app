@@ -170,7 +170,7 @@
   </div>
 
 
-  <div *ngIf="this.memory_list.length != 0">
+  <div *ngIf="this.data.length != 0">
 
     <!-- Prévisualisation -->
     <div *ngIf="this.memory_previsualiser">
@@ -199,7 +199,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of this.memory_list">
+          <tr *ngFor="let element of this.data">
             <th>{{element.id}}</th> <!-- Id du jeu -->
             <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
@@ -242,7 +242,7 @@
   </div>
 
   <!-- Si la liste des jeu Memory est vide -->
-  <div class="text-center" *ngIf="this.memory_list.length == 0">
+  <div class="text-center" *ngIf="this.data.length == 0">
     <h5 class="card-title" style="color : red">Il n'y a pas de jeu Memory créer</h5>
   </div>
 </div>
@@ -383,7 +383,7 @@
           <div class="col-md-8">
             <select class="form-control" aria-label="Default select example" #progressSelectValue
               (change)="changeProgressValue('Memory',progressSelectValue)">
-              <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}"
+              <option class="text-center" *ngFor="let p of this.progressValue" value="{{p}}" [selected]="p === this.memory_progress"
                 ng-selected="p == this.memory_progress" #progressValue>
                 <p *ngIf="p == 'blue'">Bleu</p>
                 <p *ngIf="p == 'green'">Vert</p>
@@ -513,15 +513,11 @@
           <h2 class="card-title">Vocalisation</h2>
           <i *ngIf="!this.memory_isVocaliser" class="fa-solid fa-volume-xmark"
           (change)="this.sound = false"
-          (change)="this.list['voca']=0"
           style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.memory_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-          <mat-slide-toggle [(ngModel)]="this.memory_isVocaliser"
-          (change)="this.sound = true "
-          (change)="this.list['voca']=1"
-          (change)="this.memory_isVocaliser = vocaliserInput.checked" #vocaliserInput>
-          </mat-slide-toggle>
+          <mat-slide-toggle (change)="this.list['voca']=+this.memory_isVocaliser" [(ngModel)]="this.memory_isVocaliser"></mat-slide-toggle>
+
           <i *ngIf="this.memory_isVocaliser" class="fa-solid fa-volume-high"
             style="margin-left : 2%; color : #ff4083"></i>
           <i *ngIf="!this.memory_isVocaliser" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
@@ -571,7 +567,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()" mat-raised-button>Créer le
+          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>
           </button>
@@ -581,7 +577,7 @@
       <!-- Bouton de sauvegarde du jeu -->
       <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="save_button align-middle text-center" (click)="onSend_update(this.list)" (click)="save()" mat-raised-button>Sauvegarder
+          <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
             le
             jeu
             <i class="fa-solid fa-floppy-disk"></i>

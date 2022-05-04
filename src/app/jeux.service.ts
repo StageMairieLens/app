@@ -70,4 +70,7 @@ export class JeuxService {
 
     })*/
   }
+  getImage(): Observable<Blob> {
+    return this.http.get( 'http://localhost:4000/files/getImage.php', { responseType: 'blob' });      
+ }
 }

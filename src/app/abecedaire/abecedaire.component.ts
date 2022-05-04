@@ -60,93 +60,109 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_button_text_color: string = "#ffffff";
   abecedaire_type_ecriture: string = "script";
   abecedaire_isVocaliser: boolean = false;
-  image:any=[];
+  image: any = [];
   abecedaire_previsualiser: boolean = false;
-  list:any = {image:this.image.toString(),id:1,bg_color:this.abecedaire_bg_color,text_color:this.abecedaire_text_color,gaw_color:this.abecedaire_good_answer_color,waw_color:this.abecedaire_wrong_answer_color,button_bg_color:this.abecedaire_button_bg_color,button_text_color:this.abecedaire_button_text_color,progress:'blue',ecri:this.abecedaire_type_ecriture,voca:0};
+  list: any = { image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: 0 };
 
-  constructor(private jeuxService: JeuxService,private router: Router) {
+  constructor(private jeuxService: JeuxService, private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
   }
-  reponse:any;
-  onSend(list:any){
-    
-    const formData : FormData = new FormData();
+  reponse: any;
+  onSend(list: any) {
+
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('abcd',JSON.stringify(list));
+    formData.append('abcd', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
-   
-      error  :err =>{
+
+      error: err => {
         console.log(err);
       },
-      
+
     });
   }
-  onSend_delete(id:any){
-    
-    const formData : FormData = new FormData();
+  onSend_delete(id: any) {
+
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
     }*/
-    formData.append('abcd_delete',id);
+    formData.append('abcd_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res);
-        
+
       },
-    
-      error  :err =>{
+
+      error: err => {
         console.log(err);
       },
-      
+
     });
   }
-  onSend_update(list:any){
-    
-    const formData : FormData = new FormData();
+  onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('abcd_update',JSON.stringify(list));
+    formData.append('abcd_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
-    
-      error  :err =>{
+
+      error: err => {
         console.log(err);
       },
-      
+
     });
   }
-  data = [];
-  recup(donne:any){
-    this.jeuxService.recup_abcd(donne).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
+  data: Abecedaire[] = [];
+  recup(donne: any) {
+    this.jeuxService.recup_abcd(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri)
+        );
       }
-      
-      console.log(donne[0].bg_color);
-      console.log(data[0]);
     })
-    
+
+  }
+
+  getImage(s: string): Image[] {
+    let res = [];
+    let tab = s.split(',');
+    if (s.length != 0) {
+      for (let i of tab) {
+        for (let j of ImagesComponent.list_image) {
+          if (+i == j.id) {
+            res.push(j);
+            break;
+          }
+        }
+      }
+    }
+    return res;
+
+
   }
 
   // Initialisation
   ngOnInit(): void {
     this.recup(this.data);
-    console.log(this.data);
-    if(this.game != null) {
+    if (this.game != null) {
       if (this.game!.images.length != 0) {
         this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
         this.afficherMot = this.game!.typeEcriture;
@@ -166,7 +182,18 @@ export class AbecedaireComponent implements OnInit {
       this.abecedaire_button_bg_color = this.game!.button_bg_color;
       this.abecedaire_button_text_color = this.game!.button_text_color;
       this.abecedaire_type_ecriture = this.game!.typeEcriture;
-      this.abecedaire_isVocaliser = this.game!.isVocaliser;
+      if (+this.game!.isVocaliser == 1) {
+        this.abecedaire_isVocaliser = true;
+      } else {
+        this.abecedaire_isVocaliser = false;
+      }
+
+      for (let i of this.selectedImages) {
+        this.image.push(i.id)
+      }
+
+      this.list = { image: this.image.toString(), id: this.game!.id, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: +this.abecedaire_isVocaliser };
+
     }
   }
 
@@ -244,11 +271,12 @@ export class AbecedaireComponent implements OnInit {
   }
 
   deleteGameAbecedaire(a: Abecedaire): void {
-    let index = this.abecedaire_list.indexOf(a, 0);
+    this.onSend_delete(a.id)
+    setTimeout(() => {
+      this.data = [];
+      this.recup(this.data);
 
-    if (index > -1) {
-      this.abecedaire_list.splice(index, 1);
-    }
+    }, 200)
   }
 
   parseDate(date: Date): string {
@@ -264,7 +292,7 @@ export class AbecedaireComponent implements OnInit {
 
   setPrevisualiserAbecedaire(prev: boolean): void {
     if (prev == true) {
-      this.game = new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+      this.game = new Abecedaire(0, '', this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
       this.abecedaire_previsualiser = true;
     }
     else {
@@ -314,7 +342,7 @@ export class AbecedaireComponent implements OnInit {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
-      this.list['image']=this.image.toString();
+      this.list['image'] = this.image.toString();
     }
   }
 
@@ -322,8 +350,8 @@ export class AbecedaireComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
-      this.image.splice(index,1);
-      this.list['image']=this.image.toString();
+      this.image.splice(index, 1);
+      this.list['image'] = this.image.toString();
     }
   }
 
@@ -331,47 +359,37 @@ export class AbecedaireComponent implements OnInit {
     switch (element.value) {
       case 'blue':
         this.abecedaire_progress = Progress.Blue;
-        this.list['progress']='Blue';
+        this.list['progress'] = 'blue';
         break;
       case 'green':
         this.abecedaire_progress = Progress.Green;
-        this.list['progress']='Green';
+        this.list['progress'] = 'green';
         break;
       case 'lightblue':
         this.abecedaire_progress = Progress.LightBlue;
-        this.list['progress']='LightBlue';
+        this.list['progress'] = 'lightblue';
         break;
       case 'orange':
         this.abecedaire_progress = Progress.Orange;
-        this.list['progress']='Orange';
+        this.list['progress'] = 'orange';
         break;
       case 'red':
         this.abecedaire_progress = Progress.Red;
-        this.list['progress']='Red';
+        this.list['progress'] = 'red';
         break;
     }
   }
 
   create(): void {
 
-    this.abecedaire_list.push(
-      new Abecedaire(this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture)
-    );
+    this.list = { image: this.image.toString(), id: 0, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: this.abecedaire_progress, ecri: this.abecedaire_type_ecriture, voca: +this.abecedaire_isVocaliser };
+    this.onSend(this.list);
     this.router.navigate(['/panel/Abecedaire']);
 
   }
 
   save(): void {
-    this.game!.images = this.selectedImages;
-    this.game!.bg_color = this.abecedaire_bg_color;
-    this.game!.text_color = this.abecedaire_text_color;
-    this.game!.good_answer_color = this.abecedaire_good_answer_color;
-    this.game!.wrong_answer_color = this.abecedaire_wrong_answer_color;
-    this.game!.color_progress_bar = this.abecedaire_progress;
-    this.game!.button_bg_color = this.abecedaire_button_bg_color;
-    this.game!.button_text_color = this.abecedaire_button_text_color;
-    this.game!.typeEcriture = this.abecedaire_type_ecriture;
-    this.game!.isVocaliser = this.abecedaire_isVocaliser;
+    this.onSend_update(this.list);
     this.router.navigate(['/panel/Abecedaire']);
   }
 }

@@ -15,12 +15,12 @@ import { JeuxService } from '../jeux.service';
 export class BoyGirlGameComponent implements OnInit {
 
   constructor(private jeuxService: JeuxService,private router: Router) {
-    // this.bg = null;
-    this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
+    this.bg = null;
+    // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
   }
   reponse = "";
   onSend(list:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
@@ -32,15 +32,15 @@ export class BoyGirlGameComponent implements OnInit {
         console.log(res.name);
         this.reponse = res;
       },
-   
+
       error  :err =>{
         console.log(err);
       },
-      
+
     });
   }
   onSend_delete(id:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
@@ -50,17 +50,17 @@ export class BoyGirlGameComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next:res=>{
         console.log(res);
-        
+
       },
-    
+
       error  :err =>{
         console.log(err);
       },
-      
+
     });
   }
   onSend_update(list:any){
-    
+
     const formData : FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
@@ -72,24 +72,22 @@ export class BoyGirlGameComponent implements OnInit {
         console.log(res.name);
         this.reponse = res;
       },
-    
+
       error  :err =>{
         console.log(err);
       },
-      
+
     });
   }
   data = [];
   recup(donne:any){
     this.jeuxService.recup_bg(donne).subscribe(data =>{
       for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
+        donne.push(
+        );
       }
-      
-      console.log(donne[0].bg_color);
-      console.log(data[0]);
     })
-    
+
   }
   ngOnInit(): void {
     this.recup(this.data);
@@ -115,15 +113,15 @@ export class BoyGirlGameComponent implements OnInit {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "INSERT INTO girlsandboys (type_ecri, id_image,bg_color,bg_color_f,bg_color_m, word_f,word_b,word_m,title_f, title_b,title_m, text_f,text_b,text_m)
     VALUES('$nom2[ecri]','text','$nom2[bg_color]','$nom2[bg_color_f]','$nom2[bg_color_f]','$nom2[bg_color_m]','$nom2[word_f]','$nom2[word_b]','$nom2[word_m]','$nom2[title_f]','$nom2[title_b]','$nom2[title_m]','$nom2[text_f]','$nom2[text_b]','$nom2[text_m]')";
-                  
+
     $conn->exec($sql);
     echo 'Entrée ajoutée dans la table';
-      
-  
+
+
   } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
   }
-  
+
   echo "\n";
 }*/
 
@@ -180,7 +178,7 @@ export class BoyGirlGameComponent implements OnInit {
     word_f:this.boygirl_word_color_fille,word_b:this.boygirl_word_color_garcon,word_m:this.boygirl_word_color_mot,
     title_f:this.boygirl_title_color_fille,title_b:this.boygirl_title_color_garcon,title_m:this.boygirl_title_color_mot,
     text_f:this.boygirl_text_color_fille,text_b:this.boygirl_text_color_garcon,text_m:this.boygirl_text_color_mot,
-    ecri:this.boygirl_type_ecriture};
+    ecri:this.boygirl_type_ecriture,l_m_f:this.boygirl_listMotsFille.toString(),l_m_b:this.boygirl_listMotsGarcon.toString()};
 
 
   formStep: number = 0;
@@ -293,6 +291,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (value) {
       this.boygirl_listMotsFille.push(value);
+      this.list['l_m_f']=this.boygirl_listMotsFille.toString();
+      console.log(this.list['l_m_f']);
     }
 
     event.chipInput!.clear();
@@ -303,6 +303,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (index >= 0) {
       this.boygirl_listMotsFille.splice(index, 1);
+      this.list['l_m_f']=this.boygirl_listMotsFille.toString();
+      console.log(this.list['l_m_f']);
     }
   }
 
@@ -311,6 +313,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (value) {
       this.boygirl_listMotsGarcon.push(value);
+      this.list['l_m_b']=this.boygirl_listMotsGarcon.toString();
+      console.log(this.list['l_m_b']);
     }
 
     event.chipInput!.clear();
@@ -321,12 +325,14 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (index >= 0) {
       this.boygirl_listMotsGarcon.splice(index, 1);
+      this.list['l_m_b']=this.boygirl_listMotsGarcon.toString();
+      console.log(this.list['l_m_b']);
     }
   }
 
   setPrevisualiserBoyGirl(prev: boolean): void {
     if (prev == true) {
-      this.bg = new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
+      this.bg = new BoyGirl(0,'',this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture);
       this.boygirl_previsualiser = true;
     }
     else {
@@ -375,9 +381,9 @@ export class BoyGirlGameComponent implements OnInit {
 
 
   create(): void {
-    this.boygirl_list.push(
-      new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
-    );
+    // this.boygirl_list.push(
+    //   new BoyGirl(this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture)
+    // );
     this.router.navigate(['/panel/Fille&Garçon']);
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Image } from '../Image'
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-images',
@@ -9,8 +10,8 @@ import { Image } from '../Image'
 })
 export class ImagesComponent implements OnInit {
   [x: string]: any;
-
-  constructor() {}
+  pro_img=0;
+  constructor(private jeuxService: JeuxService) {}
 
   static list_image: Image[] = [
     new Image('Fleur', '../../assets/fleur.jpg'),
@@ -70,14 +71,44 @@ export class ImagesComponent implements OnInit {
   files: File[] = [];
 
 onSelect(event: { addedFiles: any; }) {
+  if(this.pro_img<0){
+    this.pro_img=0;
+  }
   console.log(event);
   this.files.push(...event.addedFiles);
-  console.log(this.files[0].name);
+  console.log(this.files[this.pro_img].type);
+  //this.pro_img+=1;
 }
 
 onRemove(event: File) {
   console.log(event);
   this.files.splice(this.files.indexOf(event), 1);
+  this.pro_img-=1;
 }
-
+onSend(pro_img2:number){
+  var img:Blob=this.files[pro_img2];
+  const formData : FormData = new FormData();
+  /*for(var i = 0;i<list.lenght;i++){
+    formData.append('list[]',list[i]);
+  }*/
+  formData.append('image',img);
+  console.log(formData);
+  this.jeuxService.onSend(formData).subscribe({
+    next:res=>{
+      console.log(res.name);
+      
+    },
+  
+    error  :err =>{
+      console.log(err);
+    },
+    
+  });
+}
+onSend2(){
+  
+  for(var i=0;i<this.files.length;i++){
+    this.onSend(i);
+  }
+}
 }

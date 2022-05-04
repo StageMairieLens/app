@@ -205,9 +205,13 @@ img {
 
 .panel-choice {
   width: 40%;
-  margin-right: 10%;
+  /* margin-right: 10%; */
   margin-bottom: 3%;
   background :rgb(22, 158, 22);
+}
+
+#Recopier, #Reconnaitre, #Fille\&Garçon {
+  margin-right : 10%;
 }
 
 .panel-choice span {

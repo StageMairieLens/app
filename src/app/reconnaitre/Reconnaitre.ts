@@ -6,7 +6,7 @@ export class Reconnaitre {
   id: number;
   static nb: number = 0;
   images: Image[];
-  date : Date;
+  date : string;
   bg_color: string;
   title_color: string;
   good_answer_color: string;
@@ -25,10 +25,10 @@ export class Reconnaitre {
   taille = 0;
 
   liste:any=[];
-  constructor(liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean) {
-    this.id = Reconnaitre.nb++;
+  constructor(id : number, date : string, liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean) {
+    this.id = id;
     this.images = liste_images;
-    this.date = new Date();
+    this.date = date;
     this.bg_color = bg_color;
     this.title_color = title_color;
     this.good_answer_color = good_answer_color;
@@ -39,13 +39,13 @@ export class Reconnaitre {
     this.text_color = text_color;
     this.typeEcriture = typeEcriture;
     this.isVocaliser = isVocaliser;
-    this.alea(this.images);
-    this.alea2(this.liste_button);
+   /*  this.alea(this.images);
+    this.alea2(this.liste_button); */
     this.liste.push(this.images,this.bg_color,this.title_color,this.good_answer_color,this.wrong_answer_color,this.color_progress_bar,
     this.button_bg_color,this.button_text_color,this.text_color,this.typeEcriture,this.isVocaliser);
 
   }
-  
+
 
   alea(li:Image[]){
     var m=li.length,name,src, i;

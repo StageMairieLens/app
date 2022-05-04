@@ -385,7 +385,7 @@
       <tbody>
         <tr *ngFor="let element of this.getReconnaitreList()" (click)="changeJeuId(element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
-          <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
           <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
           <th *ngIf="element.isVocaliser">Oui</th>
@@ -411,7 +411,7 @@
       <tbody>
         <tr *ngFor="let element of this.getAbecedaireList()" (click)="changeJeuId(element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
-          <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
           <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
           <th *ngIf="element.isVocaliser">Oui</th>
@@ -436,7 +436,7 @@
       <tbody>
         <tr *ngFor="let element of this.getBoyGirlList()" (click)="changeJeuId(element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
-          <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
           <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
           <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
