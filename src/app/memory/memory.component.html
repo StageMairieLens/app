@@ -137,7 +137,10 @@
       </div>
     </div>
 
-    <div *ngIf="pressStart == false" class="text start" (click)="this.start()">Commencer</div>
+    <div *ngIf="pressStart == false" class="col-md-12 text-center">
+      <button (click)="this.start()" mat-raised-button color="primary" aria-label="Valider" style="background-color : rgb(77, 184, 44); width: 30%; height: 50px;">
+        Commencer</button>
+    </div>
   </div>
 
   <div *ngIf="finish" class="container boite" style="background-color: white; margin-top: 10%;"

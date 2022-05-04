@@ -188,7 +188,7 @@ export class BoyGirlGameComponent implements OnInit {
     word_f:this.boygirl_word_color_fille,word_b:this.boygirl_word_color_garcon,word_m:this.boygirl_word_color_mot,
     title_f:this.boygirl_title_color_fille,title_b:this.boygirl_title_color_garcon,title_m:this.boygirl_title_color_mot,
     text_f:this.boygirl_text_color_fille,text_b:this.boygirl_text_color_garcon,text_m:this.boygirl_text_color_mot,
-    ecri:this.boygirl_type_ecriture};
+    ecri:this.boygirl_type_ecriture,l_m_f:this.boygirl_listMotsFille.toString(),l_m_b:this.boygirl_listMotsGarcon.toString()};
 
 
   formStep: number = 0;
@@ -301,6 +301,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (value) {
       this.boygirl_listMotsFille.push(value);
+      this.list['l_m_f']=this.boygirl_listMotsFille.toString();
+      console.log(this.list['l_m_f']);
     }
 
     event.chipInput!.clear();
@@ -311,6 +313,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (index >= 0) {
       this.boygirl_listMotsFille.splice(index, 1);
+      this.list['l_m_f']=this.boygirl_listMotsFille.toString();
+      console.log(this.list['l_m_f']);
     }
   }
 
@@ -319,6 +323,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (value) {
       this.boygirl_listMotsGarcon.push(value);
+      this.list['l_m_b']=this.boygirl_listMotsGarcon.toString();
+      console.log(this.list['l_m_b']);
     }
 
     event.chipInput!.clear();
@@ -329,6 +335,8 @@ export class BoyGirlGameComponent implements OnInit {
 
     if (index >= 0) {
       this.boygirl_listMotsGarcon.splice(index, 1);
+      this.list['l_m_b']=this.boygirl_listMotsGarcon.toString();
+      console.log(this.list['l_m_b']);
     }
   }
 

@@ -28,6 +28,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  enterKey($event: KeyboardEvent, email: string, mdp: string): void {
+    if ($event.key == 'Enter') {
+      this.login(email, mdp);
+    }
+  }
+
   static logout(): void {
     localStorage.removeItem("connect");
   }
