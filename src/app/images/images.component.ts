@@ -126,7 +126,7 @@ showImage(){
 }*/
 data :any=[];
 recup(donne: any) {
-  this.jeuxService.recup_image(donne).subscribe(data => {
+  this.jeuxService.recup_image_id(donne).subscribe(data => {
     console.log(data);
     for (var i = 0; data[i] != null; i++) {
       console.log(data);
