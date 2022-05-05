@@ -11,7 +11,7 @@ import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Recopier } from '../recopier-game/Recopier';
 import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
-
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-sessions',
@@ -57,8 +57,7 @@ export class SessionsComponent implements OnInit {
 
   session_nom : string = "";
 
-
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute,private jeuxService: JeuxService) {
     this.abecedaire = null;
     this.memory = null;
     this.boyGirl = null;
@@ -67,7 +66,26 @@ export class SessionsComponent implements OnInit {
     this.recopier = null;
     this.selected_session = null;
   }
+  
+  onSend(list: any) {
 
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
   ngOnInit(): void {
 
     if(this.play) {
