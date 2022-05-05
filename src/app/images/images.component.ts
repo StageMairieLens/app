@@ -26,6 +26,7 @@ export class ImagesComponent implements OnInit {
     this.recup(ImagesComponent.list_image);
     console.log(this.test+this.test2.toString());
     console.log(this.files.length);
+    console.log(ImagesComponent.list_image);
   }
 
   public getListImages(): Image[] {
@@ -132,7 +133,7 @@ recup(donne: any) {
   this.jeuxService.recup_image_id(donne).subscribe(data => {
    
     for (var i = 0; data[i] != null; i++) {
-      console.log(data);
+      //console.log(data);
       donne.push(new Image(data[i].nom,data[i].id_image));
     }
   })

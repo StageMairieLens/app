@@ -17,6 +17,11 @@
 <button (click)="onSend2()" (click)="this.affiche=true"  >ici</button>
 
 <button (click)="recup(['list_image'])">recup</button>
+<figure class="figure" *ngFor="let image of ['list_image']">
+	<img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="...">
+
+	<figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+  </figure>
 <img src="http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{ this.test2 }}" width="400">
 <p>{{ this.affiche }}</p>
 <div *ngIf="this.affiche">
