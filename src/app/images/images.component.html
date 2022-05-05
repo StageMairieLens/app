@@ -14,7 +14,11 @@
 		</ngx-dropzone-label>
 	  </ngx-dropzone-image-preview>
 </ngx-dropzone>
-<button (click)="onSend2()">ici</button>
+<button (click)="onSend2()" (click)="this.affiche=true"  >ici</button>
 
-<button (click)="recup(this.data)">recup</button>
-<img src="http://92.154.61.105:8080/~nacer/vue_image.php?id_image=2">
+<button (click)="recup(list_image)">recup</button>
+<img src="http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{ this.test2 }}" width="400">
+<p>{{ this.affiche }}</p>
+<div *ngIf="this.affiche">
+<p>{{ this.temps }}/ {{ this.files.length }} </p>
+</div>

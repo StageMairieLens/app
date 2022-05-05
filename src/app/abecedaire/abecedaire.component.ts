@@ -37,8 +37,8 @@ export class AbecedaireComponent implements OnInit {
   rightLetter = '';
   errors = 0;
   images: Image[] = [
-    new Image("Orange", "../../assets/orange.jpg"),
-    new Image("Voiture", "../../assets/voiture.png"),
+    /*new Image("Orange", "../../assets/orange.jpg"),
+    new Image("Voiture", "../../assets/voiture.png"),*/
   ];
   nbEntries = 0;
   sound = true;
