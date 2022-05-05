@@ -7,20 +7,20 @@ export class Session {
   id: number;
   static number = 0;
   nom: string;
-  date: Date;
-  jeu: Game;
-  jeuId: number;
+  date: string;
+  jeuId: string;
   joueur: Users[];
   isActive: boolean;
+  isSuivi : boolean
 
-  constructor(nom: string, date: Date, jeu: Game, jeuId: number, isActive: boolean, joueur: Users[]) {
-    this.id = this.randomId();
+  constructor(id : number, nom: string, date: string, jeuId: string, isActive: boolean, joueur: Users[], isSuivi : boolean) {
+    this.id = id;
     this.nom = nom;
     this.date = date;
-    this.jeu = jeu;
     this.jeuId = jeuId;
     this.isActive = isActive;
     this.joueur = joueur;
+    this.isSuivi = isSuivi;
   }
 
   randomId(): number {

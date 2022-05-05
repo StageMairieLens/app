@@ -49,7 +49,7 @@ export class SessionsComponent implements OnInit {
   @Input() selected_session: Session | null;
   id_game: number | null = null;
   jeuSession: string = "";
-  jeuId: number = -1;
+  jeuId: string = '';
 
   sortById: boolean = true;
   sortByDate: boolean = false;
@@ -70,10 +70,11 @@ export class SessionsComponent implements OnInit {
   }
   data: any = [];
   recup(donne: any) {
-    this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
+    this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        console.log(data[i].isVoca)
-        donne.push(data[i]);
+        donne.push(
+          new Session(data[i].id,data[i].nom,data[i].date,data[i].jeux_id,data[i].isJoinable,data[i].joueurs,data[i].isSuivi)
+        );
       }
     })
 
@@ -138,6 +139,8 @@ export class SessionsComponent implements OnInit {
   }
   ngOnInit(): void {
 
+    this.recup(this.data);
+    console.log(this.data)
     if(this.play) {
       if (this.route.snapshot.paramMap.get('id') != null) {
         this.session_id = +this.route.snapshot.paramMap.get('id')!;
@@ -158,7 +161,7 @@ export class SessionsComponent implements OnInit {
     if(this.edit) {
       this.create_session = true;
       this.session_nom = this.selected_session!.nom;
-      this.jeuSession = this.selected_session!.jeu;
+      // this.jeuSession = this.selected_session!.jeu;
       this.jeuId = this.selected_session!.jeuId;
 
     }
@@ -181,42 +184,42 @@ export class SessionsComponent implements OnInit {
 
   enterKey($event: KeyboardEvent): void {
     if ($event.key == 'Enter') {
-      this.connect((<HTMLInputElement>$event.target)!.value);
+      // this.connect((<HTMLInputElement>$event.target)!.value);
     }
   }
 
-  connect(name: string): void {
-    this.addUser(name);
-    var session = this.getSession();
-    if(session == null) return;
-    switch(session.jeu) {
-      case Game.Abecedaire:
-        this.jeu = "abecedaire";
-        this.abecedaire = this.getAbecedaire(session.jeuId);
-        break;
-      case Game.FilleEtGarcon:
-        this.jeu = "fillegarcon";
-        this.boyGirl = this.getFilleGarcon(session.jeuId);
-        break;
-      case Game.Memory:
-        this.jeu = "memory";
-        this.memory = this.getMemory(session.jeuId);
-        break;
-      case Game.Puzzle:
-        this.jeu = "puzzle";
-        this.puzzle = this.getPuzzle(session.jeuId);
-        break;
-      case Game.Reconnaitre:
-        this.jeu = "reconnaitre";
-        this.reconnaitre = this.getReconnaitre(session.jeuId);
-        break;
-      case Game.Recopier:
-        this.jeu = "recopier";
-        this.recopier = this.getRecopier(session.jeuId);
-        break;
-    }
-    this.connected = true;
-  }
+  // connect(name: string): void {
+  //   this.addUser(name);
+  //   var session = this.getSession();
+  //   if(session == null) return;
+  //   switch(session.jeu) {
+  //     case Game.Abecedaire:
+  //       this.jeu = "abecedaire";
+  //       this.abecedaire = this.getAbecedaire(session.jeuId);
+  //       break;
+  //     case Game.FilleEtGarcon:
+  //       this.jeu = "fillegarcon";
+  //       this.boyGirl = this.getFilleGarcon(session.jeuId);
+  //       break;
+  //     case Game.Memory:
+  //       this.jeu = "memory";
+  //       this.memory = this.getMemory(session.jeuId);
+  //       break;
+  //     case Game.Puzzle:
+  //       this.jeu = "puzzle";
+  //       this.puzzle = this.getPuzzle(session.jeuId);
+  //       break;
+  //     case Game.Reconnaitre:
+  //       this.jeu = "reconnaitre";
+  //       this.reconnaitre = this.getReconnaitre(session.jeuId);
+  //       break;
+  //     case Game.Recopier:
+  //       this.jeu = "recopier";
+  //       this.recopier = this.getRecopier(session.jeuId);
+  //       break;
+  //   }
+  //   this.connected = true;
+  // }
 
   getAbecedaire(n: number): Abecedaire | null {
     for(let jeu of SessionsComponent.abecedaire_list) {
@@ -279,17 +282,7 @@ export class SessionsComponent implements OnInit {
 
   }
 
-  static data: Session[] = [
-    new Session('test', new Date(), Game.Recopier, 0, true, []),
-    new Session('test2', new Date(), Game.Memory, 0, true, [
-      new Users('test3', Session.number, 0, 50),
-      new Users('Timmy', Session.number, 20, 10)
-    ]),
-    new Session('test3', new Date('1978-4-11'), Game.Abecedaire, 0, false, []),
-    new Session('test4', new Date(), Game.Memory, 0, true, []),
-    new Session('test5', new Date(), Game.Memory, 0, true, []),
-    new Session('test6', new Date(), Game.Memory, 0, true, []),
-  ];
+  static data: Session[] = [];
 
   static recopier_list: Recopier[] = [];
 
@@ -473,7 +466,7 @@ export class SessionsComponent implements OnInit {
   }
 
   createSession(jeu: string, nom: string): void {
-    if (jeu != "" && nom != "" && this.jeuId != -1) {
+    if (jeu != "" && nom != "" && this.jeuId != '') {
       // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
       this.showList = true;
       this.jeuSession = "";
@@ -483,19 +476,18 @@ export class SessionsComponent implements OnInit {
 
   save() : void {
     this.selected_session!.nom = this.session_nom;
-    this.selected_session!.jeu = (<any>Game)[this.jeuSession]
     this.selected_session!.jeuId = this.jeuId;
     this.router.navigate(['/panel/sessions']);
   }
 
-  changeJeuSession(jeu: string) {
-    this.jeuSession = jeu;
-    this.jeuId = -1;
-  }
+  // changeJeuSession(jeu: string) {
+  //   this.jeuSession = jeu;
+  //   this.jeuId = -1;
+  // }
 
-  changeJeuId(id: number) {
-    this.jeuId = id;
-  }
+  // changeJeuId(id: number) {
+  //   this.jeuId = id;
+  // }
 
   showSessionActive(): void {
     this.showActive = true;
@@ -507,39 +499,39 @@ export class SessionsComponent implements OnInit {
 
 
 
-  getSessionRecopier(s: Session): Recopier | null {
-    this.id_game = s.jeuId;
-    return this.getRecopier(s.id);
-  }
+//   getSessionRecopier(s: Session): Recopier | null {
+//     this.id_game = s.jeuId;
+//     return this.getRecopier(s.id);
+//   }
 
 
 
-  getSessionMemory(s: Session): Memory | null {
-    this.id_game = s.jeuId;
-    return this.getMemory(s.id);
-  }
+//   getSessionMemory(s: Session): Memory | null {
+//     this.id_game = s.jeuId;
+//     return this.getMemory(s.id);
+//   }
 
 
-  getSessionReconnaitre(s: Session): Reconnaitre | null {
-    this.id_game = s.jeuId;
-    return this.getReconnaitre(s.id);
-  }
+//   getSessionReconnaitre(s: Session): Reconnaitre | null {
+//     this.id_game = s.jeuId;
+//     return this.getReconnaitre(s.id);
+//   }
 
 
-  getSessionAbecedaire(s: Session): Abecedaire | null {
-    this.id_game = s.jeuId;
-    return this.getAbecedaire(s.id);
-  }
+//   getSessionAbecedaire(s: Session): Abecedaire | null {
+//     this.id_game = s.jeuId;
+//     return this.getAbecedaire(s.id);
+//   }
 
 
-  getSessionBoyGirl(s: Session): BoyGirl | null {
-    this.id_game = s.jeuId;
-    return this.getFilleGarcon(s.id);
-  }
+//   getSessionBoyGirl(s: Session): BoyGirl | null {
+//     this.id_game = s.jeuId;
+//     return this.getFilleGarcon(s.id);
+//   }
 
-  getSessionPuzzle(s: Session): Puzzle | null {
-    this.id_game = s.jeuId;
-    return this.getPuzzle(s.id);
-  }
+//   getSessionPuzzle(s: Session): Puzzle | null {
+//     this.id_game = s.jeuId;
+//     return this.getPuzzle(s.id);
+//   }
 
-}
+// }
