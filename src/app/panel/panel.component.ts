@@ -84,6 +84,18 @@ export class PanelComponent implements OnInit {
     })
   }
 
+  recupPuzzle(donne: any) {
+    this.jeuxService.recup_puzzle(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe)
+        );
+      }
+
+    })
+
+  }
+
   getMots(s: string): string[] {
     if (s.length != 0) {
       let tab = s.split(',');
@@ -160,7 +172,7 @@ export class PanelComponent implements OnInit {
 
   // VARIABLE JEU PUZZLE
   puzzle: Puzzle | null;
-  puzzle_list: Puzzle[] = SessionsComponent.puzzle_list;
+  puzzle_list: Puzzle[] = []
 
 
   // VARIABLE JEU BOY&GIRL
@@ -186,6 +198,7 @@ export class PanelComponent implements OnInit {
     this.recupReconnaitre(this.reconnaitre_list);
     this.recupAbecedaire(this.abecedaire_list);
     this.recupBoyGirl(this.boygirl_list);
+    this.recupPuzzle(this.puzzle_list)
 
     setTimeout(() => {
       this.panel = this.route.snapshot.paramMap.get('param1');
@@ -304,7 +317,7 @@ export class PanelComponent implements OnInit {
           SessionsComponent.sessionActive.push(s);
         }
       }
-    }, 100)
+    }, 500)
 
 
   }

@@ -27,20 +27,22 @@
         </div>
 
         <div class="card container container_list text-center"
-          [ngStyle]="{background : this.r!.bg_color , 'width' : (210 * this.r!.decoupe) + 'px', 'height' : (210 * this.r!.decoupe) + 'px'}">
+          [ngStyle]="{background : this.r!.bg_color , 'width' : (240 * this.r!.decoupe) + 'px', 'height' : (240 * this.r!.decoupe) + 'px'}">
+
+          <h2 class="card-title text-center" [ngStyle]="{color : this.r!.title_color}">{{this.r!.liste_images[this.prochaine_image].nom}}</h2>
 
 
-          <img *ngIf="this.showModel" src="{{this.r!.liste_images[this.prochaine_image].src}}" alt=""
-            style="z-index:2; position : absolute; opacity : 0.8"
-            [ngStyle]="{'width' : (210 * this.r!.decoupe) + 'px', 'height' : (210 * this.r!.decoupe) + 'px'}">
 
 
-          <div class="row text-center" style="margin : auto">
+          <div class="row text-center" style="margin : auto ; border : 1px solid #ccc;" [ngStyle]="{'width' : 201 * this.r!.decoupe + 'px'}" >
+            <img *ngIf="this.showModel" src="{{this.r!.liste_images[this.prochaine_image].src}}" alt=""
+            style="z-index:2; position : absolute; opacity : 0.8; margin-top : 0px"
+            [ngStyle]="{'width' : (200 * this.r!.decoupe) + 'px', 'height' : (200 * this.r!.decoupe) + 'px'}">
 
             <div class="text-center" *ngFor="let i of this.nombre">
               <div cdkDropList id="{{'plateau_list_' + i}}" [cdkDropListData]="this.plateau[i]"
                 [cdkDropListConnectedTo]="this.dragList" (cdkDropListDropped)="drop($event)"
-                style="height : 200px; width : 200px">
+                style="height : 200px; width : 200px ">
                 <div *ngFor="let t of this.plateau[i]">
                   <div cdkDrag class="example-box"
                     [ngStyle]="{'background-image' : 'url(' + this.r!.liste_images[this.prochaine_image].src + ')' , 'width' : 200 + 'px', 'height' : 200 + 'px', 'background-position' :  t.x + '%' + t.y + '%' , 'background-size' : (this.r!.decoupe * 100) + '%' , display : 'inline-block','transform': 'translate3d(' + 0 + 'px, ' + 0 + 'px, ' +  0  + 'px)' }">
@@ -110,7 +112,7 @@
 
   </div>
 
-  <div *ngIf="this.puzzle_list.length != 0">
+  <div *ngIf="this.data.length != 0">
     <!-- Prévisualisation -->
     <div *ngIf="this.puzzle_previsualiser">
 
@@ -141,9 +143,9 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of this.puzzle_list">
+          <tr *ngFor="let element of this.data">
             <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+            <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.liste_images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
             <th>{{element.decoupe * element.decoupe}}</th> <!-- Nombre de pièce -->
             <th>{{element.typeEcriture}}</th>
@@ -185,7 +187,7 @@
 
 
   <!-- Si la liste des jeu Puzzle est vide -->
-  <div class="text-center" *ngIf="this.puzzle_list.length == 0">
+  <div class="text-center" *ngIf="this.data.length == 0">
     <h5 class="card-title" style="color : red">Il n'y a pas de jeu Puzzle créer</h5>
   </div>
 </div>
@@ -376,7 +378,7 @@
         <div class="col-md-12">
           <h2 class="card-title">Nombre de pièces</h2>
           <div>
-            <b>4</b> <mat-slider thumbLabel [(ngModel)]="this.decoupe" [displayWith]="formatLabel" tickInterval="1" step="1"
+            <b>4</b> <mat-slider thumbLabel [(ngModel)]="this.decoupe" (change)="this.list['decoupe']=this.decoupe" [displayWith]="formatLabel" tickInterval="1" step="1"
               min="2" max="5" aria-label="units" style="width : 50%"></mat-slider> <b>25</b>
           </div>
 
@@ -388,7 +390,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center" (click)="onSend(this.list)" (click)="create()"
+          <button class="validate_button align-middle text-center"(click)="create()"
             mat-raised-button>Créer
             le
             jeu
@@ -400,7 +402,7 @@
       <!-- Bouton de sauvegarde du jeu -->
       <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="save_button align-middle text-center" (click)="onSend_update(this.list)" (click)="save()"
+          <button class="save_button align-middle text-center" (click)="save()"
             mat-raised-button>Sauvegarder
             le
             jeu
