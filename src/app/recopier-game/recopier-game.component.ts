@@ -57,7 +57,7 @@ export class RecopierGameComponent implements OnInit {
     let tab = s.split(',');
     if (s.length != 0) {
       for (let i of tab) {
-        for (let j of ImagesComponent.list_image) {
+        for (let j of this.liste_image) {
           if (+i == j.id) {
             res.push(j);
             break;
@@ -75,11 +75,9 @@ export class RecopierGameComponent implements OnInit {
 
       for (var i = 0; data[i] != null; i++) {
         console.log(data);
-        donne.push(new Image(data[i].nom,data[i].id_image));
+        donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
-
-
   }
 
   liste_image: Image[] = []
@@ -180,13 +178,11 @@ export class RecopierGameComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    console.log(this.liste_image)
 
     this.recupImage(this.liste_image)
 
-    if (!this.play) {
-      this.recup(this.data);
-    }
+    this.recup(this.data);
+
 
 
     if (this.edit) {

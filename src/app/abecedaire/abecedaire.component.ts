@@ -22,7 +22,7 @@ export class AbecedaireComponent implements OnInit {
   @Input() edit: boolean = false;
 
 
-  liste_image: Image[] = ImagesComponent.list_image;
+  liste_image: Image[] = [];
   selectedImages: Image[] = [];
   progressValue: Progress[] = [
     Progress.Blue,
@@ -159,9 +159,23 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
+
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data);
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
   // Initialisation
   ngOnInit(): void {
+
+    this.recupImage(this.liste_image);
     this.recup(this.data);
+
     if (this.game != null) {
       if (this.game!.images.length != 0) {
         this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();

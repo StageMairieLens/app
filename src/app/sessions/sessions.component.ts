@@ -22,6 +22,7 @@ export class SessionsComponent implements OnInit {
 
   session_id: number | null = null;
   join: boolean = false;
+  isSuivi: boolean = false;
   connected: boolean = false;
   timer_redirect: number = 5;
   jeu: string = "";
