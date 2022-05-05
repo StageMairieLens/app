@@ -9,14 +9,14 @@
 	<ngx-dropzone-label>Drop it!</ngx-dropzone-label>
 	<ngx-dropzone-image-preview (click)="onRemove(f)" cdkDrag ngProjectAs="ngx-dropzone-preview"   *ngFor="let f of files" [file]="f"  (change)="onRemove(f)" >
 		<ngx-dropzone-label >{{ f.name }} ({{ f.type }})
-			
+
 
 		</ngx-dropzone-label>
 	  </ngx-dropzone-image-preview>
 </ngx-dropzone>
 <button (click)="onSend2()" (click)="this.affiche=true"  >ici</button>
 
-<button (click)="recup(list_image)">recup</button>
+<button (click)="recup(['list_image'])">recup</button>
 <img src="http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{ this.test2 }}" width="400">
 <p>{{ this.affiche }}</p>
 <div *ngIf="this.affiche">

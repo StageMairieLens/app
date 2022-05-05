@@ -18,17 +18,7 @@ export class MemoryComponent implements OnInit {
 
   @Input() game: Memory | null;
   derriere: Image | null;
-  images: Image[] = [
-    new Image("Orange", "../../assets/orange.jpg"),
-    new Image("Voiture", "../../assets/voiture.png"),
-    new Image("Chat", "../../assets/chat.jpg"),
-    new Image("Chien", "../../assets/chien.jpeg"),
-    new Image("Lion", "../../assets/lion.jpg"),
-    new Image("Souris", "../../assets/souris.jpg"),
-    new Image("Son", "../../assets/sound.png"),
-    new Image("Maison", "../../assets/house.svg"),
-    new Image("Panda", "../../assets/panda.png")
-  ]
+
   @Input() showTitle: boolean = true;
   @Input() play: boolean = true;
   @Input() showList: boolean = false;

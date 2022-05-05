@@ -220,9 +220,9 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-  addImage(mot: string, image: string) {
-    this.game!.images.push(new Image(mot, image));
-  }
+  // addImage(mot: string, image: string) {
+  //   this.game!.images.push(new Image(mot, image));
+  // }
 
   errorsPlus(): void {
     this.errors++;
