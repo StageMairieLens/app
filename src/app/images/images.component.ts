@@ -16,7 +16,7 @@ export class ImagesComponent implements OnInit {
   constructor(private jeuxService: JeuxService,private router: Router) {}
 
   static list_image: Image[] = [
-  
+
   ];
   affiche:Boolean=false;
   temps:number=0;
@@ -93,10 +93,10 @@ onSend(pro_img2:number){
   this.jeuxService.onSend(formData).subscribe({
     next:res=>{
       console.log(res.name);
-      
-      
+
+
     },
-  
+
     error  :err =>{
       console.log(err);
       this.temps+=1;
@@ -105,13 +105,13 @@ onSend(pro_img2:number){
         this.redirect();
       }
     },
-    
+
   });
 }
 onSend2(){
   for(var i=0;i<this.files.length;i++){
     this.onSend(i);
-    
+
   }
 }
 redirect(){
@@ -120,24 +120,28 @@ redirect(){
 /*imageUrl:any = null;
 showImage(){
 
-  this.jeuxService.getImage().subscribe((res) => { 
+  this.jeuxService.getImage().subscribe((res) => {
     var img:Blob = res;
     var myReader:FileReader = new FileReader();
     myReader.onloadend = (e) => {
       this.imageUrl = this._DomSanitizationService.bypassSecurityTrustUrl(<string>myReader.result);
     }
-    myReader.readAsDataURL(img);   
+    myReader.readAsDataURL(img);
   });
 }*/
 recup(donne: any) {
   this.jeuxService.recup_image_id(donne).subscribe(data => {
-   
+
     for (var i = 0; data[i] != null; i++) {
       //console.log(data);
       donne.push(new Image(data[i].nom,data[i].id_image));
     }
   })
-  
 
-}    
+
+}
+
+getListImage() : Image[] {
+  return ImagesComponent.list_image
+}
 }
