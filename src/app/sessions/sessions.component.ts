@@ -252,7 +252,7 @@ export class SessionsComponent implements OnInit {
 
 
   static puzzle_list: Puzzle[] = [
-    new Puzzle([ImagesComponent.list_image[0], ImagesComponent.list_image[1]], "#3bb8c9", "#ffffff", "#000000", "#0dff00", "#ff0000" , 'CAPITAL' , 3)
+    // new Puzzle([ImagesComponent.list_image[0], ImagesComponent.list_image[1]], "#3bb8c9", "#ffffff", "#000000", "#0dff00", "#ff0000" , 'CAPITAL' , 3)
   ];
 
   getPuzzleList() : Puzzle[] { return SessionsComponent.puzzle_list}

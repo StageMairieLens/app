@@ -3,7 +3,7 @@ import { Image } from '../Image'
 export class Puzzle {
   id: number;
   static nb: number = 0;
-  date : Date;
+  date : string;
   liste_images: any = [];
   bg_color: string;
   title_color: string;
@@ -15,9 +15,9 @@ export class Puzzle {
 
   typeEcriture: string;
   decoupe : number;
-  constructor(liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string,decoupe:number) {
-    this.id = Puzzle.nb++;
-    this.date = new Date();
+  constructor(id : number, date : string,liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string,decoupe:number) {
+    this.id = id;
+    this.date = date;
     this.liste_images = liste_images;
     this.bg_color = bg_color;
     this.title_color = title_color;

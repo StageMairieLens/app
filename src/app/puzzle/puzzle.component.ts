@@ -32,77 +32,95 @@ interface tuile {
 export class PuzzleComponent implements OnInit {
 
 
-  constructor(private jeuxService: JeuxService,private router: Router) {
-    this.r = new Puzzle([this.liste_image[5], this.liste_image[1]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 6);
+  constructor(private jeuxService: JeuxService, private router: Router) {
+    this.r = new Puzzle(0, '', [this.liste_image[5], this.liste_image[2]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5);
     // this.r = null;
 
   }
 
   reponse = "";
-  data = [];
-  recup(donne:any){
-    this.jeuxService.recup_puzzle(donne).subscribe(data =>{
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
+  data: Puzzle[] = [];
+  recup(donne: any) {
+    this.jeuxService.recup_puzzle(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe)
+        );
       }
 
-      console.log(donne[0].bg_color);
-      console.log(data[0]);
     })
 
   }
-  onSend(list:any){
 
-    const formData : FormData = new FormData();
+  getImage(s: string): ImageImport[] {
+    let res = [];
+    let tab = s.split(',');
+    if (s.length != 0) {
+      for (let i of tab) {
+        for (let j of ImagesComponent.list_image) {
+          if (+i == j.id) {
+            res.push(j);
+            break;
+          }
+        }
+      }
+    }
 
-    formData.append('puzzle',JSON.stringify(list));
+    return res;
+  }
+  onSend(list: any) {
+
+    const formData: FormData = new FormData();
+
+    formData.append('puzzle', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
-  }onSend_delete(id:any){
+  }
+  onSend_delete(id: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
     }*/
-    formData.append('puzzle_delete',id);
+    formData.append('puzzle_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res);
 
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
     });
   }
-  onSend_update(list:any){
+  onSend_update(list: any) {
 
-    const formData : FormData = new FormData();
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('puzzle_update',JSON.stringify(list));
+    formData.append('puzzle_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
+      next: res => {
         console.log(res.name);
         this.reponse = res;
       },
 
-      error  :err =>{
+      error: err => {
         console.log(err);
       },
 
@@ -117,7 +135,7 @@ export class PuzzleComponent implements OnInit {
 
   ngOnInit(): void {
     this.recup(this.data);
-    if(this.r != null && this.play) {
+    if (this.r != null && this.play) {
       this.decoupageImage();
 
 
@@ -132,6 +150,7 @@ export class PuzzleComponent implements OnInit {
       }
 
       this.shuffle();
+
     }
 
 
@@ -145,6 +164,13 @@ export class PuzzleComponent implements OnInit {
       this.puzzle_type_ecriture = this.r!.typeEcriture;
       this.puzzle_text_color = this.r!.text_color;
       this.decoupe = this.r!.decoupe;
+
+      for (let i of this.selectedImages) {
+        this.image.push(i.id);
+      }
+
+      this.list = { image: this.image.toString(), id: this.r!.id, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
+
     }
 
 
@@ -159,10 +185,10 @@ export class PuzzleComponent implements OnInit {
   puzzle_type_ecriture = "SCRIPT";
   puzzle_text_color: string = "#000000";
   puzzle_previsualiser: boolean = false;
-  decoupe: number = 4 ;
+  decoupe: number = 4;
   formStep: number = 0;
-  image:any=[];
-  list:any = {image:this.image.toString(),id:1,bg_color:this.puzzle_bg_color,text_color:this.puzzle_text_color,title_color:this.puzzle_title_color,button_bg_color:this.puzzle_button_bg_color,button_text_color:this.puzzle_button_text_color,ecri:this.puzzle_type_ecriture,decoupe:this.decoupe};
+  image: any = [];
+  list: any = { image: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
   prochaine_image = 0;
 
 
@@ -178,26 +204,30 @@ export class PuzzleComponent implements OnInit {
   nombre: number[] = [];
   plateau: [tuile[]] = [[]];
   dragList: string[] = [];
-  selected_image : HTMLImageElement[] = [];
-  showModel : boolean = false;
+  selected_image: HTMLImageElement[] = [];
+  showModel: boolean = false;
 
 
-  checkPuzzle() : boolean{
-    for (let i = 0 ; i< this.r!.decoupe * this.r!.decoupe; i++) {
-      if(this.decoupage[i] != this.plateau[i][0]) {
+  checkPuzzle(): boolean {
+    for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
+      if (this.decoupage[i] != this.plateau[i][0]) {
         return false;
       }
     }
     return true;
   }
 
-  shuffle() : void {
+  shuffle(): void {
     var j, x, i;
     for (i = this.plateau.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = this.plateau[i];
-        this.plateau[i] = this.plateau[j];
-        this.plateau[j] = x;
+      j = Math.floor(Math.random() * (i + 1));
+      x = this.plateau[i];
+      this.plateau[i] = this.plateau[j];
+      this.plateau[j] = x;
+    }
+
+    if(this.checkPuzzle()) {
+      this.shuffle();
     }
   }
 
@@ -266,7 +296,7 @@ export class PuzzleComponent implements OnInit {
 
     }
 
-    if(this.checkPuzzle()) {
+    if (this.checkPuzzle()) {
       this.prochaine_image++;
       this.plateau = [[]];
       this.nombre = [];
@@ -287,7 +317,7 @@ export class PuzzleComponent implements OnInit {
       this.shuffle();
 
     }
-    console.log(this.prochaine_image , this.r!.liste_images)
+    console.log(this.prochaine_image, this.r!.liste_images)
 
   }
 
@@ -303,11 +333,11 @@ export class PuzzleComponent implements OnInit {
   }
 
   deleteGamePuzzle(r: Puzzle): void {
-    let index = this.puzzle_list.indexOf(r, 0);
-
-    if (index > -1) {
-      this.puzzle_list.splice(index, 1);
-    }
+    this.onSend_delete(r.id);
+    setTimeout(() => {
+      this.data = [];
+      this.recup(this.data)
+    }, 200)
   }
 
 
@@ -321,7 +351,7 @@ export class PuzzleComponent implements OnInit {
 
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      this.r = new Puzzle(this.selectedImages, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
+      this.r = new Puzzle(0, '', this.selectedImages, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
       this.puzzle_previsualiser = true;
     }
     else {
@@ -370,14 +400,7 @@ export class PuzzleComponent implements OnInit {
   }
 
   save(): void {
-    this.r!.liste_images = this.selectedImages;
-    this.r!.bg_color = this.puzzle_bg_color;
-    this.r!.title_color = this.puzzle_title_color;
-    this.r!.text_color = this.puzzle_text_color;
-    this.r!.button_bg_color = this.puzzle_button_bg_color;
-    this.r!.button_text_color = this.puzzle_button_text_color;
-    this.r!.typeEcriture = this.puzzle_type_ecriture;
-    this.r!.decoupe = this.decoupe;
+    this.onSend_update(this.list)
     this.router.navigate(['/panel/Puzzle']);
   }
 
@@ -394,8 +417,8 @@ export class PuzzleComponent implements OnInit {
   }
 
   create(): void {
-    this.puzzle_list.push(
-      new Puzzle(this.liste_image_puzzle, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe)));
+    this.list = { image: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
+    this.onSend(this.list)
     this.router.navigate(['/panel/Puzzle']);
   }
 
@@ -403,7 +426,7 @@ export class PuzzleComponent implements OnInit {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
-      this.list['image']=this.image.toString();
+      this.list['image'] = this.image.toString();
     }
   }
 
@@ -411,8 +434,8 @@ export class PuzzleComponent implements OnInit {
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
-      this.image.splice(index,1);
-      this.list['image']=this.image.toString();
+      this.image.splice(index, 1);
+      this.list['image'] = this.image.toString();
     }
   }
 

@@ -47,85 +47,6 @@
 }
 
 
-#collage hr {
-  border: none;
-  border-top: 2px solid #f5f2f2;
-  height: 1px;
-}
-
-#collage #playPanel {
-
-  padding: 10px 0px;
-  margin: 10px auto;
-  max-width: 800px;
-  width: 95%;
-}
-
-#collage #actualImageBox {
-  display: inline-block;
-  font-size: 0.8em;
-  margin: 10px 10px;
-  vertical-align: top;
-  width: 280px;
-}
-
-#collage #stepBox,
-#collage #timeBox {
-  display: inline-block;
-  width: 48%;
-}
-
-#collage #stepBox div {
-  background-color: #c2defc;
-  display: inline-block;
-  padding: 1px 4px;
-  margin: 0px auto;
-  max-width: 800px;
-}
-
-#collage img#actualImage {
-  display: inline-block;
-  border: 2px solid;
-  height: 280px;
-  width: 280px;
-}
-
-#collage #sortable {
-  border: 2px solid;
-  list-style-type: none;
-  display: inline-block;
-  margin: 0;
-  padding: 0;
-
-}
-
-#collage #sortable li {
-  background-size: 400% 400%;
-  border: none;
-  cursor: progress;
-  margin: 0;
-  padding: 0;
-  float: left;
-  width: 25px;
-  height: 100px;
-}
-
-#collage button {
-
-  border: 1px solid;
-  display: inline;
-  font-size: 14px;
-  height: auto;
-  width: auto;
-  padding: 3px 8px;
-}
-
-
-
-#error {
-  color: red;
-}
-
 .card_play p {
   margin-left: 4px;
   border-radius: 3%;
@@ -176,6 +97,7 @@
   color: white;
   margin-top: 5%;
   padding: 5px;
+  width : auto;
   box-shadow: rgba(218, 216, 216, 0.548) 10px 10px;
 }
 
