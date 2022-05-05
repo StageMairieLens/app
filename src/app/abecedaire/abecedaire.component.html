@@ -34,15 +34,23 @@
 
   <div *ngIf="game != null && game!.images.length != 0 && finish == false">
     <div class="container container_play" [ngStyle]="{background: game!.bg_color}">
+      <div>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.afficherMot == 'SCRIPT'" (click)="this.afficherMot = 'CAPITAL'">SCRIPT</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.afficherMot == 'CAPITAL'" (click)="this.afficherMot = 'AUCUN'">CAPITAL</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.afficherMot == 'CURSIF'" (click)="this.afficherMot = 'SCRIPT'">CURSIF</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.afficherMot == 'AUCUN'" (click)="this.afficherMot = 'CURSIF'">AUCUN</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.game!.isVocaliser == true" (click)="this.game!.isVocaliser = false">Vocalisation</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.game!.isVocaliser == false" (click)="this.game!.isVocaliser = true">Non Vocalisation</button>
+      </div>
       <img class="img-fluid rounded image_play" src={{this.game!.images[this.nbEntries].getSrc()}}>
-      <div *ngIf="this.afficherMot == 'script'">
+      <div *ngIf="this.afficherMot == 'SCRIPT'">
         <p [ngStyle]="{color: game!.text_color}" class="mot">{{this.game!.images[this.nbEntries].getNom()}}</p>
       </div>
-      <p *ngIf="this.afficherMot == 'capital'" style="text-transform:uppercase" [ngStyle]="{color: game!.text_color}"
+      <p *ngIf="this.afficherMot == 'CAPITAL'" style="text-transform:uppercase" [ngStyle]="{color: game!.text_color}"
         class="mot">{{this.game!.images[this.nbEntries].getNom()}}</p>
-      <div *ngIf="this.afficherMot == 'cursif'" style="font-family: cursiveFont;" [ngStyle]="{color: game!.text_color}"
+      <div *ngIf="this.afficherMot == 'CURSIF'" style="font-family: cursiveFont;" [ngStyle]="{color: game!.text_color}"
         class="mot">{{this.game!.images[this.nbEntries].getNom()}}</div>
-        <div *ngIf="+this.game!.isVocaliser == 1" class="text-center">
+        <div *ngIf="+this.game!.isVocaliser == 1" class="text-center sound">
           <button mat-button style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;" (click)="vocalise()">
             <i class="fa-solid fa-volume-high" style="color: black"></i>
           </button>

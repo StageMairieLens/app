@@ -263,6 +263,7 @@ export class MemoryComponent implements OnInit {
     var val;
     var i = 0;
     var a;
+    this.hash = [];
     while (i < this.game!.images.length && i < this.nbTile / 2) {
       for (var x = 0; x < 2; x++) {
         a = this.random();
@@ -301,6 +302,18 @@ export class MemoryComponent implements OnInit {
         }
       }
       i++
+    }
+  }
+
+  resetImage(): void {
+    this.sound = this.memory_isVocaliser;
+    for (var i = 0; i < this.nbTile; i++) {
+      this.tiles[i].isImage = this.isImage[i];
+      this.tiles[i].sound = this.sound;
+      this.tiles[i].id = (i + 1).toString();
+      this.tiles[i].affichage = this.affichage[i];
+      this.tiles[i].nom = this.nom[i];
+      this.tiles[i].cursif = this.cursif[i];
     }
   }
 
@@ -516,7 +529,6 @@ export class MemoryComponent implements OnInit {
 
   changeMemorySetting(n: number, setting: string): void {
     this.memory_settings[n] = setting;
-    console.log(this.memory_settings);
   }
 
   changeMemoryNbTile(n: number): void {

@@ -30,6 +30,21 @@
 
   <div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2) && game.derriere != null"
     class="plateau container boite" [ngStyle]="{background: game!.bg_color}">
+    <div *ngIf="pressStart == false">
+      <div style="background-color: orange; width: fit-content; display: inline-block;">
+        <button mat-raised-button *ngIf="this.setting[0] == 'image'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[0] = 'capital'; this.set(); this.resetImage()">Image</button>
+        <button mat-raised-button *ngIf="this.setting[0] == 'capital'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[0] = 'script'; this.set(); this.resetImage()">Capital</button>
+        <button mat-raised-button *ngIf="this.setting[0] == 'script'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[0] = 'cursif'; this.set(); this.resetImage()">Script</button>
+        <button mat-raised-button *ngIf="this.setting[0] == 'cursif'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[0] = 'image'; this.set(); this.resetImage()">Cursif</button>
+        /
+        <button mat-raised-button *ngIf="this.setting[1] == 'image'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[1] = 'capital'; this.set(); this.resetImage()">Image</button>
+        <button mat-raised-button *ngIf="this.setting[1] == 'capital'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[1] = 'script'; this.set(); this.resetImage()">Capital</button>
+        <button mat-raised-button *ngIf="this.setting[1] == 'script'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[1] = 'cursif'; this.set(); this.resetImage()">Script</button>
+        <button mat-raised-button *ngIf="this.setting[1] == 'cursif'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[1] = 'image'; this.set(); this.resetImage()">Cursif</button>
+      </div>
+      <button mat-raised-button style="background-color: orange" *ngIf="memory_isVocaliser == true" (click)="memory_isVocaliser = false">Vocalisation</button>
+      <button mat-raised-button style="background-color: orange" *ngIf="memory_isVocaliser == false" (click)="memory_isVocaliser = true">Non Vocalisation</button>
+    </div>
     <table>
       <tr>
         <td id="1" *ngIf="nbTile >= 1">

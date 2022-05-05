@@ -42,7 +42,7 @@ export class AbecedaireComponent implements OnInit {
   ];
   nbEntries = 0;
   sound = true;
-  afficherMot = "cursif";
+  afficherMot = "CURSIF";
   finish = false;
 
   synthesis: SpeechSynthesis | null = window.speechSynthesis;;
@@ -58,7 +58,7 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_progress: Progress = Progress.Blue;
   abecedaire_button_bg_color: string = "#f39c12";
   abecedaire_button_text_color: string = "#ffffff";
-  abecedaire_type_ecriture: string = "script";
+  abecedaire_type_ecriture: string = "SCRIPT";
   abecedaire_isVocaliser: boolean = false;
   image: any = [];
   abecedaire_previsualiser: boolean = false;
