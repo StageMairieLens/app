@@ -20,15 +20,16 @@
 
       <div *ngIf="this.prochaine_image != this.r!.liste_images.length">
         <div class="text-center">
-          <button *ngIf="!this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
+          <button [ngStyle]="{color : this.r!.button_text_color, 'background-color' : this.r!.button_bg_color}" *ngIf="!this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
             (click)="this.showModel = true">Afficher le modéle du puzzle</button>
-          <button *ngIf="this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
+          <button [ngStyle]="{color : this.r!.button_text_color, 'background-color' : this.r!.button_bg_color}" *ngIf="this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
             (click)="this.showModel = false">Cacher le modéle du puzzle</button>
         </div>
 
         <div class="card container container_list text-center"
           [ngStyle]="{background : this.r!.bg_color , 'width' : (240 * this.r!.decoupe) + 'px', 'height' : (250 * this.r!.decoupe) + 'px'}">
 
+          <!-- Nom de l'image -->
           <div class="row justify-content-center" style="margin-top : 2%">
             <h2 *ngIf="this.r!.typeEcriture == 'CURSIF'" class="card-title text-center"
               [ngStyle]="{color : this.r!.title_color, 'font-size' : 50 + 'px'}" style="font-family : cursiveFont">

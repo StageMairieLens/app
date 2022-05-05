@@ -41,7 +41,7 @@ export class MemoryComponent implements OnInit {
   memory_list: Memory[] = SessionsComponent.memory_list;
   list: any = { image: this.image.toString(), id: 1, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: 0 };
 
-  liste_image: Image[] = ImagesComponent.list_image;
+  liste_image: Image[] = [];
   selectedImages: Image[] = [];
   formStep: number = 0;
 
@@ -190,11 +190,22 @@ export class MemoryComponent implements OnInit {
   }
 
 
+
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data);
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
   // Initialisation
   ngOnInit(): void {
-    if (!this.play) {
-      this.recup(this.data);
-    }
+    this.recupImage(this.liste_image);
+    this.recup(this.data);
+
 
 
     if (this.game == null || this.game.derriere == null) return;
