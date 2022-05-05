@@ -596,10 +596,10 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionRecopier(s: Session): Recopier | null {
-    this.id_game = s.jeuId;
-    return this.getRecopier();
-  }
+  // getSessionRecopier(s: Session): Recopier | null {
+  //   this.id_game = s.jeuId;
+  //   return this.getRecopier();
+  // }
 
 
   getMemory(): Memory | null {
@@ -611,10 +611,10 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionMemory(s: Session): Memory | null {
-    this.id_game = s.jeuId;
-    return this.getMemory();
-  }
+  // getSessionMemory(s: Session): Memory | null {
+  //   this.id_game = s.jeuId;
+  //   return this.getMemory();
+  // }
 
 
   getReconnaitre(): Reconnaitre | null {
@@ -626,10 +626,10 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionReconnaitre(s: Session): Reconnaitre | null {
-    this.id_game = s.jeuId;
-    return this.getReconnaitre();
-  }
+  // getSessionReconnaitre(s: Session): Reconnaitre | null {
+  //   this.id_game = s.jeuId;
+  //   return this.getReconnaitre();
+  // }
 
 
   getAbecedaire(): Abecedaire | null {
@@ -641,10 +641,10 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionAbecedaire(s: Session): Abecedaire | null {
-    this.id_game = s.jeuId;
-    return this.getAbecedaire();
-  }
+  // getSessionAbecedaire(s: Session): Abecedaire | null {
+  //   this.id_game = s.jeuId;
+  //   return this.getAbecedaire();
+  // }
 
 
   getBoyGirl(): BoyGirl | null {
@@ -656,10 +656,10 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionBoyGirl(s: Session): BoyGirl | null {
-    this.id_game = s.jeuId;
-    return this.getBoyGirl();
-  }
+  // getSessionBoyGirl(s: Session): BoyGirl | null {
+  //   this.id_game = s.jeuId;
+  //   return this.getBoyGirl();
+  // }
 
   getPuzzle(): Puzzle | null {
     for (let p of this.puzzle_list) {
@@ -670,10 +670,10 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  getSessionPuzzle(s: Session): Puzzle | null {
-    this.id_game = s.jeuId;
-    return this.getPuzzle();
-  }
+  // getSessionPuzzle(s: Session): Puzzle | null {
+  //   this.id_game = s.jeuId;
+  //   return this.getPuzzle();
+  // }
 
 
 

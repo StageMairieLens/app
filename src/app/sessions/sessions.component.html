@@ -34,7 +34,7 @@
             <input type="text" name="" id="" placeholder="Entrez votre nom ici" #input_name
               (keypress)="enterKey($event)">
 
-            <button mat-raised-button color="primary" aria-label="Valider" (click)="connect(input_name.value)">
+            <button mat-raised-button color="primary" aria-label="Valider">
               <i class="fa fa-check"></i>
             </button>
           </div>
@@ -145,8 +145,7 @@
             </th>
             <th>{{element.id}}</th>
             <th>{{element.nom}}</th>
-            <th>{{this.parseDate(element.date)}}</th>
-            <th>{{element.jeu}}</th>
+            <th>{{element.date}}</th>
             <th>{{element.joueur.length}}</th>
             <th class="button_actions">
               <button mat-raised-button title="Prévisualiser le jeu de la séssion" (click)="previsualiserGame(element)"
@@ -202,8 +201,7 @@
             </th>
             <th>{{element.id}}</th>
             <th>{{element.nom}}</th>
-            <th>{{this.parseDate(element.date)}}</th>
-            <th>{{element.jeu}}</th>
+            <th>{{element.date}}</th>
             <th>{{element.joueur.length}}</th>
             <th class="button_actions">
               <button mat-raised-button title="Prévisualiser le jeu de la séssion" (click)="previsualiserGame(element)"

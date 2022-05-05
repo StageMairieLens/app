@@ -534,4 +534,4 @@ export class SessionsComponent implements OnInit {
 //     return this.getPuzzle(s.id);
 //   }
 
-// }
+}
