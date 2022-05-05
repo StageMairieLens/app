@@ -20,24 +20,35 @@
 
       <div *ngIf="this.prochaine_image != this.r!.liste_images.length">
         <div class="text-center">
-          <button *ngIf="!this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
+          <button [ngStyle]="{color : this.r!.button_text_color, 'background-color' : this.r!.button_bg_color}" *ngIf="!this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
             (click)="this.showModel = true">Afficher le modéle du puzzle</button>
-          <button *ngIf="this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
+          <button [ngStyle]="{color : this.r!.button_text_color, 'background-color' : this.r!.button_bg_color}" *ngIf="this.showModel && !this.checkPuzzle()" mat-raised-button color="primary"
             (click)="this.showModel = false">Cacher le modéle du puzzle</button>
         </div>
 
         <div class="card container container_list text-center"
-          [ngStyle]="{background : this.r!.bg_color , 'width' : (240 * this.r!.decoupe) + 'px', 'height' : (240 * this.r!.decoupe) + 'px'}">
+          [ngStyle]="{background : this.r!.bg_color , 'width' : (240 * this.r!.decoupe) + 'px', 'height' : (250 * this.r!.decoupe) + 'px'}">
 
-          <h2 class="card-title text-center" [ngStyle]="{color : this.r!.title_color}">{{this.r!.liste_images[this.prochaine_image].nom}}</h2>
+          <!-- Nom de l'image -->
+          <div class="row justify-content-center" style="margin-top : 2%">
+            <h2 *ngIf="this.r!.typeEcriture == 'CURSIF'" class="card-title text-center"
+              [ngStyle]="{color : this.r!.title_color, 'font-size' : 50 + 'px'}" style="font-family : cursiveFont">
+              {{this.r!.liste_images[this.prochaine_image].nom}}</h2>
+            <h2 *ngIf="this.r!.typeEcriture == 'SCRIPT'" class="card-title text-center"
+              [ngStyle]="{color : this.r!.title_color, 'font-size' : 40 + 'px'}">
+              {{this.r!.liste_images[this.prochaine_image].nom}}</h2>
+            <h2 *ngIf="this.r!.typeEcriture == 'CAPITAL'" class="card-title text-center"
+              [ngStyle]="{color : this.r!.title_color, 'font-size' : 40 + 'px'}" style="text-transform : uppercase">
+              {{this.r!.liste_images[this.prochaine_image].nom}}</h2>
+          </div>
 
 
 
-
-          <div class="row text-center" style="margin : auto ; border : 1px solid #ccc;" [ngStyle]="{'width' : 201 * this.r!.decoupe + 'px'}" >
+          <div class="row text-center" style="margin : auto ; border : 1px solid #ccc; margin-bottom : 5%"
+            [ngStyle]="{'width' : 201 * this.r!.decoupe + 'px'}">
             <img *ngIf="this.showModel" src="{{this.r!.liste_images[this.prochaine_image].src}}" alt=""
-            style="z-index:2; position : absolute; opacity : 0.8; margin-top : 0px"
-            [ngStyle]="{'width' : (200 * this.r!.decoupe) + 'px', 'height' : (200 * this.r!.decoupe) + 'px'}">
+              style="z-index:2; position : absolute; opacity : 0.8; margin-top : 0px"
+              [ngStyle]="{'width' : (200 * this.r!.decoupe) + 'px', 'height' : (200 * this.r!.decoupe) + 'px'}">
 
             <div class="text-center" *ngFor="let i of this.nombre">
               <div cdkDropList id="{{'plateau_list_' + i}}" [cdkDropListData]="this.plateau[i]"
@@ -378,8 +389,10 @@
         <div class="col-md-12">
           <h2 class="card-title">Nombre de pièces</h2>
           <div>
-            <b>4</b> <mat-slider thumbLabel [(ngModel)]="this.decoupe" (change)="this.list['decoupe']=this.decoupe" [displayWith]="formatLabel" tickInterval="1" step="1"
-              min="2" max="5" aria-label="units" style="width : 50%"></mat-slider> <b>25</b>
+            <b>4</b>
+            <mat-slider thumbLabel [(ngModel)]="this.decoupe" (change)="this.list['decoupe']=this.decoupe"
+              [displayWith]="formatLabel" tickInterval="1" step="1" min="2" max="5" aria-label="units"
+              style="width : 50%"></mat-slider> <b>25</b>
           </div>
 
           <h2 class="card-title">{{this.decoupe * this.decoupe}} pièces</h2>
@@ -390,8 +403,7 @@
       <!-- Bouton de création du jeu -->
       <div *ngIf="!this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="validate_button align-middle text-center"(click)="create()"
-            mat-raised-button>Créer
+          <button class="validate_button align-middle text-center" (click)="create()" mat-raised-button>Créer
             le
             jeu
             <i class="fa-solid fa-check fa-lg"></i>
@@ -402,8 +414,7 @@
       <!-- Bouton de sauvegarde du jeu -->
       <div *ngIf="this.edit" class="form-row align-middle text-center" align="center">
         <div class="col-md-12 text-center">
-          <button class="save_button align-middle text-center" (click)="save()"
-            mat-raised-button>Sauvegarder
+          <button class="save_button align-middle text-center" (click)="save()" mat-raised-button>Sauvegarder
             le
             jeu
             <i class="fa-solid fa-floppy-disk"></i>

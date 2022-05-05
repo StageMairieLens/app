@@ -122,11 +122,22 @@ export class ReconnaitreComponent implements OnInit {
 
     });
   }
+
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data);
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
   ngOnInit(): void {
     //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
-    if (!this.play) {
-      this.recup(this.data);
-    }
+    //
+    this.recupImage(this.liste_image)
+    this.recup(this.data);
 
 
     if (this.r != null) {
@@ -175,7 +186,7 @@ export class ReconnaitreComponent implements OnInit {
 
   clicked = false; //Le boutton n'est pas désactiver
   //liste_images : String[] = ["../../assets/lion.jpg","../../assets/chat.jpg","../../assets/chien.jpeg","../../assets/souris.jpg"];
-  liste_image: Image[] = ImagesComponent.list_image;
+  liste_image: Image[] = [];
   selectedImages: Image[] = [];
   erreur_image: Erreur[] = [];
   //liste_images = [];

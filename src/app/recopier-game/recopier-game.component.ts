@@ -57,7 +57,7 @@ export class RecopierGameComponent implements OnInit {
     let tab = s.split(',');
     if (s.length != 0) {
       for (let i of tab) {
-        for (let j of ImagesComponent.list_image) {
+        for (let j of this.liste_image) {
           if (+i == j.id) {
             res.push(j);
             break;
@@ -70,8 +70,17 @@ export class RecopierGameComponent implements OnInit {
 
   }
 
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
 
-  liste_image: Image[] = ImagesComponent.list_image;
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data);
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
+  liste_image: Image[] = []
   selectedImages: Image[] = [];
   image: Image[] = [];
   showImageCpt: number = 0;
@@ -109,16 +118,6 @@ export class RecopierGameComponent implements OnInit {
   voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
     return voice.lang === 'fr';
   })[0];;
-
-
-  images: Image[] = [
-    new Image('Fleur', '../../assets/fleur.jpg'),
-    new Image('Lion', '../../assets/lion.jpg'),
-    new Image('Chat', '../../assets/chat.jpg'),
-    new Image('Chien', '../../assets/chien.jpeg'),
-    new Image('Elephant', '../../assets/elephant.jpg'),
-    new Image('Voiture', '../../assets/voiture.png')
-  ];
 
   progressValue: Progress[] = [
     Progress.Blue,
@@ -179,9 +178,11 @@ export class RecopierGameComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    if (!this.play) {
-      this.recup(this.data);
-    }
+
+    this.recupImage(this.liste_image)
+
+    this.recup(this.data);
+
 
 
     if (this.edit) {

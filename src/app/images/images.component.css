@@ -1,0 +1,7 @@
+.delete:hover span {
+  display : block;
+}_
+
+.delete span{
+  display : none
+}

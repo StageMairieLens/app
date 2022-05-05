@@ -126,15 +126,28 @@ export class PuzzleComponent implements OnInit {
 
     });
   }
-  liste_image: ImageImport[] = ImagesComponent.list_image;
+
+
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(new ImageImport(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
+  liste_image: ImageImport[] = [];
   selectedImages: ImageImport[] = [];
-  images = this.liste_image;
 
 
 
 
   ngOnInit(): void {
+
+    this.recupImage(this.liste_image);
     this.recup(this.data);
+
     if (this.r != null && this.play) {
       this.decoupageImage();
 
@@ -226,7 +239,7 @@ export class PuzzleComponent implements OnInit {
       this.plateau[j] = x;
     }
 
-    if(this.checkPuzzle()) {
+    if (this.checkPuzzle()) {
       this.shuffle();
     }
   }
@@ -341,13 +354,7 @@ export class PuzzleComponent implements OnInit {
   }
 
 
-  liste_image_puzzle: any = [];
-  imgPuzzle(li: ImageImport[]): any {
-    for (var i = 0; i < li.length; i++) {
-      this.liste_image_puzzle.push({ src: li[i].src, title: li[i].nom });
-    }
-    return this.liste_image_puzzle;
-  }
+
 
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {

@@ -11,7 +11,7 @@ import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Recopier } from '../recopier-game/Recopier';
 import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
-
+import { JeuxService } from '../jeux.service';
 
 @Component({
   selector: 'app-sessions',
@@ -22,6 +22,7 @@ export class SessionsComponent implements OnInit {
 
   session_id: number | null = null;
   join: boolean = false;
+  isSuivi: boolean = false;
   connected: boolean = false;
   timer_redirect: number = 5;
   jeu: string = "";
@@ -56,9 +57,9 @@ export class SessionsComponent implements OnInit {
 
 
   session_nom : string = "";
+  list:any ={nom:this.session_nom,isSuivi:this.isSuivi,join:this.join};
 
-
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute,private jeuxService: JeuxService) {
     this.abecedaire = null;
     this.memory = null;
     this.boyGirl = null;
@@ -67,7 +68,74 @@ export class SessionsComponent implements OnInit {
     this.recopier = null;
     this.selected_session = null;
   }
+  data: any = [];
+  recup(donne: any) {
+    this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data[i].isVoca)
+        donne.push(data[i]);
+      }
+    })
 
+  }
+  onSend(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+  onSend_delete(id: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<id.lenght;i++){
+      formData.append('id[]',id[i]);
+    }*/
+    formData.append('session_delete', id);
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res);
+
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+  onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session_update', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
   ngOnInit(): void {
 
     if(this.play) {

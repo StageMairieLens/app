@@ -4,10 +4,10 @@ export class Image {
   nom: string;
   src : string;
 
-  constructor(nom: string, src : string) {
-    this.id = Image.number;
-    this.nom = nom;
-    this.src = src;
+  constructor(nom: string,id:number) {
+    this.id = id;
+    this.nom = nom.split('.')[0][0].toUpperCase() + nom.split('.')[0].slice(1);
+    this.src ='http://92.154.61.105:8080/~nacer/vue_image.php?id_image='+this.id.toString();
     Image.number++;
   }
 

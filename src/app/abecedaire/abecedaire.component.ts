@@ -22,7 +22,7 @@ export class AbecedaireComponent implements OnInit {
   @Input() edit: boolean = false;
 
 
-  liste_image: Image[] = ImagesComponent.list_image;
+  liste_image: Image[] = [];
   selectedImages: Image[] = [];
   progressValue: Progress[] = [
     Progress.Blue,
@@ -37,8 +37,8 @@ export class AbecedaireComponent implements OnInit {
   rightLetter = '';
   errors = 0;
   images: Image[] = [
-    new Image("Orange", "../../assets/orange.jpg"),
-    new Image("Voiture", "../../assets/voiture.png"),
+    /*new Image("Orange", "../../assets/orange.jpg"),
+    new Image("Voiture", "../../assets/voiture.png"),*/
   ];
   nbEntries = 0;
   sound = true;
@@ -159,9 +159,23 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
+
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data);
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
   // Initialisation
   ngOnInit(): void {
+
+    this.recupImage(this.liste_image);
     this.recup(this.data);
+
     if (this.game != null) {
       if (this.game!.images.length != 0) {
         this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
@@ -220,9 +234,9 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-  addImage(mot: string, image: string) {
-    this.game!.images.push(new Image(mot, image));
-  }
+  // addImage(mot: string, image: string) {
+  //   this.game!.images.push(new Image(mot, image));
+  // }
 
   errorsPlus(): void {
     this.errors++;
