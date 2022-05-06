@@ -12,6 +12,11 @@
     <div *ngIf="this.taille_ini != 0">
       <div *ngIf="this.mots.length != 0 || !this.finish">
         <div class="container" id="content">
+          <div style="margin-bottom: 20px;">
+            <button mat-raised-button style="background-color: orange" *ngIf="this.bg.type_ecriture == 'SCRIPT'" (click)="this.bg.type_ecriture = 'CAPITAL'">SCRIPT</button>
+            <button mat-raised-button style="background-color: orange" *ngIf="this.bg.type_ecriture == 'CAPITAL'" (click)="this.bg.type_ecriture = 'CURSIF'">SCRIPT</button>
+            <button mat-raised-button style="background-color: orange" *ngIf="this.bg.type_ecriture == 'CURSIF'" (click)="this.bg.type_ecriture = 'SCRIPT'">SCRIPT</button>
+          </div>
           <div class="row">
             <div class="card_play align-self-left col" id="girlContainer"
               [ngStyle]="{background : this.bg!.bg_color_fille}" style="width: 32rem">
