@@ -238,7 +238,7 @@
 </div>
 
 <div class="card container" *ngIf="this.preview">
-  <h5 class="card-header">Prévisualisation du {{this.selected_session!.jeu}} de la séssion
+  <h5 class="card-header">Prévisualisation du jeu de la séssion
     n°{{this.selected_session!.id}}</h5>
 
   <div class="card-body text-center">
@@ -252,7 +252,7 @@
       </button>
     </div>
 
-    <div *ngIf="this.selected_session!.jeu == 'Recopier'">
+    <!-- <div *ngIf="this.selected_session!.jeu == 'Recopier'">
       <app-recopier-game [r]="this.getSessionRecopier(this.selected_session!)" [showTitle]="false"></app-recopier-game>
     </div>
     <div *ngIf="this.selected_session!.jeu == 'Memory'">
@@ -273,7 +273,7 @@
     <div *ngIf="this.selected_session!.jeu == 'Puzzle'">
       <app-puzzle [r]="this.getSessionPuzzle(this.selected_session!)" [showTitle]="false"></app-puzzle>
 
-    </div>
+    </div> -->
   </div>
 </div>
 
@@ -339,8 +339,8 @@
           <th *ngIf="!element.isVocaliser">Non</th>
           <th>Aucun</th>
           <!--Nom de l'utilisateur qui à créer le jeu-->
-          <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
         </tr>
       </tbody>
     </table>
@@ -363,8 +363,8 @@
           <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
           <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
         </tr>
       </tbody>
     </table>
@@ -389,8 +389,8 @@
           <th *ngIf="element.isVocaliser">Oui</th>
           <th *ngIf="!element.isVocaliser">Non</th>
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
         </tr>
       </tbody>
     </table>
@@ -415,8 +415,8 @@
           <th *ngIf="element.isVocaliser">Oui</th>
           <th *ngIf="!element.isVocaliser">Non</th>
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
         </tr>
       </tbody>
     </table>
@@ -439,8 +439,8 @@
           <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
           <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th>
+          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
+          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
         </tr>
       </tbody>
     </table>

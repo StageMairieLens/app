@@ -480,14 +480,14 @@ export class SessionsComponent implements OnInit {
     this.router.navigate(['/panel/sessions']);
   }
 
-  // changeJeuSession(jeu: string) {
-  //   this.jeuSession = jeu;
-  //   this.jeuId = -1;
-  // }
+  changeJeuSession(jeu: string) {
+    this.jeuSession = jeu;
+    // this.jeuId = -1;
+  }
 
-  // changeJeuId(id: number) {
-  //   this.jeuId = id;
-  // }
+  changeJeuId(id: number) {
+    // this.jeuId = id;
+  }
 
   showSessionActive(): void {
     this.showActive = true;
