@@ -161,10 +161,17 @@
                 style="background-color : red" color="primary">
                 <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
               </button>
-              <button mat-raised-button title="Rejoindre la séssion" (click)="joinSession(element)"
+              
+              <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la séssion" (click)="joinSession(element)"
                 style="background-color : rgb(77, 184, 44)" color="primary">
                 <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
               </button>
+
+              <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé" (click)="joinSession(element)"
+                style="background-color : rgb(77, 184, 44)" color="primary">
+                <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+
               <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
                 (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                 <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
