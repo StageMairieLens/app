@@ -18,7 +18,8 @@
 <button (click)="onSend2()" (click)="this.affiche=true"  >Envoyer les images</button>
 </div>
 
-<button (click)="recup(this.getListImage())">Voir les images </button>
+<button (click)="recup(this.getListImage())" (click)="this.affiche_image=true">Voir les images </button>
+<div *ngIf="this.affiche_image">
 <figure class="figure" *ngFor="let image of this.getListImage()">
 	<img class="delete" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
   <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
@@ -26,11 +27,13 @@
   </span> -->
 	<figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
   </figure>
-
+</div>
 <div *ngIf="this.affiche">
+	
 	<div class="alert alert-success" role="alert">
 		<h4 class="alert-heading">Veuillez patienter </h4>
 		<p>Les Images sont en cours de traitement.</p>
+		<mat-spinner></mat-spinner>
 		<hr>
 		
 		<p>{{ this.temps }}/ {{ this.files.length }} </p>

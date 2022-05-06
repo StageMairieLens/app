@@ -19,11 +19,12 @@ export class ImagesComponent implements OnInit {
 
   ];
   affiche:Boolean=false;
+  affiche_image:Boolean=false;
   temps:number=0;
   test:string="test";
   test2:number=1;
   ngOnInit(): void {
-    this.recup(ImagesComponent.list_image);
+    //this.recup(ImagesComponent.list_image);
     console.log(this.test+this.test2.toString());
     console.log(this.files.length);
     console.log(ImagesComponent.list_image);

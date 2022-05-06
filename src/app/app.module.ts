@@ -37,6 +37,7 @@ import { JeuxService } from './jeux.service';
 import { LoginComponent } from './index/login/login.component';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import {MatSliderModule} from '@angular/material/slider';
     HttpClientModule,
     NgxDropzoneModule,
     MatCheckboxModule,
-    MatSliderModule
+    MatSliderModule,
+    MatProgressSpinnerModule
   ],
   providers: [{
     provide: MAT_RADIO_DEFAULT_OPTIONS,
