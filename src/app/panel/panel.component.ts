@@ -142,7 +142,6 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
-
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -214,6 +213,7 @@ export class PanelComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.recupRecopier(this.recopier_list);
     this.recupMemory(this.memory_list);
     this.recupReconnaitre(this.reconnaitre_list);
@@ -418,7 +418,7 @@ export class PanelComponent implements OnInit {
   redirect(str: string): void {
     if (str == 'Accueil') {
       LoginComponent.logout();
-      this.router.navigate(['/']);
+      window.location.href = "";
     }
   }
 
