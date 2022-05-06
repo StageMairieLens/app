@@ -26,6 +26,11 @@
   <div *ngIf="this.r != null">
     <div *ngIf="this.showImageCpt != this.r!.images.length" class="card_play align-middle text-center container" id="card"
       style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
+      <div style="margin-bottom: 20px;">
+        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'SCRIPT'" (click)="this.r.typeEcriture = 'CAPITAL'">SCRIPT</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CAPITAL'" (click)="this.r.typeEcriture = 'CURSIF'">CAPITAL</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CURSIF'" (click)="this.r.typeEcriture = 'SCRIPT'">CURSIF</button>
+      </div>
       <img class="card-img-top image_play" src="{{ this.r!.images[this.showImageCpt].getSrc() }}" alt="Card image cap">
       <div class="card-body text-center">
 

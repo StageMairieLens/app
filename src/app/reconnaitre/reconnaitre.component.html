@@ -37,6 +37,12 @@
 
         <div class="row">
 
+          <div style="margin-bottom: 20px;">
+            <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'SCRIPT'" (click)="this.r.typeEcriture = 'CAPITAL'">SCRIPT</button>
+            <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CAPITAL'" (click)="this.r.typeEcriture = 'CURSIF'">CAPITAL</button>
+            <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CURSIF'" (click)="this.r.typeEcriture = 'SCRIPT'">CURSIF</button>
+          </div>
+
           <div class="col-md-8 text-center">
             <div class="col d-flex justify-content-center">
               <!-- <p id="error" >Nombre d'erreur = {{ compteur }}</p> -->
