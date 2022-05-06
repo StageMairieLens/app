@@ -12,6 +12,7 @@ import { Recopier } from '../recopier-game/Recopier';
 import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
 import { JeuxService } from '../jeux.service';
+import { PanelComponent } from '../panel/panel.component';
 
 @Component({
   selector: 'app-sessions',
@@ -67,13 +68,35 @@ export class SessionsComponent implements OnInit {
     this.reconnaitre = null;
     this.recopier = null;
     this.selected_session = null;
+    SessionsComponent.sessionActive = [];
+    PanelComponent.sessionActive = [];
+
+    this.recup(this.data)
+
+    setTimeout(() => {
+      for(let s of this.data) {
+        if(s.isActive) {
+          SessionsComponent.sessionActive.push(s);
+          PanelComponent.sessionActive.push(s);
+        }
+      }
+    },100)
   }
-  data: any = [];
+  data: Session[] = [];
   recup(donne: any) {
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
+        let isJ = false;
+        let isS = false;
+        if(data[i].isJoinable == 1) {
+          isJ = true;
+        }
+        if(data[i].isSuivi == 1) {
+          isS = true;
+        }
         donne.push(
-          new Session(data[i].id,data[i].nom,data[i].date,data[i].jeux_id,data[i].isJoinable,data[i].joueurs,data[i].isSuivi)
+
+          new Session(data[i].Id,data[i].nom,data[i].date,data[i].jeux_id,isJ,data[i].joueurs,isS)
         );
       }
     })
@@ -139,8 +162,7 @@ export class SessionsComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.recup(this.data);
-    console.log(this.data)
+
     if(this.play) {
       if (this.route.snapshot.paramMap.get('id') != null) {
         this.session_id = +this.route.snapshot.paramMap.get('id')!;

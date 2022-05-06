@@ -123,20 +123,20 @@
 
     </div>
 
-    <div *ngIf="this.getData().length == 0 && !this.showActive">
+    <div *ngIf="this.data.length == 0 && !this.showActive">
       <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
     </div>
 
-    <div *ngIf="this.getData().length != 0" class="col-md-12">
+    <div *ngIf="this.data.length != 0" class="col-md-12">
       <table class="table table-hover" *ngIf="!this.showActive">
         <thead>
           <tr>
-            <th scope="col" *ngFor="let col of this.displayedColumns">{{col}}</th>
+            <th scope="col" *ngFor="let col of ['Active','Id','Nom','Data','Suivi','Actions']">{{col}}</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let element of this.getData()">
+          <tr *ngFor="let element of this.data">
             <th *ngIf="element.isActive">
               <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
             </th>
@@ -146,7 +146,8 @@
             <th>{{element.id}}</th>
             <th>{{element.nom}}</th>
             <th>{{element.date}}</th>
-            <th>{{element.joueur.length}}</th>
+            <th *ngIf="!element.isSuivi">Non</th>
+            <th *ngIf="element.isSuivi">Oui</th>
             <th class="button_actions">
               <button mat-raised-button title="Prévisualiser le jeu de la séssion" (click)="previsualiserGame(element)"
                 color="primary">
