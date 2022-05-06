@@ -190,7 +190,6 @@ export class PuzzleComponent implements OnInit {
 
   }
 
-  puzzle_list: Puzzle[] = SessionsComponent.puzzle_list;
   puzzle_bg_color: string = "#3bb8c9";
   puzzle_title_color: string = "#ffffff";
   puzzle_button_bg_color: string = "#0f73b1";

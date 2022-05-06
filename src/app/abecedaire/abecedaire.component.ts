@@ -50,7 +50,6 @@ export class AbecedaireComponent implements OnInit {
     return voice.lang === 'fr';
   })[0];;
 
-  abecedaire_list: Abecedaire[] = SessionsComponent.abecedaire_list;
   abecedaire_bg_color: string = "#3bb8c9";
   abecedaire_text_color: string = "#ffffff";
   abecedaire_good_answer_color: string = "#3498db";

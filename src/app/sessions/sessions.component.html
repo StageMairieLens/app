@@ -1,3 +1,5 @@
+
+<!-- Jeux -->
 <div *ngIf="this.play">
   <div *ngIf="this.getSession() != null">
 
@@ -85,10 +87,13 @@
   </div>
 </div>
 
+
+<!-- Affichages des séssions -->
 <div class="card container" *ngIf="this.showList">
   <h5 class="card-header"> Listes des séssions</h5>
 
   <div class="card-body text-center">
+    <!-- Bouton de tri & création de jeux -->
     <div class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : red" (click)="sortSessionId()" color="primary">
         <i class="fa-solid fa-arrow-down-1-9 fa-xl" style="margin-bottom : 2px"></i>
@@ -123,11 +128,14 @@
 
     </div>
 
+    <!-- Il n'y a pas de séssion -->
     <div *ngIf="this.data.length == 0 && !this.showActive">
       <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
     </div>
 
     <div *ngIf="this.data.length != 0" class="col-md-12">
+
+      <!-- Afficher toutes les séssions -->
       <table class="table table-hover" *ngIf="!this.showActive">
         <thead>
           <tr>
@@ -167,8 +175,8 @@
                 <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
               </button>
 
-              <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé" (click)="joinSession(element)"
-                style="background-color : rgb(77, 184, 44)" color="primary">
+              <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé"
+                (click)="joinSession(element)" style="background-color : rgb(77, 184, 44)" color="primary">
                 <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
               </button>
 
@@ -185,14 +193,10 @@
           </tr>
         </tbody>
       </table>
-    </div>
-    <div *ngIf="this.showActive">
 
-      <div *ngIf="this.getSessionsActive().length == 0">
-        <h5 class="card-title" style="color : red">Il n'y a pas de sessions active</h5>
-      </div>
-
-      <div class="col-md-12">
+      <!-- Séssions actives -->
+      <div *ngIf="this.showActive">
+        <!-- Afficher les séssions actives -->
         <table class="table table-hover" *ngIf="this.getSessionsActive().length != 0">
           <thead>
             <tr>
@@ -214,8 +218,8 @@
               <th *ngIf="!element.isSuivi">Non</th>
               <th *ngIf="element.isSuivi">Oui</th>
               <th class="button_actions">
-                <button mat-raised-button title="Prévisualiser le jeu de la séssion" (click)="previsualiserGame(element)"
-                  color="primary">
+                <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                  (click)="previsualiserGame(element)" color="primary">
                   <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
                 </button>
                 <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
@@ -226,15 +230,17 @@
                   style="background-color : red" color="primary">
                   <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
-                <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la séssion" (click)="joinSession(element)"
-                  style="background-color : rgb(77, 184, 44)" color="primary">
+
+                <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la séssion"
+                  (click)="joinSession(element)" style="background-color : rgb(77, 184, 44)" color="primary">
                   <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
 
-                <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé" (click)="joinSession(element)"
-                  style="background-color : rgb(77, 184, 44)" color="primary">
+                <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé"
+                  (click)="joinSession(element)" style="background-color : rgb(77, 184, 44)" color="primary">
                   <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
+
                 <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
                   (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                   <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
@@ -248,11 +254,20 @@
             </tr>
           </tbody>
         </table>
+
+        <!-- Si il n'y a pas de séssion actives -->
+        <div *ngIf="this.getSessionsActive().length == 0">
+          <h5 class="card-title" style="color : red">Il n'y a pas de sessions actives</h5>
+        </div>
       </div>
+
+
     </div>
+
   </div>
 </div>
 
+<!-- Prévisualisation de la séssion -->
 <div class="card container" *ngIf="this.preview">
 
   <h5 class="card-header">Prévisualisation du jeu de la séssion
@@ -294,6 +309,7 @@
   </div>
 </div>
 
+<!-- Création et édition de séssion -->
 <div class="card container" *ngIf="this.create_session">
 
   <h5 *ngIf="!this.edit" class="card-header">Création d'une séssion</h5>
@@ -344,7 +360,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let element of this.getRecopierList()" (click)="changeJeuId(element.id)">
+        <tr *ngFor="let element of this.recopier_list" (click)="addJeu('Recopier',element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
           <th>{{element.date}}</th>
           <!--Date de création du jeu-->
@@ -354,10 +370,10 @@
           <!--Type d'écriture du jeu-->
           <th *ngIf="element.isVocaliser">Oui</th>
           <th *ngIf="!element.isVocaliser">Non</th>
-          <th>Aucun</th>
-          <!--Nom de l'utilisateur qui à créer le jeu-->
-          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
+          <th>Aucun</th>          <!--Nom de l'utilisateur qui à créer le jeu-->
+          <th>
+            <mat-checkbox [ngModel]="this.selected_session!.jeuId!.includes({type : 'Recopier' , id_jeu : element.id})" color="primary" class="example-margin"></mat-checkbox>
+          </th>
         </tr>
       </tbody>
     </table>
@@ -373,10 +389,10 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let element of this.getMemoryList()" (click)="changeJeuId(element.id)">
+        <tr *ngFor="let element of this.memory_list" (click)="addJeu('Memory',element.id)">
           <th>{{element.id}}</th>
-          <!-- Id du jeu
-              <th>{{this.parseDate(element.date)}}</th> <!-- Date de création du jeu -->
+          <!-- Id du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
           <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
@@ -398,7 +414,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let element of this.getReconnaitreList()" (click)="changeJeuId(element.id)">
+        <tr *ngFor="let element of this.reconnaitre_list" (click)="addJeu('Reconnaitre',element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
           <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
@@ -424,7 +440,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let element of this.getAbecedaireList()" (click)="changeJeuId(element.id)">
+        <tr *ngFor="let element of this.abecedaire_list" (click)="addJeu('Abecedaire',element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
           <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
@@ -449,7 +465,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let element of this.getBoyGirlList()" (click)="changeJeuId(element.id)">
+        <tr *ngFor="let element of this.boygirl_list" (click)="addJeu('Fille&Garçon',element.id)">
           <th>{{element.id}}</th> <!-- Id du jeu -->
           <th>{{element.date}}</th> <!-- Date de création du jeu -->
           <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
@@ -484,6 +500,7 @@
 </div>
 
 
+<!-- Suivi de séssion -->
 <div class="card container" *ngIf="this.view">
   <h5 class="card-header">Visualisation de la séssion</h5>
 

@@ -179,7 +179,6 @@ export class BoyGirlGameComponent implements OnInit {
   @Input() create_game: boolean = false;
   @Input() edit: boolean = false;
 
-  boygirl_list: BoyGirl[] = SessionsComponent.boygirl_list;
   boygirl_listMotsFille: string[] = [];
   boygirl_listMotsGarcon: string[] = [];
   boygirl_bg_color_container: string = "#3bb8c9";

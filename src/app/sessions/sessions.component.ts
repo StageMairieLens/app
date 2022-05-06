@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Session } from './Session';
-import { Game } from '../Game'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Users } from '../users/Users'
 import { Abecedaire } from '../abecedaire/Abecedaire';
@@ -13,7 +12,7 @@ import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
 import { JeuxService } from '../jeux.service';
 import { PanelComponent } from '../panel/panel.component';
-import { User } from 'talkjs/all';
+import { Image } from '../Image'
 
 export interface Jeu {
   type: string;
@@ -26,6 +25,104 @@ export interface Jeu {
   styleUrls: ['./sessions.component.css']
 })
 export class SessionsComponent implements OnInit {
+  list_image: Image[] = [];
+
+  recupRecopier(tab: any) {
+    this.jeuxService.recup_recopier(tab).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        tab.push(
+          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca)
+        );
+      }
+
+    })
+  }
+
+  recupMemory(donne: any) {
+    this.jeuxService.recup_memory(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
+        );
+      }
+    })
+
+  }
+
+  recupReconnaitre(donne: any) {
+    this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        console.log(data[i].id_images)
+
+        donne.push(
+          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca)
+        );
+      }
+    })
+
+  }
+
+  recupAbecedaire(donne: any) {
+    this.jeuxService.recup_abcd(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri)
+        );
+      }
+    })
+
+  }
+
+  recupBoyGirl(donne: any) {
+    this.jeuxService.recup_bg(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri)
+        );
+      }
+    })
+  }
+
+  recupPuzzle(donne: any) {
+    this.jeuxService.recup_puzzle(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe)
+        );
+      }
+
+    })
+
+  }
+  getMots(s: string): string[] {
+    if (s.length != 0) {
+      let tab = s.split(',');
+      let res: string[] = []
+      for (let mot of tab) {
+        res.push(mot)
+      }
+      return res;
+    }
+    else {
+      return []
+    }
+  }
+
+  getImage(s: string): Image[] {
+    let res = [];
+    let tab = s.split(',');
+    if (s.length != 0) {
+      for (let i of tab) {
+        for (let j of this.list_image) {
+          if (+i == j.id) {
+            res.push(j);
+            break;
+          }
+        }
+      }
+    }
+    return res;
+  }
 
   session_id: number | null = null;
   join: boolean = false;
@@ -56,7 +153,7 @@ export class SessionsComponent implements OnInit {
   @Input() selected_session: Session | null;
   id_game: number | null = null;
   jeuSession: string = "";
-  jeuId: string = '';
+  jeuId: Jeu[] = [];
   liste_j: string[] = [];
   sortById: boolean = true;
   sortByDate: boolean = false;
@@ -66,7 +163,7 @@ export class SessionsComponent implements OnInit {
 
 
   session_nom: string = "";
-  list: any = { id_crea:1,nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: this.jeux_id.push(this.jeu + this.jeuId), liste_j: this.liste_j };
+  list: any = { id_crea: 1, nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: "", liste_j: this.liste_j };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
@@ -91,6 +188,15 @@ export class SessionsComponent implements OnInit {
     }, 100)
   }
   data: Session[] = [];
+
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
   recup(donne: any) {
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
@@ -112,10 +218,10 @@ export class SessionsComponent implements OnInit {
 
   getJeuSession(s: string): Jeu[] {
     let res: Jeu[] = [];
-    if(s.length > 0) {
+    if (s.length > 0) {
       let tab = s.split(';');
       for (let i of tab) {
-        if(i != "") {
+        if (i != "") {
           res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
         }
       }
@@ -194,6 +300,13 @@ export class SessionsComponent implements OnInit {
   }
   ngOnInit(): void {
 
+    this.recupImage(this.list_image);
+    this.recupRecopier(this.recopier_list);
+    this.recupMemory(this.memory_list);
+    this.recupReconnaitre(this.reconnaitre_list);
+    this.recupAbecedaire(this.abecedaire_list);
+    this.recupBoyGirl(this.boygirl_list);
+    this.recupPuzzle(this.puzzle_list);
 
     console.log(this.data)
     setTimeout(() => {
@@ -215,13 +328,13 @@ export class SessionsComponent implements OnInit {
       }
 
       if (this.edit) {
+        
         this.create_session = true;
         this.session_nom = this.selected_session!.nom;
-        // this.jeuSession = this.selected_session!.jeu;
-        // this.jeuId = this.selected_session!.jeuId;
+        this.jeuId = this.selected_session!.jeuId;
 
       }
-    },200)
+    }, 200)
   }
 
   getSessionsActive(): Session[] {
@@ -278,47 +391,7 @@ export class SessionsComponent implements OnInit {
   //   this.connected = true;
   // }
 
-  getAbecedaire(n: number): Abecedaire | null {
-    for (let jeu of SessionsComponent.abecedaire_list) {
-      if (jeu.id == n) return jeu;
-    }
-    return null;
-  }
 
-  getMemory(n: number): Memory | null {
-    for (let jeu of SessionsComponent.memory_list) {
-      if (jeu.id == n) return jeu;
-    }
-    return null;
-  }
-
-  getFilleGarcon(n: number): BoyGirl | null {
-    for (let jeu of SessionsComponent.boygirl_list) {
-      if (jeu.id == n) return jeu;
-    }
-    return null;
-  }
-
-  getPuzzle(n: number): Puzzle | null {
-    for (let jeu of SessionsComponent.puzzle_list) {
-      if (jeu.id == n) return jeu;
-    }
-    return null;
-  }
-
-  getReconnaitre(n: number): Reconnaitre | null {
-    for (let jeu of SessionsComponent.reconnaitre_list) {
-      if (jeu.id == n) return jeu;
-    }
-    return null;
-  }
-
-  getRecopier(n: number): Recopier | null {
-    for (let jeu of SessionsComponent.recopier_list) {
-      if (jeu.id == n) return jeu;
-    }
-    return null;
-  }
 
   addUser(name: string): void {
     this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
@@ -341,41 +414,22 @@ export class SessionsComponent implements OnInit {
 
   static data: Session[] = [];
 
-  static recopier_list: Recopier[] = [];
+  recopier_list: Recopier[] = [];
 
-  getRecopierList(): Recopier[] { return SessionsComponent.recopier_list }
+  reconnaitre_list: Reconnaitre[] = [];
 
-  static reconnaitre_list: Reconnaitre[] = [];
+  boygirl_list: BoyGirl[] = [];
 
-  getReconnaitreList(): Reconnaitre[] { return SessionsComponent.reconnaitre_list }
+  abecedaire_list: Abecedaire[] = []
 
-  static boygirl_list: BoyGirl[] = [
-    new BoyGirl(0, '', ['girl', 'girl'], [], "#3bb8c9", "#ffc0cb", "#add9e6", "#fea500", "#ffc0cb", "#0f73b1", "#000000", "#000000", "#000000", "#000000", "#ffffff", "#ffffff", "#ffffff", "SCRIPT")
-  ];
+  memory_list: Memory[] = [];
 
-  getBoyGirlList(): BoyGirl[] { return SessionsComponent.boygirl_list }
+  puzzle_list: Puzzle[] = [];
 
 
-  static abecedaire_list: Abecedaire[] = []
+  addJeu(type : string, id : number) : void {
 
-
-  getAbecedaireList(): Abecedaire[] { return SessionsComponent.abecedaire_list }
-
-
-  static memory_list: Memory[] = [
-    // new Memory(ImagesComponent.list_image.slice(1), ImagesComponent.list_image[0], true, 18, ['image', 'image'], "#3bb8c9", "#ffffff", "#3498db", "#e74c3c", Progress.Blue, "5")
-  ];
-
-  getMemoryList(): Memory[] { return SessionsComponent.memory_list }
-
-
-  static puzzle_list: Puzzle[] = [
-    // new Puzzle([ImagesComponent.list_image[0], ImagesComponent.list_image[1]], "#3bb8c9", "#ffffff", "#000000", "#0dff00", "#ff0000" , 'CAPITAL' , 3)
-  ];
-
-  getPuzzleList(): Puzzle[] { return SessionsComponent.puzzle_list }
-
-
+  }
 
   previsualiserGame(element: Session): void {
     this.preview = true;
@@ -407,6 +461,7 @@ export class SessionsComponent implements OnInit {
       }
     }, 200)
   }
+
 
   setJeuSession(s: Session): string {
     let res = "";
@@ -581,7 +636,7 @@ export class SessionsComponent implements OnInit {
   }
 
   createSession(jeu: string, nom: string): void {
-    if (jeu != "" && nom != "" && this.jeuId != '') {
+    if (jeu != "" && nom != "") {
       // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
       this.showList = true;
       this.jeuSession = "";
@@ -591,7 +646,7 @@ export class SessionsComponent implements OnInit {
 
   save(): void {
     this.selected_session!.nom = this.session_nom;
-    // this.selected_session!.jeuId = this.jeuId;
+    this.selected_session!.jeuId = this.jeuId;
     this.router.navigate(['/panel/sessions']);
   }
 
