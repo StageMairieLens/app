@@ -15,6 +15,11 @@ import { JeuxService } from '../jeux.service';
 import { PanelComponent } from '../panel/panel.component';
 import { User } from 'talkjs/all';
 
+export interface Jeu {
+  type: string;
+  id_jeu: number;
+}
+
 @Component({
   selector: 'app-sessions',
   templateUrl: './sessions.component.html',
@@ -52,14 +57,16 @@ export class SessionsComponent implements OnInit {
   id_game: number | null = null;
   jeuSession: string = "";
   jeuId: string = '';
-
+  liste_j: string[] = [];
   sortById: boolean = true;
   sortByDate: boolean = false;
   sortByNbJoueur: boolean = false;
+  jeux_id: string[] = [];
+
 
 
   session_nom: string = "";
-  list: any = { nom: this.session_nom, isSuivi: this.isSuivi, join: this.join };
+  list: any = { nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: this.jeux_id.push(this.jeu + this.jeuId), liste_j: this.liste_j };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
@@ -96,19 +103,28 @@ export class SessionsComponent implements OnInit {
           isS = true;
         }
         donne.push(
-          new Session(data[i].Id, data[i].nom, data[i].date, data[i].jeux_id, isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
         );
       }
     })
 
   }
 
-  getJoueurs(s: string, id_session : number): Users[] {
+  getJeuSession(s: string): Jeu[] {
+    let tab = s.split(';');
+    let res: Jeu[] = [];
+    for (let i of tab) {
+      res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+    }
+    return res;
+  }
+
+  getJoueurs(s: string, id_session: number): Users[] {
     let tab = s.split(',');
     let res = []
-    for(let i of tab) {
+    for (let i of tab) {
       res.push(
-        new Users(i,id_session,0,0)
+        new Users(i, id_session, 0, 0)
       );
     }
     return res;
@@ -197,7 +213,7 @@ export class SessionsComponent implements OnInit {
       this.create_session = true;
       this.session_nom = this.selected_session!.nom;
       // this.jeuSession = this.selected_session!.jeu;
-      this.jeuId = this.selected_session!.jeuId;
+      // this.jeuId = this.selected_session!.jeuId;
 
     }
   }
@@ -371,7 +387,7 @@ export class SessionsComponent implements OnInit {
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);
-    },200)
+    }, 200)
 
     SessionsComponent.sessionActive = []
     PanelComponent.sessionActive = []
@@ -386,6 +402,14 @@ export class SessionsComponent implements OnInit {
     }, 200)
   }
 
+  setJeuSession(s: Session): string {
+    let res = "";
+    for (let g of s.jeuId) {
+      res += g.type + ',' + g.id_jeu + ';'
+    }
+    return res;
+  }
+
   joinSession(s: Session): void {
     this.selected_session = s;
     this.view = true;
@@ -394,8 +418,25 @@ export class SessionsComponent implements OnInit {
 
   setSessionActive(s: Session): void {
     s.isActive = true;
-    this.getSessionsActive().push(s);
-    PanelComponent.sessionActive.push(s);
+    this.list = { nom: s.nom, isSuivi: 1, join: +s.isActive, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.onSend_update(this.list);
+
+    setTimeout(() => {
+      this.data = [];
+      this.recup(this.data);
+    }, 200)
+
+    SessionsComponent.sessionActive = []
+    PanelComponent.sessionActive = []
+    setTimeout(() => {
+
+      for (let s of this.data) {
+        if (s.isActive) {
+          SessionsComponent.sessionActive.push(s);
+          PanelComponent.sessionActive.push(s);
+        }
+      }
+    }, 200)
 
 
 
@@ -403,11 +444,25 @@ export class SessionsComponent implements OnInit {
 
   setSessionInactive(s: Session): void {
     s.isActive = false;
-    let index = this.getSessionsActive().indexOf(s, 0);
-    if (index > -1) {
-      this.getSessionsActive().splice(index, 1);
-      PanelComponent.sessionActive.splice(index, 1);
-    }
+    this.list = { nom: s.nom, isSuivi: 0, join: +s.isActive, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.onSend_update(this.list);
+
+    setTimeout(() => {
+      this.data = [];
+      this.recup(this.data);
+    }, 400)
+
+    SessionsComponent.sessionActive = []
+    PanelComponent.sessionActive = []
+    setTimeout(() => {
+
+      for (let s of this.data) {
+        if (s.isActive) {
+          SessionsComponent.sessionActive.push(s);
+          PanelComponent.sessionActive.push(s);
+        }
+      }
+    }, 400)
   }
 
   sortSessionId(): void {
@@ -526,7 +581,7 @@ export class SessionsComponent implements OnInit {
 
   save(): void {
     this.selected_session!.nom = this.session_nom;
-    this.selected_session!.jeuId = this.jeuId;
+    // this.selected_session!.jeuId = this.jeuId;
     this.router.navigate(['/panel/sessions']);
   }
 

@@ -161,7 +161,7 @@
                 style="background-color : red" color="primary">
                 <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
               </button>
-              
+
               <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la séssion" (click)="joinSession(element)"
                 style="background-color : rgb(77, 184, 44)" color="primary">
                 <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
@@ -246,6 +246,7 @@
 </div>
 
 <div class="card container" *ngIf="this.preview">
+
   <h5 class="card-header">Prévisualisation du jeu de la séssion
     n°{{this.selected_session!.id}}</h5>
 
@@ -478,10 +479,12 @@
 <div class="card container" *ngIf="this.view">
   <h5 class="card-header">Visualisation de la séssion</h5>
 
+
   <div class="card-body text-center">
 
     <h2 style="font-size : 80px; letter-spacing : 3px;">N° de séssion : {{this.selected_session!.id}}</h2>
 
+    <p *ngFor="let g of this.selected_session!.jeuId">{{g.type}} : {{g.id_jeu}} <br></p>
 
     <div class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : red" (click)="this.view = false; this.showList = true"
