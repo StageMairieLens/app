@@ -420,7 +420,8 @@ export class SessionsComponent implements OnInit {
 
   setSessionActive(s: Session): void {
     s.isActive = true;
-    this.list = { nom: s.nom, isSuivi: s.isSuivi, join: 1, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 1, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    console.log(this.list)
     this.onSend_update(this.list);
 
     setTimeout(() => {
@@ -446,7 +447,9 @@ export class SessionsComponent implements OnInit {
 
   setSessionInactive(s: Session): void {
     s.isActive = false;
-    this.list = { nom: s.nom, isSuivi: s.isSuivi, join: 0, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 0, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    console.log(this.list)
+
     this.onSend_update(this.list);
 
     setTimeout(() => {
