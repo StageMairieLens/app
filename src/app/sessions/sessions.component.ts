@@ -192,30 +192,32 @@ export class SessionsComponent implements OnInit {
 
 
     console.log(this.data)
-    if (this.play) {
-      if (this.route.snapshot.paramMap.get('id') != null) {
-        this.session_id = +this.route.snapshot.paramMap.get('id')!;
-        if (this.session_id != null) {
-          if (this.getSession() != null) {
-            if (this.getSession()!.isActive) {
-              this.join = true;
+    setTimeout(() => {
+      if (this.play) {
+        if (this.route.snapshot.paramMap.get('id') != null) {
+          this.session_id = +this.route.snapshot.paramMap.get('id')!;
+          if (this.session_id != null) {
+            if (this.getSession() != null) {
+              if (this.getSession()!.isActive) {
+                this.join = true;
+              }
             }
           }
         }
+        else {
+          this.router.navigate(['']);
+
+        }
       }
-      else {
-        this.router.navigate(['']);
+
+      if (this.edit) {
+        this.create_session = true;
+        this.session_nom = this.selected_session!.nom;
+        // this.jeuSession = this.selected_session!.jeu;
+        // this.jeuId = this.selected_session!.jeuId;
 
       }
-    }
-
-    if (this.edit) {
-      this.create_session = true;
-      this.session_nom = this.selected_session!.nom;
-      // this.jeuSession = this.selected_session!.jeu;
-      // this.jeuId = this.selected_session!.jeuId;
-
-    }
+    },200)
   }
 
   getSessionsActive(): Session[] {
@@ -418,7 +420,7 @@ export class SessionsComponent implements OnInit {
 
   setSessionActive(s: Session): void {
     s.isActive = true;
-    this.list = { nom: s.nom, isSuivi: 1, join: +s.isActive, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.list = { nom: s.nom, isSuivi: s.isSuivi, join: 1, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
     this.onSend_update(this.list);
 
     setTimeout(() => {
@@ -436,7 +438,7 @@ export class SessionsComponent implements OnInit {
           PanelComponent.sessionActive.push(s);
         }
       }
-    }, 200)
+    }, 400)
 
 
 
@@ -444,13 +446,13 @@ export class SessionsComponent implements OnInit {
 
   setSessionInactive(s: Session): void {
     s.isActive = false;
-    this.list = { nom: s.nom, isSuivi: 0, join: +s.isActive, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.list = { nom: s.nom, isSuivi: s.isSuivi, join: 0, id: s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
     this.onSend_update(this.list);
 
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);
-    }, 400)
+    }, 200)
 
     SessionsComponent.sessionActive = []
     PanelComponent.sessionActive = []
