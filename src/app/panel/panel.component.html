@@ -2,7 +2,7 @@
 <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/panel/sessions"><span
       class="mat-badge mat-badge-warn mat-badge-overlap mat-badge-above mat-badge-after mat-badge-medium"
-      matBadge="{{this.sessionActive.length}}" matBadgeColor="warn">Sessions</span></a>
+      matBadge="{{this.getSessionActive().length}}" matBadgeColor="warn">Sessions</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -67,14 +67,14 @@
       </button>
 
 
-      <button *ngIf="this.sessionActive.length != 0" mat-raised-button color="primary" class="session_choice"
+      <button *ngIf="this.getSessionActive().length != 0" mat-raised-button color="primary" class="session_choice"
         [routerLink]="['/panel/sessions/active']">
         <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
 
         <span>Afficher les séssions actives</span>
       </button>
 
-      <button *ngIf="this.sessionActive.length == 0" mat-raised-button disabled color="primary" class="session_choice"
+      <button *ngIf="this.getSessionActive().length == 0" mat-raised-button disabled color="primary" class="session_choice"
         [routerLink]="['/panel/sessions/active']">
 
         <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>

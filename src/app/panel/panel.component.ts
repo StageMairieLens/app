@@ -96,6 +96,26 @@ export class PanelComponent implements OnInit {
 
   }
 
+  recupSession(donne: any) {
+    this.jeuxService.recup_session(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        let isJ = false;
+        let isS = false;
+        if(data[i].isJoinable == 1) {
+          isJ = true;
+        }
+        if(data[i].isSuivi == 1) {
+          isS = true;
+        }
+        donne.push(
+
+          new Session(data[i].Id,data[i].nom,data[i].date,data[i].jeux_id,isJ,data[i].joueurs,isS)
+        );
+      }
+    })
+
+  }
+
   getMots(s: string): string[] {
     if (s.length != 0) {
       let tab = s.split(',');
@@ -109,6 +129,7 @@ export class PanelComponent implements OnInit {
       return []
     }
   }
+
 
 
 
@@ -142,7 +163,7 @@ export class PanelComponent implements OnInit {
   panel: string | null = "";
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   sessions: Session[] = SessionsComponent.data;
-  sessionActive: Session[] = SessionsComponent.sessionActive;
+  static sessionActive: Session[] = [];
   showActive: boolean = false;
 
 
@@ -198,7 +219,8 @@ export class PanelComponent implements OnInit {
     this.recupReconnaitre(this.reconnaitre_list);
     this.recupAbecedaire(this.abecedaire_list);
     this.recupBoyGirl(this.boygirl_list);
-    this.recupPuzzle(this.puzzle_list)
+    this.recupPuzzle(this.puzzle_list);
+    this.recupSession(this.sessions);
 
     setTimeout(() => {
       this.panel = this.route.snapshot.paramMap.get('param1');
@@ -312,9 +334,9 @@ export class PanelComponent implements OnInit {
         }
       }
 
-      for (let s of SessionsComponent.data) {
-        if (s.isActive) {
-          SessionsComponent.sessionActive.push(s);
+      for(let s of this.sessions) {
+        if(s.isActive) {
+          PanelComponent.sessionActive.push(s);
         }
       }
     }, 500)
@@ -379,6 +401,10 @@ export class PanelComponent implements OnInit {
 
   }
 
+  getSessionActive() : Session[] {
+    return PanelComponent.sessionActive;
+  }
+
 
 
   previousStep(): void {
@@ -423,9 +449,9 @@ export class PanelComponent implements OnInit {
     if (index > -1) {
       this.sessions.splice(index, 1);
     }
-    index = this.sessionActive.indexOf(session, 0);
+    index = this.getSessionActive().indexOf(session, 0);
     if (index > -1) {
-      this.sessionActive.splice(index, 1);
+      this.getSessionActive().splice(index, 1);
     }
   }
 
@@ -445,14 +471,14 @@ export class PanelComponent implements OnInit {
 
   setSessionActive(s: Session): void {
     s.isActive = true;
-    this.sessionActive.push(s);
+    this.getSessionActive().push(s);
   }
 
   setSessionInactive(s: Session): void {
     s.isActive = false;
-    let index = this.sessionActive.indexOf(s, 0);
+    let index = this.getSessionActive().indexOf(s, 0);
     if (index > -1) {
-      this.sessionActive.splice(index, 1);
+      this.getSessionActive().splice(index, 1);
     }
   }
 
@@ -468,7 +494,7 @@ export class PanelComponent implements OnInit {
         return 0;
       })
 
-      this.sessionActive.sort((s1: Session, s2: Session) => {
+      this.getSessionActive().sort((s1: Session, s2: Session) => {
         if (s1.id > s2.id) return 1;
         if (s1.id < s2.id) return -1;
         return 0;
@@ -483,7 +509,7 @@ export class PanelComponent implements OnInit {
         return 0;
       })
 
-      this.sessionActive.sort((s1: Session, s2: Session) => {
+      this.getSessionActive().sort((s1: Session, s2: Session) => {
         if (s1.id > s2.id) return -1;
         if (s1.id < s2.id) return 1;
         return 0;
@@ -503,7 +529,7 @@ export class PanelComponent implements OnInit {
         return 0;
       })
 
-      this.sessionActive.sort((s1: Session, s2: Session) => {
+      this.getSessionActive().sort((s1: Session, s2: Session) => {
         if (s1.date > s2.date) return -1;
         if (s1.date < s2.date) return 1;
         return 0;
@@ -518,7 +544,7 @@ export class PanelComponent implements OnInit {
         return 0;
       })
 
-      this.sessionActive.sort((s1: Session, s2: Session) => {
+      this.getSessionActive().sort((s1: Session, s2: Session) => {
         if (s1.date > s2.date) return 1;
         if (s1.date < s2.date) return -1;
         return 0;
@@ -538,7 +564,7 @@ export class PanelComponent implements OnInit {
         return 0;
       })
 
-      this.sessionActive.sort((s1: Session, s2: Session) => {
+      this.getSessionActive().sort((s1: Session, s2: Session) => {
         if (s1.joueur.length > s2.joueur.length) return -1;
         if (s1.joueur.length < s2.joueur.length) return 1;
         return 0;
@@ -553,7 +579,7 @@ export class PanelComponent implements OnInit {
         return 0;
       })
 
-      this.sessionActive.sort((s1: Session, s2: Session) => {
+      this.getSessionActive().sort((s1: Session, s2: Session) => {
         if (s1.joueur.length > s2.joueur.length) return 1;
         if (s1.joueur.length < s2.joueur.length) return -1;
         return 0;
