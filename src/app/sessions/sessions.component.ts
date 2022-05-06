@@ -111,10 +111,14 @@ export class SessionsComponent implements OnInit {
   }
 
   getJeuSession(s: string): Jeu[] {
-    let tab = s.split(';');
     let res: Jeu[] = [];
-    for (let i of tab) {
-      res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+    if(s.length > 0) {
+      let tab = s.split(';');
+      for (let i of tab) {
+        if(i != "") {
+          res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+        }
+      }
     }
     return res;
   }
@@ -407,6 +411,7 @@ export class SessionsComponent implements OnInit {
   setJeuSession(s: Session): string {
     let res = "";
     for (let g of s.jeuId) {
+      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
