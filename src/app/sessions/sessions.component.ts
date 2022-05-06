@@ -225,7 +225,7 @@ export class SessionsComponent implements OnInit {
   }
 
   getSession(): Session | null {
-    for (let s of SessionsComponent.data) {
+    for (let s of this.data) {
       if (this.session_id != null) {
         if (s.id == this.session_id) {
           return s;
