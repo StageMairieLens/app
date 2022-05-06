@@ -55,9 +55,10 @@ export class SessionsComponent implements OnInit {
   sortByDate: boolean = false;
   sortByNbJoueur: boolean = false;
 
-
+  jeux_id:string[]=[];
+  liste_j:string[]=[];
   session_nom : string = "";
-  list:any ={nom:this.session_nom,isSuivi:this.isSuivi,join:this.join};
+  list:any ={nom:this.session_nom,isSuivi:this.isSuivi,join:this.join,id:this.session_id,jeux_id:this.jeux_id.push(this.jeu+this.jeuId),liste_j:this.liste_j};
 
   constructor(private router: Router, private route: ActivatedRoute,private jeuxService: JeuxService) {
     this.abecedaire = null;

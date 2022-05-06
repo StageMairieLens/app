@@ -14,17 +14,26 @@
 		</ngx-dropzone-label>
 	  </ngx-dropzone-image-preview>
 </ngx-dropzone>
-<button (click)="onSend2()" (click)="this.affiche=true"  >ici</button>
+<div>
+<button (click)="onSend2()" (click)="this.affiche=true"  >Envoyer les images</button>
+</div>
 
-<button (click)="recup(this.getListImage())">recup</button>
+<button (click)="recup(this.getListImage())">Voir les images </button>
 <figure class="figure" *ngFor="let image of this.getListImage()">
-	<img class="delete" src="{{image.getSrc()}}" width="200px" class="figure-img img-fluid rounded" alt="...">
+	<img class="delete" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
   <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
     <i class="fa-solid fa-xmark fa-lg"></i>
   </span> -->
 	<figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
   </figure>
-<p>{{ this.affiche }}</p>
+
 <div *ngIf="this.affiche">
-<p>{{ this.temps }}/ {{ this.files.length }} </p>
+	<div class="alert alert-success" role="alert">
+		<h4 class="alert-heading">Veuillez patienter </h4>
+		<p>Les Images sont en cours de traitement.</p>
+		<hr>
+		
+		<p>{{ this.temps }}/ {{ this.files.length }} </p>
+	  </div>
+
 </div>
