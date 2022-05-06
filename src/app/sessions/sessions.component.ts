@@ -66,7 +66,7 @@ export class SessionsComponent implements OnInit {
 
 
   session_nom: string = "";
-  list: any = { id_session:1,nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: this.jeux_id.push(this.jeu + this.jeuId), liste_j: this.liste_j };
+  list: any = { id_crea:1,nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: this.jeux_id.push(this.jeu + this.jeuId), liste_j: this.liste_j };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
