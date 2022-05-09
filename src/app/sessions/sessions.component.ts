@@ -1,6 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Session } from './Session';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Users } from '../users/Users'
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
@@ -13,6 +13,7 @@ import { Progress } from '../Progress';
 import { JeuxService } from '../jeux.service';
 import { PanelComponent } from '../panel/panel.component';
 import { Image } from '../Image'
+import { Subscription } from 'rxjs';
 
 export interface Jeu {
   type: string;
@@ -153,14 +154,14 @@ export class SessionsComponent implements OnInit {
   @Input() selected_session: Session | null;
   id_game: number | null = null;
   jeuSession: string = "";
-  jeuId: Jeu[] = [];
   liste_j: string[] = [];
+  jeuId : Jeu[] = [];
   sortById: boolean = true;
   sortByDate: boolean = false;
   sortByNbJoueur: boolean = false;
   jeux_id: string[] = [];
 
-
+  subscription: Subscription | undefined;
 
   session_nom: string = "";
   list: any = { id_crea: 1, nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: "", liste_j: this.liste_j };
@@ -340,7 +341,6 @@ export class SessionsComponent implements OnInit {
       }
 
       if (this.edit) {
-
         this.create_session = true;
         this.session_nom = this.selected_session!.nom;
         this.jeuId = this.selected_session!.jeuId;
@@ -371,11 +371,34 @@ export class SessionsComponent implements OnInit {
     }
   }
 
+  getConnected(): boolean {
+    console.log(localStorage.getItem('id_user'));
+    if (localStorage.getItem('id_user') != null) {
+      for (let j of this.getSession()!.joueur) {
+        if (j.id == +localStorage.getItem('id_user')!) {
+          return true;
+        }
+      }
+    }
+    else {
+      localStorage.removeItem('id_user')
+      return false;
+    }
+    localStorage.removeItem('id_user')
+    return false;
+  }
+
   connect(name: string): void {
-    this.addUser(name);
-    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
-    this.onSend_update(this.list);
-    this.deleteUser(name)
+
+    this.data = [];
+    this.recup(this.data);
+
+
+    setTimeout(() => {
+      this.addUser(name);
+      this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+      this.onSend_update(this.list);
+    }, 500)
 
   }
 
@@ -396,28 +419,35 @@ export class SessionsComponent implements OnInit {
 
     this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
     this.onSend_update(this.list);
+    localStorage.removeItem('id_user')
 
   }
-
-
-  deleteUser(name: string): void {
-    console.log(localStorage.getItem('id_user'));
-  }
-
 
   addUser(name: string): void {
-
-    setInterval(() => {
-      setInterval(() => {
-        this.data = []
-        this.recup(this.data)
-      }, 200)
-      this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
-      localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
-    }, 500)
-
+    this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
+    localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
   }
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event: any) {
+    // Do something
+    let index = -1;
+
+    for (let j of this.getSession()!.joueur) {
+      if (j.id == +localStorage.getItem('id_user')!) {
+        index = this.getSession()!.joueur.indexOf(j);
+      }
+    }
+
+    if (index > -1) {
+      this.getSession()!.joueur.splice(index, 1);
+    }
+
+    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+    this.onSend_update(this.list);
+    localStorage.removeItem('id_user')
+
+  }
 
   getData(): Session[] {
     return SessionsComponent.data;
@@ -740,4 +770,34 @@ export class SessionsComponent implements OnInit {
   //     return this.getPuzzle(s.id);
   //   }
 
+
+  addRecopier(r :Recopier) : void {
+    console.log(this.jeuId);
+
+    this.jeuId.push(
+      {type: "Recopier" ,id_jeu : r.id}
+    )
+  }
+
+  deleteRecopier(r :Recopier) : void {
+    let index = -1;
+    for(let g of this.jeuId) {
+      if(g.type == 'Recopier' && g.id_jeu == r.id) {
+        index = this.jeuId.indexOf(g,0);
+      }
+    }
+
+    if(index > -1) {
+      this.jeuId.splice(index, 1);
+    }
+  }
+
+  containRecopier(r: Recopier) : boolean {
+    for(let g of this.jeuId) {
+      if(g.type == 'Recopier' && g.id_jeu == r.id) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

@@ -15,9 +15,10 @@ import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
 import { Session } from '../sessions/Session';
 import { join } from 'path';
-import { SessionsComponent } from '../sessions/sessions.component';
+import { Jeu, SessionsComponent } from '../sessions/sessions.component';
 import { LoginComponent } from '../index/login/login.component';
 import { JeuxService } from '../jeux.service';
+import { Users } from '../users/Users';
 
 @Component({
   selector: 'app-panel',
@@ -101,20 +102,46 @@ export class PanelComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
         let isS = false;
-        if(data[i].isJoinable == 1) {
+        if (data[i].isJoinable == 1) {
           isJ = true;
         }
-        if(data[i].isSuivi == 1) {
+        if (data[i].isSuivi == 1) {
           isS = true;
         }
         donne.push(
-
-          new Session(data[i].Id,data[i].nom,data[i].date,data[i].jeux_id,isJ,data[i].joueurs,isS)
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
         );
       }
     })
 
   }
+
+  getJeuSession(s: string): Jeu[] {
+    let res: Jeu[] = [];
+    if (s.length > 0) {
+      let tab = s.split(';');
+      for (let i of tab) {
+        if (i != "") {
+          res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+        }
+      }
+    }
+    return res;
+  }
+
+  getJoueurs(s: string, id_session: number): Users[] {
+    let tab = s.split(';');
+    let res = []
+    for (let i of tab) {
+      if (i.length != 0) {
+        res.push(
+          new Users(i.split(',')[0], id_session, +i.split(',')[2], +i.split(',')[3])
+        );
+      }
+    }
+    return res;
+  }
+
 
   getMots(s: string): string[] {
     if (s.length != 0) {
