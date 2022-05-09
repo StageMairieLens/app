@@ -490,7 +490,7 @@ export class SessionsComponent implements OnInit {
     setInterval(() => {
       this.data = []
       this.recup(this.data)
-    }, 3000)
+    }, 2500)
 
     setInterval(() => {
       this.session_id = s.id;
