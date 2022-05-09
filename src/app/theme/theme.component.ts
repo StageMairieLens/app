@@ -66,7 +66,7 @@ export class ThemeComponent implements OnInit {
         donne.push({nom:data[i].nom_theme,id_image:data[i].id_image});
         var a=data[i].id_image.split(',');
         
-        this.test.push({id:a[0],nom:data[i].nom_theme});
+        this.test.push({id:a,nom:data[i].nom_theme});
         
       }
       console.log(this.test);

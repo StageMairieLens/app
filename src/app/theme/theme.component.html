@@ -17,7 +17,7 @@
 </div>
 
 <figure class="figure" *ngFor="let image of this.test">
-    <img class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
+    <img class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
   <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
     <i class="fa-solid fa-xmark fa-lg"></i>
   </span> -->
