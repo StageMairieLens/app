@@ -487,12 +487,13 @@ export class SessionsComponent implements OnInit {
     this.view = true;
     this.showList = false;
 
-    setInterval(() => {
-      this.data = []
-      this.recup(this.data)
-    }, 4000)
+
 
     setInterval(() => {
+      setInterval(() => {
+        this.data = []
+        this.recup(this.data)
+      }, 4000)
       console.log(this.data)
       this.session_id = s.id;
       s = this.getSession()!;
