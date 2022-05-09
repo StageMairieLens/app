@@ -493,6 +493,7 @@ export class SessionsComponent implements OnInit {
     }, 2500)
 
     setInterval(() => {
+      console.log(this.data)
       this.session_id = s.id;
       s = this.getSession()!;
       console.log(s);
