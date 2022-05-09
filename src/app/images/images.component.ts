@@ -102,6 +102,7 @@ onSend(pro_img2:number){
       console.log(err);
       this.temps+=1;
       console.log(this.temps);
+     
       if(this.temps>=this.files.length){
         this.redirect();
       }
@@ -144,5 +145,8 @@ recup(donne: any) {
 
 getListImage() : Image[] {
   return ImagesComponent.list_image
+}
+noImage():Image[]{
+  return ImagesComponent.list_image = [];
 }
 }
