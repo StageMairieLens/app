@@ -230,13 +230,25 @@ export class SessionsComponent implements OnInit {
   }
 
   getJoueurs(s: string, id_session: number): Users[] {
-    let tab = s.split(',');
+    let tab = s.split(';');
     let res = []
     for (let i of tab) {
-      res.push(
-        new Users(i, id_session, 0, 0)
-      );
+      if (i.length != 0) {
+        res.push(
+          new Users(i.split(',')[0], id_session, +i.split(',')[2], +i.split(',')[3])
+        );
+      }
     }
+    return res;
+  }
+
+  setJoueurs(s: Session): string {
+    let res = "";
+
+    for (let j of s.joueur) {
+      res += j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+    }
+
     return res;
   }
 
@@ -328,13 +340,14 @@ export class SessionsComponent implements OnInit {
       }
 
       if (this.edit) {
-        
+
         this.create_session = true;
         this.session_nom = this.selected_session!.nom;
         this.jeuId = this.selected_session!.jeuId;
 
       }
     }, 200)
+
   }
 
   getSessionsActive(): Session[] {
@@ -427,7 +440,7 @@ export class SessionsComponent implements OnInit {
   puzzle_list: Puzzle[] = [];
 
 
-  addJeu(type : string, id : number) : void {
+  addJeu(type: string, id: number): void {
 
   }
 
@@ -476,12 +489,28 @@ export class SessionsComponent implements OnInit {
     this.selected_session = s;
     this.view = true;
     this.showList = false;
+
+    setInterval(() => {
+      this.data = []
+      this.recup(this.data)
+    }, 2000)
+
+    setInterval(() => {
+      this.session_id = s.id;
+      s = this.getSession()!;
+      console.log(s);
+      this.selected_session = s;
+    }, 5000)
   }
+
+  quitView() : void {
+    window.location.href = '/panel/sessions'
+  }
+
 
   setSessionActive(s: Session): void {
     s.isActive = true;
-    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 1, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
-    console.log(this.list)
+    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 1, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: this.setJoueurs(s) };
     this.onSend_update(this.list);
 
     setTimeout(() => {
@@ -507,7 +536,7 @@ export class SessionsComponent implements OnInit {
 
   setSessionInactive(s: Session): void {
     s.isActive = false;
-    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 0, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: s.joueur.toString() };
+    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 0, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: this.setJoueurs(s) };
     console.log(this.list)
 
     this.onSend_update(this.list);

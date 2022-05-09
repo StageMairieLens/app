@@ -512,7 +512,7 @@
     <p *ngFor="let g of this.selected_session!.jeuId">{{g.type}} : {{g.id_jeu}} <br></p>
 
     <div class="col-md-12 text-center sortButton">
-      <button mat-raised-button style="background-color : red" (click)="this.view = false; this.showList = true"
+      <button mat-raised-button style="background-color : red" (click)="quitView() "
         color="primary">
         <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
         <span>Retourner sur les sessions</span>
