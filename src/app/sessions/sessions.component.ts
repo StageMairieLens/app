@@ -155,7 +155,7 @@ export class SessionsComponent implements OnInit {
   id_game: number | null = null;
   jeuSession: string = "";
   liste_j: string[] = [];
-  jeuId : Jeu[] = [];
+  jeuId: Jeu[] = [];
   sortById: boolean = true;
   sortByDate: boolean = false;
   sortByNbJoueur: boolean = false;
@@ -771,33 +771,192 @@ export class SessionsComponent implements OnInit {
   //   }
 
 
-  addRecopier(r :Recopier) : void {
+  // RECOPIER LISTE CREATION SESSION
+  addRecopier(r: Recopier): void {
     console.log(this.jeuId);
 
     this.jeuId.push(
-      {type: "Recopier" ,id_jeu : r.id}
+      { type: "Recopier", id_jeu: r.id }
     )
   }
 
-  deleteRecopier(r :Recopier) : void {
+  deleteRecopier(r: Recopier): void {
     let index = -1;
-    for(let g of this.jeuId) {
-      if(g.type == 'Recopier' && g.id_jeu == r.id) {
-        index = this.jeuId.indexOf(g,0);
+    for (let g of this.jeuId) {
+      if (g.type == 'Recopier' && g.id_jeu == r.id) {
+        index = this.jeuId.indexOf(g, 0);
       }
     }
 
-    if(index > -1) {
+    if (index > -1) {
       this.jeuId.splice(index, 1);
     }
   }
 
-  containRecopier(r: Recopier) : boolean {
-    for(let g of this.jeuId) {
-      if(g.type == 'Recopier' && g.id_jeu == r.id) {
+  containRecopier(r: Recopier): boolean {
+    for (let g of this.jeuId) {
+      if (g.type == 'Recopier' && g.id_jeu == r.id) {
         return true;
       }
     }
     return false;
   }
+
+
+  // MEMORY LISTE CREATION SESSION
+  addMemory(m: Memory): void {
+    console.log(this.jeuId);
+
+    this.jeuId.push(
+      { type: "Memory", id_jeu: m.id }
+    )
+  }
+
+  deleteMemory(m: Memory): void {
+    let index = -1;
+    for (let g of this.jeuId) {
+      if (g.type == 'Memory' && g.id_jeu == m.id) {
+        index = this.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      this.jeuId.splice(index, 1);
+    }
+  }
+
+  containMemory(m: Memory): boolean {
+    for (let g of this.jeuId) {
+      if (g.type == 'Memory' && g.id_jeu == m.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // RECONNAITRE LISTE CREATION SESSION
+  addReconaitre(r: Reconnaitre): void {
+    console.log(this.jeuId);
+
+    this.jeuId.push(
+      { type: "Reconnaitre", id_jeu: r.id }
+    )
+  }
+
+  deleteReconnaitre(r: Reconnaitre): void {
+    let index = -1;
+    for (let g of this.jeuId) {
+      if (g.type == 'Reconnaitre' && g.id_jeu == r.id) {
+        index = this.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      this.jeuId.splice(index, 1);
+    }
+  }
+
+  containReconnaitre(r: Reconnaitre): boolean {
+    for (let g of this.jeuId) {
+      if (g.type == 'Reconnaitre' && g.id_jeu == r.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // ABECEDAIRE LISTE CREATION SESSION
+  addAbecedaire(a: Abecedaire): void {
+    console.log(this.jeuId);
+
+    this.jeuId.push(
+      { type: "Abecedaire", id_jeu: a.id }
+    )
+  }
+
+  deleteAbecedaire(a: Abecedaire): void {
+    let index = -1;
+    for (let g of this.jeuId) {
+      if (g.type == 'Abecedaire' && g.id_jeu == a.id) {
+        index = this.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      this.jeuId.splice(index, 1);
+    }
+  }
+
+  containAbecedaire(a: Abecedaire): boolean {
+    for (let g of this.jeuId) {
+      if (g.type == 'Abecedaire' && g.id_jeu == a.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Fille&Garçon LISTE CREATION SESSION
+  addBoyGirl(bg: BoyGirl): void {
+    console.log(this.jeuId);
+
+    this.jeuId.push(
+      { type: "Fille&Garçon", id_jeu: bg.id }
+    )
+  }
+
+  deleteBoyGirl(bg: BoyGirl): void {
+    let index = -1;
+    for (let g of this.jeuId) {
+      if (g.type == 'Fille&Garçon' && g.id_jeu == bg.id) {
+        index = this.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      this.jeuId.splice(index, 1);
+    }
+  }
+
+  containBoyGirl(bg: BoyGirl): boolean {
+    for (let g of this.jeuId) {
+      if (g.type == 'Fille&Garçon' && g.id_jeu == bg.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Puzzle LISTE CREATION SESSION
+  addPuzle(p: Puzzle): void {
+    console.log(this.jeuId);
+
+    this.jeuId.push(
+      { type: "Puzzle&Garçon", id_jeu: p.id }
+    )
+  }
+
+  deletePuzzle(p: BoyGirl): void {
+    let index = -1;
+    for (let g of this.jeuId) {
+      if (g.type == 'Puzzle' && g.id_jeu == p.id) {
+        index = this.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      this.jeuId.splice(index, 1);
+    }
+  }
+
+  containPuzzle(p: Puzzle): boolean {
+    for (let g of this.jeuId) {
+      if (g.type == 'Puzzle' && g.id_jeu == p.id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
 }

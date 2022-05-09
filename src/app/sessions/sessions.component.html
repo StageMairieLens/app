@@ -322,8 +322,8 @@
   </div>
 
   <h2 class="text-center" style="margin-bottom : 2%">Jeu dans la séssion</h2>
-  <div class="row justify-content-around">
 
+  <div *ngIf="this.jeuId.length != 0" class="row justify-content-around">
     <mat-card style="background : #ecececee" *ngFor="let g of this.jeuId" class="text-center col-md-3">
       <mat-card-title><b>Type : </b> {{g.type}}</mat-card-title>
       <mat-card-content><b>Id : </b>{{g.id_jeu}}</mat-card-content>
@@ -331,13 +331,26 @@
         <button mat-fab color="primary" aria-label="Example icon button with a bookmark icon">
           <i class="fa-solid fa-eye fa-lg"></i>
         </button>
+        <button mat-fab color="warn" aria-label="Example icon button with a bookmark icon">
+          <i class="fa-solid fa-trash fa-lg"></i>
+        </button>
       </mat-card-actions>
     </mat-card>
-
   </div>
 
   <div class="text-center">
-    <mat-divider style="margin-top : 3%; margin-bottom : 3% ; background : white; width : 85% ; display : inline-block"></mat-divider>
+    <div *ngIf="this.jeuId.length == 0" style="width : 85%;" class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
+      <i class="fa-solid fa-warning fa-2x" style="margin-bottom : 1%; margin-right : 1%"></i>
+      <div>
+        <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la séssion</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="text-center">
+    <mat-divider style="margin-top : 3%; margin-bottom : 3% ; background : white; width : 85% ; display : inline-block">
+    </mat-divider>
   </div>
 
   <div class="form-row">
@@ -418,8 +431,12 @@
           <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
           <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
+          <th>
+            <mat-checkbox *ngIf="!containMemory(element)" (ngModelChange)="addMemory(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containMemory(element)" (ngModelChange)="deleteMemory(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
         </tr>
       </tbody>
     </table>
@@ -444,8 +461,12 @@
           <th *ngIf="element.isVocaliser">Oui</th>
           <th *ngIf="!element.isVocaliser">Non</th>
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
+          <th>
+            <mat-checkbox *ngIf="!containReconnaitre(element)" (ngModelChange)="addReconaitre(element)"
+              [ngModel]="false" color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containReconnaitre(element)" (ngModelChange)="deleteReconnaitre(element)"
+              [ngModel]="true" color="primary" class="example-margin"></mat-checkbox>
+          </th>
         </tr>
       </tbody>
     </table>
@@ -470,8 +491,12 @@
           <th *ngIf="element.isVocaliser">Oui</th>
           <th *ngIf="!element.isVocaliser">Non</th>
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
+          <th>
+            <mat-checkbox *ngIf="!containAbecedaire(element)" (ngModelChange)="addAbecedaire(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containAbecedaire(element)" (ngModelChange)="deleteAbecedaire(element)"
+              [ngModel]="true" color="primary" class="example-margin"></mat-checkbox>
+          </th>
         </tr>
       </tbody>
     </table>
@@ -494,8 +519,12 @@
           <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
           <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
           <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-          <!-- <th *ngIf="this.jeuId == element.id"><i class="fa-solid fa-square-check fa-lg"></i></th>
-          <th *ngIf="this.jeuId != element.id"><i class="fa-solid fa-square fa-lg"></i></th> -->
+          <th>
+            <mat-checkbox *ngIf="!containBoyGirl(element)" (ngModelChange)="addBoyGirl(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containBoyGirl(element)" (ngModelChange)="deleteBoyGirl(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
         </tr>
       </tbody>
     </table>
