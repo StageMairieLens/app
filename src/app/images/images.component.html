@@ -1,10 +1,4 @@
-<!--<div style="text-align:center">
-	<div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
-	<div><img [src]="url" *ngIf="url"></div>
-	<p>
-		<input type="file" (change)="selectFile($event)">
-	</p>
-</div>-->
+
 <ngx-dropzone (change)="onSelect($event)" [expandable]="true"  [processDirectoryDrop]="true"  >
 	<ngx-dropzone-label>Drop it!</ngx-dropzone-label>
 	<ngx-dropzone-image-preview (click)="onRemove(f)" cdkDrag ngProjectAs="ngx-dropzone-preview"   *ngFor="let f of files" [file]="f"  (change)="onRemove(f)" >
@@ -15,10 +9,14 @@
 	  </ngx-dropzone-image-preview>
 </ngx-dropzone>
 <div>
-<button (click)="onSend2()" (click)="this.affiche=true"  >Envoyer les images</button>
+<button *ngIf="this.files.length!=0" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()" (click)="this.affiche_image=false" >Envoyer les images</button>
 </div>
 
 <button (click)="recup(this.getListImage())" (click)="this.affiche_image=true">Voir les images </button>
+<button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>
+<div class="container card container_list" >
+	
+  
 <div *ngIf="this.affiche_image">
 <figure class="figure" *ngFor="let image of this.getListImage()">
 	<img class="delete" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
@@ -28,6 +26,8 @@
 	<figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
   </figure>
 </div>
+</div>
+
 <div *ngIf="this.affiche">
 	
 	<div class="alert alert-success" role="alert">
@@ -36,7 +36,7 @@
 		<mat-spinner></mat-spinner>
 		<hr>
 		
-		<p>{{ this.temps }}/ {{ this.files.length }} </p>
+		<p>Chargement: {{ this.temps }}/ {{ this.files.length }} </p>
 	  </div>
 
 </div>
