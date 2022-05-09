@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Session } from './Session';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Users } from '../users/Users'
@@ -375,19 +375,41 @@ export class SessionsComponent implements OnInit {
     this.addUser(name);
     this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
     this.onSend_update(this.list);
+    this.deleteUser(name)
 
   }
 
+  @HostListener('window:beforeunload', ['$event'])
+  onWindowClose(event: any): void {
+    // Do something
+    let index = -1;
+
+    for(let j of this.getSession()!.joueur) {
+      if(j.id == +localStorage.getItem('id_user')!) {
+        index = this.getSession()!.joueur.indexOf(j);
+      }
+    }
+
+    if(index > -1) {
+      this.getSession()!.joueur.splice(index, 1);
+    }
+
+    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+    this.onSend_update(this.list);
+
+  }
+
+
+  deleteUser(name: string): void {
+    console.log(localStorage.getItem('id_user'));
+  }
 
 
   addUser(name: string): void {
     this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
-
+    localStorage.setItem('id_user',(this.getSession()!.joueur.length - 1).toString());
   }
 
-  deleteUser(str: string): void {
-
-  }
 
   getData(): Session[] {
     return SessionsComponent.data;
@@ -478,7 +500,7 @@ export class SessionsComponent implements OnInit {
     }, 5000)
   }
 
-  quitView() : void {
+  quitView(): void {
     window.location.href = '/panel/sessions'
   }
 
