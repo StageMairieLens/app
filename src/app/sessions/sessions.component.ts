@@ -367,47 +367,22 @@ export class SessionsComponent implements OnInit {
 
   enterKey($event: KeyboardEvent): void {
     if ($event.key == 'Enter') {
-      // this.connect((<HTMLInputElement>$event.target)!.value);
+      this.connect((<HTMLInputElement>$event.target)!.value);
     }
   }
 
-  // connect(name: string): void {
-  //   this.addUser(name);
-  //   var session = this.getSession();
-  //   if(session == null) return;
-  //   switch(session.jeu) {
-  //     case Game.Abecedaire:
-  //       this.jeu = "abecedaire";
-  //       this.abecedaire = this.getAbecedaire(session.jeuId);
-  //       break;
-  //     case Game.FilleEtGarcon:
-  //       this.jeu = "fillegarcon";
-  //       this.boyGirl = this.getFilleGarcon(session.jeuId);
-  //       break;
-  //     case Game.Memory:
-  //       this.jeu = "memory";
-  //       this.memory = this.getMemory(session.jeuId);
-  //       break;
-  //     case Game.Puzzle:
-  //       this.jeu = "puzzle";
-  //       this.puzzle = this.getPuzzle(session.jeuId);
-  //       break;
-  //     case Game.Reconnaitre:
-  //       this.jeu = "reconnaitre";
-  //       this.reconnaitre = this.getReconnaitre(session.jeuId);
-  //       break;
-  //     case Game.Recopier:
-  //       this.jeu = "recopier";
-  //       this.recopier = this.getRecopier(session.jeuId);
-  //       break;
-  //   }
-  //   this.connected = true;
-  // }
+  connect(name: string): void {
+    this.addUser(name);
+    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+    this.onSend_update(this.list);
+
+  }
 
 
 
   addUser(name: string): void {
     this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
+
   }
 
   deleteUser(str: string): void {

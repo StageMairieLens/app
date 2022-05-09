@@ -37,7 +37,7 @@
               (keypress)="enterKey($event)">
 
             <button mat-raised-button color="primary" aria-label="Valider">
-              <i class="fa fa-check"></i>
+              <i class="fa fa-check" (click)="connect(input_name.value)"></i>
             </button>
           </div>
         </div>
