@@ -144,7 +144,12 @@ recup(donne: any) {
 }
 
 getListImage() : Image[] {
-  return ImagesComponent.list_image
+  if(this.affiche_image == true){
+    
+    return ImagesComponent.list_image;
+  }else{
+    return ImagesComponent.list_image = [];
+  }
 }
 noImage():Image[]{
   return ImagesComponent.list_image = [];
