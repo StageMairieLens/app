@@ -16,7 +16,7 @@ export class ThemeComponent implements OnInit {
   temps:number=0;
   test:any=[];
   data:any=[];
-
+  recup_image:any=[];
   nom:string="";
   liste_id=[];
   list:any={nom:this.nom,id:this.liste_id.toString()};
