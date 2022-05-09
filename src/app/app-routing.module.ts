@@ -16,7 +16,7 @@ import { ImagesComponent } from './images/images.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuardComponent } from './auth-guard/auth-guard.component';
-
+import { ThemeComponent } from './theme/theme.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'session', component: SessionsComponent },
   { path: 'session/:id', component: SessionsComponent },
   { path: 'images', component: ImagesComponent },
+  { path: 'theme', component: ThemeComponent },
 ];
 
 @NgModule({

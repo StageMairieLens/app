@@ -1,6 +1,6 @@
 
 <ngx-dropzone (change)="onSelect($event)" [expandable]="true"  [processDirectoryDrop]="true"  >
-	<ngx-dropzone-label>Drop it!</ngx-dropzone-label>
+	<ngx-dropzone-label>Déposez ici</ngx-dropzone-label>
 	<ngx-dropzone-image-preview (click)="onRemove(f)" cdkDrag ngProjectAs="ngx-dropzone-preview"   *ngFor="let f of files" [file]="f"  (change)="onRemove(f)" >
 		<ngx-dropzone-label >{{ f.name }} ({{ f.type }})
 
@@ -12,7 +12,7 @@
 <button *ngIf="this.files.length!=0" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()" (click)="this.affiche_image=false" >Envoyer les images</button>
 </div>
 
-<button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" >Voir les images </button>
+<button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image"  >Voir les images </button>
 <button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>
 <div class="container card container_list" >
 	
