@@ -20,6 +20,7 @@ export class ImagesComponent implements OnInit {
   ];
   affiche:Boolean=false;
   affiche_image:Boolean=false;
+
   temps:number=0;
   test:string="test";
   test2:number=1;
