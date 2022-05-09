@@ -411,10 +411,10 @@ export class SessionsComponent implements OnInit {
       setInterval(() => {
         this.data = []
         this.recup(this.data)
-      }, 500)
+      }, 200)
       this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
       localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
-    }, 1000)
+    }, 500)
 
   }
 
