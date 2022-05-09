@@ -384,13 +384,13 @@ export class SessionsComponent implements OnInit {
     // Do something
     let index = -1;
 
-    for(let j of this.getSession()!.joueur) {
-      if(j.id == +localStorage.getItem('id_user')!) {
+    for (let j of this.getSession()!.joueur) {
+      if (j.id == +localStorage.getItem('id_user')!) {
         index = this.getSession()!.joueur.indexOf(j);
       }
     }
 
-    if(index > -1) {
+    if (index > -1) {
       this.getSession()!.joueur.splice(index, 1);
     }
 
@@ -406,8 +406,16 @@ export class SessionsComponent implements OnInit {
 
 
   addUser(name: string): void {
-    this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
-    localStorage.setItem('id_user',(this.getSession()!.joueur.length - 1).toString());
+
+    setInterval(() => {
+      setInterval(() => {
+        this.data = []
+        this.recup(this.data)
+      }, 500)
+      this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
+      localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
+    }, 1000)
+
   }
 
 
