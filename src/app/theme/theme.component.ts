@@ -63,9 +63,8 @@ export class ThemeComponent implements OnInit {
   
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
-        donne.push({nom:data[i].nom_theme,id_image:data[i].id_image});
+        donne.push({id:data[i].id_theme,nom:data[i].nom_theme,id_image:data[i].id_image});
         var a=data[i].id_image.split(',');
-        
         this.test.push({id:a,nom:data[i].nom_theme});
         
       }
@@ -120,5 +119,8 @@ export class ThemeComponent implements OnInit {
       this.onSend(i);
   
     }
+  }
+  aff(test:any){
+    console.log(test);
   }
 }

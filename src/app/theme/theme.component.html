@@ -1,6 +1,6 @@
-<button *ngIf="this.files.length!=0" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()" (click)="this.affiche_image=false" >Envoyer les images</button>
+<!--<button *ngIf="this.files.length!=0" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()" (click)="this.affiche_image=false" >Envoyer les images</button>
 <button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image"  >Voir les images </button>
-<button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>
+<button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>-->
 
 <div class="container card container_list" >
 	
@@ -17,10 +17,11 @@
 </div>
 
 <figure class="figure" *ngFor="let image of this.test">
-    <img class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
+    <img (click)="aff(this.image.id)" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
   <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
     <i class="fa-solid fa-xmark fa-lg"></i>
   </span> -->
   <figcaption class="figure-caption text-center">{{image.nom}}</figcaption>
   </figure>
+  
 
