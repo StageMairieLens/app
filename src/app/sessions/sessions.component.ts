@@ -1069,24 +1069,29 @@ export class SessionsComponent implements OnInit {
     }
   }
 
-  quitSession() : void {
-    let index = -1;
+  quitSession(): void {
+    this.data = [];
+    this.recup(this.data);
 
-    for (let j of this.getSession()!.joueur) {
-      if (j.id == +localStorage.getItem('id_user')!) {
-        index = this.getSession()!.joueur.indexOf(j);
+    setInterval(() => {
+      let index = -1;
+
+      for (let j of this.getSession()!.joueur) {
+        if (j.id == +localStorage.getItem('id_user')!) {
+          index = this.getSession()!.joueur.indexOf(j);
+        }
       }
-    }
 
-    if (index > -1) {
-      this.getSession()!.joueur.splice(index, 1);
-    }
+      if (index > -1) {
+        this.getSession()!.joueur.splice(index, 1);
+      }
 
-    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
-    this.onSend_update(this.list);
-    localStorage.removeItem('id_user')
-    setTimeout(() => {
-      window.location.href = '';
-    },200)
+      this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+      this.onSend_update(this.list);
+      localStorage.removeItem('id_user')
+      setTimeout(() => {
+        window.location.href = '';
+      }, 200)
+    }, 500)
   }
 }
