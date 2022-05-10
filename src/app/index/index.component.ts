@@ -34,7 +34,7 @@ export class IndexComponent implements OnInit {
 
   connect(id: string): void {
     if (id != "") {
-      this.router.navigate(['/session/' + id]);
+      window.location.href = '/session/' + id
     }
   }
 

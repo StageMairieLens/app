@@ -384,10 +384,6 @@ export class SessionsComponent implements OnInit {
         }
       }
     }
-    else {
-      localStorage.removeItem('id_user')
-      return false;
-    }
     localStorage.removeItem('id_user')
     return false;
   }
@@ -406,52 +402,12 @@ export class SessionsComponent implements OnInit {
 
   }
 
-  @HostListener('window:beforeunload', ['$event'])
-  onWindowClose(event: any): void {
-    // Do something
-    let index = -1;
-
-    for (let j of this.getSession()!.joueur) {
-      if (j.id == +localStorage.getItem('id_user')!) {
-        index = this.getSession()!.joueur.indexOf(j);
-      }
-    }
-
-    if (index > -1) {
-      this.getSession()!.joueur.splice(index, 1);
-    }
-
-    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
-    this.onSend_update(this.list);
-    localStorage.removeItem('id_user')
-
-  }
 
   addUser(name: string): void {
     this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
     localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
   }
 
-  @HostListener('window:popstate', ['$event'])
-  onPopState(event: any) {
-    // Do something
-    let index = -1;
-
-    for (let j of this.getSession()!.joueur) {
-      if (j.id == +localStorage.getItem('id_user')!) {
-        index = this.getSession()!.joueur.indexOf(j);
-      }
-    }
-
-    if (index > -1) {
-      this.getSession()!.joueur.splice(index, 1);
-    }
-
-    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
-    this.onSend_update(this.list);
-    localStorage.removeItem('id_user')
-
-  }
 
   getData(): Session[] {
     return SessionsComponent.data;
@@ -1111,5 +1067,26 @@ export class SessionsComponent implements OnInit {
         this.puzzle = this.getPuzzle(id)!
         break;
     }
+  }
+
+  quitSession() : void {
+    let index = -1;
+
+    for (let j of this.getSession()!.joueur) {
+      if (j.id == +localStorage.getItem('id_user')!) {
+        index = this.getSession()!.joueur.indexOf(j);
+      }
+    }
+
+    if (index > -1) {
+      this.getSession()!.joueur.splice(index, 1);
+    }
+
+    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+    this.onSend_update(this.list);
+    localStorage.removeItem('id_user')
+    setTimeout(() => {
+      window.location.href = '';
+    },200)
   }
 }
