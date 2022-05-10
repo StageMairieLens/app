@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class ThemeComponent implements OnInit {
   affiche_image:Boolean=false;
   affiche_image2:Boolean=false;
+  create_theme:Boolean=false;
+  n_theme:any=[];
+  nouveau_theme:any={};
   pro_img=0;
   affiche:Boolean=false;
   temps:number=0;
@@ -76,7 +79,7 @@ export class ThemeComponent implements OnInit {
   }
   
   getListImage() : Image[] {
-    if(this.affiche_image == true){
+    if(this.affiche_image == true || this.affiche_image2 == true){
       
       return ThemeComponent.list_image;
       
@@ -88,38 +91,28 @@ export class ThemeComponent implements OnInit {
     return ThemeComponent.list_image = [];
   }
 
-  onSend(pro_img2:number){
-    var img:Blob=this.files[pro_img2];
-    const formData : FormData = new FormData();
+  onSend(list: any) {
+    var list2=list;
+    list2.id=list2.id.toString();
+    console.log(list2);
+    const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('theme',img);
+    formData.append('theme', JSON.stringify(list2));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next:res=>{
-        console.log(res.name);
-  
-  
+      next: res => {
+        console.log(res);
+
       },
-  
-      error  :err =>{
+
+      error: err => {
         console.log(err);
-        //this.temps+=1;
-        //console.log(this.temps);
-       
-        /*if(this.temps>=this.files.length){
-          this.redirect();
-        }*/
+        this.reloadCurrentPage();
       },
-  
+
     });
-  }
-  onSend2(){
-    for(var i=0;i<this.files.length;i++){
-      this.onSend(i);
-  
-    }
   }
   onSend_delete(id: any) {
 
@@ -137,6 +130,7 @@ export class ThemeComponent implements OnInit {
 
       error: err => {
         console.log(err);
+        
       },
 
     });
@@ -144,6 +138,7 @@ export class ThemeComponent implements OnInit {
   onSend_update(list: any) {
     var list2=list;
     list2.id=list2.id.toString();
+    console.log(list2);
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);

@@ -2,44 +2,82 @@
 <button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image"  >Voir les images </button>
 <button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>-->
 
+<button (click)="this.create_theme=true" *ngIf="!this.create_theme" >Créez un nouveau Theme</button>
+<div *ngIf="this.create_theme">
+  
+        <label for="name_input" class="form-label align-middle">Choisissez le nom du theme
+          <input type="text" class="form-control form-control-color"
+             #name_input
+            (change)="this.nouveau_theme['nom']=name_input.value"
+
+             title="Choisissez le nom du theme">
+        </label>
+    
+    
+        <figure class="figure" *ngFor="let image of this.n_theme">
+          <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.n_theme)">
+          <i class="fa-solid fa-xmark fa-lg" ></i>
+        </span> 
+        <figcaption class="figure-caption text-center">{{image}}</figcaption>
+        
+      </figure>
+  <button (click)="recup(this.getListImage())"  *ngIf="!this.affiche_image2"  (click)="this.affiche_image2=true"    >Voir les images </button>
+  <button *ngIf="this.affiche_image2" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
+      <div class="container card container_list" >
+        <div *ngIf="this.affiche_image2">
+        <figure class="figure" *ngFor="let image of this.getListImage()">
+            <img (click)="this.n_theme.push(image.id)" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
+          <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
+            <i class="fa-solid fa-xmark fa-lg"></i>
+          </span> -->
+            <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
+          </figure>
+        </div>
+    </div>
+  <button (click)="this.nouveau_theme['id']=this.n_theme" (click)="onSend(this.nouveau_theme)">Envoyer les données</button>
+</div>
 
 
-<figure class="figure" *ngFor="let image of this.test">
-    <img (click)="this.recup_image=image"  (click)="this.affiche_image=true" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-  <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
-    <i class="fa-solid fa-xmark fa-lg"></i>
-  </span> -->
-  
-  <figcaption class="figure-caption text-center">{{image.nom}}</figcaption>
-  
-  </figure>
-  
-  <div *ngIf="this.affiche_image">
-    <figure class="figure" *ngFor="let image of this.recup_image.id">
-        <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
-      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.recup_image.id)">
-        <i class="fa-solid fa-xmark fa-lg" ></i>
-      </span> 
-      <figcaption class="figure-caption text-center">{{image}}</figcaption>
-      
+<div *ngIf="!this.create_theme">
+  <figure class="figure" *ngFor="let image of this.test">
+      <img (click)="this.recup_image=image"  (click)="this.affiche_image=true" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
+    <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
+      <i class="fa-solid fa-xmark fa-lg"></i>
+    </span> -->
+    
+    <figcaption class="figure-caption text-center">{{image.nom}}</figcaption>
+    
     </figure>
     
+    <div *ngIf="this.affiche_image">
+      <figure class="figure" *ngFor="let image of this.recup_image.id">
+          <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.recup_image.id)">
+          <i class="fa-solid fa-xmark fa-lg" ></i>
+        </span> 
+        <figcaption class="figure-caption text-center">{{image}}</figcaption>
+        
+      </figure>
+      
+      
     
-   
-    <button (click)="recup(this.getListImage())" (click)="this.affiche_image2=true"  >Voir les images </button>
-    <div class="container card container_list" >
-	
-  
-      <div *ngIf="this.affiche_image2">
-      <figure class="figure" *ngFor="let image of this.getListImage()">
-          <img class="delete" (click)="this.recup_image.id.push(image.id)" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-        <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
-          <i class="fa-solid fa-xmark fa-lg"></i>
-        </span> -->
-          <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
-        </figure>
-      </div>
-  </div>
-    <button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
-    <button  (click)="onSend_update(this.recup_image)" (click)="reloadCurrentPage()">Valider</button>
-  </div>
+      <button (click)="recup(this.getListImage())" (click)="this.affiche_image2=true" *ngIf="!this.affiche_image2" >Voir les images </button>
+      <button *ngIf="this.affiche_image2" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
+      <div class="container card container_list" >
+    
+    
+        <div *ngIf="this.affiche_image2">
+        <figure class="figure" *ngFor="let image of this.getListImage()">
+            <img class="delete" (click)="this.recup_image.id.push(image.id)" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
+          <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
+            <i class="fa-solid fa-xmark fa-lg"></i>
+          </span> -->
+            <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
+          </figure>
+        </div>
+    </div>
+      
+      <button  (click)="onSend_update(this.recup_image)" (click)="reloadCurrentPage()">Valider</button>
+    </div>
+</div>
