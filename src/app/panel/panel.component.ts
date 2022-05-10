@@ -135,7 +135,7 @@ export class PanelComponent implements OnInit {
     for (let i of tab) {
       if (i.length != 0) {
         res.push(
-          new Users(i.split(',')[0], id_session, +i.split(',')[2], +i.split(',')[3])
+          new Users(+i.split(',')[0],i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
         );
       }
     }

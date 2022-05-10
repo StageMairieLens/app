@@ -236,7 +236,7 @@ export class SessionsComponent implements OnInit {
     for (let i of tab) {
       if (i.length != 0) {
         res.push(
-          new Users(i.split(',')[0], id_session, +i.split(',')[2], +i.split(',')[3])
+          new Users(+i.split(',')[0],i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
         );
       }
     }
@@ -247,7 +247,7 @@ export class SessionsComponent implements OnInit {
     let res = "";
 
     for (let j of s.joueur) {
-      res += j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+      res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
     }
 
     return res;
@@ -404,7 +404,7 @@ export class SessionsComponent implements OnInit {
 
 
   addUser(name: string): void {
-    this.getSession()!.joueur.push((new Users(name, Session.number, 0, 0)));
+    this.getSession()!.joueur.push((new Users(this.getSession()!.joueur.length,name, Session.number, 0, 0)));
     localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
   }
 
@@ -1070,10 +1070,11 @@ export class SessionsComponent implements OnInit {
   }
 
   quitSession(): void {
-    this.data = [];
-    this.recup(this.data);
 
-    setInterval(() => {
+    this.data = []
+    this.recup(this.data)
+
+    setTimeout(() => {
       let index = -1;
 
       for (let j of this.getSession()!.joueur) {
@@ -1088,10 +1089,8 @@ export class SessionsComponent implements OnInit {
 
       this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
       this.onSend_update(this.list);
-      localStorage.removeItem('id_user')
-      setTimeout(() => {
-        window.location.href = '';
-      }, 200)
-    }, 1000)
+      localStorage.removeItem('id_user');
+      window.location.href = '';
+    }, 200);
   }
 }
