@@ -344,6 +344,10 @@ export class SessionsComponent implements OnInit {
         this.create_session = true;
         this.session_nom = this.selected_session!.nom;
         this.jeuId = this.selected_session!.jeuId;
+        this.isSuivi = this.selected_session!.isSuivi;
+        this.list = { nom: this.selected_session!.nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.selected_session!.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
+
+
 
       }
     }, 200)
@@ -396,7 +400,7 @@ export class SessionsComponent implements OnInit {
 
     setTimeout(() => {
       this.addUser(name);
-      this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+      this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
       this.onSend_update(this.list);
     }, 500)
 
@@ -417,7 +421,7 @@ export class SessionsComponent implements OnInit {
       this.getSession()!.joueur.splice(index, 1);
     }
 
-    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
     this.onSend_update(this.list);
     localStorage.removeItem('id_user')
 
@@ -443,7 +447,7 @@ export class SessionsComponent implements OnInit {
       this.getSession()!.joueur.splice(index, 1);
     }
 
-    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!), liste_j: this.setJoueurs(this.getSession()!) };
+    this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
     this.onSend_update(this.list);
     localStorage.removeItem('id_user')
 
@@ -578,9 +582,9 @@ export class SessionsComponent implements OnInit {
   }
 
 
-  setJeuSession(s: Session): string {
+  setJeuSession(tab: Jeu[]): string {
     let res = "";
-    for (let g of s.jeuId) {
+    for (let g of tab) {
       console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
@@ -614,7 +618,7 @@ export class SessionsComponent implements OnInit {
 
   setSessionActive(s: Session): void {
     s.isActive = true;
-    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 1, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: this.setJoueurs(s) };
+    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 1, id: +s.id, jeux_id: this.setJeuSession(s.jeuId), liste_j: this.setJoueurs(s) };
     this.onSend_update(this.list);
 
     setTimeout(() => {
@@ -640,7 +644,7 @@ export class SessionsComponent implements OnInit {
 
   setSessionInactive(s: Session): void {
     s.isActive = false;
-    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 0, id: +s.id, jeux_id: this.setJeuSession(s), liste_j: this.setJoueurs(s) };
+    this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 0, id: +s.id, jeux_id: this.setJeuSession(s.jeuId), liste_j: this.setJoueurs(s) };
     console.log(this.list)
 
     this.onSend_update(this.list);
@@ -770,16 +774,15 @@ export class SessionsComponent implements OnInit {
 
   createSession(jeu: string, nom: string): void {
     if (jeu != "" && nom != "") {
-      // new Session(nom, new Date(), (<any>Game)[jeu], false, []);
-      this.showList = true;
-      this.jeuSession = "";
+      this.list = { nom: this.session_nom, isSuivi: +this.isSuivi, join: 0, id: 0, jeux_id: this.setJeuSession(this.jeuId), liste_j: "" };
+      this.onSend(this.list);
       this.router.navigate(['/panel/sessions']);
     }
   }
 
   save(): void {
-    this.selected_session!.nom = this.session_nom;
-    this.selected_session!.jeuId = this.jeuId;
+    this.list = { nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
+    this.onSend_update(this.list)
     this.router.navigate(['/panel/sessions']);
   }
 
