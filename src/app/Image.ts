@@ -17,4 +17,5 @@ export class Image {
     img[val].nom=x;
 
   }
+  
 }

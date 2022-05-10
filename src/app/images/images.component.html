@@ -20,9 +20,9 @@
 <div *ngIf="this.affiche_image">
 <figure class="figure" *ngFor="let image of this.getListImage()">
 	<img class="delete" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-  <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
+   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="onSend_delete(image.id)"(click)="remove(image.id)">
     <i class="fa-solid fa-xmark fa-lg"></i>
-  </span> -->
+  </span> 
 	<figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
   </figure>
 </div>

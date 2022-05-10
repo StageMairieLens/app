@@ -1,6 +1,4 @@
-<!--<button *ngIf="this.files.length!=0" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()" (click)="this.affiche_image=false" >Envoyer les images</button>
-<button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image"  >Voir les images </button>
-<button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>-->
+
 
 <button (click)="this.create_theme=true" *ngIf="!this.create_theme" >Créez un nouveau Theme</button>
 <div *ngIf="this.create_theme">
