@@ -153,6 +153,7 @@ export class ThemeComponent implements OnInit {
 
       error: err => {
         console.log(err);
+        this.reloadCurrentPage();
       },
 
     });
@@ -180,4 +181,17 @@ export class ThemeComponent implements OnInit {
   reloadCurrentPage() {
     window.location.reload();
    }
+   remove2(id:any): any{
+    //console.log(liste);
+    console.log(id);
+    for(var i =0;this.test[i]!=null;i++){
+      //console.log(liste);
+      if(this.test[i].id_theme== id){
+        //console.log(liste[i]);
+        this.test.splice(i, 1);
+        
+      }
+      console.log(this.test);
+    }
+  }
 }

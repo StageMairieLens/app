@@ -42,9 +42,9 @@
 <div *ngIf="!this.create_theme">
   <figure class="figure" *ngFor="let image of this.test">
       <img (click)="this.recup_image=image"  (click)="this.affiche_image=true" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-    <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
+     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="onSend_delete(image.id_theme)"(click)="remove2(image.id_theme)" >
       <i class="fa-solid fa-xmark fa-lg"></i>
-    </span> -->
+    </span> 
     
     <figcaption class="figure-caption text-center">{{image.nom}}</figcaption>
     
@@ -78,6 +78,6 @@
         </div>
     </div>
       
-      <button  (click)="onSend_update(this.recup_image)" (click)="reloadCurrentPage()">Valider</button>
+      <button  (click)="onSend_update(this.recup_image)" >Valider</button>
     </div>
 </div>
