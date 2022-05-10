@@ -413,7 +413,7 @@ export class SessionsComponent implements OnInit {
     }
 
     this.getSession()!.joueur.push((new Users(id,name, Session.number, 0, 0)));
-    localStorage.setItem('id_user', (this.getSession()!.joueur.length - 1).toString());
+    localStorage.setItem('id_user', id.toString());
   }
 
 
