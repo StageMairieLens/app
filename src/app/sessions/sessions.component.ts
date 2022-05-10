@@ -1092,6 +1092,6 @@ export class SessionsComponent implements OnInit {
       setTimeout(() => {
         window.location.href = '';
       }, 200)
-    }, 500)
+    }, 1000)
   }
 }
