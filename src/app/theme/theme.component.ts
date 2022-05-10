@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ThemeComponent implements OnInit {
   affiche_image:Boolean=false;
+  affiche_image2:Boolean=false;
   pro_img=0;
   affiche:Boolean=false;
   temps:number=0;
@@ -65,7 +66,7 @@ export class ThemeComponent implements OnInit {
         //console.log(data);
         donne.push({id:data[i].id_theme,nom:data[i].nom_theme,id_image:data[i].id_image});
         var a=data[i].id_image.split(',');
-        this.test.push({id:a,nom:data[i].nom_theme});
+        this.test.push({id_theme:data[i].id_theme,id:a,nom:data[i].nom_theme});
         
       }
       console.log(this.test);
@@ -120,7 +121,68 @@ export class ThemeComponent implements OnInit {
   
     }
   }
+  onSend_delete(id: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<id.lenght;i++){
+      formData.append('id[]',id[i]);
+    }*/
+    formData.append('theme_delete', id);
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res);
+
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+  onSend_update(list: any) {
+    var list2=list;
+    list2.id=list2.id.toString();
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('theme_update', JSON.stringify(list2));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+        
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
   aff(test:any){
     console.log(test);
   }
+  ajoute(id:any,liste : any): any{
+    if(!liste.includes(id)){
+      liste.push(id.toString());
+    }
+  }
+  remove(id:any,liste : any): any{
+    //console.log(liste);
+    for(var i =0;liste[i]!=null;i++){
+      //console.log(liste);
+      if(liste[i]== id){
+        //console.log(liste[i]);
+        liste.splice(i, 1);
+        
+      }
+      console.log(liste);
+    }
+  }
+  reloadCurrentPage() {
+    window.location.reload();
+   }
 }
