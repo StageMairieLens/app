@@ -118,7 +118,7 @@ onSend2(){
   }
 }
 redirect(){
-  this.router.navigate(['/panel']);
+  this.router.navigate(['/theme']);
 }
 /*imageUrl:any = null;
 showImage(){
