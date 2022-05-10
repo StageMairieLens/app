@@ -335,7 +335,8 @@
             <mat-card-title><b>Type : </b> {{g.type}}</mat-card-title>
             <mat-card-content><b>Id : </b>{{g.id_jeu}}</mat-card-content>
             <mat-card-actions>
-              <button mat-fab color="primary" style="margin-right : 5%" (click)="previewGame(g.type,g.id_jeu)" aria-label="Prévisualiser le jeu">
+              <button mat-fab color="primary" style="margin-right : 5%" (click)="previewGame(g.type,g.id_jeu)"
+                aria-label="Prévisualiser le jeu">
                 <i class="fa-solid fa-eye fa-2xl"></i>
               </button>
               <button mat-fab color="warn" (click)="deleteJeu(g.type,g.id_jeu)"
@@ -362,20 +363,31 @@
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="col-md-2 text-center">
-        <label for="nom_session" class="form-label align-middle"><b>Nom de la session</b></label>
-      </div>
-      <div class="col-md-10 text-center">
-        <input value="{{this.session_nom}}" type="text" class="form-control" #nom_session title="Nom de la session">
+    <div class="form-row text-center">
+      <div class="col-md-12">
+        <h2 class="card-title">Vocalisation</h2>
+        <b *ngIf="!this.isSuivi" style="color : #ff4083; margin-right : 1%">Non</b>
+        <b *ngIf="this.isSuivi" style="margin-right : 1%">Non</b>
+
+        <mat-slide-toggle (change)="this.list['isSuivi']=+this.isSuivi" [(ngModel)]="this.isSuivi"></mat-slide-toggle>
+
+        <b *ngIf="this.isSuivi" style="color : #ff4083; margin-left : 1%">Oui</b>
+        <b *ngIf="!this.isSuivi" style="margin-left : 1%">Oui</b>
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="col-md-2 text-center">
-        <label for="jeu_session" class="form-label align-middle"><b>Jeu</b></label>
-      </div>
+    <div class="form-row justify-content-center">
+
       <div class="col-md-10 text-center">
+        <label for="nom_session" class="form-label align-middle"><b>Nom de la session</b></label>
+        <input (change)="this.session_nom = nom_session.value" value="{{this.session_nom}}" type="text" class="form-control" #nom_session title="Nom de la session">
+      </div>
+
+    </div>
+
+    <div class="form-row justify-content-center">
+      <div class="col-md-10 text-center">
+        <label for="jeu_session" class="form-label align-middle"><b>Jeu</b></label>
         <select value="{{this.jeuSession}}" class="form-control" aria-label="Default select example"
           (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
           <option class="text-center"></option>
@@ -594,8 +606,8 @@
     <!-- Bouton quitter la prévisualisation -->
     <div class="prev-button align-middle text-center" style="margin-bottom : 10px; margin-top : 10px">
       <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-        <button class="prev-button align-middle text-center" (click)="this.previsualiserJeuSession = false" mat-raised-button
-          color="warn">
+        <button class="prev-button align-middle text-center" (click)="this.previsualiserJeuSession = false"
+          mat-raised-button color="warn">
           <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
           Quitter la prévisualisation</button>
       </div>
