@@ -1098,7 +1098,7 @@ export class SessionsComponent implements OnInit {
       this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
       this.onSend_update(this.list);
       localStorage.removeItem('id_user');
-      // window.location.href = '';
+      window.location.href = '';
     }, 200);
   }
 }
