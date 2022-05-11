@@ -118,7 +118,7 @@ onSend2(){
   }
 }
 redirect(){
-  this.router.navigate(['/panel']);
+  this.router.navigate(['/theme']);
 }
 /*imageUrl:any = null;
 showImage(){
@@ -143,6 +143,27 @@ recup(donne: any) {
 
 
 }
+onSend_delete(id: any) {
+
+  const formData: FormData = new FormData();
+  /*for(var i = 0;i<id.lenght;i++){
+    formData.append('id[]',id[i]);
+  }*/
+  formData.append('image_delete', id);
+  console.log(formData);
+  this.jeuxService.onSend(formData).subscribe({
+    next: res => {
+      console.log(res);
+
+    },
+
+    error: err => {
+      console.log(err);
+      
+    },
+
+  });
+}
 
 getListImage() : Image[] {
   if(this.affiche_image == true){
@@ -154,5 +175,19 @@ getListImage() : Image[] {
 }
 noImage():Image[]{
   return ImagesComponent.list_image = [];
+}
+remove(id:any): any{
+  console.log(ImagesComponent.list_image);
+  console.log(id);
+  for(var i =0;ImagesComponent.list_image[i]!=null;i++){
+    //console.log(liste);
+    if(ImagesComponent.list_image[i].id== id){
+      console.log(ImagesComponent.list_image[i]);
+      ImagesComponent.list_image.splice(i, 1);
+      
+    }
+    
+  }
+  console.log(ImagesComponent.list_image);
 }
 }
