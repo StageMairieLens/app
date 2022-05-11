@@ -68,9 +68,8 @@ export class RecopierGameComponent implements OnInit {
         }
       }
     }
+
     return res;
-
-
   }
 
   recupImage(donne: any) {

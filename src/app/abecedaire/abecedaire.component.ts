@@ -66,6 +66,9 @@ export class AbecedaireComponent implements OnInit {
   constructor(private jeuxService: JeuxService, private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
+
+    this.recupImage(this.liste_image);
+    this.recup(this.data);
   }
   reponse: any;
   onSend(list: any) {
@@ -172,8 +175,7 @@ export class AbecedaireComponent implements OnInit {
   // Initialisation
   ngOnInit(): void {
 
-    this.recupImage(this.liste_image);
-    this.recup(this.data);
+
 
     if (this.game != null) {
       if (this.game!.images.length != 0) {

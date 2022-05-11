@@ -28,6 +28,10 @@ export class ReconnaitreComponent implements OnInit {
       //this.data.push(data);
       console.log(data[0]);
     })*/
+
+    this.recupImage(this.liste_image)
+    this.recup(this.data);
+
   }
 
   reponse = "";
@@ -49,7 +53,7 @@ export class ReconnaitreComponent implements OnInit {
     let tab = s.split(',');
     if (s.length != 0) {
       for (let i of tab) {
-        for (let j of ImagesComponent.list_image) {
+        for (let j of this.liste_image) {
           if (+i == j.id) {
             res.push(j);
             break;
@@ -136,9 +140,8 @@ export class ReconnaitreComponent implements OnInit {
   ngOnInit(): void {
     //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
     //
-    this.recupImage(this.liste_image)
-    this.recup(this.data);
 
+    this.r!.liste_button = [];
 
     if (this.r != null) {
       this.alea(this.r!.images);
