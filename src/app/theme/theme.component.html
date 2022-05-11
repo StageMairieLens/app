@@ -14,7 +14,8 @@
         </label>
         
       </div>
-      <div class="col-md-6">
+      <h2 class="card-title text-center" style="color: darkgreen;" > Les images choisit sont:</h2>
+      <div class="card-body selectImage_container text-center align-top" >
         <figure class="figure" *ngFor="let image of this.n_theme">
           <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.n_theme)">
@@ -23,14 +24,15 @@
         <figcaption class="figure-caption text-center">{{image}}</figcaption>
         
       </figure>
-    </div>
+      </div>
     </div>
   </form>
   
   <button class="btn btn-info" (click)="recup(this.getListImage())"  *ngIf="!this.affiche_image2"  (click)="this.affiche_image2=true"    >Voir les images </button>
   <button class="btn btn-info" *ngIf="this.affiche_image2" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
   
-      <div class="container card container_list" >
+  <h2 class="card-title text-center"style="color: black;">Choisissez les images</h2>
+  <div class="card-body selectImage_container text-center align-top" >
         <div *ngIf="this.affiche_image2">
         <figure class="figure" *ngFor="let image of this.getListImage()">
             <img (click)="this.n_theme.push(image.id)" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
@@ -52,8 +54,8 @@
     
     <div class="form-row">
       <div class="col-md-6">
-        <figure class="figure" *ngFor="let image of this.test">
-            <img (click)="this.recup_image=image"  (click)="this.affiche_image=true" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
+        <figure class="figure " *ngFor="let image of this.test">
+            <img style="margin-left : 5px" (click)="this.recup_image=image"  (click)="this.affiche_image=true" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="onSend_delete(image.id_theme)"(click)="remove2(image.id_theme)" >
             <i class="fa-solid fa-xmark fa-lg"></i>
           </span> 
@@ -66,7 +68,8 @@
   </form>
     
     <div *ngIf="this.affiche_image">
-      <div class="col-md-6">
+      
+        <div class="card-body selectImage_container text-center align-top" >
       <figure class="figure" *ngFor="let image of this.recup_image.id">
           <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.recup_image.id)">
@@ -76,11 +79,13 @@
         
       </figure>
     </div>
+    
       
     
       <button (click)="recup(this.getListImage())" (click)="this.affiche_image2=true" *ngIf="!this.affiche_image2" >Voir les images </button>
       <button *ngIf="this.affiche_image2" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
-      <div class="container card container_list" >
+      <h2 class="card-title text-center">Choisissez les images</h2>
+      <div class="card-body selectImage_container text-center align-top" >
     
     
         <div *ngIf="this.affiche_image2">
@@ -97,5 +102,5 @@
     <button  (click)="onSend_update(this.recup_image)" class="btn btn-primary pull-right">Valider</button>
     
     </div>
-    
+  
 </div>
