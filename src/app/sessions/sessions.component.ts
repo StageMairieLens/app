@@ -144,6 +144,7 @@ export class SessionsComponent implements OnInit {
   @Input() preview: boolean = false;
   @Input() edit: boolean = false;
   @Input() view: boolean = false;
+  inPlay : boolean = false;
 
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   static sessionActive: Session[] = [];
@@ -176,6 +177,14 @@ export class SessionsComponent implements OnInit {
     this.selected_session = null;
     SessionsComponent.sessionActive = [];
     PanelComponent.sessionActive = [];
+
+    this.recupImage(this.list_image);
+    this.recupRecopier(this.recopier_list);
+    this.recupMemory(this.memory_list);
+    this.recupReconnaitre(this.reconnaitre_list);
+    this.recupAbecedaire(this.abecedaire_list);
+    this.recupBoyGirl(this.boygirl_list);
+    this.recupPuzzle(this.puzzle_list);
 
     this.recup(this.data)
 
@@ -312,14 +321,6 @@ export class SessionsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-
-    this.recupImage(this.list_image);
-    this.recupRecopier(this.recopier_list);
-    this.recupMemory(this.memory_list);
-    this.recupReconnaitre(this.reconnaitre_list);
-    this.recupAbecedaire(this.abecedaire_list);
-    this.recupBoyGirl(this.boygirl_list);
-    this.recupPuzzle(this.puzzle_list);
 
     console.log(this.data)
     setTimeout(() => {
@@ -1100,5 +1101,16 @@ export class SessionsComponent implements OnInit {
       localStorage.removeItem('id_user');
       // window.location.href = '';
     }, 200);
+  }
+
+  playGame(type : string , id : number) : void {
+    this.inPlay = true;
+
+    switch(type) {
+      case 'Recopier':
+        this.jeu = 'Recopier'
+        this.recopier = this.getRecopier(id);
+        break;
+    }
   }
 }

@@ -42,45 +42,149 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <div *ngIf="this.join && this.getConnected()">
-      <div class="card container">
-        <h5 class="card-header">Listes des jeux</h5>
+  <div *ngIf="this.join && this.getConnected() && !this.inPlay">
+    <div class="card container">
+      <h5 class="card-header">Listes des jeux</h5>
 
-        <div class="col-md-12 text-center sortButton">
-          <button mat-raised-button style="background-color : red" (click)="quitSession()" color="primary">
-            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-            <span>Quitter la séssion</span>
-          </button>
-        </div>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red" (click)="quitSession()" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Quitter la séssion</span>
+        </button>
+      </div>
 
+      <div class="form-row">
         <div class="col-md-12 text-center">
-          <div *ngFor="let g of this.getSession()!.jeuId">
-            <p>{{g.type}}</p>
+          <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
+
+          <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
+            <mat-card style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%"
+              *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3">
+
+              <mat-card-header *ngIf="g.type == 'Recopier'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-pen fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Recopier'" mat-card-image src="../../assets/images/thumb/recopier_mot.png">
+
+              <mat-card-header *ngIf="g.type == 'Reconnaitre'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-eye fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Reconnaitre'" mat-card-image
+                src="../../assets/images/thumb/reconnaissance_mot.png">
+
+              <mat-card-header *ngIf="g.type == 'Memory'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-brain fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Memory'" mat-card-image src="../../assets/images/thumb/memory.png">
+
+              <mat-card-header *ngIf="g.type == 'Abecedaire'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-brain fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Abecedaire'" mat-card-image src="../../assets/images/thumb/anagramme.png">
+
+
+              <mat-card-header *ngIf="g.type == 'Fille&Garçon'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-children fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Fille&Garçon'" mat-card-image src="../../assets/images/thumb/">
+
+              <mat-card-header *ngIf="g.type == 'Puzzle'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-puzzle-piece fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Puzzle'" mat-card-image src="../../assets/images/thumb/puzzle.png">
+
+              <mat-card-actions>
+                <button mat-fab color="primary" style="background : green" (click)="playGame(g.type,g.id_jeu)"
+                  aria-label="Prévisualiser le jeu">
+                  <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <div class="row text-center" *ngIf="this.getSession()!.jeuId.length == 0"
+            style="width : 85%; display : inline-flex"
+            class="alert alert-danger align-items-center justify-content-center" role="alert">
+            <i class="fa-solid fa-warning fa-2x" style="margin-bottom : 1%; margin-right : 1%"></i>
+            <div>
+              <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la séssion</p>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <mat-divider
+              style="margin-top : 3%; margin-bottom : 3% ; background : white; width : 85% ; display : inline-block">
+            </mat-divider>
           </div>
         </div>
       </div>
-
     </div>
 
-    <div *ngIf="this.getSession() == null">
-      <div class="card container error align-middle">
-        <div class="card-body text-center">
-          <img src="../../assets/images/error.png" class="card-img-top" alt="error_img">
-          <h1 class="card-title text-center" style="color : red ; font-size : 50px">ERREUR</h1>
-          <p class="card-text text-center" style="font-size : 30px">La séssion que vous essayer de rejoindre n'éxiste
-            pas
-          </p>
-        </div>
+  </div>
 
-        <div class="align-middle text-center redirect_button">
-          <button mat-raised-button color="primary" aria-label="Valider" [routerLink]="['']">
-            <i class="fa-solid fa-angles-left fa-xl"></i>
-            Retourner à l'acceuil
-          </button>
-        </div>
-
+  <div *ngIf="this.inPlay">
+    <div *ngIf="this.jeu == 'Recopier'">
+      <app-recopier-game [play]="false"></app-recopier-game>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red"
+          (click)="this.inPlay = false; this.jeu = ''; this.recopier = null" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
       </div>
+      <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
+    </div>
+  </div>
+
+  <div *ngIf="this.getSession() == null">
+    <div class="card container error align-middle">
+      <div class="card-body text-center">
+        <img src="../../assets/images/error.png" class="card-img-top" alt="error_img">
+        <h1 class="card-title text-center" style="color : red ; font-size : 50px">ERREUR</h1>
+        <p class="card-text text-center" style="font-size : 30px">La séssion que vous essayer de rejoindre n'éxiste
+          pas
+        </p>
+      </div>
+
+      <div class="align-middle text-center redirect_button">
+        <button mat-raised-button color="primary" aria-label="Valider" [routerLink]="['']">
+          <i class="fa-solid fa-angles-left fa-xl"></i>
+          Retourner à l'acceuil
+        </button>
+      </div>
+
     </div>
   </div>
 </div>
@@ -328,22 +432,86 @@
       <div class="col-md-12 text-center">
         <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
 
-        <div *ngIf="this.jeuId.length != 0" class="row justify-content-center">
-          <mat-card style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%"
-            *ngFor="let g of this.jeuId" class="text-center col-md-3">
-            <mat-card-title><b>Type : </b> {{g.type}}</mat-card-title>
-            <mat-card-content><b>Id : </b>{{g.id_jeu}}</mat-card-content>
-            <mat-card-actions>
-              <button mat-fab color="primary" style="margin-right : 5%" (click)="previewGame(g.type,g.id_jeu)"
-                aria-label="Prévisualiser le jeu">
-                <i class="fa-solid fa-eye fa-2xl"></i>
-              </button>
-              <button mat-fab color="warn" (click)="deleteJeu(g.type,g.id_jeu)"
-                aria-label="Supprimer le jeu de la séssion">
-                <i class="fa-solid fa-xmark fa-2xl"></i>
-              </button>
-            </mat-card-actions>
-          </mat-card>
+        <div *ngIf="this.jeuId.length != 0">
+          <div *ngIf="this.jeuId.length != 0" class="row justify-content-center">
+            <mat-card
+              style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%; width : auto"
+              *ngFor="let g of this.jeuId" class="text-center col-md-3">
+
+              <mat-card-header *ngIf="g.type == 'Recopier'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-pen fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Recopier'" mat-card-image src="../../assets/images/thumb/recopier_mot.png">
+
+              <mat-card-header *ngIf="g.type == 'Reconnaitre'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-eye fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Reconnaitre'" mat-card-image
+                src="../../assets/images/thumb/reconnaissance_mot.png">
+
+              <mat-card-header *ngIf="g.type == 'Memory'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-brain fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Memory'" mat-card-image src="../../assets/images/thumb/memory.png">
+
+              <mat-card-header *ngIf="g.type == 'Abecedaire'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-brain fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Abecedaire'" mat-card-image src="../../assets/images/thumb/anagramme.png">
+
+
+              <mat-card-header *ngIf="g.type == 'Fille&Garçon'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-children fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Fille&Garçon'" mat-card-image src="../../assets/images/thumb/">
+
+              <mat-card-header *ngIf="g.type == 'Puzzle'" class="justify-content-center">
+                <mat-card-title style="font-size : 23px">
+                  <b>
+                    <i class="fa-solid fa-puzzle-piece fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                    {{g.type}}
+                  </b>
+                </mat-card-title>
+              </mat-card-header>
+              <img *ngIf="g.type == 'Puzzle'" mat-card-image src="../../assets/images/thumb/puzzle.png">
+
+              <mat-card-actions>
+                <button mat-fab color="primary" style="margin-right : 5%" (click)="previewGame(g.type,g.id_jeu)"
+                  aria-label="Prévisualiser le jeu">
+                  <i class="fa-solid fa-eye fa-2xl"></i>
+                </button>
+                <button mat-fab color="warn" (click)="deleteJeu(g.type,g.id_jeu)"
+                  aria-label="Supprimer le jeu de la séssion">
+                  <i class="fa-solid fa-xmark fa-2xl"></i>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
         </div>
 
         <div class="row text-center" *ngIf="this.jeuId.length == 0" style="width : 85%; display : inline-flex"
@@ -361,287 +529,291 @@
         </div>
       </div>
     </div>
-
-    <div class="form-row text-center">
-      <div class="col-md-12">
-        <h2 class="card-title">Suivi de la séssion</h2>
-        <b *ngIf="!this.isSuivi" style="color : #ff4083; margin-right : 1%">Non</b>
-        <b *ngIf="this.isSuivi" style="margin-right : 1%">Non</b>
-
-        <mat-slide-toggle (change)="this.list['isSuivi']=+this.isSuivi" [(ngModel)]="this.isSuivi"></mat-slide-toggle>
-
-        <b *ngIf="this.isSuivi" style="color : #ff4083; margin-left : 1%">Oui</b>
-        <b *ngIf="!this.isSuivi" style="margin-left : 1%">Oui</b>
-      </div>
-    </div>
-
-    <div class="form-row justify-content-center">
-
-      <div class="col-md-10 text-center">
-        <label for="nom_session" class="form-label align-middle"><b>Nom de la session</b></label>
-        <input (change)="this.session_nom = nom_session.value" value="{{this.session_nom}}" type="text"
-          class="form-control" #nom_session title="Nom de la session">
-      </div>
-
-    </div>
-
-    <div class="form-row justify-content-center">
-      <div class="col-md-10 text-center">
-        <label for="jeu_session" class="form-label align-middle"><b>Jeu</b></label>
-        <select value="{{this.jeuSession}}" class="form-control" aria-label="Default select example"
-          (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
-          <option class="text-center"></option>
-          <option class="text-center">Recopier</option>
-          <option class="text-center">Memory</option>
-          <option class="text-center">Reconnaitre</option>
-          <option class="text-center">Abecedaire</option>
-          <option class="text-center">FilleEtGarcon</option>
-          <option class="text-center">Puzzle</option>
-        </select>
-      </div>
-    </div>
-
-    <div *ngIf="jeuSession == 'Recopier'">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th scope="col"
-              *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','']">
-              {{col}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let element of this.recopier_list" (click)="addJeu('Recopier',element.id)">
-            <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{element.date}}</th>
-            <!--Date de création du jeu-->
-            <th>{{element.images.length}}</th>
-            <!--Nombre d'image qui compose le jeu-->
-            <th>{{element.typeEcriture}}</th>
-            <!--Type d'écriture du jeu-->
-            <th *ngIf="element.isVocaliser">Oui</th>
-            <th *ngIf="!element.isVocaliser">Non</th>
-            <th>Aucun</th>
-            <!--Nom de l'utilisateur qui à créer le jeu-->
-            <th>
-              <mat-checkbox *ngIf="!containRecopier(element)" (ngModelChange)="addRecopier(element)" [ngModel]="false"
-                color="primary" class="example-margin"></mat-checkbox>
-              <mat-checkbox *ngIf="containRecopier(element)" (ngModelChange)="deleteRecopier(element)" [ngModel]="true"
-                color="primary" class="example-margin"></mat-checkbox>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div *ngIf="jeuSession == 'Memory'">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th scope="col" *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par']">
-              {{col}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let element of this.memory_list" (click)="addJeu('Memory',element.id)">
-            <th>{{element.id}}</th>
-            <!-- Id du jeu -->
-            <th>{{element.date}}</th> <!-- Date de création du jeu -->
-            <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
-            <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-            <th>
-              <mat-checkbox *ngIf="!containMemory(element)" (ngModelChange)="addMemory(element)" [ngModel]="false"
-                color="primary" class="example-margin"></mat-checkbox>
-              <mat-checkbox *ngIf="containMemory(element)" (ngModelChange)="deleteMemory(element)" [ngModel]="true"
-                color="primary" class="example-margin"></mat-checkbox>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div *ngIf="jeuSession == 'Reconnaitre'">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th scope="col"
-              *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
-              {{col}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let element of this.reconnaitre_list" (click)="addJeu('Reconnaitre',element.id)">
-            <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{element.date}}</th> <!-- Date de création du jeu -->
-            <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
-            <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th *ngIf="element.isVocaliser">Oui</th>
-            <th *ngIf="!element.isVocaliser">Non</th>
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-            <th>
-              <mat-checkbox *ngIf="!containReconnaitre(element)" (ngModelChange)="addReconaitre(element)"
-                [ngModel]="false" color="primary" class="example-margin"></mat-checkbox>
-              <mat-checkbox *ngIf="containReconnaitre(element)" (ngModelChange)="deleteReconnaitre(element)"
-                [ngModel]="true" color="primary" class="example-margin"></mat-checkbox>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div *ngIf="jeuSession == 'Abecedaire'">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th scope="col"
-              *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
-              {{col}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let element of this.abecedaire_list" (click)="addJeu('Abecedaire',element.id)">
-            <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{element.date}}</th> <!-- Date de création du jeu -->
-            <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
-            <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th *ngIf="element.isVocaliser">Oui</th>
-            <th *ngIf="!element.isVocaliser">Non</th>
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-            <th>
-              <mat-checkbox *ngIf="!containAbecedaire(element)" (ngModelChange)="addAbecedaire(element)"
-                [ngModel]="false" color="primary" class="example-margin"></mat-checkbox>
-              <mat-checkbox *ngIf="containAbecedaire(element)" (ngModelChange)="deleteAbecedaire(element)"
-                [ngModel]="true" color="primary" class="example-margin"></mat-checkbox>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div *ngIf="jeuSession == 'FilleEtGarcon'">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th scope="col" *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par']">
-              {{col}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let element of this.boygirl_list" (click)="addJeu('Fille&Garçon',element.id)">
-            <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{element.date}}</th> <!-- Date de création du jeu -->
-            <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
-            <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
-            <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-            <th>
-              <mat-checkbox *ngIf="!containBoyGirl(element)" (ngModelChange)="addBoyGirl(element)" [ngModel]="false"
-                color="primary" class="example-margin"></mat-checkbox>
-              <mat-checkbox *ngIf="containBoyGirl(element)" (ngModelChange)="deleteBoyGirl(element)" [ngModel]="true"
-                color="primary" class="example-margin"></mat-checkbox>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  </div>
 
 
-    <div *ngIf="jeuSession == 'Puzzle'">
-      <table class="table table-hover text-center">
-        <thead>
-          <tr>
-            <th scope="col"
-              *ngFor="let col of ['ID','Date','Nombre d\'images','Nombre de pièces','Type d\'écriture','Crée par']">
-              {{col}}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let element of this.puzzle_list" (click)="addJeu('Puzzle',element.id)">
-            <th>{{element.id}}</th> <!-- Id du jeu -->
-            <th>{{element.date}}</th> <!-- Date de création du jeu -->
-            <th>{{element.liste_images.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
-            <th>{{element.decoupe}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
-            <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
-            <th>
-              <mat-checkbox *ngIf="!containPuzzle(element)" (ngModelChange)="addPuzzle(element)" [ngModel]="false"
-                color="primary" class="example-margin"></mat-checkbox>
-              <mat-checkbox *ngIf="containPuzzle(element)" (ngModelChange)="deletePuzzle(element)" [ngModel]="true"
-                color="primary" class="example-margin"></mat-checkbox>
-            </th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Bouton création de la séssion -->
-    <div *ngIf="!this.edit" class="col-md-12 text-center sortButton">
-      <button mat-raised-button style="background-color : rgb(12, 202, 12)"
-        (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
-        <i class="fa-solid fa-plus-circle fa-lg" style="margin-bottom : 1px"></i>
-        <span>Créer la sessions</span>
-      </button>
-    </div>
 
 
-    <!-- Bouton sauvegarde de la séssion -->
-    <div *ngIf="this.edit" class="col-md-12 text-center sortButton">
-      <button mat-raised-button style="background-color : rgb(255, 196, 0) ; color : black" (click)="save()"
-        color="primary">
-        <i class="fa-solid fa-floppy-disk fa-lg" style="margin-bottom : 1px"></i>
-        <span>Sauvegarder la sessions</span>
-      </button>
+
+  <div class="form-row text-center">
+    <div class="col-md-12">
+      <h2 class="card-title">Suivi de la séssion</h2>
+      <b *ngIf="!this.isSuivi" style="color : #ff4083; margin-right : 1%">Non</b>
+      <b *ngIf="this.isSuivi" style="margin-right : 1%">Non</b>
+
+      <mat-slide-toggle (change)="this.list['isSuivi']=+this.isSuivi" [(ngModel)]="this.isSuivi"></mat-slide-toggle>
+
+      <b *ngIf="this.isSuivi" style="color : #ff4083; margin-left : 1%">Oui</b>
+      <b *ngIf="!this.isSuivi" style="margin-left : 1%">Oui</b>
     </div>
   </div>
 
-  <div *ngIf="this.previsualiserJeuSession">
+  <div class="form-row justify-content-center">
 
-    <!-- Bouton quitter la prévisualisation -->
-    <div class="prev-button align-middle text-center" style="margin-bottom : 10px; margin-top : 10px">
-      <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
-        <button class="prev-button align-middle text-center" (click)="this.previsualiserJeuSession = false"
-          mat-raised-button color="warn">
-          <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
-          Quitter la prévisualisation</button>
-      </div>
+    <div class="col-md-10 text-center">
+      <label for="nom_session" class="form-label align-middle"><b>Nom de la session</b></label>
+      <input (change)="this.session_nom = nom_session.value" value="{{this.session_nom}}" type="text"
+        class="form-control" #nom_session title="Nom de la session">
     </div>
-
-    <div *ngIf="this.jeu == 'Recopier'">
-      <app-recopier-game [r]="this.recopier" [showTitle]="false" [play]="true" [showList]="false"></app-recopier-game>
-    </div>
-
-    <div *ngIf="this.jeu == 'Reconnaitre'">
-      <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false" [play]="true" [showList]="false"></app-reconnaitre>
-    </div>
-
-    <div *ngIf="this.jeu == 'Puzzle'">
-      <app-puzzle [r]="this.puzzle" [showTitle]="false"></app-puzzle>
-    </div>
-
-    <div *ngIf="this.jeu == 'Memory'">
-      <app-memory [showTitle]=false [showList]="false" [game]="this.memory"></app-memory>
-    </div>
-
-    <div *ngIf="this.jeu == 'Abecedaire'">
-      <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
-
-    </div>
-
-    <div *ngIf="this.jeu == 'Fille&Garçon'">
-      <app-boy-girl-game [bg]="this.boyGirl" [showTitle]="false"></app-boy-girl-game>
-
-    </div>
-
-
 
   </div>
+
+  <div class="form-row justify-content-center">
+    <div class="col-md-10 text-center">
+      <label for="jeu_session" class="form-label align-middle"><b>Jeu</b></label>
+      <select value="{{this.jeuSession}}" class="form-control" aria-label="Default select example"
+        (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
+        <option class="text-center"></option>
+        <option class="text-center">Recopier</option>
+        <option class="text-center">Memory</option>
+        <option class="text-center">Reconnaitre</option>
+        <option class="text-center">Abecedaire</option>
+        <option class="text-center">FilleEtGarcon</option>
+        <option class="text-center">Puzzle</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="jeuSession == 'Recopier'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col"
+            *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par','']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.recopier_list" (click)="addJeu('Recopier',element.id)">
+          <th>{{element.id}}</th> <!-- Id du jeu -->
+          <th>{{element.date}}</th>
+          <!--Date de création du jeu-->
+          <th>{{element.images.length}}</th>
+          <!--Nombre d'image qui compose le jeu-->
+          <th>{{element.typeEcriture}}</th>
+          <!--Type d'écriture du jeu-->
+          <th *ngIf="element.isVocaliser">Oui</th>
+          <th *ngIf="!element.isVocaliser">Non</th>
+          <th>Aucun</th>
+          <!--Nom de l'utilisateur qui à créer le jeu-->
+          <th>
+            <mat-checkbox *ngIf="!containRecopier(element)" (ngModelChange)="addRecopier(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containRecopier(element)" (ngModelChange)="deleteRecopier(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="jeuSession == 'Memory'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col" *ngFor="let col of ['Id','Date','Nombre de tuiles','Paramètre','Crée par']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.memory_list" (click)="addJeu('Memory',element.id)">
+          <th>{{element.id}}</th>
+          <!-- Id du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
+          <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
+          <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
+          <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+          <th>
+            <mat-checkbox *ngIf="!containMemory(element)" (ngModelChange)="addMemory(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containMemory(element)" (ngModelChange)="deleteMemory(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="jeuSession == 'Reconnaitre'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col"
+            *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.reconnaitre_list" (click)="addJeu('Reconnaitre',element.id)">
+          <th>{{element.id}}</th> <!-- Id du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
+          <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+          <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+          <th *ngIf="element.isVocaliser">Oui</th>
+          <th *ngIf="!element.isVocaliser">Non</th>
+          <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+          <th>
+            <mat-checkbox *ngIf="!containReconnaitre(element)" (ngModelChange)="addReconaitre(element)"
+              [ngModel]="false" color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containReconnaitre(element)" (ngModelChange)="deleteReconnaitre(element)"
+              [ngModel]="true" color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="jeuSession == 'Abecedaire'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col"
+            *ngFor="let col of ['ID','Date','Nombre d\'image','Type d\'écriture','Vocalisation','Crée par']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.abecedaire_list" (click)="addJeu('Abecedaire',element.id)">
+          <th>{{element.id}}</th> <!-- Id du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
+          <th>{{element.images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
+          <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+          <th *ngIf="element.isVocaliser">Oui</th>
+          <th *ngIf="!element.isVocaliser">Non</th>
+          <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+          <th>
+            <mat-checkbox *ngIf="!containAbecedaire(element)" (ngModelChange)="addAbecedaire(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containAbecedaire(element)" (ngModelChange)="deleteAbecedaire(element)"
+              [ngModel]="true" color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="jeuSession == 'FilleEtGarcon'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col" *ngFor="let col of ['ID','Date','Mots fille','Mots garçon','Type d\'écriture','Crée par']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.boygirl_list" (click)="addJeu('Fille&Garçon',element.id)">
+          <th>{{element.id}}</th> <!-- Id du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
+          <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
+          <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
+          <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
+          <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+          <th>
+            <mat-checkbox *ngIf="!containBoyGirl(element)" (ngModelChange)="addBoyGirl(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containBoyGirl(element)" (ngModelChange)="deleteBoyGirl(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div *ngIf="jeuSession == 'Puzzle'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col"
+            *ngFor="let col of ['ID','Date','Nombre d\'images','Nombre de pièces','Type d\'écriture','Crée par']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.puzzle_list" (click)="addJeu('Puzzle',element.id)">
+          <th>{{element.id}}</th> <!-- Id du jeu -->
+          <th>{{element.date}}</th> <!-- Date de création du jeu -->
+          <th>{{element.liste_images.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
+          <th>{{element.decoupe}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
+          <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
+          <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+          <th>
+            <mat-checkbox *ngIf="!containPuzzle(element)" (ngModelChange)="addPuzzle(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containPuzzle(element)" (ngModelChange)="deletePuzzle(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bouton création de la séssion -->
+  <div *ngIf="!this.edit" class="col-md-12 text-center sortButton">
+    <button mat-raised-button style="background-color : rgb(12, 202, 12)"
+      (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
+      <i class="fa-solid fa-plus-circle fa-lg" style="margin-bottom : 1px"></i>
+      <span>Créer la sessions</span>
+    </button>
+  </div>
+
+
+  <!-- Bouton sauvegarde de la séssion -->
+  <div *ngIf="this.edit" class="col-md-12 text-center sortButton">
+    <button mat-raised-button style="background-color : rgb(255, 196, 0) ; color : black" (click)="save()"
+      color="primary">
+      <i class="fa-solid fa-floppy-disk fa-lg" style="margin-bottom : 1px"></i>
+      <span>Sauvegarder la sessions</span>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="this.previsualiserJeuSession">
+
+  <!-- Bouton quitter la prévisualisation -->
+  <div class="prev-button align-middle text-center" style="margin-bottom : 10px; margin-top : 10px">
+    <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
+      <button class="prev-button align-middle text-center" (click)="this.previsualiserJeuSession = false"
+        mat-raised-button color="warn">
+        <i class="fa-solid fa-eye-slash fa-lg" style="margin-bottom : 4px"></i>
+        Quitter la prévisualisation</button>
+    </div>
+  </div>
+
+  <div *ngIf="this.jeu == 'Recopier'">
+    <app-recopier-game [r]="this.recopier" [showTitle]="false" [play]="true" [showList]="false"></app-recopier-game>
+  </div>
+
+  <div *ngIf="this.jeu == 'Reconnaitre'">
+    <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false" [play]="true" [showList]="false"></app-reconnaitre>
+  </div>
+
+  <div *ngIf="this.jeu == 'Puzzle'">
+    <app-puzzle [r]="this.puzzle" [showTitle]="false"></app-puzzle>
+  </div>
+
+  <div *ngIf="this.jeu == 'Memory'">
+    <app-memory [showTitle]=false [showList]="false" [game]="this.memory"></app-memory>
+  </div>
+
+  <div *ngIf="this.jeu == 'Abecedaire'">
+    <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
+
+  </div>
+
+  <div *ngIf="this.jeu == 'Fille&Garçon'">
+    <app-boy-girl-game [bg]="this.boyGirl" [showTitle]="false"></app-boy-girl-game>
+
+  </div>
+
+
+
 </div>
 
 

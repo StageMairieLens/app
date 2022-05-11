@@ -18,6 +18,9 @@ export class RecopierGameComponent implements OnInit {
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
+    this.recupImage(this.liste_image)
+    this.recup(this.data);
+
   }
   recup(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
@@ -178,10 +181,6 @@ export class RecopierGameComponent implements OnInit {
   }
   ngOnInit(): void {
 
-
-    this.recupImage(this.liste_image)
-
-    this.recup(this.data);
 
 
 
