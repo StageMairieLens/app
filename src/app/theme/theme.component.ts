@@ -173,6 +173,7 @@ export class ThemeComponent implements OnInit {
       if(liste[i]== id){
         //console.log(liste[i]);
         liste.splice(i, 1);
+        return ;
         
       }
       console.log(liste);
