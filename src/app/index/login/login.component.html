@@ -8,7 +8,8 @@
             <label for="Email" class="form-label align-middle">Email :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input type="text" class="form-control" #email title="Email" (keypress)="enterKey($event, email.value, mdp.value)">
+            <input type="text" class="form-control" #email title="Email" (keypress)="enterKey($event, email.value, mdp.value)"
+            (change)="this.list['mail']=email.value">
         </div>
     </div>
 
@@ -17,13 +18,14 @@
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe" (keypress)="enterKey($event, email.value, mdp.value)">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe" (keypress)="enterKey($event, email.value, mdp.value)"
+            (change)="this.list['pwd']=mdp.value">
         </div>
     </div>
 
     <div class="form-row">
         <div class="col-md-12 text-center">
-            <button (click)="login(email.value, mdp.value)" mat-raised-button color="primary" aria-label="Valider"><i class="fa-solid fa-check"></i> Se connecter</button>
+            <button (click)="onSend_verify(this.list)" (click)="login(email.value, mdp.value)" mat-raised-button color="primary" aria-label="Valider"><i class="fa-solid fa-check" ></i> Se connecter</button>
         </div>
     </div>
 
@@ -47,7 +49,8 @@
             <label for="Email" class="form-label align-middle">Email :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input type="text" class="form-control" #email title="Email">
+            <input type="text" class="form-control" #email title="Email"
+            (change)="this.list['mail']=email.value">
         </div>
     </div>
     
@@ -56,7 +59,8 @@
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe">
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe"
+            (change)="this.list['pwd']=mdp.value">
         </div>
     </div>
 
@@ -70,7 +74,7 @@
     </div>
 
     <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
-        <button mat-raised-button color="primary" aria-label="Valider">
+        <button mat-raised-button color="primary" aria-label="Valider" (click)="onSend(this.list)">
             <i class="fa-solid fa-check"></i>
             Créer compte
         </button>
