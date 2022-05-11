@@ -376,7 +376,7 @@ export class PanelComponent implements OnInit {
     let tab = s.split(',');
     if (s.length != 0) {
       for (let i of tab) {
-        for (let j of ImagesComponent.list_image) {
+        for (let j of this.liste_image) {
           if (+i == j.id) {
             res.push(j);
             break;
