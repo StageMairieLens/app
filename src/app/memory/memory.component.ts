@@ -98,6 +98,9 @@ export class MemoryComponent implements OnInit {
     // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
     this.game = null;
     this.derriere = null;
+
+    this.recupImage(this.liste_image);
+    this.recup(this.data);
   }
   data: Memory[] = [];
   recup(donne: any) {
@@ -202,8 +205,7 @@ export class MemoryComponent implements OnInit {
 
   // Initialisation
   ngOnInit(): void {
-    this.recupImage(this.liste_image);
-    this.recup(this.data);
+
 
 
 

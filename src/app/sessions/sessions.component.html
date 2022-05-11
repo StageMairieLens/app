@@ -155,6 +155,7 @@
   </div>
 
   <div *ngIf="this.inPlay">
+
     <div *ngIf="this.jeu == 'Recopier'">
       <app-recopier-game [play]="false"></app-recopier-game>
       <div class="col-md-12 text-center sortButton">
@@ -166,6 +167,31 @@
       </div>
       <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
     </div>
+
+    <div *ngIf="this.jeu == 'Memory'">
+      <app-memory [play]="false"></app-memory>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red"
+          (click)="this.inPlay = false; this.jeu = ''; this.memory = null" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
+      </div>
+      <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
+    </div>
+
+    <div *ngIf="this.jeu == 'Reconnaitre'">
+      <app-reconnaitre [play]="false"></app-reconnaitre>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red"
+          (click)="this.inPlay = false; this.jeu = ''; this.reconnaitre = null" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
+      </div>
+      <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+    </div>
+
   </div>
 
   <div *ngIf="this.getSession() == null">

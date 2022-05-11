@@ -162,8 +162,6 @@ export class SessionsComponent implements OnInit {
   sortByNbJoueur: boolean = false;
   jeux_id: string[] = [];
 
-  subscription: Subscription | undefined;
-
   session_nom: string = "";
   list: any = { id_crea: 1, nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: "", liste_j: this.liste_j };
 
@@ -1105,11 +1103,26 @@ export class SessionsComponent implements OnInit {
 
   playGame(type : string , id : number) : void {
     this.inPlay = true;
+    this.jeu = type;
 
     switch(type) {
       case 'Recopier':
-        this.jeu = 'Recopier'
         this.recopier = this.getRecopier(id);
+        break;
+      case 'Memory':
+        this.memory = this.getMemory(id);
+        break;
+      case 'Reconnaitre':
+        this.reconnaitre = this.getReconnaitre(id);
+        break;
+      case 'Abecedaire':
+        this.abecedaire = this.getAbecedaire(id);
+        break;
+      case 'Fille&Garçon':
+        this.boyGirl = this.getBoyGirl(id);
+        break;
+      case 'Puzzle':
+        this.puzzle = this.getPuzzle(id);
         break;
     }
   }

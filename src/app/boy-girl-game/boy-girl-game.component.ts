@@ -17,6 +17,7 @@ export class BoyGirlGameComponent implements OnInit {
   constructor(private jeuxService: JeuxService, private router: Router) {
     this.bg = null;
     // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
+    this.recup(this.data);
   }
   reponse = "";
   onSend(list: any) {
@@ -105,8 +106,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recup(this.data);
-    console.log(this.data);
+
     if (this.bg != null) {
       this.boy = this.bg!.listMotsGarcon;
       this.girl = this.bg!.listMotsFille;
