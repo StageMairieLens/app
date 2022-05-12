@@ -139,9 +139,9 @@ export class ReconnaitreComponent implements OnInit {
     //
 
     this.recupImage(this.liste_image)
-    setInterval(() => {
+    setTimeout(() => {
       this.recup(this.data);
-    },500)
+    },200)
 
     this.r!.liste_button = [];
 

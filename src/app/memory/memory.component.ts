@@ -204,9 +204,9 @@ export class MemoryComponent implements OnInit {
   ngOnInit(): void {
 
     this.recupImage(this.liste_image)
-    setInterval(() => {
+    setTimeout(() => {
       this.recup(this.data);
-    },500)
+    },200)
 
     if (this.game == null || this.game.derriere == null) return;
     this.nbTile = this.game.nbTile;

@@ -178,9 +178,9 @@ export class RecopierGameComponent implements OnInit {
   ngOnInit(): void {
 
     this.recupImage(this.liste_image)
-    setInterval(() => {
+    setTimeout(() => {
       this.recup(this.data);
-    },500)
+    },200)
 
     if (this.edit) {
       this.create_game = true;

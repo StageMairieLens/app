@@ -307,7 +307,7 @@ export class SessionsComponent implements OnInit {
     this.recupImage(this.list_image);
 
 
-    setInterval(() => {
+    setTimeout(() => {
       this.recupRecopier(this.recopier_list);
       this.recupMemory(this.memory_list);
       this.recupReconnaitre(this.reconnaitre_list);
