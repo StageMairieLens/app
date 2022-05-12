@@ -35,6 +35,8 @@ export class PuzzleComponent implements OnInit {
   constructor(private jeuxService: JeuxService, private router: Router) {
     this.r = new Puzzle(0, '', [this.liste_image[5], this.liste_image[2]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5);
     // this.r = null;
+    //
+
 
   }
 
@@ -145,8 +147,11 @@ export class PuzzleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.recupImage(this.liste_image);
-    this.recup(this.data);
+    this.recupImage(this.liste_image)
+    setInterval(() => {
+      this.recup(this.data);
+    },500)
+
 
     if (this.r != null && this.play) {
       this.decoupageImage();

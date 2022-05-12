@@ -18,8 +18,7 @@ export class RecopierGameComponent implements OnInit {
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
-    this.recupImage(this.liste_image)
-    this.recup(this.data);
+
 
   }
   recup(tab: any) {
@@ -76,7 +75,6 @@ export class RecopierGameComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        console.log(data);
         donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
@@ -145,7 +143,6 @@ export class RecopierGameComponent implements OnInit {
       formData.append('id[]',id[i]);
     }*/
     formData.append('recopier_delete', id);
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
@@ -180,8 +177,10 @@ export class RecopierGameComponent implements OnInit {
   }
   ngOnInit(): void {
 
-
-
+    this.recupImage(this.liste_image)
+    setInterval(() => {
+      this.recup(this.data);
+    },500)
 
     if (this.edit) {
       this.create_game = true;

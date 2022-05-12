@@ -67,8 +67,7 @@ export class AbecedaireComponent implements OnInit {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
 
-    this.recupImage(this.liste_image);
-    this.recup(this.data);
+
   }
   reponse: any;
   onSend(list: any) {
@@ -166,7 +165,6 @@ export class AbecedaireComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        console.log(data);
         donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
@@ -175,7 +173,10 @@ export class AbecedaireComponent implements OnInit {
   // Initialisation
   ngOnInit(): void {
 
-
+    this.recupImage(this.liste_image)
+    setInterval(() => {
+      this.recup(this.data);
+    },500)
 
     if (this.game != null) {
       if (this.game!.images.length != 0) {

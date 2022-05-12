@@ -29,8 +29,6 @@ export class ReconnaitreComponent implements OnInit {
       console.log(data[0]);
     })*/
 
-    this.recupImage(this.liste_image)
-    this.recup(this.data);
 
   }
 
@@ -131,7 +129,6 @@ export class ReconnaitreComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        console.log(data);
         donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
@@ -140,6 +137,11 @@ export class ReconnaitreComponent implements OnInit {
   ngOnInit(): void {
     //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
     //
+
+    this.recupImage(this.liste_image)
+    setInterval(() => {
+      this.recup(this.data);
+    },500)
 
     this.r!.liste_button = [];
 

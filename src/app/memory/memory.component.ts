@@ -99,8 +99,6 @@ export class MemoryComponent implements OnInit {
     this.game = null;
     this.derriere = null;
 
-    this.recupImage(this.liste_image);
-    this.recup(this.data);
   }
   data: Memory[] = [];
   recup(donne: any) {
@@ -180,7 +178,7 @@ export class MemoryComponent implements OnInit {
     let tab = s.split(',');
     if (s.length != 0) {
       for (let i of tab) {
-        for (let j of ImagesComponent.list_image) {
+        for (let j of this.liste_image) {
           if (+i == j.id) {
             res.push(j);
             break;
@@ -197,7 +195,6 @@ export class MemoryComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        console.log(data);
         donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
@@ -206,8 +203,10 @@ export class MemoryComponent implements OnInit {
   // Initialisation
   ngOnInit(): void {
 
-
-
+    this.recupImage(this.liste_image)
+    setInterval(() => {
+      this.recup(this.data);
+    },500)
 
     if (this.game == null || this.game.derriere == null) return;
     this.nbTile = this.game.nbTile;

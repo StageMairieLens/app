@@ -176,24 +176,7 @@ export class SessionsComponent implements OnInit {
     SessionsComponent.sessionActive = [];
     PanelComponent.sessionActive = [];
 
-    this.recupImage(this.list_image);
-    this.recupRecopier(this.recopier_list);
-    this.recupMemory(this.memory_list);
-    this.recupReconnaitre(this.reconnaitre_list);
-    this.recupAbecedaire(this.abecedaire_list);
-    this.recupBoyGirl(this.boygirl_list);
-    this.recupPuzzle(this.puzzle_list);
 
-    this.recup(this.data)
-
-    setTimeout(() => {
-      for (let s of this.data) {
-        if (s.isActive) {
-          SessionsComponent.sessionActive.push(s);
-          PanelComponent.sessionActive.push(s);
-        }
-      }
-    }, 100)
   }
   data: Session[] = [];
 
@@ -320,6 +303,29 @@ export class SessionsComponent implements OnInit {
   }
   ngOnInit(): void {
 
+
+    this.recupImage(this.list_image);
+    this.recupRecopier(this.recopier_list);
+    this.recupMemory(this.memory_list);
+    this.recupReconnaitre(this.reconnaitre_list);
+    this.recupAbecedaire(this.abecedaire_list);
+    this.recupBoyGirl(this.boygirl_list);
+    this.recupPuzzle(this.puzzle_list);
+
+    setInterval(() => {
+      this.recup(this.data)
+    },300)
+
+
+    setTimeout(() => {
+      for (let s of this.data) {
+        if (s.isActive) {
+          SessionsComponent.sessionActive.push(s);
+          PanelComponent.sessionActive.push(s);
+        }
+      }
+    }, 300)
+
     console.log(this.data)
     setTimeout(() => {
       if (this.play) {
@@ -349,7 +355,7 @@ export class SessionsComponent implements OnInit {
 
 
       }
-    }, 200)
+    }, 500)
 
   }
 
@@ -375,7 +381,6 @@ export class SessionsComponent implements OnInit {
   }
 
   getConnected(): boolean {
-    console.log(localStorage.getItem('id_user'));
     if (localStorage.getItem('id_user') != null) {
       for (let j of this.getSession()!.joueur) {
         if (j.id == +localStorage.getItem('id_user')!) {
