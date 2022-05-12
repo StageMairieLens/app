@@ -455,6 +455,7 @@ export class PanelComponent implements OnInit {
   redirect(str: string): void {
     if (str == 'Accueil') {
       LoginComponent.logout();
+      localStorage.removeItem('user');
       window.location.href = "";
     }
   }

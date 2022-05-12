@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   inscript = false;
   oublie = false;
   co:number=0;
-  data:any=[];
+  data:Login[]=[];
   mail:any="";
   pwd:any="";
   list: any = {mail:this.mail,pwd:this.pwd,co:this.co };
@@ -24,13 +24,27 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {
   }
+
+  static logins: Login[] = [
+    new Login(0,"root", "",0),
+  ];
+
   recup(donne: any) {
     this.jeuxService.recup_user(donne).subscribe(data => {
   
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
         //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));  
+        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+        var inn=0;
+        for(var j=0;LoginComponent.logins[j];j++){
+          if(data[i].mail_user==LoginComponent.logins[j]){
+            inn=1;
+          }
+        }
+        if(inn == 0){
+          LoginComponent.logins.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+        }
   
       }
      
@@ -75,15 +89,18 @@ export class LoginComponent implements OnInit {
 
       error: err => {
         console.log(err);
-        var liste:any=[];
+        var liste:Login[]=[];
         this.recup(liste);
-        console.log(liste);
-        for(var i=0;liste;i++){
-          console.log(liste);
-          if(liste[i].mail==this.list.mail && liste[i].co==1){
-            this.login(liste[i].mail,liste[i].pwd);
+        
+        setTimeout(()=>{
+          console.log(liste[0]);
+        for(var i=0;liste[i];i++){
+          console.log(liste[i]);
+          if(liste[i].email==this.list.mail && liste[i].co==1){
+            this.login(liste[i].email,liste[i].mdp);
           }
         }
+        },1000)
         
       },
 
@@ -132,9 +149,11 @@ export class LoginComponent implements OnInit {
 
   login(email: string, mdp: string): void {
     console.log(this.list);
+    console.log(LoginComponent.logins);
     for(var login of LoginComponent.logins) {
       if(login.email == email && login.mdp == mdp) {
         localStorage.setItem("connect", "true");
+        localStorage.setItem("user",email);
         this.router.navigate(['panel']);
         this.close();
       }
@@ -155,8 +174,6 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  static logins: Login[] = [
-    new Login(0,"root", "",0),
-  ];
+  
 
 }
