@@ -144,7 +144,7 @@ export class SessionsComponent implements OnInit {
   @Input() preview: boolean = false;
   @Input() edit: boolean = false;
   @Input() view: boolean = false;
-  inPlay : boolean = false;
+  inPlay: boolean = false;
 
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   static sessionActive: Session[] = [];
@@ -226,7 +226,7 @@ export class SessionsComponent implements OnInit {
     for (let i of tab) {
       if (i.length != 0) {
         res.push(
-          new Users(+i.split(',')[0],i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
         );
       }
     }
@@ -305,16 +305,17 @@ export class SessionsComponent implements OnInit {
 
 
     this.recupImage(this.list_image);
-    this.recupRecopier(this.recopier_list);
-    this.recupMemory(this.memory_list);
-    this.recupReconnaitre(this.reconnaitre_list);
-    this.recupAbecedaire(this.abecedaire_list);
-    this.recupBoyGirl(this.boygirl_list);
-    this.recupPuzzle(this.puzzle_list);
+
 
     setInterval(() => {
+      this.recupRecopier(this.recopier_list);
+      this.recupMemory(this.memory_list);
+      this.recupReconnaitre(this.reconnaitre_list);
+      this.recupAbecedaire(this.abecedaire_list);
+      this.recupBoyGirl(this.boygirl_list);
+      this.recupPuzzle(this.puzzle_list);
       this.recup(this.data)
-    },300)
+    }, 100)
 
 
     setTimeout(() => {
@@ -355,7 +356,7 @@ export class SessionsComponent implements OnInit {
 
 
       }
-    }, 500)
+    }, 200)
 
   }
 
@@ -410,13 +411,13 @@ export class SessionsComponent implements OnInit {
   addUser(name: string): void {
     let id = this.getSession()!.joueur.length;
 
-    for(let j of this.getSession()!.joueur) {
-      if(j.id == id) {
+    for (let j of this.getSession()!.joueur) {
+      if (j.id == id) {
         id++;
       }
     }
 
-    this.getSession()!.joueur.push((new Users(id,name, Session.number, 0, 0)));
+    this.getSession()!.joueur.push((new Users(id, name, Session.number, 0, 0)));
     localStorage.setItem('id_user', id.toString());
   }
 
@@ -1106,11 +1107,11 @@ export class SessionsComponent implements OnInit {
     }, 200);
   }
 
-  playGame(type : string , id : number) : void {
+  playGame(type: string, id: number): void {
     this.inPlay = true;
     this.jeu = type;
 
-    switch(type) {
+    switch (type) {
       case 'Recopier':
         this.recopier = this.getRecopier(id);
         break;

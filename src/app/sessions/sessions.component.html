@@ -192,6 +192,46 @@
       <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
     </div>
 
+
+    <div *ngIf="this.jeu == 'Abecedaire'">
+      <app-abecedaire [play]="false"></app-abecedaire>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red"
+          (click)="this.inPlay = false; this.jeu = ''; this.abecedaire = null" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
+      </div>
+      <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
+
+    </div>
+
+    <div *ngIf="this.jeu == 'Puzzle'">
+      <app-puzzle [play]="false"></app-puzzle>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red"
+          (click)="this.inPlay = false; this.jeu = ''; this.puzzle = null" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
+      </div>
+      <app-puzzle [r]="this.puzzle" [showTitle]="false"></app-puzzle>
+
+    </div>
+
+    <div *ngIf="this.jeu == 'Fille&Garçon'">
+      <app-boy-girl-game [play]="false"></app-boy-girl-game>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red"
+          (click)="this.inPlay = false; this.jeu = ''; this.boyGirl = null" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
+      </div>
+      <app-boy-girl-game [bg]="this.boyGirl" [showTitle]="false"></app-boy-girl-game>
+
+    </div>
+
   </div>
 
   <div *ngIf="this.getSession() == null">
