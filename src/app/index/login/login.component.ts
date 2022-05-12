@@ -11,48 +11,46 @@ import { JeuxService } from '../../jeux.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   inscript = false;
   oublie = false;
-  co:number=0;
-  data:Login[]=[];
-  mail:any="";
-  pwd:any="";
-  list: any = {mail:this.mail,pwd:this.pwd,co:this.co };
+  co: number = 0;
+  data: Login[] = [];
+  mail: any = "";
+  pwd: any = "";
+  list: any = { mail: this.mail, pwd: this.pwd, co: this.co };
 
-  constructor( public dialogRef: MatDialogRef<LoginComponent>, private router: Router,private jeuxService: JeuxService) {}
-  
+  constructor(public dialogRef: MatDialogRef<LoginComponent>, private router: Router, private jeuxService: JeuxService) { }
+
   ngOnInit(): void {
   }
 
-  static logins: Login[] = [
-    new Login(0,"root", "",0),
-  ];
+  static logins: Login[] = [];
 
   recup(donne: any) {
     this.jeuxService.recup_user(donne).subscribe(data => {
-  
+
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
         //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
-        var inn=0;
-        for(var j=0;LoginComponent.logins[j];j++){
-          if(data[i].mail_user==LoginComponent.logins[j]){
-            inn=1;
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect));
+        var inn = 0;
+        for (var j = 0; LoginComponent.logins[j]; j++) {
+          if (data[i].mail_user == LoginComponent.logins[j]) {
+            inn = 1;
           }
         }
-        if(inn == 0){
-          LoginComponent.logins.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+        if (inn == 0) {
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect));
         }
-  
+
       }
-     
+
     })
-  
-  
+
+
   }
-  
+
   onSend(list: any) {
 
     const formData: FormData = new FormData();
@@ -64,7 +62,7 @@ export class LoginComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
-        
+
       },
 
       error: err => {
@@ -84,24 +82,45 @@ export class LoginComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
-        
+
       },
 
       error: err => {
         console.log(err);
-        var liste:Login[]=[];
+        var liste: Login[] = [];
         this.recup(liste);
-        
-        setTimeout(()=>{
+
+        setTimeout(() => {
           console.log(liste[0]);
-        for(var i=0;liste[i];i++){
-          console.log(liste[i]);
-          if(liste[i].email==this.list.mail && liste[i].co==1){
-            this.login(liste[i].email,liste[i].mdp);
+          for (var i = 0; liste[i]; i++) {
+            console.log(liste[i]);
+            if (liste[i].email == this.list.mail && liste[i].co == 1) {
+              this.login(liste[i].email, liste[i].mdp);
+            }
           }
-        }
-        },1000)
-        
+        }, 1000)
+
+      },
+
+    });
+  }
+
+  onSend_verify_deco(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('user_verify_deco', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res);
+
+      },
+
+      error: err => {
+        console.log(err);
       },
 
     });
@@ -137,7 +156,7 @@ export class LoginComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res.name);
-        
+
       },
 
       error: err => {
@@ -150,10 +169,10 @@ export class LoginComponent implements OnInit {
   login(email: string, mdp: string): void {
     console.log(this.list);
     console.log(LoginComponent.logins);
-    for(var login of LoginComponent.logins) {
-      if(login.email == email && login.mdp == mdp) {
+    for (var login of LoginComponent.logins) {
+      if (login.email == email && login.mdp == mdp) {
         localStorage.setItem("connect", "true");
-        localStorage.setItem("user",email);
+        localStorage.setItem("user", email);
         this.router.navigate(['panel']);
         this.close();
       }
@@ -162,7 +181,9 @@ export class LoginComponent implements OnInit {
 
   enterKey($event: KeyboardEvent, email: string, mdp: string): void {
     if ($event.key == 'Enter') {
+      this.onSend_verify(this.list)
       this.login(email, mdp);
+
     }
   }
 
@@ -174,6 +195,6 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  
+
 
 }

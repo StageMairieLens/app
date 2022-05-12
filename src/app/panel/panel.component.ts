@@ -19,6 +19,7 @@ import { Jeu, SessionsComponent } from '../sessions/sessions.component';
 import { LoginComponent } from '../index/login/login.component';
 import { JeuxService } from '../jeux.service';
 import { Users } from '../users/Users';
+import { Login } from '../index/login/Login';
 
 @Component({
   selector: 'app-panel',
@@ -28,6 +29,30 @@ import { Users } from '../users/Users';
 export class PanelComponent implements OnInit {
 
   jeu: string | null = "";
+
+  recupLogin(donne: any) {
+    this.jeuxService.recup_user(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        //console.log(data);
+        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+        var inn=0;
+        for(var j=0;LoginComponent.logins[j];j++){
+          if(data[i].mail_user==LoginComponent.logins[j]){
+            inn=1;
+          }
+        }
+        if(inn == 0){
+          LoginComponent.logins.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+        }
+
+      }
+
+    })
+
+
+  }
 
   recupRecopier(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
@@ -215,6 +240,7 @@ export class PanelComponent implements OnInit {
   sortByNbJoueur: boolean = false;
 
 
+  login_list : Login[] = [];
 
   // VARIABLE JEU RECOPIER
   recopier: Recopier | null;
@@ -248,6 +274,7 @@ export class PanelComponent implements OnInit {
   formStep: number = 0;
 
 
+
   ngOnInit(): void {
 
     this.recupImage(this.liste_image)
@@ -258,8 +285,17 @@ export class PanelComponent implements OnInit {
     this.recupBoyGirl(this.boygirl_list);
     this.recupPuzzle(this.puzzle_list);
     this.recupSession(this.sessions);
+    this.recupLogin(this.login_list);
+
+
+
+
+
 
     setTimeout(() => {
+
+      console.log(this.getUser()!)
+
       this.panel = this.route.snapshot.paramMap.get('param1');
 
       if (this.panel != null) {
@@ -379,6 +415,16 @@ export class PanelComponent implements OnInit {
     }, 500)
 
 
+  }
+
+  getUser() : Login | null {
+
+    for(let l of this.login_list) {
+      if(l.email == localStorage.getItem('user')) {
+        return l;
+      }
+    }
+    return null;
   }
 
   getImage(s: string): Image[] {
