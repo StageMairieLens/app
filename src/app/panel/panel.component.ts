@@ -20,6 +20,7 @@ import { LoginComponent } from '../index/login/login.component';
 import { JeuxService } from '../jeux.service';
 import { Users } from '../users/Users';
 import { Login } from '../index/login/Login';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-panel',
@@ -500,9 +501,14 @@ export class PanelComponent implements OnInit {
 
   redirect(str: string): void {
     if (str == 'Accueil') {
+      let lc : LoginComponent = new LoginComponent(null,this.router,this.jeuxService);
+      lc.onSend_verify_deco(localStorage.getItem('user'));
       LoginComponent.logout();
       localStorage.removeItem('user');
-      window.location.href = "";
+      setTimeout(() => {
+        window.location.href = "";
+
+      },200)
     }
   }
 

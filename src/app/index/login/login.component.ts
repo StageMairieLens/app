@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   pwd: any = "";
   list: any = { mail: this.mail, pwd: this.pwd, co: this.co };
 
-  constructor(public dialogRef: MatDialogRef<LoginComponent>, private router: Router, private jeuxService: JeuxService) { }
+  constructor(public dialogRef: MatDialogRef<LoginComponent> | null, private router: Router, private jeuxService: JeuxService) { }
 
   ngOnInit(): void {
   }
@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('user_verify_deco', JSON.stringify(list));
+    formData.append('user_verify_deco', list);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
@@ -192,7 +192,7 @@ export class LoginComponent implements OnInit {
   }
 
   close(): void {
-    this.dialogRef.close();
+    this.dialogRef!.close();
   }
 
 
