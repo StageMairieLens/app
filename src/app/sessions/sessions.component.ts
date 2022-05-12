@@ -325,7 +325,7 @@ export class SessionsComponent implements OnInit {
           PanelComponent.sessionActive.push(s);
         }
       }
-    }, 300)
+    }, 200)
 
     console.log(this.data)
     setTimeout(() => {
@@ -356,7 +356,7 @@ export class SessionsComponent implements OnInit {
 
 
       }
-    }, 200)
+    }, 400)
 
   }
 
