@@ -39,7 +39,6 @@ export class PanelComponent implements OnInit {
 
     })
   }
-
   recupMemory(donne: any) {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
@@ -157,6 +156,16 @@ export class PanelComponent implements OnInit {
     }
   }
 
+  recupImage(donne: any) {
+    this.jeuxService.recup_image_id(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        donne.push(new Image(data[i].nom, data[i].id_image));
+      }
+    })
+  }
+
+
 
 
 
@@ -241,6 +250,7 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.recupImage(this.liste_image)
     this.recupRecopier(this.recopier_list);
     this.recupMemory(this.memory_list);
     this.recupReconnaitre(this.reconnaitre_list);
@@ -321,6 +331,7 @@ export class PanelComponent implements OnInit {
                   this.router.navigate(['/panel/Memory']);
                 } else {
                   this.memory = this.getMemory();
+                  console.log(this.memory)
                 }
               }
 
