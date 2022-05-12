@@ -174,9 +174,9 @@ export class AbecedaireComponent implements OnInit {
   ngOnInit(): void {
 
     this.recupImage(this.liste_image)
-    setInterval(() => {
+    setTimeout(() => {
       this.recup(this.data);
-    },500)
+    },200)
 
     if (this.game != null) {
       if (this.game!.images.length != 0) {
