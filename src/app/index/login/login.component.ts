@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
   
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
-        donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});  
+        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));  
+  
       }
      
     })
@@ -76,8 +78,8 @@ export class LoginComponent implements OnInit {
         var liste:any=[];
         this.recup(liste);
         console.log(liste);
-        for(var i=0;i<liste.lenght;i++){
-          
+        for(var i=0;liste;i++){
+          console.log(liste);
           if(liste[i].mail==this.list.mail && liste[i].co==1){
             this.login(liste[i].mail,liste[i].pwd);
           }
@@ -154,7 +156,7 @@ export class LoginComponent implements OnInit {
   }
 
   static logins: Login[] = [
-    new Login("root", ""),
+    new Login(0,"root", "",0),
   ];
 
 }
