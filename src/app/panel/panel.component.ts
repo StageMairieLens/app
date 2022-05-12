@@ -331,7 +331,6 @@ export class PanelComponent implements OnInit {
                   this.router.navigate(['/panel/Memory']);
                 } else {
                   this.memory = this.getMemory();
-                  console.log(this.memory)
                 }
               }
 
