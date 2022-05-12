@@ -14,15 +14,27 @@ export class LoginComponent implements OnInit {
   
   inscript = false;
   oublie = false;
-
+  co:Boolean=false;
   data:any=[];
   mail:any="";
   pwd:any="";
-  list: any = {mail:this.mail,pwd:this.pwd };
+  list: any = {mail:this.mail,pwd:this.pwd,co:this.co };
 
   constructor( public dialogRef: MatDialogRef<LoginComponent>, private router: Router,private jeuxService: JeuxService) {}
   
   ngOnInit(): void {
+  }
+  recup(donne: any) {
+    this.jeuxService.recup_user(donne).subscribe(data => {
+  
+      for (var i = 0; data[i] != null; i++) {
+        //console.log(data);
+        donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});  
+      }
+     
+    })
+  
+  
   }
   
   onSend(list: any) {
@@ -61,6 +73,16 @@ export class LoginComponent implements OnInit {
 
       error: err => {
         console.log(err);
+        var liste:any=[];
+        this.recup(liste);
+        console.log(liste);
+        for(var i=0;i<liste.lenght;i++){
+          
+          if(liste[i].mail==this.list.mail && liste[i].co==1){
+            this.login(liste[i].mail,liste[i].pwd);
+          }
+        }
+        
       },
 
     });
