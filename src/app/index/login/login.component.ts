@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   
   inscript = false;
   oublie = false;
-  co:Boolean=false;
+  co:number=0;
   data:any=[];
   mail:any="";
   pwd:any="";
