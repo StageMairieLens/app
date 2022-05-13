@@ -73,6 +73,16 @@
         </div>
     </div>
 
+    <div class="form-row">
+        <div class="col-md-3 text-center align-middle">
+            <label for="Pseudo" class="form-label align-middle">Pseudo :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input type="text" class="form-control" #pseudo title="Pseudo"
+            (change)="this.list['pseudo']=pseudo.value">
+        </div>
+    </div>
+
     <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
         <button mat-raised-button color="primary" aria-label="Valider" (click)="onSend(this.list)">
             <i class="fa-solid fa-check"></i>

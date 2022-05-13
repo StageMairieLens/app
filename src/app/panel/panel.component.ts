@@ -37,7 +37,7 @@ export class PanelComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
         //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+        donne.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect,data[i].pseudo));
         var inn=0;
         for(var j=0;LoginComponent.logins[j];j++){
           if(data[i].mail_user==LoginComponent.logins[j]){
@@ -45,7 +45,7 @@ export class PanelComponent implements OnInit {
           }
         }
         if(inn == 0){
-          LoginComponent.logins.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect));
+          LoginComponent.logins.push(new Login(data[i].id_user,data[i].mail_user,data[i].password_user,data[i].connect,data[i].pseudo));
         }
 
       }
@@ -421,7 +421,7 @@ export class PanelComponent implements OnInit {
   getUser() : Login | null {
 
     for(let l of this.login_list) {
-      if(l.email == localStorage.getItem('user')) {
+      if(l.email == localStorage.getItem('id_user')) {
         return l;
       }
     }
