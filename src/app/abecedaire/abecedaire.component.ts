@@ -59,9 +59,10 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_button_text_color: string = "#ffffff";
   abecedaire_type_ecriture: string = "SCRIPT";
   abecedaire_isVocaliser: boolean = false;
+  id_crea=localStorage.getItem('id_crea');
   image: any = [];
   abecedaire_previsualiser: boolean = false;
-  list: any = { image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: 0 };
+  list: any = { image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: 0,id_crea:this.id_crea };
 
   constructor(private jeuxService: JeuxService, private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
@@ -135,7 +136,7 @@ export class AbecedaireComponent implements OnInit {
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri)
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri,data[i].id_crea)
         );
       }
     })
@@ -308,7 +309,7 @@ export class AbecedaireComponent implements OnInit {
 
   setPrevisualiserAbecedaire(prev: boolean): void {
     if (prev == true) {
-      this.game = new Abecedaire(0, '', this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture);
+      this.game = new Abecedaire(0, '', this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture,Number(this.id_crea));
       this.abecedaire_previsualiser = true;
     }
     else {

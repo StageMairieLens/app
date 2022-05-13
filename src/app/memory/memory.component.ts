@@ -40,7 +40,8 @@ export class MemoryComponent implements OnInit {
   sound: boolean = false;
   image: any = [];
   memory_tmp_affichage: string = "5";
-  list: any = { image: this.image.toString(), id: 1, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: 0 };
+  id_crea=localStorage.getItem('id_crea');
+  list: any = { id_crea:this.id_crea,image: this.image.toString(), id: 1, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: 0 };
 
   liste_image: Image[] = [];
   selectedImages: Image[] = [];
@@ -108,7 +109,7 @@ export class MemoryComponent implements OnInit {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps)
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps,data[i].id_crea)
         );
       }
     })
@@ -609,7 +610,7 @@ export class MemoryComponent implements OnInit {
 
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
-      this.game = new Memory(0, "", this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage);
+      this.game = new Memory(0, "", this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage,Number(this.id_crea));
       this.memory_previsualiser = true;
     }
     else {

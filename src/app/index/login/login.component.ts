@@ -173,6 +173,7 @@ export class LoginComponent implements OnInit {
       if (login.email == email && login.mdp == mdp) {
         localStorage.setItem("connect", "true");
         localStorage.setItem("user", email);
+        localStorage.setItem("id_crea",login.id2.toString());
         this.router.navigate(['panel']);
         this.close();
       }

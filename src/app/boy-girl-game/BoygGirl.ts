@@ -26,8 +26,8 @@ export class BoyGirl {
   text_color_mot: string;
 
   type_ecriture: string;
-
-  constructor(id: number, date: string, listMotsFille: string[], listMotsGarcon: string[], bg_color_container: string, bg_color_fille: string, bg_color_garcon: string, bg_color_mot: string, word_color_fille: string, word_color_garcon: string, word_color_mot: string, title_color_fille: string, title_color_garcon: string, title_color_mot: string, text_color_fille: string, text_color_garcon: string, text_color_mot: string, type_ecriture: string) {
+  id_crea:number;
+  constructor(id: number, date: string, listMotsFille: string[], listMotsGarcon: string[], bg_color_container: string, bg_color_fille: string, bg_color_garcon: string, bg_color_mot: string, word_color_fille: string, word_color_garcon: string, word_color_mot: string, title_color_fille: string, title_color_garcon: string, title_color_mot: string, text_color_fille: string, text_color_garcon: string, text_color_mot: string, type_ecriture: string,id_crea:number) {
     this.id = id;
     this.date = date;
     this.listMotsFille = listMotsFille;
@@ -46,5 +46,6 @@ export class BoyGirl {
     this.title_color_mot = title_color_mot;
     this.text_color_mot = text_color_mot;
     this.type_ecriture = type_ecriture;
+    this.id_crea=id_crea;
   }
 }

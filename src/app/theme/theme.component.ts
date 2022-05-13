@@ -23,7 +23,8 @@ export class ThemeComponent implements OnInit {
   recup_image:any=[];
   nom:string="";
   liste_id=[];
-  list:any={nom:this.nom,id:this.liste_id.toString()};
+  id_crea=localStorage.getItem('id_crea');
+  list:any={nom:this.nom,id:this.liste_id.toString(),id_crea:this.id_crea};
   constructor(private jeuxService: JeuxService,private router: Router) { }
   static list_image: Image[] = [];
   ngOnInit(): void {
@@ -67,9 +68,9 @@ export class ThemeComponent implements OnInit {
   
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
-        donne.push({id:data[i].id_theme,nom:data[i].nom_theme,id_image:data[i].id_image});
+        donne.push({id:data[i].id_theme,nom:data[i].nom_theme,id_image:data[i].id_image,id_crea:data[i].id_crea});
         var a=data[i].id_image.split(',');
-        this.test.push({id_theme:data[i].id_theme,id:a,nom:data[i].nom_theme});
+        this.test.push({id_theme:data[i].id_theme,id:a,nom:data[i].nom_theme,id_crea:data[i].id_crea});
         
       }
       console.log(this.test);

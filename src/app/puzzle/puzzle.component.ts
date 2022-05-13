@@ -33,7 +33,7 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private jeuxService: JeuxService, private router: Router) {
-    this.r = new Puzzle(0, '', [this.liste_image[5], this.liste_image[2]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5);
+    this.r = new Puzzle(0, '', [this.liste_image[5], this.liste_image[2]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5,Number(this.id_crea));
     // this.r = null;
     //
 
@@ -46,7 +46,7 @@ export class PuzzleComponent implements OnInit {
     this.jeuxService.recup_puzzle(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe)
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe,data[i].id_crea)
         );
       }
 
@@ -205,7 +205,8 @@ export class PuzzleComponent implements OnInit {
   decoupe: number = 4;
   formStep: number = 0;
   image: any = [];
-  list: any = { image: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
+  id_crea=localStorage.getItem('id_crea');
+  list: any = { id_crea:this.id_crea,image: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
   prochaine_image = 0;
 
 
@@ -362,7 +363,7 @@ export class PuzzleComponent implements OnInit {
 
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
-      this.r = new Puzzle(0, '', this.selectedImages, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe));
+      this.r = new Puzzle(0, '', this.selectedImages, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe),Number(this.id_crea));
       this.puzzle_previsualiser = true;
     }
     else {
