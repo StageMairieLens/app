@@ -15,7 +15,8 @@ export class Puzzle {
 
   typeEcriture: string;
   decoupe : number;
-  constructor(id : number, date : string,liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string,decoupe:number) {
+  id_crea:number;
+  constructor(id : number, date : string,liste_images: any,bg_color: string, title_color: string, text_color: string, button_bg_color: string, button_text_color: string, typeEcriture: string,decoupe:number,id_crea:number) {
     this.id = id;
     this.date = date;
     this.liste_images = liste_images;
@@ -27,7 +28,7 @@ export class Puzzle {
     this.text_color = text_color;
     this.typeEcriture = typeEcriture;
     this.decoupe=decoupe;
-
+    this.id_crea=id_crea;
   }
 
 

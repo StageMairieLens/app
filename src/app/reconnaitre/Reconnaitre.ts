@@ -23,9 +23,9 @@ export class Reconnaitre {
   isVocaliser : boolean;
 
   taille = 0;
-
+  id_crea:number;
   liste:any=[];
-  constructor(id : number, date : string, liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean) {
+  constructor(id : number, date : string, liste_images: Image[],bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, typeEcriture: string, isVocaliser : boolean,id_crea:number) {
     this.id = id;
     this.images = liste_images;
     this.date = date;
@@ -43,6 +43,7 @@ export class Reconnaitre {
     this.alea2(this.liste_button); */
     this.liste.push(this.images,this.bg_color,this.title_color,this.good_answer_color,this.wrong_answer_color,this.color_progress_bar,
     this.button_bg_color,this.button_text_color,this.text_color,this.typeEcriture,this.isVocaliser);
+    this.id_crea=id_crea;
 
   }
 

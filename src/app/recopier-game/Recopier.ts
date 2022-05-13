@@ -24,8 +24,8 @@ export class Recopier {
 
   typeEcriture: string;
   isVocaliser : boolean;
-
-  constructor(id : number, date : string, images: Image[], bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, input_bg_color: string, input_text_color: string, typeEcriture: string, isVocaliser : boolean) {
+  id_crea:number;
+  constructor(id : number, date : string, images: Image[], bg_color: string, title_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, input_bg_color: string, input_text_color: string, typeEcriture: string, isVocaliser : boolean,id_crea:number) {
     this.id = id;
     this.date = date
     this.images = images;
@@ -41,6 +41,7 @@ export class Recopier {
     this.input_text_color = input_text_color;
     this.typeEcriture = typeEcriture;
     this.isVocaliser = isVocaliser;
+    this.id_crea=id_crea;
   }
 
 }

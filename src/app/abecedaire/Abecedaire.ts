@@ -21,8 +21,8 @@ export class Abecedaire {
     color_progress_bar: Progress;
 
     typeEcriture: string;
-
-    constructor(id : number , date : string,images: Image[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, isVocaliser: boolean, typeEcriture: string) {
+    id_crea:number;
+    constructor(id : number , date : string,images: Image[], bg_color: string, text_color: string, good_answer_color: string, wrong_answer_color: string, color_progress_bar: Progress, button_bg_color: string, button_text_color: string, isVocaliser: boolean, typeEcriture: string,id_crea:number) {
       this.id = id;
       this.images = images;
       this.date = date;
@@ -35,6 +35,7 @@ export class Abecedaire {
       this.button_text_color = button_text_color;
       this.isVocaliser = isVocaliser;
       this.typeEcriture = typeEcriture;
+      this.id_crea=id_crea;
     }
 
   }
