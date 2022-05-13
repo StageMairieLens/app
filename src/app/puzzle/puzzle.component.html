@@ -160,7 +160,8 @@
             <th>{{element.liste_images.length}}</th> <!-- Nombre d'image qui compose le jeu -->
             <th>{{element.decoupe * element.decoupe}}</th> <!-- Nombre de pièce -->
             <th>{{element.typeEcriture}}</th>
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th *ngIf="this.getUser(element.id_crea) != null">{{this.getUser(element.id_crea)}}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th *ngIf="this.getUser(element.id_crea) == null">Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
             <!-- Actions -->
             <th class="button_actions">

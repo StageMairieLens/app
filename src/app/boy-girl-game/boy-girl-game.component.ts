@@ -1,11 +1,15 @@
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { SessionsComponent } from '../sessions/sessions.component';
+import { Jeu, SessionsComponent } from '../sessions/sessions.component';
 import { BoyGirl } from './BoygGirl'
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JeuxService } from '../jeux.service';
+import { Login } from '../index/login/Login';
+import { LoginComponent } from '../index/login/login.component';
+import { Session } from '../sessions/Session';
+import { Users } from '../users/Users';
 
 @Component({
   selector: 'app-boy-girl-game',
@@ -14,11 +18,85 @@ import { JeuxService } from '../jeux.service';
 })
 export class BoyGirlGameComponent implements OnInit {
 
-  constructor(private jeuxService: JeuxService, private router: Router) {
+  constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     this.bg = null;
     // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
     this.recup(this.data);
+    this.recupLogin(this.list_login);
+    this.recupSession(this.list_session);
   }
+
+  list_session : Session[] = [];
+
+  recupSession(donne: any) {
+    this.jeuxService.recup_session(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        let isJ = false;
+        let isS = false;
+        if (data[i].isJoinable == 1) {
+          isJ = true;
+        }
+        if (data[i].isSuivi == 1) {
+          isS = true;
+        }
+        donne.push(
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+        );
+      }
+    })
+
+  }
+
+  getJeuSession(s: string): Jeu[] {
+    let res: Jeu[] = [];
+    if (s.length > 0) {
+      let tab = s.split(';');
+      for (let i of tab) {
+        if (i != "") {
+          res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+        }
+      }
+    }
+    return res;
+  }
+
+  getJoueurs(s: string, id_session: number): Users[] {
+    let tab = s.split(';');
+    let res = []
+    for (let i of tab) {
+      if (i.length != 0) {
+        res.push(
+          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+        );
+      }
+    }
+    return res;
+  }
+
+  list_login : Login[] = [];
+  recupLogin(donne: any) {
+      this.jeuxService.recup_user(donne).subscribe(data => {
+
+        for (var i = 0; data[i] != null; i++) {
+          //console.log(data);
+          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+          donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          var inn = 0;
+          for (var j = 0; LoginComponent.logins[j]; j++) {
+            if (data[i].mail_user == LoginComponent.logins[j]) {
+              inn = 1;
+            }
+          }
+          if (inn == 0) {
+            LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          }
+
+        }
+
+      })
+
+
+    }
   reponse = "";
   onSend(list: any) {
 
@@ -103,6 +181,16 @@ export class BoyGirlGameComponent implements OnInit {
     else {
       return []
     }
+  }
+
+
+  getUser(id : number) : string | null {
+    for(let l of this.list_login) {
+      if(l.id2 == id) {
+        return l.pseudo;
+      }
+    }
+    return null;
   }
 
   ngOnInit(): void {
@@ -293,8 +381,56 @@ export class BoyGirlGameComponent implements OnInit {
     this.boygirl_previsualiser = false;
   }
 
+  deleteBoyGirl(id : number, s : Session): void {
+    let index = -1;
+    for (let g of s.jeuId) {
+      if (g.type == 'Fille&Garçon' && g.id_jeu == id) {
+        index = s.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      s.jeuId.splice(index, 1);
+    }
+  }
+
+  setJoueurs(s: Session): string {
+    let res = "";
+
+    for (let j of s.joueur) {
+      res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+    }
+
+    return res;
+  }
+
+
+  setJeuSession(tab: Jeu[]): string {
+    let res = "";
+    for (let g of tab) {
+      console.log(g)
+      res += g.type + ',' + g.id_jeu + ';'
+    }
+    return res;
+  }
+
+
+  deleteSessionBoyGirl(id : number) : void {
+    let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
+    for (let s of this.list_session) {
+      for(let jeu of s.jeuId) {
+        if(jeu.type == 'Fille&Garçon' && jeu.id_jeu == id) {
+          this.deleteBoyGirl(id , s);
+          this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
+          ses.onSend_update(this.list);
+        }
+      }
+    }
+  }
+
   deleteGameBoyGirl(bg: BoyGirl): void {
     this.onSend_delete(bg.id);
+    this.deleteSessionBoyGirl(bg.id);
     setTimeout(() => {
       this.data = [];
       this.recup(this.data)

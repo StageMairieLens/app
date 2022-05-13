@@ -200,7 +200,8 @@
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
             <th *ngIf="+element.isVocaliser == 1">Oui</th>
             <th *ngIf="+element.isVocaliser == 0">Non</th>
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th *ngIf="this.getUser(element.id_crea) != null">{{this.getUser(element.id_crea)}}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th *ngIf="this.getUser(element.id_crea) == null">Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
             <!-- Actions -->
             <th class="button_actions">

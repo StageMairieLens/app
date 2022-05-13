@@ -219,7 +219,8 @@
             <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
             <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th *ngIf="this.getUser(element.id_crea) != null">{{this.getUser(element.id_crea)}}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th *ngIf="this.getUser(element.id_crea) == null">Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
 
             <!-- Actions -->
             <th class="button_actions">

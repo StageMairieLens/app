@@ -1,11 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Image } from '../Image';
 import { ImagesComponent } from '../images/images.component';
 import { Progress } from '../Progress';
-import { SessionsComponent } from '../sessions/sessions.component';
+import { Jeu, SessionsComponent } from '../sessions/sessions.component';
 import { Abecedaire } from './Abecedaire';
 import { JeuxService } from '../jeux.service';
+import { Login } from '../index/login/Login';
+import { LoginComponent } from '../index/login/login.component';
+import { Session } from '../sessions/Session';
+import { Users } from '../users/Users';
 
 @Component({
   selector: 'app-abecedaire',
@@ -64,7 +68,7 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_previsualiser: boolean = false;
   list: any = { image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: 0,id_crea:this.id_crea };
 
-  constructor(private jeuxService: JeuxService, private router: Router) {
+  constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
 
@@ -161,6 +165,86 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
+  list_session : Session[] = [];
+  recupSession(donne: any) {
+    this.jeuxService.recup_session(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        let isJ = false;
+        let isS = false;
+        if (data[i].isJoinable == 1) {
+          isJ = true;
+        }
+        if (data[i].isSuivi == 1) {
+          isS = true;
+        }
+        donne.push(
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+        );
+      }
+    })
+
+  }
+
+  getJeuSession(s: string): Jeu[] {
+    let res: Jeu[] = [];
+    if (s.length > 0) {
+      let tab = s.split(';');
+      for (let i of tab) {
+        if (i != "") {
+          res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+        }
+      }
+    }
+    return res;
+  }
+
+  getJoueurs(s: string, id_session: number): Users[] {
+    let tab = s.split(';');
+    let res = []
+    for (let i of tab) {
+      if (i.length != 0) {
+        res.push(
+          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+        );
+      }
+    }
+    return res;
+  }
+
+  list_login : Login[] = [];
+  recupLogin(donne: any) {
+      this.jeuxService.recup_user(donne).subscribe(data => {
+
+        for (var i = 0; data[i] != null; i++) {
+          //console.log(data);
+          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+          donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          var inn = 0;
+          for (var j = 0; LoginComponent.logins[j]; j++) {
+            if (data[i].mail_user == LoginComponent.logins[j]) {
+              inn = 1;
+            }
+          }
+          if (inn == 0) {
+            LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          }
+
+        }
+
+      })
+
+
+    }
+
+
+  getUser(id : number) : string | null {
+    for(let l of this.list_login) {
+      if(l.id2 == id) {
+        return l.pseudo;
+      }
+    }
+    return null;
+  }
 
   recupImage(donne: any) {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
@@ -177,6 +261,8 @@ export class AbecedaireComponent implements OnInit {
     this.recupImage(this.liste_image)
     setTimeout(() => {
       this.recup(this.data);
+      this.recupLogin(this.list_login);
+      this.recupSession(this.list_session);
     },200)
 
     if (this.game != null) {
@@ -287,8 +373,56 @@ export class AbecedaireComponent implements OnInit {
     this.abecedaire_previsualiser = false;
   }
 
+  deleteAbcdr(id : number, s : Session): void {
+    let index = -1;
+    for (let g of s.jeuId) {
+      if (g.type == 'Abecedaire' && g.id_jeu == id) {
+        index = s.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      s.jeuId.splice(index, 1);
+    }
+  }
+
+  setJoueurs(s: Session): string {
+    let res = "";
+
+    for (let j of s.joueur) {
+      res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+    }
+
+    return res;
+  }
+
+
+  setJeuSession(tab: Jeu[]): string {
+    let res = "";
+    for (let g of tab) {
+      console.log(g)
+      res += g.type + ',' + g.id_jeu + ';'
+    }
+    return res;
+  }
+
+
+  deleteSessionAbecedaire(id : number) : void {
+    let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
+    for (let s of this.list_session) {
+      for(let jeu of s.jeuId) {
+        if(jeu.type == 'Abecedaire' && jeu.id_jeu == id) {
+          this.deleteAbcdr(id , s);
+          this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
+          ses.onSend_update(this.list);
+        }
+      }
+    }
+  }
+
   deleteGameAbecedaire(a: Abecedaire): void {
     this.onSend_delete(a.id)
+    this.deleteSessionAbecedaire(a.id);
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);

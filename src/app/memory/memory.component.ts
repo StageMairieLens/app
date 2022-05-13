@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { throttleTime } from 'rxjs';
 import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Memory } from './Memory';
@@ -10,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JeuxService } from '../jeux.service';
 import { Session } from '../sessions/Session';
 import { Users } from '../users/Users';
+import { Login } from '../index/login/Login';
+import { LoginComponent } from '../index/login/login.component';
 
 @Component({
   selector: 'app-memory',
@@ -18,6 +19,31 @@ import { Users } from '../users/Users';
 })
 export class MemoryComponent implements OnInit {
 
+
+  list_login : Login[] = [];
+  recupLogin(donne: any) {
+      this.jeuxService.recup_user(donne).subscribe(data => {
+
+        for (var i = 0; data[i] != null; i++) {
+          //console.log(data);
+          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+          donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          var inn = 0;
+          for (var j = 0; LoginComponent.logins[j]; j++) {
+            if (data[i].mail_user == LoginComponent.logins[j]) {
+              inn = 1;
+            }
+          }
+          if (inn == 0) {
+            LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          }
+
+        }
+
+      })
+
+
+    }
   @Input() game: Memory | null;
   derriere: Image | null;
 
@@ -256,6 +282,7 @@ export class MemoryComponent implements OnInit {
     setTimeout(() => {
       this.recup(this.data);
       this.recupSession(this.list_session);
+      this.recupLogin(this.list_login);
     }, 200)
 
     if (this.game == null || this.game.derriere == null) return;
@@ -294,6 +321,15 @@ export class MemoryComponent implements OnInit {
 
   }
 
+
+  getUser(id : number) : string | null {
+    for(let l of this.list_login) {
+      if(l.id2 == id) {
+        return l.pseudo;
+      }
+    }
+    return null;
+  }
   // Initialisation
   ngAfterViewInit(): void {
     if (this.game == null || this.game!.images.length == 0) return;
