@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
   data: Login[] = [];
   mail: any = "";
   pwd: any = "";
-  list: any = { mail: this.mail, pwd: this.pwd, co: this.co };
+  pseudo:any="";
+  list: any = { mail: this.mail, pwd: this.pwd, co: this.co,pseudo:this.pseudo };
 
   constructor(public dialogRef: MatDialogRef<LoginComponent> | null, private router: Router, private jeuxService: JeuxService) { }
 
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
         //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect));
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
           if (data[i].mail_user == LoginComponent.logins[j]) {
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
           }
         }
         if (inn == 0) {
-          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect));
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
         }
 
       }
@@ -172,8 +173,9 @@ export class LoginComponent implements OnInit {
     for (var login of LoginComponent.logins) {
       if (login.email == email && login.mdp == mdp) {
         localStorage.setItem("connect", "true");
-        localStorage.setItem("user", email);
+        localStorage.setItem("id_user", email);
         localStorage.setItem("id_crea",login.id2.toString());
+        localStorage.setItem("id_pseudo",login.pseudo);
         this.router.navigate(['panel']);
         this.close();
       }
