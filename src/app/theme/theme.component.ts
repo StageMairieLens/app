@@ -14,7 +14,7 @@ export class ThemeComponent implements OnInit {
   affiche_image2:Boolean=false;
   create_theme:Boolean=false;
   n_theme:any=[];
-  nouveau_theme:any={};
+  
   pro_img=0;
   affiche:Boolean=false;
   temps:number=0;
@@ -24,11 +24,13 @@ export class ThemeComponent implements OnInit {
   nom:string="";
   liste_id=[];
   id_crea=localStorage.getItem('id_crea');
-  list:any={nom:this.nom,id:this.liste_id.toString(),id_crea:this.id_crea};
+  nouveau_theme:any={id_crea:Number(this.id_crea)};
+  list:any={nom:this.nom,id:this.liste_id.toString(),id_crea:Number(this.id_crea)};
   constructor(private jeuxService: JeuxService,private router: Router) { }
   static list_image: Image[] = [];
   ngOnInit(): void {
     this.recup2(this.data);
+    console.log(this.id_crea);
     
   }
   
