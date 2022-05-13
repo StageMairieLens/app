@@ -20,7 +20,7 @@ interface Erreur {
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-
+  id_crea=localStorage.getItem('id_crea');
   constructor(private jeuxService: JeuxService, private router: Router) {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
@@ -227,7 +227,7 @@ export class ReconnaitreComponent implements OnInit {
   reconnaitre_type_ecriture = "SCRIPT";
   reconnaitre_isVocaliser: boolean = false;
   reconnaitre_previsualiser: boolean = false;
-  id_crea=localStorage.getItem('id_crea');
+  
   image: any = [];
   list: any = { id_crea:this.id_crea,image: this.image.toString(), id: 10, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color, waw_color: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: 0 };
 
@@ -451,7 +451,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   create(): void {
-    this.list = { image: this.image.toString(), id: 0, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color, waw_color: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser };
+    this.list = { image: this.image.toString(), id: 0, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color, waw_color: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser,id_crea:Number(this.id_crea) };
     this.onSend(this.list);
     this.router.navigate(['/panel/Reconnaitre']);
   }

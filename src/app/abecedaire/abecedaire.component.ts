@@ -399,7 +399,7 @@ export class AbecedaireComponent implements OnInit {
 
   create(): void {
 
-    this.list = { image: this.image.toString(), id: 0, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: this.abecedaire_progress, ecri: this.abecedaire_type_ecriture, voca: +this.abecedaire_isVocaliser };
+    this.list = { image: this.image.toString(), id: 0, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: this.abecedaire_progress, ecri: this.abecedaire_type_ecriture, voca: +this.abecedaire_isVocaliser,id_crea:Number(this.id_crea) };
     this.onSend(this.list);
     this.router.navigate(['/panel/Abecedaire']);
 
