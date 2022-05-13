@@ -18,7 +18,7 @@
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe" (keypress)="enterKey($event, email.value, mdp.value)"
+            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe"  (keypress)="enterKey($event, email.value, mdp.value)"
             (change)="this.list['pwd']=mdp.value">
         </div>
     </div>
@@ -53,7 +53,7 @@
             (change)="this.list['mail']=email.value">
         </div>
     </div>
-    
+
     <div class="form-row">
         <div class="col-md-3 text-center align-middle">
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
