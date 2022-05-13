@@ -36,7 +36,7 @@ export class PanelComponent implements OnInit {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         tab.push(
-          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca,data[i].id_crea)
+          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
 
@@ -46,7 +46,7 @@ export class PanelComponent implements OnInit {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps,data[i].id_crea)
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps, data[i].id_crea)
         );
       }
     })
@@ -59,7 +59,7 @@ export class PanelComponent implements OnInit {
         console.log(data[i].id_images)
 
         donne.push(
-          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca,data[i].id_crea)
+          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
     })
@@ -70,7 +70,7 @@ export class PanelComponent implements OnInit {
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri,data[i].id_crea)
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri, data[i].id_crea)
         );
       }
     })
@@ -81,7 +81,7 @@ export class PanelComponent implements OnInit {
     this.jeuxService.recup_bg(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri,data[i].id_crea)
+          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri, data[i].id_crea)
         );
       }
     })
@@ -91,7 +91,7 @@ export class PanelComponent implements OnInit {
     this.jeuxService.recup_puzzle(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe,data[i].id_crea)
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe, data[i].id_crea)
         );
       }
 
@@ -137,7 +137,7 @@ export class PanelComponent implements OnInit {
     for (let i of tab) {
       if (i.length != 0) {
         res.push(
-          new Users(+i.split(',')[0],i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
         );
       }
     }
@@ -383,8 +383,8 @@ export class PanelComponent implements OnInit {
         }
       }
 
-      for(let s of this.sessions) {
-        if(s.isActive) {
+      for (let s of this.sessions) {
+        if (s.isActive) {
           PanelComponent.sessionActive.push(s);
         }
       }
@@ -409,7 +409,7 @@ export class PanelComponent implements OnInit {
     return res;
   }
 
-  getUserName() : string | null{
+  getUserName(): string | null {
     return localStorage.getItem('id_pseudo');
   }
 
@@ -453,7 +453,7 @@ export class PanelComponent implements OnInit {
 
   }
 
-  getSessionActive() : Session[] {
+  getSessionActive(): Session[] {
     return PanelComponent.sessionActive;
   }
 
@@ -469,14 +469,17 @@ export class PanelComponent implements OnInit {
 
   redirect(str: string): void {
     if (str == 'Accueil') {
-      let lc : LoginComponent = new LoginComponent(null,this.router,this.jeuxService);
-      lc.onSend_verify_deco(localStorage.getItem('user'));
+      let lc: LoginComponent = new LoginComponent(null, this.router, this.jeuxService);
+      lc.onSend_verify_deco(localStorage.getItem('id_user'));
       LoginComponent.logout();
-      localStorage.removeItem('user');
+      localStorage.removeItem("connect");
+      localStorage.removeItem("id_user");
+      localStorage.removeItem("id_crea");
+      localStorage.removeItem("id_pseudo");
       setTimeout(() => {
         window.location.href = "";
 
-      },200)
+      }, 200)
     }
   }
 

@@ -8,6 +8,8 @@ import { Jeu, SessionsComponent } from '../sessions/sessions.component';
 import { JeuxService } from '../jeux.service';
 import { Users } from '../users/Users';
 import { Session } from '../sessions/Session';
+import { Login } from '../index/login/Login';
+import { LoginComponent } from '../index/login/login.component';
 
 
 @Component({
@@ -18,9 +20,34 @@ import { Session } from '../sessions/Session';
 export class RecopierGameComponent implements OnInit {
   data: Recopier[] = [];
   list_session : Session[] = [];
+  list_login : Login[] = [];
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
+
+
+  }
+
+  recupLogin(donne: any) {
+    this.jeuxService.recup_user(donne).subscribe(data => {
+
+      for (var i = 0; data[i] != null; i++) {
+        //console.log(data);
+        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        var inn = 0;
+        for (var j = 0; LoginComponent.logins[j]; j++) {
+          if (data[i].mail_user == LoginComponent.logins[j]) {
+            inn = 1;
+          }
+        }
+        if (inn == 0) {
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        }
+
+      }
+
+    })
 
 
   }
@@ -230,6 +257,7 @@ export class RecopierGameComponent implements OnInit {
     setTimeout(() => {
       this.recup(this.data);
       this.recupSession(this.list_session);
+      this.recupLogin(this.list_login);
     },200)
 
     if (this.edit) {
@@ -356,6 +384,15 @@ export class RecopierGameComponent implements OnInit {
 
     }
 
+  }
+
+  getUser(id : number) : string | null {
+    for(let l of this.list_login) {
+      if(l.id2 == id) {
+        return l.pseudo;
+      }
+    }
+    return null;
   }
 
 
