@@ -4,10 +4,12 @@ import { Image } from '../Image';
 import { Progress } from '../Progress';
 import { Memory } from './Memory';
 import { TileComponent } from './tile/tile.component';
-import { SessionsComponent } from '../sessions/sessions.component';
+import { Jeu, SessionsComponent } from '../sessions/sessions.component';
 import { ImagesComponent } from '../images/images.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JeuxService } from '../jeux.service';
+import { Session } from '../sessions/Session';
+import { Users } from '../users/Users';
 
 @Component({
   selector: 'app-memory',
@@ -94,7 +96,7 @@ export class MemoryComponent implements OnInit {
   @ViewChild("tile18") tile18!: TileComponent;
   tiles: TileComponent[] = [];
 
-  constructor(private jeuxService: JeuxService, private router: Router) {
+  constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.derriere = new Image("Lapin", "../../assets/lapin.webp");
     // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
     this.game = null;
@@ -102,6 +104,7 @@ export class MemoryComponent implements OnInit {
 
   }
   data: Memory[] = [];
+  list_session: Session[] = [];
   recup(donne: any) {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
@@ -111,6 +114,51 @@ export class MemoryComponent implements OnInit {
       }
     })
 
+  }
+
+  recupSession(donne: any) {
+    this.jeuxService.recup_session(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        let isJ = false;
+        let isS = false;
+        if (data[i].isJoinable == 1) {
+          isJ = true;
+        }
+        if (data[i].isSuivi == 1) {
+          isS = true;
+        }
+        donne.push(
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+        );
+      }
+    })
+
+  }
+
+  getJeuSession(s: string): Jeu[] {
+    let res: Jeu[] = [];
+    if (s.length > 0) {
+      let tab = s.split(';');
+      for (let i of tab) {
+        if (i != "") {
+          res.push({ type: i.split(',')[0], id_jeu: +i.split(',')[1] })
+        }
+      }
+    }
+    return res;
+  }
+
+  getJoueurs(s: string, id_session: number): Users[] {
+    let tab = s.split(';');
+    let res = []
+    for (let i of tab) {
+      if (i.length != 0) {
+        res.push(
+          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+        );
+      }
+    }
+    return res;
   }
   onSend_delete(id: any) {
 
@@ -207,7 +255,8 @@ export class MemoryComponent implements OnInit {
     this.recupImage(this.liste_image)
     setTimeout(() => {
       this.recup(this.data);
-    },200)
+      this.recupSession(this.list_session);
+    }, 200)
 
     if (this.game == null || this.game.derriere == null) return;
     this.nbTile = this.game.nbTile;
@@ -415,8 +464,56 @@ export class MemoryComponent implements OnInit {
     this.memory_previsualiser = false;
   }
 
+  setJoueurs(s: Session): string {
+    let res = "";
+
+    for (let j of s.joueur) {
+      res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+    }
+
+    return res;
+  }
+
+
+  setJeuSession(tab: Jeu[]): string {
+    let res = "";
+    for (let g of tab) {
+      console.log(g)
+      res += g.type + ',' + g.id_jeu + ';'
+    }
+    return res;
+  }
+
+
+  deleteMemory(id: number, s: Session): void {
+    let index = -1;
+    for (let g of s.jeuId) {
+      if (g.type == 'Memory' && g.id_jeu == id) {
+        index = s.jeuId.indexOf(g, 0);
+      }
+    }
+
+    if (index > -1) {
+      s.jeuId.splice(index, 1);
+    }
+  }
+
+  deleteSessionMemory(id: number): void {
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+    for (let s of this.list_session) {
+      for (let jeu of s.jeuId) {
+        if (jeu.type == 'Memory' && jeu.id_jeu == id) {
+          this.deleteMemory(id, s);
+          this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
+          ses.onSend_update(this.list);
+        }
+      }
+    }
+  }
+
   deleteGameMemory(m: Memory): void {
     this.onSend_delete(m.id);
+    this.deleteSessionMemory(m.id);
     setTimeout(() => {
       this.data = []
       this.recup(this.data);
