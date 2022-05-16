@@ -20,16 +20,16 @@ export interface Jeu {
   id_jeu: number;
 }
 
-export interface Guest{
-  id : number;
-  nom : string;
-  progress_jeu : Progression[];
+export interface Guest {
+  id: number;
+  nom: string;
+  progress_jeu: Progression[];
 }
 
 export interface Progression {
-  id_jeu : number;
-  cpt_erreur : number;
-  progress : number;
+  id_jeu: number;
+  cpt_erreur: number;
+  progress: number;
 }
 
 @Component({
@@ -44,7 +44,7 @@ export class SessionsComponent implements OnInit {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         tab.push(
-          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca,data[i].id_crea)
+          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
 
@@ -55,7 +55,7 @@ export class SessionsComponent implements OnInit {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps,data[i].id_crea)
+          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps, data[i].id_crea)
         );
       }
     })
@@ -68,7 +68,7 @@ export class SessionsComponent implements OnInit {
         console.log(data[i].id_images)
 
         donne.push(
-          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca,data[i].id_crea)
+          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
     })
@@ -79,7 +79,7 @@ export class SessionsComponent implements OnInit {
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri,data[i].id_crea)
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri, data[i].id_crea)
         );
       }
     })
@@ -90,7 +90,7 @@ export class SessionsComponent implements OnInit {
     this.jeuxService.recup_bg(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri,data[i].id_crea)
+          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri, data[i].id_crea)
         );
       }
     })
@@ -100,7 +100,7 @@ export class SessionsComponent implements OnInit {
     this.jeuxService.recup_puzzle(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe,data[i].id_crea)
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe, data[i].id_crea)
         );
       }
 
@@ -174,8 +174,8 @@ export class SessionsComponent implements OnInit {
   sortByNbJoueur: boolean = false;
   jeux_id: string[] = [];
 
-  jeuSelected : string = "";
-  jeuSelected_id : number | null = null;
+  jeuSelected: string = "";
+  jeuSelected_id: number | null = null;
 
   session_nom: string = "";
   list: any = { id_crea: 1, nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: "", liste_j: this.liste_j };
@@ -235,23 +235,23 @@ export class SessionsComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
-      let progression : Progression[] = []
+      let progression: Progression[] = []
       if (i.length != 0) {
-        for(let p of i.split(',[')) {
-            for(let p2 of  p.split(']')) {
-              if(p2 != "" && p2.split(',').length == 3) {
-                progression.push(
-                  { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
-                )
-              }
+        for (let p of i.split(',[')) {
+          for (let p2 of p.split(']')) {
+            if (p2 != "" && p2.split(',').length == 3) {
+              progression.push(
+                { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
+              )
             }
+          }
         }
         res.push(
-          { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
+          { id: +i.split(',')[0], nom: i.split(',')[1], progress_jeu: progression }
         );
       }
     }
@@ -262,7 +262,11 @@ export class SessionsComponent implements OnInit {
     let res = "";
 
     for (let j of s.joueur) {
-      console.log('test')
+      res += j.id + ',' + j.nom;
+      for (let p of j.progress_jeu) {
+        res += ',[' + p.id_jeu + ',' + p.cpt_erreur + ',' + p.progress + ']'
+      }
+      res += ';'
     }
 
     return res;
@@ -441,6 +445,18 @@ export class SessionsComponent implements OnInit {
         id++;
       }
     }
+
+    let progress: Progression[] = []
+
+    for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
+      progress.push(
+        { id_jeu: i, cpt_erreur: 0, progress: 0 }
+      )
+    }
+
+    this.getSession()!.joueur.push(
+      { id: id, nom: name, progress_jeu: progress }
+    );
 
     // this.getSession()!.joueur.push((new Users(id, name, Session.number, 0, 0)));
     localStorage.setItem('id_user', id.toString());
@@ -1157,10 +1173,10 @@ export class SessionsComponent implements OnInit {
     }
   }
 
-  getJeuId() : number {
-    for(let i= 0 ; i<this.selected_session!.jeuId.length ; i++) {
-      if(this.selected_session!.jeuId[i].type == this.jeuSelected) {
-        if(this.selected_session!.jeuId[i].id_jeu == this.jeuSelected_id) {
+  getJeuId(): number {
+    for (let i = 0; i < this.selected_session!.jeuId.length; i++) {
+      if (this.selected_session!.jeuId[i].type == this.jeuSelected) {
+        if (this.selected_session!.jeuId[i].id_jeu == this.jeuSelected_id) {
           return i;
         }
       }

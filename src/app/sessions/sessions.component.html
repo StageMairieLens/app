@@ -892,18 +892,23 @@
 
     <h2 style="font-size : 80px; letter-spacing : 3px;">N° de séssion : {{this.selected_session!.id}}</h2>
 
-    <p *ngFor="let g of this.selected_session!.jeuId">{{g.type}} : {{g.id_jeu}} <br></p>
-
     <div class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : red" (click)="quitView() " color="primary">
         <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
         <span>Retourner sur les sessions</span>
       </button>
     </div>
+    <h4>Il y a actuellement <b style="color : rgb(216, 31, 62)">{{this.selected_session!.joueur.length}}</b> joueurs dans la séssion ! </h4>
 
-    <div class="col-md-12 text-center sortButton">
+    <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
+    </mat-divider>
+
+
+
+    <div class="col-md-12 text-center">
+      <h3>Choisissez le jeu pour voir les progressions des joueurs</h3>
       <button *ngFor="let b of this.selected_session!.jeuId" mat-raised-button
-        style="background-color : rgb(10, 41, 218)" (click)="this.jeuSelected = b.type; this.jeuSelected_id = b.id_jeu"
+        style="background-color : rgb(10, 41, 218) ; margin : 1%" (click)="this.jeuSelected = b.type; this.jeuSelected_id = b.id_jeu"
         color="primary">
         <i *ngIf="b.type == 'Recopier'" class="fa-solid fa-pen fa-lg"></i>
         <i *ngIf="b.type == 'Memory'" class="fa-solid fa-brain fa-lg"></i>
@@ -913,11 +918,12 @@
         <i *ngIf="b.type == 'Abecedaire'" class="fa-solid fa-z fa-lg"></i>
         <i *ngIf="b.type == 'Fille&Garçon'" class="fa-solid fa-children fa-lg"></i>
         <i *ngIf="b.type == 'Puzzle'" class="fa-solid fa-puzzle-piece fa-lg"></i>
-        <span style="font-size : 25px">{{b.type}}</span>
+        <span style="font-size : 25px">{{b.type}}(id : {{b.id_jeu}})</span>
       </button>
     </div>
 
     <div *ngIf="this.selected_session!.joueur.length != 0 && this.jeuSelected != '' ">
+        <h2>Progression des joueurs sur le jeu {{this.jeuSelected}}(id:{{this.jeuSelected_id}})</h2>
       <div *ngIf="this.selected_session!.isActive">
         <table class="table table-hover">
           <thead>
