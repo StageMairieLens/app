@@ -602,6 +602,7 @@ export class SessionsComponent implements OnInit {
   }
 
   joinSession(s: Session): void {
+    let n = 0
     this.selected_session = s;
     this.view = true;
     this.showList = false;
@@ -609,15 +610,17 @@ export class SessionsComponent implements OnInit {
 
 
     setInterval(() => {
+      n++;
       setTimeout(() => {
         this.data = []
         this.recup(this.data)
-      }, 1000)
+      }, 500)
       this.session_id = s.id;
       s = this.getSession()!;
-      console.log(s);
+      console.log(s + ',' + n);
       this.selected_session = s;
-    }, 2000)
+
+    }, 500)
   }
 
   quitView(): void {
