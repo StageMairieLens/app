@@ -462,12 +462,15 @@ export class PuzzleComponent implements OnInit {
     let res = "";
 
     for (let j of s.joueur) {
-      // res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+      res += j.id + ',' + j.nom;
+      for (let p of j.progress_jeu) {
+        res += ',[' + p.id_jeu + ',' + p.cpt_erreur + ',' + p.progress + ']'
+      }
+      res += ';'
     }
 
     return res;
   }
-
 
   setJeuSession(tab: Jeu[]): string {
     let res = "";
