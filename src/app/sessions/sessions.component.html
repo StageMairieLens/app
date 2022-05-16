@@ -932,6 +932,7 @@
               <th scope="col">Nom</th>
               <th scope="col">Erreur(s)</th>
               <th scope="col">Progression</th>
+              <th scope="col">Status</th>
             </tr>
           </thead>
 
@@ -945,6 +946,15 @@
                     role="progressbar" [ngStyle]="{width: user.progress_jeu[this.getJeuId()].progress.toString() + '%'}"
                     aria-valuenow=" 50" aria-valuemin="0" aria-valuemax='100'></div>
                 </div>
+              </th>
+              <th *ngIf="user.progress_jeu[this.getJeuId()].progress == 100">
+                <span style="color : green ; margin-right : 2%">Terminé</span>
+                <i class="fa-solid fa-check-circle fa-2xl" style="color : green"></i>
+              </th>
+              <th class="" *ngIf="user.progress_jeu[this.getJeuId()].progress != 100">
+                <span style="color : rgb(230, 191, 21) ; margin-right : 2%">En cours</span>
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-2xl" style="color : rgb(230, 191, 21)"></i>
+
               </th>
             </tr>
           </tbody>
