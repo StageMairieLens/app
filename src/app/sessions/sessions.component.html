@@ -60,6 +60,7 @@
           <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
 
           <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
+
             <mat-card style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%"
               *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3">
 
@@ -126,12 +127,17 @@
               <img *ngIf="g.type == 'Puzzle'" mat-card-image src="../../assets/images/thumb/puzzle.png">
 
               <mat-card-actions>
-                <button mat-fab color="primary" style="background : green" (click)="playGame(g.type,g.id_jeu)"
-                  aria-label="Prévisualiser le jeu">
+                <button *ngIf="this.getProgressionJeu(g.type,g.id_jeu) != 100" mat-fab color="primary"
+                  style="background : green" (click)="playGame(g.type,g.id_jeu)" aria-label="Prévisualiser le jeu">
+                  <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
+                </button>
+                <button *ngIf="this.getProgressionJeu(g.type,g.id_jeu) == 100" mat-fab color="primary" disabled
+                  style="background : green" (click)="playGame(g.type,g.id_jeu)" aria-label="Prévisualiser le jeu">
                   <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
                 </button>
               </mat-card-actions>
             </mat-card>
+
           </div>
 
           <div class="row text-center" *ngIf="this.getSession()!.jeuId.length == 0"
@@ -159,8 +165,7 @@
     <div *ngIf="this.jeu == 'Recopier'">
       <app-recopier-game [play]="false"></app-recopier-game>
       <div class="col-md-12 text-center sortButton">
-        <button mat-raised-button style="background-color : red"
-          (click)="this.inPlay = false; this.jeu = ''; this.recopier = null" color="primary">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
           <span>Revenir à la listes des jeux</span>
         </button>
@@ -171,8 +176,7 @@
     <div *ngIf="this.jeu == 'Memory'">
       <app-memory [play]="false"></app-memory>
       <div class="col-md-12 text-center sortButton">
-        <button mat-raised-button style="background-color : red"
-          (click)="this.inPlay = false; this.jeu = ''; this.memory = null" color="primary">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
           <span>Revenir à la listes des jeux</span>
         </button>
@@ -183,8 +187,7 @@
     <div *ngIf="this.jeu == 'Reconnaitre'">
       <app-reconnaitre [play]="false"></app-reconnaitre>
       <div class="col-md-12 text-center sortButton">
-        <button mat-raised-button style="background-color : red"
-          (click)="this.inPlay = false; this.jeu = ''; this.reconnaitre = null" color="primary">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
           <span>Revenir à la listes des jeux</span>
         </button>
@@ -196,8 +199,7 @@
     <div *ngIf="this.jeu == 'Abecedaire'">
       <app-abecedaire [play]="false"></app-abecedaire>
       <div class="col-md-12 text-center sortButton">
-        <button mat-raised-button style="background-color : red"
-          (click)="this.inPlay = false; this.jeu = ''; this.abecedaire = null" color="primary">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
           <span>Revenir à la listes des jeux</span>
         </button>
@@ -209,8 +211,7 @@
     <div *ngIf="this.jeu == 'Puzzle'">
       <app-puzzle [play]="false"></app-puzzle>
       <div class="col-md-12 text-center sortButton">
-        <button mat-raised-button style="background-color : red"
-          (click)="this.inPlay = false; this.jeu = ''; this.puzzle = null" color="primary">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
           <span>Revenir à la listes des jeux</span>
         </button>
@@ -222,8 +223,7 @@
     <div *ngIf="this.jeu == 'Fille&Garçon'">
       <app-boy-girl-game [play]="false"></app-boy-girl-game>
       <div class="col-md-12 text-center sortButton">
-        <button mat-raised-button style="background-color : red"
-          (click)="this.inPlay = false; this.jeu = ''; this.boyGirl = null" color="primary">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
           <span>Revenir à la listes des jeux</span>
         </button>

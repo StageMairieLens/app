@@ -563,6 +563,19 @@ export class SessionsComponent implements OnInit {
     }
   }
 
+  getUser() : Guest | null {
+    for(let u of this.getSession()!.joueur) {
+      if(u.id == +localStorage.getItem('id_user')!) {
+        return u;
+      }
+    }
+    return null;
+  }
+
+  getProgressionJeu(type : string , id : number) : number {
+    return this.getUser()!.progress_jeu[this.getJeuById(type,id)].progress;
+  }
+
   previsualiserGame(element: Session): void {
     this.preview = true;
     this.showList = false;
@@ -1191,13 +1204,17 @@ export class SessionsComponent implements OnInit {
   }
 
   getJeuById(type : string , id : number): number {
-    for (let i = 0; i < this.selected_session!.jeuId.length; i++) {
-      if (this.selected_session!.jeuId[i].type == type) {
-        if (this.selected_session!.jeuId[i].id_jeu == id) {
+    for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
+      if (this.getSession()!.jeuId[i].type == type) {
+        if (this.getSession()!.jeuId[i].id_jeu == id) {
           return i;
         }
       }
     }
     return -1;
+  }
+
+  redirectSession() : void {
+    window.location.href = '/session/' + this.getSession()!.id;
   }
 }
