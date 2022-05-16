@@ -46,6 +46,7 @@
       <button mat-raised-button style="background-color: orange" *ngIf="memory_isVocaliser == false" (click)="memory_isVocaliser = true">Non Vocalisation</button>
     </div>
     <table>
+
       <tr>
         <td id="1" *ngIf="nbTile >= 1">
           <app-tile class="tile text-center" #tile1 [derriere]="derriere!.getSrc()"

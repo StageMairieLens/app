@@ -21,11 +21,11 @@
 }
 
 .choice span {
-  margin-left : 10px;
+  margin-left: 10px;
 }
 
 .choice i {
-  margin-bottom : 2%;
+  margin-bottom: 2%;
 }
 
 #nav {
@@ -169,6 +169,23 @@ img {
   margin-right: 5px;
 }
 
+.school-header {
+  margin-top : 5px;
+  width: 45%;
+  margin-left: 27.5%;
+  padding: 10px;
+  font-size: 20px;
+  background: rgb(9, 143, 231);
+  color: white;
+  border : solid grey 2px;
+  box-shadow: rgb(255, 255, 255) 0px 1px 2px;
+}
+
+.school-header i {
+  margin-right : 2%;
+  margin-bottom : 2%
+}
+
 .quit_button {
   color: rgb(250, 58, 58);
   border: red solid 2px;
@@ -207,11 +224,13 @@ img {
   width: 40%;
   /* margin-right: 10%; */
   margin-bottom: 3%;
-  background :rgb(22, 158, 22);
+  background: rgb(22, 158, 22);
 }
 
-#Recopier, #Reconnaitre, #Fille\&Garçon {
-  margin-right : 10%;
+#Recopier,
+#Reconnaitre,
+#Fille\&Garçon {
+  margin-right: 10%;
 }
 
 .panel-choice span {
@@ -224,11 +243,11 @@ img {
 }
 
 .session_choice {
-  width : 80%;
-  margin-bottom : 3%
+  width: 80%;
+  margin-bottom: 3%
 }
 
 .session_choice span {
-  font-size : 25px;
-  margin-left : 10px;
+  font-size: 25px;
+  margin-left: 10px;
 }

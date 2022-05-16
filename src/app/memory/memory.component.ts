@@ -21,6 +21,7 @@ export class MemoryComponent implements OnInit {
 
 
   list_login : Login[] = [];
+  cpt_erreur: number = 0;
   recupLogin(donne: any) {
       this.jeuxService.recup_user(donne).subscribe(data => {
 
@@ -440,10 +441,12 @@ export class MemoryComponent implements OnInit {
         document.getElementById(this.retourner)!.style.border = "3px solid";
         document.getElementById(this.retourner)!.style.borderColor = this.game!.good_answer_color;
         this.retourner = "0";
+        this.sendProgress();
         document.getElementById('progressbar')!.style.width = ((this.nbBon / (this.game!.nbTile / 2)) * 100).toString() + '%';
         if (this.nbBon >= this.nbTile / 2) {
           setTimeout(() => {
             this.finish = true;
+            this.sendProgress();
           }, 1000);
         }
       }
@@ -453,6 +456,8 @@ export class MemoryComponent implements OnInit {
         document.getElementById(id)!.style.borderColor = this.game!.wrong_answer_color;
         document.getElementById(this.retourner)!.style.border = "3px solid";
         document.getElementById(this.retourner)!.style.borderColor = this.game!.wrong_answer_color;
+        this.cpt_erreur++;
+        this.sendProgress();
         setTimeout(() => {
           this.tiles[Number(id) - 1].cacher();
           this.tiles[Number(this.retourner) - 1].cacher();
@@ -476,6 +481,74 @@ export class MemoryComponent implements OnInit {
       this.tiles[i].disable = false;
     }
   }
+
+  getSession(): Session | null {
+    for (let s of this.list_session) {
+      for (let j of s.jeuId) {
+        if (j.type == 'Memory') {
+          if (j.id_jeu == this.game!.id) {
+            return s;
+          }
+        }
+      }
+    }
+    return null
+  }
+
+  getJeuById(): number {
+    for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
+      if (this.getSession()!.jeuId[i].type == 'Memory') {
+        if (this.getSession()!.jeuId[i].id_jeu == this.game!.id) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+  getJoueur(): Guest | null {
+    for (let g of this.getSession()!.joueur) {
+      if (g.id == +localStorage.getItem('id_user')!) {
+        return g;
+      }
+    }
+    return null;
+  }
+
+
+  session_onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session_update', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+
+  sendProgress(): void {
+
+    this.list_session = [];
+    this.recupSession(this.list_session);
+
+    setTimeout(() => {
+    this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
+    this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.nbBon / (this.game!.nbTile / 2)) * 100
+    let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+    this.session_onSend_update(list)
+    },500);
+  }
+
 
   // Logique du bouton commencer
   start(): void {

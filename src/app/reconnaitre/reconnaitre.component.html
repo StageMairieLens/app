@@ -152,7 +152,7 @@
 
 
       <!-- Carte félicitation -->
-      <div *ngIf="this.prochaine_image == this.r!.images.length" class="card_play align-middle container text-center"
+      <div *ngIf="isFinish()" class="card_play align-middle container text-center"
         id="card_finish" style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
         <img class="card-img-top image_play" src="../../assets/images/congratulations.png" alt="Card image cap">
         <div class="card-body text-center">
