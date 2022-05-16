@@ -19,8 +19,8 @@ import { LoginComponent } from '../index/login/login.component';
 })
 export class RecopierGameComponent implements OnInit {
   data: Recopier[] = [];
-  list_session : Session[] = [];
-  list_login : Login[] = [];
+  list_session: Session[] = [];
+  list_login: Login[] = [];
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
@@ -34,7 +34,7 @@ export class RecopierGameComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
         //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
           if (data[i].mail_user == LoginComponent.logins[j]) {
@@ -42,7 +42,7 @@ export class RecopierGameComponent implements OnInit {
           }
         }
         if (inn == 0) {
-          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         }
 
       }
@@ -55,7 +55,7 @@ export class RecopierGameComponent implements OnInit {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         tab.push(
-          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca,data[i].id_crea)
+          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
 
@@ -94,23 +94,23 @@ export class RecopierGameComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
-      let progression : Progression[] = []
+      let progression: Progression[] = []
       if (i.length != 0) {
-        for(let p of i.split(',[')) {
-            for(let p2 of  p.split(']')) {
-              if(p2 != "" && p2.split(',').length == 3) {
-                progression.push(
-                  { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
-                )
-              }
+        for (let p of i.split(',[')) {
+          for (let p2 of p.split(']')) {
+            if (p2 != "" && p2.split(',').length == 3) {
+              progression.push(
+                { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
+              )
             }
+          }
         }
         res.push(
-          { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
+          { id: +i.split(',')[0], nom: i.split(',')[1], progress_jeu: progression }
         );
       }
     }
@@ -179,7 +179,7 @@ export class RecopierGameComponent implements OnInit {
   @Input() create_game: boolean = false;
   @Input() edit: boolean = false;
 
-  cpt_erreur : number = 0;
+  cpt_erreur: number = 0;
 
   // VARIABLE JEU RECOPIER
   recopier_bg_color: string = "#3bb8c9";
@@ -196,12 +196,12 @@ export class RecopierGameComponent implements OnInit {
   recopier_isVocaliser: boolean = false;
   recopier_previsualiser: boolean = false;
   image2: any = [];
-  id_crea=localStorage.getItem('id_crea');
-  list: any = { id_crea:this.id_crea,image: this.image2.toString(), id: this.id_game, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: 0 };
+  id_crea = localStorage.getItem('id_crea');
+  list: any = { id_crea: this.id_crea, image: this.image2.toString(), id: this.id_game, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: 0 };
 
   formStep: number = 0;
 
-  static firstFinish : number =0;
+  static firstFinish: number = 0;
 
   synthesis: SpeechSynthesis | null = window.speechSynthesis;;
   voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
@@ -271,7 +271,7 @@ export class RecopierGameComponent implements OnInit {
       this.recup(this.data);
       this.recupSession(this.list_session);
       this.recupLogin(this.list_login);
-    },200)
+    }, 200)
 
     if (this.edit) {
       this.create_game = true;
@@ -354,6 +354,7 @@ export class RecopierGameComponent implements OnInit {
 
         } else {
           this.cpt_erreur++;
+          this.sendProgress();
 
           document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
           document.getElementById('card')?.animate([
@@ -388,6 +389,7 @@ export class RecopierGameComponent implements OnInit {
             1600);
         } else {
           this.cpt_erreur++;
+          this.sendProgress();
 
           document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
           document.getElementById('card')?.animate([
@@ -406,11 +408,11 @@ export class RecopierGameComponent implements OnInit {
 
   }
 
-  getSession() : Session | null {
-    for(let s of this.list_session) {
-      for(let j of s.jeuId) {
-        if(j.type == 'Recopier') {
-          if(j.id_jeu == this.r!.id) {
+  getSession(): Session | null {
+    for (let s of this.list_session) {
+      for (let j of s.jeuId) {
+        if (j.type == 'Recopier') {
+          if (j.id_jeu == this.r!.id) {
             return s;
           }
         }
@@ -419,7 +421,7 @@ export class RecopierGameComponent implements OnInit {
     return null
   }
 
-  getJeuById() : number {
+  getJeuById(): number {
     for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
       if (this.getSession()!.jeuId[i].type == 'Recopier') {
         if (this.getSession()!.jeuId[i].id_jeu == this.r!.id) {
@@ -430,9 +432,9 @@ export class RecopierGameComponent implements OnInit {
     return -1;
   }
 
-  getJoueur() : Guest | null {
-    for(let g of this.getSession()!.joueur) {
-      if(g.id == +localStorage.getItem('id_user')!) {
+  getJoueur(): Guest | null {
+    for (let g of this.getSession()!.joueur) {
+      if (g.id == +localStorage.getItem('id_user')!) {
         return g;
       }
     }
@@ -460,7 +462,7 @@ export class RecopierGameComponent implements OnInit {
     });
   }
 
-  sendProgress() : void {
+  sendProgress(): void {
     this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
     console.log((this.showImageCpt / this.r!.images.length) * 100)
     this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.showImageCpt / this.r!.images.length) * 100;
@@ -468,20 +470,20 @@ export class RecopierGameComponent implements OnInit {
     this.session_onSend_update(list)
   }
 
-  isFinish() : boolean {
-    if(this.showImageCpt == this.r!.images.length && this.r!.images.length != 0) {
-      if(RecopierGameComponent.firstFinish == 0) {
-      this.sendProgress();
-      RecopierGameComponent.firstFinish = 1;
+  isFinish(): boolean {
+    if (this.showImageCpt == this.r!.images.length && this.r!.images.length != 0) {
+      if (RecopierGameComponent.firstFinish == 0) {
+        this.sendProgress();
+        RecopierGameComponent.firstFinish = 1;
       }
       return true;
     }
     return false;
   }
 
-  getUser(id : number) : string | null {
-    for(let l of this.list_login) {
-      if(l.id2 == id) {
+  getUser(id: number): string | null {
+    for (let l of this.list_login) {
+      if (l.id2 == id) {
         return l.pseudo;
       }
     }
@@ -499,7 +501,7 @@ export class RecopierGameComponent implements OnInit {
 
   setPrevisualiserRecopier(prev: boolean): void {
     if (prev == true) {
-      this.r = new Recopier(0, '', this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser,Number(this.id_crea));
+      this.r = new Recopier(0, '', this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser, Number(this.id_crea));
       this.recopier_previsualiser = true;
     }
     else {
@@ -520,7 +522,7 @@ export class RecopierGameComponent implements OnInit {
     this.recopier_previsualiser = false;
   }
 
-  deleteRecopier(id : number, s : Session): void {
+  deleteRecopier(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
       if (g.type == 'Recopier' && g.id_jeu == id) {
@@ -558,12 +560,12 @@ export class RecopierGameComponent implements OnInit {
   }
 
 
-  deleteSessionRecopier(id : number) : void {
-    let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
+  deleteSessionRecopier(id: number): void {
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
-      for(let jeu of s.jeuId) {
-        if(jeu.type == 'Recopier' && jeu.id_jeu == id) {
-          this.deleteRecopier(id , s);
+      for (let jeu of s.jeuId) {
+        if (jeu.type == 'Recopier' && jeu.id_jeu == id) {
+          this.deleteRecopier(id, s);
           this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
           ses.onSend_update(this.list);
         }
@@ -663,7 +665,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   create(): void {
-    this.list = { image: this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: this.recopier_progress, ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser,id_crea:Number(this.id_crea) };
+    this.list = { image: this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: this.recopier_progress, ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser, id_crea: Number(this.id_crea) };
     this.onSend(this.list);
     this.router.navigate(['/panel/Recopier']);
   }

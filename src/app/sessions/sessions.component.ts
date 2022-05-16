@@ -617,13 +617,13 @@ export class SessionsComponent implements OnInit {
       setTimeout(() => {
         this.data = []
         this.recup(this.data)
-      }, 1800)
+      }, 2000)
       this.session_id = s.id;
       s = this.getSession()!;
       console.log(s + ',' + n);
       this.selected_session = s;
 
-    }, 2500)
+    }, 3000)
   }
 
   quitView(): void {
