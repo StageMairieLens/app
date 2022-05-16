@@ -174,6 +174,9 @@ export class SessionsComponent implements OnInit {
   sortByNbJoueur: boolean = false;
   jeux_id: string[] = [];
 
+  jeuSelected : string = "";
+  jeuSelected_id : number | null = null;
+
   session_nom: string = "";
   list: any = { id_crea: 1, nom: this.session_nom, isSuivi: this.isSuivi, join: this.join, id: this.session_id, jeux_id: "", liste_j: this.liste_j };
 
@@ -594,12 +597,11 @@ export class SessionsComponent implements OnInit {
         this.data = []
         this.recup(this.data)
       }, 1000)
-      console.log(this.data)
       this.session_id = s.id;
       s = this.getSession()!;
       console.log(s);
       this.selected_session = s;
-    }, 5000)
+    }, 2000)
   }
 
   quitView(): void {
@@ -1153,5 +1155,16 @@ export class SessionsComponent implements OnInit {
         this.puzzle = this.getPuzzle(id);
         break;
     }
+  }
+
+  getJeuId() : number {
+    for(let i= 0 ; i<this.selected_session!.jeuId.length ; i++) {
+      if(this.selected_session!.jeuId[i].type == this.jeuSelected) {
+        if(this.selected_session!.jeuId[i].id_jeu == this.jeuSelected_id) {
+          return i;
+        }
+      }
+    }
+    return -1;
   }
 }
