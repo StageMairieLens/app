@@ -179,6 +179,7 @@ export class RecopierGameComponent implements OnInit {
   @Input() create_game: boolean = false;
   @Input() edit: boolean = false;
 
+  cpt_erreur : number = 0;
 
   // VARIABLE JEU RECOPIER
   recopier_bg_color: string = "#3bb8c9";
@@ -199,6 +200,8 @@ export class RecopierGameComponent implements OnInit {
   list: any = { id_crea:this.id_crea,image: this.image2.toString(), id: this.id_game, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: 0 };
 
   formStep: number = 0;
+
+  static firstFinish : number =0;
 
   synthesis: SpeechSynthesis | null = window.speechSynthesis;;
   voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
@@ -340,6 +343,7 @@ export class RecopierGameComponent implements OnInit {
 
           setTimeout(() => {
             this.showImageCpt++;
+            this.sendProgress();
             document.getElementById('result')!.innerHTML = '';
             (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
             document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
@@ -349,6 +353,8 @@ export class RecopierGameComponent implements OnInit {
             1600);
 
         } else {
+          this.cpt_erreur++;
+
           document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
           document.getElementById('card')?.animate([
             { transform: 'translateX(0px)' },
@@ -372,6 +378,7 @@ export class RecopierGameComponent implements OnInit {
 
           setTimeout(() => {
             this.showImageCpt++;
+            this.sendProgress();
             document.getElementById('result')!.innerHTML = '';
             (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
             document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
@@ -380,6 +387,8 @@ export class RecopierGameComponent implements OnInit {
           },
             1600);
         } else {
+          this.cpt_erreur++;
+
           document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.wrong_answer_color + '">Ce n\'est pas le bon mot</p>';
           document.getElementById('card')?.animate([
             { transform: 'translateX(0px)' },
@@ -394,6 +403,80 @@ export class RecopierGameComponent implements OnInit {
 
     }
 
+
+  }
+
+  getSession() : Session | null {
+    for(let s of this.list_session) {
+      for(let j of s.jeuId) {
+        if(j.type == 'Recopier') {
+          if(j.id_jeu == this.r!.id) {
+            return s;
+          }
+        }
+      }
+    }
+    return null
+  }
+
+  getJeuById() : number {
+    for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
+      if (this.getSession()!.jeuId[i].type == 'Recopier') {
+        if (this.getSession()!.jeuId[i].id_jeu == this.r!.id) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+  getJoueur() : Guest | null {
+    for(let g of this.getSession()!.joueur) {
+      if(g.id == +localStorage.getItem('id_user')!) {
+        return g;
+      }
+    }
+    return null;
+  }
+
+
+  session_onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session_update', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+
+  sendProgress() : void {
+    this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
+    console.log((this.showImageCpt / this.r!.images.length) * 100)
+    this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.showImageCpt / this.r!.images.length) * 100;
+    let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+    this.session_onSend_update(list)
+  }
+
+  isFinish() : boolean {
+    if(this.showImageCpt == this.r!.images.length && this.r!.images.length != 0) {
+      if(RecopierGameComponent.firstFinish == 0) {
+      this.sendProgress();
+      RecopierGameComponent.firstFinish = 1;
+      }
+      return true;
+    }
+    return false;
   }
 
   getUser(id : number) : string | null {

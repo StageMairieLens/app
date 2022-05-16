@@ -38,6 +38,9 @@ export interface Progression {
   styleUrls: ['./sessions.component.css']
 })
 export class SessionsComponent implements OnInit {
+  static onSend_update(list: { nom: string; isSuivi: number; join: number; id: number; jeux_id: string; liste_j: string; }) {
+    throw new Error('Method not implemented.');
+  }
   list_image: Image[] = [];
 
   recupRecopier(tab: any) {
@@ -614,13 +617,13 @@ export class SessionsComponent implements OnInit {
       setTimeout(() => {
         this.data = []
         this.recup(this.data)
-      }, 500)
+      }, 1800)
       this.session_id = s.id;
       s = this.getSession()!;
       console.log(s + ',' + n);
       this.selected_session = s;
 
-    }, 500)
+    }, 2500)
   }
 
   quitView(): void {
@@ -1180,6 +1183,17 @@ export class SessionsComponent implements OnInit {
     for (let i = 0; i < this.selected_session!.jeuId.length; i++) {
       if (this.selected_session!.jeuId[i].type == this.jeuSelected) {
         if (this.selected_session!.jeuId[i].id_jeu == this.jeuSelected_id) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+  getJeuById(type : string , id : number): number {
+    for (let i = 0; i < this.selected_session!.jeuId.length; i++) {
+      if (this.selected_session!.jeuId[i].type == type) {
+        if (this.selected_session!.jeuId[i].id_jeu == id) {
           return i;
         }
       }

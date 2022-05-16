@@ -34,6 +34,8 @@
       <img class="card-img-top image_play" src="{{ this.r!.images[this.showImageCpt].getSrc() }}" alt="Card image cap">
       <div class="card-body text-center">
 
+        <p>{{this.cpt_erreur}}</p>
+
         <h5 *ngIf="this.r!.typeEcriture == 'CURSIF'" style="font-family: cursiveFont; font-size : 50px"
           class="card-title title_image" id="image_title" [ngStyle]="{color : this.r!.title_color}">
           {{this.r!.images[this.showImageCpt].getNom()}}</h5>
@@ -115,7 +117,7 @@
     </div>
   </div>
 
-  <div *ngIf="this.showImageCpt == this.r!.images.length && this.r!.images.length != 0"
+  <div *ngIf="isFinish()"
     class="card_play align-middle container" id="card_finish" style="width: 32rem;"
     [ngStyle]="{background : this.r!.bg_color}">
     <img class="card-img-top image_play" src="../../assets/images/congratulations.png" alt="Card image cap">
@@ -133,6 +135,7 @@
         <p class="card-text" [ngStyle]="{color : this.r!.text_color}">Vous avez recopier correctement touts les mots !
         </p>
       </div>
+
     </div>
   </div>
 

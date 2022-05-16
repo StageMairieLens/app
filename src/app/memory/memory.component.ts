@@ -54,6 +54,7 @@ export class MemoryComponent implements OnInit {
   @Input() edit: boolean = false;
 
 
+
   memory_nbTile: number = 18;
   memory_settings: string[] = ['image', 'image'];
   memory_isVocaliser: boolean = false;
