@@ -911,14 +911,14 @@
       <button *ngFor="let b of this.selected_session!.jeuId" mat-raised-button
         style="background-color : rgb(10, 41, 218) ; margin : 1%"
         (click)="this.jeuSelected = b.type; this.jeuSelected_id = b.id_jeu" color="primary">
-        <i *ngIf="b.type == 'Recopier'" class="fa-solid fa-pen fa-lg"></i>
-        <i *ngIf="b.type == 'Memory'" class="fa-solid fa-brain fa-lg"></i>
-        <i *ngIf="b.type == 'Reconnaitre'" class="fa-solid fa-eye fa-lg"></i>
-        <i *ngIf="b.type == 'Abecedaire'" class="fa-solid fa-a fa-lg"></i>
-        <i *ngIf="b.type == 'Abecedaire'" class="fa-solid fa-minus fa-lg"></i>
-        <i *ngIf="b.type == 'Abecedaire'" class="fa-solid fa-z fa-lg"></i>
-        <i *ngIf="b.type == 'Fille&Garçon'" class="fa-solid fa-children fa-lg"></i>
-        <i *ngIf="b.type == 'Puzzle'" class="fa-solid fa-puzzle-piece fa-lg"></i>
+        <i *ngIf="b.type == 'Recopier'" style="margin-right : 5%" class="fa-solid fa-pen fa-lg"></i>
+        <i *ngIf="b.type == 'Memory'" style="margin-right : 5%" class="fa-solid fa-brain fa-lg"></i>
+        <i *ngIf="b.type == 'Reconnaitre'" style="margin-right : 5%" class="fa-solid fa-eye fa-lg"></i>
+        <i *ngIf="b.type == 'Abecedaire'" style="margin-right : 5%" class="fa-solid fa-a fa-lg"></i>
+        <i *ngIf="b.type == 'Abecedaire'" style="margin-right : 5%" class="fa-solid fa-minus fa-lg"></i>
+        <i *ngIf="b.type == 'Abecedaire'" style="margin-right : 5%" class="fa-solid fa-z fa-lg"></i>
+        <i *ngIf="b.type == 'Fille&Garçon'" style="margin-right : 5%" class="fa-solid fa-children fa-lg"></i>
+        <i *ngIf="b.type == 'Puzzle'" style="margin-right : 5%" class="fa-solid fa-puzzle-piece fa-lg"></i>
         <span style="font-size : 25px">{{b.type}}(id : {{b.id_jeu}})</span>
       </button>
     </div>
