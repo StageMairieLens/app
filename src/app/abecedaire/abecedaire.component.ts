@@ -63,12 +63,12 @@ export class AbecedaireComponent implements OnInit {
   abecedaire_button_text_color: string = "#ffffff";
   abecedaire_type_ecriture: string = "SCRIPT";
   abecedaire_isVocaliser: boolean = false;
-  id_crea=localStorage.getItem('id_crea');
+  id_crea = localStorage.getItem('id_crea');
   image: any = [];
   abecedaire_previsualiser: boolean = false;
-  list: any = { image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: 0,id_crea:this.id_crea };
+  list: any = { image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: 'blue', ecri: this.abecedaire_type_ecriture, voca: 0, id_crea: this.id_crea };
 
-  constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
+  constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
 
@@ -140,7 +140,7 @@ export class AbecedaireComponent implements OnInit {
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(
-          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri,data[i].id_crea)
+          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri, data[i].id_crea)
         );
       }
     })
@@ -165,7 +165,7 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
-  list_session : Session[] = [];
+  list_session: Session[] = [];
   recupSession(donne: any) {
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
@@ -198,58 +198,58 @@ export class AbecedaireComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
-      let progression : Progression[] = []
+      let progression: Progression[] = []
       if (i.length != 0) {
-        for(let p of i.split(',[')) {
-            for(let p2 of  p.split(']')) {
-              if(p2 != "" && p2.split(',').length == 3) {
-                progression.push(
-                  { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
-                )
-              }
+        for (let p of i.split(',[')) {
+          for (let p2 of p.split(']')) {
+            if (p2 != "" && p2.split(',').length == 3) {
+              progression.push(
+                { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
+              )
             }
+          }
         }
         res.push(
-          { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
+          { id: +i.split(',')[0], nom: i.split(',')[1], progress_jeu: progression }
         );
       }
     }
     return res;
   }
 
-  list_login : Login[] = [];
+  list_login: Login[] = [];
   recupLogin(donne: any) {
-      this.jeuxService.recup_user(donne).subscribe(data => {
+    this.jeuxService.recup_user(donne).subscribe(data => {
 
-        for (var i = 0; data[i] != null; i++) {
-          //console.log(data);
-          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-          donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
-          var inn = 0;
-          for (var j = 0; LoginComponent.logins[j]; j++) {
-            if (data[i].mail_user == LoginComponent.logins[j]) {
-              inn = 1;
-            }
+      for (var i = 0; data[i] != null; i++) {
+        //console.log(data);
+        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
+        var inn = 0;
+        for (var j = 0; LoginComponent.logins[j]; j++) {
+          if (data[i].mail_user == LoginComponent.logins[j]) {
+            inn = 1;
           }
-          if (inn == 0) {
-            LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
-          }
-
+        }
+        if (inn == 0) {
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         }
 
-      })
+      }
+
+    })
 
 
-    }
+  }
 
 
-  getUser(id : number) : string | null {
-    for(let l of this.list_login) {
-      if(l.id2 == id) {
+  getUser(id: number): string | null {
+    for (let l of this.list_login) {
+      if (l.id2 == id) {
         return l.pseudo;
       }
     }
@@ -273,7 +273,7 @@ export class AbecedaireComponent implements OnInit {
       this.recup(this.data);
       this.recupLogin(this.list_login);
       this.recupSession(this.list_session);
-    },200)
+    }, 200)
 
     if (this.game != null) {
       if (this.game!.images.length != 0) {
@@ -326,6 +326,8 @@ export class AbecedaireComponent implements OnInit {
         (buttons.item(i) as HTMLButtonElement).style.backgroundColor = this.game!.button_bg_color;
       }
       this.finish = true;
+      this.sendProgress();
+
     }
     else {
       this.rightLetter = this.game!.images[this.nbEntries].getNom()[0].toUpperCase();
@@ -357,14 +359,87 @@ export class AbecedaireComponent implements OnInit {
       setTimeout(() => {
         this.nbEntries++;
         document.getElementById('progressbar')!.style.width = ((this.nbEntries / (this.game!.images.length)) * 100).toString() + '%';
+        this.sendProgress();
+
         this.nextImage();
       }, 1000);
     }
     else {
       this.errorsPlus();
+      this.sendProgress();
+
       ($event.target as HTMLButtonElement).style.backgroundColor = this.game!.wrong_answer_color;
     }
   }
+
+
+  getSession(): Session | null {
+    for (let s of this.list_session) {
+      for (let j of s.jeuId) {
+        if (j.type == 'Abecedaire') {
+          if (j.id_jeu == this.game!.id) {
+            return s;
+          }
+        }
+      }
+    }
+    return null
+  }
+
+  getJeuById(): number {
+    for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
+      if (this.getSession()!.jeuId[i].type == 'Abecedaire') {
+        if (this.getSession()!.jeuId[i].id_jeu == this.game!.id) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+  getJoueur(): Guest | null {
+    for (let g of this.getSession()!.joueur) {
+      if (g.id == +localStorage.getItem('id_user')!) {
+        return g;
+      }
+    }
+    return null;
+  }
+
+
+  session_onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session_update', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+
+  sendProgress(): void {
+
+    this.list_session = [];
+    this.recupSession(this.list_session);
+
+    setTimeout(() => {
+      this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.errors;
+      this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.nbEntries / this.game!.images.length) * 100
+      let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+      this.session_onSend_update(list)
+    }, 500);
+  }
+
 
   resetButton() {
     var buttons = document.getElementsByClassName("button");
@@ -383,7 +458,7 @@ export class AbecedaireComponent implements OnInit {
     this.abecedaire_previsualiser = false;
   }
 
-  deleteAbcdr(id : number, s : Session): void {
+  deleteAbcdr(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
       if (g.type == 'Abecedaire' && g.id_jeu == id) {
@@ -420,12 +495,12 @@ export class AbecedaireComponent implements OnInit {
   }
 
 
-  deleteSessionAbecedaire(id : number) : void {
-    let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
+  deleteSessionAbecedaire(id: number): void {
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
-      for(let jeu of s.jeuId) {
-        if(jeu.type == 'Abecedaire' && jeu.id_jeu == id) {
-          this.deleteAbcdr(id , s);
+      for (let jeu of s.jeuId) {
+        if (jeu.type == 'Abecedaire' && jeu.id_jeu == id) {
+          this.deleteAbcdr(id, s);
           this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
           ses.onSend_update(this.list);
         }
@@ -456,7 +531,7 @@ export class AbecedaireComponent implements OnInit {
 
   setPrevisualiserAbecedaire(prev: boolean): void {
     if (prev == true) {
-      this.game = new Abecedaire(0, '', this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture,Number(this.id_crea));
+      this.game = new Abecedaire(0, '', this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture, Number(this.id_crea));
       this.abecedaire_previsualiser = true;
     }
     else {
@@ -546,7 +621,7 @@ export class AbecedaireComponent implements OnInit {
 
   create(): void {
 
-    this.list = { image: this.image.toString(), id: 0, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: this.abecedaire_progress, ecri: this.abecedaire_type_ecriture, voca: +this.abecedaire_isVocaliser,id_crea:Number(this.id_crea) };
+    this.list = { image: this.image.toString(), id: 0, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw_color: this.abecedaire_good_answer_color, waw_color: this.abecedaire_wrong_answer_color, button_bg_color: this.abecedaire_button_bg_color, button_text_color: this.abecedaire_button_text_color, progress: this.abecedaire_progress, ecri: this.abecedaire_type_ecriture, voca: +this.abecedaire_isVocaliser, id_crea: Number(this.id_crea) };
     this.onSend(this.list);
     this.router.navigate(['/panel/Abecedaire']);
 
