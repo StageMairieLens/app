@@ -221,19 +221,20 @@ export class PuzzleComponent implements OnInit {
     for (let i of tab) {
       let progression : Progression[] = []
       if (i.length != 0) {
-        for(let p of i.split('[')[1].split(']')) {
-          if(p != ',') {
-            progression.push(
-              { id_jeu : +p.split(',')[0], cpt_erreur : +p.split(',')[1] , progress : +p.split(',')[2]}
-            )
-          }
+        for(let p of i.split(',[')) {
+            for(let p2 of  p.split(']')) {
+              if(p2 != "" && p2.split(',').length == 3) {
+                progression.push(
+                  { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
+                )
+              }
+            }
         }
         res.push(
           { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
         );
       }
     }
-    console.log(res);
     return res;
   }
 
