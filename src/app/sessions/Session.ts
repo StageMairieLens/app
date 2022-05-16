@@ -1,7 +1,7 @@
 
 import { Game } from '../Game'
 import { Users } from '../users/Users'
-import { SessionsComponent } from './sessions.component'
+import { Guest, SessionsComponent } from './sessions.component'
 import { Jeu } from './sessions.component'
 
 export class Session {
@@ -10,11 +10,11 @@ export class Session {
   nom: string;
   date: string;
   jeuId: Jeu[];
-  joueur: Users[];
+  joueur: Guest[];
   isActive: boolean;
   isSuivi : boolean
 
-  constructor(id : number, nom: string, date: string, jeuId: Jeu[], isActive: boolean, joueur: Users[], isSuivi : boolean) {
+  constructor(id : number, nom: string, date: string, jeuId: Jeu[], isActive: boolean, joueur: Guest[], isSuivi : boolean) {
     this.id = id;
     this.nom = nom;
     this.date = date;

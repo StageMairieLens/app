@@ -15,7 +15,7 @@ import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
 import { Session } from '../sessions/Session';
 import { join } from 'path';
-import { Jeu, SessionsComponent } from '../sessions/sessions.component';
+import { Guest, Jeu, Progression, SessionsComponent } from '../sessions/sessions.component';
 import { LoginComponent } from '../index/login/login.component';
 import { JeuxService } from '../jeux.service';
 import { Users } from '../users/Users';
@@ -130,17 +130,26 @@ export class PanelComponent implements OnInit {
     }
     return res;
   }
-
-  getJoueurs(s: string, id_session: number): Users[] {
+  
+  getJoueurs(s: string, id_session: number):  Guest[] {
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
+      let progression : Progression[] = []
       if (i.length != 0) {
+        for(let p of i.split('[')[1].split(']')) {
+          if(p != ',') {
+            progression.push(
+              { id_jeu : +p.split(',')[0], cpt_erreur : +p.split(',')[1] , progress : +p.split(',')[2]}
+            )
+          }
+        }
         res.push(
-          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+          { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
         );
       }
     }
+    console.log(res);
     return res;
   }
 

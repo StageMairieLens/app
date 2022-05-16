@@ -1,6 +1,6 @@
 import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
-import { Jeu, SessionsComponent } from '../sessions/sessions.component';
+import { Jeu, SessionsComponent, Guest, Progression } from '../sessions/sessions.component';
 import { BoyGirl } from './BoygGirl'
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -59,17 +59,26 @@ export class BoyGirlGameComponent implements OnInit {
     }
     return res;
   }
-
-  getJoueurs(s: string, id_session: number): Users[] {
+  
+  getJoueurs(s: string, id_session: number):  Guest[] {
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
+      let progression : Progression[] = []
       if (i.length != 0) {
+        for(let p of i.split('[')[1].split(']')) {
+          if(p != ',') {
+            progression.push(
+              { id_jeu : +p.split(',')[0], cpt_erreur : +p.split(',')[1] , progress : +p.split(',')[2]}
+            )
+          }
+        }
         res.push(
-          new Users(+i.split(',')[0], i.split(',')[1], id_session, +i.split(',')[3], +i.split(',')[4])
+          { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
         );
       }
     }
+    console.log(res);
     return res;
   }
 
@@ -398,7 +407,7 @@ export class BoyGirlGameComponent implements OnInit {
     let res = "";
 
     for (let j of s.joueur) {
-      res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
+      // res += j.id + ',' + j.nom + ',' + s.id + ',' + j.compteur_erreur + ',' + j.progression + ';'
     }
 
     return res;
