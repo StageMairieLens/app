@@ -463,11 +463,16 @@ export class RecopierGameComponent implements OnInit {
   }
 
   sendProgress(): void {
+
+    this.list_session = [];
+    this.recupSession(this.list_session);
+
+    setTimeout(() => {
     this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
-    console.log((this.showImageCpt / this.r!.images.length) * 100)
     this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.showImageCpt / this.r!.images.length) * 100;
     let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
     this.session_onSend_update(list)
+    },500);
   }
 
   isFinish(): boolean {
