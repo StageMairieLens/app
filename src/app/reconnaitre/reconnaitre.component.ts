@@ -25,6 +25,8 @@ interface Erreur {
 })
 export class ReconnaitreComponent implements OnInit {
   id_crea=localStorage.getItem('id_crea');
+  static firstFinish: number = 0;
+  cpt_erreur: number = 0;
   constructor(private route: ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
@@ -379,6 +381,7 @@ export class ReconnaitreComponent implements OnInit {
       this.clicked = false;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
       this.erreur_image.push({ src: this.r!.images[this.prochaine_image].src, erreur: this.compteur_image });
+      this.sendProgress();
 
 
       this.compteur_image = 0;
@@ -399,6 +402,7 @@ export class ReconnaitreComponent implements OnInit {
       setTimeout(() => {
         document.getElementById('result')!.innerHTML = '';
         document.getElementById('progressbar')!.style.width = ((this.prochaine_image / this.r!.images.length) * 100).toString() + '%';
+        this.sendProgress();
 
       },
         1600);
@@ -430,6 +434,9 @@ export class ReconnaitreComponent implements OnInit {
         document.getElementById(varia)!.classList.add('disabled');
         this.compteur += 1;
         this.compteur_image += 1;
+        this.cpt_erreur++;
+        this.sendProgress();
+
 
         document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
 
@@ -443,6 +450,84 @@ export class ReconnaitreComponent implements OnInit {
       return false;
     }
 
+  }
+
+  getSession(): Session | null {
+    for (let s of this.list_session) {
+      for (let j of s.jeuId) {
+        if (j.type == 'Reconnaitre') {
+          if (j.id_jeu == this.r!.id) {
+            return s;
+          }
+        }
+      }
+    }
+    return null
+  }
+
+  getJeuById(): number {
+    for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
+      if (this.getSession()!.jeuId[i].type == 'Reconnaitre') {
+        if (this.getSession()!.jeuId[i].id_jeu == this.r!.id) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+
+  getJoueur(): Guest | null {
+    for (let g of this.getSession()!.joueur) {
+      if (g.id == +localStorage.getItem('id_user')!) {
+        return g;
+      }
+    }
+    return null;
+  }
+
+
+  session_onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('session_update', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+      },
+
+      error: err => {
+        console.log(err);
+      },
+
+    });
+  }
+
+  sendProgress(): void {
+
+    this.list_session = [];
+    this.recupSession(this.list_session);
+
+    setTimeout(() => {
+    this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
+    this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.prochaine_image / this.r!.images.length) * 100
+    let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+    this.session_onSend_update(list)
+    },500);
+  }
+
+  isFinish(): boolean {
+    if (this.prochaine_image == this.r!.images.length) {
+      if (ReconnaitreComponent.firstFinish == 0) {
+        this.sendProgress();
+        ReconnaitreComponent.firstFinish = 1;
+      }
+      return true;
+    }
+    return false;
   }
 
 
