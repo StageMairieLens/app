@@ -42,6 +42,11 @@
           Images
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/panel/themes" role="">
+          Thémes
+        </a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <button mat-stroked-button color="primary" class="quit_button" (click)="redirect('Accueil')">Déconnexion</button>
@@ -310,4 +315,10 @@
 
 <div *ngIf="this.panel == 'images'">
   <app-images></app-images>
+</div>
+
+<!-- Themes-->
+
+<div *ngIf="this.panel == 'themes'">
+  <app-theme></app-theme>
 </div>

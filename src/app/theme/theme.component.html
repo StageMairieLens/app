@@ -1,106 +1,148 @@
-<button (click)="this.create_theme=true" *ngIf="!this.create_theme" class="btn btn-primary pull-right" >Créez un nouveau Theme</button>
-<div *ngIf="this.create_theme">
-  <button (click)="this.create_theme=false" class="btn btn-secondary pull-right"  >Revenir sur les thèmes</button>
-  <form>
-    
-    <div class="form-row">
-      <div class="col-md-6">
-        <label for="name_input" class="form-label align-middle">Choisissez le nom du theme
-          <input type="text" class="form-control form-control-color"
-             #name_input
-            (change)="this.nouveau_theme['nom']=name_input.value"
+<!-- Affichage des themes -->
+<div class="container card container_list" *ngIf="!this.create_theme">
+  <h2 class="card-header">Thémes</h2>
 
-             title="Choisissez le nom du theme">
-        </label>
-        
-      </div>
-      <h2 class="card-title text-center" style="color: darkgreen;" > Les images choisit sont:</h2>
-      <div class="card-body selectImage_container text-center align-top" >
-        <figure class="figure" *ngFor="let image of this.n_theme">
-          <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.n_theme)">
-          <i class="fa-solid fa-xmark fa-lg" ></i>
-        </span> 
-        <figcaption class="figure-caption text-center">{{image}}</figcaption>
-        
-      </figure>
+  <div class="card-body">
+    <div class="row" *ngIf="!this.create_theme">
+      <div class="col-md-12 text-center">
+        <button mat-raised-button color="primary" style="padding : 1%; font-size : 24px"
+          (click)="this.create_theme = true">
+          <i class="fa-solid fa-circle-plus fa-lg" style="margin-right : 2% ; margin-bottom : 1%"></i>
+          Créer un thème
+        </button>
       </div>
     </div>
-  </form>
-  
-  <button class="btn btn-info" (click)="recup(this.getListImage())"  *ngIf="!this.affiche_image2"  (click)="this.affiche_image2=true"    >Voir les images </button>
-  <button class="btn btn-info" *ngIf="this.affiche_image2" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
-  
-  <h2 class="card-title text-center"style="color: black;">Choisissez les images</h2>
-  <div class="card-body selectImage_container text-center align-top" >
-        <div *ngIf="this.affiche_image2">
-        <figure class="figure" *ngFor="let image of this.getListImage()">
-            <img (click)="this.n_theme.push(image.id)" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-          <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
-            <i class="fa-solid fa-xmark fa-lg"></i>
-          </span> -->
-            <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
+
+    <div class="row" style="margin-top : 2%">
+      <div class="col-md-12 text-center">
+        <h2 class="card-title">Liste des thèmes</h2>
+
+        <div *ngIf="this.test.length != 0">
+          <figure class="figure " *ngFor="let image of this.test">
+            <img style="margin-left : 5px" (click)="this.recup_image=image" (click)="this.affiche_image=true"
+              class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px"
+              height="200px" class="figure-img img-fluid rounded" alt="...">
+            <a class="remove-image" (click)="onSend_delete(image.id_theme)" (click)="remove2(image.id_theme)"
+              style="display: inline;" title="Supprimer l'image">&#215;</a>
+
+            <figcaption class="figure-caption text-center">{{image.nom}}</figcaption>
+
           </figure>
         </div>
+
+        <div *ngIf="this.test.length == 0">
+          <div class="alert alert-danger justify-content-center text-center" role="alert">
+            <h2 class="alert-heading">
+              <i class="fa-solid fa-warning fa-xl" style="margin-right : 2%"></i>
+              Il n'y a pas de thèmes existants
+            </h2>
+
+          </div>
+        </div>
+
+
+      </div>
     </div>
-    
-  <button class="btn btn-success " *ngIf="this.nouveau_theme['nom'] && this.n_theme.length " (click)="this.nouveau_theme['id']=this.n_theme" (click)="onSend(this.nouveau_theme)">Envoyer les données</button>
+  </div>
 </div>
 
 
-<div *ngIf="!this.create_theme">
-  <p>Pour modifier un thème, cliquez sur l'image du thème.</p>
-  <form>
-    
-    <div class="form-row">
-      <div class="col-md-6">
-        <figure class="figure " *ngFor="let image of this.test">
-            <img style="margin-left : 5px" (click)="this.recup_image=image"  (click)="this.affiche_image=true" class="delete" src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image.id[0]}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="onSend_delete(image.id_theme)"(click)="remove2(image.id_theme)" >
-            <i class="fa-solid fa-xmark fa-lg"></i>
-          </span> 
-          
-          <figcaption class="figure-caption text-center">{{image.nom}}</figcaption>
-          
-          </figure>
+<!-- Création théme -->
+<div class="container card container_list" *ngIf="this.create_theme">
+  <h2 class="card-header">Création d'un thèmes </h2>
+
+  <div class="card-body">
+    <div class="row" *ngIf="this.create_theme">
+      <div class="col-md-12 text-center">
+        <button mat-raised-button style="padding : 1%; font-size : 24px; background : green ; color : white"
+          (click)="this.create_theme = false">
+          <i class="fa-solid fa-angles-left fa-lg" style="padding-right : 2% ; margin-bottom : 1%"></i>
+          Revenir à l'acceuil des thèmes
+        </button>
       </div>
+
     </div>
-  </form>
-    
-    <div *ngIf="this.affiche_image">
-      
-        <div class="card-body selectImage_container text-center align-top" >
-      <figure class="figure" *ngFor="let image of this.recup_image.id">
-          <img   src='http://92.154.61.105:8080/~nacer/vue_image.php?id_image={{image}}' width="200px" height="200px" class="figure-img img-fluid rounded" alt="..." >
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="remove(image,this.recup_image.id)">
-          <i class="fa-solid fa-xmark fa-lg" ></i>
-        </span> 
-        <figcaption class="figure-caption text-center">{{image}}</figcaption>
-        
-      </figure>
+
+    <div class="text-center">
+      <mat-divider style="background : #ececec ; width : 70%; display : inline-block"></mat-divider>
     </div>
-    
-      
-    
-      <button (click)="recup(this.getListImage())" (click)="this.affiche_image2=true" *ngIf="!this.affiche_image2" >Voir les images </button>
-      <button *ngIf="this.affiche_image2" (click)="noImage()" (click)="this.affiche_image2=false">Cacher les images </button>
-      <h2 class="card-title text-center">Choisissez les images</h2>
-      <div class="card-body selectImage_container text-center align-top" >
-    
-    
-        <div *ngIf="this.affiche_image2">
-          
-        <figure class="figure" *ngFor="let image of this.getListImage()">
-            <img class="delete" (click)="this.recup_image.id.push(image.id)" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded" alt="...">
-          <!-- <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%">
-            <i class="fa-solid fa-xmark fa-lg"></i>
-          </span> -->
-            <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
-          </figure>
+
+
+    <div class="form-row text-center">
+      <div class="col-md-12">
+        <label for="name_input" class="form-label align-middle"><b>Nom</b>
+          <input type="text" placeholder="Entrez le nom du thème" style="width : 90%"
+            class="form-control form-control-color" #name_input (change)="this.nouveau_theme['nom']=name_input.value"
+            title="Choisissez le nom du theme">
+        </label>
+
+        <h3 class="card-title">Choississez les images du thèmes</h3>
+
+        <div class="row" style="margin-top : 2%">
+          <div class="col-md-12 text-center">
+            <button mat-raised-button
+              style="width : 30%;background : rgb(16, 72, 224) ; color : white; font-size : 25px"
+              (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image">
+              <i class="fa-solid fa-eye" style="margin-bottom : 1%; margin-right : 2%"></i>
+              Voir les
+              images</button>
+            <button mat-raised-button
+              style="width : 30%;background : rgb(16, 72, 224) ; color : white; font-size : 25px"
+              *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">
+              <i class="fa-solid fa-eye-slash" style="margin-bottom : 1%; margin-right : 2%"></i>
+
+              Cacher les
+              images</button>
+          </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="card-body selectImage_container text-center align-top">
+              <div *ngIf="this.affiche_image">
+                <h3 class="card-title text-center">Choisissez les images</h3>
+
+                <figure class="figure" *ngFor="let image of this.getListImage()">
+                  <img class="delete" src="{{image.getSrc()}}" width="200px" height="200px"
+                    class="figure-img img-fluid rounded img-thumbnail" alt="...">
+
+                  <a *ngIf="this.n_theme.indexOf(image.id,0) == -1" class="add-image"
+                    (click)="this.n_theme.push(image.id)" style="display: inline;" title="Ajouter l'image">
+                    +
+                  </a>
+
+                  <a *ngIf="this.n_theme.indexOf(image.id,0) != -1" class="remove-image"
+                    (click)="remove(image.id,this.n_theme)" style="display: inline;" title="Retirer l'image">
+                    <i class="fa-solid fa-xmark fa-sm"></i>
+                  </a>
+
+                  <figcaption class="figure-caption text-center">{{image.getNom()}}
+                    <i *ngIf="this.n_theme.indexOf(image.id,0) != -1" class="fa-solid fa-circle-check fa-lg"
+                      style="color : green"></i>
+                  </figcaption>
+
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <button mat-raised-button *ngIf="this.nouveau_theme['nom'] && this.n_theme.length "
+            (click)="this.nouveau_theme['id']=this.n_theme" (click)="onSend(this.nouveau_theme)">
+            <i class="fa-solid fa-paper-plane fa-lg" style="margin-right : 2%; margin-bottom : 1%"></i>
+            Créer le thème
+            </button>
+          </div>
+
+        </div>
+
+
+      </div>
+
     </div>
-    <button  (click)="onSend_update(this.recup_image)" class="btn btn-primary pull-right">Valider</button>
-    
-    </div>
-  
+  </div>
+
 </div>

@@ -10,93 +10,93 @@ import { Router } from '@angular/router';
   styleUrls: ['./theme.component.css']
 })
 export class ThemeComponent implements OnInit {
-  affiche_image:Boolean=false;
-  affiche_image2:Boolean=false;
-  create_theme:Boolean=false;
-  n_theme:any=[];
-  
-  pro_img=0;
-  affiche:Boolean=false;
-  temps:number=0;
-  test:any=[];
-  data:any=[];
-  recup_image:any=[];
-  nom:string="";
-  liste_id=[];
-  id_crea=localStorage.getItem('id_crea');
-  nouveau_theme:any={id_crea:Number(this.id_crea)};
-  list:any={nom:this.nom,id:this.liste_id.toString(),id_crea:Number(this.id_crea)};
-  constructor(private jeuxService: JeuxService,private router: Router) { }
+  affiche_image: Boolean = false;
+  affiche_image2: Boolean = false;
+  create_theme: Boolean = false;
+  n_theme: any = [];
+
+  pro_img = 0;
+  affiche: Boolean = false;
+  temps: number = 0;
+  test: any = [];
+  data: any = [];
+  recup_image: any = [];
+  nom: string = "";
+  liste_id = [];
+  id_crea = localStorage.getItem('id_crea');
+  nouveau_theme: any = { id_crea: Number(this.id_crea) };
+  list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
+  constructor(private jeuxService: JeuxService, private router: Router) { }
   static list_image: Image[] = [];
   ngOnInit(): void {
     this.recup2(this.data);
     console.log(this.id_crea);
-    
+
   }
-  
+
   public getListImages(): Image[] {
     return ThemeComponent.list_image;
   }
   files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
-    if(this.pro_img<0){
-      this.pro_img=0;
+    if (this.pro_img < 0) {
+      this.pro_img = 0;
     }
     console.log(event);
     this.files.push(...event.addedFiles);
     console.log(this.files[this.pro_img].type);
     //this.pro_img+=1;
   }
-  
+
   onRemove(event: File) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
-    this.pro_img-=1;
+    this.pro_img -= 1;
   }
   recup(donne: any) {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
-  
+
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
-        donne.push(new Image(data[i].nom,data[i].id_image));
+        donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
-  
-  
+
+
   }
   recup2(donne: any) {
     this.jeuxService.recup_theme(donne).subscribe(data => {
-  
+
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
-        donne.push({id:data[i].id_theme,nom:data[i].nom_theme,id_image:data[i].id_image,id_crea:data[i].id_crea});
-        var a=data[i].id_image.split(',');
-        this.test.push({id_theme:data[i].id_theme,id:a,nom:data[i].nom_theme,id_crea:data[i].id_crea});
-        
+        donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea });
+        var a = data[i].id_image.split(',');
+        this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea });
+
       }
       console.log(this.test);
     })
-  
-  
+
+
   }
-  
-  getListImage() : Image[] {
-    if(this.affiche_image == true || this.affiche_image2 == true){
-      
+
+  getListImage(): Image[] {
+    if (this.affiche_image == true || this.affiche_image2 == true) {
+
       return ThemeComponent.list_image;
-      
-    }else{
+
+    } else {
       return ThemeComponent.list_image = [];
     }
   }
-  noImage():Image[]{
+  noImage(): Image[] {
     return ThemeComponent.list_image = [];
   }
 
   onSend(list: any) {
-    var list2=list;
-    list2.id=list2.id.toString();
+    var list2 = list;
+    list2.id = list2.id.toString();
     console.log(list2);
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
@@ -133,14 +133,14 @@ export class ThemeComponent implements OnInit {
 
       error: err => {
         console.log(err);
-        
+
       },
 
     });
   }
   onSend_update(list: any) {
-    var list2=list;
-    list2.id=list2.id.toString();
+    var list2 = list;
+    list2.id = list2.id.toString();
     console.log(list2);
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
@@ -151,7 +151,7 @@ export class ThemeComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res.name);
-        
+
       },
 
       error: err => {
@@ -161,39 +161,39 @@ export class ThemeComponent implements OnInit {
 
     });
   }
-  aff(test:any){
+  aff(test: any) {
     console.log(test);
   }
-  ajoute(id:any,liste : any): any{
-    if(!liste.includes(id)){
+  ajoute(id: any, liste: any): any {
+    if (!liste.includes(id)) {
       liste.push(id.toString());
     }
   }
-  remove(id:any,liste : any): any{
+  remove(id: any, liste: any): any {
     //console.log(liste);
-    for(var i =0;liste[i]!=null;i++){
+    for (var i = 0; liste[i] != null; i++) {
       //console.log(liste);
-      if(liste[i]== id){
+      if (liste[i] == id) {
         //console.log(liste[i]);
         liste.splice(i, 1);
-        return ;
-        
+        return;
+
       }
       console.log(liste);
     }
   }
   reloadCurrentPage() {
     window.location.reload();
-   }
-   remove2(id:any): any{
+  }
+  remove2(id: any): any {
     //console.log(liste);
     console.log(id);
-    for(var i =0;this.test[i]!=null;i++){
+    for (var i = 0; this.test[i] != null; i++) {
       //console.log(liste);
-      if(this.test[i].id_theme== id){
+      if (this.test[i].id_theme == id) {
         //console.log(liste[i]);
         this.test.splice(i, 1);
-        
+
       }
       console.log(this.test);
     }
