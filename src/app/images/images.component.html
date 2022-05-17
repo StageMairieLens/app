@@ -1,42 +1,49 @@
+<div class="card container container_list">
+  <h5 class="card-header">Images</h5>
 
-<ngx-dropzone (change)="onSelect($event)" [expandable]="true"  [processDirectoryDrop]="true"  >
-	<ngx-dropzone-label>Déposez ici</ngx-dropzone-label>
-	<ngx-dropzone-image-preview (click)="onRemove(f)" cdkDrag ngProjectAs="ngx-dropzone-preview"   *ngFor="let f of files" [file]="f"  (change)="onRemove(f)" >
-		<ngx-dropzone-label >{{ f.name }} ({{ f.type }})
+  <ngx-dropzone (change)="onSelect($event)" [expandable]="true" [processDirectoryDrop]="true">
+    <ngx-dropzone-label>Déposez ici</ngx-dropzone-label>
+    <ngx-dropzone-image-preview (click)="onRemove(f)" cdkDrag ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+      [file]="f" (change)="onRemove(f)">
+      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})
 
 
-		</ngx-dropzone-label>
-	  </ngx-dropzone-image-preview>
-</ngx-dropzone>
-<div>
-<button *ngIf="this.files.length" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()" (click)="this.affiche_image=false" >Envoyer les images</button>
-</div>
+      </ngx-dropzone-label>
+    </ngx-dropzone-image-preview>
+  </ngx-dropzone>
 
-<button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image"  >Voir les images </button>
-<button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>
-<h2 class="card-title text-center">Choisissez les images</h2>
-<div class="card-body selectImage_container text-center align-top" >
-	<div *ngIf="this.affiche_image">
+  <div>
+    <button *ngIf="this.files.length" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()"
+      (click)="this.affiche_image=false">Envoyer les images</button>
+  </div>
 
-		<figure style="background-color: black ;" class="figure" *ngFor="let image of this.getListImage()">
-			<img class="delete" src="{{image.getSrc()}}" width="200px" height="200px" class="figure-img img-fluid rounded img-thumbnail" alt="...">
-		<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left : -2%" (click)="onSend_delete(image.id)"(click)="remove(image.id)">
-			<i class="fa-solid fa-xmark fa-lg"></i>
-		</span> 
-			<figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
-		</figure>
-	</div>
-</div>
+  <button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image">Voir les
+    images </button>
+  <button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>
+  <h2 class="card-title text-center">Choisissez les images</h2>
+  <div class="card-body selectImage_container text-center align-top">
+    <div *ngIf="this.affiche_image">
 
-<div *ngIf="this.affiche">
-	
-	<div class="alert alert-success" role="alert">
-		<h4 class="alert-heading">Veuillez patienter </h4>
-		<p>Les Images sont en cours de traitement.</p>
-		<mat-spinner></mat-spinner>
-		<hr>
-		
-		<p>Chargement: {{ this.temps }}/ {{ this.files.length }} </p>
-	  </div>
+      <figure class="figure" *ngFor="let image of this.getListImage()">
+        <img class="delete" src="{{image.getSrc()}}" width="200px" height="200px"
+          class="figure-img img-fluid rounded img-thumbnail" alt="...">
+        <a class="remove-image" (click)="onSend_delete(image.id)" (click)="remove(image.id)" style="display: inline;">&#215;</a>
+        <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div *ngIf="this.affiche">
+
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Veuillez patienter </h4>
+      <p>Les Images sont en cours de traitement.</p>
+      <mat-spinner></mat-spinner>
+      <hr>
+
+      <p>Chargement: {{ this.temps }}/ {{ this.files.length }} </p>
+    </div>
+
+  </div>
 
 </div>

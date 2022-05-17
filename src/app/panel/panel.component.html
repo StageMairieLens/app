@@ -36,6 +36,12 @@
           <a class="dropdown-item" href="/panel/{{g}}/create">Créer un jeu {{g}}</a>
         </div>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/panel/images" role="">
+          Images
+        </a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <button mat-stroked-button color="primary" class="quit_button" (click)="redirect('Accueil')">Déconnexion</button>
@@ -298,4 +304,10 @@
     <app-sessions [play]="false" [edit]="true" [selected_session]="this.getSession()"></app-sessions>
   </div>
 
+</div>
+
+<!-- IMAGES -->
+
+<div *ngIf="this.panel == 'Images'">
+  <app-images></app-images>
 </div>

@@ -301,7 +301,7 @@ export class PanelComponent implements OnInit {
           }
         }
 
-        if (this.panel == 'sessions') {
+        else if (this.panel == 'sessions') {
           this.panel_option = this.route.snapshot.paramMap.get('param2');
 
           if (this.panel_option != null) {
