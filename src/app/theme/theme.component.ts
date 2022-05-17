@@ -23,6 +23,7 @@ export class ThemeComponent implements OnInit {
   recup_image: any = [];
   nom: string = "";
   liste_id = [];
+  hover_edit : boolean = false;
   id_crea = localStorage.getItem('id_crea');
   nouveau_theme: any = { id_crea: Number(this.id_crea) };
   list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
@@ -32,6 +33,15 @@ export class ThemeComponent implements OnInit {
     this.recup2(this.data);
     console.log(this.id_crea);
 
+  }
+
+  edit(element: any): void {
+    this.recup_image = element;
+    this.create_theme = true;
+    for(let i = 0 ; i<element.id.length ; i++) {
+      this.n_theme.push(element.id[i])
+    }
+    this.nouveau_theme['nom'] = element.nom;
   }
 
   public getListImages(): Image[] {
