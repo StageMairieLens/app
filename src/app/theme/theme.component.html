@@ -56,7 +56,7 @@
     <div class="row" *ngIf="this.create_theme">
       <div class="col-md-12 text-center">
         <button mat-raised-button style="padding : 1%; font-size : 24px; background : green ; color : white"
-          (click)="this.create_theme = false">
+          (click)="this.create_theme = false ; this.recup_image = null ;this.nouveau_theme['nom'] = '' ; this.n_theme = []">
           <i class="fa-solid fa-angles-left fa-lg" style="padding-right : 2% ; margin-bottom : 1%"></i>
           Revenir à l'acceuil des thèmes
         </button>
@@ -140,8 +140,9 @@
             <i class="fa-solid fa-paper-plane fa-lg" style="margin-right : 2%; margin-bottom : 1%"></i>
             Créer le thème
             </button>
-            <button mat-raised-button (click)="this.recup_image.nom = this.nouveau_theme['nom'];this.recup_image.id = this.n_theme;onSend_update(this.recup_image)">
-            <i class="fa-solid fa-paper-plane fa-lg" style="margin-right : 2%; margin-bottom : 1%"></i>
+            <button *ngIf="this.recup_image != null && this.nouveau_theme['nom'] && this.n_theme.length" mat-raised-button (click)="this.recup_image.nom = this.nouveau_theme['nom'];this.recup_image.id = this.n_theme;onSend_update(this.recup_image)"
+            style= "font-size : 25px ; padding : 2% ; background : rgb(221, 209, 36)">
+            <i class="fa-solid fa-floppy-disk fa-lg" style="margin-right : 2%; margin-bottom : 1%"></i>
             Sauvegarder le thème
             </button>
           </div>
