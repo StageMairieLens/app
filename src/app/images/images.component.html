@@ -18,7 +18,11 @@
       <div class="col-md-12 text-center">
         <h2 class="card-title">Ajouter des images</h2>
         <ngx-dropzone (change)="onSelect($event)">
-          <ngx-dropzone-label>Déposez ici</ngx-dropzone-label>
+          <ngx-dropzone-label>Déposez ici<br>
+              <i class="fa-solid fa-warning fa-2lg"></i>
+              Ne sont accpeter que les fichier images<br>
+             ( .png / .jpg / .jpeg, etc... )
+          </ngx-dropzone-label>
           <ngx-dropzone-image-preview [file]="f" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
           </ngx-dropzone-image-preview>
@@ -44,6 +48,23 @@
             <hr>
 
             <p>Chargement: {{ this.temps }}/ {{ this.files.length }} </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngIf="this.showAlert" class="col-md-12 text-center">
+        <div>
+
+          <div class="alert alert-danger justify-content-center text-center" role="alert">
+            <button mat-fab aria-label="Fermer" (click)="this.showAlert = false" style="position : relative ; float : right">
+              <i class="fa-solid fa-xmark fa-2xl"></i>
+            </button>
+            <h4 class="alert-heading">
+              <i class="fa-solid fa-warning fa-2lg"></i>
+              Erreur</h4>
+            <p>Le(s) fichier(s) que vous souhaitez envoyer n'est pas une image !</p>
+
           </div>
 
         </div>
