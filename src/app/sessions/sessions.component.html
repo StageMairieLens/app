@@ -1,6 +1,6 @@
 <!-- Jeux -->
 <div *ngIf="this.play">
-  <div *ngIf="this.getSession() != null">
+  <div *ngIf="this.getSession() != null && this.selected_session == null">
 
 
     <div *ngIf="!this.join">
@@ -39,6 +39,12 @@
               <i class="fa fa-check" (click)="connect(input_name.value)"></i>
             </button>
           </div>
+          <div class="align-middle text-center redirect_button">
+            <button mat-raised-button color="primary" aria-label="Valider" [routerLink]="['']">
+              <i class="fa-solid fa-angles-left fa-xl"></i>
+              Retourner à l'acceuil
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -62,7 +68,8 @@
           <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
 
             <mat-card style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%"
-              *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3" [ngStyle]="{'opacity' : (this.getProgressionJeu(g.type,g.id_jeu) == 100) ? 0.3 : 1}">
+              *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3"
+              [ngStyle]="{'opacity' : (this.getProgressionJeu(g.type,g.id_jeu) == 100) ? 0.3 : 1}">
 
               <mat-card-header *ngIf="g.type == 'Recopier'" class="justify-content-center">
                 <mat-card-title style="font-size : 23px">
@@ -136,7 +143,8 @@
                   <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
                 </button>
               </mat-card-actions>
-              <mat-card-footer *ngIf="this.getProgressionJeu(g.type,g.id_jeu) == 100" style="background : #ececec; padding : 4%; font-size : 30px">
+              <mat-card-footer *ngIf="this.getProgressionJeu(g.type,g.id_jeu) == 100"
+                style="background : #ececec; padding : 4%; font-size : 30px">
                 <i class="fa-solid fa-trophy fa-lg" style="margin-right : 4px ; color : #ff6c00 ; "></i>
                 <span style="color : rgb(35, 214, 18);">
                   <b>Terminé</b>
@@ -458,28 +466,176 @@
       </button>
     </div>
 
-    <!-- <div *ngIf="this.selected_session!.jeu == 'Recopier'">
-      <app-recopier-game [r]="this.getSessionRecopier(this.selected_session!)" [showTitle]="false"></app-recopier-game>
-    </div>
-    <div *ngIf="this.selected_session!.jeu == 'Memory'">
-      <app-memory [showTitle]="false" [game]="this.getSessionMemory(this.selected_session!)"></app-memory>
-    </div>
-    <div *ngIf="this.selected_session!.jeu == 'Reconnaitre'">
-      <app-reconnaitre [r]="this.getSessionReconnaitre(this.selected_session!)" [showTitle]="false">
-      </app-reconnaitre>
-    </div>
-    <div *ngIf="this.selected_session!.jeu == 'Abecedaire'">
-      <app-abecedaire [showTitle]="false" [game]="this.getSessionAbecedaire(this.selected_session!)">
-      </app-abecedaire>
-    </div>
-    <div *ngIf="this.selected_session!.jeu == 'Fille&Garçon'">
-      <app-boy-girl-game [showTitle]="false" [bg]="this.getSessionBoyGirl(this.selected_session!)">
-      </app-boy-girl-game>
-    </div>
-    <div *ngIf="this.selected_session!.jeu == 'Puzzle'">
-      <app-puzzle [r]="this.getSessionPuzzle(this.selected_session!)" [showTitle]="false"></app-puzzle>
+    <div class="form-row" *ngIf="!this.inPlay">
+      <div class="col-md-12 text-center">
+        <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
 
-    </div> -->
+        <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
+
+          <mat-card style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%"
+            *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3">
+
+            <mat-card-header *ngIf="g.type == 'Recopier'" class="justify-content-center">
+              <mat-card-title style="font-size : 23px">
+                <b>
+                  <i class="fa-solid fa-pen fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                  {{g.type}}
+                </b>
+              </mat-card-title>
+            </mat-card-header>
+            <img *ngIf="g.type == 'Recopier'" mat-card-image src="../../assets/images/thumb/recopier_mot.png">
+
+            <mat-card-header *ngIf="g.type == 'Reconnaitre'" class="justify-content-center">
+              <mat-card-title style="font-size : 23px">
+                <b>
+                  <i class="fa-solid fa-eye fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                  {{g.type}}
+                </b>
+              </mat-card-title>
+            </mat-card-header>
+            <img *ngIf="g.type == 'Reconnaitre'" mat-card-image src="../../assets/images/thumb/reconnaissance_mot.png">
+
+            <mat-card-header *ngIf="g.type == 'Memory'" class="justify-content-center">
+              <mat-card-title style="font-size : 23px">
+                <b>
+                  <i class="fa-solid fa-brain fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                  {{g.type}}
+                </b>
+              </mat-card-title>
+            </mat-card-header>
+            <img *ngIf="g.type == 'Memory'" mat-card-image src="../../assets/images/thumb/memory.png">
+
+            <mat-card-header *ngIf="g.type == 'Abecedaire'" class="justify-content-center">
+              <mat-card-title style="font-size : 23px">
+                <b>
+                  <i class="fa-solid fa-brain fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                  {{g.type}}
+                </b>
+              </mat-card-title>
+            </mat-card-header>
+            <img *ngIf="g.type == 'Abecedaire'" mat-card-image src="../../assets/images/thumb/anagramme.png">
+
+
+            <mat-card-header *ngIf="g.type == 'Fille&Garçon'" class="justify-content-center">
+              <mat-card-title style="font-size : 23px">
+                <b>
+                  <i class="fa-solid fa-children fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                  {{g.type}}
+                </b>
+              </mat-card-title>
+            </mat-card-header>
+            <img *ngIf="g.type == 'Fille&Garçon'" mat-card-image src="../../assets/images/thumb/">
+
+            <mat-card-header *ngIf="g.type == 'Puzzle'" class="justify-content-center">
+              <mat-card-title style="font-size : 23px">
+                <b>
+                  <i class="fa-solid fa-puzzle-piece fa-xl" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+                  {{g.type}}
+                </b>
+              </mat-card-title>
+            </mat-card-header>
+            <img *ngIf="g.type == 'Puzzle'" mat-card-image src="../../assets/images/thumb/puzzle.png">
+
+            <mat-card-actions class="align-middle" style="height : auto">
+              <button mat-fab color="primary"
+                style="background : green" (click)="playGame(g.type,g.id_jeu)" aria-label="Prévisualiser le jeu">
+                <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+
+        </div>
+
+        <div class="row text-center" *ngIf="this.getSession()!.jeuId.length == 0"
+          style="width : 85%; display : inline-flex"
+          class="alert alert-danger align-items-center justify-content-center" role="alert">
+          <i class="fa-solid fa-warning fa-2x" style="margin-bottom : 1%; margin-right : 1%"></i>
+          <div>
+            <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la séssion</p>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <mat-divider
+            style="margin-top : 3%; margin-bottom : 3% ; background : white; width : 85% ; display : inline-block">
+          </mat-divider>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="this.inPlay">
+
+      <div *ngIf="this.jeu == 'Recopier'">
+        <app-recopier-game [play]="false"></app-recopier-game>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red"  (click)="this.jeu = ''; this.inPlay = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Revenir à la listes des jeux</span>
+          </button>
+        </div>
+        <app-recopier-game [r]="this.recopier" [showTitle]="false"></app-recopier-game>
+      </div>
+
+      <div *ngIf="this.jeu == 'Memory'">
+        <app-memory [play]="false"></app-memory>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red" (click)="this.jeu = ''; this.inPlay = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Revenir à la listes des jeux</span>
+          </button>
+        </div>
+        <app-memory [game]="this.memory" [showTitle]="false"></app-memory>
+      </div>
+
+      <div *ngIf="this.jeu == 'Reconnaitre'">
+        <app-reconnaitre [play]="false"></app-reconnaitre>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red"  (click)="this.jeu = ''; this.inPlay = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Revenir à la listes des jeux</span>
+          </button>
+        </div>
+        <app-reconnaitre [r]="this.reconnaitre" [showTitle]="false"></app-reconnaitre>
+      </div>
+
+
+      <div *ngIf="this.jeu == 'Abecedaire'">
+        <app-abecedaire [play]="false"></app-abecedaire>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red"  (click)="this.jeu = ''; this.inPlay = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Revenir à la listes des jeux</span>
+          </button>
+        </div>
+        <app-abecedaire [game]="this.abecedaire" [showTitle]="false"></app-abecedaire>
+
+      </div>
+
+      <div *ngIf="this.jeu == 'Puzzle'">
+        <app-puzzle [play]="false"></app-puzzle>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red"  (click)="this.jeu = ''; this.inPlay = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Revenir à la listes des jeux</span>
+          </button>
+        </div>
+        <app-puzzle [r]="this.puzzle" [showTitle]="false"></app-puzzle>
+
+      </div>
+
+      <div *ngIf="this.jeu == 'Fille&Garçon'">
+        <app-boy-girl-game [play]="false"></app-boy-girl-game>
+        <div class="col-md-12 text-center sortButton">
+          <button mat-raised-button style="background-color : red"  (click)="this.jeu = ''; this.inPlay = false" color="primary">
+            <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+            <span>Revenir à la listes des jeux</span>
+          </button>
+        </div>
+        <app-boy-girl-game [bg]="this.boyGirl" [showTitle]="false"></app-boy-girl-game>
+
+      </div>
+
+    </div>
   </div>
 </div>
 

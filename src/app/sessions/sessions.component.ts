@@ -159,7 +159,7 @@ export class SessionsComponent implements OnInit {
   @Input() preview: boolean = false;
   @Input() edit: boolean = false;
   @Input() view: boolean = false;
-  inPlay: boolean = false;
+  @Input() inPlay: boolean = false;
 
   displayedColumns: string[] = ['Active', 'Id', 'Nom', 'Date', 'Jeu', 'Nombre de joueurs', 'Actions'];
   static sessionActive: Session[] = [];
@@ -579,6 +579,7 @@ export class SessionsComponent implements OnInit {
   previsualiserGame(element: Session): void {
     this.preview = true;
     this.showList = false;
+    this.session_id = element.id;
     this.selected_session = element;
   }
 
@@ -1191,6 +1192,34 @@ export class SessionsComponent implements OnInit {
         break;
     }
   }
+
+  playGamePreview(type: string, id: number): void {
+    this.inPlay = true;
+    this.jeu = type;
+
+    switch (type) {
+      case 'Recopier':
+        this.recopier = this.getRecopier(id);
+        break;
+      case 'Memory':
+        this.memory = this.getMemory(id);
+        break;
+      case 'Reconnaitre':
+        this.reconnaitre = this.getReconnaitre(id);
+        break;
+      case 'Abecedaire':
+        this.abecedaire = this.getAbecedaire(id);
+        break;
+      case 'Fille&Garçon':
+        this.boyGirl = this.getBoyGirl(id);
+        break;
+      case 'Puzzle':
+        this.puzzle = this.getPuzzle(id);
+        break;
+    }
+  }
+
+
 
   getJeuId(): number {
     for (let i = 0; i < this.selected_session!.jeuId.length; i++) {
