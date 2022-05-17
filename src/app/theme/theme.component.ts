@@ -20,7 +20,7 @@ export class ThemeComponent implements OnInit {
   temps: number = 0;
   test: any = [];
   data: any = [];
-  recup_image: any = [];
+  recup_image: any | null = null;
   nom: string = "";
   liste_id = [];
   hover_edit : boolean = false;
