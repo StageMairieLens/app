@@ -43,6 +43,7 @@ figure {
 
 .figure-caption {
   color: white;
+  font-size : 22px;
 }
 
 figure img:hover {
@@ -180,11 +181,11 @@ button {
   .remove-image:hover {
    background: #E54E4E;
     padding: 3px 7px 5px;
-    top: -11px;
-  right: -11px;
+    top: -8px;
+  right: -8px;
   }
   .remove-image:active {
    background: #E54E4E;
-    top: -10px;
-  right: -11px;
+    top: -8px;
+  right: -8px;
   }
