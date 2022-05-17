@@ -194,6 +194,27 @@ export class SessionsComponent implements OnInit {
     SessionsComponent.sessionActive = [];
     PanelComponent.sessionActive = [];
 
+    this.recupImage(this.list_image);
+
+
+    setTimeout(() => {
+      this.recupRecopier(this.recopier_list);
+      this.recupMemory(this.memory_list);
+      this.recupReconnaitre(this.reconnaitre_list);
+      this.recupAbecedaire(this.abecedaire_list);
+      this.recupBoyGirl(this.boygirl_list);
+      this.recupPuzzle(this.puzzle_list);
+      this.recup(this.data)
+    }, 100)
+
+
+    setTimeout(() => {
+      for (let s of this.data) {
+        if (s.isActive) {
+          SessionsComponent.sessionActive.push(s);
+        }
+      }
+    }, 300)
 
   }
   data: Session[] = [];
@@ -336,28 +357,7 @@ export class SessionsComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.recupImage(this.list_image);
 
-
-    setTimeout(() => {
-      this.recupRecopier(this.recopier_list);
-      this.recupMemory(this.memory_list);
-      this.recupReconnaitre(this.reconnaitre_list);
-      this.recupAbecedaire(this.abecedaire_list);
-      this.recupBoyGirl(this.boygirl_list);
-      this.recupPuzzle(this.puzzle_list);
-      this.recup(this.data)
-    }, 100)
-
-
-    setTimeout(() => {
-      for (let s of this.data) {
-        if (s.isActive) {
-          SessionsComponent.sessionActive.push(s);
-          PanelComponent.sessionActive.push(s);
-        }
-      }
-    }, 200)
 
     console.log(this.data)
     setTimeout(() => {

@@ -30,6 +30,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class PanelComponent implements OnInit {
 
   jeu: string | null = "";
+  ses: SessionsComponent;
 
 
   recupRecopier(tab: any) {
@@ -191,6 +192,8 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
+    this.ses = new SessionsComponent(this.router,this.route,this.jeuxService);
+
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -392,12 +395,6 @@ export class PanelComponent implements OnInit {
           }
         }
       }
-
-      for (let s of this.sessions) {
-        if (s.isActive) {
-          PanelComponent.sessionActive.push(s);
-        }
-      }
     }, 500)
 
 
@@ -464,7 +461,7 @@ export class PanelComponent implements OnInit {
   }
 
   getSessionActive(): Session[] {
-    return PanelComponent.sessionActive;
+    return SessionsComponent.sessionActive;
   }
 
 
