@@ -20,7 +20,7 @@
         <ngx-dropzone (change)="onSelect($event)">
           <ngx-dropzone-label>Déposez ici<br>
               <i class="fa-solid fa-warning fa-2lg"></i>
-              Ne sont accpeter que les fichier images<br>
+              Ne sont accpter que les fichier images<br>
              ( .png / .jpg / .jpeg, etc... )
           </ngx-dropzone-label>
           <ngx-dropzone-image-preview [file]="f" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
