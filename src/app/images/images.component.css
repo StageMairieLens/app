@@ -27,6 +27,12 @@
   background: rgb(209, 42, 12);
 }
 
+ngx-dropzone-label {
+  color : black;
+  opacity : .8;
+  font-size : 18px;
+}
+
 /* .selectImage_container {
   display: inline-block;
   width: 45%;

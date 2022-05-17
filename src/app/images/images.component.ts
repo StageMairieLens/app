@@ -103,7 +103,7 @@ onSend(pro_img2:number){
       console.log(err);
       this.temps+=1;
       console.log(this.temps);
-     
+
       if(this.temps>=this.files.length){
         this.redirect();
       }
@@ -159,7 +159,7 @@ onSend_delete(id: any) {
 
     error: err => {
       console.log(err);
-      
+
     },
 
   });
@@ -167,7 +167,7 @@ onSend_delete(id: any) {
 
 getListImage() : Image[] {
   if(this.affiche_image == true){
-    
+
     return ImagesComponent.list_image;
   }else{
     return ImagesComponent.list_image = [];
@@ -184,9 +184,9 @@ remove(id:any): any{
     if(ImagesComponent.list_image[i].id== id){
       console.log(ImagesComponent.list_image[i]);
       ImagesComponent.list_image.splice(i, 1);
-      
+
     }
-    
+
   }
   console.log(ImagesComponent.list_image);
 }

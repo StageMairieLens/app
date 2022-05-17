@@ -13,44 +13,81 @@
     </ngx-dropzone-image-preview>
   </ngx-dropzone> -->
 
-  <ngx-dropzone (change)="onSelect($event)">
-    <ngx-dropzone-label>Déposez ici</ngx-dropzone-label>
-    <ngx-dropzone-image-preview [file]="f" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-    </ngx-dropzone-image-preview>
-  </ngx-dropzone>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2 class="card-title">Ajouter des images</h2>
+        <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone-label>Déposez ici</ngx-dropzone-label>
+          <ngx-dropzone-image-preview [file]="f" *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div>
 
-  <div>
-      <button mat-raised-button *ngIf="this.files.length" (click)="onSend2()" (click)="this.affiche=true" (click)="noImage()"
-      (click)="this.affiche_image=false" >Envoyer les images</button>
-  </div>
+      <div class="col-md-12 text-center" style="margin-top : 2%">
+          <button mat-raised-button style="width : 40%;background : rgba(36, 175, 8, 0.829) ; color : white; font-size : 25px"
+          *ngIf="this.files.length" (click)="onSend2()" (click)="this.affiche=true"
+          (click)="noImage()" (click)="this.affiche_image=false">
+          <i class="fa-solid fa-paper-plane" style="margin-bottom : 1%; margin-right : 2%"></i>
+          Envoyer les images</button>
+      </div>
 
-  <button (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image">Voir les
-    images </button>
-  <button *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">Cacher les images </button>
-  <h2 class="card-title text-center">Choisissez les images</h2>
-  <div class="card-body selectImage_container text-center align-top">
-    <div *ngIf="this.affiche_image">
+      <div class="col-md-12 text-center" style="margin-top : 2%">
+        <div *ngIf="this.affiche">
 
-      <figure class="figure" *ngFor="let image of this.getListImage()">
-        <img class="delete" src="{{image.getSrc()}}" width="200px" height="200px"
-          class="figure-img img-fluid rounded img-thumbnail" alt="...">
-        <a class="remove-image" (click)="onSend_delete(image.id)" (click)="remove(image.id)" style="display: inline;">&#215;</a>
-        <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
-      </figure>
+          <div class="alert alert-success justify-content-center text-center" role="alert">
+            <h4 class="alert-heading">Veuillez patienter </h4>
+            <p>Les Images sont en cours de traitement.</p>
+            <mat-spinner style="width : 30%"></mat-spinner>
+
+            <hr>
+
+            <p>Chargement: {{ this.temps }}/ {{ this.files.length }} </p>
+          </div>
+
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="this.affiche">
-
-    <div class="alert alert-success" role="alert">
-      <h4 class="alert-heading">Veuillez patienter </h4>
-      <p>Les Images sont en cours de traitement.</p>
-      <mat-spinner></mat-spinner>
-      <hr>
-
-      <p>Chargement: {{ this.temps }}/ {{ this.files.length }} </p>
+    <div class="text-center">
+      <mat-divider style="background : #ececec ; width : 70%; display : inline-block"></mat-divider>
     </div>
+
+    <div class="row" style="margin-top : 2%">
+      <div class="col-md-12 text-center">
+        <button mat-raised-button style="width : 30%;background : rgb(16, 72, 224) ; color : white; font-size : 25px"
+          (click)="recup(this.getListImage())" (click)="this.affiche_image=true" *ngIf="!this.affiche_image">
+          <i class="fa-solid fa-eye" style="margin-bottom : 1%; margin-right : 2%"></i>
+          Voir les
+          images</button>
+        <button mat-raised-button style="width : 30%;background : rgb(16, 72, 224) ; color : white; font-size : 25px"
+          *ngIf="this.affiche_image" (click)="noImage()" (click)="this.affiche_image=false">
+          <i class="fa-solid fa-eye-slash" style="margin-bottom : 1%; margin-right : 2%"></i>
+
+          Cacher les
+          images</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="card-body selectImage_container text-center align-top">
+          <div *ngIf="this.affiche_image">
+            <h3 class="card-title text-center">Choisissez les images</h3>
+
+            <figure class="figure" *ngFor="let image of this.getListImage()">
+              <img class="delete" src="{{image.getSrc()}}" width="200px" height="200px"
+                class="figure-img img-fluid rounded img-thumbnail" alt="...">
+              <a class="remove-image" (click)="onSend_delete(image.id)" (click)="remove(image.id)"
+                style="display: inline;" title="Supprimer l'image">&#215;</a>
+              <figcaption class="figure-caption text-center">{{image.getNom()}}</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   </div>
 
