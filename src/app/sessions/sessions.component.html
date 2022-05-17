@@ -62,7 +62,7 @@
           <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
 
             <mat-card style="background : #ecececee; margin-left : 2%; margin-right : 2% ; margin-bottom : 2%"
-              *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3">
+              *ngFor="let g of this.getSession()!.jeuId" class="text-center col-md-3" [ngStyle]="{'opacity' : (this.getProgressionJeu(g.type,g.id_jeu) == 100) ? 0.3 : 1}">
 
               <mat-card-header *ngIf="g.type == 'Recopier'" class="justify-content-center">
                 <mat-card-title style="font-size : 23px">
@@ -126,7 +126,7 @@
               </mat-card-header>
               <img *ngIf="g.type == 'Puzzle'" mat-card-image src="../../assets/images/thumb/puzzle.png">
 
-              <mat-card-actions>
+              <mat-card-actions class="align-middle" style="height : auto">
                 <button *ngIf="this.getProgressionJeu(g.type,g.id_jeu) != 100" mat-fab color="primary"
                   style="background : green" (click)="playGame(g.type,g.id_jeu)" aria-label="Prévisualiser le jeu">
                   <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
@@ -136,6 +136,12 @@
                   <i style="margin-left : 4%" class="fa-solid fa-play fa-2xl"></i>
                 </button>
               </mat-card-actions>
+              <mat-card-footer *ngIf="this.getProgressionJeu(g.type,g.id_jeu) == 100" style="background : #ececec; padding : 4%; font-size : 30px">
+                <i class="fa-solid fa-trophy fa-lg" style="margin-right : 4px ; color : #ff6c00 ; "></i>
+                <span style="color : rgb(35, 214, 18);">
+                  <b>Terminé</b>
+                </span>
+              </mat-card-footer>
             </mat-card>
 
           </div>
