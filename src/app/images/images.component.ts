@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Image } from '../Image'
 import { JeuxService } from '../jeux.service';
 import { Router } from '@angular/router';
-//import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-images',
@@ -26,10 +26,8 @@ export class ImagesComponent implements OnInit {
   test: string = "test";
   test2: number = 1;
   ngOnInit(): void {
-    //this.recup(ImagesComponent.list_image);
-    console.log(this.test + this.test2.toString());
-    console.log(this.files.length);
-    console.log(ImagesComponent.list_image);
+    
+    
   }
 
   public getListImages(): Image[] {
@@ -51,10 +49,10 @@ export class ImagesComponent implements OnInit {
         if (this.pro_img < 0) {
           this.pro_img = 0;
         }
-        console.log(event);
+        
         this.files.push(...event.addedFiles);
-        console.log(this.files[this.pro_img].type);
-        //this.pro_img+=1;
+        
+       
       } else {
         this.showAlert = true;
         setTimeout(() =>  {
@@ -110,7 +108,7 @@ export class ImagesComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        //console.log(data);
+        
         donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
@@ -149,17 +147,16 @@ export class ImagesComponent implements OnInit {
     return ImagesComponent.list_image = [];
   }
   remove(id: any): any {
-    console.log(ImagesComponent.list_image);
-    console.log(id);
+    
     for (var i = 0; ImagesComponent.list_image[i] != null; i++) {
-      //console.log(liste);
+      
       if (ImagesComponent.list_image[i].id == id) {
-        console.log(ImagesComponent.list_image[i]);
+       
         ImagesComponent.list_image.splice(i, 1);
 
       }
 
     }
-    console.log(ImagesComponent.list_image);
+ 
   }
 }
