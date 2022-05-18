@@ -33,7 +33,6 @@ export class ThemeComponent implements OnInit {
   recup_image: any | null = null;
   nom: string = "";
   liste_id = [];
-  hover_edit : boolean = false;
   id_crea = localStorage.getItem('id_crea');
   nouveau_theme: any = { id_crea: Number(this.id_crea) , id_jeux : '' };
   list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
@@ -65,6 +64,12 @@ export class ThemeComponent implements OnInit {
     for(let i = 0 ; i<element.id.length ; i++) {
       this.n_theme.push(element.id[i])
     }
+
+    for(let j of this.recup_image.id_jeux.split(';')) {
+      console.log(j);
+    }
+
+
     this.nouveau_theme['nom'] = element.nom;
   }
 
@@ -251,7 +256,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for(let i = recopier_list.length - 1 ; recopier_list[i] != null ; i--) {
           if(recopier_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Recopier,' + recopier_list[i].id + ','
+            this.nouveau_theme['id_jeux'] += 'Recopier,' + recopier_list[i].id + ';'
             break;
           }
         }
@@ -274,7 +279,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for(let i = memory_list.length - 1 ; memory_list[i] != null ; i--) {
           if(memory_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Memory,' + memory_list[i].id + ','
+            this.nouveau_theme['id_jeux'] += 'Memory,' + memory_list[i].id + ';'
             break;
           }
         }
@@ -296,7 +301,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for(let i = reconnaitre_list.length - 1 ; reconnaitre_list[i] != null ; i--) {
           if(reconnaitre_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Reconnaitre,' + reconnaitre_list[i].id + ','
+            this.nouveau_theme['id_jeux'] += 'Reconnaitre,' + reconnaitre_list[i].id + ';'
             break;
           }
         }
@@ -319,7 +324,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for(let i = abecedaire_list.length - 1 ; abecedaire_list[i] != null ; i--) {
           if(abecedaire_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Abécédaire,' + abecedaire_list[i].id + ','
+            this.nouveau_theme['id_jeux'] += 'Abécédaire,' + abecedaire_list[i].id + ';'
             break;
           }
         }
@@ -342,7 +347,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for(let i = puzzle_list.length - 1 ; puzzle_list[i] != null ; i--) {
           if(puzzle_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Puzzle,' + puzzle_list[i].id + ','
+            this.nouveau_theme['id_jeux'] += 'Puzzle,' + puzzle_list[i].id + ';'
             break;
           }
         }
@@ -361,6 +366,10 @@ export class ThemeComponent implements OnInit {
       this.onSend(this.nouveau_theme);
       this.showAlert = false;
     } , 1000 * this.cpt_jeux)
+
+  }
+
+  save()  : void {
 
   }
 }
