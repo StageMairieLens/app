@@ -34,21 +34,26 @@ export class ThemeComponent implements OnInit {
   nom: string = "";
   liste_id = [];
   id_crea = localStorage.getItem('id_crea');
-  nouveau_theme: any = { id_crea: Number(this.id_crea) , id_jeux : '' };
+  nouveau_theme: any = { id_crea: Number(this.id_crea), id_jeux: '' };
   list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
 
 
-  create_recopier : boolean = false;
-  create_reconnaitre : boolean = false;
-  create_memory : boolean = false;
-  create_abecedaire : boolean = false;
-  create_boygirl : boolean = false;
-  create_puzzle : boolean = false;
+  create_recopier: boolean = false;
+  create_reconnaitre: boolean = false;
+  create_memory: boolean = false;
+  create_abecedaire: boolean = false;
+  create_puzzle: boolean = false;
+
+  edit_create_recopier: string | null = null;
+  edit_create_reconnaitre: string | null = null;
+  edit_create_memory: string | null = null;
+  edit_create_abecedaire: string | null = null;
+  edit_create_puzzle: string | null = null;
   cpt_jeux: number = 0;
   showAlert: boolean = false;
-  cpt : number =0;
+  cpt: number = 0;
 
-  constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) { }
   static list_image: Image[] = [];
   ngOnInit(): void {
     this.recup2(this.data);
@@ -61,12 +66,33 @@ export class ThemeComponent implements OnInit {
   edit(element: any): void {
     this.recup_image = element;
     this.create_theme = true;
-    for(let i = 0 ; i<element.id.length ; i++) {
+    for (let i = 0; i < element.id.length; i++) {
       this.n_theme.push(element.id[i])
     }
 
-    for(let j of this.recup_image.id_jeux.split(';')) {
-      console.log(j);
+    for (let j of this.recup_image.id_jeux.split(';')) {
+      switch (j.split(',')[0]) {
+        case 'Recopier':
+          this.create_recopier = true;
+          this.edit_create_recopier = j;
+          break;
+        case 'Memory':
+          this.create_memory = true;
+          this.edit_create_memory = j;
+          break;
+        case 'Reconnaitre':
+          this.create_reconnaitre = true;
+          this.edit_create_reconnaitre = j;
+          break;
+        case 'Abécédaire':
+          this.create_abecedaire = true
+          this.edit_create_abecedaire = j;
+          break;
+        case 'Puzzle':
+          this.create_puzzle = true;
+          this.edit_create_puzzle = j;
+          break;
+      }
     }
 
 
@@ -97,8 +123,8 @@ export class ThemeComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
-          donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
         }
       }
     })
@@ -109,10 +135,10 @@ export class ThemeComponent implements OnInit {
     this.jeuxService.recup_theme(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
-          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea,id_jeux:data[i].id_jeux });
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux });
           var a = data[i].id_image.split(',');
-          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea ,id_jeux:data[i].id_jeux});
+          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux });
         }
       }
       console.log(this.test);
@@ -239,120 +265,120 @@ export class ThemeComponent implements OnInit {
     }
   }
 
-  create() : void {
-    this.nouveau_theme['id']=this.n_theme;
+  create(): void {
+    this.nouveau_theme['id'] = this.n_theme;
 
-    if(this.create_recopier) {
+    if (this.create_recopier) {
       this.cpt_jeux++;
-      let recopier : RecopierGameComponent = new RecopierGameComponent(this.route,this.jeuxService,this.router);
-      let recopier_list : Recopier[] = [];
+      let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
+      let recopier_list: Recopier[] = [];
       recopier.list['image'] = this.n_theme.toString();
       recopier.onSend(recopier.list);
 
       setTimeout(() => {
         recopier.recup(recopier_list);
-      },300)
+      }, 300)
 
       setTimeout(() => {
-        for(let i = recopier_list.length - 1 ; recopier_list[i] != null ; i--) {
-          if(recopier_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+        for (let i = recopier_list.length - 1; recopier_list[i] != null; i--) {
+          if (recopier_list[i].id_crea == +localStorage.getItem('id_crea')!) {
             this.nouveau_theme['id_jeux'] += 'Recopier,' + recopier_list[i].id + ';'
             break;
           }
         }
 
-      },500)
+      }, 500)
 
     }
 
-    if(this.create_memory) {
+    if (this.create_memory) {
       this.cpt_jeux++;
-      let memory : MemoryComponent = new MemoryComponent(this.route,this.jeuxService,this.router);
-      let memory_list : Memory[] = [];
+      let memory: MemoryComponent = new MemoryComponent(this.route, this.jeuxService, this.router);
+      let memory_list: Memory[] = [];
       memory.list['image'] = this.n_theme.toString();
       memory.onSend(memory.list);
 
       setTimeout(() => {
         memory.recup(memory_list);
-      },300)
+      }, 300)
 
       setTimeout(() => {
-        for(let i = memory_list.length - 1 ; memory_list[i] != null ; i--) {
-          if(memory_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+        for (let i = memory_list.length - 1; memory_list[i] != null; i--) {
+          if (memory_list[i].id_crea == +localStorage.getItem('id_crea')!) {
             this.nouveau_theme['id_jeux'] += 'Memory,' + memory_list[i].id + ';'
             break;
           }
         }
 
-      },500)
+      }, 500)
 
     }
-    if(this.create_reconnaitre) {
+    if (this.create_reconnaitre) {
       this.cpt_jeux++;
-      let reconnaitre : ReconnaitreComponent = new ReconnaitreComponent(this.route,this.jeuxService,this.router);
-      let reconnaitre_list : Reconnaitre[] = [];
+      let reconnaitre: ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService, this.router);
+      let reconnaitre_list: Reconnaitre[] = [];
       reconnaitre.list['image'] = this.n_theme.toString();
       reconnaitre.onSend(reconnaitre.list);
 
       setTimeout(() => {
         reconnaitre.recup(reconnaitre_list);
-      },300)
+      }, 300)
 
       setTimeout(() => {
-        for(let i = reconnaitre_list.length - 1 ; reconnaitre_list[i] != null ; i--) {
-          if(reconnaitre_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+        for (let i = reconnaitre_list.length - 1; reconnaitre_list[i] != null; i--) {
+          if (reconnaitre_list[i].id_crea == +localStorage.getItem('id_crea')!) {
             this.nouveau_theme['id_jeux'] += 'Reconnaitre,' + reconnaitre_list[i].id + ';'
             break;
           }
         }
 
-      },500)
+      }, 500)
 
     }
 
-    if(this.create_abecedaire) {
+    if (this.create_abecedaire) {
       this.cpt_jeux++;
-      let abecedaire : AbecedaireComponent = new AbecedaireComponent(this.route,this.jeuxService,this.router);
-      let abecedaire_list : Abecedaire[] = [];
+      let abecedaire: AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService, this.router);
+      let abecedaire_list: Abecedaire[] = [];
       abecedaire.list['image'] = this.n_theme.toString();
       abecedaire.onSend(abecedaire.list);
 
       setTimeout(() => {
         abecedaire.recup(abecedaire_list);
-      },300)
+      }, 300)
 
       setTimeout(() => {
-        for(let i = abecedaire_list.length - 1 ; abecedaire_list[i] != null ; i--) {
-          if(abecedaire_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+        for (let i = abecedaire_list.length - 1; abecedaire_list[i] != null; i--) {
+          if (abecedaire_list[i].id_crea == +localStorage.getItem('id_crea')!) {
             this.nouveau_theme['id_jeux'] += 'Abécédaire,' + abecedaire_list[i].id + ';'
             break;
           }
         }
 
-      },500)
+      }, 500)
 
     }
 
-    if(this.create_puzzle) {
+    if (this.create_puzzle) {
       this.cpt_jeux++;
-      let puzzle : PuzzleComponent = new PuzzleComponent(this.route,this.jeuxService,this.router);
-      let puzzle_list : Puzzle[] = [];
+      let puzzle: PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService, this.router);
+      let puzzle_list: Puzzle[] = [];
       puzzle.list['image'] = this.n_theme.toString();
       puzzle.onSend(puzzle.list);
 
       setTimeout(() => {
         puzzle.recup(puzzle_list);
-      },300)
+      }, 300)
 
       setTimeout(() => {
-        for(let i = puzzle_list.length - 1 ; puzzle_list[i] != null ; i--) {
-          if(puzzle_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+        for (let i = puzzle_list.length - 1; puzzle_list[i] != null; i--) {
+          if (puzzle_list[i].id_crea == +localStorage.getItem('id_crea')!) {
             this.nouveau_theme['id_jeux'] += 'Puzzle,' + puzzle_list[i].id + ';'
             break;
           }
         }
 
-      },500)
+      }, 500)
 
     }
 
@@ -360,16 +386,75 @@ export class ThemeComponent implements OnInit {
 
     setInterval(() => {
       this.cpt++;
-    },1000)
+    }, 1000)
 
     setTimeout(() => {
       this.onSend(this.nouveau_theme);
       this.showAlert = false;
-    } , 1000 * this.cpt_jeux)
+    }, 1000 * this.cpt_jeux)
 
   }
 
-  save()  : void {
+  save(): void {
 
+    if (this.edit_create_recopier != null && !this.create_recopier) {
+      this.cpt_jeux++;
+      let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
+      recopier.onSend_delete(this.edit_create_recopier.split(',')[1])
+
+      setTimeout(() => {
+        let index = -1;
+        for (let j of this.recup_image.id_jeux.split(';')) {
+          if (j == this.edit_create_recopier) {
+            index = this.recup_image.id_jeux.split(';').indexOf(j);
+          }
+        }
+
+        if (index > -1) {
+          this.recup_image.id_jeux.split(';').splice(index, 1);
+          console.log(this.recup_image.id_jeux.split(';'))
+          console.log(index)
+        }
+      }, 200)
+    }
+    else if (this.edit_create_recopier == null && this.create_recopier) {
+      this.cpt_jeux++;
+      let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
+      let recopier_list: Recopier[] = [];
+      recopier.list['image'] = this.n_theme.toString();
+      recopier.onSend(recopier.list);
+
+      setTimeout(() => {
+        recopier.recup(recopier_list);
+      }, 300)
+
+      setTimeout(() => {
+        for (let i = recopier_list.length - 1; recopier_list[i] != null; i--) {
+          if (recopier_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.nouveau_theme['id_jeux'] += 'Recopier,' + recopier_list[i].id + ';'
+            break;
+          }
+        }
+
+      }, 200)
+    }
+
+    this.showAlert = true;
+
+    setInterval(() => {
+      this.cpt++;
+    }, 1000)
+
+    setTimeout(() => {
+      this.recup_image.nom = this.nouveau_theme['nom'];
+      this.recup_image.id = this.n_theme;
+      console.log(this.recup_image)
+      // this.onSend_update(this.recup_image)
+      this.showAlert = false;
+    }, 1000 * this.cpt_jeux)
+
+    // this.recup_image.nom = this.nouveau_theme['nom'];
+    // this.recup_image.id = this.n_theme;
+    // this.onSend_update(this.recup_image)
   }
 }
