@@ -26,8 +26,8 @@ export class ImagesComponent implements OnInit {
   test: string = "test";
   test2: number = 1;
   ngOnInit(): void {
-    
-    
+
+
   }
 
   public getListImages(): Image[] {
@@ -39,7 +39,7 @@ export class ImagesComponent implements OnInit {
     console.log(i);
   }
 
- 
+
   files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
@@ -49,10 +49,10 @@ export class ImagesComponent implements OnInit {
         if (this.pro_img < 0) {
           this.pro_img = 0;
         }
-        
-        this.files.push(...event.addedFiles);
-        
-       
+        console.log(event);
+        this.files.push(i);
+        console.log(this.files[this.pro_img].type);
+        //this.pro_img+=1;
       } else {
         this.showAlert = true;
         setTimeout(() =>  {
@@ -65,16 +65,20 @@ export class ImagesComponent implements OnInit {
   }
 
   onRemove(event: File) {
-    
+
     this.files.splice(this.files.indexOf(event), 1);
     this.pro_img -= 1;
   }
   onSend(pro_img2: number) {
     var img: Blob = this.files[pro_img2];
     const formData: FormData = new FormData();
-    
+
     formData.append('image', img);
+<<<<<<< HEAD
     formData.append('image',localStorage.getItem('id_crea')!);
+=======
+
+>>>>>>> 6736a166d23f0dee647cb522bba24c20b8fdd989
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
@@ -85,7 +89,7 @@ export class ImagesComponent implements OnInit {
       error: err => {
         console.log(err);
         this.temps += 1;
-      
+
 
         if (this.temps >= this.files.length) {
           this.redirect();
@@ -108,7 +112,7 @@ export class ImagesComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        
+
         donne.push(new Image(data[i].nom, data[i].id_image));
       }
     })
@@ -118,7 +122,7 @@ export class ImagesComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-    
+
     formData.append('image_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -147,16 +151,16 @@ export class ImagesComponent implements OnInit {
     return ImagesComponent.list_image = [];
   }
   remove(id: any): any {
-    
+
     for (var i = 0; ImagesComponent.list_image[i] != null; i++) {
-      
+
       if (ImagesComponent.list_image[i].id == id) {
-       
+
         ImagesComponent.list_image.splice(i, 1);
 
       }
 
     }
- 
+
   }
 }
