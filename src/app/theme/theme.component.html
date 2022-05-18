@@ -209,23 +209,6 @@
 
           </div>
 
-          <div class="col-md-4 text-center">
-            <div class="col-md-12">
-              <label for="" style="font-size : 24px"><b>Fille & Garçon</b></label>
-            </div>
-            <div class="col-md-12">
-              <span *ngIf="!this.create_boygirl" style="margin-right : 4% ; color : #ff4083">Non</span>
-              <span *ngIf="this.create_boygirl" style="margin-right : 4%">Non</span>
-
-              <mat-slide-toggle (change)="this.create_boygirl = boygirl_slider.checked"
-                [(ngModel)]="this.create_boygirl" #boygirl_slider></mat-slide-toggle>
-
-              <span *ngIf="!this.create_boygirl" style="margin-left : 4%">Oui</span>
-              <span *ngIf="this.create_boygirl" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
-
-            </div>
-
-          </div>
 
           <div class="col-md-4 text-center">
             <div class="col-md-12">
@@ -250,8 +233,7 @@
           <div class="col-md-12 text-center">
 
             <button mat-raised-button
-              *ngIf="this.nouveau_theme['nom'] && this.n_theme.length && this.recup_image == null "
-              (click)="create()"
+              *ngIf="this.nouveau_theme['nom'] && this.n_theme.length && this.recup_image == null " (click)="create()"
               style="font-size : 25px ; padding : 2% ; background : rgb(18, 124, 15); color : white">
               <i class="fa-solid fa-paper-plane fa-lg" style="margin-right : 2%; margin-bottom : 1%"></i>
               Créer le thème
@@ -267,10 +249,22 @@
 
         </div>
 
+        <div *ngIf="this.showAlert" class="row" style="margin-top : 2%">
+          <div class="col-md-12">
+            <div class="alert alert-success justify-content-center text-center" role="alert">
+              <h4 class="alert-heading">Veuillez patienter </h4>
+              <p>Le thème est en cours de création</p>
+              <mat-spinner style="width : 30%"></mat-spinner>
 
+              <hr>
+
+              <p>Jeux créer : {{ this.cpt }}/ {{ this.cpt_jeux }} </p>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
+
   </div>
 
 </div>
