@@ -78,7 +78,7 @@ export class ImagesComponent implements OnInit {
           this.pro_img = 0;
         }
         console.log(event);
-        this.files.push(...event.addedFiles);
+        this.files.push(i);
         console.log(this.files[this.pro_img].type);
         //this.pro_img+=1;
       } else {

@@ -33,6 +33,8 @@ export class ThemeComponent implements OnInit {
     this.recup2(this.data);
     console.log(this.id_crea);
 
+
+
   }
 
   edit(element: any): void {
