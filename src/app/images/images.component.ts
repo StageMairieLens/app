@@ -41,33 +41,7 @@ export class ImagesComponent implements OnInit {
     console.log(i);
   }
 
-  /*	//url; //Angular 8
-    url: any; //Angular 11, for stricter type
-    msg = "";
-
-    //selectFile(event) { //Angular 8
-    selectFile(event: any) { //Angular 11, for stricter type
-      if(!event.target.files[0] || event.target.files[0].length == 0) {
-        this.msg = 'You must select an image';
-        return;
-        }
-
-      var mimeType = event.target.files[0].type;
-
-      if (mimeType.match(/image\/*//*) == null) {
-    this.msg = "Only images are supported";
-    return;
-  }
-
-  var reader = new FileReader();
-  reader.readAsDataURL(event.target.files[0]);
-
-  reader.onload = (_event) => {
-    this.msg = "";
-    this.url = reader.result;
-    console.log(reader.result);
-  }
-}*/
+ 
   files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
@@ -100,9 +74,7 @@ export class ImagesComponent implements OnInit {
   onSend(pro_img2: number) {
     var img: Blob = this.files[pro_img2];
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
+    
     formData.append('image', img);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -133,18 +105,7 @@ export class ImagesComponent implements OnInit {
   redirect() {
     this.router.navigate(['/theme']);
   }
-  /*imageUrl:any = null;
-  showImage(){
 
-    this.jeuxService.getImage().subscribe((res) => {
-      var img:Blob = res;
-      var myReader:FileReader = new FileReader();
-      myReader.onloadend = (e) => {
-        this.imageUrl = this._DomSanitizationService.bypassSecurityTrustUrl(<string>myReader.result);
-      }
-      myReader.readAsDataURL(img);
-    });
-  }*/
   recup(donne: any) {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
@@ -159,9 +120,7 @@ export class ImagesComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<id.lenght;i++){
-      formData.append('id[]',id[i]);
-    }*/
+    
     formData.append('image_delete', id);
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
