@@ -79,8 +79,9 @@ export class ThemeComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        //console.log(data);
-        donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+          donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
+        }
       }
     })
 
@@ -90,11 +91,11 @@ export class ThemeComponent implements OnInit {
     this.jeuxService.recup_theme(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        //console.log(data);
-        donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea });
-        var a = data[i].id_image.split(',');
-        this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea });
-
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea });
+          var a = data[i].id_image.split(',');
+          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea });
+        }
       }
       console.log(this.test);
     })
