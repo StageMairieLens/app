@@ -71,7 +71,7 @@ export class ThemeComponent implements OnInit {
 
       for (var i = 0; data[i] != null; i++) {
         //console.log(data);
-        donne.push(new Image(data[i].nom, data[i].id_image));
+        donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
       }
     })
 
