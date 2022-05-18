@@ -8,7 +8,7 @@
         <div class="card-body text-center">
           <img src="../../assets/images/error.png" class="card-img-top" alt="error_img">
           <h1 class="card-title text-center" style="color : red ; font-size : 50px">ERREUR</h1>
-          <p class="card-text text-center" style="font-size : 30px">La séssion que vous essayer de rejoindre n'est
+          <p class="card-text text-center" style="font-size : 30px">La session que vous essayer de rejoindre n'est
             pas rejoignable</p>
         </div>
 
@@ -25,12 +25,12 @@
     <div *ngIf="this.join && !this.getConnected()">
       <div class="card container align-middle">
         <div class="card-header">
-          Séssion N ° : {{this.getSession()!.id }}
+          Session N ° : {{this.getSession()!.id }}
         </div>
 
         <div class="card-body">
 
-          <h2 class="card-title text-center">Rejoindre la séssion</h2>
+          <h2 class="card-title text-center">Rejoindre la session</h2>
           <div class="input-join align-middle">
             <input type="text" name="" id="" placeholder="Entrez votre nom ici" #input_name
               (keypress)="enterKey($event)">
@@ -57,13 +57,13 @@
       <div class="col-md-12 text-center sortButton">
         <button mat-raised-button style="background-color : red" (click)="quitSession()" color="primary">
           <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
-          <span>Quitter la séssion</span>
+          <span>Quitter la session</span>
         </button>
       </div>
 
       <div class="form-row">
         <div class="col-md-12 text-center">
-          <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
+          <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la session</h2>
 
           <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
 
@@ -159,7 +159,7 @@
             class="alert alert-danger align-items-center justify-content-center" role="alert">
             <i class="fa-solid fa-warning fa-2x" style="margin-bottom : 1%; margin-right : 1%"></i>
             <div>
-              <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la séssion</p>
+              <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la session</p>
             </div>
           </div>
 
@@ -253,7 +253,7 @@
       <div class="card-body text-center">
         <img src="../../assets/images/error.png" class="card-img-top" alt="error_img">
         <h1 class="card-title text-center" style="color : red ; font-size : 50px">ERREUR</h1>
-        <p class="card-text text-center" style="font-size : 30px">La séssion que vous essayer de rejoindre n'éxiste
+        <p class="card-text text-center" style="font-size : 30px">La session que vous essayer de rejoindre n'éxiste
           pas
         </p>
       </div>
@@ -270,7 +270,7 @@
 </div>
 
 
-<!-- Affichages des séssions -->
+<!-- Affichages des sessions -->
 <div class="card container" *ngIf="this.showList">
   <h5 class="card-header"> Listes des sessions</h5>
 
@@ -310,14 +310,14 @@
 
     </div>
 
-    <!-- Il n'y a pas de séssion -->
+    <!-- Il n'y a pas de session -->
     <div *ngIf="this.data.length == 0 && !this.showActive">
       <h5 class="card-title" style="color : red">Il n'y a pas de sessions créer</h5>
     </div>
 
     <div *ngIf="this.data.length != 0" class="col-md-12">
 
-      <!-- Afficher toutes les séssions -->
+      <!-- Afficher toutes les sessions -->
       <table class="table table-hover" *ngIf="!this.showActive">
         <thead>
           <tr>
@@ -339,20 +339,20 @@
             <th *ngIf="!element.isSuivi">Non</th>
             <th *ngIf="element.isSuivi">Oui</th>
             <th class="button_actions">
-              <button mat-raised-button title="Prévisualiser le jeu de la séssion" (click)="previsualiserGame(element)"
+              <button mat-raised-button title="Prévisualiser le jeu de la session" (click)="previsualiserGame(element)"
                 color="primary">
                 <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
               </button>
-              <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
+              <button mat-raised-button title="Editer la session" (click)="editSession(element)"
                 style="background-color : rgb(223, 175, 18)" color="primary">
                 <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
               </button>
-              <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+              <button mat-raised-button title="Supprimer la session" (click)="deleteSession(element)"
                 style="background-color : red" color="primary">
                 <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
               </button>
 
-              <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la séssion" (click)="joinSession(element)"
+              <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la session" (click)="joinSession(element)"
                 style="background-color : rgb(77, 184, 44)" color="primary">
                 <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
               </button>
@@ -362,11 +362,11 @@
                 <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
               </button>
 
-              <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+              <button *ngIf="!element.isActive" title="Démarrer la session" mat-raised-button
                 (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                 <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
               </button>
-              <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+              <button *ngIf="element.isActive" title="Eteindre la session" mat-raised-button
                 (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                 <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
               </button>
@@ -376,9 +376,9 @@
         </tbody>
       </table>
 
-      <!-- Séssions actives -->
+      <!-- Sessions actives -->
       <div *ngIf="this.showActive">
-        <!-- Afficher les séssions actives -->
+        <!-- Afficher les sessions actives -->
         <table class="table table-hover" *ngIf="this.getSessionsActive().length != 0">
           <thead>
             <tr>
@@ -400,20 +400,20 @@
               <th *ngIf="!element.isSuivi">Non</th>
               <th *ngIf="element.isSuivi">Oui</th>
               <th class="button_actions">
-                <button mat-raised-button title="Prévisualiser le jeu de la séssion"
+                <button mat-raised-button title="Prévisualiser le jeu de la session"
                   (click)="previsualiserGame(element)" color="primary">
                   <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
                 </button>
-                <button mat-raised-button title="Editer la séssion" (click)="editSession(element)"
+                <button mat-raised-button title="Editer la session" (click)="editSession(element)"
                   style="background-color : rgb(223, 175, 18)" color="primary">
                   <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
                 </button>
-                <button mat-raised-button title="Supprimer la séssion" (click)="deleteSession(element)"
+                <button mat-raised-button title="Supprimer la session" (click)="deleteSession(element)"
                   style="background-color : red" color="primary">
                   <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
 
-                <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la séssion"
+                <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la session"
                   (click)="joinSession(element)" style="background-color : rgb(77, 184, 44)" color="primary">
                   <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
@@ -423,11 +423,11 @@
                   <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
 
-                <button *ngIf="!element.isActive" title="Démarrer la séssion" mat-raised-button
+                <button *ngIf="!element.isActive" title="Démarrer la session" mat-raised-button
                   (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                   <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
-                <button *ngIf="element.isActive" title="Eteindre la séssion" mat-raised-button
+                <button *ngIf="element.isActive" title="Eteindre la session" mat-raised-button
                   (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
                   <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
                 </button>
@@ -437,7 +437,7 @@
           </tbody>
         </table>
 
-        <!-- Si il n'y a pas de séssion actives -->
+        <!-- Si il n'y a pas de session actives -->
         <div *ngIf="this.getSessionsActive().length == 0">
           <h5 class="card-title" style="color : red">Il n'y a pas de sessions actives</h5>
         </div>
@@ -449,14 +449,14 @@
   </div>
 </div>
 
-<!-- Prévisualisation de la séssion -->
+<!-- Prévisualisation de la session -->
 <div class="card container" *ngIf="this.preview">
 
-  <h5 class="card-header">Prévisualisation de la séssion
+  <h5 class="card-header">Prévisualisation de la session
     n°{{this.selected_session!.id}}</h5>
 
   <div class="card-body text-center">
-    <!-- Prévisualisr le jeu d'une séssion -->
+    <!-- Prévisualisr le jeu d'une session -->
 
     <div class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : red" (click)="this.preview = false; this.showList = true"
@@ -468,7 +468,7 @@
 
     <div class="form-row" *ngIf="!this.inPlay">
       <div class="col-md-12 text-center">
-        <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
+        <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la session</h2>
 
         <div *ngIf="this.getSession()!.jeuId.length != 0" class="row justify-content-center">
 
@@ -551,7 +551,7 @@
           class="alert alert-danger align-items-center justify-content-center" role="alert">
           <i class="fa-solid fa-warning fa-2x" style="margin-bottom : 1%; margin-right : 1%"></i>
           <div>
-            <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la séssion</p>
+            <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la session</p>
           </div>
         </div>
 
@@ -639,11 +639,11 @@
   </div>
 </div>
 
-<!-- Création et édition de séssion -->
+<!-- Création et édition de session -->
 <div class="card container" *ngIf="this.create_session">
 
-  <h5 *ngIf="!this.edit" class="card-header">Création d'une séssion</h5>
-  <h5 *ngIf="this.edit" class="card-header">édition de la séssion n°{{this.selected_session!.id}}</h5>
+  <h5 *ngIf="!this.edit" class="card-header">Création d'une session</h5>
+  <h5 *ngIf="this.edit" class="card-header">édition de la session n°{{this.selected_session!.id}}</h5>
 
 
 
@@ -658,7 +658,7 @@
 
     <div class="form-row">
       <div class="col-md-12 text-center">
-        <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la séssion</h2>
+        <h2 class="card-title" style="margin-bottom : 2%">Jeu dans la session</h2>
 
         <div *ngIf="this.jeuId.length != 0">
           <div *ngIf="this.jeuId.length != 0" class="row justify-content-center">
@@ -734,7 +734,7 @@
                   <i class="fa-solid fa-eye fa-2xl"></i>
                 </button>
                 <button mat-fab color="warn" (click)="deleteJeu(g.type,g.id_jeu)"
-                  aria-label="Supprimer le jeu de la séssion">
+                  aria-label="Supprimer le jeu de la session">
                   <i class="fa-solid fa-xmark fa-2xl"></i>
                 </button>
               </mat-card-actions>
@@ -746,7 +746,7 @@
           class="alert alert-danger align-items-center justify-content-center" role="alert">
           <i class="fa-solid fa-warning fa-2x" style="margin-bottom : 1%; margin-right : 1%"></i>
           <div>
-            <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la séssion</p>
+            <p style="font-size : 28px">Il n'y a pas de jeu sélectionnées dans la session</p>
           </div>
         </div>
 
@@ -764,7 +764,7 @@
 
     <div class="form-row text-center">
       <div class="col-md-12">
-        <h2 class="card-title">Suivi de la séssion</h2>
+        <h2 class="card-title">Suivi de la session</h2>
         <b *ngIf="!this.isSuivi" style="color : #ff4083; margin-right : 1%">Non</b>
         <b *ngIf="this.isSuivi" style="margin-right : 1%">Non</b>
 
@@ -981,7 +981,7 @@
       </table>
     </div>
 
-    <!-- Bouton création de la séssion -->
+    <!-- Bouton création de la session -->
     <div *ngIf="!this.edit" class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : rgb(12, 202, 12)"
         (click)="this.createSession(jeu_session.value, nom_session.value)" color="primary">
@@ -991,7 +991,7 @@
     </div>
 
 
-    <!-- Bouton sauvegarde de la séssion -->
+    <!-- Bouton sauvegarde de la session -->
     <div *ngIf="this.edit" class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : rgb(255, 196, 0) ; color : black" (click)="save()"
         color="primary">
@@ -1045,14 +1045,14 @@
 </div>
 
 
-<!-- Suivi de séssion -->
+<!-- Suivi de session -->
 <div class="card container" *ngIf="this.view">
-  <h5 class="card-header">Visualisation de la séssion</h5>
+  <h5 class="card-header">Visualisation de la session</h5>
 
 
   <div class="card-body text-center">
 
-    <h2 style="font-size : 80px; letter-spacing : 3px;">N° de séssion : {{this.selected_session!.id}}</h2>
+    <h2 style="font-size : 80px; letter-spacing : 3px;">N° de session : {{this.selected_session!.id}}</h2>
 
     <div class="col-md-12 text-center sortButton">
       <button mat-raised-button style="background-color : red" (click)="quitView() " color="primary">
@@ -1061,7 +1061,7 @@
       </button>
     </div>
     <h4>Il y a actuellement <b style="color : rgb(216, 31, 62)">{{this.selected_session!.joueur.length}}</b> joueurs
-      dans la séssion ! </h4>
+      dans la session ! </h4>
 
     <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
     </mat-divider>
@@ -1130,7 +1130,7 @@
     </div>
 
     <div *ngIf="this.selected_session!.joueur.length == 0">
-      <h5 class="card-title" style="color : red">Il n'y a pas de joueurs dans la séssion</h5>
+      <h5 class="card-title" style="color : red">Il n'y a pas de joueurs dans la session</h5>
     </div>
   </div>
 
