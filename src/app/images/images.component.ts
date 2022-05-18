@@ -101,7 +101,7 @@ export class ImagesComponent implements OnInit {
     }
   }
   redirect() {
-    this.router.navigate(['/theme']);
+    window.location.href = '/panel/themes'
   }
 
   recup(donne: any) {
