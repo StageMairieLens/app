@@ -65,7 +65,7 @@ export class ImagesComponent implements OnInit {
   }
 
   onRemove(event: File) {
-    console.log(event);
+    
     this.files.splice(this.files.indexOf(event), 1);
     this.pro_img -= 1;
   }
@@ -74,7 +74,7 @@ export class ImagesComponent implements OnInit {
     const formData: FormData = new FormData();
     
     formData.append('image', img);
-    console.log(formData);
+   
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res.name);
@@ -85,7 +85,7 @@ export class ImagesComponent implements OnInit {
       error: err => {
         console.log(err);
         this.temps += 1;
-        console.log(this.temps);
+      
 
         if (this.temps >= this.files.length) {
           this.redirect();
