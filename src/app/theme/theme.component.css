@@ -4,11 +4,6 @@ img:hover {
   box-shadow: 0 0 10px rgb(163, 132, 132);
 }
 
-span:hover {
-  -moz-box-shadow: 0 0 10px rgb(226, 15, 15);
-  -webkit-box-shadow: 0 0 10px rgb(226, 15, 15);
-  box-shadow: 0 0 10px rgb(226, 15, 15);
-}
 
 .container_list {
   background-color: #303030;

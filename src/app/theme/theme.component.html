@@ -133,49 +133,120 @@
         </div>
 
         <div class="row">
-          <div class="col-md-3 text-center">
+          <div class="col-md-12 text-center">
+            <h3 class="card-title">Créer automatiquement des jeux à partir de ce thème</h3>
+          </div>
+          <div class="col-md-4 text-center">
             <div class="col-md-12">
-              <label for="">Recopier</label>
+              <label for="" style="font-size : 24px"><b>Recopier</b></label>
             </div>
             <div class="col-md-12">
-              <span style="margin-right : 4%">Oui</span>
-              <mat-slide-toggle></mat-slide-toggle>
-              <span style="margin-left : 4%">Non</span>
+              <span *ngIf="!this.create_recopier" style="margin-right : 4% ; color : #ff4083">Non</span>
+              <span *ngIf="this.create_recopier" style="margin-right : 4%">Non</span>
+
+              <mat-slide-toggle (change)="this.create_recopier = recopier_slider.checked"
+                [(ngModel)]="this.create_recopier" #recopier_slider></mat-slide-toggle>
+
+              <span *ngIf="!this.create_recopier" style="margin-left : 4%">Oui</span>
+              <span *ngIf="this.create_recopier" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
 
             </div>
           </div>
 
-          <div class="col-md-3 text-center">
+          <div class="col-md-4 text-center">
             <div class="col-md-12">
-              <label for="">Recopier</label>
+              <label for="" style="font-size : 24px"><b>Memory</b></label>
             </div>
             <div class="col-md-12">
-              <mat-slide-toggle>Slide me!</mat-slide-toggle>
+              <span *ngIf="!this.create_memory" style="margin-right : 4% ; color : #ff4083">Non</span>
+              <span *ngIf="this.create_memory" style="margin-right : 4%">Non</span>
+
+              <mat-slide-toggle (change)="this.create_memory = memory_slider.checked" [(ngModel)]="this.create_memory"
+                #memory_slider></mat-slide-toggle>
+
+              <span *ngIf="!this.create_memory" style="margin-left : 4%">Oui</span>
+              <span *ngIf="this.create_memory" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
+
             </div>
+
           </div>
 
-          <div class="col-md-3 text-center">
+          <div class="col-md-4 text-center">
             <div class="col-md-12">
-              <label for="">Recopier</label>
+              <label for="" style="font-size : 24px"><b>Reconnaitre</b></label>
             </div>
             <div class="col-md-12">
-              <mat-slide-toggle>Slide me!</mat-slide-toggle>
-            </div>
-          </div>
+              <span *ngIf="!this.create_reconnaitre" style="margin-right : 4% ; color : #ff4083">Non</span>
+              <span *ngIf="this.create_reconnaitre" style="margin-right : 4%">Non</span>
 
-          <div class="col-md-3 text-center">
-            <div class="col-md-12">
-              <label for="">Recopier</label>
-            </div>
-            <div class="col-md-12">
-              <mat-slide-toggle>Slide me!</mat-slide-toggle>
-            </div>
-          </div>
+              <mat-slide-toggle (change)="this.create_reconnaitre = reconnaitre_slider.checked"
+                [(ngModel)]="this.create_reconnaitre" #reconnaitre_slider></mat-slide-toggle>
 
+              <span *ngIf="!this.create_reconnaitre" style="margin-left : 4%">Oui</span>
+              <span *ngIf="this.create_reconnaitre" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
+
+            </div>
+
+          </div>
         </div>
 
+        <div class="row" style="margin-top : 2%">
+          <div class="col-md-4 text-center">
+            <div class="col-md-12">
+              <label for="" style="font-size : 24px"><b>Abécédaire</b></label>
+            </div>
+            <div class="col-md-12">
+              <span *ngIf="!this.create_abecedaire" style="margin-right : 4% ; color : #ff4083">Non</span>
+              <span *ngIf="this.create_abecedaire" style="margin-right : 4%">Non</span>
 
-        <div class="row">
+              <mat-slide-toggle (change)="this.create_abecedaire = abecedaire_slider.checked"
+                [(ngModel)]="this.create_abecedaire" #abecedaire_slider></mat-slide-toggle>
+
+              <span *ngIf="!this.create_abecedaire" style="margin-left : 4%">Oui</span>
+              <span *ngIf="this.create_abecedaire" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-4 text-center">
+            <div class="col-md-12">
+              <label for="" style="font-size : 24px"><b>Fille & Garçon</b></label>
+            </div>
+            <div class="col-md-12">
+              <span *ngIf="!this.create_boygirl" style="margin-right : 4% ; color : #ff4083">Non</span>
+              <span *ngIf="this.create_boygirl" style="margin-right : 4%">Non</span>
+
+              <mat-slide-toggle (change)="this.create_boygirl = boygirl_slider.checked"
+                [(ngModel)]="this.create_boygirl" #boygirl_slider></mat-slide-toggle>
+
+              <span *ngIf="!this.create_boygirl" style="margin-left : 4%">Oui</span>
+              <span *ngIf="this.create_boygirl" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-4 text-center">
+            <div class="col-md-12">
+              <label for="" style="font-size : 24px"><b>Puzzle</b></label>
+            </div>
+            <div class="col-md-12">
+              <span *ngIf="!this.create_puzzle" style="margin-right : 4% ; color : #ff4083">Non</span>
+              <span *ngIf="this.create_puzzle" style="margin-right : 4%">Non</span>
+
+              <mat-slide-toggle (change)="this.create_puzzle = puzzle_slider.checked" [(ngModel)]="this.create_puzzle"
+                #puzzle_slider></mat-slide-toggle>
+
+              <span *ngIf="!this.create_puzzle" style="margin-left : 4%">Oui</span>
+              <span *ngIf="this.create_puzzle" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row" style="margin-top : 4%">
           <div class="col-md-12 text-center">
 
             <button mat-raised-button

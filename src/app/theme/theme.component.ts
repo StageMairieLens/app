@@ -27,6 +27,15 @@ export class ThemeComponent implements OnInit {
   id_crea = localStorage.getItem('id_crea');
   nouveau_theme: any = { id_crea: Number(this.id_crea) };
   list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
+
+
+  create_recopier : boolean = false;
+  create_reconnaitre : boolean = false;
+  create_memory : boolean = false;
+  create_abecedaire : boolean = false;
+  create_boygirl : boolean = false;
+  create_puzzle : boolean = false;
+
   constructor(private jeuxService: JeuxService, private router: Router) { }
   static list_image: Image[] = [];
   ngOnInit(): void {
@@ -209,5 +218,10 @@ export class ThemeComponent implements OnInit {
       }
       console.log(this.test);
     }
+  }
+
+  create() : void {
+    this.nouveau_theme['id']=this.n_theme;
+    this.onSend(this.nouveau_theme);
   }
 }
