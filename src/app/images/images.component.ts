@@ -21,7 +21,7 @@ export class ImagesComponent implements OnInit {
   affiche: boolean = false;
   affiche_image: boolean = false;
   showAlert: boolean = false;
-
+  id_local=Number(localStorage.getItem('id_crea'));
   temps: number = 0;
   test: string = "test";
   test2: number = 1;
@@ -43,7 +43,7 @@ export class ImagesComponent implements OnInit {
   files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
-    
+
     for (let i of event.addedFiles) {
       if (i.type.split('/')[0] == 'image') {
         if (this.pro_img < 0) {
@@ -108,8 +108,11 @@ export class ImagesComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-
-        donne.push(new Image(data[i].nom, data[i].id_image));
+        console.log(data[i].id_crea);
+        if(data[i].id_crea == this.id_local){
+          
+          donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
+        }
       }
     })
 

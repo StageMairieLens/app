@@ -281,7 +281,7 @@ export class MemoryComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        donne.push(new Image(data[i].nom, data[i].id_image));
+        donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
       }
     })
   }
