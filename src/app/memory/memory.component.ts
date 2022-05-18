@@ -391,12 +391,6 @@ export class MemoryComponent implements OnInit {
             this.isImage[a] = false;
             this.cursif[a] = false;
             break;
-          case "sound":
-            this.affichage[a] = this.game!.images[i].getSrc();
-            this.nom[a] = this.game!.images[i].getNom();
-            this.isImage[a] = true;
-            this.cursif[a] = false;
-            break;
         }
       }
       i++
@@ -732,7 +726,7 @@ export class MemoryComponent implements OnInit {
 
   setPrevisualiserMemory(prev: boolean): void {
     if (prev == true) {
-      this.game = new Memory(0, "", this.selectedImages.slice(1), this.selectedImages[0], this.sound, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage,Number(this.id_crea));
+      this.game = new Memory(0, "", this.selectedImages.slice(1), this.selectedImages[0], this.memory_isVocaliser, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage,Number(this.id_crea));
       this.memory_previsualiser = true;
     }
     else {
