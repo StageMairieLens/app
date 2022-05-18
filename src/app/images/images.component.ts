@@ -74,11 +74,7 @@ export class ImagesComponent implements OnInit {
     const formData: FormData = new FormData();
 
     formData.append('image', img);
-<<<<<<< HEAD
     formData.append('image',localStorage.getItem('id_crea')!);
-=======
-
->>>>>>> 6736a166d23f0dee647cb522bba24c20b8fdd989
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
