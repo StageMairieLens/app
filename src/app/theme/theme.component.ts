@@ -2,7 +2,11 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Image } from '../Image'
 import { JeuxService } from '../jeux.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RecopierGameComponent } from '../recopier-game/recopier-game.component';
+import { Recopier } from '../recopier-game/Recopier';
+import { MemoryComponent } from '../memory/memory.component';
+import { Memory } from '../memory/Memory';
 
 @Component({
   selector: 'app-theme',
@@ -25,7 +29,7 @@ export class ThemeComponent implements OnInit {
   liste_id = [];
   hover_edit : boolean = false;
   id_crea = localStorage.getItem('id_crea');
-  nouveau_theme: any = { id_crea: Number(this.id_crea) };
+  nouveau_theme: any = { id_crea: Number(this.id_crea) , id_jeux : '' };
   list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
 
 
@@ -35,8 +39,9 @@ export class ThemeComponent implements OnInit {
   create_abecedaire : boolean = false;
   create_boygirl : boolean = false;
   create_puzzle : boolean = false;
+  cpt_jeux: number = 0;
 
-  constructor(private jeuxService: JeuxService, private router: Router) { }
+  constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) { }
   static list_image: Image[] = [];
   ngOnInit(): void {
     this.recup2(this.data);
@@ -222,6 +227,57 @@ export class ThemeComponent implements OnInit {
 
   create() : void {
     this.nouveau_theme['id']=this.n_theme;
-    this.onSend(this.nouveau_theme);
+
+    if(this.create_recopier) {
+      this.cpt_jeux++;
+      let recopier : RecopierGameComponent = new RecopierGameComponent(this.route,this.jeuxService,this.router);
+      let recopier_list : Recopier[] = [];
+      recopier.list['image'] = this.n_theme.toString();
+      recopier.onSend(recopier.list);
+
+      setTimeout(() => {
+        recopier.recup(recopier_list);
+      },300)
+
+      setTimeout(() => {
+        for(let i = recopier_list.length - 1 ; recopier_list[i] != null ; i--) {
+          if(recopier_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.nouveau_theme['id_jeux'] += 'Recopier,' + recopier_list[i].id + ','
+            break;
+          }
+        }
+
+      },500)
+
+    }
+
+    if(this.create_memory) {
+      this.cpt_jeux++;
+      let memory : MemoryComponent = new MemoryComponent(this.route,this.jeuxService,this.router);
+      let memory_list : Memory[] = [];
+      memory.list['image'] = this.n_theme.toString();
+      memory.onSend(memory.list);
+
+      setTimeout(() => {
+        memory.recup(memory_list);
+      },300)
+
+      setTimeout(() => {
+        for(let i = memory_list.length - 1 ; memory_list[i] != null ; i--) {
+          if(memory_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.nouveau_theme['id_jeux'] += 'Memory,' + memory_list[i].id + ','
+            break;
+          }
+        }
+
+      },500)
+
+    }
+
+    setTimeout(() => {
+      this.onSend(this.nouveau_theme);
+
+    } , 1000 * this.cpt_jeux)
+
   }
 }
