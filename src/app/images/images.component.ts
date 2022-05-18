@@ -43,7 +43,7 @@ export class ImagesComponent implements OnInit {
   files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
-
+    
     for (let i of event.addedFiles) {
       if (i.type.split('/')[0] == 'image') {
         if (this.pro_img < 0) {
@@ -74,10 +74,10 @@ export class ImagesComponent implements OnInit {
     const formData: FormData = new FormData();
 
     formData.append('image', img);
-
+    formData.append('image',localStorage.getItem('id_crea')!);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
+        console.log(res);
 
 
       },
