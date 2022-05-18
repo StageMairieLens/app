@@ -42,8 +42,8 @@
         <button mat-raised-button *ngIf="this.setting[1] == 'script'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[1] = 'cursif'; this.set(); this.resetImage()">Script</button>
         <button mat-raised-button *ngIf="this.setting[1] == 'cursif'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[1] = 'image'; this.set(); this.resetImage()">Cursif</button>
       </div>
-      <button mat-raised-button style="background-color: orange" *ngIf="memory_isVocaliser == true" (click)="memory_isVocaliser = false">Vocalisation</button>
-      <button mat-raised-button style="background-color: orange" *ngIf="memory_isVocaliser == false" (click)="memory_isVocaliser = true">Non Vocalisation</button>
+      <button mat-raised-button style="background-color: orange" *ngIf="sound == true" (click)="sound = false; this.set(); this.resetImage()">Vocalisation</button>
+      <button mat-raised-button style="background-color: orange" *ngIf="sound == false" (click)="sound = true; this.set(); this.resetImage()">Non Vocalisation</button>
     </div>
     <table>
 
@@ -242,8 +242,8 @@
                 <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
               </button>
 
-              <!-- Démarrer une séssion à partir de ce jeu -->
-              <button title="Démarrer une séssion à partir de ce jeu" mat-raised-button
+              <!-- Démarrer une session à partir de ce jeu -->
+              <button title="Démarrer une session à partir de ce jeu" mat-raised-button
                 style="background-color : rgb(168, 14, 135)" color="primary">
                 <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
               </button>

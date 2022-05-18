@@ -72,13 +72,13 @@
 
     <!-- Session -->
     <div class="col-md-6">
-      <h3 class="card-title" style="margin-bottom : -10px">Séssion</h3>
+      <h3 class="card-title" style="margin-bottom : -10px">session</h3>
       <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
       </mat-divider>
 
       <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions']">
         <i class="fa-solid fa-eye fa-lg fa-xl" style=" margin-bottom : 2px "></i>
-        <span>Afficher toutes les séssions</span>
+        <span>Afficher toutes les sessions</span>
 
       </button>
 
@@ -87,20 +87,20 @@
         [routerLink]="['/panel/sessions/active']">
         <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
 
-        <span>Afficher les séssions actives</span>
+        <span>Afficher les sessions actives</span>
       </button>
 
       <button *ngIf="this.getSessionActive().length == 0" mat-raised-button disabled color="primary" class="session_choice"
         [routerLink]="['/panel/sessions/active']">
 
         <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
-        <span>Afficher les séssions actives</span>
+        <span>Afficher les sessions actives</span>
       </button>
 
 
       <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions/create']">
         <i class="fa-solid fa-circle-plus fa-xl"></i>
-        <span>Créer une séssions</span>
+        <span>Créer une sessions</span>
       </button>
 
     </div>
@@ -281,7 +281,7 @@
 <!-- SESSIONS -->
 <div *ngIf="this.panel == 'sessions'">
 
-  <!-- Affiche la liste des séssions -->
+  <!-- Affiche la liste des sessions -->
   <div
     *ngIf="(this.panel_option == null || (this.panel_option != 'edit' && this.panel_option != 'view' && this.panel_option != 'preview')) && !this.create_session">
     <div *ngIf="!this.showActive">
@@ -295,16 +295,16 @@
   </div>
 
 
-  <!-- Créer une séssion -->
+  <!-- Créer une session -->
   <div *ngIf="this.create_session">
     <app-sessions [play]="false" [create_session]="true"></app-sessions>
   </div>
 
-  <!-- Superviser une séssion -->
+  <!-- Superviser une session -->
   <div *ngIf="this.panel_option == 'view'">
   </div>
 
-  <!-- Editer une séssion -->
+  <!-- Editer une session -->
   <div *ngIf="this.panel_option == 'edit'">
     <app-sessions [play]="false" [edit]="true" [selected_session]="this.getSession()"></app-sessions>
   </div>
