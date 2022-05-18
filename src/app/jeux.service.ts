@@ -7,120 +7,43 @@ import { Observable } from 'rxjs';
 export class JeuxService {
 
   constructor(private http:HttpClient) { }
+  link_onSend='http://92.154.61.105:8080/~nacer/co.php';
   onSend(formData:any):Observable<any>{
-    return this.http.post<any>('http://92.154.61.105:8080/~nacer/co.php',formData);
+    return this.http.post<any>(this.link_onSend,formData);
   }
+  link_recup='http://92.154.61.105:8080/~nacer/';
   recup_reconnaitre(donne:any){
-    return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_reco.php');/*.subscribe(data =>{
-      console.log(data);
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
-      }
-      //donne.push(data[0]);
-
-    })*/
+    return this.http.get<any>(this.link_recup+'vue_reco.php');
   }
   recup_recopier(donne:any){
-    return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_recopier.php');/*.subscribe(data =>{
-      console.log(data);
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
-      }
-      //donne.push(data[0]);
-
-    })*/
+    return this.http.get<any>(this.link_recup+'vue_recopier.php');
   }
   recup_memory(donne:any){
-    return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_memory.php');/*.subscribe(data =>{
-      console.log(data);
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
-      }
-      //donne.push(data[0]);
-
-    })*/
+    return this.http.get<any>(this.link_recup+'vue_memory.php');
   }
   recup_abcd(donne:any){
-    return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_abcd.php');/*.subscribe(data =>{
-      console.log(data);
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
-      }
-      //donne.push(data[0]);
-
-    })*/
+    return this.http.get<any>(this.link_recup+'vue_abcd.php');
   }
   recup_bg(donne:any){
-    return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_bg.php');/*.subscribe(data =>{
-      console.log(data);
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
-      }
-      //donne.push(data[0]);
-
-    })*/
+    return this.http.get<any>(this.link_recup+'vue_bg.php');
   }
   recup_puzzle(donne:any){
-    return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_puzzle.php');/*.subscribe(data =>{
-      console.log(data);
-      for(var i = 0;data[i]!= null;i++){
-        donne.push(data[i]);
-      }
-      //donne.push(data[0]);
-
-    })*/
+    return this.http.get<any>(this.link_recup+'vue_puzzle.php');
   }
-  /*getImage(): Observable<Blob> {
-    return this.http.get( 'http://localhost:4000/vue_image.php', { responseType: 'blob' });
- }*/
- recup_image(donne:any){
-  return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_image.php');/*.subscribe(data =>{
-    console.log(data);
-    for(var i = 0;data[i]!= null;i++){
-      donne.push(data[i]);
-    }
-    //donne.push(data[0]);
-
-  })*/
-}
-recup_image_id(donne:any){
-  return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_id_image.php');/*.subscribe(data =>{
-    console.log(data);
-    for(var i = 0;data[i]!= null;i++){
-      donne.push(data[i]);
-    }
-    //donne.push(data[0]);
-
-  })*/
-}
-recup_session(donne:any){
-  return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_session.php');/*.subscribe(data =>{
-    console.log(data);
-    for(var i = 0;data[i]!= null;i++){
-      donne.push(data[i]);
-    }
-    //donne.push(data[0]);
-
-  })*/
-}
-recup_theme(donne:any){
-  return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_theme.php');/*.subscribe(data =>{
-    console.log(data);
-    for(var i = 0;data[i]!= null;i++){
-      donne.push(data[i]);
-    }
-    //donne.push(data[0]);
-
-  })*/
-}
-recup_user(donne:any){
-  return this.http.get<any>('http://92.154.61.105:8080/~nacer/vue_user.php');/*.subscribe(data =>{
-    console.log(data);
-    for(var i = 0;data[i]!= null;i++){
-      donne.push(data[i]);
-    }
-    //donne.push(data[0]);
-
-  })*/
-}
+  
+  recup_image(donne:any){
+    return this.http.get<any>(this.link_recup+'vue_image.php');
+  }
+  recup_image_id(donne:any){
+    return this.http.get<any>(this.link_recup+'vue_id_image.php');
+  }
+  recup_session(donne:any){
+    return this.http.get<any>(this.link_recup+'vue_session.php');
+  }
+  recup_theme(donne:any){
+    return this.http.get<any>(this.link_recup+'vue_theme.php');
+  }
+  recup_user(donne:any){
+    return this.http.get<any>(this.link_recup+'vue_user.php');
+  }
 }
