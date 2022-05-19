@@ -1,16 +1,14 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit } from '@angular/core';
-import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Component, OnInit, Input } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Puzzle } from './Puzzle';
 import { Image as ImageImport } from '../Image';
 import { Guest, Jeu, Progression, SessionsComponent } from '../sessions/sessions.component'
-import { Progress } from '../Progress';
 import { ImagesComponent } from '../images/images.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JeuxService } from '../jeux.service';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
 import { Session } from '../sessions/Session';
-import { Users } from '../users/Users';
 
 declare function restart(gridsize: number, imagess: any): any;
 declare function rules(): any;
@@ -39,9 +37,6 @@ export class PuzzleComponent implements OnInit {
   constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     this.r = new Puzzle(0, '', [this.liste_image[5], this.liste_image[2]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5,Number(this.id_crea));
     // this.r = null;
-    //
-
-
   }
   login:string=localStorage.getItem('id_pseudo')!;
 
@@ -58,7 +53,6 @@ export class PuzzleComponent implements OnInit {
       }
     }
     })
-
   }
 
   getImage(s: string): ImageImport[] {
@@ -74,7 +68,6 @@ export class PuzzleComponent implements OnInit {
         }
       }
     }
-
     return res;
   }
   onSend(list: any) {
@@ -152,29 +145,22 @@ export class PuzzleComponent implements OnInit {
 
   list_login : Login[] = [];
   recupLogin(donne: any) {
-      this.jeuxService.recup_user(donne).subscribe(data => {
-
-        for (var i = 0; data[i] != null; i++) {
-          //console.log(data);
-          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-          donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
-          var inn = 0;
-          for (var j = 0; LoginComponent.logins[j]; j++) {
-            if (data[i].mail_user == LoginComponent.logins[j]) {
-              inn = 1;
-            }
+    this.jeuxService.recup_user(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        var inn = 0;
+        for (var j = 0; LoginComponent.logins[j]; j++) {
+          if (data[i].mail_user == LoginComponent.logins[j]) {
+            inn = 1;
           }
-          if (inn == 0) {
-            LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
-          }
-
         }
-
-      })
-
-
-    }
-
+        if (inn == 0) {
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        }
+      }
+    })
+  }
 
   getUser(id : number) : string | null {
     for(let l of this.list_login) {
@@ -250,7 +236,6 @@ export class PuzzleComponent implements OnInit {
       this.recupSession(this.list_session);
     },200)
 
-
     if (this.r != null && this.play) {
       this.decoupageImage();
 
@@ -268,7 +253,6 @@ export class PuzzleComponent implements OnInit {
       this.shuffle();
 
     }
-
 
     if (this.edit) {
       this.create_game = true;
@@ -288,9 +272,6 @@ export class PuzzleComponent implements OnInit {
       this.list = { image: this.image.toString(), id: this.r!.id, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
 
     }
-
-
-
   }
 
   puzzle_bg_color: string = "#3bb8c9";
@@ -355,12 +336,6 @@ export class PuzzleComponent implements OnInit {
       )
     }
   }
-
-  // switch(t1: tuile[], t2: tuile[]): void {
-  //   let tmp = t1[0];
-  //   t1[0] = t2[0];
-  //   t2[0] = tmp;
-  // }
 
   drop(event: CdkDragDrop<tuile[]>) {
 
@@ -437,8 +412,6 @@ export class PuzzleComponent implements OnInit {
 
   }
 
-
-
   previewPuzzle(r: Puzzle): void {
     this.r = r;
     this.puzzle_previsualiser = true;
@@ -484,7 +457,6 @@ export class PuzzleComponent implements OnInit {
     return res;
   }
 
-
   deleteSessionPuzzle(id : number) : void {
     let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
     for (let s of this.list_session) {
@@ -506,9 +478,6 @@ export class PuzzleComponent implements OnInit {
       this.recup(this.data)
     }, 200)
   }
-
-
-
 
   setPrevisualiserPuzzle(prev: boolean): void {
     if (prev == true) {
@@ -550,8 +519,6 @@ export class PuzzleComponent implements OnInit {
 
   }
 
-
-
   previousStep(): void {
     let step = this.formStep;
     if (this.formStep > 0) {
@@ -564,7 +531,6 @@ export class PuzzleComponent implements OnInit {
     this.onSend_update(this.list)
     this.router.navigate(['/panel/Puzzle']);
   }
-
 
   parseDate(date: Date): string {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -608,10 +574,5 @@ export class PuzzleComponent implements OnInit {
 
     return value;
   }
-
-
-
+  
 }
-
-
-

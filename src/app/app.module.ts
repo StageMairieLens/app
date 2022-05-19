@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { RecopierGameComponent } from './recopier-game/recopier-game.component';
 import { AppRoutingModule } from './app-routing.module';

@@ -1,19 +1,15 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Session } from './Session';
-import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { Users } from '../users/Users'
+import { ActivatedRoute, Router } from '@angular/router';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
 import { BoyGirl } from '../boy-girl-game/BoygGirl';
 import { Puzzle } from '../puzzle/Puzzle';
 import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Recopier } from '../recopier-game/Recopier';
-import { ImagesComponent } from '../images/images.component';
-import { Progress } from '../Progress';
 import { JeuxService } from '../jeux.service';
 import { PanelComponent } from '../panel/panel.component';
 import { Image } from '../Image'
-import { Subscription } from 'rxjs';
 
 export interface Jeu {
   type: string;
@@ -355,11 +351,6 @@ export class SessionsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-
-
-
-
-    console.log(this.data)
     setTimeout(() => {
       if (this.play) {
         if (this.route.snapshot.paramMap.get('id') != null) {
@@ -374,7 +365,6 @@ export class SessionsComponent implements OnInit {
         }
         else {
           this.router.navigate(['']);
-
         }
       }
 
@@ -384,9 +374,6 @@ export class SessionsComponent implements OnInit {
         this.jeuId = this.selected_session!.jeuId;
         this.isSuivi = this.selected_session!.isSuivi;
         this.list = { nom: this.selected_session!.nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.selected_session!.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
-
-
-
       }
     }, 400)
 
@@ -426,10 +413,8 @@ export class SessionsComponent implements OnInit {
   }
 
   connect(name: string): void {
-
     this.data = [];
     this.recup(this.data);
-
 
     setTimeout(() => {
       this.addUser(name);
@@ -465,7 +450,6 @@ export class SessionsComponent implements OnInit {
     localStorage.setItem('id_user', id.toString());
   }
 
-
   getData(): Session[] {
     return SessionsComponent.data;
   }
@@ -474,7 +458,6 @@ export class SessionsComponent implements OnInit {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     let index: number = date.getMonth() - 1;
     return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
   }
 
   static data: Session[] = [];
@@ -624,8 +607,6 @@ export class SessionsComponent implements OnInit {
     this.view = true;
     this.showList = false;
 
-
-
     setInterval(() => {
       n++;
       setTimeout(() => {
@@ -666,9 +647,6 @@ export class SessionsComponent implements OnInit {
         }
       }
     }, 400)
-
-
-
   }
 
   setSessionInactive(s: Session): void {
@@ -831,44 +809,6 @@ export class SessionsComponent implements OnInit {
   showSessionInactive(): void {
     this.showActive = false;
   }
-
-
-
-  //   getSessionRecopier(s: Session): Recopier | null {
-  //     this.id_game = s.jeuId;
-  //     return this.getRecopier(s.id);
-  //   }
-
-
-
-  //   getSessionMemory(s: Session): Memory | null {
-  //     this.id_game = s.jeuId;
-  //     return this.getMemory(s.id);
-  //   }
-
-
-  //   getSessionReconnaitre(s: Session): Reconnaitre | null {
-  //     this.id_game = s.jeuId;
-  //     return this.getReconnaitre(s.id);
-  //   }
-
-
-  //   getSessionAbecedaire(s: Session): Abecedaire | null {
-  //     this.id_game = s.jeuId;
-  //     return this.getAbecedaire(s.id);
-  //   }
-
-
-  //   getSessionBoyGirl(s: Session): BoyGirl | null {
-  //     this.id_game = s.jeuId;
-  //     return this.getFilleGarcon(s.id);
-  //   }
-
-  //   getSessionPuzzle(s: Session): Puzzle | null {
-  //     this.id_game = s.jeuId;
-  //     return this.getPuzzle(s.id);
-  //   }
-
 
   // RECOPIER LISTE CREATION SESSION
   addRecopier(r: Recopier): void {
@@ -1218,8 +1158,6 @@ export class SessionsComponent implements OnInit {
         break;
     }
   }
-
-
 
   getJeuId(): number {
     for (let i = 0; i < this.selected_session!.jeuId.length; i++) {

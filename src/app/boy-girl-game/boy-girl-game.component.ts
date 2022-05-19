@@ -1,4 +1,4 @@
-import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, Input, OnInit } from '@angular/core';
 import { Jeu, SessionsComponent, Guest, Progression } from '../sessions/sessions.component';
 import { BoyGirl } from './BoygGirl'
@@ -9,7 +9,6 @@ import { JeuxService } from '../jeux.service';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
 import { Session } from '../sessions/Session';
-import { Users } from '../users/Users';
 
 @Component({
   selector: 'app-boy-girl-game',
@@ -90,7 +89,6 @@ export class BoyGirlGameComponent implements OnInit {
       this.jeuxService.recup_user(donne).subscribe(data => {
 
         for (var i = 0; data[i] != null; i++) {
-          //console.log(data);
           //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
           donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
           var inn = 0;

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from '../Game';
 import { Progress } from '../Progress';
 import { Image } from '../Image';
 import { Recopier } from './../recopier-game/Recopier';
@@ -9,18 +8,12 @@ import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Puzzle } from '../puzzle/Puzzle';
 import { ActivatedRoute } from '@angular/router';
 import { BoyGirl } from '../boy-girl-game/BoygGirl';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Memory } from '../memory/Memory';
 import { Session } from '../sessions/Session';
-import { join } from 'path';
 import { Guest, Jeu, Progression, SessionsComponent } from '../sessions/sessions.component';
 import { LoginComponent } from '../index/login/login.component';
 import { JeuxService } from '../jeux.service';
-import { Users } from '../users/Users';
-import { Login } from '../index/login/Login';
-import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-panel',
@@ -690,11 +683,6 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  // getSessionRecopier(s: Session): Recopier | null {
-  //   this.id_game = s.jeuId;
-  //   return this.getRecopier();
-  // }
-
 
   getMemory(): Memory | null {
     for (let m of this.memory_list) {
@@ -705,12 +693,6 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  // getSessionMemory(s: Session): Memory | null {
-  //   this.id_game = s.jeuId;
-  //   return this.getMemory();
-  // }
-
-
   getReconnaitre(): Reconnaitre | null {
     for (let r of this.reconnaitre_list) {
       if (r.id == this.id_game) {
@@ -720,12 +702,6 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  // getSessionReconnaitre(s: Session): Reconnaitre | null {
-  //   this.id_game = s.jeuId;
-  //   return this.getReconnaitre();
-  // }
-
-
   getAbecedaire(): Abecedaire | null {
     for (let a of this.abecedaire_list) {
       if (a.id == this.id_game) {
@@ -734,11 +710,6 @@ export class PanelComponent implements OnInit {
     }
     return null;
   }
-
-  // getSessionAbecedaire(s: Session): Abecedaire | null {
-  //   this.id_game = s.jeuId;
-  //   return this.getAbecedaire();
-  // }
 
 
   getBoyGirl(): BoyGirl | null {
@@ -750,11 +721,6 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  // getSessionBoyGirl(s: Session): BoyGirl | null {
-  //   this.id_game = s.jeuId;
-  //   return this.getBoyGirl();
-  // }
-
   getPuzzle(): Puzzle | null {
     for (let p of this.puzzle_list) {
       if (p.id == this.id_game) {
@@ -764,13 +730,4 @@ export class PanelComponent implements OnInit {
     return null;
   }
 
-  // getSessionPuzzle(s: Session): Puzzle | null {
-  //   this.id_game = s.jeuId;
-  //   return this.getPuzzle();
-  // }
-
-
-
-
 }
-

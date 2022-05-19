@@ -1,17 +1,13 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Reconnaitre } from './Reconnaitre'
 import { Progress } from '../Progress'
 import { Image } from '../Image'
-import { MatButton } from '@angular/material/button';
 import { JeuxService } from '../jeux.service';
 import { Guest, Jeu, Progression, SessionsComponent } from '../sessions/sessions.component'
-import { ImagesComponent } from '../images/images.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
 import { Session } from '../sessions/Session';
-import { Users } from '../users/Users';
 
 interface Erreur {
   src: string;
@@ -31,13 +27,9 @@ export class ReconnaitreComponent implements OnInit {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
     /*this.http.get<any>('http://92.154.61.105:8080/~nacer/vue.php').subscribe(data =>{
-      //this.data.push(data);
-      console.log(data[0]);
+      this.data.push(data);
     })*/
-
-
   }
-
 
   getUser(id : number) : string | null {
     for(let l of this.list_login) {
@@ -50,28 +42,22 @@ export class ReconnaitreComponent implements OnInit {
 
   list_login : Login[] = [];
   recupLogin(donne: any) {
-      this.jeuxService.recup_user(donne).subscribe(data => {
-
-        for (var i = 0; data[i] != null; i++) {
-          //console.log(data);
-          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-          donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
-          var inn = 0;
-          for (var j = 0; LoginComponent.logins[j]; j++) {
-            if (data[i].mail_user == LoginComponent.logins[j]) {
-              inn = 1;
-            }
+    this.jeuxService.recup_user(donne).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        var inn = 0;
+        for (var j = 0; LoginComponent.logins[j]; j++) {
+          if (data[i].mail_user == LoginComponent.logins[j]) {
+            inn = 1;
           }
-          if (inn == 0) {
-            LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
-          }
-
         }
-
-      })
-
-
-    }
+        if (inn == 0) {
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        }
+      }
+    })
+  }
 
   reponse = "";
   data: Reconnaitre[] = [];
@@ -89,7 +75,6 @@ export class ReconnaitreComponent implements OnInit {
         }
       }
     })
-
   }
 
   list_session : Session[] = [];
@@ -109,7 +94,6 @@ export class ReconnaitreComponent implements OnInit {
         );
       }
     })
-
   }
 
   getJeuSession(s: string): Jeu[] {
@@ -290,8 +274,6 @@ export class ReconnaitreComponent implements OnInit {
       text_color: this.reconnaitre_text_color
       , id_crea:this.id_crea };
     }
-
-
   }
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Reconnaitre | null;
@@ -375,8 +357,6 @@ export class ReconnaitreComponent implements OnInit {
       li[m].src = li[i].src;
       li[i].nom = name;
       li[i].src = src;
-
-
     }
   }
 
@@ -405,7 +385,6 @@ export class ReconnaitreComponent implements OnInit {
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
       this.erreur_image.push({ src: this.r!.images[this.prochaine_image].src, erreur: this.compteur_image });
       this.sendProgress();
-
 
       this.compteur_image = 0;
       console.log(this.erreur_image);
@@ -436,8 +415,6 @@ export class ReconnaitreComponent implements OnInit {
             document.getElementById(this.r!.images[i].nom)!.style.backgroundColor = this.r!.button_bg_color;
             document.getElementById(this.r!.images[i].nom)!.style.border = '';
             document.getElementById(this.r!.images[i].nom)!.style.color = this.r!.button_text_color;
-
-
           }
         }, 1600);
 
@@ -460,7 +437,6 @@ export class ReconnaitreComponent implements OnInit {
         this.cpt_erreur++;
         this.sendProgress();
 
-
         document.getElementById('result')!.innerHTML = '<p style="color : red">Ce n\'est pas le bon mot</p>';
 
         document.getElementById('container')?.animate([
@@ -472,7 +448,6 @@ export class ReconnaitreComponent implements OnInit {
       }
       return false;
     }
-
   }
 
   getSession(): Session | null {
@@ -525,7 +500,6 @@ export class ReconnaitreComponent implements OnInit {
       error: err => {
         console.log(err);
       },
-
     });
   }
 
@@ -553,8 +527,6 @@ export class ReconnaitreComponent implements OnInit {
     return false;
   }
 
-
-
   previewReconnaitre(r: Reconnaitre): void {
     this.r = r;
     this.reconnaitre_previsualiser = true;
@@ -563,7 +535,6 @@ export class ReconnaitreComponent implements OnInit {
   quitPreviewReconnaitre(): void {
     this.reconnaitre_previsualiser = false;
   }
-
 
   deleteReconnaitre(id : number, s : Session): void {
     let index = -1;
@@ -600,7 +571,6 @@ export class ReconnaitreComponent implements OnInit {
     }
     return res;
   }
-
 
   deleteSessionReconnaitre(id : number) : void {
     let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
@@ -728,7 +698,6 @@ export class ReconnaitreComponent implements OnInit {
       this.selectedImages.push(img);
       this.image.push(img.id);
       this.list['image'] = this.image.toString();
-
     }
   }
 
@@ -754,5 +723,4 @@ export class ReconnaitreComponent implements OnInit {
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Reconnaitre']);
   }
-
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SessionsComponent } from '../sessions/sessions.component'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 
