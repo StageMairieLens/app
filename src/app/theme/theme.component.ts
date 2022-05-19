@@ -182,6 +182,7 @@ export class ThemeComponent implements OnInit {
       },
     });
   }
+  
   onSend_update(list: any) {
     var list2 = list;
     list2.id = list2.id.toString();
