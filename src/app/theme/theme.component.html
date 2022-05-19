@@ -249,7 +249,7 @@
 
         </div>
 
-        <div *ngIf="this.showAlert" class="row" style="margin-top : 2%">
+        <div *ngIf="this.showAlert && !this.edit" class="row" style="margin-top : 2%">
           <div class="col-md-12">
             <div class="alert alert-success justify-content-center text-center" role="alert">
               <h4 class="alert-heading">Veuillez patienter </h4>
@@ -258,7 +258,21 @@
 
               <hr>
 
-              <p>Jeux créer : {{ this.cpt }}/ {{ this.cpt_jeux }} </p>
+              <p>Progréssion : {{ ((this.cpt) / this.cpt_jeux)}} %</p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="this.showAlert && this.edit" class="row" style="margin-top : 2%">
+          <div class="col-md-12">
+            <div class="alert alert-success justify-content-center text-center" role="alert">
+              <h4 class="alert-heading">Veuillez patienter </h4>
+              <p>Mise à jour du thème en cours</p>
+              <mat-spinner style="width : 30%"></mat-spinner>
+
+              <hr>
+
+              <p>Progréssion : {{ ((this.cpt) / this.cpt_jeux)}} %</p>
             </div>
           </div>
         </div>
