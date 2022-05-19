@@ -43,17 +43,20 @@ export class PuzzleComponent implements OnInit {
 
 
   }
+  login:string=localStorage.getItem('id_pseudo')!;
 
   reponse = "";
   data: Puzzle[] = [];
   recup(donne: any) {
     this.jeuxService.recup_puzzle(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+
         donne.push(
           new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe,data[i].id_crea)
         );
       }
-
+    }
     })
 
   }

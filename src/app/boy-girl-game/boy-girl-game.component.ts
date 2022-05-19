@@ -20,6 +20,7 @@ export class BoyGirlGameComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     this.bg = null;
+    
     // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
     this.recup(this.data);
     this.recupLogin(this.list_login);
@@ -27,6 +28,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
   list_session : Session[] = [];
+  login:string=localStorage.getItem('id_pseudo')!;
 
   recupSession(donne: any) {
     this.jeuxService.recup_session(donne).subscribe(data => {
@@ -172,10 +174,13 @@ export class BoyGirlGameComponent implements OnInit {
   recup(donne: any) {
     this.jeuxService.recup_bg(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+
         donne.push(
           new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri,data[i].id_crea)
         );
       }
+    }
     })
   }
 

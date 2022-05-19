@@ -25,6 +25,8 @@ export class AbecedaireComponent implements OnInit {
   @Input() create_game: boolean = false;
   @Input() edit: boolean = false;
 
+  login:string=localStorage.getItem('id_pseudo')!;
+
 
   liste_image: Image[] = [];
   selectedImages: Image[] = [];
@@ -139,9 +141,12 @@ export class AbecedaireComponent implements OnInit {
   recup(donne: any) {
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+
         donne.push(
           new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri, data[i].id_crea)
         );
+        }
       }
     })
 

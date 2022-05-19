@@ -21,6 +21,7 @@ export class RecopierGameComponent implements OnInit {
   data: Recopier[] = [];
   list_session: Session[] = [];
   list_login: Login[] = [];
+  login:string=localStorage.getItem('id_pseudo')!;
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
@@ -270,7 +271,7 @@ export class RecopierGameComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-
+    
     this.recupImage(this.liste_image)
     setTimeout(() => {
       this.recup(this.data);
