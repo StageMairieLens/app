@@ -9,6 +9,7 @@ import { JeuxService } from '../jeux.service';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
 import { Session } from '../sessions/Session';
+import { ThemeComponent } from '../theme/theme.component';
 
 @Component({
   selector: 'app-abecedaire',
@@ -508,9 +509,37 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
+  deleteThemeAbcdr(id: number): void {
+    let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
+    let liste: any = [];
+    theme.recup2(liste);
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+
+    setTimeout(() => {
+      for (let t of liste) {
+        let array = ses.getJeuSession(t.id_jeux);
+        let index = -1;
+        for (let j of array) {
+          if (j.type == 'Abécédaire') {
+            if (j.id_jeu == id) {
+              index = array.indexOf(j);
+            }
+          }
+        }
+
+        if (index > -1) {
+          array.splice(index, 1);
+          t.id_jeux = ses.setJeuSession(array);
+          theme.onSend_update({id_theme : t.id, id : t.id_image , id_jeux : t.id_jeux , nom : t.nom});
+        }
+      }
+    }, 200)
+  }
+
   deleteGameAbecedaire(a: Abecedaire): void {
     this.onSend_delete(a.id)
     this.deleteSessionAbecedaire(a.id);
+    this.deleteThemeAbcdr(a.id);
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);

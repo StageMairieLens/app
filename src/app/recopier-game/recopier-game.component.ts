@@ -553,9 +553,10 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
+
   deleteThemeRecopier(id: number): void {
     let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
-    var liste: any = [];
+    let liste: any = [];
     theme.recup2(liste);
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
 
@@ -574,8 +575,7 @@ export class RecopierGameComponent implements OnInit {
         if (index > -1) {
           array.splice(index, 1);
           t.id_jeux = ses.setJeuSession(array);
-          console.log(t)
-          theme.onSend_update(t);
+          theme.onSend_update({id_theme : t.id, id : t.id_image , id_jeux : t.id_jeux , nom : t.nom});
         }
       }
     }, 200)
@@ -587,7 +587,7 @@ export class RecopierGameComponent implements OnInit {
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);
-    }, 1000)
+    }, 400)
   }
 
   redirectEditRecopier(r: Recopier): void {
