@@ -19,6 +19,7 @@ export class RecopierGameComponent implements OnInit {
   data: Recopier[] = [];
   list_session: Session[] = [];
   list_login: Login[] = [];
+  login:string=localStorage.getItem('id_pseudo')!;
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
@@ -47,10 +48,14 @@ export class RecopierGameComponent implements OnInit {
   recup(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+
+
         tab.push(
           new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
+    }
     })
   }
   recupSession(donne: any) {
@@ -553,7 +558,7 @@ export class RecopierGameComponent implements OnInit {
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);
-    }, 200)
+    },200)
   }
 
   redirectEditRecopier(r: Recopier): void {

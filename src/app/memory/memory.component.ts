@@ -17,6 +17,7 @@ import { LoginComponent } from '../index/login/login.component';
 })
 export class MemoryComponent implements OnInit {
 
+  login:string=localStorage.getItem('id_pseudo')!;
 
   list_login : Login[] = [];
   cpt_erreur: number = 0;
@@ -133,10 +134,13 @@ export class MemoryComponent implements OnInit {
   recup(donne: any) {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
+        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+
         donne.push(
           new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps,data[i].id_crea)
         );
       }
+    }
     })
 
   }

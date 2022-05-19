@@ -12,6 +12,7 @@ import { Reconnaitre } from '../reconnaitre/Reconnaitre';
 import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Puzzle } from '../puzzle/Puzzle';
 import { PuzzleComponent } from '../puzzle/puzzle.component';
+import { SessionsComponent } from '../sessions/sessions.component';
 
 @Component({
   selector: 'app-theme',
@@ -23,6 +24,8 @@ export class ThemeComponent implements OnInit {
   affiche_image2: Boolean = false;
   create_theme: Boolean = false;
   n_theme: any = [];
+
+  math = Math;
 
   pro_img = 0;
   affiche: Boolean = false;
@@ -354,19 +357,22 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
       recopier.onSend_delete(this.edit_create_recopier.split(',')[1])
+      let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      let array = ses.getJeuSession(this.recup_image.id_jeux);
 
-      setTimeout(() => {
-        let index = -1;
-        for (let j of this.recup_image.id_jeux.split(';')) {
-          if (j == this.edit_create_recopier) {
-            index = this.recup_image.id_jeux.split(';').indexOf(j);
+      let index_recopier = -1;
+      for (let j of array) {
+        if (j.type == this.edit_create_recopier!.split(',')[0]) {
+          if (j.id_jeu == +this.edit_create_recopier!.split(',')[1]) {
+            index_recopier = array.indexOf(j);
           }
         }
+      }
 
-        if (index > -1) {
-          this.recup_image.id_jeux.split(';').splice(index, 1);
-        }
-      }, 200)
+      if (index_recopier > -1) {
+        array.splice(index_recopier, 1);
+        this.recup_image.id_jeux = ses.setJeuSession(array);
+      }
     }
     else if (this.edit_create_recopier == null && this.create_recopier) {
       this.cpt_jeux++;
@@ -377,27 +383,209 @@ export class ThemeComponent implements OnInit {
 
       setTimeout(() => {
         recopier.recup(recopier_list);
-      }, 300)
+      }, 100)
 
       setTimeout(() => {
         for (let i = recopier_list.length - 1; recopier_list[i] != null; i--) {
           if (recopier_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Recopier,' + recopier_list[i].id + ';'
+            this.recup_image.id_jeux += 'Recopier,' + recopier_list[i].id + ';'
             break;
           }
         }
-      }, 200)
+
+      }, 300)
+    }
+
+
+
+    if (this.edit_create_memory != null && !this.create_memory) {
+      this.cpt_jeux++;
+      let memory: MemoryComponent = new MemoryComponent(this.route, this.jeuxService, this.router);
+      memory.onSend_delete(this.edit_create_memory.split(',')[1])
+      let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      let array = ses.getJeuSession(this.recup_image.id_jeux);
+
+      let index_memory = -1;
+      for (let j of array) {
+        if (j.type == this.edit_create_memory!.split(',')[0]) {
+          if (j.id_jeu == +this.edit_create_memory!.split(',')[1]) {
+            index_memory = array.indexOf(j);
+          }
+        }
+      }
+
+      if (index_memory > -1) {
+        array.splice(index_memory, 1);
+        this.recup_image.id_jeux = ses.setJeuSession(array);
+      }
+    }
+    else if (this.edit_create_memory == null && this.create_memory) {
+      this.cpt_jeux++;
+      let memory: MemoryComponent = new MemoryComponent(this.route, this.jeuxService, this.router);
+      let memory_list: Memory[] = [];
+      memory.list['image'] = this.n_theme.toString();
+      memory.onSend(memory.list);
+
+      setTimeout(() => {
+        memory.recup(memory_list);
+      }, 100)
+
+      setTimeout(() => {
+        for (let i = memory_list.length - 1; memory_list[i] != null; i--) {
+          if (memory_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.recup_image.id_jeux += 'Memory,' + memory_list[i].id + ';'
+            break;
+          }
+        }
+
+      }, 300)
+    }
+
+    // Reconnaitre
+    if (this.edit_create_reconnaitre != null && !this.create_reconnaitre) {
+      this.cpt_jeux++;
+      let reconnaitre: ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService, this.router);
+      reconnaitre.onSend_delete(this.edit_create_reconnaitre.split(',')[1])
+      let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      let array = ses.getJeuSession(this.recup_image.id_jeux);
+
+      let index_reconnaitre = -1;
+      for (let j of array) {
+        if (j.type == this.edit_create_reconnaitre!.split(',')[0]) {
+          if (j.id_jeu == +this.edit_create_reconnaitre!.split(',')[1]) {
+            index_reconnaitre = array.indexOf(j);
+          }
+        }
+      }
+
+      if (index_reconnaitre > -1) {
+        array.splice(index_reconnaitre, 1);
+        this.recup_image.id_jeux = ses.setJeuSession(array);
+      }
+    }
+    else if (this.edit_create_reconnaitre == null && this.create_reconnaitre) {
+      this.cpt_jeux++;
+      let reconnaitre: ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService, this.router);
+      let reconnaitre_list: Reconnaitre[] = [];
+      reconnaitre.list['image'] = this.n_theme.toString();
+      reconnaitre.onSend(reconnaitre.list);
+
+      setTimeout(() => {
+        reconnaitre.recup(reconnaitre_list);
+      }, 100)
+
+      setTimeout(() => {
+        for (let i = reconnaitre_list.length - 1; reconnaitre_list[i] != null; i--) {
+          if (reconnaitre_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.recup_image.id_jeux += 'Reconnaitre,' + reconnaitre_list[i].id + ';'
+            break;
+          }
+        }
+
+      }, 300)
+    }
+
+    // Abécédaire
+    if (this.edit_create_abecedaire != null && !this.create_abecedaire) {
+      this.cpt_jeux++;
+      let abecedaire: AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService, this.router);
+      abecedaire.onSend_delete(this.edit_create_abecedaire.split(',')[1])
+      let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      let array = ses.getJeuSession(this.recup_image.id_jeux);
+
+      let index_abecedaire = -1;
+      for (let j of array) {
+        if (j.type == this.edit_create_abecedaire!.split(',')[0]) {
+          if (j.id_jeu == +this.edit_create_abecedaire!.split(',')[1]) {
+            index_abecedaire = array.indexOf(j);
+          }
+        }
+      }
+
+      if (index_abecedaire > -1) {
+        array.splice(index_abecedaire, 1);
+        this.recup_image.id_jeux = ses.setJeuSession(array);
+      }
+    }
+    else if (this.edit_create_abecedaire == null && this.create_abecedaire) {
+      this.cpt_jeux++;
+      let abecedaire: AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService, this.router);
+      let abecedaire_list: Abecedaire[] = [];
+      abecedaire.list['image'] = this.n_theme.toString();
+      abecedaire.onSend(abecedaire.list);
+
+      setTimeout(() => {
+        abecedaire.recup(abecedaire_list);
+      }, 100)
+
+      setTimeout(() => {
+        for (let i = abecedaire_list.length - 1; abecedaire_list[i] != null; i--) {
+          if (abecedaire_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.recup_image.id_jeux += 'Abécédaire,' + abecedaire_list[i].id + ';'
+            break;
+          }
+        }
+
+      }, 300)
+    }
+
+    // Puzzle
+    if (this.edit_create_puzzle != null && !this.create_puzzle) {
+      this.cpt_jeux++;
+      let puzzle: PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService, this.router);
+      puzzle.onSend_delete(this.edit_create_puzzle.split(',')[1])
+      let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      let array = ses.getJeuSession(this.recup_image.id_jeux);
+
+      let index_puzzle = -1;
+      for (let j of array) {
+        if (j.type == this.edit_create_puzzle!.split(',')[0]) {
+          if (j.id_jeu == +this.edit_create_puzzle!.split(',')[1]) {
+            index_puzzle = array.indexOf(j);
+          }
+        }
+      }
+
+      if (index_puzzle > -1) {
+        array.splice(index_puzzle, 1);
+        this.recup_image.id_jeux = ses.setJeuSession(array);
+      }
+    }
+    else if (this.edit_create_puzzle == null && this.create_puzzle) {
+      this.cpt_jeux++;
+      let puzzle: PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService, this.router);
+      let puzzle_list: Puzzle[] = [];
+      puzzle.list['image'] = this.n_theme.toString();
+      puzzle.onSend(puzzle.list);
+
+      setTimeout(() => {
+        puzzle.recup(puzzle_list);
+      }, 100)
+
+      setTimeout(() => {
+        for (let i = puzzle_list.length - 1; puzzle_list[i] != null; i--) {
+          if (puzzle_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.recup_image.id_jeux += 'Puzzle,' + puzzle_list[i].id + ';'
+            break;
+          }
+        }
+
+      }, 300)
     }
 
     this.showAlert = true;
 
+    this.showAlert = true;
+
     setInterval(() => {
-      this.cpt++;
-    }, 1000)
+      this.cpt+=2;
+    }, 20)
 
     setTimeout(() => {
       this.recup_image.nom = this.nouveau_theme['nom'];
       this.recup_image.id = this.n_theme;
+      console.log(this.recup_image)
+      this.onSend_update(this.recup_image)
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
   }
