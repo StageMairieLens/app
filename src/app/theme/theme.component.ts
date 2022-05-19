@@ -26,6 +26,8 @@ export class ThemeComponent implements OnInit {
   create_theme: Boolean = false;
   n_theme: any = [];
 
+  math = Math;
+
   pro_img = 0;
   affiche: Boolean = false;
   temps: number = 0;
