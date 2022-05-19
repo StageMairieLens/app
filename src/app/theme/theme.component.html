@@ -56,7 +56,7 @@
     <div class="row" *ngIf="this.create_theme">
       <div class="col-md-12 text-center">
         <button mat-raised-button style="padding : 1%; font-size : 24px; background : green ; color : white"
-          (click)="this.create_theme = false ; this.recup_image = null ;this.nouveau_theme['nom'] = '' ; this.n_theme = []">
+          (click)="quitEdit()">
           <i class="fa-solid fa-angles-left fa-lg" style="padding-right : 2% ; margin-bottom : 1%"></i>
           Revenir à l'acceuil des thèmes
         </button>
