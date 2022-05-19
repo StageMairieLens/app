@@ -108,7 +108,7 @@ export class ThemeComponent implements OnInit {
   onRemove(event: File) {//Retire les images de la liste
     this.files.splice(this.files.indexOf(event), 1);
   }
-  recup(donne: any) {//Recupère les thèmes crée par l'utilisateur
+  recup(donne: any) {//Recupère les images crée par l'utilisateur
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -120,7 +120,7 @@ export class ThemeComponent implements OnInit {
 
 
   }
-  recup2(donne: any) {
+  recup2(donne: any) {//Recupère les thèmes crée par l'utilisateur
     this.jeuxService.recup_theme(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
