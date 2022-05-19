@@ -20,14 +20,14 @@ import { SessionsComponent } from '../sessions/sessions.component';
   styleUrls: ['./theme.component.css']
 })
 export class ThemeComponent implements OnInit {
-  affiche_image: Boolean = false;
-  affiche_image2: Boolean = false;
-  create_theme: Boolean = false;
-  n_theme: any = [];
+  affiche_image: Boolean = false; // Pour afficher les images
+  affiche_image2: Boolean = false;//Pour afficher les images
+  create_theme: Boolean = false;//Pour crée le thème
+  n_theme: any = [];//Récupere les id des images
 
   math = Math;
 
-  pro_img = 0;
+  //pro_img = 0;
   affiche: Boolean = false;
   temps: number = 0;
   test: any = [];
@@ -97,21 +97,17 @@ export class ThemeComponent implements OnInit {
   public getListImages(): Image[] {
     return ThemeComponent.list_image;
   }
-  files: File[] = [];
+  files: File[] = [];//Listes des images/fichiers
 
-  onSelect(event: { addedFiles: any; }) {
-    if (this.pro_img < 0) {
-      this.pro_img = 0;
-    }
+  onSelect(event: { addedFiles: any; }) {//Insere les images dans la liste
+    
     this.files.push(...event.addedFiles);
-    //this.pro_img+=1;
   }
 
-  onRemove(event: File) {
+  onRemove(event: File) {//Retire les images de la liste
     this.files.splice(this.files.indexOf(event), 1);
-    this.pro_img -= 1;
   }
-  recup(donne: any) {
+  recup(donne: any) {//Recupère les thèmes crée par l'utilisateur
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
