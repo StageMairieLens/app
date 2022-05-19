@@ -8,6 +8,7 @@ import { JeuxService } from '../jeux.service';
 import { Session } from '../sessions/Session';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
+import { ThemeComponent } from '../theme/theme.component';
 
 
 @Component({
@@ -551,10 +552,35 @@ export class RecopierGameComponent implements OnInit {
       }
     }
   }
+  deleteThemeRecopier(id:number):void{
+    let theme = new ThemeComponent(this.route,this.jeuxService,this.router);
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+    var liste: any =[];
+    theme.recup(liste);
 
+    setTimeout(()=>{
+    for(let t of liste){
+      let array = ses.getJeuSession(t.id_jeux);
+      console.log(array);
+      let index = -1;
+      for(let j of array){
+        if(j.type=='Recopier' && j.id_jeu== id){
+          index=t.id_jeux.indexOf(j);
+          
+        }
+      }
+      if (index > -1) {
+        array.splice(index, 1);
+        t.id_jeux=ses.setJeuSession(array);
+        theme.onSend_update(t);
+      }
+    }
+  },400)
+  }
   deleteGameRecopier(r: Recopier): void {
     this.onSend_delete(r.id);
     this.deleteSessionRecopier(r.id);
+    this.deleteThemeRecopier(r.id);
     setTimeout(() => {
       this.data = [];
       this.recup(this.data);
