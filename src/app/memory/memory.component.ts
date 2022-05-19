@@ -4,11 +4,9 @@ import { Progress } from '../Progress';
 import { Memory } from './Memory';
 import { TileComponent } from './tile/tile.component';
 import { Guest, Jeu, Progression, SessionsComponent } from '../sessions/sessions.component';
-import { ImagesComponent } from '../images/images.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JeuxService } from '../jeux.service';
 import { Session } from '../sessions/Session';
-import { Users } from '../users/Users';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
 
@@ -26,7 +24,6 @@ export class MemoryComponent implements OnInit {
       this.jeuxService.recup_user(donne).subscribe(data => {
 
         for (var i = 0; data[i] != null; i++) {
-          //console.log(data);
           //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
           donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
           var inn = 0;

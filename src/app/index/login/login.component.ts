@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   pwd: any = "";
   pseudo:any="";
   list: any = { mail: this.mail, pwd: this.pwd, co: this.co,pseudo:this.pseudo };
+  domaineAccept: string[] = ["gmail.com"];
 
   constructor(public dialogRef: MatDialogRef<LoginComponent> | null, private router: Router, private jeuxService: JeuxService) { }
 
@@ -182,7 +183,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  enterKey($event: KeyboardEvent, email: string, mdp: string): void {
+  enterKeyLogin($event: KeyboardEvent, email: string, mdp: string): void {
     if ($event.key == 'Enter') {
       this.onSend_verify(this.list)
       this.login(email, mdp);
@@ -198,6 +199,8 @@ export class LoginComponent implements OnInit {
     this.dialogRef!.close();
   }
 
-
+  register(email: string, mdp: string, confMdp: string): void {
+    if(mdp === confMdp) this.onSend(this.list);
+  }
 
 }

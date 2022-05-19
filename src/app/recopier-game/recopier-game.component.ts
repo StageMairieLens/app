@@ -1,12 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Image } from '../Image'
 import { Recopier } from './Recopier'
 import { Progress } from '../Progress'
-import { ImagesComponent } from '../images/images.component'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guest, Jeu, Progression, SessionsComponent } from '../sessions/sessions.component';
 import { JeuxService } from '../jeux.service';
-import { Users } from '../users/Users';
 import { Session } from '../sessions/Session';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
@@ -24,8 +22,6 @@ export class RecopierGameComponent implements OnInit {
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
-
-
   }
 
   recupLogin(donne: any) {
@@ -45,12 +41,8 @@ export class RecopierGameComponent implements OnInit {
         if (inn == 0) {
           LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         }
-
       }
-
     })
-
-
   }
   recup(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
@@ -59,9 +51,7 @@ export class RecopierGameComponent implements OnInit {
           new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
         );
       }
-
     })
-
   }
   recupSession(donne: any) {
     this.jeuxService.recup_session(donne).subscribe(data => {
@@ -79,7 +69,6 @@ export class RecopierGameComponent implements OnInit {
         );
       }
     })
-
   }
 
   getJeuSession(s: string): Jeu[] {
@@ -136,7 +125,6 @@ export class RecopierGameComponent implements OnInit {
       error: err => {
         console.log(err);
       },
-
     });
   }
 
@@ -153,13 +141,11 @@ export class RecopierGameComponent implements OnInit {
         }
       }
     }
-
     return res;
   }
 
   recupImage(donne: any) {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
-
       for (var i = 0; data[i] != null; i++) {
         donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
       }
@@ -227,7 +213,6 @@ export class RecopierGameComponent implements OnInit {
     }
   }
   onSend_delete(id: any) {
-
     const formData: FormData = new FormData();
     /*for(var i = 0;i<id.lenght;i++){
       formData.append('id[]',id[i]);
@@ -236,17 +221,14 @@ export class RecopierGameComponent implements OnInit {
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
-
       },
 
       error: err => {
         console.log(err);
       },
-
     });
   }
   onSend_update(list: any) {
-
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
@@ -262,11 +244,9 @@ export class RecopierGameComponent implements OnInit {
       error: err => {
         console.log(err);
       },
-
     });
   }
   ngOnInit(): void {
-
     this.recupImage(this.liste_image)
     setTimeout(() => {
       this.recup(this.data);
@@ -293,11 +273,9 @@ export class RecopierGameComponent implements OnInit {
       } else {
         this.recopier_isVocaliser = false;
       }
-
       for (let i of this.selectedImages) {
         this.image2.push(i.id);
       }
-
       this.list = { image: this.image2.toString(), id: this.r!.id, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw_color: this.recopier_good_answer_color, waw_color: this.recopier_wrong_answer_color, button_bg_color: this.recopier_button_bg_color, button_text_color: this.recopier_button_text_color, progress: 'blue', ecri: this.recopier_type_ecriture, voca: +this.recopier_isVocaliser };
     }
   }
@@ -330,7 +308,6 @@ export class RecopierGameComponent implements OnInit {
   sendAnswer(text: string, img: Image): void {
     if (!this.waitToSend) {
       this.waitToSend = true;
-
       if (this.r!.typeEcriture == 'CAPITAL') {
         if (text.toUpperCase() === img.getNom().toUpperCase()) {
           document.getElementById('result')!.innerHTML = '<p style="color :' + this.r!.good_answer_color + '">C\'est le bon mot</p>';
@@ -349,7 +326,6 @@ export class RecopierGameComponent implements OnInit {
             (<HTMLInputElement>document.getElementById('input_recopier')).value = '';
             document.getElementById('progressbar')!.style.width = ((this.showImageCpt / this.r!.images.length) * 100).toString() + '%';
             this.waitToSend = false;
-
           },
             1600);
 
@@ -400,13 +376,9 @@ export class RecopierGameComponent implements OnInit {
           ], { duration: 200 }
           );
           this.waitToSend = false;
-
         }
       }
-
     }
-
-
   }
 
   getSession(): Session | null {
@@ -459,7 +431,6 @@ export class RecopierGameComponent implements OnInit {
       error: err => {
         console.log(err);
       },
-
     });
   }
 
@@ -496,14 +467,11 @@ export class RecopierGameComponent implements OnInit {
     return null;
   }
 
-
   parseDate(date: Date): string {
     let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     let index: number = date.getMonth() - 1;
     return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
   }
-
 
   setPrevisualiserRecopier(prev: boolean): void {
     if (prev == true) {
@@ -592,8 +560,6 @@ export class RecopierGameComponent implements OnInit {
     window.location.href = '/panel/Recopier/edit/' + r.id;
   }
 
-
-
   nextStep(): void {
     let step = this.formStep;
     if (this.formStep < 2) {
@@ -628,7 +594,6 @@ export class RecopierGameComponent implements OnInit {
   }
 
   changeProgressValue(jeu: string, element: HTMLSelectElement): void {
-
     switch (element.value) {
       case 'blue':
         this.recopier_progress = Progress.Blue;
@@ -675,7 +640,6 @@ export class RecopierGameComponent implements OnInit {
     this.onSend(this.list);
     this.router.navigate(['/panel/Recopier']);
   }
-
 
   save(): void {
     this.onSend_update(this.list);

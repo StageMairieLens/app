@@ -9,7 +9,6 @@ import { JeuxService } from '../jeux.service';
 import { Login } from '../index/login/Login';
 import { LoginComponent } from '../index/login/login.component';
 import { Session } from '../sessions/Session';
-import { Users } from '../users/Users';
 
 @Component({
   selector: 'app-abecedaire',
@@ -334,10 +333,6 @@ export class AbecedaireComponent implements OnInit {
       this.resetButton();
     }
   }
-
-  // addImage(mot: string, image: string) {
-  //   this.game!.images.push(new Image(mot, image));
-  // }
 
   errorsPlus(): void {
     this.errors++;

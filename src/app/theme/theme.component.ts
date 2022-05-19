@@ -1,5 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnInit } from '@angular/core';
 import { Image } from '../Image'
 import { JeuxService } from '../jeux.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,7 +36,6 @@ export class ThemeComponent implements OnInit {
   nouveau_theme: any = { id_crea: Number(this.id_crea), id_jeux: '' };
   list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
 
-
   create_recopier: boolean = false;
   create_reconnaitre: boolean = false;
   create_memory: boolean = false;
@@ -57,10 +55,6 @@ export class ThemeComponent implements OnInit {
   static list_image: Image[] = [];
   ngOnInit(): void {
     this.recup2(this.data);
-    console.log(this.id_crea);
-
-
-
   }
 
   edit(element: any): void {
@@ -94,8 +88,6 @@ export class ThemeComponent implements OnInit {
           break;
       }
     }
-
-
     this.nouveau_theme['nom'] = element.nom;
   }
 
@@ -108,14 +100,11 @@ export class ThemeComponent implements OnInit {
     if (this.pro_img < 0) {
       this.pro_img = 0;
     }
-    console.log(event);
     this.files.push(...event.addedFiles);
-    console.log(this.files[this.pro_img].type);
     //this.pro_img+=1;
   }
 
   onRemove(event: File) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
     this.pro_img -= 1;
   }
@@ -141,17 +130,12 @@ export class ThemeComponent implements OnInit {
           this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux });
         }
       }
-      console.log(this.test);
     })
-
-
   }
 
   getListImage(): Image[] {
     if (this.affiche_image == true || this.affiche_image2 == true) {
-
       return ThemeComponent.list_image;
-
     } else {
       return ThemeComponent.list_image = [];
     }
@@ -163,13 +147,11 @@ export class ThemeComponent implements OnInit {
   onSend(list: any) {
     var list2 = list;
     list2.id = list2.id.toString();
-    console.log(list2);
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
     formData.append('theme', JSON.stringify(list2));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
@@ -190,45 +172,34 @@ export class ThemeComponent implements OnInit {
       formData.append('id[]',id[i]);
     }*/
     formData.append('theme_delete', id);
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
-
       },
 
       error: err => {
         console.log(err);
-
       },
-
     });
   }
   onSend_update(list: any) {
     var list2 = list;
     list2.id = list2.id.toString();
-    console.log(list2);
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
     formData.append('theme_update', JSON.stringify(list2));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res.name);
-
       },
 
       error: err => {
         console.log(err);
         this.reloadCurrentPage();
       },
-
     });
-  }
-  aff(test: any) {
-    console.log(test);
   }
   ajoute(id: any, liste: any): any {
     if (!liste.includes(id)) {
@@ -236,32 +207,22 @@ export class ThemeComponent implements OnInit {
     }
   }
   remove(id: any, liste: any): any {
-    //console.log(liste);
     for (var i = 0; liste[i] != null; i++) {
-      //console.log(liste);
       if (liste[i] == id) {
-        //console.log(liste[i]);
         liste.splice(i, 1);
         return;
-
       }
-      console.log(liste);
     }
   }
   reloadCurrentPage() {
     window.location.reload();
   }
   remove2(id: any): any {
-    //console.log(liste);
     console.log(id);
     for (var i = 0; this.test[i] != null; i++) {
-      //console.log(liste);
       if (this.test[i].id_theme == id) {
-        //console.log(liste[i]);
         this.test.splice(i, 1);
-
       }
-      console.log(this.test);
     }
   }
 
@@ -286,9 +247,7 @@ export class ThemeComponent implements OnInit {
             break;
           }
         }
-
       }, 500)
-
     }
 
     if (this.create_memory) {
@@ -331,9 +290,7 @@ export class ThemeComponent implements OnInit {
             break;
           }
         }
-
       }, 500)
-
     }
 
     if (this.create_abecedaire) {
@@ -354,9 +311,7 @@ export class ThemeComponent implements OnInit {
             break;
           }
         }
-
       }, 500)
-
     }
 
     if (this.create_puzzle) {
@@ -377,9 +332,7 @@ export class ThemeComponent implements OnInit {
             break;
           }
         }
-
       }, 500)
-
     }
 
     this.showAlert = true;
@@ -412,8 +365,6 @@ export class ThemeComponent implements OnInit {
 
         if (index > -1) {
           this.recup_image.id_jeux.split(';').splice(index, 1);
-          console.log(this.recup_image.id_jeux.split(';'))
-          console.log(index)
         }
       }, 200)
     }
@@ -435,7 +386,6 @@ export class ThemeComponent implements OnInit {
             break;
           }
         }
-
       }, 200)
     }
 
@@ -448,13 +398,7 @@ export class ThemeComponent implements OnInit {
     setTimeout(() => {
       this.recup_image.nom = this.nouveau_theme['nom'];
       this.recup_image.id = this.n_theme;
-      console.log(this.recup_image)
-      // this.onSend_update(this.recup_image)
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
-
-    // this.recup_image.nom = this.nouveau_theme['nom'];
-    // this.recup_image.id = this.n_theme;
-    // this.onSend_update(this.recup_image)
   }
 }
