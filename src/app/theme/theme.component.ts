@@ -37,7 +37,7 @@ export class ThemeComponent implements OnInit {
   liste_id = [];
   id_crea = localStorage.getItem('id_crea');
   nouveau_theme: any = { id_crea: Number(this.id_crea), id_jeux: '' };
-  list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea) };
+  list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea), id_jeux: '' };
 
   create_recopier: boolean = false;
   create_reconnaitre: boolean = false;
@@ -50,6 +50,7 @@ export class ThemeComponent implements OnInit {
   edit_create_memory: string | null = null;
   edit_create_abecedaire: string | null = null;
   edit_create_puzzle: string | null = null;
+
   cpt_jeux: number = 0;
   showAlert: boolean = false;
   cpt: number = 0;
@@ -196,7 +197,6 @@ export class ThemeComponent implements OnInit {
 
       error: err => {
         console.log(err);
-        this.reloadCurrentPage();
       },
     });
   }
@@ -574,7 +574,7 @@ export class ThemeComponent implements OnInit {
     this.showAlert = true;
 
     setInterval(() => {
-      this.cpt+=2;
+      this.cpt += 2;
     }, 20)
 
     setTimeout(() => {
@@ -582,7 +582,30 @@ export class ThemeComponent implements OnInit {
       this.recup_image.id = this.n_theme;
       console.log(this.recup_image)
       this.onSend_update(this.recup_image)
+      setTimeout(() => {
+        this.reloadCurrentPage();
+
+      }, 100)
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
+  }
+
+
+  quitEdit(): void {
+    this.create_theme = false;
+    this.recup_image = null;
+    this.nouveau_theme['nom'] = ''; this.n_theme = [];
+
+    this.create_recopier = false;
+    this.create_reconnaitre = false;
+    this.create_memory = false;
+    this.create_abecedaire = false;
+    this.create_puzzle = false;
+
+    this.edit_create_recopier = null;
+    this.edit_create_reconnaitre = null;
+    this.edit_create_memory = null;
+    this.edit_create_abecedaire = null;
+    this.edit_create_puzzle = null;
   }
 }
