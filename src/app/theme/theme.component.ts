@@ -52,6 +52,8 @@ export class ThemeComponent implements OnInit {
   edit_create_abecedaire: string | null = null;
   edit_create_puzzle: string | null = null;
 
+  edit_session : boolean = false;
+
   cpt_jeux: number = 0;
   showAlert: boolean = false;
   cpt: number = 0;
@@ -65,6 +67,7 @@ export class ThemeComponent implements OnInit {
   edit(element: any): void {
     this.recup_image = element;
     this.create_theme = true;
+    this.edit_session = true;
     for (let i = 0; i < element.id.length; i++) {
       this.n_theme.push(element.id[i])
     }
@@ -357,7 +360,6 @@ export class ThemeComponent implements OnInit {
       }, 500)
     }
 
-    this.cpt_jeux++;
     setTimeout(() => {
     let ses = new SessionsComponent(this.router, this.route, this.jeuxService);
     ses.list['nom'] = 'Session à thème | ' + this.nouveau_theme['nom'];
@@ -639,6 +641,7 @@ export class ThemeComponent implements OnInit {
 
   quitEdit(): void {
     this.create_theme = false;
+    this.edit_session = false;
     this.recup_image = null;
     this.nouveau_theme['nom'] = ''; this.n_theme = [];
 
