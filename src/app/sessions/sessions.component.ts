@@ -177,7 +177,7 @@ export class SessionsComponent implements OnInit {
   jeuSelected_id: number | null = null;
 
   session_nom: string = "";
-  list: any = { id_crea: 1, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: this.liste_j };
+  list: any = { id_crea: 1, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: "" };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
