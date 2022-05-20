@@ -37,8 +37,8 @@ export class ThemeComponent implements OnInit {
   nom: string = "";
   liste_id = [];
   id_crea = localStorage.getItem('id_crea');
-  nouveau_theme: any = { id_crea: Number(this.id_crea), id_jeux: '',id_session:null };
-  list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea), id_jeux: '',id_session:null };
+  nouveau_theme: any = { id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
+  list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
 
   create_recopier: boolean = false;
   create_reconnaitre: boolean = false;
@@ -51,6 +51,8 @@ export class ThemeComponent implements OnInit {
   edit_create_memory: string | null = null;
   edit_create_abecedaire: string | null = null;
   edit_create_puzzle: string | null = null;
+
+  edit_session : boolean = false;
 
   cpt_jeux: number = 0;
   showAlert: boolean = false;
@@ -65,6 +67,7 @@ export class ThemeComponent implements OnInit {
   edit(element: any): void {
     this.recup_image = element;
     this.create_theme = true;
+    this.edit_session = true;
     for (let i = 0; i < element.id.length; i++) {
       this.n_theme.push(element.id[i])
     }
@@ -126,9 +129,9 @@ export class ThemeComponent implements OnInit {
 
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
-          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux,id_session:data[i].id_session });
+          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux, id_session: data[i].id_session });
           var a = data[i].id_image.split(',');
-          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux,id_session:data[i].id_session });
+          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux, id_session: data[i].id_session });
         }
       }
     })
@@ -222,13 +225,28 @@ export class ThemeComponent implements OnInit {
     console.log(id);
 
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+    let session_list: Session[] = []
+    ses.recup(session_list);
 
-
+    let t : any;
     for (var i = 0; this.test[i] != null; i++) {
       if (this.test[i].id_theme == id) {
+        t = this.test[i];
         this.test.splice(i, 1);
       }
     }
+
+    setTimeout(() => {
+      for(let s of session_list) {
+        if(s.id == t.id_session) {
+          ses.onSend_delete(s.id);
+        }
+      }
+
+
+    }, 300)
+
+
 
 
   }
@@ -342,17 +360,35 @@ export class ThemeComponent implements OnInit {
       }, 500)
     }
 
+    setTimeout(() => {
+    let ses = new SessionsComponent(this.router, this.route, this.jeuxService);
+    ses.list['nom'] = 'Session à thème | ' + this.nouveau_theme['nom'];
+    ses.list['jeux_id'] = this.nouveau_theme['id_jeux'];
+    ses.onSend(ses.list);
+
+    let session_list: Session[] = [];
+    setTimeout(() => {
+      ses.recup(session_list);
+    }, 300)
+
+    setTimeout(() => {
+      console.log(session_list)
+      for (let i = session_list.length - 1; session_list[i] != null; i--) {
+        if (session_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+          this.nouveau_theme['id_session'] = session_list[i].id
+          break;
+        }
+      }
+    }, 500)
+    },1000)
+
     this.showAlert = true;
 
     setInterval(() => {
-      this.cpt++;
-    }, 1000)
+      this.cpt += 2;
+    }, 20)
 
     setTimeout(() => {
-      let ses = new SessionsComponent(this.router, this.route, this.jeuxService);
-      ses.list['nom'] = 'Session à thème | ' + this.nouveau_theme['nom'];
-      ses.list['jeux_id'] = this.nouveau_theme['id_jeux'];
-      ses.onSend(ses.list);
       this.onSend(this.nouveau_theme);
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
@@ -582,7 +618,7 @@ export class ThemeComponent implements OnInit {
       }, 300)
     }
 
-    this.showAlert = true;
+
 
     this.showAlert = true;
 
@@ -591,13 +627,19 @@ export class ThemeComponent implements OnInit {
     }, 20)
 
     setTimeout(() => {
+
+
+      let ses : SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      ses.list['id'] = this.recup_image.id_session;
+      ses.list['jeux_id'] = this.recup_image.id_jeux;
+      ses.onSend_update(ses.list);
+
       this.recup_image.nom = this.nouveau_theme['nom'];
       this.recup_image.id = this.n_theme;
       console.log(this.recup_image)
       this.onSend_update(this.recup_image)
       setTimeout(() => {
         this.reloadCurrentPage();
-
       }, 100)
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
@@ -606,6 +648,7 @@ export class ThemeComponent implements OnInit {
 
   quitEdit(): void {
     this.create_theme = false;
+    this.edit_session = false;
     this.recup_image = null;
     this.nouveau_theme['nom'] = ''; this.n_theme = [];
 

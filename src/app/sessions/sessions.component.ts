@@ -10,6 +10,7 @@ import { Recopier } from '../recopier-game/Recopier';
 import { JeuxService } from '../jeux.service';
 import { PanelComponent } from '../panel/panel.component';
 import { Image } from '../Image'
+import { ThemeComponent } from '../theme/theme.component';
 
 export interface Jeu {
   type: string;
@@ -177,7 +178,7 @@ export class SessionsComponent implements OnInit {
   jeuSelected_id: number | null = null;
 
   session_nom: string = "";
-  list: any = { id_crea: 1, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: "" };
+  list: any = { id_crea: +localStorage.getItem('id_crea')!, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: "" };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
@@ -235,7 +236,7 @@ export class SessionsComponent implements OnInit {
           isS = true;
         }
         donne.push(
-          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS , +data[i].id_crea)
         );
       }
     })
@@ -448,7 +449,7 @@ export class SessionsComponent implements OnInit {
 
     // this.getSession()!.joueur.push((new Users(id, name, Session.number, 0, 0)));
     localStorage.setItem('id_user', id.toString());
-    localStorage.setItem('id_crea_player ',this.getSession()!.id.toString());
+    //localStorage.setItem('id_crea',this.getSession()!.id)
   }
 
   getData(): Session[] {
@@ -573,6 +574,18 @@ export class SessionsComponent implements OnInit {
 
   deleteSession(session: Session): void {
     this.onSend_delete(session.id);
+
+    let theme : ThemeComponent = new ThemeComponent(this.route,this.jeuxService,this.router);
+    theme.recup2(theme.data);
+
+    setTimeout(() => {
+      for(let t of theme.test) {
+        console.log(t)
+        if(t.id_session == session.id) {
+          theme.onSend_delete(t.id_theme);
+        }
+      }
+    },200)
 
     setTimeout(() => {
       this.data = [];
