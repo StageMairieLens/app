@@ -126,9 +126,9 @@ export class ThemeComponent implements OnInit {
 
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
-          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux });
+          donne.push({ id: data[i].id_theme, nom: data[i].nom_theme, id_image: data[i].id_image, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux,id_session:data[i].id_session });
           var a = data[i].id_image.split(',');
-          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux });
+          this.test.push({ id_theme: data[i].id_theme, id: a, nom: data[i].nom_theme, id_crea: data[i].id_crea, id_jeux: data[i].id_jeux,id_session:data[i].id_session });
         }
       }
     })
