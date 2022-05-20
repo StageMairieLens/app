@@ -101,12 +101,20 @@
             <label for="Email" class="form-label align-middle">Email :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input type="text" class="form-control" #email title="Email">
+            <input type="text" class="form-control" #email title="Email"
+            (change)="this.new_password['mail']=email.value">
+        </div>
+        <div class="col-md-3 text-center align-middle">
+            <label for="Password" class="form-label align-middle">Nouveau mot de passe :</label>
+        </div>
+        <div class="col-md-9 text-center">
+            <input type="password" class="form-control" #pwd title="Password"
+            (change)="this.new_password['pwd']=pwd.value">
         </div>
     </div>
 
     <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
-        <button mat-raised-button color="primary" aria-label="Valider">
+        <button mat-raised-button color="primary" aria-label="Valider" (click)="this.onSend_update(this.new_password)">
             <i class="fa-solid fa-check"></i>
             Envoyer
         </button>

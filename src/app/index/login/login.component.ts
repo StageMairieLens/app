@@ -73,6 +73,8 @@ export class LoginComponent implements OnInit {
 
     });
   }
+
+ 
   onSend_verify(list: any) {
 
     const formData: FormData = new FormData();
@@ -102,6 +104,27 @@ export class LoginComponent implements OnInit {
           }
         }, 1000)
 
+      },
+
+    });
+  }
+  new_password:any={};
+  onSend_update(list: any) {
+
+    const formData: FormData = new FormData();
+    /*for(var i = 0;i<list.lenght;i++){
+      formData.append('list[]',list[i]);
+    }*/
+    formData.append('user_update', JSON.stringify(list));
+    console.log(formData);
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        console.log(res.name);
+
+      },
+
+      error: err => {
+        console.log(err);
       },
 
     });
@@ -147,26 +170,7 @@ export class LoginComponent implements OnInit {
 
     });
   }
-  onSend_update(list: any) {
-
-    const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
-    formData.append('user_update', JSON.stringify(list));
-    console.log(formData);
-    this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
-    });
-  }
+ 
 
   login(email: string, mdp: string): void {
     console.log(this.list);
@@ -201,6 +205,10 @@ export class LoginComponent implements OnInit {
 
   register(email: string, mdp: string, confMdp: string): void {
     if(mdp === confMdp) this.onSend(this.list);
+    setTimeout(()=>{
+      this.close();
+    },200);
+    
   }
 
 }
