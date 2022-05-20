@@ -13,6 +13,7 @@ import { Abecedaire } from '../abecedaire/Abecedaire';
 import { Puzzle } from '../puzzle/Puzzle';
 import { PuzzleComponent } from '../puzzle/puzzle.component';
 import { SessionsComponent } from '../sessions/sessions.component';
+import { Session } from '../sessions/Session';
 
 @Component({
   selector: 'app-theme',
@@ -101,7 +102,7 @@ export class ThemeComponent implements OnInit {
   files: File[] = [];//Listes des images/fichiers
 
   onSelect(event: { addedFiles: any; }) {//Insere les images dans la liste
-    
+
     this.files.push(...event.addedFiles);
   }
 
@@ -182,7 +183,7 @@ export class ThemeComponent implements OnInit {
       },
     });
   }
-  
+
   onSend_update(list: any) {
     var list2 = list;
     list2.id = list2.id.toString();
@@ -219,11 +220,17 @@ export class ThemeComponent implements OnInit {
   }
   remove2(id: any): any {
     console.log(id);
+
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+
+
     for (var i = 0; this.test[i] != null; i++) {
       if (this.test[i].id_theme == id) {
         this.test.splice(i, 1);
       }
     }
+
+
   }
 
   create(): void {
@@ -342,6 +349,10 @@ export class ThemeComponent implements OnInit {
     }, 1000)
 
     setTimeout(() => {
+      let ses = new SessionsComponent(this.router, this.route, this.jeuxService);
+      ses.list['nom'] = 'Session à thème | ' + this.nouveau_theme['nom'];
+      ses.list['jeux_id'] = this.nouveau_theme['id_jeux'];
+      ses.onSend(ses.list);
       this.onSend(this.nouveau_theme);
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
@@ -354,6 +365,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
       recopier.onSend_delete(this.edit_create_recopier.split(',')[1])
+      recopier.deleteSessionRecopier(+this.edit_create_recopier.split(',')[1])
       let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
       let array = ses.getJeuSession(this.recup_image.id_jeux);
 

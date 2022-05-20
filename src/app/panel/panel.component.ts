@@ -25,6 +25,7 @@ export class PanelComponent implements OnInit {
   jeu: string | null = "";
   ses: SessionsComponent;
 
+  window = window;
 
   recupRecopier(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
