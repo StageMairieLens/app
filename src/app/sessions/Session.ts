@@ -13,8 +13,9 @@ export class Session {
   joueur: Guest[];
   isActive: boolean;
   isSuivi : boolean
+  id_crea : number;
 
-  constructor(id : number, nom: string, date: string, jeuId: Jeu[], isActive: boolean, joueur: Guest[], isSuivi : boolean) {
+  constructor(id : number, nom: string, date: string, jeuId: Jeu[], isActive: boolean, joueur: Guest[], isSuivi : boolean, id_crea : number) {
     this.id = id;
     this.nom = nom;
     this.date = date;
@@ -22,6 +23,7 @@ export class Session {
     this.isActive = isActive;
     this.joueur = joueur;
     this.isSuivi = isSuivi;
+    this.id_crea = id_crea;
   }
 
   randomId(): number {
