@@ -47,7 +47,16 @@
           Thémes
         </a>
       </li>
+
+
     </ul>
+    <form class="form-inline my-2 my-lg-0" style="margin-right : 1%">
+      <i #icon_user (mouseenter)="icon_user.removeAttribute('class') ; icon_user.setAttribute('class','fa-solid fa-user fa-lg') "
+      (mouseleave)="icon_user.removeAttribute('class') ; icon_user.setAttribute('class','fa-regular fa-user fa-lg') "
+      style="transition : 150ms"
+      (click)="window.location.href = '/panel/user'"
+      class="fa-regular fa-user fa-lg"></i>
+    </form>
     <form class="form-inline my-2 my-lg-0">
       <button mat-stroked-button color="primary" class="quit_button" (click)="redirect('Accueil')">Déconnexion</button>
     </form>
@@ -72,7 +81,7 @@
 
     <!-- Session -->
     <div class="col-md-6">
-      <h3 class="card-title" style="margin-bottom : -10px">session</h3>
+      <h3 class="card-title" style="margin-bottom : -10px">Session</h3>
       <mat-divider style="background : #ececec ; width : 80%; display : inline-block; margin-bottom : 5px">
       </mat-divider>
 
@@ -321,4 +330,10 @@
 
 <div *ngIf="this.panel == 'themes'">
   <app-theme></app-theme>
+</div>
+
+<!-- Users -->
+
+<div *ngIf="this.panel == 'user'">
+  <p>Bonjour {{this.getUserName()}}</p>
 </div>

@@ -101,7 +101,7 @@ export class ThemeComponent implements OnInit {
   files: File[] = [];//Listes des images/fichiers
 
   onSelect(event: { addedFiles: any; }) {//Insere les images dans la liste
-    
+
     this.files.push(...event.addedFiles);
   }
 
@@ -182,7 +182,7 @@ export class ThemeComponent implements OnInit {
       },
     });
   }
-  
+
   onSend_update(list: any) {
     var list2 = list;
     list2.id = list2.id.toString();
@@ -342,7 +342,11 @@ export class ThemeComponent implements OnInit {
     }, 1000)
 
     setTimeout(() => {
-      this.onSend(this.nouveau_theme);
+      let ses = new SessionsComponent(this.router, this.route, this.jeuxService);
+      ses.list['nom'] = 'Session à thème | ' + this.nouveau_theme['nom'];
+      ses.list['jeux_id'] = this.nouveau_theme['id_jeux'];
+      ses.onSend(ses.list);
+      // this.onSend(this.nouveau_theme);
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
 
