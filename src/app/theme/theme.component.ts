@@ -627,6 +627,13 @@ export class ThemeComponent implements OnInit {
     }, 20)
 
     setTimeout(() => {
+
+
+      let ses : SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+      ses.list['id'] = this.recup_image.id_session;
+      ses.list['jeux_id'] = this.recup_image.id_jeux;
+      ses.onSend_update(ses.list);
+
       this.recup_image.nom = this.nouveau_theme['nom'];
       this.recup_image.id = this.n_theme;
       console.log(this.recup_image)
