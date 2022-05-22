@@ -265,15 +265,15 @@ export class ReconnaitreComponent implements OnInit {
         this.image.push(i.id);
       }
 
-      this.list = //{ image: this.image.toString(), id: this.r!.id, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color, waw_color: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser };
+      this.list = //{ image: this.image.toString(), id: this.r!.id, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser };
       {table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
     id_images: this.image.toString(),
       bg_color: this.reconnaitre_bg_color,
-     title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color,
-     waw_color: this.reconnaitre_wrong_answer_color,
+     title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
+     waw: this.reconnaitre_wrong_answer_color,
      progress: 'blue',
-     bu_bg_color: this.reconnaitre_button_bg_color,
-      bu_txt_color: this.reconnaitre_button_text_color,
+     bu_bg_co: this.reconnaitre_button_bg_color,
+      bu_txt_co: this.reconnaitre_button_text_color,
       text_color: this.reconnaitre_text_color
       , id_crea:this.id_crea };
     }
@@ -330,11 +330,11 @@ export class ReconnaitreComponent implements OnInit {
   list: any = {table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: 0,
     id_images: this.image.toString(),
       bg_color: this.reconnaitre_bg_color,
-     title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color,
-     waw_color: this.reconnaitre_wrong_answer_color,
+     title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
+     waw: this.reconnaitre_wrong_answer_color,
      progress: 'blue',
-     bu_bg_color: this.reconnaitre_button_bg_color,
-      bu_txt_color: this.reconnaitre_button_text_color,
+     bu_bg_co: this.reconnaitre_button_bg_color,
+      bu_txt_co: this.reconnaitre_button_text_color,
       text_color: this.reconnaitre_text_color
       , id_crea:this.id_crea };
 
@@ -709,15 +709,15 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   create(): void {
-    //this.list = {table:'Reconnaitre', id_images: this.image.toString(),  bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color, waw_color: this.reconnaitre_wrong_answer_color, bu_bg_color: this.reconnaitre_button_bg_color, bu_txt_color: this.reconnaitre_button_text_color, progress: 'blue', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,id_crea:Number(this.id_crea) };
+    //this.list = {table:'Reconnaitre', id_images: this.image.toString(),  bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, bu_bg_co: this.reconnaitre_button_bg_color, bu_txt_co: this.reconnaitre_button_text_color, progress: 'blue', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,id_crea:Number(this.id_crea) };
     this.list={table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
     id_images: this.image.toString(),
       bg_color: this.reconnaitre_bg_color,
-     title_color: this.reconnaitre_title_color, gaw_color: this.reconnaitre_good_answer_color,
-     waw_color: this.reconnaitre_wrong_answer_color,
+     title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
+     waw: this.reconnaitre_wrong_answer_color,
      progress: 'blue',
-     bu_bg_color: this.reconnaitre_button_bg_color,
-      bu_txt_color: this.reconnaitre_button_text_color,
+     bu_bg_co: this.reconnaitre_button_bg_color,
+      bu_txt_co: this.reconnaitre_button_text_color,
       text_color: this.reconnaitre_text_color
       , id_crea:this.id_crea };
     this.onSend(this.list);

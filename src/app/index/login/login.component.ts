@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
     this.jeuxService.recup_user(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        //console.log(data);
-        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
+        
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
@@ -95,9 +94,9 @@ export class LoginComponent implements OnInit {
         this.recup(liste);
 
         setTimeout(() => {
-          console.log(liste[0]);
+          
           for (var i = 0; liste[i]; i++) {
-            console.log(liste[i]);
+            
             if (liste[i].email == this.list.mail && liste[i].co == 1) {
               this.login(liste[i].email, liste[i].mdp);
             }
@@ -173,8 +172,7 @@ export class LoginComponent implements OnInit {
  
 
   login(email: string, mdp: string): void {
-    console.log(this.list);
-    console.log(LoginComponent.logins);
+  
     for (var login of LoginComponent.logins) {
       if (login.email == email && login.mdp == mdp) {
         localStorage.setItem("connect", "true");
