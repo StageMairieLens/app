@@ -678,7 +678,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   save(): void {
-   
+
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Recopier']);
   }
