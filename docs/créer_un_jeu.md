@@ -8,8 +8,21 @@
 
 ## 1) Etape 1 : Créer le component pour le jeu
 Rendez vous dans la racine du projet dans un shell et tapez la commandes quit suit
-<pre>
-$ ng <b>generate</b> c {NOM DU JEU} 
-</pre>
 
-Après avoir fait cette commande un nouveau dossier dans '<b>/src/app/{NOM DU JEU}</b>' devrait avoir été créer
+```sh
+$ ng generate c {NOM_DU_JEU}
+```
+
+Après avoir fait cette commande un nouveau dossier dans '<b>/src/app/{NOM_DU_JEU}</b>' devrait avoir été créer
+
+<img style="float: right;" src="./images/architecture_dossier_component.png">
+
+- Le fichier <b>CSS</b> permet de gérer le style du component
+- Le fichier <b>HTML</B> permet de gérer le contenu du component
+- Le fichier <b>TS</b> permet d'incluce le **TypeScript** du component
+
+Pour appeler ce component depuis un autre vous devez utiliser le code qui suit
+
+```html
+  <app-nom-du-jeu></app-nom-du-jeu>
+```
