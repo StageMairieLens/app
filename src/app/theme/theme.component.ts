@@ -37,8 +37,8 @@ export class ThemeComponent implements OnInit {
   nom: string = "";
   liste_id = [];
   id_crea = localStorage.getItem('id_crea');
-  nouveau_theme: any = { id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
-  list: any = { nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
+  nouveau_theme: any = { table:'Theme',id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
+  list: any = { table:'Theme',nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
 
   create_recopier: boolean = false;
   create_reconnaitre: boolean = false;
