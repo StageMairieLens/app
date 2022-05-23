@@ -263,31 +263,33 @@ export class RecopierGameComponent implements OnInit {
       this.recupLogin(this.list_login);
     }, 200)
 
-    if (this.edit) {
-      console.log(this.r!.button_bg_color, this.r!.button_text_color, this.r!.bg_color);
-      this.create_game = true;
-      this.selectedImages = this.r!.images;
-      this.recopier_bg_color = this.r!.bg_color;
-      this.recopier_text_color = this.r!.text_color;
-      this.recopier_title_color = this.r!.title_color;
-      this.recopier_good_answer_color = this.r!.good_answer_color;
-      this.recopier_wrong_answer_color = this.r!.wrong_answer_color;
-      this.recopier_button_bg_color = this.r!.button_bg_color;
-      this.recopier_button_text_color = this.r!.button_text_color;
-      this.recopier_input_bg_color = this.r!.input_bg_color;
-      this.recopier_input_text_color = this.r!.input_text_color;
-      this.recopier_progress = this.r!.color_progress_bar;
-      this.recopier_type_ecriture = this.r!.typeEcriture;
-      if (+this.r!.isVocaliser == 1) {
-        this.recopier_isVocaliser = true;
-      } else {
-        this.recopier_isVocaliser = false;
+    setTimeout(() => {
+      if (this.edit) {
+        console.log(this.r!.button_bg_color, this.r!.button_text_color, this.r!.bg_color);
+        this.create_game = true;
+        this.selectedImages = this.r!.images;
+        this.recopier_bg_color = this.r!.bg_color;
+        this.recopier_text_color = this.r!.text_color;
+        this.recopier_title_color = this.r!.title_color;
+        this.recopier_good_answer_color = this.r!.good_answer_color;
+        this.recopier_wrong_answer_color = this.r!.wrong_answer_color;
+        this.recopier_button_bg_color = this.r!.button_bg_color;
+        this.recopier_button_text_color = this.r!.button_text_color;
+        this.recopier_input_bg_color = this.r!.input_bg_color;
+        this.recopier_input_text_color = this.r!.input_text_color;
+        this.recopier_progress = this.r!.color_progress_bar;
+        this.recopier_type_ecriture = this.r!.typeEcriture;
+        if (+this.r!.isVocaliser == 1) {
+          this.recopier_isVocaliser = true;
+        } else {
+          this.recopier_isVocaliser = false;
+        }
+        for (let i of this.selectedImages) {
+          this.image2.push(i.id);
+        }
+        this.list = {table:'Recopier',id_image: this.image2.toString(), id: this.r!.id, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw: this.recopier_good_answer_color, waw: this.recopier_wrong_answer_color,bu_bg_co: this.recopier_button_bg_color,bu_txt_co: this.recopier_button_text_color, progress: 'blue', type_ecri: this.recopier_type_ecriture, isVoca: +this.recopier_isVocaliser };
       }
-      for (let i of this.selectedImages) {
-        this.image2.push(i.id);
-      }
-      this.list = {table:'Recopier',id_image: this.image2.toString(), id: this.r!.id, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw: this.recopier_good_answer_color, waw: this.recopier_wrong_answer_color,bu_bg_co: this.recopier_button_bg_color,bu_txt_co: this.recopier_button_text_color, progress: 'blue', type_ecri: this.recopier_type_ecriture, isVoca: +this.recopier_isVocaliser };
-    }
+    },500)
   }
 
   vocalise(): void {

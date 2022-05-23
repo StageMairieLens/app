@@ -21,10 +21,10 @@ interface Erreur {
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-  id_crea=localStorage.getItem('id_crea');
+  id_crea = localStorage.getItem('id_crea');
   static firstFinish: number = 0;
   cpt_erreur: number = 0;
-  constructor(private route: ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
+  constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     this.r = null;
     // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
     /*this.http.get<any>('http://92.154.61.105:8080/~nacer/vue.php').subscribe(data =>{
@@ -32,21 +32,21 @@ export class ReconnaitreComponent implements OnInit {
     })*/
   }
 
-  getUser(id : number) : string | null {
-    for(let l of this.list_login) {
-      if(l.id2 == id) {
+  getUser(id: number): string | null {
+    for (let l of this.list_login) {
+      if (l.id2 == id) {
         return l.pseudo;
       }
     }
     return null;
   }
 
-  list_login : Login[] = [];
+  list_login: Login[] = [];
   recupLogin(donne: any) {
     this.jeuxService.recup_user(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
-        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+        donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
           if (data[i].mail_user == LoginComponent.logins[j]) {
@@ -54,7 +54,7 @@ export class ReconnaitreComponent implements OnInit {
           }
         }
         if (inn == 0) {
-          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
+          LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         }
       }
     })
@@ -62,23 +62,23 @@ export class ReconnaitreComponent implements OnInit {
 
   reponse = "";
   data: Reconnaitre[] = [];
-  login:string=localStorage.getItem('id_pseudo')!;
+  login: string = localStorage.getItem('id_pseudo')!;
 
   recup(donne: any) {
     this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        if(data[i].id_crea == +localStorage.getItem('id_crea')!){
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
 
-        console.log(data[i].isVoca)
-        donne.push(
-          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca,Number(this.id_crea))
-        );
+          console.log(data[i].isVoca)
+          donne.push(
+            new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, Number(this.id_crea))
+          );
         }
       }
     })
   }
 
-  list_session : Session[] = [];
+  list_session: Session[] = [];
   recupSession(donne: any) {
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
@@ -91,7 +91,7 @@ export class ReconnaitreComponent implements OnInit {
           isS = true;
         }
         donne.push(
-          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS , +data[i].Id_createur)
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS, +data[i].Id_createur)
         );
       }
     })
@@ -112,23 +112,23 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
-      let progression : Progression[] = []
+      let progression: Progression[] = []
       if (i.length != 0) {
-        for(let p of i.split(',[')) {
-            for(let p2 of  p.split(']')) {
-              if(p2 != "" && p2.split(',').length == 3) {
-                progression.push(
-                  { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
-                )
-              }
+        for (let p of i.split(',[')) {
+          for (let p2 of p.split(']')) {
+            if (p2 != "" && p2.split(',').length == 3) {
+              progression.push(
+                { id_jeu: +p2.split(',')[0], cpt_erreur: +p2.split(',')[1], progress: +p2.split(',')[2] }
+              )
             }
+          }
         }
         res.push(
-          { id : +i.split(',')[0], nom : i.split(',')[1], progress_jeu : progression}
+          { id: +i.split(',')[0], nom: i.split(',')[1], progress_jeu: progression }
         );
       }
     }
@@ -218,7 +218,7 @@ export class ReconnaitreComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
+        donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
       }
     })
   }
@@ -232,7 +232,7 @@ export class ReconnaitreComponent implements OnInit {
       this.recup(this.data);
       this.recupLogin(this.list_login);
       this.recupSession(this.list_session);
-    },200)
+    }, 200)
 
     this.r!.liste_button = [];
 
@@ -263,20 +263,22 @@ export class ReconnaitreComponent implements OnInit {
 
       for (let i of this.selectedImages) {
         this.image.push(i.id);
-        console.log("aaaa",this.image);
+        console.log("aaaa", this.image);
       }
 
       this.list = //{ image: this.image.toString(), id: this.r!.id, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser };
-      {table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
-      id_images: this.image.toString(),
-      bg_color: this.reconnaitre_bg_color,
-     title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
-     waw: this.reconnaitre_wrong_answer_color,
-     progress: 'blue',
-     bu_bg_co: this.reconnaitre_button_bg_color,
-      bu_txt_co: this.reconnaitre_button_text_color,
-      text_color: this.reconnaitre_text_color
-      , id_crea:this.id_crea,id: this.r!.id, };
+      {
+        table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
+        id_images: this.image.toString(),
+        bg_color: this.reconnaitre_bg_color,
+        title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
+        waw: this.reconnaitre_wrong_answer_color,
+        progress: 'blue',
+        bu_bg_co: this.reconnaitre_button_bg_color,
+        bu_txt_co: this.reconnaitre_button_text_color,
+        text_color: this.reconnaitre_text_color
+        , id_crea: this.id_crea, id: this.r!.id,
+      };
     }
   }
   typeEcriture: string = "CAPITAL"; // default
@@ -328,16 +330,18 @@ export class ReconnaitreComponent implements OnInit {
   reconnaitre_previsualiser: boolean = false;
 
   image: any = [];
-  list: any = {table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: 0,
+  list: any = {
+    table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: 0,
     id_images: this.image.toString(),
-      bg_color: this.reconnaitre_bg_color,
-     title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
-     waw: this.reconnaitre_wrong_answer_color,
-     progress: 'blue',
-     bu_bg_co: this.reconnaitre_button_bg_color,
-      bu_txt_co: this.reconnaitre_button_text_color,
-      text_color: this.reconnaitre_text_color
-      , id_crea:this.id_crea };
+    bg_color: this.reconnaitre_bg_color,
+    title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
+    waw: this.reconnaitre_wrong_answer_color,
+    progress: 'blue',
+    bu_bg_co: this.reconnaitre_button_bg_color,
+    bu_txt_co: this.reconnaitre_button_text_color,
+    text_color: this.reconnaitre_text_color
+    , id_crea: this.id_crea
+  };
 
   formStep: number = 0;
 
@@ -513,11 +517,11 @@ export class ReconnaitreComponent implements OnInit {
     this.recupSession(this.list_session);
 
     setTimeout(() => {
-    this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
-    this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.prochaine_image / this.r!.images.length) * 100
-    let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
-    this.session_onSend_update(list)
-    },500);
+      this.getJoueur()!.progress_jeu[this.getJeuById()].cpt_erreur = this.cpt_erreur;
+      this.getJoueur()!.progress_jeu[this.getJeuById()].progress = (this.prochaine_image / this.r!.images.length) * 100
+      let list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+      this.session_onSend_update(list)
+    }, 500);
   }
 
   isFinish(): boolean {
@@ -540,7 +544,7 @@ export class ReconnaitreComponent implements OnInit {
     this.reconnaitre_previsualiser = false;
   }
 
-  deleteReconnaitre(id : number, s : Session): void {
+  deleteReconnaitre(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
       if (g.type == 'Reconnaitre' && g.id_jeu == id) {
@@ -576,12 +580,12 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  deleteSessionReconnaitre(id : number) : void {
-    let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
+  deleteSessionReconnaitre(id: number): void {
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
-      for(let jeu of s.jeuId) {
-        if(jeu.type == 'Reconnaitre' && jeu.id_jeu == id) {
-          this.deleteReconnaitre(id , s);
+      for (let jeu of s.jeuId) {
+        if (jeu.type == 'Reconnaitre' && jeu.id_jeu == id) {
+          this.deleteReconnaitre(id, s);
           this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
           ses.onSend_update(this.list);
         }
@@ -610,7 +614,7 @@ export class ReconnaitreComponent implements OnInit {
         if (index > -1) {
           array.splice(index, 1);
           t.id_jeux = ses.setJeuSession(array);
-          theme.onSend_update({id_theme : t.id, id : t.id_image , id_jeux : t.id_jeux , nom : t.nom});
+          theme.onSend_update({ id_theme: t.id, id: t.id_image, id_jeux: t.id_jeux, nom: t.nom });
         }
       }
     }, 200)
@@ -628,7 +632,7 @@ export class ReconnaitreComponent implements OnInit {
 
   setPrevisualiserReconnaitre(prev: boolean): void {
     if (prev == true) {
-      this.r = new Reconnaitre(0, '', this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser,Number(this.id_crea));
+      this.r = new Reconnaitre(0, '', this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser, Number(this.id_crea));
       this.reconnaitre_previsualiser = true;
     }
     else {
@@ -711,16 +715,18 @@ export class ReconnaitreComponent implements OnInit {
 
   create(): void {
     //this.list = {table:'Reconnaitre', id_images: this.image.toString(),  bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, bu_bg_co: this.reconnaitre_button_bg_color, bu_txt_co: this.reconnaitre_button_text_color, progress: 'blue', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,id_crea:Number(this.id_crea) };
-    this.list={table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
-    id_images: this.image.toString(),
+    this.list = {
+      table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
+      id_images: this.image.toString(),
       bg_color: this.reconnaitre_bg_color,
-     title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
-     waw: this.reconnaitre_wrong_answer_color,
-     progress: 'blue',
-     bu_bg_co: this.reconnaitre_button_bg_color,
+      title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
+      waw: this.reconnaitre_wrong_answer_color,
+      progress: 'blue',
+      bu_bg_co: this.reconnaitre_button_bg_color,
       bu_txt_co: this.reconnaitre_button_text_color,
       text_color: this.reconnaitre_text_color
-      , id_crea:this.id_crea };
+      , id_crea: this.id_crea
+    };
     this.onSend(this.list);
     this.router.navigate(['/panel/Reconnaitre']);
   }
@@ -752,7 +758,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   save(): void {
-    this.list['id']=this.r!.id;
+    this.list['id'] = this.r!.id;
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Reconnaitre']);
   }
