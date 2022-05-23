@@ -27,14 +27,12 @@
     <div *ngIf="this.showImageCpt != this.r!.images.length" class="card_play align-middle text-center container" id="card"
       style="width: 32rem;" [ngStyle]="{background : this.r!.bg_color}">
       <div style="margin-bottom: 20px;">
-        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'SCRIPT'" (click)="this.r.typeEcriture = 'CAPITAL'">SCRIPT</button>
-        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CAPITAL'" (click)="this.r.typeEcriture = 'CURSIF'">CAPITAL</button>
-        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CURSIF'" (click)="this.r.typeEcriture = 'SCRIPT'">CURSIF</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'SCRIPT'" [ngStyle]="{'color' : this.r!.text_color}" (click)="this.r.typeEcriture = 'CAPITAL'">SCRIPT</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CAPITAL'" [ngStyle]="{'color' : this.r!.text_color}" (click)="this.r.typeEcriture = 'CURSIF'">CAPITAL</button>
+        <button mat-raised-button style="background-color: orange" *ngIf="this.r.typeEcriture == 'CURSIF'" [ngStyle]="{'color' : this.r!.text_color}" (click)="this.r.typeEcriture = 'SCRIPT'">CURSIF</button>
       </div>
       <img class="card-img-top image_play" src="{{ this.r!.images[this.showImageCpt].getSrc() }}" alt="Card image cap">
       <div class="card-body text-center">
-
-        <p>{{this.cpt_erreur}}</p>
 
         <h5 *ngIf="this.r!.typeEcriture == 'CURSIF'" style="font-family: cursiveFont; font-size : 50px"
           class="card-title title_image" id="image_title" [ngStyle]="{color : this.r!.title_color}">
@@ -64,9 +62,9 @@
         <div *ngIf="this.r!.typeEcriture == 'CAPITAL'">
           <input type="text" name="input_recopier"
             [ngStyle]="{background : this.r!.input_bg_color , color : this.r!.input_text_color}"
-            style="text-transform: uppercase;" id="input_recopier" #input_recopier (keypress)="enterKey($event)">
+            style="text-transform: uppercase;font-size : 22px" id="input_recopier" #input_recopier (keypress)="enterKey($event)">
           <button type="button" (click)="sendAnswer(input_recopier.value,this.r!.images[this.showImageCpt])"
-            [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
+            [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color , 'margin-bottom' : 2 + '%'}"
             class="btn btn-primary">
             Envoyer
           </button>
@@ -74,10 +72,10 @@
 
         <div *ngIf="this.r!.typeEcriture == 'SCRIPT'">
           <input type="text" name="input_recopier"
-            [ngStyle]="{background : this.r!.input_bg_color , color : this.r!.input_text_color}" id="input_recopier"
+            [ngStyle]="{background : this.r!.input_bg_color , color : this.r!.input_text_color, 'font-size' : 22 + 'px'}" id="input_recopier"
             #input_recopier (keypress)="enterKey($event)">
           <button type="button" (click)="sendAnswer(input_recopier.value,this.r!.images[this.showImageCpt])"
-            [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
+            [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color , 'margin-bottom' : 2 + '%'}"
             class="btn btn-primary">
             Envoyer
           </button>
