@@ -363,7 +363,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_good_answer_color = recopier_good_answer_color_input.value "
-                (change)="this.list['gaw_color']=recopier_good_answer_color_input.value"
+                (change)="this.list['gaw']=recopier_good_answer_color_input.value"
                 #recopier_good_answer_color_input value="{{this.recopier_good_answer_color}}"
                 title="Choisissez la couleur du message de bonne réponse">
             </label>
@@ -377,7 +377,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_wrong_answer_color = recopier_wrong_answer_color_input.value "
-                (change)="this.list['waw_color']=recopier_wrong_answer_color_input.value"
+                (change)="this.list['waw']=recopier_wrong_answer_color_input.value"
                 #recopier_wrong_answer_color_input value="{{this.recopier_wrong_answer_color}}"
                 title="Choisissez la couleur du message de mauvaise réponse">
             </label>
@@ -387,7 +387,7 @@
               bouton
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_button_bg_color = recopier_button_bg_color_input.value "
-                (change)="this.list['button_bg_color']=recopier_button_bg_color_input.value"
+                (change)="this.list['bu_bg_co']=recopier_button_bg_color_input.value"
                 #recopier_button_bg_color_input value="{{this.recopier_button_bg_color}}"
                 title="Choisissez la couleur d'arriére-plan du bouton">
             </label>
@@ -401,7 +401,7 @@
               bouton
               <input type="color" class="form-control form-control-color"
                 (change)="this.recopier_button_text_color = recopier_button_text_color_input.value "
-                (change)="this.list['button_text_color']=recopier_button_text_color_input.value"
+                (change)="this.list['bu_txt_co']=recopier_button_text_color_input.value"
                 #recopier_button_text_color_input value="{{this.recopier_button_text_color}}"
                 title="Choisissez la couleur du texte du bouton">
             </label>
@@ -498,34 +498,34 @@
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CURSIF'" value="Cursif"
               (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-              (change)="this.list['ecri']='CURSIF' "
+              (change)="this.list['type_ecri']='CURSIF' "
               checked>Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CURSIF'" value="Cursif"
               (change)="this.recopier_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-              (change)="this.list['ecri']='CURSIF' ">
+              (change)="this.list['type_ecri']='CURSIF' ">
 
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'CAPITAL'" value="Capital"
               (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
-              (change)="this.list['ecri']='CAPITAL' "
+              (change)="this.list['type_ecri']='CAPITAL' "
               >CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'CAPITAL'" value="Capital"
               (change)="this.recopier_type_ecriture = 'CAPITAL'" style="font-size : 40px"
-              (change)="this.list['ecri']='CAPITAL' "
+              (change)="this.list['type_ecri']='CAPITAL' "
               >CAPITAL
 
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.recopier_type_ecriture == 'SCRIPT'" value="Script"
               (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked
-              (change)="this.list['ecri']='SCRIPT' "
+              (change)="this.list['type_ecri']='SCRIPT' "
               >Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.recopier_type_ecriture != 'SCRIPT'" value="Script"
               (change)="this.recopier_type_ecriture = 'SCRIPT'" style="font-size : 40px"
-              (change)="this.list['ecri']='SCRIPT' "
+              (change)="this.list['type_ecri']='SCRIPT' "
               >Script</mat-radio-button>
             </mat-radio-group>
         </div>
@@ -537,7 +537,7 @@
           style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-          <mat-slide-toggle (change)="this.list['voca']=+this.recopier_isVocaliser" [(ngModel)]="this.recopier_isVocaliser"></mat-slide-toggle>
+          <mat-slide-toggle (change)="this.list['isVoca']=+this.recopier_isVocaliser" [(ngModel)]="this.recopier_isVocaliser"></mat-slide-toggle>
 
           <i *ngIf="this.recopier_isVocaliser" class="fa-solid fa-volume-high"
             style="margin-left : 2%; color : #ff4083"></i>
