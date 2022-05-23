@@ -23,8 +23,9 @@ import { JeuxService } from '../jeux.service';
 export class PanelComponent implements OnInit {
 
   jeu: string | null = "";
-  ses: SessionsComponent;
+  ses: SessionsComponent | null = null;
 
+  window = window;
 
   recupRecopier(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
@@ -105,7 +106,7 @@ export class PanelComponent implements OnInit {
           isS = true;
         }
         donne.push(
-          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS , +data[i].Id_createur)
         );
       }
     })
@@ -185,8 +186,6 @@ export class PanelComponent implements OnInit {
     this.abecedaire = null;
     this.memory = null;
     this.selected_session = null;
-    this.ses = new SessionsComponent(this.router,this.route,this.jeuxService);
-
   }
 
   liste_image: Image[] = ImagesComponent.list_image;
@@ -268,6 +267,7 @@ export class PanelComponent implements OnInit {
     this.recupBoyGirl(this.boygirl_list);
     this.recupPuzzle(this.puzzle_list);
     this.recupSession(this.sessions);
+    this.ses = new SessionsComponent(this.router,this.route,this.jeuxService);
 
 
 
@@ -275,9 +275,6 @@ export class PanelComponent implements OnInit {
 
 
     setTimeout(() => {
-
-
-
       this.panel = this.route.snapshot.paramMap.get('param1');
 
       if (this.panel != null) {
@@ -454,7 +451,7 @@ export class PanelComponent implements OnInit {
   }
 
   getSessionActive(): Session[] {
-    return SessionsComponent.sessionActive;
+    return this.ses!.getSessionsActive();
   }
 
 

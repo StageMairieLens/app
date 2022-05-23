@@ -19,7 +19,7 @@ export class BoyGirlGameComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     this.bg = null;
-    
+
     // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
     this.recup(this.data);
     this.recupLogin(this.list_login);
@@ -41,12 +41,13 @@ export class BoyGirlGameComponent implements OnInit {
           isS = true;
         }
         donne.push(
-          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS)
+          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS , +data[i].Id_createur)
         );
       }
     })
 
   }
+
 
   getJeuSession(s: string): Jeu[] {
     let res: Jeu[] = [];
