@@ -51,7 +51,6 @@ export class RecopierGameComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
 
-          console.log(data[i].bu_bg_co, data[i].bu_txt_co);
           tab.push(
             new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
           );
