@@ -178,7 +178,7 @@ export class SessionsComponent implements OnInit {
   jeuSelected_id: number | null = null;
 
   session_nom: string = "";
-  list: any = { id_crea: +localStorage.getItem('id_crea')!, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: "" };
+  list: any = { table:"Session",id_crea: +localStorage.getItem('id_crea')!, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: "" };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
@@ -374,7 +374,7 @@ export class SessionsComponent implements OnInit {
         this.session_nom = this.selected_session!.nom;
         this.jeuId = this.selected_session!.jeuId;
         this.isSuivi = this.selected_session!.isSuivi;
-        this.list = { nom: this.selected_session!.nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.selected_session!.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
+        this.list = {table:"Session", nom: this.selected_session!.nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.selected_session!.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
       }
     }, 400)
 
@@ -419,7 +419,7 @@ export class SessionsComponent implements OnInit {
 
     setTimeout(() => {
       this.addUser(name);
-      this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+      this.list = { table:"Session",nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
       this.onSend_update(this.list);
     }, 200)
 
@@ -795,7 +795,7 @@ export class SessionsComponent implements OnInit {
 
   createSession(jeu: string, nom: string): void {
     if (jeu != "" && nom != "") {
-      this.list = { nom: this.session_nom, isSuivi: +this.isSuivi, join: 0, id: 0, jeux_id: this.setJeuSession(this.jeuId), liste_j: "" };
+      this.list = { table:"Session",id_crea: +localStorage.getItem('id_crea')!,nom: this.session_nom, isSuivi: +this.isSuivi, join: 0, id: 0, jeux_id: this.setJeuSession(this.jeuId), liste_j: "" };
       this.onSend(this.list);
       this.router.navigate(['/panel/sessions']);
     }
