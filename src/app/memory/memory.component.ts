@@ -55,7 +55,7 @@ export class MemoryComponent implements OnInit {
 
 
 
-  memory_nbTile: number = 18;
+  memory_nbTile: number = 8;
   memory_settings: string[] = ['image', 'image'];
   memory_isVocaliser: boolean = false;
   memory_bg_color: string = "#3bb8c9";
@@ -85,7 +85,7 @@ export class MemoryComponent implements OnInit {
 
   started = false;
   pressStart = false;
-  nbTile = 18;
+  nbTile = 8;
   setting: string[] = ["image", "image"];
   tmpAfficher: number = 5000;
   affichage: string[] = [];
