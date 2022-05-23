@@ -53,7 +53,7 @@ export class RecopierGameComponent implements OnInit {
 
 
           tab.push(
-            new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
+            new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
           );
         }
       }
@@ -678,6 +678,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   save(): void {
+   
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Recopier']);
   }
