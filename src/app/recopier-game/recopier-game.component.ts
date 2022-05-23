@@ -57,6 +57,7 @@ export class RecopierGameComponent implements OnInit {
           );
         }
       }
+      console.log(tab);
     })
   }
   recupSession(donne: any) {
