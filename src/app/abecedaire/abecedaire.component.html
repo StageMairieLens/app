@@ -353,7 +353,7 @@
                   réponse
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_good_answer_color = abecedaire_good_answer_color_input.value "
-                    (change)="this.list['gaw_color']=abecedaire_good_answer_color_input.value"
+                    (change)="this.list['gaw']=abecedaire_good_answer_color_input.value"
                     #abecedaire_good_answer_color_input value="{{this.abecedaire_good_answer_color}}"
                     title="Choisissez la couleur du message de bonne réponse">
                 </label>
@@ -364,7 +364,7 @@
                   réponse
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_wrong_answer_color = abecedaire_wrong_answer_color_input.value "
-                    (change)="this.list['waw_color']=abecedaire_wrong_answer_color_input.value"
+                    (change)="this.list['waw']=abecedaire_wrong_answer_color_input.value"
                     #abecedaire_wrong_answer_color_input value="{{this.abecedaire_wrong_answer_color}}"
                     title="Choisissez la couleur du message de mauvaise réponse">
                 </label>
@@ -378,7 +378,7 @@
                   bouton
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_button_bg_color = abecedaire_button_bg_color_input.value "
-                    (change)="this.list['button_bg_color']=abecedaire_button_bg_color_input.value"
+                    (change)="this.list['bu_bg_co']=abecedaire_button_bg_color_input.value"
                     #abecedaire_button_bg_color_input value="{{this.abecedaire_button_bg_color}}"
                     title="Choisissez la couleur d'arriére-plan du bouton">
                 </label>
@@ -388,7 +388,7 @@
                   bouton
                   <input type="color" class="form-control form-control-color"
                     (change)="this.abecedaire_button_text_color = abecedaire_button_text_color_input.value "
-                    (change)="this.list['button_text_color']=abecedaire_button_text_color_input.value"
+                    (change)="this.list['bu_txt_co']=abecedaire_button_text_color_input.value"
                     #abecedaire_button_text_color_input value="{{this.abecedaire_button_text_color}}"
                     title="Choisissez la couleur du texte du bouton">
                 </label>
@@ -461,35 +461,35 @@
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'none'" value="None"
                   (change)="this.abecedaire_type_ecriture = 'none'" style="font-size : 40px" checked
-                  (change)="this.list['ecri']='none' ">Aucune
+                  (change)="this.list['type_ecri']='none' ">Aucune
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'none'" value="None"
                   (change)="this.abecedaire_type_ecriture = 'none'"
-                  (change)="this.list['ecri']='none' "
+                  (change)="this.list['type_ecri']='none' "
                   style="font-size : 40px">Aucune
                 </mat-radio-button>
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'CURSIF'" value="Cursif"
-                  (change)="this.abecedaire_type_ecriture = 'CURSIF'"(change)="this.list['ecri']='CURSIF' "
+                  (change)="this.abecedaire_type_ecriture = 'CURSIF'"(change)="this.list['type_ecri']='CURSIF' "
                   style="font-family: cursiveFont; font-size: 40px" checked>Cursif</mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'CURSIF'" value="Cursif"
-                  (change)="this.abecedaire_type_ecriture = 'CURSIF'"(change)="this.list['ecri']='CURSIF' "
+                  (change)="this.abecedaire_type_ecriture = 'CURSIF'"(change)="this.list['type_ecri']='CURSIF' "
                   style="font-family: cursiveFont; font-size: 40px">
                   Cursif</mat-radio-button>
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'CAPITAL'" value="CAPITAL"
                   (change)="this.abecedaire_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
-                  (change)="this.list['ecri']='CAPITAL' ">CAPITAL
+                  (change)="this.list['type_ecri']='CAPITAL' ">CAPITAL
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'CAPITAL'" value="CAPITAL"
-                (change)="this.list['ecri']='CAPITAL' "(change)="this.abecedaire_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
+                (change)="this.list['type_ecri']='CAPITAL' "(change)="this.abecedaire_type_ecriture = 'CAPITAL'" style="font-size : 40px">CAPITAL
                 </mat-radio-button>
 
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture == 'SCRIPT'" value="SCRIPT"
-                (change)="this.list['ecri']='SCRIPT' "(change)="this.abecedaire_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
+                (change)="this.list['type_ecri']='SCRIPT' "(change)="this.abecedaire_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked>Script
                 </mat-radio-button>
                 <mat-radio-button *ngIf="this.abecedaire_type_ecriture != 'SCRIPT'" value="SCRIPT"
-                (change)="this.list['ecri']='SCRIPT' "(change)="this.abecedaire_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
+                (change)="this.list['type_ecri']='SCRIPT' "(change)="this.abecedaire_type_ecriture = 'SCRIPT'" style="font-size : 40px">Script
                 </mat-radio-button>
               </mat-radio-group>
             </div>
@@ -501,7 +501,7 @@
               style="margin-right : 2%; color : #ff4083"></i>
               <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-              <mat-slide-toggle (change)="this.list['voca']=+this.abecedaire_isVocaliser" [(ngModel)]="this.abecedaire_isVocaliser"></mat-slide-toggle>
+              <mat-slide-toggle (change)="this.list['isVoca']=+this.abecedaire_isVocaliser" [(ngModel)]="this.abecedaire_isVocaliser"></mat-slide-toggle>
 
               <i *ngIf="this.abecedaire_isVocaliser" class="fa-solid fa-volume-high"
                 style="margin-left : 2%; color : #ff4083"></i>

@@ -337,28 +337,28 @@
             <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CURSIF'" value="Cursif"
               (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
               checked
-              (change)="this.list['ecri']='CURSIF' ">Cursif</mat-radio-button>
+              (change)="this.list['type_ecri']='CURSIF' ">Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CURSIF'" value="Cursif"
               (change)="this.boygirl_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-              (change)="this.list['ecri']='CURSIF' ">
+              (change)="this.list['type_ecri']='CURSIF' ">
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'CAPITAL'" value="Capital"
               (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px" checked
-              (change)="this.list['ecri']='CAPITAL' ">CAPITAL
+              (change)="this.list['type_ecri']='CAPITAL' ">CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'CAPITAL'" value="Capital"
               (change)="this.boygirl_type_ecriture = 'CAPITAL'" style="font-size : 40px"
-              (change)="this.list['ecri']='CAPITAL' ">CAPITAL
+              (change)="this.list['type_ecri']='CAPITAL' ">CAPITAL
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.boygirl_type_ecriture == 'SCRIPT'" value="Script"
               (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px" checked
-              (change)="this.list['ecri']='SCRIPT' ">Script
+              (change)="this.list['type_ecri']='SCRIPT' ">Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.boygirl_type_ecriture != 'SCRIPT'" value="Script"
               (change)="this.boygirl_type_ecriture = 'SCRIPT'" style="font-size : 40px"
-              (change)="this.list['ecri']='SCRIPT' ">Script</mat-radio-button>
+              (change)="this.list['type_ecri']='SCRIPT' ">Script</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>

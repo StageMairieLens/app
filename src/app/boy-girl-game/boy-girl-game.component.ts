@@ -222,25 +222,7 @@ export class BoyGirlGameComponent implements OnInit {
       this.girl = [];
       this.shuffle();
     }
-    /*elseif($_POST['bg']){
-  $nom2=json_decode($_POST['bg'],TRUE);
-  try {
-    $conn = new PDO("mysql:host=$servername;dbname=Application", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO girlsandboys (type_ecri, id_image,bg_color,bg_color_f,bg_color_m, word_f,word_b,word_m,title_f, title_b,title_m, text_f,text_b,text_m)
-    VALUES('$nom2[ecri]','text','$nom2[bg_color]','$nom2[bg_color_f]','$nom2[bg_color_f]','$nom2[bg_color_m]','$nom2[word_f]','$nom2[word_b]','$nom2[word_m]','$nom2[title_f]','$nom2[title_b]','$nom2[title_m]','$nom2[text_f]','$nom2[text_b]','$nom2[text_m]')";
-
-    $conn->exec($sql);
-    echo 'Entrée ajoutée dans la table';
-
-
-  } catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-  }
-
-  echo "\n";
-}*/
+    
 
     if (this.edit) {
       this.create_game = true;
@@ -262,12 +244,15 @@ export class BoyGirlGameComponent implements OnInit {
       this.boygirl_type_ecriture = this.bg!.type_ecriture;
 
       this.list = {
+        table:'girlsandboys',
         id: this.bg!.id , bg_color: this.boygirl_bg_color_container,
         bg_color_b: this.boygirl_bg_color_garcon, bg_color_f: this.boygirl_bg_color_fille, bg_color_m: this.boygirl_bg_color_mot,
         word_f: this.boygirl_word_color_fille, word_b: this.boygirl_word_color_garcon, word_m: this.boygirl_word_color_mot,
         title_f: this.boygirl_title_color_fille, title_b: this.boygirl_title_color_garcon, title_m: this.boygirl_title_color_mot,
         text_f: this.boygirl_text_color_fille, text_b: this.boygirl_text_color_garcon, text_m: this.boygirl_text_color_mot,
-        ecri: this.boygirl_type_ecriture, l_m_f: this.boygirl_listMotsFille.toString(), l_m_b: this.boygirl_listMotsGarcon.toString()
+        id_crea:this.id_crea,
+        type_ecri: this.boygirl_type_ecriture,
+         l_m_f: this.boygirl_listMotsFille.toString(), l_m_b: this.boygirl_listMotsGarcon.toString()
       };
     }
 
@@ -300,12 +285,13 @@ export class BoyGirlGameComponent implements OnInit {
   boygirl_previsualiser: boolean = false;
   id_crea=localStorage.getItem('id_crea');
   list: any = {
+    table:'girlsandboys',
     id: 1, bg_color: this.boygirl_bg_color_container,
     bg_color_b: this.boygirl_bg_color_garcon, bg_color_f: this.boygirl_bg_color_fille, bg_color_m: this.boygirl_bg_color_mot,
     word_f: this.boygirl_word_color_fille, word_b: this.boygirl_word_color_garcon, word_m: this.boygirl_word_color_mot,
     title_f: this.boygirl_title_color_fille, title_b: this.boygirl_title_color_garcon, title_m: this.boygirl_title_color_mot,
     text_f: this.boygirl_text_color_fille, text_b: this.boygirl_text_color_garcon, text_m: this.boygirl_text_color_mot,
-    ecri: this.boygirl_type_ecriture, l_m_f: this.boygirl_listMotsFille.toString(), l_m_b: this.boygirl_listMotsGarcon.toString(),
+    type_ecri: this.boygirl_type_ecriture, l_m_f: this.boygirl_listMotsFille.toString(), l_m_b: this.boygirl_listMotsGarcon.toString(),
     id_crea:this.id_crea
   };
 
