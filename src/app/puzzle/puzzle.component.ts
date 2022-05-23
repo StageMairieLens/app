@@ -49,7 +49,7 @@ export class PuzzleComponent implements OnInit {
         if(data[i].id_crea == +localStorage.getItem('id_crea')!){
 
         donne.push(
-          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe,data[i].id_crea)
+          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_co, data[i].bu_bg_co, data[i].bu_text_co, data[i].type_ecri, data[i].decoupe,data[i].id_crea)
         );
       }
     }
@@ -271,7 +271,7 @@ export class PuzzleComponent implements OnInit {
         this.image.push(i.id);
       }
 
-      this.list = { image: this.image.toString(), id: this.r!.id, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
+      this.list = { table:'Puzzle', id_images: this.image.toString(), id: this.r!.id, bg_color: this.puzzle_bg_color,text_co: this.puzzle_text_color, title_color: this.puzzle_title_color,bu_bg_co: this.puzzle_button_bg_color,bu_text_co: this.puzzle_button_text_color,type_ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
 
     }
   }
@@ -287,7 +287,7 @@ export class PuzzleComponent implements OnInit {
   formStep: number = 0;
   image: any = [];
   id_crea=localStorage.getItem('id_crea');
-  list: any = { id_crea:this.id_crea,image: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
+  list: any = { table:'Puzzle',id_crea:this.id_crea,id_images: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color,text_co: this.puzzle_text_color, title_color: this.puzzle_title_color,bu_bg_co: this.puzzle_button_bg_color,bu_text_co: this.puzzle_button_text_color,type_ecri: this.puzzle_type_ecriture, decoupe: this.decoupe };
   prochaine_image = 0;
 
 
@@ -574,7 +574,7 @@ export class PuzzleComponent implements OnInit {
   }
 
   create(): void {
-    this.list = { image: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color, text_color: this.puzzle_text_color, title_color: this.puzzle_title_color, button_bg_color: this.puzzle_button_bg_color, button_text_color: this.puzzle_button_text_color, ecri: this.puzzle_type_ecriture, decoupe: this.decoupe,id_crea:Number(this.id_crea) };
+    this.list = {table:'Puzzle', id_images: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color,text_co: this.puzzle_text_color, title_color: this.puzzle_title_color,bu_bg_co: this.puzzle_button_bg_color,bu_text_co: this.puzzle_button_text_color,type_ecri: this.puzzle_type_ecriture, decoupe: this.decoupe,id_crea:Number(this.id_crea) };
     this.onSend(this.list)
     this.router.navigate(['/panel/Puzzle']);
   }
@@ -583,7 +583,7 @@ export class PuzzleComponent implements OnInit {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
-      this.list['image'] = this.image.toString();
+      this.list['id_images'] = this.image.toString();
     }
   }
 
@@ -592,7 +592,7 @@ export class PuzzleComponent implements OnInit {
     if (index > -1) {
       this.selectedImages.splice(index, 1);
       this.image.splice(index, 1);
-      this.list['image'] = this.image.toString();
+      this.list['id_images'] = this.image.toString();
     }
   }
 

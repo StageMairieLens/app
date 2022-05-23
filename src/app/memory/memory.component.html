@@ -372,7 +372,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.memory_good_answer_color = memory_good_answer_color_input.value "
-                (change)="this.list['gaw_color']=memory_good_answer_color_input.value"
+                (change)="this.list['gaw']=memory_good_answer_color_input.value"
                 #memory_good_answer_color_input value="{{this.memory_good_answer_color}}"
                 title="Choisissez la couleur du message de bonne réponse">
             </label>
@@ -383,7 +383,7 @@
               réponse
               <input type="color" class="form-control form-control-color"
                 (change)="this.memory_wrong_answer_color = memory_wrong_answer_color_input.value "
-                (change)="this.list['waw_color']=memory_wrong_answer_color_input.value"
+                (change)="this.list['waw']=memory_wrong_answer_color_input.value"
                 #memory_wrong_answer_color_input value="{{this.memory_wrong_answer_color}}"
                 title="Choisissez la couleur du message de mauvaise réponse">
             </label>
@@ -466,25 +466,25 @@
 
             <mat-radio-button value="Image" (change)="this.changeMemorySetting(0, 'image')" style="font-size : 40px"
               [checked]="this.memory_settings[0] == 'image'"
-              (change)="this.list['ecri1']='image'"
+              (change)="this.list['sett0']='image'"
               >Image
             </mat-radio-button>
 
             <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(0, 'cursif')" style="font-size : 40px"
               [checked]="this.memory_settings[0] == 'cursif'"
-              (change)="this.list['ecri1']='cursif'"
+              (change)="this.list['sett0']='cursif'"
               >Cursif
             </mat-radio-button>
 
             <mat-radio-button value="Capital" (change)="this.changeMemorySetting(0, 'capital')" style="font-size : 40px"
               [checked]="this.memory_settings[0] == 'capital'"
-              (change)="this.list['ecri1']='capital'"
+              (change)="this.list['sett0']='capital'"
               >Capital
             </mat-radio-button>
 
             <mat-radio-button value="Script" (change)="this.changeMemorySetting(0, 'script')" style="font-size : 40px"
               [checked]="this.memory_settings[0] == 'script'"
-              (change)="this.list['ecri1']='script'"
+              (change)="this.list['sett0']='script'"
               >Script
             </mat-radio-button>
           </mat-radio-group>
@@ -499,25 +499,25 @@
 
             <mat-radio-button value="Image" (change)="this.changeMemorySetting(1, 'image')" style="font-size : 40px"
               [checked]="this.memory_settings[1] == 'image'"
-              (change)="this.list['ecri2']='image'"
+              (change)="this.list['sett1']='image'"
               >Image
             </mat-radio-button>
 
             <mat-radio-button value="Cursif" (change)="this.changeMemorySetting(1, 'cursif')" style="font-size : 40px"
               [checked]="this.memory_settings[1] == 'cursif'"
-              (change)="this.list['ecri2']='cursif'"
+              (change)="this.list['sett1']='cursif'"
               >Cursif
             </mat-radio-button>
 
             <mat-radio-button value="Capital" (change)="this.changeMemorySetting(1, 'capital')" style="font-size : 40px"
               [checked]="this.memory_settings[1] == 'capital'"
-              (change)="this.list['ecri2']='capital'"
+              (change)="this.list['sett1']='capital'"
               >Capital
             </mat-radio-button>
 
             <mat-radio-button value="Script" (change)="this.changeMemorySetting(1, 'script')" style="font-size : 40px"
               [checked]="this.memory_settings[1] == 'script'"
-              (change)="this.list['ecri2']='script'"
+              (change)="this.list['sett1']='script'"
               >Script
             </mat-radio-button>
           </mat-radio-group>
@@ -532,7 +532,7 @@
           style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.memory_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-          <mat-slide-toggle (change)="this.list['voca']=+this.memory_isVocaliser" [(ngModel)]="this.memory_isVocaliser"></mat-slide-toggle>
+          <mat-slide-toggle (change)="this.list['isVoca']=+this.memory_isVocaliser" [(ngModel)]="this.memory_isVocaliser"></mat-slide-toggle>
 
           <i *ngIf="this.memory_isVocaliser" class="fa-solid fa-volume-high"
             style="margin-left : 2%; color : #ff4083"></i>
@@ -548,19 +548,19 @@
 
             <mat-radio-button value="tile8" (change)="this.changeMemoryNbTile(8)" style="font-size : 40px"
               [checked]="this.memory_nbTile == 8"
-              (change)="this.list['pair']=8"
+              (change)="this.list['nb_pair']=8"
               >8
             </mat-radio-button>
 
             <mat-radio-button value="Cursif" (change)="this.changeMemoryNbTile(12)" style="font-size : 40px"
               [checked]="this.memory_nbTile == 12"
-              (change)="this.list['pair']=12"
+              (change)="this.list['nb_pair']=12"
               >12
             </mat-radio-button>
 
             <mat-radio-button value="Capital" (change)="this.changeMemoryNbTile(18)" style="font-size : 40px"
               [checked]="this.memory_nbTile == 18"
-              (change)="this.list['pair']=18"
+              (change)="this.list['nb_pair']=18"
               >18
             </mat-radio-button>
           </mat-radio-group>
