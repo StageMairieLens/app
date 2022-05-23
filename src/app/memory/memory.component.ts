@@ -68,7 +68,7 @@ export class MemoryComponent implements OnInit {
   image: any = [];
   memory_tmp_affichage: string = "5";
   id_crea=localStorage.getItem('id_crea');
-  list: any = { id_crea:this.id_crea,image: this.image.toString(), id: 1, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: 0 };
+  list: any = { table:'Memory',id_crea:this.id_crea,id_image: this.image.toString(), id: 1, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw: this.memory_good_answer_color, waw: this.memory_wrong_answer_color, progress: 'blue', sett0: this.memory_settings[0], sett1: this.memory_settings[1], nb_pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, isVoca: 0 };
 
   liste_image: Image[] = [];
   selectedImages: Image[] = [];
@@ -330,7 +330,7 @@ export class MemoryComponent implements OnInit {
       this.image.push(i.id);
     }
 
-    this.list = { image: this.image.toString(), id: this.game!.id, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw_color: this.memory_good_answer_color, waw_color: this.memory_wrong_answer_color, progress: 'blue', ecri1: this.memory_settings[0], ecri2: this.memory_settings[1], pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, voca: +this.memory_isVocaliser };
+    this.list = { table:'Memory',id_image: this.image.toString(), id: this.game!.id, bg_color: this.memory_bg_color, text_color: this.memory_text_color, gaw: this.memory_good_answer_color, waw: this.memory_wrong_answer_color, progress: 'blue', sett0: this.memory_settings[0], sett1: this.memory_settings[1], nb_pair: this.memory_nbTile, tmps: this.memory_tmp_affichage, isVoca: +this.memory_isVocaliser };
 
 
   }
@@ -741,7 +741,7 @@ export class MemoryComponent implements OnInit {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
-      this.list['image'] = this.image.toString();
+      this.list['id_image'] = this.image.toString();
     }
   }
 
@@ -750,7 +750,7 @@ export class MemoryComponent implements OnInit {
     if (index > -1) {
       this.selectedImages.splice(index, 1);
       this.image.splice(index, 1);
-      this.list['image'] = this.image.toString();
+      this.list['id_image'] = this.image.toString();
     }
   }
 
