@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('user', JSON.stringify(list));
+    formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {

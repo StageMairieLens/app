@@ -158,7 +158,7 @@ export class ReconnaitreComponent implements OnInit {
     /*for(var i = 0;i<list.lenght;i++){
       formData.append('list[]',list[i]);
     }*/
-    formData.append('reconnaitre', JSON.stringify(list));
+    formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
@@ -176,10 +176,8 @@ export class ReconnaitreComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<id.lenght;i++){
-      formData.append('id[]',id[i]);
-    }*/
-    formData.append('reconnaitre_delete', id);
+    var list={table:'Reconnaitre',id:id,id_table:'id_reco'};
+    formData.append('reconnaitre_delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {

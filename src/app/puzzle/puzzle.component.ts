@@ -75,7 +75,7 @@ export class PuzzleComponent implements OnInit {
 
     const formData: FormData = new FormData();
 
-    formData.append('puzzle', JSON.stringify(list));
+    formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
