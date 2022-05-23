@@ -258,7 +258,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
       let recopier_list: Recopier[] = [];
-      recopier.list['image'] = this.n_theme.toString();
+      recopier.list['id_image'] = this.n_theme.toString();
       recopier.onSend(recopier.list);
 
       setTimeout(() => {
@@ -279,7 +279,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let memory: MemoryComponent = new MemoryComponent(this.route, this.jeuxService, this.router);
       let memory_list: Memory[] = [];
-      memory.list['image'] = this.n_theme.toString();
+      memory.list['id_image'] = this.n_theme.toString();
       memory.onSend(memory.list);
 
       setTimeout(() => {
@@ -301,7 +301,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let reconnaitre: ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService, this.router);
       let reconnaitre_list: Reconnaitre[] = [];
-      reconnaitre.list['image'] = this.n_theme.toString();
+      reconnaitre.list['id_images'] = this.n_theme.toString();
       reconnaitre.onSend(reconnaitre.list);
 
       setTimeout(() => {
@@ -322,7 +322,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let abecedaire: AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService, this.router);
       let abecedaire_list: Abecedaire[] = [];
-      abecedaire.list['image'] = this.n_theme.toString();
+      abecedaire.list['id_image'] = this.n_theme.toString();
       abecedaire.onSend(abecedaire.list);
 
       setTimeout(() => {
@@ -343,7 +343,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let puzzle: PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService, this.router);
       let puzzle_list: Puzzle[] = [];
-      puzzle.list['image'] = this.n_theme.toString();
+      puzzle.list['id_images'] = this.n_theme.toString();
       puzzle.onSend(puzzle.list);
 
       setTimeout(() => {
@@ -423,7 +423,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let recopier: RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService, this.router);
       let recopier_list: Recopier[] = [];
-      recopier.list['image'] = this.n_theme.toString();
+      recopier.list['id_image'] = this.n_theme.toString();
       recopier.onSend(recopier.list);
 
       setTimeout(() => {
@@ -468,7 +468,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let memory: MemoryComponent = new MemoryComponent(this.route, this.jeuxService, this.router);
       let memory_list: Memory[] = [];
-      memory.list['image'] = this.n_theme.toString();
+      memory.list['id_image'] = this.n_theme.toString();
       memory.onSend(memory.list);
 
       setTimeout(() => {
@@ -512,7 +512,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let reconnaitre: ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService, this.router);
       let reconnaitre_list: Reconnaitre[] = [];
-      reconnaitre.list['image'] = this.n_theme.toString();
+      reconnaitre.list['id_images'] = this.n_theme.toString();
       reconnaitre.onSend(reconnaitre.list);
 
       setTimeout(() => {
@@ -556,7 +556,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let abecedaire: AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService, this.router);
       let abecedaire_list: Abecedaire[] = [];
-      abecedaire.list['image'] = this.n_theme.toString();
+      abecedaire.list['id_image'] = this.n_theme.toString();
       abecedaire.onSend(abecedaire.list);
 
       setTimeout(() => {
@@ -600,7 +600,7 @@ export class ThemeComponent implements OnInit {
       this.cpt_jeux++;
       let puzzle: PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService, this.router);
       let puzzle_list: Puzzle[] = [];
-      puzzle.list['image'] = this.n_theme.toString();
+      puzzle.list['id_images'] = this.n_theme.toString();
       puzzle.onSend(puzzle.list);
 
       setTimeout(() => {
