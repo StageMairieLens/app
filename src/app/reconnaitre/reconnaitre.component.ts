@@ -263,11 +263,12 @@ export class ReconnaitreComponent implements OnInit {
 
       for (let i of this.selectedImages) {
         this.image.push(i.id);
+        console.log("aaaa",this.image);
       }
 
       this.list = //{ image: this.image.toString(), id: this.r!.id, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser };
       {table:'Reconnaitre',type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
-    id_images: this.image.toString(),
+      id_images: this.image.toString(),
       bg_color: this.reconnaitre_bg_color,
      title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color,
      waw: this.reconnaitre_wrong_answer_color,
@@ -275,7 +276,7 @@ export class ReconnaitreComponent implements OnInit {
      bu_bg_co: this.reconnaitre_button_bg_color,
       bu_txt_co: this.reconnaitre_button_text_color,
       text_color: this.reconnaitre_text_color
-      , id_crea:this.id_crea };
+      , id_crea:this.id_crea,id: this.r!.id, };
     }
   }
   typeEcriture: string = "CAPITAL"; // default
@@ -728,7 +729,7 @@ export class ReconnaitreComponent implements OnInit {
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
-      this.list['image'] = this.image.toString();
+      this.list['id_images'] = this.image.toString();
     }
   }
 
@@ -737,7 +738,7 @@ export class ReconnaitreComponent implements OnInit {
     if (index > -1) {
       this.selectedImages.splice(index, 1);
       this.image.splice(index, 1);
-      this.list['image'] = this.image.toString();
+      this.list['id_images'] = this.image.toString();
     }
   }
 
@@ -751,6 +752,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   save(): void {
+    this.list['id']=this.r!.id;
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Reconnaitre']);
   }

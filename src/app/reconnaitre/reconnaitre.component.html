@@ -529,27 +529,27 @@
 
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CURSIF'" value="Cursif"
               (change)="this.reconnaitre_type_ecriture = 'CURSIF'" style="font-family: cursiveFont; font-size: 40px"
-              (change)="this.list['ecri']='CURSIF' " checked>Cursif</mat-radio-button>
+              (change)="this.list['type_ecri']='CURSIF' " checked>Cursif</mat-radio-button>
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CURSIF'" value="Cursif"
-              (change)="this.list['ecri']='CURSIF' " (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
+              (change)="this.list['type_ecri']='CURSIF' " (change)="this.reconnaitre_type_ecriture = 'CURSIF'"
               style="font-family: cursiveFont; font-size: 40px">
               Cursif</mat-radio-button>
 
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'CAPITAL'" value="Capital"
-              (change)="this.list['ecri']='CAPITAL' " (change)="this.reconnaitre_type_ecriture = 'CAPITAL'"
+              (change)="this.list['type_ecri']='CAPITAL' " (change)="this.reconnaitre_type_ecriture = 'CAPITAL'"
               style="font-size : 40px" checked>CAPITAL
             </mat-radio-button>
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'CAPITAL'" value="Capital"
-              (change)="this.list['ecri']='CAPITAL' " (change)="this.reconnaitre_type_ecriture = 'CAPITAL'"
+              (change)="this.list['type_ecri']='CAPITAL' " (change)="this.reconnaitre_type_ecriture = 'CAPITAL'"
               style="font-size : 40px">CAPITAL
             </mat-radio-button>
 
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture == 'SCRIPT'" value="Script"
-              (change)="this.list['ecri']='SCRIPT' " (change)="this.reconnaitre_type_ecriture = 'SCRIPT'"
+              (change)="this.list['type_ecri']='SCRIPT' " (change)="this.reconnaitre_type_ecriture = 'SCRIPT'"
               style="font-size : 40px" checked>Script
             </mat-radio-button>
             <mat-radio-button *ngIf="this.reconnaitre_type_ecriture != 'SCRIPT'" value="Script"
-              (change)="this.list['ecri']='SCRIPT' " (change)="this.reconnaitre_type_ecriture = 'SCRIPT'"
+              (change)="this.list['type_ecri']='SCRIPT' " (change)="this.reconnaitre_type_ecriture = 'SCRIPT'"
               style="font-size : 40px">Script
             </mat-radio-button>
           </mat-radio-group>
@@ -563,7 +563,7 @@
             style="margin-right : 2%; color : #ff4083"></i>
           <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
 
-          <mat-slide-toggle (change)="this.list['voca']=+this.reconnaitre_isVocaliser"
+          <mat-slide-toggle (change)="this.list['isVoca']=+this.reconnaitre_isVocaliser"
             [(ngModel)]="this.reconnaitre_isVocaliser"></mat-slide-toggle>
 
           <i *ngIf="this.reconnaitre_isVocaliser" class="fa-solid fa-volume-high"
