@@ -327,50 +327,50 @@
 
         <tbody>
           <tr *ngFor="let element of this.data">
-            <th *ngIf="element.isActive">
-              <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
-            </th>
-            <th *ngIf="!element.isActive">
-              <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
-            </th>
-            <th>{{element.id}}</th>
-            <th>{{element.nom}}</th>
-            <th>{{element.date}}</th>
-            <th *ngIf="!element.isSuivi">Non</th>
-            <th *ngIf="element.isSuivi">Oui</th>
-            <th class="button_actions">
-              <button mat-raised-button title="Prévisualiser le jeu de la session" (click)="previsualiserGame(element)"
-                color="primary">
-                <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
-              </button>
-              <button mat-raised-button title="Editer la session" (click)="editSession(element)"
-                style="background-color : rgb(223, 175, 18)" color="primary">
-                <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
-              </button>
-              <button mat-raised-button title="Supprimer la session" (click)="deleteSession(element)"
-                style="background-color : red" color="primary">
-                <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-              </button>
+              <th *ngIf="element.isActive">
+                <i class="fa-solid fa-circle-check fa-2xl" style="color : green;"></i>
+              </th>
+              <th *ngIf="!element.isActive">
+                <i class="fa-solid fa-circle-xmark fa-2xl" style="color : red"></i>
+              </th>
+              <th>{{element.id}}</th>
+              <th>{{element.nom}}</th>
+              <th>{{element.date}}</th>
+              <th *ngIf="!element.isSuivi">Non</th>
+              <th *ngIf="element.isSuivi">Oui</th>
+              <th class="button_actions">
+                <button mat-raised-button title="Prévisualiser le jeu de la session" (click)="previsualiserGame(element)"
+                  color="primary">
+                  <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 3px"></i>
+                </button>
+                <button mat-raised-button title="Editer la session" (click)="editSession(element)"
+                  style="background-color : rgb(223, 175, 18)" color="primary">
+                  <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+                </button>
+                <button mat-raised-button title="Supprimer la session" (click)="deleteSession(element)"
+                  style="background-color : red" color="primary">
+                  <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+                </button>
 
-              <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la session" (click)="joinSession(element)"
-                style="background-color : rgb(77, 184, 44)" color="primary">
-                <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-              </button>
+                <button *ngIf="element.isSuivi" mat-raised-button title="Suivre la session" (click)="joinSession(element)"
+                  style="background-color : rgb(77, 184, 44)" color="primary">
+                  <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+                </button>
 
-              <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé"
-                (click)="joinSession(element)" style="background-color : rgb(77, 184, 44)" color="primary">
-                <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
-              </button>
+                <button *ngIf="!element.isSuivi" disabled mat-raised-button title="Suivi désactivé"
+                  (click)="joinSession(element)" style="background-color : rgb(77, 184, 44)" color="primary">
+                  <i class="fa-solid fa-right-to-bracket fa-lg" style=" margin-bottom : 2px "></i>
+                </button>
 
-              <button *ngIf="!element.isActive" title="Démarrer la session" mat-raised-button
-                (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
-              </button>
-              <button *ngIf="element.isActive" title="Eteindre la session" mat-raised-button
-                (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
-                <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
-              </button>
-            </th>
+                <button *ngIf="!element.isActive" title="Démarrer la session" mat-raised-button
+                  (click)="setSessionActive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                  <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
+                </button>
+                <button *ngIf="element.isActive" title="Eteindre la session" mat-raised-button
+                  (click)="setSessionInactive(element)" style="background-color : rgb(168, 14, 135)" color="primary">
+                  <i class="fa-solid fa-stop fa-lg" style=" margin-bottom : 2px "></i>
+                </button>
+              </th>
 
           </tr>
         </tbody>

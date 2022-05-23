@@ -1,8 +1,6 @@
 <!-- Barre de navigation -->
 <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/panel/sessions"><span
-      class="mat-badge mat-badge-warn mat-badge-overlap mat-badge-above mat-badge-after mat-badge-medium"
-      matBadge="{{this.getSessionActive().length}}" matBadgeColor="warn">Sessions</span></a>
+  <a class="navbar-brand" href="/panel/sessions">Sessions</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -50,12 +48,6 @@
 
 
     </ul>
-    <form class="form-inline my-2 my-lg-0" style="margin-right : 1%">
-      <i #icon_user
-        (mouseenter)="icon_user.removeAttribute('class') ; icon_user.setAttribute('class','fa-solid fa-user fa-lg') "
-        (mouseleave)="icon_user.removeAttribute('class') ; icon_user.setAttribute('class','fa-regular fa-user fa-lg') "
-        style="transition : 150ms" (click)="window.location.href = '/panel/user'" class="fa-regular fa-user fa-lg"></i>
-    </form>
     <form class="form-inline my-2 my-lg-0">
       <button mat-stroked-button color="primary" class="quit_button" (click)="redirect('Accueil')">Déconnexion</button>
     </form>
@@ -81,7 +73,7 @@
     <!-- Session -->
     <div class="col-md-6">
       <h3 class="card-title" style="margin-bottom : -10px">Session</h3>
-      <mat-divider style="background : #ececec ; width : 90%; display : inline-block; margin-bottom : 5px">
+      <mat-divider style="background : #ececec ; width : 90%; display : inline-block; margin-bottom : 6px">
       </mat-divider>
 
       <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions']">
@@ -90,20 +82,6 @@
 
       </button>
 
-
-      <button *ngIf="this.getSessionActive().length != 0" mat-raised-button color="primary" class="session_choice"
-        [routerLink]="['/panel/sessions/active']">
-        <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
-
-        <span>Afficher les sessions actives</span>
-      </button>
-
-      <button *ngIf="this.getSessionActive().length == 0" mat-raised-button disabled color="primary"
-        class="session_choice" [routerLink]="['/panel/sessions/active']">
-
-        <i class="fa-solid fa-circle-check fa-xl" style=" margin-bottom : 2px "></i>
-        <span>Afficher les sessions actives</span>
-      </button>
 
 
       <button mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/sessions/create']">
@@ -170,7 +148,7 @@
       <mat-divider style="background : #ececec ; width : 90%; display : inline-block; margin-bottom : 5px">
       </mat-divider>
 
-      <button style="background : rgb(153, 57, 1)" mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/images']">
+      <button style="background : rgb(153, 57, 1)" mat-raised-button color="primary" class="session_choice" [routerLink]="['/panel/themes']">
         <i class="fa-solid fa-layer-group fa-lg fa-xl" style=" margin-bottom : 2px "></i>
         <span>Afficher la page des thèmes</span>
 
@@ -369,10 +347,4 @@
 
 <div *ngIf="this.panel == 'themes'">
   <app-theme></app-theme>
-</div>
-
-<!-- Users -->
-
-<div *ngIf="this.panel == 'user'">
-  <p>Bonjour {{this.getUserName()}}</p>
 </div>
