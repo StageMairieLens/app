@@ -234,10 +234,11 @@ export class SessionsComponent implements OnInit {
         }
         if (data[i].isSuivi == 1) {
           isS = true;
-        }
+        }if(+localStorage.getItem("id_crea")! == data[i].id_crea){
         donne.push(
           new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS , +data[i].id_crea)
         );
+        }
       }
     })
 

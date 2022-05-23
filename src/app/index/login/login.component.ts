@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   mail: any = "";
   pwd: any = "";
   pseudo:any="";
-  list: any = { mail: this.mail, pwd: this.pwd, co: this.co,pseudo:this.pseudo };
+  list: any = {table:'user', mail: this.mail, pwd: this.pwd, co: this.co,pseudo:this.pseudo };
   domaineAccept: string[] = ["gmail.com"];
 
   constructor(public dialogRef: MatDialogRef<LoginComponent> | null, private router: Router, private jeuxService: JeuxService) { }
