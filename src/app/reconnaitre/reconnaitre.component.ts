@@ -177,7 +177,7 @@ export class ReconnaitreComponent implements OnInit {
 
     const formData: FormData = new FormData();
     var list={table:'Reconnaitre',id:id,id_table:'id_reco'};
-    formData.append('reconnaitre_delete', JSON.stringify(list));
+    formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {

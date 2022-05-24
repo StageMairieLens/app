@@ -8,10 +8,14 @@ export class JeuxService {
 
   constructor(private http:HttpClient) { }
   link_onSend='http://92.154.61.105:8080/~nacer/co.php';
+
+  link_recup='http://92.154.61.105:8080/~nacer/';
+
+  
   onSend(formData:any):Observable<any>{
     return this.http.post<any>(this.link_onSend,formData);
   }
-  link_recup='http://92.154.61.105:8080/~nacer/';
+  
   recup_reconnaitre(donne:any){
     return this.http.get<any>(this.link_recup+'vue_reco.php');
   }
