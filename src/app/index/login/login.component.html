@@ -18,7 +18,7 @@
             <label for="mdp" class="form-label align-middle">Mot de passe :</label>
         </div>
         <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe"  (keypress)="enterKeyLogin($event, email.value, mdp.value)"
+            <input type="password" class="form-control" #mdp title="Mot de passe"  (keypress)="enterKeyLogin($event, email.value, mdp.value)"
             (change)="this.list['pwd']=mdp.value">
         </div>
     </div>
@@ -43,52 +43,51 @@
     <div class="col-md-12 text-right">
         <button mat-button mat-dialog-close (click)="close()" style="background-color: rgb(221, 221, 221);"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
+    <form>
+        <div class="form-row">
+            <div class="col-md-3 text-center align-middle">
+                <label for="Email" class="form-label align-middle">Email :</label>
+            </div>
+            <div class="col-md-9 text-center">
+                <input type="email" class="form-control" #email ngModel email title="Email"
+                (change)="this.list['mail']=email.value" required>
+            </div>
+        </div>
 
-    <div class="form-row">
-        <div class="col-md-3 text-center align-middle">
-            <label for="Email" class="form-label align-middle">Email :</label>
+        <div class="form-row">
+            <div class="col-md-3 text-center align-middle">
+                <label for="mdp" class="form-label align-middle">Mot de passe :</label>
+            </div>
+            <div class="col-md-9 text-center">
+                <input type="password" class="form-control" #mdp title="Mot de passe"
+                (change)="this.list['pwd']=mdp.value" required>
+            </div>
         </div>
-        <div class="col-md-9 text-center">
-            <input type="text" class="form-control" #email title="Email"
-            (change)="this.list['mail']=email.value">
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="col-md-3 text-center align-middle">
-            <label for="mdp" class="form-label align-middle">Mot de passe :</label>
+        <div class="form-row">
+            <div class="col-md-3 text-center align-middle">
+                <label for="mdp2" class="form-label align-middle">Confirmer mot de passe :</label>
+            </div>
+            <div class="col-md-9 text-center">
+                <input type="password" class="form-control" #mdp2 title="Confirmer" required>
+            </div>
         </div>
-        <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp title="Mot de passe"
-            (change)="this.list['pwd']=mdp.value">
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="col-md-3 text-center align-middle">
-            <label for="mdp2" class="form-label align-middle">Confirmer mot de passe :</label>
+        <div class="form-row">
+            <div class="col-md-3 text-center align-middle">
+                <label for="Pseudo" class="form-label align-middle">Pseudo :</label>
+            </div>
+            <div class="col-md-9 text-center">
+                <input type="text" class="form-control" #pseudo title="Pseudo"
+                (change)="this.list['pseudo']=pseudo.value" required>
+            </div>
         </div>
-        <div class="col-md-9 text-center">
-            <input [type]="true ? 'password' : 'text'" class="form-control" #mdp2 title="Confirmer">
-        </div>
-    </div>
 
-    <div class="form-row">
-        <div class="col-md-3 text-center align-middle">
-            <label for="Pseudo" class="form-label align-middle">Pseudo :</label>
+        <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
+            <input type="submit" value="Créer compte" mat-raised-button color="primary" aria-label="Valider" (click)="register(email.value, mdp.value, mdp2.value)">
+                <i class="fa-solid fa-check"></i>
         </div>
-        <div class="col-md-9 text-center">
-            <input type="text" class="form-control" #pseudo title="Pseudo"
-            (change)="this.list['pseudo']=pseudo.value">
-        </div>
-    </div>
-
-    <div class="align-middle text-center redirect_button" style="margin-top: 20px;">
-        <button mat-raised-button color="primary" aria-label="Valider" (click)="register(email.value, mdp.value, mdp2.value)">
-            <i class="fa-solid fa-check"></i>
-            Créer compte
-        </button>
-    </div>
+    </form>
 </div>
 
 <div *ngIf="oublie">
