@@ -22,21 +22,21 @@ import { Session } from '../sessions/Session';
 })
 export class ThemeComponent implements OnInit {
   affiche_image: Boolean = false; // Pour afficher les images
-  affiche_image2: Boolean = false;//Pour afficher les images
+  affiche_image2: Boolean = false;//Pour afficher les images dans la création ou modification de theme
   create_theme: Boolean = false;//Pour crée le thème
   n_theme: any = [];//Récupere les id des images
 
   math = Math;
 
-  //pro_img = 0;
+  
   affiche: Boolean = false;
   temps: number = 0;
-  test: any = [];
-  data: any = [];
+  test: any = [];//Récupère les donées de la base
+  data: any = [];//Récupère les donées de la base
   recup_image: any | null = null;
-  nom: string = "";
+  nom: string = "";//Nom du theme
   liste_id = [];
-  id_crea = localStorage.getItem('id_crea');
+  id_crea = localStorage.getItem('id_crea');//L'id du créateur du theme, de la personne connecter
   nouveau_theme: any = { table:'Theme',id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
   list: any = { table:'Theme',nom: this.nom, id: this.liste_id.toString(), id_crea: Number(this.id_crea), id_jeux: '', id_session: null };
 
@@ -137,24 +137,22 @@ export class ThemeComponent implements OnInit {
     })
   }
 
-  getListImage(): Image[] {
+  getListImage(): Image[] {//Fonction pour afficher et récuperer les images dans l'HTML
     if (this.affiche_image == true || this.affiche_image2 == true) {
       return ThemeComponent.list_image;
     } else {
       return ThemeComponent.list_image = [];
     }
   }
-  noImage(): Image[] {
+  noImage(): Image[] {//Cache les images dans l'HTML
     return ThemeComponent.list_image = [];
   }
 
-  onSend(list: any) {
+  onSend(list: any) {//Envoi les données dans la base de donnée
     var list2 = list;
     list2.id = list2.id.toString();
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
+    
     formData.append('send', JSON.stringify(list2));
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
@@ -169,7 +167,7 @@ export class ThemeComponent implements OnInit {
 
     });
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Supprime une ligne de la table en fonction de l'id 
 
     const formData: FormData = new FormData();
     var list={table:'Theme',id:id,id_table:'id_theme'};
@@ -185,7 +183,7 @@ export class ThemeComponent implements OnInit {
     });
   }
 
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update une ligne de la table en fonction de l'id
     var list2 = list;
     list2.id = list2.id.toString();
     list2['id_table']='id_theme';
@@ -203,12 +201,8 @@ export class ThemeComponent implements OnInit {
       },
     });
   }
-  ajoute(id: any, liste: any): any {
-    if (!liste.includes(id)) {
-      liste.push(id.toString());
-    }
-  }
-  remove(id: any, liste: any): any {
+  
+  remove(id: any, liste: any): any {//Enleve l'image de la liste
     for (var i = 0; liste[i] != null; i++) {
       if (liste[i] == id) {
         liste.splice(i, 1);
@@ -220,7 +214,7 @@ export class ThemeComponent implements OnInit {
     window.location.reload();
   }
   remove2(id: any): any {
-    console.log(id);
+    
 
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     let session_list: Session[] = []
@@ -272,7 +266,7 @@ export class ThemeComponent implements OnInit {
 
   }
 
-  create(): void {
+  create(): void {//Crée le thème et les jeux séléctionner
     this.nouveau_theme['id'] = this.n_theme;
 
     if (this.create_recopier) {
@@ -416,7 +410,8 @@ export class ThemeComponent implements OnInit {
 
   }
 
-  save(): void {
+  save(): void {//Update le thème,ajoute des images dans le thèmes ou supprime les images du thèmes en fonnction du choix de l'utilisateur
+    //Supprime totalement les jeux de la bdd si séléctionner ou en re-créez
 
     if (this.edit_create_recopier != null && !this.create_recopier) {
       this.cpt_jeux++;
