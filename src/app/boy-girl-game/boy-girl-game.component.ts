@@ -112,9 +112,6 @@ export class BoyGirlGameComponent implements OnInit {
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -193,16 +190,6 @@ export class BoyGirlGameComponent implements OnInit {
     else {
       return []
     }
-  }
-
-
-  getUser(id : number) : string | null {
-    for(let l of this.list_login) {
-      if(l.id2 == id) {
-        return l.pseudo;
-      }
-    }
-    return null;
   }
 
   ngOnInit(): void {
@@ -441,14 +428,6 @@ export class BoyGirlGameComponent implements OnInit {
 
   redirectEditBoyGirl(bg: BoyGirl): void {
     window.location.href = '/panel/Fille&Garçon/edit/' + bg.id;
-  }
-
-
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
   }
 
   addMotsFille(event: MatChipInputEvent): void {

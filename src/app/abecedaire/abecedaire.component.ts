@@ -71,18 +71,12 @@ export class AbecedaireComponent implements OnInit {
   list: any = {table:'Abcdr',id_image: this.image.toString(), id: 1, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw: this.abecedaire_good_answer_color, waw: this.abecedaire_wrong_answer_color,bu_bg_co: this.abecedaire_button_bg_color,bu_txt_co: this.abecedaire_button_text_color, progress: 'blue',type_ecri: this.abecedaire_type_ecriture,isVoca: 0, id_crea: this.id_crea };
 
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
-    // this.game = new Abecedaire(this.images, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, 'orange', 'black', true, "cursif");
     this.game = null;
-
-
   }
   reponse: any;
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -118,9 +112,6 @@ export class AbecedaireComponent implements OnInit {
   onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('abcd_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -164,8 +155,6 @@ export class AbecedaireComponent implements OnInit {
       }
     }
     return res;
-
-
   }
 
   list_session: Session[] = [];
@@ -230,8 +219,6 @@ export class AbecedaireComponent implements OnInit {
     this.jeuxService.recup_user(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        //console.log(data);
-        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
@@ -242,22 +229,8 @@ export class AbecedaireComponent implements OnInit {
         if (inn == 0) {
           LoginComponent.logins.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         }
-
       }
-
     })
-
-
-  }
-
-
-  getUser(id: number): string | null {
-    for (let l of this.list_login) {
-      if (l.id2 == id) {
-        return l.pseudo;
-      }
-    }
-    return null;
   }
 
   recupImage(donne: any) {
@@ -410,9 +383,6 @@ export class AbecedaireComponent implements OnInit {
   session_onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('session_update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -544,13 +514,6 @@ export class AbecedaireComponent implements OnInit {
       this.recup(this.data);
 
     }, 200)
-  }
-
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
   }
 
   redirectEditAbecedaire(a: Abecedaire): void {
