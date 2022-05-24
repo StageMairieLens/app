@@ -139,7 +139,7 @@ export class SessionsComponent implements OnInit {
 
   session_id: number | null = null;
   join: boolean = false;
-  isSuivi: boolean = false;
+  isSuivi: boolean = true;
   connected: boolean = false;
   previsualiserJeuSession: boolean = false;
   jeu: string = "";
@@ -162,6 +162,8 @@ export class SessionsComponent implements OnInit {
   static sessionActive: Session[] = [];
   @Input() showActive: boolean = false;
 
+  isJoinable = true;
+
 
 
   @Input() selected_session: Session | null;
@@ -178,7 +180,7 @@ export class SessionsComponent implements OnInit {
   jeuSelected_id: number | null = null;
 
   session_nom: string = "";
-  list: any = { table:"Session",id_crea: +localStorage.getItem('id_crea')!, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.join, id: this.session_id, jeux_id: "", liste_j: "" };
+  list: any = { table: "Session", id_crea: +localStorage.getItem('id_crea')!, nom: this.session_nom, isSuivi: +this.isSuivi, join: +this.isJoinable, id: this.session_id, jeux_id: "", liste_j: "" };
 
   constructor(private router: Router, private route: ActivatedRoute, private jeuxService: JeuxService) {
     this.abecedaire = null;
@@ -189,38 +191,15 @@ export class SessionsComponent implements OnInit {
     this.recopier = null;
     this.selected_session = null;
     SessionsComponent.sessionActive = [];
-    PanelComponent.sessionActive = [];
-
-    this.recupImage(this.list_image);
-
-
-    setTimeout(() => {
-      this.recupRecopier(this.recopier_list);
-      this.recupMemory(this.memory_list);
-      this.recupReconnaitre(this.reconnaitre_list);
-      this.recupAbecedaire(this.abecedaire_list);
-      this.recupBoyGirl(this.boygirl_list);
-      this.recupPuzzle(this.puzzle_list);
-      this.recup(this.data)
-    }, 100)
-
-
-    setTimeout(() => {
-      for (let s of this.data) {
-        if (s.isActive) {
-          SessionsComponent.sessionActive.push(s);
-        }
-      }
-    }, 300)
-
   }
+
   data: Session[] = [];
 
   recupImage(donne: any) {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
+        donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
       }
     })
   }
@@ -234,10 +213,17 @@ export class SessionsComponent implements OnInit {
         }
         if (data[i].isSuivi == 1) {
           isS = true;
-        }if(+localStorage.getItem("id_crea")! == data[i].id_crea){
-        donne.push(
-          new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS , +data[i].id_crea)
-        );
+        }
+        if(localStorage.getItem('id_crea') == null) {
+          donne.push(
+            new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS, +data[i].id_crea)
+          );
+        }else {
+          if(data[i].id_crea == +localStorage.getItem('id_crea')!) {
+            donne.push(
+              new Session(data[i].Id, data[i].nom, data[i].date, this.getJeuSession(data[i].Jeux_id), isJ, this.getJoueurs(data[i].liste_j, data[i].Id), isS, +data[i].id_crea)
+            );
+          }
         }
       }
     })
@@ -353,9 +339,34 @@ export class SessionsComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+
+
+    this.recupImage(this.list_image);
+
+
+    setTimeout(() => {
+      this.recupRecopier(this.recopier_list);
+      this.recupMemory(this.memory_list);
+      this.recupReconnaitre(this.reconnaitre_list);
+      this.recupAbecedaire(this.abecedaire_list);
+      this.recupBoyGirl(this.boygirl_list);
+      this.recupPuzzle(this.puzzle_list);
+      this.recup(this.data)
+    }, 200)
+
+
+    setTimeout(() => {
+      for (let s of this.data) {
+        if (s.isActive) {
+          SessionsComponent.sessionActive.push(s);
+        }
+      }
+    }, 400)
+
     setTimeout(() => {
       if (this.play) {
         if (this.route.snapshot.paramMap.get('id') != null) {
+          console.log(this.data)
           this.session_id = +this.route.snapshot.paramMap.get('id')!;
           if (this.session_id != null) {
             if (this.getSession() != null) {
@@ -375,9 +386,9 @@ export class SessionsComponent implements OnInit {
         this.session_nom = this.selected_session!.nom;
         this.jeuId = this.selected_session!.jeuId;
         this.isSuivi = this.selected_session!.isSuivi;
-        this.list = {table:"Session", nom: this.selected_session!.nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.selected_session!.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
+        this.list = { table: "Session", nom: this.selected_session!.nom, isSuivi: +this.isSuivi, join: +this.selected_session!.isActive, id: +this.selected_session!.id, jeux_id: this.setJeuSession(this.selected_session!.jeuId), liste_j: this.setJoueurs(this.selected_session!) };
       }
-    }, 400)
+    }, 800)
 
   }
 
@@ -420,7 +431,7 @@ export class SessionsComponent implements OnInit {
 
     setTimeout(() => {
       this.addUser(name);
-      this.list = { table:"Session",nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
+      this.list = { table: "Session", nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
       this.onSend_update(this.list);
     }, 200)
 
@@ -549,17 +560,17 @@ export class SessionsComponent implements OnInit {
     }
   }
 
-  getUser() : Guest | null {
-    for(let u of this.getSession()!.joueur) {
-      if(u.id == +localStorage.getItem('id_user')!) {
+  getUser(): Guest | null {
+    for (let u of this.getSession()!.joueur) {
+      if (u.id == +localStorage.getItem('id_user')!) {
         return u;
       }
     }
     return null;
   }
 
-  getProgressionJeu(type : string , id : number) : number {
-    return this.getUser()!.progress_jeu[this.getJeuById(type,id)].progress;
+  getProgressionJeu(type: string, id: number): number {
+    return this.getUser()!.progress_jeu[this.getJeuById(type, id)].progress;
   }
 
   previsualiserGame(element: Session): void {
@@ -576,17 +587,17 @@ export class SessionsComponent implements OnInit {
   deleteSession(session: Session): void {
     this.onSend_delete(session.id);
 
-    let theme : ThemeComponent = new ThemeComponent(this.route,this.jeuxService,this.router);
+    let theme: ThemeComponent = new ThemeComponent(this.route, this.jeuxService, this.router);
     theme.recup2(theme.data);
 
     setTimeout(() => {
-      for(let t of theme.test) {
+      for (let t of theme.test) {
         console.log(t)
-        if(t.id_session == session.id) {
+        if (t.id_session == session.id) {
           theme.onSend_delete(t.id_theme);
         }
       }
-    },200)
+    }, 200)
 
     setTimeout(() => {
       this.data = [];
@@ -796,7 +807,7 @@ export class SessionsComponent implements OnInit {
 
   createSession(jeu: string, nom: string): void {
     if (jeu != "" && nom != "") {
-      this.list = { table:"Session",id_crea: +localStorage.getItem('id_crea')!,nom: this.session_nom, isSuivi: +this.isSuivi, join: 0, id: 0, jeux_id: this.setJeuSession(this.jeuId), liste_j: "" };
+      this.list = { table: "Session", id_crea: +localStorage.getItem('id_crea')!, nom: this.session_nom, isSuivi: +this.isSuivi, join: 0, id: 0, jeux_id: this.setJeuSession(this.jeuId), liste_j: "" };
       this.onSend(this.list);
       this.router.navigate(['/panel/sessions']);
     }
@@ -1185,7 +1196,7 @@ export class SessionsComponent implements OnInit {
     return -1;
   }
 
-  getJeuById(type : string , id : number): number {
+  getJeuById(type: string, id: number): number {
     for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
       if (this.getSession()!.jeuId[i].type == type) {
         if (this.getSession()!.jeuId[i].id_jeu == id) {
@@ -1196,7 +1207,7 @@ export class SessionsComponent implements OnInit {
     return -1;
   }
 
-  redirectSession() : void {
+  redirectSession(): void {
     window.location.href = '/session/' + this.getSession()!.id;
   }
 }
