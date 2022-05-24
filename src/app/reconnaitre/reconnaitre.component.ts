@@ -66,7 +66,7 @@ export class ReconnaitreComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
 
-          console.log(data[i].isVoca)
+          
           donne.push(
             new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, Number(this.id_crea))
           );
@@ -217,9 +217,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
-    //
-
+    
     this.recupImage(this.liste_image)
     setTimeout(() => {
       this.recup(this.data);
@@ -256,7 +254,7 @@ export class ReconnaitreComponent implements OnInit {
 
       for (let i of this.selectedImages) {
         this.image.push(i.id);
-        console.log("aaaa", this.image);
+        
       }
 
       this.list = //Recupere les données dans une liste pour l'update
@@ -390,7 +388,7 @@ export class ReconnaitreComponent implements OnInit {
       this.sendProgress();
 
       this.compteur_image = 0;
-      console.log(this.erreur_image);
+      
 
       setTimeout(() => {
         //this.variable = this.r!.images[this.prochaine_image].nom;
@@ -569,7 +567,7 @@ export class ReconnaitreComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
+      
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
