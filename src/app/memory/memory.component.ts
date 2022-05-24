@@ -221,10 +221,8 @@ export class MemoryComponent implements OnInit {
   onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
-    formData.append('memory_update', JSON.stringify(list));
+    list['id_table']='id_memory';
+    formData.append('update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
