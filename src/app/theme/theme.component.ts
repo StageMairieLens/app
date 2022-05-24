@@ -188,11 +188,11 @@ export class ThemeComponent implements OnInit {
   onSend_update(list: any) {
     var list2 = list;
     list2.id = list2.id.toString();
+    list2['id_table']='id_theme';
+    list2['table']='Theme';
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
-    formData.append('theme_update', JSON.stringify(list2));
+    
+    formData.append('update', JSON.stringify(list2));
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res.name);
