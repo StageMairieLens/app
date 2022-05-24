@@ -11,6 +11,11 @@ import { JeuxService } from '../jeux.service';
 import { PanelComponent } from '../panel/panel.component';
 import { Image } from '../Image'
 import { ThemeComponent } from '../theme/theme.component';
+import { RecopierGameComponent } from '../recopier-game/recopier-game.component';
+import { MemoryComponent } from '../memory/memory.component';
+import { ReconnaitreComponent } from '../reconnaitre/reconnaitre.component';
+import { AbecedaireComponent } from '../abecedaire/abecedaire.component';
+import { PuzzleComponent } from '../puzzle/puzzle.component';
 
 export interface Jeu {
   type: string;
@@ -582,6 +587,7 @@ export class SessionsComponent implements OnInit {
     this.router.navigate(['/panel/sessions/edit', session.id]);
   }
 
+
   deleteSession(session: Session): void {
     this.onSend_delete(session.id);
 
@@ -593,6 +599,28 @@ export class SessionsComponent implements OnInit {
         console.log(t)
         if (t.id_session == session.id) {
           theme.onSend_delete(t.id_theme);
+          for(let j of theme.getTheme(t.id_theme).id_jeux.split(';')) {
+            if(j.split(',')[0] == 'Recopier') {
+              let rc : RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService,this.router);
+              rc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Memory') {
+              let mc : MemoryComponent = new MemoryComponent(this.route, this.jeuxService,this.router);
+              mc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Reconnaitre') {
+              let rc : ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService,this.router);
+              rc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Abecedaire') {
+              let abc : AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService,this.router);
+              abc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Puzzle') {
+              let pc : PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService,this.router);
+              pc.onSend_delete(j.split(',')[1])
+            }
+          }
         }
       }
     }, 200)
