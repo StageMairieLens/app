@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Login } from './Login';
 import { JeuxService } from '../../jeux.service';
+import { EmailValidator } from '@angular/forms';
 
 
 @Component({
@@ -199,8 +200,11 @@ export class LoginComponent implements OnInit {
     this.dialogRef!.close();
   }
 
-  register(email: string, mdp: string, confMdp: string): void {
-    if(mdp === confMdp) this.onSend(this.list);
+  register(email: string, mdp: string, confMdp: string, pseudo: string): void {
+    if(email == "" || mdp == "" || pseudo == "") return;
+    if(mdp != confMdp) return;
+    if(!email.includes("@")) return;
+    this.onSend(this.list);
     setTimeout(()=>{
       this.close();
     },200);

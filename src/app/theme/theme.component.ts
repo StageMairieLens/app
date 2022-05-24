@@ -238,6 +238,29 @@ export class ThemeComponent implements OnInit {
       for(let s of session_list) {
         if(s.id == t.id_session) {
           ses.onSend_delete(s.id);
+
+          for(let j of t.id_jeux.split(';')) {
+            if(j.split(',')[0] == 'Recopier') {
+              let rc : RecopierGameComponent = new RecopierGameComponent(this.route, this.jeuxService,this.router);
+              rc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Memory') {
+              let mc : MemoryComponent = new MemoryComponent(this.route, this.jeuxService,this.router);
+              mc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Reconnaitre') {
+              let rc : ReconnaitreComponent = new ReconnaitreComponent(this.route, this.jeuxService,this.router);
+              rc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Abecedaire') {
+              let abc : AbecedaireComponent = new AbecedaireComponent(this.route, this.jeuxService,this.router);
+              abc.onSend_delete(j.split(',')[1])
+            }
+            if(j.split(',')[0] == 'Puzzle') {
+              let pc : PuzzleComponent = new PuzzleComponent(this.route, this.jeuxService,this.router);
+              pc.onSend_delete(j.split(',')[1])
+            }
+          }
         }
       }
 
@@ -641,6 +664,16 @@ export class ThemeComponent implements OnInit {
       }, 100)
       this.showAlert = false;
     }, 1000 * this.cpt_jeux)
+  }
+
+
+  getTheme(id : number) : any {
+    for(let t of this.test) {
+      if (t.id_theme == id) {
+        return t;
+      }
+    }
+    return null;
   }
 
 
