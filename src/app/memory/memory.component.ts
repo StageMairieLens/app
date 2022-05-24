@@ -124,8 +124,6 @@ export class MemoryComponent implements OnInit {
   tiles: TileComponent[] = [];
 
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
-    // this.derriere = new Image("Lapin", "../../assets/lapin.webp");
-    // this.game = new Memory(this.images, this.derriere, 18, this.setting, '#3bb8c9', 'white', 'blue', 'red', Progress.Blue, "5");
     this.game = null;
     this.derriere = null;
 
@@ -205,17 +203,7 @@ export class MemoryComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'Memory',id:id,id_table:'id_memory'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_update(list: any) {
@@ -223,38 +211,21 @@ export class MemoryComponent implements OnInit {
     const formData: FormData = new FormData();
     list['id_table']='id_memory';
     formData.append('update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   reponse: any;
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -331,15 +302,6 @@ export class MemoryComponent implements OnInit {
 
   }
 
-
-  getUser(id : number) : string | null {
-    for(let l of this.list_login) {
-      if(l.id2 == id) {
-        return l.pseudo;
-      }
-    }
-    return null;
-  }
   // Initialisation
   ngAfterViewInit(): void {
     if (this.game == null || this.game!.images.length == 0) return;
@@ -512,20 +474,8 @@ export class MemoryComponent implements OnInit {
   session_onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('session_update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -554,7 +504,6 @@ export class MemoryComponent implements OnInit {
     }
     this.pressStart = true;
     for (var i = 0; i < this.nbTile; i++) {
-      console.log(i);
       this.tiles[i].retourner = true;
     }
     setTimeout(() => {
@@ -593,7 +542,6 @@ export class MemoryComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
@@ -661,13 +609,6 @@ export class MemoryComponent implements OnInit {
       this.data = []
       this.recup(this.data);
     }, 400)
-  }
-
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
   }
 
   redirectEditMemory(m: Memory): void {

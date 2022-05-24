@@ -26,26 +26,12 @@ export class ReconnaitreComponent implements OnInit {
   cpt_erreur: number = 0;
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     this.r = null;
-    // this.r = new Reconnaitre(this.images, 'blue', 'white', 'black', 'green', 'red', Progress.Red, 'lightblue', 'white', 'CAPITAL',false);
-    /*this.http.get<any>('http://92.154.61.105:8080/~nacer/vue.php').subscribe(data =>{
-      this.data.push(data);
-    })*/
-  }
-
-  getUser(id: number): string | null {
-    for (let l of this.list_login) {
-      if (l.id2 == id) {
-        return l.pseudo;
-      }
-    }
-    return null;
   }
 
   list_login: Login[] = [];
   recupLogin(donne: any) {
     this.jeuxService.recup_user(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
@@ -69,7 +55,6 @@ export class ReconnaitreComponent implements OnInit {
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
 
-          console.log(data[i].isVoca)
           donne.push(
             new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, Number(this.id_crea))
           );
@@ -155,21 +140,11 @@ export class ReconnaitreComponent implements OnInit {
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -178,17 +153,7 @@ export class ReconnaitreComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'Reconnaitre',id:id,id_table:'id_reco'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_update(list: any) {
@@ -196,17 +161,10 @@ export class ReconnaitreComponent implements OnInit {
     const formData: FormData = new FormData();
     list['id_table']='id_reco';
     formData.append('update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -220,9 +178,6 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.onSend_delete(9);Fonctionne faut juste faire en sorte de recup l'id dans l'html
-    //
-
     this.recupImage(this.liste_image)
     setTimeout(() => {
       this.recup(this.data);
@@ -259,10 +214,9 @@ export class ReconnaitreComponent implements OnInit {
 
       for (let i of this.selectedImages) {
         this.image.push(i.id);
-        console.log("aaaa", this.image);
       }
 
-      this.list = //{ image: this.image.toString(), id: this.r!.id, bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, button_bg_color: this.reconnaitre_button_bg_color, button_text_color: this.reconnaitre_button_text_color, progress: 'blue', ecri: this.reconnaitre_type_ecriture, voca: +this.reconnaitre_isVocaliser };
+      this.list =
       {
         table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
         id_images: this.image.toString(),
@@ -287,19 +241,15 @@ export class ReconnaitreComponent implements OnInit {
 
 
   clicked = false; //Le boutton n'est pas désactiver
-  //liste_images : String[] = ["../../assets/lion.jpg","../../assets/chat.jpg","../../assets/chien.jpeg","../../assets/souris.jpg"];
   liste_image: Image[] = [];
   selectedImages: Image[] = [];
   erreur_image: Erreur[] = [];
-  //liste_images = [];
   prochaine_image = 0;
   taille_to = 0;
   //Variable qui contient l'image a trouver
-  //liste_mot: string[] = []; //Liste qui contient les noms des images
   liste_mot_boutton: string[] = [];
   compteur = 0; //Compte le nombre d'erreur
   compteur_image = 0; //Compte erreur par image
-  //variable: string = this.r!.images[this.prochaine_image].nom;
   progressValue: Progress[] = [
     Progress.Blue,
     Progress.Green,
@@ -341,10 +291,6 @@ export class ReconnaitreComponent implements OnInit {
 
   formStep: number = 0;
 
-
-  async delay(ms: number) {
-    await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
-  }
   alea(li: Image[]): void {
 
     var m = li.length, name, src, i;
@@ -383,7 +329,6 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   change($event: any, varia: string): Boolean {
-    //this.variable=this.liste_images[this.prochaine_image];
     if (varia == this.r!.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked = false;
       document.getElementById('result')!.innerHTML = '<p style="color : green">C\'est le bon mot</p>';
@@ -391,10 +336,8 @@ export class ReconnaitreComponent implements OnInit {
       this.sendProgress();
 
       this.compteur_image = 0;
-      console.log(this.erreur_image);
 
       setTimeout(() => {
-        //this.variable = this.r!.images[this.prochaine_image].nom;
         document.getElementById('container')!.animate([{ opacity: 1 },
         { opacity: 0.1, offset: 0.7 },
         { opacity: 1 }],
@@ -423,7 +366,6 @@ export class ReconnaitreComponent implements OnInit {
         }, 1600);
 
 
-        //($event.target as HTMLButtonElement).disabled = false;
       }
       else {
         this.clicked = true;
@@ -491,19 +433,8 @@ export class ReconnaitreComponent implements OnInit {
   session_onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('session_update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
     });
   }
 
@@ -570,7 +501,6 @@ export class ReconnaitreComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
@@ -699,18 +629,11 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
-  }
   redirectEditReconnaitre(r: Reconnaitre): void {
     window.location.href = '/panel/Reconnaitre/edit/' + r.id;
   }
 
   create(): void {
-    //this.list = {table:'Reconnaitre', id_images: this.image.toString(),  bg_color: this.reconnaitre_bg_color, text_color: this.reconnaitre_text_color, title_color: this.reconnaitre_title_color, gaw: this.reconnaitre_good_answer_color, waw: this.reconnaitre_wrong_answer_color, bu_bg_co: this.reconnaitre_button_bg_color, bu_txt_co: this.reconnaitre_button_text_color, progress: 'blue', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,id_crea:Number(this.id_crea) };
     this.list = {
       table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
       id_images: this.image.toString(),

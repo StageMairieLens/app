@@ -36,8 +36,7 @@ export class PuzzleComponent implements OnInit {
 
 
   constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
-    this.r = new Puzzle(0, '', [this.liste_image[5], this.liste_image[2]], 'yellow', 'blue', 'black', 'green', 'red', 'SCRIPT', 5,Number(this.id_crea));
-    // this.r = null;
+    this.r = null;
   }
   login:string=localStorage.getItem('id_pseudo')!;
 
@@ -76,17 +75,10 @@ export class PuzzleComponent implements OnInit {
     const formData: FormData = new FormData();
 
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_delete(id: any) {
@@ -94,17 +86,7 @@ export class PuzzleComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'Puzzle',id:id,id_table:'id_puzzle'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_update(list: any) {
@@ -112,17 +94,10 @@ export class PuzzleComponent implements OnInit {
     const formData: FormData = new FormData();
     list['id_table']='id_puzzle';
     formData.append('update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -144,7 +119,6 @@ export class PuzzleComponent implements OnInit {
   recupLogin(donne: any) {
     this.jeuxService.recup_user(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
         var inn = 0;
         for (var j = 0; LoginComponent.logins[j]; j++) {
@@ -157,15 +131,6 @@ export class PuzzleComponent implements OnInit {
         }
       }
     })
-  }
-
-  getUser(id : number) : string | null {
-    for(let l of this.list_login) {
-      if(l.id2 == id) {
-        return l.pseudo;
-      }
-    }
-    return null;
   }
 
   list_session : Session[] = [];
@@ -406,8 +371,6 @@ export class PuzzleComponent implements OnInit {
       this.shuffle();
 
     }
-    console.log(this.prochaine_image, this.r!.liste_images)
-
   }
 
   previewPuzzle(r: Puzzle): void {
@@ -449,7 +412,6 @@ export class PuzzleComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
@@ -556,13 +518,6 @@ export class PuzzleComponent implements OnInit {
   save(): void {
     this.onSend_update(this.list)
     this.router.navigate(['/panel/Puzzle']);
-  }
-
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-
   }
 
   redirectEditPuzzle(p: Puzzle): void {

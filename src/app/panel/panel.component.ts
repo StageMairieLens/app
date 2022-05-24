@@ -51,7 +51,6 @@ export class PanelComponent implements OnInit {
   recupReconnaitre(donne: any) {
     this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        console.log(data[i].id_images)
 
         donne.push(
           new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
@@ -178,7 +177,6 @@ export class PanelComponent implements OnInit {
 
 
   constructor(private jeuxService: JeuxService, private router: Router, private route: ActivatedRoute) {
-    // this.recopier = new Recopier(this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture);
     this.recopier = null;
     this.reconnaitre = null;
     this.puzzle = null;

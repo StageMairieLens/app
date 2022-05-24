@@ -70,7 +70,6 @@ export class SessionsComponent implements OnInit {
   recupReconnaitre(donne: any) {
     this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        console.log(data[i].id_images)
 
         donne.push(
           new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
@@ -288,20 +287,8 @@ export class SessionsComponent implements OnInit {
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_delete(id: any) {
@@ -309,17 +296,7 @@ export class SessionsComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'Session',id:id,id_table:'Id'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_update(list: any) {
@@ -327,16 +304,7 @@ export class SessionsComponent implements OnInit {
     const formData: FormData = new FormData();
     
     formData.append('session_update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   ngOnInit(): void {
@@ -367,7 +335,6 @@ export class SessionsComponent implements OnInit {
     setTimeout(() => {
       if (this.play) {
         if (this.route.snapshot.paramMap.get('id') != null) {
-          console.log(this.data)
           this.session_id = +this.route.snapshot.paramMap.get('id')!;
           if (this.session_id != null) {
             if (this.getSession() != null) {
@@ -460,19 +427,11 @@ export class SessionsComponent implements OnInit {
       { id: id, nom: name, progress_jeu: progress }
     );
 
-    // this.getSession()!.joueur.push((new Users(id, name, Session.number, 0, 0)));
     localStorage.setItem('id_user', id.toString());
-    //localStorage.setItem('id_crea',this.getSession()!.id)
   }
 
   getData(): Session[] {
     return SessionsComponent.data;
-  }
-
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
   }
 
   static data: Session[] = [];
@@ -594,7 +553,6 @@ export class SessionsComponent implements OnInit {
 
     setTimeout(() => {
       for (let t of theme.test) {
-        console.log(t)
         if (t.id_session == session.id) {
           theme.onSend_delete(t.id_theme);
           for(let j of theme.getTheme(t.id_theme).id_jeux.split(';')) {
@@ -645,7 +603,6 @@ export class SessionsComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
@@ -665,7 +622,6 @@ export class SessionsComponent implements OnInit {
       }, 2000)
       this.session_id = s.id;
       s = this.getSession()!;
-      console.log(s + ',' + n);
       this.selected_session = s;
 
     }, 3000)
@@ -702,7 +658,6 @@ export class SessionsComponent implements OnInit {
   setSessionInactive(s: Session): void {
     s.isActive = false;
     this.list = { nom: s.nom, isSuivi: +s.isSuivi, join: 0, id: +s.id, jeux_id: this.setJeuSession(s.jeuId), liste_j: this.setJoueurs(s) };
-    console.log(this.list)
 
     this.onSend_update(this.list);
 
@@ -845,25 +800,10 @@ export class SessionsComponent implements OnInit {
 
   changeJeuSession(jeu: string) {
     this.jeuSession = jeu;
-    // this.jeuId = -1;
-  }
-
-  changeJeuId(id: number) {
-    // this.jeuId = id;
-  }
-
-  showSessionActive(): void {
-    this.showActive = true;
-  }
-
-  showSessionInactive(): void {
-    this.showActive = false;
   }
 
   // RECOPIER LISTE CREATION SESSION
   addRecopier(r: Recopier): void {
-    console.log(this.jeuId);
-
     this.jeuId.push(
       { type: "Recopier", id_jeu: r.id }
     )
@@ -894,8 +834,6 @@ export class SessionsComponent implements OnInit {
 
   // MEMORY LISTE CREATION SESSION
   addMemory(m: Memory): void {
-    console.log(this.jeuId);
-
     this.jeuId.push(
       { type: "Memory", id_jeu: m.id }
     )
@@ -925,8 +863,6 @@ export class SessionsComponent implements OnInit {
 
   // RECONNAITRE LISTE CREATION SESSION
   addReconaitre(r: Reconnaitre): void {
-    console.log(this.jeuId);
-
     this.jeuId.push(
       { type: "Reconnaitre", id_jeu: r.id }
     )
@@ -956,8 +892,6 @@ export class SessionsComponent implements OnInit {
 
   // ABECEDAIRE LISTE CREATION SESSION
   addAbecedaire(a: Abecedaire): void {
-    console.log(this.jeuId);
-
     this.jeuId.push(
       { type: "Abecedaire", id_jeu: a.id }
     )
@@ -987,8 +921,6 @@ export class SessionsComponent implements OnInit {
 
   // Fille&Garçon LISTE CREATION SESSION
   addBoyGirl(bg: BoyGirl): void {
-    console.log(this.jeuId);
-
     this.jeuId.push(
       { type: "Fille&Garçon", id_jeu: bg.id }
     )
@@ -1018,8 +950,6 @@ export class SessionsComponent implements OnInit {
 
   // Puzzle LISTE CREATION SESSION
   addPuzzle(p: Puzzle): void {
-    console.log(this.jeuId);
-
     this.jeuId.push(
       { type: "Puzzle", id_jeu: p.id }
     )
@@ -1139,7 +1069,6 @@ export class SessionsComponent implements OnInit {
 
     setTimeout(() => {
       let index = -1;
-      console.log(this.getSession())
       for (let j of this.getSession()!.joueur) {
         if (j.id == +localStorage.getItem('id_user')!) {
           index = this.getSession()!.joueur.indexOf(j);
@@ -1153,7 +1082,6 @@ export class SessionsComponent implements OnInit {
       this.list = { nom: this.getSession()!.nom, isSuivi: +this.getSession()!.isSuivi, join: +this.getSession()!.isActive, id: this.getSession()!.id, jeux_id: this.setJeuSession(this.getSession()!.jeuId), liste_j: this.setJoueurs(this.getSession()!) };
       this.onSend_update(this.list);
       localStorage.removeItem('id_user');
-      // window.location.href = '';
     }, 200);
   }
 

@@ -113,17 +113,10 @@ export class BoyGirlGameComponent implements OnInit {
 
     const formData: FormData = new FormData();
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_delete(id: any) {
@@ -131,17 +124,7 @@ export class BoyGirlGameComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'girlsandboys',id:id,id_table:'id_gb'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_update(list: any) {
@@ -149,17 +132,7 @@ export class BoyGirlGameComponent implements OnInit {
     const formData: FormData = new FormData();
     list['id_table']='id_gb';
     formData.append('update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-        this.reponse = res;
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   data: BoyGirl[] = [];
@@ -395,7 +368,6 @@ export class BoyGirlGameComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;
@@ -434,7 +406,6 @@ export class BoyGirlGameComponent implements OnInit {
     if (value) {
       this.boygirl_listMotsFille.push(value);
       this.list['l_m_f'] = this.boygirl_listMotsFille.toString();
-      console.log(this.list['l_m_f']);
     }
 
     event.chipInput!.clear();
@@ -446,7 +417,6 @@ export class BoyGirlGameComponent implements OnInit {
     if (index >= 0) {
       this.boygirl_listMotsFille.splice(index, 1);
       this.list['l_m_f'] = this.boygirl_listMotsFille.toString();
-      console.log(this.list['l_m_f']);
     }
   }
 
@@ -456,7 +426,6 @@ export class BoyGirlGameComponent implements OnInit {
     if (value) {
       this.boygirl_listMotsGarcon.push(value);
       this.list['l_m_b'] = this.boygirl_listMotsGarcon.toString();
-      console.log(this.list['l_m_b']);
     }
 
     event.chipInput!.clear();
@@ -468,7 +437,6 @@ export class BoyGirlGameComponent implements OnInit {
     if (index >= 0) {
       this.boygirl_listMotsGarcon.splice(index, 1);
       this.list['l_m_b'] = this.boygirl_listMotsGarcon.toString();
-      console.log(this.list['l_m_b']);
     }
   }
 

@@ -78,17 +78,10 @@ export class AbecedaireComponent implements OnInit {
 
     const formData: FormData = new FormData();
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_delete(id: any) {
@@ -96,17 +89,7 @@ export class AbecedaireComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'Abcdr',id:id,id_table:'id_abcdr'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_update(list: any) {
@@ -114,17 +97,10 @@ export class AbecedaireComponent implements OnInit {
     const formData: FormData = new FormData();
     list['id_table']='id_abcdr';
     formData.append('update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
       },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   data: Abecedaire[] = [];
@@ -385,16 +361,7 @@ export class AbecedaireComponent implements OnInit {
 
     const formData: FormData = new FormData();
     formData.append('session_update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -459,7 +426,6 @@ export class AbecedaireComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;

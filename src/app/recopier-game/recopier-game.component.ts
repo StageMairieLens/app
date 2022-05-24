@@ -22,7 +22,6 @@ export class RecopierGameComponent implements OnInit {
   list_login: Login[] = [];
   login: string = localStorage.getItem('id_pseudo')!;
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
-    // this.r = new Recopier(this.images, '#3bb8c9', 'red', 'black', 'green', 'red', Progress.Red, 'blue', 'white', 'white', 'black', this.typeEcriture, false);
     this.r = null;
   }
 
@@ -30,8 +29,6 @@ export class RecopierGameComponent implements OnInit {
     this.jeuxService.recup_user(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        //console.log(data);
-        //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
 
         var inn = 0;
@@ -118,19 +115,10 @@ export class RecopierGameComponent implements OnInit {
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
-      },
-
-      error: err => {
-        console.log(err);
       },
     });
   }
@@ -210,10 +198,6 @@ export class RecopierGameComponent implements OnInit {
     Progress.Red
   ];
 
-  async delay(ms: number) {
-    await new Promise<void>(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
-  }
-
   enterKey($event: KeyboardEvent): void {
     if ($event.key == 'Enter') {
       this.sendAnswer((<HTMLInputElement>$event.target).value, this.r!.images[this.showImageCpt]);
@@ -224,28 +208,15 @@ export class RecopierGameComponent implements OnInit {
     var list={table:'Recopier',id:id,id_table:'id_recopier'};
     formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-      },
-
-      error: err => {
-        console.log(err);
-      },
     });
   }
   onSend_update(list: any) {
     const formData: FormData = new FormData();
     list['id_table']='id_recopier';
     formData.append('update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
-        console.log(res.name);
         this.reponse = res;
-      },
-
-      error: err => {
-        console.log(err);
       },
     });
   }
@@ -423,19 +394,8 @@ export class RecopierGameComponent implements OnInit {
   session_onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('session_update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
     });
   }
 
@@ -461,21 +421,6 @@ export class RecopierGameComponent implements OnInit {
       return true;
     }
     return false;
-  }
-
-  getUser(id: number): string | null {
-    for (let l of this.list_login) {
-      if (l.id2 == id) {
-        return l.pseudo;
-      }
-    }
-    return null;
-  }
-
-  parseDate(date: Date): string {
-    let month: string[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    let index: number = date.getMonth() - 1;
-    return date.getUTCDate() + '/' + month[index] + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
   }
 
   setPrevisualiserRecopier(prev: boolean): void {
@@ -532,7 +477,6 @@ export class RecopierGameComponent implements OnInit {
   setJeuSession(tab: Jeu[]): string {
     let res = "";
     for (let g of tab) {
-      console.log(g)
       res += g.type + ',' + g.id_jeu + ';'
     }
     return res;

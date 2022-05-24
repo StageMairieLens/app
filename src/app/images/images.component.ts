@@ -29,16 +29,6 @@ export class ImagesComponent implements OnInit {
 
   }
 
-  public getListImages(): Image[] {
-    return ImagesComponent.list_image;
-  }
-
-
-  addImage(i: Image): void {
-    console.log(i);
-  }
-
-
   files: File[] = [];
 
   onSelect(event: { addedFiles: any; }) {
@@ -48,10 +38,7 @@ export class ImagesComponent implements OnInit {
         if (this.pro_img < 0) {
           this.pro_img = 0;
         }
-        console.log(event);
         this.files.push(i);
-        console.log(this.files[this.pro_img].type);
-        //this.pro_img+=1;
       } else {
         this.showAlert = true;
         setTimeout(() =>  {
@@ -75,22 +62,13 @@ export class ImagesComponent implements OnInit {
     formData.append('image', img);
     formData.append('image',localStorage.getItem('id_crea')!);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-
-      },
-
       error: err => {
-        console.log(err);
         this.temps += 1;
-
 
         if (this.temps >= this.files.length) {
           this.redirect();
         }
       },
-
     });
   }
   onSend2() {
@@ -107,7 +85,6 @@ export class ImagesComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        console.log(data[i].id_crea);
         if(data[i].id_crea == this.id_local){
           
           donne.push(new Image(data[i].nom, data[i].id_image,data[i].id_crea));
@@ -122,18 +99,7 @@ export class ImagesComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'images',id:id,id_table:'id_image'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-
-      },
-
     });
   }
 

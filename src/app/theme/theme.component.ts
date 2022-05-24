@@ -155,13 +155,7 @@ export class ThemeComponent implements OnInit {
     
     formData.append('send', JSON.stringify(list2));
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
       error: err => {
-        console.log(err);
         this.reloadCurrentPage();
       },
 
@@ -173,13 +167,6 @@ export class ThemeComponent implements OnInit {
     var list={table:'Theme',id:id,id_table:'id_theme'};
     formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-      },
-
-      error: err => {
-        console.log(err);
-      },
     });
   }
 
@@ -192,13 +179,6 @@ export class ThemeComponent implements OnInit {
     
     formData.append('update', JSON.stringify(list2));
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-      },
-
-      error: err => {
-        console.log(err);
-      },
     });
   }
   
@@ -257,13 +237,7 @@ export class ThemeComponent implements OnInit {
           }
         }
       }
-
-
     }, 300)
-
-
-
-
   }
 
   create(): void {//Crée le thème et les jeux séléctionner
@@ -387,7 +361,6 @@ export class ThemeComponent implements OnInit {
     }, 300)
 
     setTimeout(() => {
-      console.log(session_list)
       for (let i = session_list.length - 1; session_list[i] != null; i--) {
         if (session_list[i].id_crea == +localStorage.getItem('id_crea')!) {
           this.nouveau_theme['id_session'] = session_list[i].id
@@ -634,17 +607,7 @@ export class ThemeComponent implements OnInit {
       }, 300)
     }
 
-
-
-    this.showAlert = true;
-
-    setInterval(() => {
-      this.cpt += 2;
-    }, 20)
-
     setTimeout(() => {
-
-
       let ses : SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
       ses.list['id'] = this.recup_image.id_session;
       ses.list['jeux_id'] = this.recup_image.id_jeux;
@@ -652,7 +615,6 @@ export class ThemeComponent implements OnInit {
 
       this.recup_image.nom = this.nouveau_theme['nom'];
       this.recup_image.id = this.n_theme;
-      console.log(this.recup_image)
       this.onSend_update(this.recup_image)
       setTimeout(() => {
         this.reloadCurrentPage();
