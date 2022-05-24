@@ -221,10 +221,8 @@ export class RecopierGameComponent implements OnInit {
   }
   onSend_delete(id: any) {
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<id.lenght;i++){
-      formData.append('id[]',id[i]);
-    }*/
-    formData.append('recopier_delete', id);
+    var list={table:'Recopier',id:id,id_table:'id_recopier'};
+    formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);

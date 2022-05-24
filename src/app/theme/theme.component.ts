@@ -172,10 +172,8 @@ export class ThemeComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<id.lenght;i++){
-      formData.append('id[]',id[i]);
-    }*/
-    formData.append('theme_delete', id);
+    var list={table:'Theme',id:id,id_table:'id_theme'};
+    formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);

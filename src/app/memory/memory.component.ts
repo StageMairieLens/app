@@ -203,10 +203,8 @@ export class MemoryComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<id.lenght;i++){
-      formData.append('id[]',id[i]);
-    }*/
-    formData.append('memory_delete', id);
+    var list={table:'Memory',id:id,id_table:'id_memory'};
+    formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {

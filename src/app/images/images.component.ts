@@ -120,8 +120,8 @@ export class ImagesComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-
-    formData.append('image_delete', id);
+    var list={table:'images',id:id,id_table:'id_image'};
+    formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
