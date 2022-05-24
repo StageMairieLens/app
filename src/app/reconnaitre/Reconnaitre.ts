@@ -1,8 +1,9 @@
 import { Progress } from '../Progress'
 import { Image } from '../Image'
 import { text } from 'express';
-
+//Permet de crée le jeu
 export class Reconnaitre {
+  //Toutes les variables du jeu Reconnaitre
   id: number;
   static nb: number = 0;
   images: Image[];

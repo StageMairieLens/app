@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ImagesComponent implements OnInit {
   [x: string]: any;
-  pro_img = 0;
+  //pro_img = 0;
   constructor(private jeuxService: JeuxService, private router: Router) { }
 
   static list_image: Image[] = [
@@ -29,16 +29,21 @@ export class ImagesComponent implements OnInit {
 
   }
 
-  files: File[] = [];
+  public getListImages(): Image[] {
+    return ImagesComponent.list_image;
+  }
 
-  onSelect(event: { addedFiles: any; }) {
+  files: File[] = [];//La liste de toutes les images
+
+  onSelect(event: { addedFiles: any; }) {//Ajoute les images dans la liste d'images
 
     for (let i of event.addedFiles) {
       if (i.type.split('/')[0] == 'image') {
-        if (this.pro_img < 0) {
-          this.pro_img = 0;
-        }
+        
+       
         this.files.push(i);
+      
+        
       } else {
         this.showAlert = true;
         setTimeout(() =>  {
@@ -50,17 +55,17 @@ export class ImagesComponent implements OnInit {
 
   }
 
-  onRemove(event: File) {
+  onRemove(event: File) {//Supprime les images de la listes
 
     this.files.splice(this.files.indexOf(event), 1);
-    this.pro_img -= 1;
+    
   }
-  onSend(pro_img2: number) {
+  onSend(pro_img2: number) {//Envoi les images une par une dans la base de données
     var img: Blob = this.files[pro_img2];
     const formData: FormData = new FormData();
 
-    formData.append('image', img);
-    formData.append('image',localStorage.getItem('id_crea')!);
+    formData.append('image', img);//Envoi l'image
+    formData.append('image',localStorage.getItem('id_crea')!);//Envoi l'id de l'utilisateur
     this.jeuxService.onSend(formData).subscribe({
       error: err => {
         this.temps += 1;
@@ -71,17 +76,17 @@ export class ImagesComponent implements OnInit {
       },
     });
   }
-  onSend2() {
+  onSend2() {//Permet d'envoyer toutes les images dans la base de données
     for (var i = 0; i < this.files.length; i++) {
       this.onSend(i);
 
     }
   }
-  redirect() {
+  redirect() {//Redirect vers les themes après l'ajout des images
     window.location.href = '/panel/themes'
   }
 
-  recup(donne: any) {
+  recup(donne: any) {//Récupere toutes les images depuis la base de données
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -94,7 +99,7 @@ export class ImagesComponent implements OnInit {
 
 
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Suprimme les images de la base de données et les envois dans le component Image.ts
 
     const formData: FormData = new FormData();
     var list={table:'images',id:id,id_table:'id_image'};
@@ -103,7 +108,7 @@ export class ImagesComponent implements OnInit {
     });
   }
 
-  getListImage(): Image[] {
+  getListImage(): Image[] {//Affiche les images dans l'HTML
     if (this.affiche_image == true) {
 
       return ImagesComponent.list_image;
@@ -111,10 +116,10 @@ export class ImagesComponent implements OnInit {
       return ImagesComponent.list_image = [];
     }
   }
-  noImage(): Image[] {
+  noImage(): Image[] {//Cache les images dans l'HTML
     return ImagesComponent.list_image = [];
   }
-  remove(id: any): any {
+  remove(id: any): any {//Supprime les images dans Images.ts
 
     for (var i = 0; ImagesComponent.list_image[i] != null; i++) {
 

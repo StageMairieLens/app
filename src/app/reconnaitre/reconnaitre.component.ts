@@ -21,15 +21,15 @@ interface Erreur {
   styleUrls: ['./reconnaitre.component.css']
 })
 export class ReconnaitreComponent implements OnInit {
-  id_crea = localStorage.getItem('id_crea');
+  id_crea = localStorage.getItem('id_crea');//L'id de la personne connecter
   static firstFinish: number = 0;
-  cpt_erreur: number = 0;
+  cpt_erreur: number = 0;//nombre d'erreur
   constructor(private route: ActivatedRoute, private jeuxService: JeuxService, private router: Router) {
     this.r = null;
   }
 
   list_login: Login[] = [];
-  recupLogin(donne: any) {
+  recupLogin(donne: any) {//Recupere les données des utilisateurs
     this.jeuxService.recup_user(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect, data[i].pseudo));
@@ -46,11 +46,11 @@ export class ReconnaitreComponent implements OnInit {
     })
   }
 
-  reponse = "";
+  
   data: Reconnaitre[] = [];
   login: string = localStorage.getItem('id_pseudo')!;
 
-  recup(donne: any) {
+  recup(donne: any) {//Récupere tout les jeux Reconnaitre crée par la personne connecter
     this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
@@ -64,7 +64,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   list_session: Session[] = [];
-  recupSession(donne: any) {
+  recupSession(donne: any) {//Recupere les sessions
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -84,7 +84,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {
+  getJeuSession(s: string): Jeu[] {//Récupere la session et lui rajoute le jeu
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -120,7 +120,7 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  getImage(s: string): Image[] {
+  getImage(s: string): Image[] {//Recupere les images et les ajoutes dans une liste
     let res = [];
     let tab = s.split(',');
     if (s.length != 0) {
@@ -137,38 +137,32 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  onSend(list: any) {
+  onSend(list: any) {//Envoi les données du jeu dans la bdd
 
     const formData: FormData = new FormData();
     formData.append('send', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        this.reponse = res;
-      },
     });
   }
 
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Suprimme un jeu de la bdd
 
     const formData: FormData = new FormData();
-    var list={table:'Reconnaitre',id:id,id_table:'id_reco'};
+    var list={table:'Reconnaitre',id:id,id_table:'id_reco'};//Permet de reconnaitre la table, le nom de l'id et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
     });
   }
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update le jeu dans la bdd
 
     const formData: FormData = new FormData();
-    list['id_table']='id_reco';
+    list['id_table']='id_reco';//Permet de reconnaitre la table
     formData.append('update', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        this.reponse = res;
-      },
     });
   }
 
-  recupImage(donne: any) {
+  recupImage(donne: any) {//Récupere les images depuis la bdd
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -194,7 +188,7 @@ export class ReconnaitreComponent implements OnInit {
     }
 
 
-    if (this.edit) {
+    if (this.edit) {//Permet d'editer un jeu, récupere les données du jeu this.r!.(nom d'une variable du jeu) de Reconnaitre.ts et les affiches
       this.create_game = true
       this.selectedImages = this.r!.images;
       this.reconnaitre_bg_color = this.r!.bg_color;
@@ -214,9 +208,10 @@ export class ReconnaitreComponent implements OnInit {
 
       for (let i of this.selectedImages) {
         this.image.push(i.id);
+        
       }
 
-      this.list =
+      this.list = //Recupere les données dans une liste pour l'update
       {
         table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
         id_images: this.image.toString(),
@@ -233,23 +228,27 @@ export class ReconnaitreComponent implements OnInit {
   }
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Reconnaitre | null;
-  @Input() showTitle: boolean = true;
+  @Input() showTitle: boolean = true;//affiche le titre du jeu
   @Input() showList: boolean = false;
-  @Input() play: boolean = true;
-  @Input() create_game: boolean = false;
-  @Input() edit: boolean = false;
+  @Input() play: boolean = true;//Lance le jeu
+  @Input() create_game: boolean = false;//Crée le jeu si true
+  @Input() edit: boolean = false;//Va dans l'edit si true
 
 
   clicked = false; //Le boutton n'est pas désactiver
+  
   liste_image: Image[] = [];
   selectedImages: Image[] = [];
   erreur_image: Erreur[] = [];
+  
   prochaine_image = 0;
   taille_to = 0;
   //Variable qui contient l'image a trouver
+  
   liste_mot_boutton: string[] = [];
   compteur = 0; //Compte le nombre d'erreur
   compteur_image = 0; //Compte erreur par image
+  
   progressValue: Progress[] = [
     Progress.Blue,
     Progress.Green,
@@ -257,12 +256,12 @@ export class ReconnaitreComponent implements OnInit {
     Progress.Orange,
     Progress.Red
   ];
-
+  //Permet de mettre le son 
   synthesis: SpeechSynthesis | null = window.speechSynthesis;
   voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
     return voice.lang === 'fr';
   })[0];;
-
+  //Valeur par défault du jeu
   reconnaitre_bg_color: string = "#3bb8c9";
   reconnaitre_title_color: string = "#ffffff";
   reconnaitre_text_color: string = "#000000";
@@ -276,6 +275,7 @@ export class ReconnaitreComponent implements OnInit {
   reconnaitre_previsualiser: boolean = false;
 
   image: any = [];
+  //Valeur par défaut ajouter dans la liste pour les envoyé dans la bdd
   list: any = {
     table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: 0,
     id_images: this.image.toString(),
@@ -309,7 +309,7 @@ export class ReconnaitreComponent implements OnInit {
       li[i].src = src;
     }
   }
-
+  //rend aléatoire l'affichage des bouttons
   alea2(li: string[]): void {
     for (var taile = 0; this.r!.images[taile]; taile++) {
       li.push(this.r!.images[taile].nom);
@@ -327,7 +327,7 @@ export class ReconnaitreComponent implements OnInit {
       li[i] = t;
     }
   }
-
+  //Foncion qui lance le jeu,qui gere tout le jeu
   change($event: any, varia: string): Boolean {
     if (varia == this.r!.images[this.prochaine_image].nom) { //Si reponse trouver alert un message et bloque tous les bouttons
       this.clicked = false;
@@ -395,7 +395,7 @@ export class ReconnaitreComponent implements OnInit {
       return false;
     }
   }
-
+  //Récupere la session
   getSession(): Session | null {
     for (let s of this.list_session) {
       for (let j of s.jeuId) {
@@ -430,7 +430,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
 
-  session_onSend_update(list: any) {
+  session_onSend_update(list: any) {//Update la session avec les parametre du jeu en cours
 
     const formData: FormData = new FormData();
     formData.append('session_update', JSON.stringify(list));
@@ -438,7 +438,7 @@ export class ReconnaitreComponent implements OnInit {
     });
   }
 
-  sendProgress(): void {
+  sendProgress(): void {//Envoie la progression dans la session du jeu en cours
 
     this.list_session = [];
     this.recupSession(this.list_session);
@@ -451,7 +451,7 @@ export class ReconnaitreComponent implements OnInit {
     }, 500);
   }
 
-  isFinish(): boolean {
+  isFinish(): boolean {//Si le jeu est fini
     if (this.prochaine_image == this.r!.images.length) {
       if (ReconnaitreComponent.firstFinish == 0) {
         this.sendProgress();
@@ -461,16 +461,16 @@ export class ReconnaitreComponent implements OnInit {
     }
     return false;
   }
-
+  //Permet de previsualiser le jeu
   previewReconnaitre(r: Reconnaitre): void {
     this.r = r;
     this.reconnaitre_previsualiser = true;
   }
-
+  //Quitte la previsualition en cours 
   quitPreviewReconnaitre(): void {
     this.reconnaitre_previsualiser = false;
   }
-
+  //delete le jeu Reconnaitre de toutes les sessions qui le contient
   deleteReconnaitre(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
@@ -519,7 +519,7 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  deleteThemeReconnaitre(id: number): void {
+  deleteThemeReconnaitre(id: number): void {//Delete le jeu reconnaitre du theme
     let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
     let liste: any = [];
     theme.recup2(liste);
@@ -546,7 +546,7 @@ export class ReconnaitreComponent implements OnInit {
     }, 200)
   }
 
-  deleteGameReconnaitre(r: Reconnaitre): void {
+  deleteGameReconnaitre(r: Reconnaitre): void {//Supprime le jeu reconnaitre de partout
     this.onSend_delete(r.id);
     this.deleteSessionReconnaitre(r.id);
     this.deleteThemeReconnaitre(r.id);
@@ -633,7 +633,7 @@ export class ReconnaitreComponent implements OnInit {
     window.location.href = '/panel/Reconnaitre/edit/' + r.id;
   }
 
-  create(): void {
+  create(): void {//Crée le jeu reconnaitre avec les parametres soit par défaut, soit modifier à la création
     this.list = {
       table: 'Reconnaitre', type_ecri: this.reconnaitre_type_ecriture, isVoca: +this.reconnaitre_isVocaliser,
       id_images: this.image.toString(),
@@ -650,7 +650,7 @@ export class ReconnaitreComponent implements OnInit {
     this.router.navigate(['/panel/Reconnaitre']);
   }
 
-  addImage(img: Image): void {
+  addImage(img: Image): void {//ajoute les images choisit dans la liste
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
@@ -658,7 +658,7 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  deleteImage(i: Image): void {
+  deleteImage(i: Image): void {//Supprime les images de la liste
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
@@ -667,7 +667,7 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  vocalise(): void {
+  vocalise(): void {//Lance la vocalisation
     this.synthesis!.cancel();
     var utterance = new SpeechSynthesisUtterance(this.r!.images[this.prochaine_image].getNom());
     utterance.voice = this.voice;
@@ -676,7 +676,7 @@ export class ReconnaitreComponent implements OnInit {
     this.synthesis!.speak(utterance);
   }
 
-  save(): void {
+  save(): void {//Sauvegarde les changement lors d'un edit
     this.list['id'] = this.r!.id;
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Reconnaitre']);

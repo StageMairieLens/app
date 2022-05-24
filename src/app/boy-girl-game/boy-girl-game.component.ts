@@ -109,7 +109,7 @@ export class BoyGirlGameComponent implements OnInit {
 
     }
   reponse = "";
-  onSend(list: any) {
+  onSend(list: any) {//Envoi les données
 
     const formData: FormData = new FormData();
     formData.append('send', JSON.stringify(list));
@@ -119,24 +119,24 @@ export class BoyGirlGameComponent implements OnInit {
       },
     });
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Delete les données
 
     const formData: FormData = new FormData();
-    var list={table:'girlsandboys',id:id,id_table:'id_gb'};
+    var list={table:'girlsandboys',id:id,id_table:'id_gb'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
     });
   }
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update le jeu dans la bdd
 
     const formData: FormData = new FormData();
-    list['id_table']='id_gb';
+    list['id_table']='id_gb';//Ajoute le nom de l'id de la table
     formData.append('update', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
     });
   }
   data: BoyGirl[] = [];
-  recup(donne: any) {
+  recup(donne: any) {//Recupere le sjeux crée par l'utilisateur
     this.jeuxService.recup_bg(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         if(data[i].id_crea == +localStorage.getItem('id_crea')!){
