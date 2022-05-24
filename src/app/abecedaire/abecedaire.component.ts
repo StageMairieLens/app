@@ -74,7 +74,7 @@ export class AbecedaireComponent implements OnInit {
     this.game = null;
   }
   reponse: any;
-  onSend(list: any) {
+  onSend(list: any) {//Envoi les données du jeu 
 
     const formData: FormData = new FormData();
     formData.append('send', JSON.stringify(list));
@@ -91,10 +91,10 @@ export class AbecedaireComponent implements OnInit {
 
     });
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Supprime les données du jeu
 
     const formData: FormData = new FormData();
-    var list={table:'Abcdr',id:id,id_table:'id_abcdr'};
+    var list={table:'Abcdr',id:id,id_table:'id_abcdr'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -112,7 +112,7 @@ export class AbecedaireComponent implements OnInit {
   onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    list['id_table']='id_abcdr';
+    list['id_table']='id_abcdr';//Ajoute le nom de l'id de la table
     formData.append('update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -128,7 +128,7 @@ export class AbecedaireComponent implements OnInit {
     });
   }
   data: Abecedaire[] = [];
-  recup(donne: any) {
+  recup(donne: any) {//Recupere les jeux Abcdr crée par l'utilisateur
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         if(data[i].id_crea == +localStorage.getItem('id_crea')!){

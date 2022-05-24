@@ -71,7 +71,7 @@ export class PuzzleComponent implements OnInit {
     }
     return res;
   }
-  onSend(list: any) {
+  onSend(list: any) {//Ajoute le jeu dans la bdd
 
     const formData: FormData = new FormData();
 
@@ -89,10 +89,10 @@ export class PuzzleComponent implements OnInit {
 
     });
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Supprime le jeu
 
     const formData: FormData = new FormData();
-    var list={table:'Puzzle',id:id,id_table:'id_puzzle'};
+    var list={table:'Puzzle',id:id,id_table:'id_puzzle'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -107,10 +107,10 @@ export class PuzzleComponent implements OnInit {
 
     });
   }
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update le jeu
 
     const formData: FormData = new FormData();
-    list['id_table']='id_puzzle';
+    list['id_table']='id_puzzle';//Ajoute le nom de l'id de la table
     formData.append('update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -127,7 +127,7 @@ export class PuzzleComponent implements OnInit {
   }
 
 
-  recupImage(donne: any) {
+  recupImage(donne: any) {//Récupere les images
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {

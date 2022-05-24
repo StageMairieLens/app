@@ -46,7 +46,7 @@ export class RecopierGameComponent implements OnInit {
       }
     })
   }
-  recup(tab: any) {
+  recup(tab: any) {//Récupere les jeux crée par l'utilisateur
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
@@ -115,7 +115,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
   reponse: any;
-  onSend(list: any) {
+  onSend(list: any) {//Ajoute le jeu dans la bdd
 
     const formData: FormData = new FormData();
     /*for(var i = 0;i<list.lenght;i++){
@@ -151,7 +151,7 @@ export class RecopierGameComponent implements OnInit {
     return res;
   }
 
-  recupImage(donne: any) {
+  recupImage(donne: any) {//Récupere les images
     this.jeuxService.recup_image_id(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
@@ -219,9 +219,9 @@ export class RecopierGameComponent implements OnInit {
       this.sendAnswer((<HTMLInputElement>$event.target).value, this.r!.images[this.showImageCpt]);
     }
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Supprime le jeu
     const formData: FormData = new FormData();
-    var list={table:'Recopier',id:id,id_table:'id_recopier'};
+    var list={table:'Recopier',id:id,id_table:'id_recopier'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
@@ -233,9 +233,9 @@ export class RecopierGameComponent implements OnInit {
       },
     });
   }
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update les données
     const formData: FormData = new FormData();
-    list['id_table']='id_recopier';
+    list['id_table']='id_recopier';//Ajoute le nom de l'id de la table
     formData.append('update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({

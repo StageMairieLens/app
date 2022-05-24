@@ -200,7 +200,7 @@ export class SessionsComponent implements OnInit {
 
   data: Session[] = [];
 
-  recupImage(donne: any) {
+  recupImage(donne: any) {//Récupere les images
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -208,7 +208,7 @@ export class SessionsComponent implements OnInit {
       }
     })
   }
-  recup(donne: any) {
+  recup(donne: any) {//Récupere les sessions crée par l'utilisateur
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -285,12 +285,10 @@ export class SessionsComponent implements OnInit {
     return res;
   }
 
-  onSend(list: any) {
+  onSend(list: any) {//Ajoute la session
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
+    
     formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -304,10 +302,10 @@ export class SessionsComponent implements OnInit {
 
     });
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Delete la session
 
     const formData: FormData = new FormData();
-    var list={table:'Session',id:id,id_table:'Id'};
+    var list={table:'Session',id:id,id_table:'Id'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -322,7 +320,7 @@ export class SessionsComponent implements OnInit {
 
     });
   }
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update la session
 
     const formData: FormData = new FormData();
     

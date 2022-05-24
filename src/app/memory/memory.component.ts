@@ -203,7 +203,7 @@ export class MemoryComponent implements OnInit {
   onSend_delete(id: any) {
 
     const formData: FormData = new FormData();
-    var list={table:'Memory',id:id,id_table:'id_memory'};
+    var list={table:'Memory',id:id,id_table:'id_memory'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
     formData.append('delete', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -218,10 +218,10 @@ export class MemoryComponent implements OnInit {
 
     });
   }
-  onSend_update(list: any) {
+  onSend_update(list: any) {//Update le jeu
 
     const formData: FormData = new FormData();
-    list['id_table']='id_memory';
+    list['id_table']='id_memory';//Ajoute le nom de l'id de la table
     formData.append('update', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -237,12 +237,10 @@ export class MemoryComponent implements OnInit {
     });
   }
   reponse: any;
-  onSend(list: any) {
+  onSend(list: any) {//Envoi les données dans la bdd
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
+    
     formData.append('send', JSON.stringify(list));
     console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
@@ -276,7 +274,7 @@ export class MemoryComponent implements OnInit {
 
 
 
-  recupImage(donne: any) {
+  recupImage(donne: any) {//Recupere les images
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {

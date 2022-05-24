@@ -68,8 +68,8 @@ export class ImagesComponent implements OnInit {
     var img: Blob = this.files[pro_img2];
     const formData: FormData = new FormData();
 
-    formData.append('image', img);
-    formData.append('image',localStorage.getItem('id_crea')!);
+    formData.append('image', img);//Envoi l'image
+    formData.append('image',localStorage.getItem('id_crea')!);//Envoi l'id de l'utilisateur
     this.jeuxService.onSend(formData).subscribe({
       next: res => {
         console.log(res);
