@@ -12,11 +12,13 @@
     <div *ngIf="this.taille_ini != 0">
       <div *ngIf="this.mots.length != 0 || !this.finish">
         <div class="container" id="content">
+          <!-- Change les paramètres direct dans le jeu -->
           <div style="margin-bottom: 20px;">
             <button mat-raised-button style="background-color: orange" *ngIf="this.bg.type_ecriture == 'SCRIPT'" (click)="this.bg.type_ecriture = 'CAPITAL'">SCRIPT</button>
             <button mat-raised-button style="background-color: orange" *ngIf="this.bg.type_ecriture == 'CAPITAL'" (click)="this.bg.type_ecriture = 'CURSIF'">SCRIPT</button>
             <button mat-raised-button style="background-color: orange" *ngIf="this.bg.type_ecriture == 'CURSIF'" (click)="this.bg.type_ecriture = 'SCRIPT'">SCRIPT</button>
           </div>
+          <!-- Boite fille -->
           <div class="row">
             <div class="card_play align-self-left col" id="girlContainer"
               [ngStyle]="{background : this.bg!.bg_color_fille}" style="width: 32rem">
@@ -48,6 +50,7 @@
               </div>
             </div>
 
+            <!-- Boite garçon -->
             <div class="card_play align-self-right col" id="boyContainer"
               [ngStyle]="{background : this.bg!.bg_color_garcon}" style="width: 32rem;">
               <div class="card-body text-center">
@@ -82,7 +85,7 @@
           </div>
         </div>
 
-
+        <!-- Liste des mots -->
         <div class="card_play align-middle container" id="container" [ngStyle]="{background : this.bg!.bg_color_mot}"
           style="width: 32rem;margin-top : 5%">
           <div class="card-body text-center">
@@ -114,6 +117,7 @@
       </div>
     </div>
 
+    <!-- Fin du jeu -->
     <div *ngIf="this.mots.length == 0 && this.finish" class="card_play align-middle container" id="finish"
       style="width: 32rem;" [ngStyle]="{background : this.bg!.bg_color_container}">
       <img class="card-img-top image" src="../../assets/images/congratulations.png" alt="Card image cap">
@@ -123,6 +127,7 @@
       </div>
     </div>
 
+    <!-- ERREURS -->
     <div *ngIf="this.taille_ini == 0" class="card_play align-middle container" id="card_error"
       style="width: 32rem; color : black " [ngStyle]="{background : this.bg!.bg_color_container}">
 
@@ -132,9 +137,6 @@
         <p class="card-text">La liste de mots est vide !</p>
       </div>
     </div>
-
-
-
   </div>
 
   <div *ngIf="this.bg == null" class="card_play align-middle container" id="card_error"

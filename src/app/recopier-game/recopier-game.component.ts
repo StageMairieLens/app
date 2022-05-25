@@ -25,7 +25,7 @@ export class RecopierGameComponent implements OnInit {
     this.r = null;
   }
 
-  recupLogin(donne: any) {
+  recupLogin(donne: any) {//Recupere les données des utilisateurs
     this.jeuxService.recup_user(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -55,7 +55,7 @@ export class RecopierGameComponent implements OnInit {
       }
     })
   }
-  recupSession(donne: any) {
+  recupSession(donne: any) {//Recupere les sessions
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -75,7 +75,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {
+  getJeuSession(s: string): Jeu[] {//Récupere la liste des jeux de la session et les mets en tableau
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -88,7 +88,7 @@ export class RecopierGameComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number): Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {//Récupere la liste des joueurs de la session et les mets en tableau
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
@@ -123,7 +123,7 @@ export class RecopierGameComponent implements OnInit {
     });
   }
 
-  getImage(s: string): Image[] {
+  getImage(s: string): Image[] {//Recupere les images et les ajoutes dans un tableau
     let res = [];
     let tab = s.split(',');
     if (s.length != 0) {
@@ -283,6 +283,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
+  // Teste si la réponse est le bonne ou pas
   sendAnswer(text: string, img: Image): void {
     if (!this.waitToSend) {
       this.waitToSend = true;
@@ -359,6 +360,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
+  //Récupere la session du jeu
   getSession(): Session | null {
     for (let s of this.list_session) {
       for (let j of s.jeuId) {
@@ -372,7 +374,7 @@ export class RecopierGameComponent implements OnInit {
     return null
   }
 
-  getJeuById(): number {
+  getJeuById(): number {//Récupère le jeu de la session par son id
     for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
       if (this.getSession()!.jeuId[i].type == 'Recopier') {
         if (this.getSession()!.jeuId[i].id_jeu == this.r!.id) {
@@ -383,7 +385,7 @@ export class RecopierGameComponent implements OnInit {
     return -1;
   }
 
-  getJoueur(): Guest | null {
+  getJoueur(): Guest | null {//Récupère les informations du joueur actuel
     for (let g of this.getSession()!.joueur) {
       if (g.id == +localStorage.getItem('id_user')!) {
         return g;
@@ -393,7 +395,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
 
-  session_onSend_update(list: any) {
+  session_onSend_update(list: any) {//Update la session avec les parametre du jeu en cours
 
     const formData: FormData = new FormData();
     formData.append('session_update', JSON.stringify(list));
@@ -401,7 +403,7 @@ export class RecopierGameComponent implements OnInit {
     });
   }
 
-  sendProgress(): void {
+  sendProgress(): void {//Envoie la progression dans la session du jeu en cours
 
     this.list_session = [];
     this.recupSession(this.list_session);
@@ -414,6 +416,7 @@ export class RecopierGameComponent implements OnInit {
     }, 500);
   }
 
+  // Teste si le jeu est fini
   isFinish(): boolean {
     if (this.showImageCpt == this.r!.images.length && this.r!.images.length != 0) {
       if (RecopierGameComponent.firstFinish == 0) {
@@ -425,7 +428,7 @@ export class RecopierGameComponent implements OnInit {
     return false;
   }
 
-  setPrevisualiserRecopier(prev: boolean): void {
+  setPrevisualiserRecopier(prev: boolean): void {//Affiche le jeu dans la prévisualisation
     if (prev == true) {
       this.r = new Recopier(0, '', this.selectedImages, this.recopier_bg_color, this.recopier_title_color, this.recopier_text_color, this.recopier_good_answer_color, this.recopier_wrong_answer_color, this.recopier_progress, this.recopier_button_bg_color, this.recopier_button_text_color, this.recopier_input_bg_color, this.recopier_input_text_color, this.recopier_type_ecriture, this.recopier_isVocaliser, Number(this.id_crea));
       this.recopier_previsualiser = true;
@@ -439,15 +442,18 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
+  //Permet de previsualiser le jeu
   previewRecopier(r: Recopier): void {
     this.r = r;
     this.recopier_previsualiser = true;
   }
 
+  //Quitte la previsualition en cours 
   quitPreviewRecopier(): void {
     this.recopier_previsualiser = false;
   }
 
+  //delete le jeu Recopier de toutes les sessions qui le contient
   deleteRecopier(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
@@ -461,7 +467,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  setJoueurs(s: Session): string {
+  setJoueurs(s: Session): string {//Cast les données des joueurs dans le type string pour la base de donnée de la table session
     let res = "";
 
     for (let j of s.joueur) {
@@ -476,7 +482,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
 
-  setJeuSession(tab: Jeu[]): string {
+  setJeuSession(tab: Jeu[]): string {//Cast les données des jeux dans le type string pour la base de donnée de la table session
     let res = "";
     for (let g of tab) {
       res += g.type + ',' + g.id_jeu + ';'
@@ -485,7 +491,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
 
-  deleteSessionRecopier(id: number): void {
+  deleteSessionRecopier(id: number): void {//Delete le jeu de toutes sessions auquel il appartient
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
       for (let jeu of s.jeuId) {
@@ -499,7 +505,7 @@ export class RecopierGameComponent implements OnInit {
   }
 
 
-  deleteThemeRecopier(id: number): void {
+  deleteThemeRecopier(id: number): void {//Delete le jeu Recopier du theme
     let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
     let liste: any = [];
     theme.recup2(liste);
@@ -525,7 +531,7 @@ export class RecopierGameComponent implements OnInit {
       }
     }, 200)
   }
-  deleteGameRecopier(r: Recopier): void {
+  deleteGameRecopier(r: Recopier): void {//Supprime le jeu Recopier de partout
     this.onSend_delete(r.id);
     this.deleteSessionRecopier(r.id);
     this.deleteThemeRecopier(r.id);
@@ -539,7 +545,7 @@ export class RecopierGameComponent implements OnInit {
     window.location.href = '/panel/Recopier/edit/' + r.id;
   }
 
-  nextStep(): void {
+  nextStep(): void {//Permet d'aller a l'étape suivante dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep < 2) {
       step++;
@@ -547,7 +553,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  previousStep(): void {
+  previousStep(): void {//Permet d'aller a l'étape précédente dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
@@ -555,12 +561,12 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  setActive(element: Element | null): void {
+  setActive(element: Element | null): void {// Donne Du style
     (<HTMLButtonElement>element!).style.background = 'white';
     (<HTMLButtonElement>element!).style.color = 'black';
   }
 
-  setInactive(element: Element | null) {
+  setInactive(element: Element | null) {//Enleve  Du style
     (<HTMLButtonElement>element!).style.background = '';
     (<HTMLButtonElement>element!).style.color = 'white';
   }
@@ -572,7 +578,7 @@ export class RecopierGameComponent implements OnInit {
 
   }
 
-  changeProgressValue(jeu: string, element: HTMLSelectElement): void {
+  changeProgressValue(jeu: string, element: HTMLSelectElement): void {//Change la couleur de la progress bar
     switch (element.value) {
       case 'blue':
         this.recopier_progress = Progress.Blue;
@@ -597,7 +603,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  addImage(img: Image): void {
+  addImage(img: Image): void {//ajoute les images choisit dans la liste
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image2.push(img.id);
@@ -605,7 +611,7 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  deleteImage(i: Image): void {
+  deleteImage(i: Image): void {//Supprime les images de la liste
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
@@ -614,13 +620,13 @@ export class RecopierGameComponent implements OnInit {
     }
   }
 
-  create(): void {
+  create(): void {//Crée le jeu Recopier avec les parametres soit par défaut, soit modifier à la création
     this.list = { table: 'Recopier', id_image: this.image2.toString(), id: 0, i_bg_co: this.recopier_input_bg_color, i_text_co: this.recopier_input_text_color, bg_color: this.recopier_bg_color, text_color: this.recopier_text_color, title_color: this.recopier_title_color, gaw: this.recopier_good_answer_color, waw: this.recopier_wrong_answer_color, bu_bg_co: this.recopier_button_bg_color, bu_txt_co: this.recopier_button_text_color, progress: this.recopier_progress, type_ecri: this.recopier_type_ecriture, isVoca: +this.recopier_isVocaliser, id_crea: Number(this.id_crea) };
     this.onSend(this.list);
     this.router.navigate(['/panel/Recopier']);
   }
 
-  save(): void {
+  save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bd
 
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Recopier']);

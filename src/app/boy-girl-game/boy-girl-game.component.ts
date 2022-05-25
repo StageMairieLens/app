@@ -19,8 +19,6 @@ export class BoyGirlGameComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,private jeuxService: JeuxService, private router: Router) {
     this.bg = null;
-
-    // this.bg = new BoyGirl(this.girl, this.boy, '#3bb8c9', 'pink', 'blue', 'orange', 'brown', 'lightblue', 'red', 'black', 'black', 'black', 'black', 'white', 'black', 'SCRIPT');
     this.recup(this.data);
     this.recupLogin(this.list_login);
     this.recupSession(this.list_session);
@@ -29,7 +27,7 @@ export class BoyGirlGameComponent implements OnInit {
   list_session : Session[] = [];
   login:string=localStorage.getItem('id_pseudo')!;
 
-  recupSession(donne: any) {
+  recupSession(donne: any) {//Recupere les sessions
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -49,7 +47,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {
+  getJeuSession(s: string): Jeu[] {//Récupere la liste des jeux de la session et les mets en tableau
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -62,7 +60,7 @@ export class BoyGirlGameComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {//Récupere la liste des joueurs de la session et les mets en tableau
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
@@ -86,7 +84,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
   list_login : Login[] = [];
-  recupLogin(donne: any) {
+  recupLogin(donne: any) {//Recupere les données des utilisateurs
       this.jeuxService.recup_user(donne).subscribe(data => {
 
         for (var i = 0; data[i] != null; i++) {
@@ -109,7 +107,7 @@ export class BoyGirlGameComponent implements OnInit {
 
     }
   reponse = "";
-  onSend(list: any) {//Envoi les données
+  onSend(list: any) {//Envoi les données du jeu 
 
     const formData: FormData = new FormData();
     formData.append('send', JSON.stringify(list));
@@ -265,9 +263,8 @@ export class BoyGirlGameComponent implements OnInit {
   taille_ini: number = 0;
 
 
-
+  // Check si tout les noms de garçon sont au bon endroit
   checkBoy(): boolean {
-
     if (this.boy.length == this.boyFinish.length) {
       let result = true;
       for (let i = 0; i < this.boy.length; i++) {
@@ -280,6 +277,7 @@ export class BoyGirlGameComponent implements OnInit {
     return false;
   }
 
+  // Check si tout les noms de fille sont au bon endroit
   checkGirl(): boolean {
     if (this.girl.length == this.girlFinish.length) {
       let result = true;
@@ -328,15 +326,18 @@ export class BoyGirlGameComponent implements OnInit {
 
   }
 
+  //Permet de previsualiser le jeu
   previewBoyGirl(bg: BoyGirl): void {
     this.bg = bg;
     this.boygirl_previsualiser = true;
   }
 
+  //Quitte la previsualition en cours 
   quitPreviewBoyGirl(): void {
     this.boygirl_previsualiser = false;
   }
 
+  //delete le jeu Fille Garcon de toutes les sessions qui le contient
   deleteBoyGirl(id : number, s : Session): void {
     let index = -1;
     for (let g of s.jeuId) {
@@ -350,7 +351,7 @@ export class BoyGirlGameComponent implements OnInit {
     }
   }
 
-  setJoueurs(s: Session): string {
+  setJoueurs(s: Session): string {//Cast les données des joueurs dans le type string pour la base de donnée de la table session
     let res = "";
 
     for (let j of s.joueur) {
@@ -365,7 +366,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
 
-  setJeuSession(tab: Jeu[]): string {
+  setJeuSession(tab: Jeu[]): string {//Cast les données des jeux dans le type string pour la base de donnée de la table session
     let res = "";
     for (let g of tab) {
       res += g.type + ',' + g.id_jeu + ';'
@@ -374,7 +375,7 @@ export class BoyGirlGameComponent implements OnInit {
   }
 
 
-  deleteSessionBoyGirl(id : number) : void {
+  deleteSessionBoyGirl(id : number) : void {//Delete le jeu de toutes sessions auquel il appartient
     let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
     for (let s of this.list_session) {
       for(let jeu of s.jeuId) {
@@ -387,7 +388,7 @@ export class BoyGirlGameComponent implements OnInit {
     }
   }
 
-  deleteGameBoyGirl(bg: BoyGirl): void {
+  deleteGameBoyGirl(bg: BoyGirl): void {//Supprime le jeu Abecedaire de partout
     this.onSend_delete(bg.id);
     this.deleteSessionBoyGirl(bg.id);
     setTimeout(() => {
@@ -400,6 +401,7 @@ export class BoyGirlGameComponent implements OnInit {
     window.location.href = '/panel/Fille&Garçon/edit/' + bg.id;
   }
 
+  // Rajoute un nom fille
   addMotsFille(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -411,6 +413,7 @@ export class BoyGirlGameComponent implements OnInit {
     event.chipInput!.clear();
   }
 
+  // Enleve un nom fille
   removeFille(str: string): void {
     const index = this.boygirl_listMotsFille.indexOf(str);
 
@@ -420,6 +423,7 @@ export class BoyGirlGameComponent implements OnInit {
     }
   }
 
+  // Rajoute un nom garcon
   addMotsGarcon(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
@@ -431,6 +435,7 @@ export class BoyGirlGameComponent implements OnInit {
     event.chipInput!.clear();
   }
 
+  // Enleve un nom garcon
   removeGarcon(str: string): void {
     const index = this.boygirl_listMotsGarcon.indexOf(str);
 
@@ -440,7 +445,7 @@ export class BoyGirlGameComponent implements OnInit {
     }
   }
 
-  setPrevisualiserBoyGirl(prev: boolean): void {
+  setPrevisualiserBoyGirl(prev: boolean): void {//Affiche le jeu dans la prévisualisation
     if (prev == true) {
       this.bg = new BoyGirl(0, '', this.boygirl_listMotsFille, this.boygirl_listMotsGarcon, this.boygirl_bg_color_container, this.boygirl_bg_color_fille, this.boygirl_bg_color_garcon, this.boygirl_bg_color_mot, this.boygirl_word_color_fille, this.boygirl_word_color_garcon, this.boygirl_word_color_mot, this.boygirl_title_color_fille, this.boygirl_title_color_garcon, this.boygirl_title_color_mot, this.boygirl_text_color_fille, this.boygirl_text_color_garcon, this.boygirl_text_color_mot, this.boygirl_type_ecriture,Number(this.id_crea));
       this.boygirl_previsualiser = true;
@@ -454,24 +459,24 @@ export class BoyGirlGameComponent implements OnInit {
     }
   }
 
-  setActive(element: Element | null): void {
+  setActive(element: Element | null): void {// Donne Du style
     (<HTMLButtonElement>element!).style.background = 'white';
     (<HTMLButtonElement>element!).style.color = 'black';
   }
 
-  setInactive(element: Element | null) {
+  setInactive(element: Element | null) {//Enleve  Du style
     (<HTMLButtonElement>element!).style.background = '';
     (<HTMLButtonElement>element!).style.color = 'white';
   }
 
-  nextStep(): void {
+  nextStep(): void {//Permet d'aller a l'étape suivante dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep < 1) {
       step++;
       this.setFormStep(step);
     }
   }
-  previousStep(): void {
+  previousStep(): void {//Permet d'aller a l'étape précédente dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
@@ -490,14 +495,14 @@ export class BoyGirlGameComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
 
-  create(): void {
+  create(): void {//Crée le jeu Fille Garcon avec les parametres soit par défaut, soit modifier à la création
     this.onSend(this.list)
     setTimeout(() => {
       this.router.navigate(['/panel/Fille&Garçon']);
     },200)
   }
 
-  save(): void {
+  save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bd
     this.onSend_update(this.list)
     setTimeout(() => {
       this.router.navigate(['/panel/Fille&Garçon']);
