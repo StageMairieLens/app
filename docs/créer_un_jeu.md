@@ -24,11 +24,14 @@ Après avoir fait cette commande un nouveau dossier dans '<b>/src/app/{NOM_DU_JE
 - Le fichier <b>HTML</B> permet de gérer le contenu du component
 - Le fichier <b>TS</b> permet d'incluce le **TypeScript** du component
 
-Pour appeler ce component depuis un autre vous devez utiliser le code qui suit
+Pour <b>appeler</b> ce component depuis un autre vous devez utiliser le code qui suit
+
+<div id="appel">
 
 ```html
   <app-nom-du-jeu></app-nom-du-jeu>
 ```
+</div>
 
 <h2 align=center>Etape 2 : Créer le jeu</h2>
 
@@ -213,6 +216,9 @@ recup(tab: any) {//Récupére le jeu depuis la BDD
   }
 ```
 
+<div id="onSendDelete">
+</div>
+
 ***Delete***
 
 ```ts
@@ -299,4 +305,93 @@ Vous devez considérez que cette action prendra un certain temps donc il est con
     }
   }
 ```
-Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci
+Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.
+
+***Edition du jeu***
+
+```ts
+  edit(j: jeu): void {
+    window.location.href = '/panel/NOM_DU_JEU/edit/' + j.id;
+  }
+```
+<p>Cette fonction amène a une redirection qui sera géré par la page <b>Panel</b>.<br>Dans la page Panel nous gérerons l'affichage du menu d'édition tout comme celui de la liste des jeux et le formulaire de création par <a href="#appel">appel du component</a> et en modifiant l'affichage avec des variables booléenes.</p> 
+
+
+***Supprésion du jeu***
+
+
+```ts
+  delete(j: NOM_DU_JEU): void {
+    this.onSend_delete(j.id);
+    this.deleteSessionjeu(j.id);
+    this.deleteThemeJeu(j.id);
+    setTimeout(() => {
+      this.data = [];
+      this.recup(this.data);
+    }, 400)
+  }
+```
+<p>Cette fonction réalise l'appel de <b>4</b> fonctions :
+  <br>
+  - La fonction de <a href="#onSendDelete">supprésion du jeu dans la base de donnée</a> ;
+  <br>
+  - La fonction de <a href="#deleteSessionJeu">suppréssion du jeu dans toutes les séssions qui comporte le jeu</a> ;
+  <br>
+  - La fonction <a href="#deleteThemeJeu">suppréssion du jeu dans le thème associé au jeu</a> ;
+
+</p>
+
+<div id="deleteSessionJeu">
+
+***Fonction suppréssion du jeu dans toutes les séssion***
+
+```ts
+  deleteSessionJeu(id: number): void {
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+    for (let s of this.list_session) {
+      for (let jeu of s.jeuId) {
+        if (jeu.type == 'NOM_DU_JEU' && jeu.id_jeu == id) {
+          this.deleteRecopier(id, s);
+          this.list = { nom: s!.nom, isSuivi: +s!.isSuivi, join: +s!.isActive, id: s!.id, jeux_id: this.setJeuSession(s!.jeuId), liste_j: this.setJoueurs(s!) };
+          ses.onSend_update(this.list);
+        }
+      }
+    }
+  }
+```
+
+</div>
+
+<div id="deleteThemeJeu">
+
+***Fonction suppréssion du jeu dans le thème associés***
+
+```ts
+  deleteThemeJeu(id: number): void {
+    let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
+    let liste: any = [];
+    theme.recup2(liste);
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+
+    setTimeout(() => {
+      for (let t of liste) {
+        let array = ses.getJeuSession(t.id_jeux);
+        let index = -1;
+        for (let j of array) {
+          if (j.type == 'NOM_DU_JEU') {
+            if (j.id_jeu == id) {
+              index = array.indexOf(j);
+            }
+          }
+        }
+
+        if (index > -1) {
+          array.splice(index, 1);
+          t.id_jeux = ses.setJeuSession(array);
+          theme.onSend_update({ id_theme: t.id, id: t.id_image, id_jeux: t.id_jeux, nom: t.nom });
+        }
+      }
+    }, 200)
+  }
+```
+</div>
