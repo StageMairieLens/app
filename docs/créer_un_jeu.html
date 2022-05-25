@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Le style css du titre</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;font-style:normal;font-weight:400;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Caligraphic;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Fraktur;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:700;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype")}@font-face{font-family:KaTeX_Main;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:700;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype")}@font-face{font-family:KaTeX_Math;font-style:italic;font-weight:400;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:700;src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:italic;font-weight:400;src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype")}@font-face{font-family:"KaTeX_SansSerif";font-style:normal;font-weight:400;src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Script;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size1;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size2;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size3;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Size4;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype")}@font-face{font-family:KaTeX_Typewriter;font-style:normal;font-weight:400;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype")}.katex{text-rendering:auto;font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0}.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}.katex .katex-version:after{content:"0.13.24"}.katex .katex-mathml{clip:rect(1px,1px,1px,1px);border:0;height:1px;overflow:hidden;padding:0;position:absolute;width:1px}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{max-width:0;width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{position:relative;width:0}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{border:0 solid;display:inline-block;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:block;height:inherit;position:absolute;width:100%}.katex svg path{stroke:none}.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{overflow:hidden;position:relative;width:100%}.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{border:.04em solid;box-sizing:border-box}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{padding-left:2em;text-align:left}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+/* From extension bierner.markdown-preview-github-styles */
+html,
+body,
+.github-markdown-body {
+    padding: 0 !important;
+    max-width: auto !important;
+}
+
+.github-markdown-body {
+    background-color: var(--color-canvas-default);
+    color: var(--color-fg-default);
+}
+
+.github-markdown-body {
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100% !important;
+}
+
+.github-markdown-content {
+    padding: 32px !important;
+    max-width: 980px;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+
+.vscode-body.scrollBeyondLastLine {
+    margin-bottom: 0;
+}
+.vscode-body.scrollBeyondLastLine .github-markdown-body {
+    padding-bottom: calc(100vh + 10px) !important;
+}
+
+.github-markdown-body blockquote {
+    background-color: initial;
+}
+
+.github-markdown-body pre {
+    color: initial;
+}
+
+.github-markdown-body code {
+    color: inherit;
+}
+
+.github-markdown-body pre code {
+    color: initial;
+}
+
+.github-markdown-body code > div {
+    background: none
+}
+
+.github-markdown-body.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.github-markdown-body p,
+.github-markdown-body blockquote,
+.github-markdown-body ul,
+.github-markdown-body ol,
+.github-markdown-body dl,
+.github-markdown-body table,
+.github-markdown-body pre {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* Generated from 'node_modules/github-markdown-css/github-markdown.css' */
+
+.github-markdown-light,
+.vscode-body.vscode-light .github-markdown-auto {
+  color-scheme: light;
+  --color-prettylights-syntax-comment: #6e7781;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-entity: #8250df;
+  --color-prettylights-syntax-storage-modifier-import: #24292f;
+  --color-prettylights-syntax-entity-tag: #116329;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-variable: #953800;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-italic: #24292f;
+  --color-prettylights-syntax-markup-bold: #24292f;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-deleted-bg: #FFEBE9;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-brackethighlighter-angle: #57606a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-fg-default: #24292f;
+  --color-fg-muted: #57606a;
+  --color-fg-subtle: #6e7781;
+  --color-canvas-default: #ffffff;
+  --color-canvas-subtle: #f6f8fa;
+  --color-border-default: #d0d7de;
+  --color-border-muted: hsla(210,18%,87%,1);
+  --color-neutral-muted: rgba(175,184,193,0.2);
+  --color-accent-fg: #0969da;
+  --color-accent-emphasis: #0969da;
+  --color-danger-fg: #cf222e;
+}
+
+.github-markdown-dark,
+.vscode-body.vscode-dark .github-markdown-auto {
+  color-scheme: dark;
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-fg-default: #c9d1d9;
+  --color-fg-muted: #8b949e;
+  --color-fg-subtle: #484f58;
+  --color-canvas-default: #0d1117;
+  --color-canvas-subtle: #161b22;
+  --color-border-default: #30363d;
+  --color-border-muted: #21262d;
+  --color-neutral-muted: rgba(110,118,129,0.4);
+  --color-accent-fg: #58a6ff;
+  --color-accent-emphasis: #1f6feb;
+  --color-danger-fg: #f85149;
+}
+
+@media (prefers-color-scheme: dark) {
+  .github-markdown-system {
+    color-scheme: dark;
+    --color-prettylights-syntax-comment: #8b949e;
+    --color-prettylights-syntax-constant: #79c0ff;
+    --color-prettylights-syntax-entity: #d2a8ff;
+    --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+    --color-prettylights-syntax-entity-tag: #7ee787;
+    --color-prettylights-syntax-keyword: #ff7b72;
+    --color-prettylights-syntax-string: #a5d6ff;
+    --color-prettylights-syntax-variable: #ffa657;
+    --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+    --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+    --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+    --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+    --color-prettylights-syntax-carriage-return-bg: #b62324;
+    --color-prettylights-syntax-string-regexp: #7ee787;
+    --color-prettylights-syntax-markup-list: #f2cc60;
+    --color-prettylights-syntax-markup-heading: #1f6feb;
+    --color-prettylights-syntax-markup-italic: #c9d1d9;
+    --color-prettylights-syntax-markup-bold: #c9d1d9;
+    --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+    --color-prettylights-syntax-markup-deleted-bg: #67060c;
+    --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+    --color-prettylights-syntax-markup-inserted-bg: #033a16;
+    --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+    --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+    --color-prettylights-syntax-markup-ignored-text: #c9d1d9;
+    --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+    --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+    --color-prettylights-syntax-brackethighlighter-angle: #8b949e;
+    --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58;
+    --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+    --color-fg-default: #c9d1d9;
+    --color-fg-muted: #8b949e;
+    --color-fg-subtle: #484f58;
+    --color-canvas-default: #0d1117;
+    --color-canvas-subtle: #161b22;
+    --color-border-default: #30363d;
+    --color-border-muted: #21262d;
+    --color-neutral-muted: rgba(110,118,129,0.4);
+    --color-accent-fg: #58a6ff;
+    --color-accent-emphasis: #1f6feb;
+    --color-danger-fg: #f85149;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .github-markdown-system {
+    color-scheme: light;
+    --color-prettylights-syntax-comment: #6e7781;
+    --color-prettylights-syntax-constant: #0550ae;
+    --color-prettylights-syntax-entity: #8250df;
+    --color-prettylights-syntax-storage-modifier-import: #24292f;
+    --color-prettylights-syntax-entity-tag: #116329;
+    --color-prettylights-syntax-keyword: #cf222e;
+    --color-prettylights-syntax-string: #0a3069;
+    --color-prettylights-syntax-variable: #953800;
+    --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+    --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+    --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+    --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+    --color-prettylights-syntax-carriage-return-bg: #cf222e;
+    --color-prettylights-syntax-string-regexp: #116329;
+    --color-prettylights-syntax-markup-list: #3b2300;
+    --color-prettylights-syntax-markup-heading: #0550ae;
+    --color-prettylights-syntax-markup-italic: #24292f;
+    --color-prettylights-syntax-markup-bold: #24292f;
+    --color-prettylights-syntax-markup-deleted-text: #82071e;
+    --color-prettylights-syntax-markup-deleted-bg: #FFEBE9;
+    --color-prettylights-syntax-markup-inserted-text: #116329;
+    --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+    --color-prettylights-syntax-markup-changed-text: #953800;
+    --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+    --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+    --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+    --color-prettylights-syntax-meta-diff-range: #8250df;
+    --color-prettylights-syntax-brackethighlighter-angle: #57606a;
+    --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
+    --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+    --color-fg-default: #24292f;
+    --color-fg-muted: #57606a;
+    --color-fg-subtle: #6e7781;
+    --color-canvas-default: #ffffff;
+    --color-canvas-subtle: #f6f8fa;
+    --color-border-default: #d0d7de;
+    --color-border-muted: hsla(210,18%,87%,1);
+    --color-neutral-muted: rgba(175,184,193,0.2);
+    --color-accent-fg: #0969da;
+    --color-accent-emphasis: #0969da;
+    --color-danger-fg: #cf222e;
+  }
+}
+
+.github-markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  color: var(--color-fg-default);
+  background-color: var(--color-canvas-default);
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.github-markdown-body .octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.github-markdown-body h1:hover .anchor .octicon-link:before,
+.github-markdown-body h2:hover .anchor .octicon-link:before,
+.github-markdown-body h3:hover .anchor .octicon-link:before,
+.github-markdown-body h4:hover .anchor .octicon-link:before,
+.github-markdown-body h5:hover .anchor .octicon-link:before,
+.github-markdown-body h6:hover .anchor .octicon-link:before {
+  width: 16px;
+  height: 16px;
+  content: ' ';
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+}
+
+.github-markdown-body details,
+.github-markdown-body figcaption,
+.github-markdown-body figure {
+  display: block;
+}
+
+.github-markdown-body summary {
+  display: list-item;
+}
+
+.github-markdown-body a {
+  background-color: transparent;
+  color: var(--color-accent-fg);
+  text-decoration: none;
+}
+
+.github-markdown-body a:active,
+.github-markdown-body a:hover {
+  outline-width: 0;
+}
+
+.github-markdown-body abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.github-markdown-body b,
+.github-markdown-body strong {
+  font-weight: 600;
+}
+
+.github-markdown-body dfn {
+  font-style: italic;
+}
+
+.github-markdown-body h1 {
+  margin: .67em 0;
+  font-weight: 600;
+  padding-bottom: .3em;
+  font-size: 2em;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+.github-markdown-body mark {
+  background-color: #ff0;
+  color: var(--color-text-primary);
+}
+
+.github-markdown-body small {
+  font-size: 90%;
+}
+
+.github-markdown-body sub,
+.github-markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.github-markdown-body sub {
+  bottom: -0.25em;
+}
+
+.github-markdown-body sup {
+  top: -0.5em;
+}
+
+.github-markdown-body img {
+  border-style: none;
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: var(--color-canvas-default);
+}
+
+.github-markdown-body code,
+.github-markdown-body kbd,
+.github-markdown-body pre,
+.github-markdown-body samp {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.github-markdown-body figure {
+  margin: 1em 40px;
+}
+
+.github-markdown-body hr {
+  box-sizing: content-box;
+  overflow: hidden;
+  background: transparent;
+  border-bottom: 1px solid var(--color-border-muted);
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: var(--color-border-default);
+  border: 0;
+}
+
+.github-markdown-body html [type=button],
+.github-markdown-body [type=reset],
+.github-markdown-body [type=submit] {
+  -webkit-appearance: button;
+}
+
+.github-markdown-body [type=button]::-moz-focus-inner,
+.github-markdown-body [type=reset]::-moz-focus-inner,
+.github-markdown-body [type=submit]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+.github-markdown-body [type=button]:-moz-focusring,
+.github-markdown-body [type=reset]:-moz-focusring,
+.github-markdown-body [type=submit]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+.github-markdown-body [type=checkbox],
+.github-markdown-body [type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.github-markdown-body [type=number]::-webkit-inner-spin-button,
+.github-markdown-body [type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.github-markdown-body [type=search] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+.github-markdown-body [type=search]::-webkit-search-cancel-button,
+.github-markdown-body [type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+.github-markdown-body ::-webkit-input-placeholder {
+  color: inherit;
+  opacity: .54;
+}
+
+.github-markdown-body ::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+.github-markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.github-markdown-body hr::before {
+  display: table;
+  content: "";
+}
+
+.github-markdown-body hr::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.github-markdown-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.github-markdown-body td,
+.github-markdown-body th {
+  padding: 0;
+}
+
+.github-markdown-body details summary {
+  cursor: pointer;
+}
+
+.github-markdown-body details:not([open])>*:not(summary) {
+  display: none !important;
+}
+
+.github-markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+  line-height: 10px;
+  color: var(--color-fg-default);
+  vertical-align: middle;
+  background-color: var(--color-canvas-subtle);
+  border: solid 1px var(--color-neutral-muted);
+  border-bottom-color: var(--color-neutral-muted);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--color-neutral-muted);
+}
+
+.github-markdown-body h1,
+.github-markdown-body h2,
+.github-markdown-body h3,
+.github-markdown-body h4,
+.github-markdown-body h5,
+.github-markdown-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.github-markdown-body h2 {
+  font-weight: 600;
+  padding-bottom: .3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+
+.github-markdown-body h3 {
+  font-weight: 600;
+  font-size: 1.25em;
+}
+
+.github-markdown-body h4 {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.github-markdown-body h5 {
+  font-weight: 600;
+  font-size: .875em;
+}
+
+.github-markdown-body h6 {
+  font-weight: 600;
+  font-size: .85em;
+  color: var(--color-fg-muted);
+}
+
+.github-markdown-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.github-markdown-body blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: var(--color-fg-muted);
+  border-left: .25em solid var(--color-border-default);
+}
+
+.github-markdown-body ul,
+.github-markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2em;
+}
+
+.github-markdown-body ol ol,
+.github-markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.github-markdown-body ul ul ol,
+.github-markdown-body ul ol ol,
+.github-markdown-body ol ul ol,
+.github-markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.github-markdown-body dd {
+  margin-left: 0;
+}
+
+.github-markdown-body tt,
+.github-markdown-body code {
+  font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+  font-size: 12px;
+}
+
+.github-markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+  font-size: 12px;
+  word-wrap: normal;
+}
+
+.github-markdown-body :-ms-input-placeholder {
+  color: var(--color-fg-subtle);
+  opacity: 1;
+}
+
+.github-markdown-body ::-ms-input-placeholder {
+  color: var(--color-fg-subtle);
+  opacity: 1;
+}
+
+.github-markdown-body ::placeholder {
+  color: var(--color-fg-subtle);
+  opacity: 1;
+}
+
+.github-markdown-body .pl-c {
+  color: var(--color-prettylights-syntax-comment);
+}
+
+.github-markdown-body .pl-c1,
+.github-markdown-body .pl-s .pl-v {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.github-markdown-body .pl-e,
+.github-markdown-body .pl-en {
+  color: var(--color-prettylights-syntax-entity);
+}
+
+.github-markdown-body .pl-smi,
+.github-markdown-body .pl-s .pl-s1 {
+  color: var(--color-prettylights-syntax-storage-modifier-import);
+}
+
+.github-markdown-body .pl-ent {
+  color: var(--color-prettylights-syntax-entity-tag);
+}
+
+.github-markdown-body .pl-k {
+  color: var(--color-prettylights-syntax-keyword);
+}
+
+.github-markdown-body .pl-s,
+.github-markdown-body .pl-pds,
+.github-markdown-body .pl-s .pl-pse .pl-s1,
+.github-markdown-body .pl-sr,
+.github-markdown-body .pl-sr .pl-cce,
+.github-markdown-body .pl-sr .pl-sre,
+.github-markdown-body .pl-sr .pl-sra {
+  color: var(--color-prettylights-syntax-string);
+}
+
+.github-markdown-body .pl-v,
+.github-markdown-body .pl-smw {
+  color: var(--color-prettylights-syntax-variable);
+}
+
+.github-markdown-body .pl-bu {
+  color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
+}
+
+.github-markdown-body .pl-ii {
+  color: var(--color-prettylights-syntax-invalid-illegal-text);
+  background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
+}
+
+.github-markdown-body .pl-c2 {
+  color: var(--color-prettylights-syntax-carriage-return-text);
+  background-color: var(--color-prettylights-syntax-carriage-return-bg);
+}
+
+.github-markdown-body .pl-sr .pl-cce {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-string-regexp);
+}
+
+.github-markdown-body .pl-ml {
+  color: var(--color-prettylights-syntax-markup-list);
+}
+
+.github-markdown-body .pl-mh,
+.github-markdown-body .pl-mh .pl-en,
+.github-markdown-body .pl-ms {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-markup-heading);
+}
+
+.github-markdown-body .pl-mi {
+  font-style: italic;
+  color: var(--color-prettylights-syntax-markup-italic);
+}
+
+.github-markdown-body .pl-mb {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-markup-bold);
+}
+
+.github-markdown-body .pl-md {
+  color: var(--color-prettylights-syntax-markup-deleted-text);
+  background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+}
+
+.github-markdown-body .pl-mi1 {
+  color: var(--color-prettylights-syntax-markup-inserted-text);
+  background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+}
+
+.github-markdown-body .pl-mc {
+  color: var(--color-prettylights-syntax-markup-changed-text);
+  background-color: var(--color-prettylights-syntax-markup-changed-bg);
+}
+
+.github-markdown-body .pl-mi2 {
+  color: var(--color-prettylights-syntax-markup-ignored-text);
+  background-color: var(--color-prettylights-syntax-markup-ignored-bg);
+}
+
+.github-markdown-body .pl-mdr {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-meta-diff-range);
+}
+
+.github-markdown-body .pl-ba {
+  color: var(--color-prettylights-syntax-brackethighlighter-angle);
+}
+
+.github-markdown-body .pl-sg {
+  color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+}
+
+.github-markdown-body .pl-corl {
+  text-decoration: underline;
+  color: var(--color-prettylights-syntax-constant-other-reference-link);
+}
+
+.github-markdown-body [data-catalyst] {
+  display: block;
+}
+
+.github-markdown-body g-emoji {
+  font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1em;
+  font-style: normal !important;
+  font-weight: 400;
+  line-height: 1;
+  vertical-align: -0.075em;
+}
+
+.github-markdown-body g-emoji img {
+  width: 1em;
+  height: 1em;
+}
+
+.github-markdown-body::before {
+  display: table;
+  content: "";
+}
+
+.github-markdown-body::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.github-markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.github-markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.github-markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.github-markdown-body .absent {
+  color: var(--color-danger-fg);
+}
+
+.github-markdown-body .anchor {
+  float: left;
+  padding-right: 4px;
+  margin-left: -20px;
+  line-height: 1;
+}
+
+.github-markdown-body .anchor:focus {
+  outline: none;
+}
+
+.github-markdown-body p,
+.github-markdown-body blockquote,
+.github-markdown-body ul,
+.github-markdown-body ol,
+.github-markdown-body dl,
+.github-markdown-body table,
+.github-markdown-body pre,
+.github-markdown-body details {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.github-markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.github-markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.github-markdown-body sup>a::before {
+  content: "[";
+}
+
+.github-markdown-body sup>a::after {
+  content: "]";
+}
+
+.github-markdown-body h1 .octicon-link,
+.github-markdown-body h2 .octicon-link,
+.github-markdown-body h3 .octicon-link,
+.github-markdown-body h4 .octicon-link,
+.github-markdown-body h5 .octicon-link,
+.github-markdown-body h6 .octicon-link {
+  color: var(--color-fg-default);
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.github-markdown-body h1:hover .anchor,
+.github-markdown-body h2:hover .anchor,
+.github-markdown-body h3:hover .anchor,
+.github-markdown-body h4:hover .anchor,
+.github-markdown-body h5:hover .anchor,
+.github-markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.github-markdown-body h1:hover .anchor .octicon-link,
+.github-markdown-body h2:hover .anchor .octicon-link,
+.github-markdown-body h3:hover .anchor .octicon-link,
+.github-markdown-body h4:hover .anchor .octicon-link,
+.github-markdown-body h5:hover .anchor .octicon-link,
+.github-markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.github-markdown-body h1 tt,
+.github-markdown-body h1 code,
+.github-markdown-body h2 tt,
+.github-markdown-body h2 code,
+.github-markdown-body h3 tt,
+.github-markdown-body h3 code,
+.github-markdown-body h4 tt,
+.github-markdown-body h4 code,
+.github-markdown-body h5 tt,
+.github-markdown-body h5 code,
+.github-markdown-body h6 tt,
+.github-markdown-body h6 code {
+  padding: 0 .2em;
+  font-size: inherit;
+}
+
+.github-markdown-body ul.no-list,
+.github-markdown-body ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.github-markdown-body ol[type="1"] {
+  list-style-type: decimal;
+}
+
+.github-markdown-body ol[type=a] {
+  list-style-type: lower-alpha;
+}
+
+.github-markdown-body ol[type=i] {
+  list-style-type: lower-roman;
+}
+
+.github-markdown-body div>ol:not([type]) {
+  list-style-type: decimal;
+}
+
+.github-markdown-body ul ul,
+.github-markdown-body ul ol,
+.github-markdown-body ol ol,
+.github-markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.github-markdown-body li>p {
+  margin-top: 16px;
+}
+
+.github-markdown-body li+li {
+  margin-top: .25em;
+}
+
+.github-markdown-body dl {
+  padding: 0;
+}
+
+.github-markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.github-markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.github-markdown-body table th {
+  font-weight: 600;
+}
+
+.github-markdown-body table th,
+.github-markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid var(--color-border-default);
+}
+
+.github-markdown-body table tr {
+  background-color: var(--color-canvas-default);
+  border-top: 1px solid var(--color-border-muted);
+}
+
+.github-markdown-body table tr:nth-child(2n) {
+  background-color: var(--color-canvas-subtle);
+}
+
+.github-markdown-body table img {
+  background-color: transparent;
+}
+
+.github-markdown-body img[align=right] {
+  padding-left: 20px;
+}
+
+.github-markdown-body img[align=left] {
+  padding-right: 20px;
+}
+
+.github-markdown-body .emoji {
+  max-width: none;
+  vertical-align: text-top;
+  background-color: transparent;
+}
+
+.github-markdown-body span.frame {
+  display: block;
+  overflow: hidden;
+}
+
+.github-markdown-body span.frame>span {
+  display: block;
+  float: left;
+  width: auto;
+  padding: 7px;
+  margin: 13px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+}
+
+.github-markdown-body span.frame span img {
+  display: block;
+  float: left;
+}
+
+.github-markdown-body span.frame span span {
+  display: block;
+  padding: 5px 0 0;
+  clear: both;
+  color: var(--color-fg-default);
+}
+
+.github-markdown-body span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+
+.github-markdown-body span.align-center>span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.github-markdown-body span.align-center span img {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.github-markdown-body span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+
+.github-markdown-body span.align-right>span {
+  display: block;
+  margin: 13px 0 0;
+  overflow: hidden;
+  text-align: right;
+}
+
+.github-markdown-body span.align-right span img {
+  margin: 0;
+  text-align: right;
+}
+
+.github-markdown-body span.float-left {
+  display: block;
+  float: left;
+  margin-right: 13px;
+  overflow: hidden;
+}
+
+.github-markdown-body span.float-left span {
+  margin: 13px 0 0;
+}
+
+.github-markdown-body span.float-right {
+  display: block;
+  float: right;
+  margin-left: 13px;
+  overflow: hidden;
+}
+
+.github-markdown-body span.float-right>span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: right;
+}
+
+.github-markdown-body code,
+.github-markdown-body tt {
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: var(--color-neutral-muted);
+  border-radius: 6px;
+}
+
+.github-markdown-body code br,
+.github-markdown-body tt br {
+  display: none;
+}
+
+.github-markdown-body del code {
+  text-decoration: inherit;
+}
+
+.github-markdown-body pre code {
+  font-size: 100%;
+}
+
+.github-markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.github-markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.github-markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.github-markdown-body .highlight pre,
+.github-markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: var(--color-canvas-subtle);
+  border-radius: 6px;
+}
+
+.github-markdown-body pre code,
+.github-markdown-body pre tt {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.github-markdown-body .csv-data td,
+.github-markdown-body .csv-data th {
+  padding: 5px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.github-markdown-body .csv-data .blob-num {
+  padding: 10px 8px 9px;
+  text-align: right;
+  background: var(--color-canvas-default);
+  border: 0;
+}
+
+.github-markdown-body .csv-data tr {
+  border-top: 0;
+}
+
+.github-markdown-body .csv-data th {
+  font-weight: 600;
+  background: var(--color-canvas-subtle);
+  border-top: 0;
+}
+
+.github-markdown-body .footnotes {
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  border-top: 1px solid var(--color-border-default);
+}
+
+.github-markdown-body .footnotes ol {
+  padding-left: 16px;
+}
+
+.github-markdown-body .footnotes li {
+  position: relative;
+}
+
+.github-markdown-body .footnotes li:target::before {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  bottom: -8px;
+  left: -24px;
+  pointer-events: none;
+  content: "";
+  border: 2px solid var(--color-accent-emphasis);
+  border-radius: 6px;
+}
+
+.github-markdown-body .footnotes li:target {
+  color: var(--color-fg-default);
+}
+
+.github-markdown-body .footnotes .data-footnote-backref g-emoji {
+  font-family: monospace;
+}
+
+.github-markdown-body [hidden] {
+  display: none !important;
+}
+
+.github-markdown-body ::-webkit-calendar-picker-indicator {
+  filter: invert(50%);
+}
+/*!
+  Theme: GitHub
+  Description: Highlight-js port of github.com theme
+  Author: github.com
+  Maintainer: @SNDST00M, @mjbvz
+  Updated: 2021-12-08
+*/
+.markdown-body pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.markdown-body code.hljs {
+  padding: 3px 5px;
+}
+
+/*!
+  Theme: GitHub
+  Description: Theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-dark
+  Current colors taken from GitHub's CSS
+*/
+.markdown-body .hljs {
+  color: var(--color-fg-default);
+  background: var(--color-canvas-subtle);
+}
+
+.markdown-body .hljs-doctag,
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-meta .hljs-keyword,
+.markdown-body .hljs-template-tag,
+.markdown-body .hljs-template-variable,
+.markdown-body .hljs-type,
+.markdown-body .hljs-variable.language_ {
+  color: var(--color-prettylights-syntax-keyword);
+}
+
+.markdown-body .hljs-title,
+.markdown-body .hljs-title.class_,
+.markdown-body .hljs-title.class_.inherited__,
+.markdown-body .hljs-title.function_ {
+  color: var(--color-prettylights-syntax-entity);
+}
+
+.markdown-body .hljs-attr,
+.markdown-body .hljs-attribute,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-meta,
+.markdown-body .hljs-number,
+.markdown-body .hljs-operator,
+.markdown-body .hljs-selector-attr,
+.markdown-body .hljs-selector-class,
+.markdown-body .hljs-selector-id,
+.markdown-body .hljs-variable {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.markdown-body .hljs-meta .hljs-string,
+.markdown-body .hljs-regexp,
+.markdown-body .hljs-string {
+  color: var(--color-prettylights-syntax-string);
+}
+
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-symbol {
+  color: var(--color-prettylights-syntax-variable);
+}
+
+.markdown-body .hljs-code,
+.markdown-body .hljs-comment,
+.markdown-body .hljs-formula {
+  color: var(--color-prettylights-syntax-comment);
+}
+
+.markdown-body .hljs-name,
+.markdown-body .hljs-quote,
+.markdown-body .hljs-selector-pseudo,
+.markdown-body .hljs-selector-tag {
+  color: var(--color-prettylights-syntax-entity-tag);
+}
+
+.markdown-body .hljs-subst {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.markdown-body .hljs-section {
+  color: var(--color-prettylights-syntax-markup-heading);
+  font-weight: bold;
+}
+
+.markdown-body .hljs-bullet {
+  color: var(--color-prettylights-syntax-markup-list);
+}
+
+.markdown-body .hljs-emphasis {
+  color: var(--color-prettylights-syntax-constant);
+  font-style: italic;
+}
+
+.markdown-body .hljs-strong {
+  color: var(--color-prettylights-syntax-constant);
+  font-weight: bold;
+}
+
+.markdown-body .hljs-addition {
+  color: var(--color-prettylights-syntax-markup-inserted-text);
+  background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+}
+
+.markdown-body .hljs-deletion {
+  color: var(--color-prettylights-syntax-markup-deleted-text);
+  background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+}
+
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <div class="github-markdown-body github-markdown-auto">
+            <div class="github-markdown-content">  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
+<h1 align=center>Ajouter un jeu dans l'application</h1> 
+<p align=center><i class='fa-solid fa-exclamation-triangle fa-lg' style='color : yellow'></i> Tout ce qui suit doit être réaliser dans l'application <i class="fa-brands fa-angular" style="color : #dd0031"></i> Angular.
+</p>
+<span align=center>Nous avons utiliser <b>boostrap 4.0</b> et <b>angular material</b> pour le front du projet en grande partie vous pouvez donc allez piocher des styles directement depuis ces librairie pour le rendu front de votre jeu.</span>
+<p>Dans le cas d'une intérogation je vous conseille de regardez les autres componenent de jeu dans le dossier source (Angular).</p>
+<p> <i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i> Si votre jeu doit contenir des images : créer une liste d'<a href="../src/app/Image.ts"><b><i>Image</i></b></a> qui contiendra le resultat de la méthode <b><u>recup</u></b> du component <a href="../src/app/images/images.component.ts"><b><i>images.componenent.ts</i></b></a> qui ira chercher les images dans la BDD.</p>
+<hr>
+<p align=center></p>
+<h2 align=center>Etape 1 : Créer le component pour le jeu</h2>
+Rendez vous dans la racine du projet dans un shell et tapez la commandes quit suit
+<pre><code class="language-sh"><div>$ ng generate c {NOM_DU_JEU}
+</div></code></pre>
+<p>Après avoir fait cette commande un nouveau dossier dans '<b>/src/app/{NOM_DU_JEU}</b>' devrait avoir été créer</p>
+<img style="float: right;" src="file:///c:\Users\carpe\Documents\app\docs\images\architecture_dossier_component.png">
+<ul>
+<li>Le fichier <b>CSS</b> permet de gérer le style du component</li>
+<li>Le fichier <b>HTML</B> permet de gérer le contenu du component</li>
+<li>Le fichier <b>TS</b> permet d'incluce le <strong>TypeScript</strong> du component</li>
+</ul>
+<p>Pour <b>appeler</b> ce component depuis un autre vous devez utiliser le code qui suit</p>
+<div id="appel">
+<pre><code class="language-html"><div>  <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+</div></code></pre>
+</div>
+<hr>
+<h2 align=center>Etape 2 : Créer le jeu</h2>
+<p>La création du jeu est une chose a faire de vous même mais je vous met a disposition des partie de code que vous pouvez reutilisez.</p>
+<h3 align=center>Le titre</h3>
+<h4 id="le-style-css-du-titre">Le style css du titre</h4>
+<pre><code class="language-css"><div><span class="hljs-selector-class">.title</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">105px</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+  <span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">text-shadow</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.7</span>) <span class="hljs-number">5px</span> <span class="hljs-number">8px</span>;
+}
+
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">1</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#835ba7</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">2</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#3e4194</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">3</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#01afee</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">4</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#00a656</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">5</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff116</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">6</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#f68635</span>;
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">7</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ec3238</span>
+}
+<span class="hljs-selector-class">.title</span> <span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">8</span>n) {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#835ba7</span>
+}
+</div></code></pre>
+<h4 id="le-code-du-titre">Le code du titre</h4>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.showTitle&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;title&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>R<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>E<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>C<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>O<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>P<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>I<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>E<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>R<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>A notez qu'il faut que vous rajoutez le code qui suit dans le <strong>.ts</strong> pour désactiver ou non l'affichage du titre lors de l'appel du componenent (nous utiliserons cette fonctionalité dans le panel pour faire afficher la prévisualisation du jeu ou l'affichage de la liste et du formulaire de création / édition du jeu)</p>
+<pre><code class="language-ts"><div>  <span class="hljs-meta">@Input</span>() showTitle: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>;
+</div></code></pre>
+<h3 align=center>Le jeu</h3>
+Nous vous mettons à disposition du style CSS utilisable
+<h4 id="boite-de-jeu">Boite de jeu</h4>
+<pre><code class="language-css"><div><span class="hljs-selector-class">.card_play</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">3%</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0deg</span> <span class="hljs-number">0%</span> <span class="hljs-number">0%</span> / <span class="hljs-number">40%</span>) <span class="hljs-number">10px</span> <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">color</span>: white;
+}
+
+<span class="hljs-selector-class">.image_play</span> {
+  <span class="hljs-attribute">border</span>: solid grey <span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">width</span> : <span class="hljs-number">490px</span>;
+  <span class="hljs-attribute">display</span>: inline;
+}
+</div></code></pre>
+<p><em><strong>Exemple :</strong></em></p>
+<div align=center>
+<img style="width : 45%" src="file:///c:\Users\carpe\Documents\app\docs\images\exemple_card_play.png">
+</div>
+<p>Le cadre bleu ci-contre est le résultat de ce style.
+<p>Nous utilisons le style des cadres <strong>boostrap</strong> vous pouvez donc utiliser le code qui suit pour agencer les élements de votre jeu</p></p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card_play align-middle text-center container&quot;</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<h3 align=center>La liste des jeux</h3>
+<ul>
+<li>
+<p>Une fois votre jeu terminé vous devez créer une classe avec les attributs de votre jeu qui le rendront personalisable (couleur de background , couleur de texte, police d'écriture,ect...)
+</li>
+</ul>
+</p>
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
+Votre classe doit contenir les deux attributs suivant !</p>
+<pre><code class="language-ts"><div>  id: <span class="hljs-built_in">number</span>;
+  date: <span class="hljs-built_in">string</span>;
+</div></code></pre>
+<ul>
+<li>
+<p>Vous devez ensuite créer une table dans la base de données correspondant à votre jeu</p>
+</li>
+</ul>
+<p><em><strong>Exemple</strong></em>
+<img src="file:///c:\Users\carpe\Documents\app\docs\images\capture_bd.png"></p>
+<p></p>
+<ul>
+<li>
+<p>Vous devez créer le fichier <b>PHP</b> correspondant à la récupération des données (vue) </p>
+</li>
+</ul>
+<pre><code class="language-php"><div><span class="hljs-meta">&lt;?php</span>
+header(<span class="hljs-string">&quot;Access-Control-Allow-Origin: http://localhost:4200&quot;</span>);
+header(<span class="hljs-string">&quot;Access-Control-Allow-Methods: PUT, GET, POST, DELETE&quot;</span>);
+header(<span class="hljs-string">&quot;Access-Control-Allow-Headers: Origin, X-Requested-With, Authorization, Content-Type, Accept&quot;</span>);
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">&quot;connection.php&quot;</span>);
+<span class="hljs-variable">$conn</span> = <span class="hljs-keyword">new</span> Connection();
+<span class="hljs-variable">$result</span>;
+<span class="hljs-variable">$myArray</span>=<span class="hljs-keyword">array</span>();
+
+    <span class="hljs-variable">$sql</span> = <span class="hljs-string">&quot;SELECT * FROM {NOM_DE_LA_TABLE}&quot;</span>;
+    <span class="hljs-variable">$result</span> = <span class="hljs-variable">$conn</span>-&gt;db-&gt;query(<span class="hljs-variable">$sql</span>);
+    
+        <span class="hljs-keyword">while</span>(<span class="hljs-variable">$row</span> = <span class="hljs-variable">$result</span>-&gt;fetch(PDO::FETCH_ASSOC)){
+            <span class="hljs-variable">$myArray</span>[] = <span class="hljs-variable">$row</span>;
+        }
+    
+    <span class="hljs-variable">$myJSON</span> = json_encode(<span class="hljs-variable">$myArray</span>);
+    <span class="hljs-keyword">echo</span> <span class="hljs-variable">$myJSON</span>;
+<span class="hljs-meta">?&gt;</span>
+</div></code></pre>
+<ul>
+<li>
+<p>Vous devez ensuite ajoutez dans votre fichier <b>.ts</b> les fonctions de récupération et d'envoie dans la base de données</p>
+</li>
+</ul>
+<div id="recup"></div>
+<p><em><strong>Récupération</strong></em></p>
+<pre><code class="language-ts"><div><span class="hljs-function"><span class="hljs-title">recup</span>(<span class="hljs-params">tab: <span class="hljs-built_in">any</span></span>)</span> {<span class="hljs-comment">//Récupére le jeu depuis la BDD</span>
+    <span class="hljs-built_in">this</span>.jeuxService.recup_recopier(tab).subscribe(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; data[i] != <span class="hljs-literal">null</span>; i++) {
+        <span class="hljs-keyword">if</span> (data[i].id_crea == +<span class="hljs-built_in">localStorage</span>.getItem(<span class="hljs-string">&#x27;id_crea&#x27;</span>)!) {
+          tab.push(
+            <span class="hljs-comment">//Appeler le constructeur de votre jeu</span>
+          );
+        }
+      }
+    })
+  }
+</div></code></pre>
+<p><em><strong>Insertion</strong></em></p>
+<pre><code class="language-ts"><div>  <span class="hljs-function"><span class="hljs-title">onSend</span>(<span class="hljs-params">list: <span class="hljs-built_in">any</span></span>)</span> {<span class="hljs-comment">//Ajoute le jeu dans la BDD</span>
+    <span class="hljs-keyword">const</span> formData: FormData = <span class="hljs-keyword">new</span> FormData();
+    formData.append(<span class="hljs-string">&#x27;send&#x27;</span>, <span class="hljs-built_in">JSON</span>.stringify(list));
+    <span class="hljs-built_in">this</span>.jeuxService.onSend(formData).subscribe({
+      <span class="hljs-attr">next</span>: <span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+        <span class="hljs-built_in">this</span>.reponse = res;
+      },
+    });
+  }
+</div></code></pre>
+<p><em><strong>Update</strong></em></p>
+<pre><code class="language-ts"><div>  <span class="hljs-function"><span class="hljs-title">onSend_update</span>(<span class="hljs-params">list: <span class="hljs-built_in">any</span></span>)</span> {<span class="hljs-comment">//Update le jeu dans la bdd</span>
+    <span class="hljs-keyword">const</span> formData: FormData = <span class="hljs-keyword">new</span> FormData();
+    list[<span class="hljs-string">&#x27;id_table&#x27;</span>]=<span class="hljs-string">&#x27;ID_NOM_DU_JEU&#x27;</span>;<span class="hljs-comment">//Permet de reconnaitre la table</span>
+    formData.append(<span class="hljs-string">&#x27;update&#x27;</span>, <span class="hljs-built_in">JSON</span>.stringify(list));
+    <span class="hljs-built_in">this</span>.jeuxService.onSend(formData).subscribe({
+    });
+  }
+</div></code></pre>
+<div id="onSendDelete">
+</div>
+<p><em><strong>Delete</strong></em></p>
+<pre><code class="language-ts"><div>  <span class="hljs-function"><span class="hljs-title">onSend_delete</span>(<span class="hljs-params">id_jeu: <span class="hljs-built_in">any</span></span>)</span> {<span class="hljs-comment">//Suprimme un jeu de la bdd</span>
+
+    <span class="hljs-keyword">const</span> formData: FormData = <span class="hljs-keyword">new</span> FormData();
+    <span class="hljs-keyword">var</span> list={<span class="hljs-attr">table</span>:<span class="hljs-string">&#x27;NOM_DE_LA_TABLE_DU_JEU&#x27;</span>,<span class="hljs-attr">id</span>:id_jeu,<span class="hljs-attr">id_table</span>:<span class="hljs-string">&#x27;ID_NOM_DU_JEU&#x27;</span>};<span class="hljs-comment">//Permet de reconnaitre la table, le nom de l&#x27;id et le numero de l&#x27;id</span>
+    formData.append(<span class="hljs-string">&#x27;delete&#x27;</span>, <span class="hljs-built_in">JSON</span>.stringify(list));
+    <span class="hljs-built_in">this</span>.jeuxService.onSend(formData).subscribe({
+    });
+  }
+</div></code></pre>
+<p>Si vous souhaitez faire afficher vos jeu vous devez dans un premier temps les récupérer depuis la bdd en faisant l'appel de la fonction <b>recup</b>. Cela se fait dans la fonction <b>ngOnInit</b> dans le fichier <b>.ts</b></p>
+<p><em><strong>Exemple</strong></em></p>
+<pre><code class="language-ts"><div>data : NOM_DU_JEU[] = [];
+ngOnInit(): <span class="hljs-built_in">void</span> {
+  <span class="hljs-built_in">this</span>.recup(<span class="hljs-built_in">this</span>.data);
+}
+</div></code></pre>
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
+Vous devez considérez que cette action prendra un certain temps donc il est conseillez si vous souhaitez agir sur la liste récupérer de laissez le temps en utilisant la fonction <b>setTimeout</b></p>
+<ul>
+<li>
+<p> Pour maintenant afficher la liste des jeux vous devez ajoutez le code HTML qui suit
+</li>
+</ul>
+<pre><code class="language-html"><div> <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table table-hover text-center&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>
+              *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let col of [&#x27;NOM_COLLONE_1&#x27;,NOM_COLLONE_2&#x27;,&#x27;Actions&#x27;]&quot;</span>&gt;</span>
+              {{col}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let element of this.data&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>{{element.attribut_1}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span> <span class="hljs-comment">&lt;!-- element correspondant à la collone 1 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>{{element.atrribut_2}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span> <span class="hljs-comment">&lt;!-- element correspondant à la collone 2 --&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- Actions --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;button_actions&quot;</span>&gt;</span>
+              <span class="hljs-comment">&lt;!-- Prévisualiser le jeu --&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">mat-raised-button</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Prévisualiser le jeu&quot;</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;preview(element)&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-eye fa-lg fa-lg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-bottom : 2px&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+              <span class="hljs-comment">&lt;!-- Editer le jeu --&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">mat-raised-button</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Editer le jeu&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color : rgb(223, 175, 18)&quot;</span>
+                <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;edit(element)&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-pen fa-lg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot; margin-bottom : 2px&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+              <span class="hljs-comment">&lt;!-- Supprimer le jeu --&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">mat-raised-button</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Supprimer le jeu&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color : red&quot;</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span>
+                (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;delete(element)&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-trash fa-lg&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot; margin-bottom : 2px &quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+</div></code></pre>
+<p>La collone actions contient des boutons qui appel des fonctions nécéssaire</p>
+<p><em><strong>Prévisualisation du jeu</strong></em></p>
+<pre><code class="language-ts"><div>  preview(prev: <span class="hljs-built_in">boolean</span>): <span class="hljs-built_in">void</span> {
+    <span class="hljs-keyword">if</span> (prev == <span class="hljs-literal">true</span>) {
+      <span class="hljs-built_in">this</span>.jeu = <span class="hljs-comment">//APPEL ICI DU CONSTRUCTEUR DU JEU AVEC LES PARAMETRES DU JEU</span>
+      <span class="hljs-built_in">this</span>.previsualiser = <span class="hljs-literal">true</span>;
+    }
+    <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">this</span>.previsualiser = <span class="hljs-literal">false</span>;
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-built_in">this</span>.setInactive(<span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">&#x27;breadcrumb-item&#x27;</span>)!.item(<span class="hljs-number">0</span>)!.children.item(<span class="hljs-number">0</span>));
+        <span class="hljs-built_in">this</span>.setActive(<span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">&#x27;breadcrumb-item&#x27;</span>)!.item(<span class="hljs-built_in">this</span>.formStep)!.children.item(<span class="hljs-number">0</span>));
+      }, <span class="hljs-number">0</span>);
+    }
+  }
+</div></code></pre>
+<p>Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.</p>
+<p><em><strong>Edition du jeu</strong></em></p>
+<pre><code class="language-ts"><div>  edit(j: jeu): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">window</span>.location.href = <span class="hljs-string">&#x27;/panel/NOM_DU_JEU/edit/&#x27;</span> + j.id;
+  }
+</div></code></pre>
+<p>Cette fonction amène a une redirection qui sera géré par la page <b>Panel</b>.<br>Dans la page Panel nous gérerons l'affichage du menu d'édition tout comme celui de la liste des jeux et le formulaire de création par <a href="#appel">appel du component</a> et en modifiant l'affichage avec des variables booléenes.</p> 
+<p><em><strong>Supprésion du jeu</strong></em></p>
+<pre><code class="language-ts"><div>  <span class="hljs-keyword">delete</span>(j: NOM_DU_JEU): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.onSend_delete(j.id);
+    <span class="hljs-built_in">this</span>.deleteSessionjeu(j.id);
+    <span class="hljs-built_in">this</span>.deleteThemeJeu(j.id);
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-built_in">this</span>.data = [];
+      <span class="hljs-built_in">this</span>.recup(<span class="hljs-built_in">this</span>.data);
+    }, <span class="hljs-number">400</span>)
+  }
+</div></code></pre>
+<p>Cette fonction réalise l'appel de <b>4</b> fonctions :
+  <br>
+  - La fonction de <a href="#onSendDelete">supprésion du jeu dans la base de donnée</a> ;
+  <br>
+  - La fonction de <a href="#deleteSessionJeu">suppréssion du jeu dans toutes les séssions qui comporte le jeu</a> ;
+  <br>
+  - La fonction <a href="#deleteThemeJeu">suppréssion du jeu dans le thème associé au jeu</a> ;
+</p>
+<div id="deleteSessionJeu">
+<p><em><strong>Fonction suppréssion du jeu dans toutes les séssion</strong></em></p>
+<pre><code class="language-ts"><div>  deleteSessionJeu(id: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+    <span class="hljs-keyword">let</span> ses: SessionsComponent = <span class="hljs-keyword">new</span> SessionsComponent(<span class="hljs-built_in">this</span>.router, <span class="hljs-built_in">this</span>.route, <span class="hljs-built_in">this</span>.jeuxService);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> s <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.list_session) {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> jeu <span class="hljs-keyword">of</span> s.jeuId) {
+        <span class="hljs-keyword">if</span> (jeu.type == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span> &amp;&amp; jeu.id_jeu == id) {
+          <span class="hljs-built_in">this</span>.deleteRecopier(id, s);
+          <span class="hljs-built_in">this</span>.list = { <span class="hljs-attr">nom</span>: s!.nom, <span class="hljs-attr">isSuivi</span>: +s!.isSuivi, <span class="hljs-attr">join</span>: +s!.isActive, <span class="hljs-attr">id</span>: s!.id, <span class="hljs-attr">jeux_id</span>: <span class="hljs-built_in">this</span>.setJeuSession(s!.jeuId), <span class="hljs-attr">liste_j</span>: <span class="hljs-built_in">this</span>.setJoueurs(s!) };
+          ses.onSend_update(<span class="hljs-built_in">this</span>.list);
+        }
+      }
+    }
+  }
+</div></code></pre>
+</div>
+<div id="deleteThemeJeu">
+<p><em><strong>Fonction suppréssion du jeu dans le thème associés</strong></em></p>
+<pre><code class="language-ts"><div>  deleteThemeJeu(id: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+    <span class="hljs-keyword">let</span> theme = <span class="hljs-keyword">new</span> ThemeComponent(<span class="hljs-built_in">this</span>.route, <span class="hljs-built_in">this</span>.jeuxService, <span class="hljs-built_in">this</span>.router);
+    <span class="hljs-keyword">let</span> liste: <span class="hljs-built_in">any</span> = [];
+    theme.recup2(liste);
+    <span class="hljs-keyword">let</span> ses: SessionsComponent = <span class="hljs-keyword">new</span> SessionsComponent(<span class="hljs-built_in">this</span>.router, <span class="hljs-built_in">this</span>.route, <span class="hljs-built_in">this</span>.jeuxService);
+
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> t <span class="hljs-keyword">of</span> liste) {
+        <span class="hljs-keyword">let</span> array = ses.getJeuSession(t.id_jeux);
+        <span class="hljs-keyword">let</span> index = -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> array) {
+          <span class="hljs-keyword">if</span> (j.type == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>) {
+            <span class="hljs-keyword">if</span> (j.id_jeu == id) {
+              index = array.indexOf(j);
+            }
+          }
+        }
+
+        <span class="hljs-keyword">if</span> (index &gt; -<span class="hljs-number">1</span>) {
+          array.splice(index, <span class="hljs-number">1</span>);
+          t.id_jeux = ses.setJeuSession(array);
+          theme.onSend_update({ <span class="hljs-attr">id_theme</span>: t.id, <span class="hljs-attr">id</span>: t.id_image, <span class="hljs-attr">id_jeux</span>: t.id_jeux, <span class="hljs-attr">nom</span>: t.nom });
+        }
+      }
+    }, <span class="hljs-number">200</span>)
+  }
+</div></code></pre>
+</div>
+<hr>
+<h2 align=center>Etape 3 : Ajoutez le jeu au panel</h2>
+<p>L'ajout du jeu au panel se fait en plusieurs étapes.<br>
+La prémière étape consiste à ajouté dans panel la route pour l'affichage de la liste des jeux, la création et l'édition du jeu</p>
+<h3 align=center>Ajout de la route</h3>
+<p>Dans le fichier <a href="../src/app/panel/panel.component.ts"><b><i>panel.component.ts</i></b></a> ajoutez <u>la fonction de récupération</u> du jeu depuis la BDD (<a href="#recup">voir fonction recup</a>)
+<ul>
+<li>
+<p>Ensuit il faut mettre en place la route. Pour cela ajoutez les lignes suivants dans la fonction <b>ngOnInit()</b></p>
+</li>
+</ul>
+<pre><code class="language-ts"><div><span class="hljs-built_in">this</span>.NOM_DU_JEU_list : NOM_DU_JEU[] = [];
+ngOnInit(): <span class="hljs-built_in">void</span> {
+  <span class="hljs-built_in">this</span>.recup_NOM_DU_JEU(<span class="hljs-built_in">this</span>.NOM_DU_JEU_list)
+  ...
+
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.selectedGame == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.getNOM_DU_JEU()! == <span class="hljs-literal">null</span>) {
+      <span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/panel/NOM_DU_JEU&#x27;</span>]);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">this</span>.NOM_DU_JEU = <span class="hljs-built_in">this</span>.getNOM_DU_JEU();
+    }
+  }
+
+  ...
+}
+</div></code></pre>
+<ul>
+<li>
+<p>Ensuite ajouter la fonction <b>getNOM_DU_JEU() dans le fichier comme suit :</b></p>
+</li>
+</ul>
+<pre><code class="language-ts"><div>  getNOM_DU_JEU(): NOM_DU_JEU | <span class="hljs-literal">null</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.NOM_DU_JEU_list) {
+      <span class="hljs-keyword">if</span> (j.id == <span class="hljs-built_in">this</span>.id_game) {
+        <span class="hljs-keyword">return</span> j;
+      }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  }
+</div></code></pre>
+<ul>
+<li>
+<p>On ajoute maintenant l'appel dans le <b>HTML</b> mais avant cela ajoutez les variables dans le fichier <b>.ts</b> de votre jeu afin de géré l'affichage lors de l'appel. <br>
+On ajoutera au moins les variables qui suivent</p>
+<pre><code class="language-ts"><div><span class="hljs-meta">@Input</span>() jeu : NOM_DU_JEU | <span class="hljs-literal">null</span>;
+<span class="hljs-meta">@Input</span>() showTitle: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>; <span class="hljs-comment">//affiche le titre du jeu</span>
+<span class="hljs-meta">@Input</span>() showList: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>; <span class="hljs-comment">//Affiche la liste des jeu</span>
+<span class="hljs-meta">@Input</span>() play: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>;<span class="hljs-comment">//Lance le jeu</span>
+<span class="hljs-meta">@Input</span>() create_game: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;<span class="hljs-comment">//Crée le jeu si true</span>
+<span class="hljs-meta">@Input</span>() edit: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;<span class="hljs-comment">//Va dans l&#x27;edit si true</span>
+</div></code></pre>
+</li>
+</ul>
+<p>On commence par ajoutez les boutons quit permettent d'acceder au menu du jeu dans le  panel pour cela ajoutez le code quit suit dans le fichier <a href="../src/app/panel/panel.component.html"><b><i>panel.componenent.html</i></b></a></p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;nav&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;navbar navbar-expand-lg navbar-light bg-light&quot;</span>&gt;</span>
+...
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nav-item&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;nav-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/panel/NOM_DU_JEU&quot;</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>
+      NOM_DU_JEU
+    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+
+...
+
+<span class="hljs-comment">&lt;!-- Panel - Page d&#x27;accueil --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card container&quot;</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.panel == null&quot;</span>&gt;</span>
+...
+    <span class="hljs-comment">&lt;!-- Jeux --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-6&quot;</span>&gt;</span>
+      ...
+      <span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;c == &#x27;NOM_DU_JEU&#x27;&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;METTRE ICI LA CLASSE D&#x27;UNE ICON FONTAWESOME APPROPRIER AU JEU&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+      ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Si /panel/create --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.panel == &#x27;create&#x27;&quot;</span>&gt;</span>
+  ...
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;choice&quot;</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let c of this.optionGame&quot;</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">&quot;[&#x27;/panel/&#x27;, c,&#x27;create&#x27;]&quot;</span> <span class="hljs-attr">mat-raised-button</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;c == &#x27;NOM_DU_JEU&#x27;&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;METTRE ICI LA CLASSE D&#x27;UNE ICON FONTAWESOME APPROPRIER AU JEU&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+    ...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+</div></code></pre>
+<ul>
+<li>
+<p>Ensuite, nous allons ajoutez l'appel de du formulaire de création / édition et l'affichage de la liste des jeux. <br> Ajoutez le code qui suit dans <a href="../src/app/panel/panel.component.html"><b><i>panel.component.html</a></b></i></p>
+</li>
+</ul>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- Si un jeu est selectionné --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.selectedGame != &#x27;&#x27; &amp;&amp; this.optionGame.includes(this.selectedGame!)&quot;</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.panel_option == &#x27;create&#x27;&quot;</span>&gt;</span>
+    ...
+
+    <span class="hljs-comment">&lt;!-- Formulaire NOM_DU_JEU --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-body&quot;</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.selectedGame == &#x27;NOM_DU_JEU&#x27;&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span> [<span class="hljs-attr">play</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">showTitle</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">create_game</span>]=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.panel_option == &#x27;showList&#x27;&quot;</span>&gt;</span>
+    ...
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.selectedGame == &#x27;NOM_DU_JEU&#x27;&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span> [<span class="hljs-attr">play</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">showTitle</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">showList</span>]=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.panel_option == &#x27;edit&#x27;&quot;</span>&gt;</span>
+    ...
+
+    <span class="hljs-comment">&lt;!-- Formulaire édition NOM_DU_JEU --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.selectedGame == &#x27;NOM_DU_JEU&#x27;&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span> [<span class="hljs-attr">play</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">showTitle</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">edit</span>]=<span class="hljs-string">&quot;true&quot;</span> [<span class="hljs-attr">jeu</span>]=<span class="hljs-string">&quot;this.NOM_DU_JEU&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>
+<p>La prochaine étape consiste à ajoutez le code pour modifier les paramètre par défaut en cas d'édition. <br> Ajoutez le code qui suit dans le fichier <b>.ts</b> de votre jeu :</p>
+</li>
+</ul>
+<pre><code class="language-ts"><div>
+  ngOnInit(): <span class="hljs-built_in">void</span> {
+    ...
+    
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.edit) {<span class="hljs-comment">//Permet d&#x27;editer un jeu, récupere les données du jeu this.jeu!.(nom d&#x27;une variable du jeu) de NOM_DU_JEU.ts et les affiches</span>
+        <span class="hljs-built_in">this</span>.create_game = <span class="hljs-literal">true</span>
+        <span class="hljs-built_in">this</span>.selectedImages = <span class="hljs-built_in">this</span>.r!.images;
+        
+        <span class="hljs-comment">//METTRE ICI LE CODE D&#x27;ASSOCIATION DES PARAM7TRE DE JEU AU VARIABLE PAR DEFAUT</span>
+        <span class="hljs-comment">//EXEMPLE :</span>
+        <span class="hljs-built_in">this</span>.NOM_DU_JEU_bg_color = <span class="hljs-built_in">this</span>.jeu!.bg_color;
+
+
+        <span class="hljs-built_in">this</span>.list = <span class="hljs-comment">//Recupere les données dans une liste pour l&#x27;update</span>
+        {
+          <span class="hljs-attr">table</span>: <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>, 
+          <span class="hljs-attr">attribut_nom_collonne_bdd_1</span>: <span class="hljs-built_in">this</span>.jeu.attribut_1, 
+          <span class="hljs-attr">id_crea</span>: <span class="hljs-built_in">this</span>.id_crea, 
+          <span class="hljs-attr">id</span>: <span class="hljs-built_in">this</span>.jeu!.id,
+        };
+      }
+    ...
+    }
+</div></code></pre>
+<ul>
+<li>
+<p>Une fois cela fait vous devriez avoir l'affichage et la redirection sur le formulaire d'édition ou de création. <p>La partie sur le formulaire de création et d'édition étant propre au jeu je n'ai pas de fonction clair a donnez cependant je liste ici quelque partie de code qui pourrait vous être utile</p></p>
+</li>
+</ul>
+<p><em><strong>Le code utilisé pour la sélection des images</strong></em></p>
+<p><strong>.html</strong></p>
+<pre><code class="language-html"><div> <span class="hljs-comment">&lt;!--Formulaire Recopier Etape du formulaire 1 -- Choix des images--&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-body selectImage_container text-center align-top&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h5</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-header&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color : black&quot;</span>&gt;</span>Listes des images<span class="hljs-tag">&lt;/<span class="hljs-name">h5</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">figure</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;figure&quot;</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let image of this.liste_image&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;{{image.getSrc()}}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;figure-img img-fluid rounded&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;...&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;addImage(image)&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">figcaption</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;figure-caption&quot;</span>&gt;</span>{{image.getNom()}}<span class="hljs-tag">&lt;/<span class="hljs-name">figcaption</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">figure</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-body selectImage_container text-center&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h5</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-header&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color : black&quot;</span>&gt;</span>Images selectionné<span class="hljs-tag">&lt;/<span class="hljs-name">h5</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h6</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.selectedImages.length == 0&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-title&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color : black&quot;</span>&gt;</span>Vous n&#x27;avez
+          selectionné
+          aucune image<span class="hljs-tag">&lt;/<span class="hljs-name">h6</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">figure</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;figure&quot;</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let image of this.selectedImages&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;{{image.getSrc()}}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;figure-img img-fluid rounded&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;...&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;deleteImage(image)&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">figcaption</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;figure-caption&quot;</span>&gt;</span>{{image.getNom()}}<span class="hljs-tag">&lt;/<span class="hljs-name">figcaption</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">figure</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p><strong>.ts</strong></p>
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
+La classe Image est la classe <a href="../src/app/Image.ts"><b><i>Image</i></b></a> créer pour le projet</p>
+```ts
+<p>selectedImages : Image[] = [];</p>
+<p>addImage(img: Image): void {//ajoute les images choisit dans la liste
+if (this.selectedImages.indexOf(img) == -1) {
+this.selectedImages.push(img);
+this.image.push(<a href="http://img.id">img.id</a>);
+this.list['id_images'] = this.image.toString();
+}
+}</p>
+<p>deleteImage(i: Image): void {//Supprime les images de la liste
+let index = this.selectedImages.indexOf(i, 0);
+if (index &gt; -1) {
+this.selectedImages.splice(index, 1);
+this.image.splice(index, 1);
+this.list['id_images'] = this.image.toString();
+}
+}</p>
+<pre><code><code><div>
+
+***L'input de couleur***
+
+```html
+&lt;label for=&quot;id_input_couleur&quot; class=&quot;form-label align-middle&quot;&gt;Nom du paramètre
+  &lt;input type=&quot;color&quot; class=&quot;form-control form-control-color&quot;
+    (change)=&quot;this.jeu_attribut = id_input_couleur.value &quot; #id_input_couleur
+    (change)=&quot;this.list['jeu_attribut']=id_input_couleur.value&quot; value=&quot;{{this.jeu_attribut}}&quot;
+    title=&quot;Déscription du paramètre&quot;&gt;
+&lt;/label&gt;
+</div></code></code></pre>
+<p><strong>L'input de texte</strong></p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;id_input_text&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-label align-middle&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>Nom du paramètre<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> (<span class="hljs-attr">change</span>)=<span class="hljs-string">&quot;this.jeu_attribut = id_input_text.value&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;{{this.jeu_attribut}}&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span>
+  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-control&quot;</span> <span class="hljs-attr">id_input_text</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Déscription du paramètre&quot;</span>&gt;</span>
+</div></code></pre>
+<p><strong>Slider OUI / NON</strong></p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-title&quot;</span>&gt;</span>Nom du paramètre<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;!this.jeu_attribut&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-volume-xmark&quot;</span>
+  <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-right : 2%; color : #ff4083&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.jeu_attribut&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-volume-xmark&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-right : 2%&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">mat-slide-toggle</span> (<span class="hljs-attr">change</span>)=<span class="hljs-string">&quot;this.list[&#x27;jeu_attribut&#x27;]=+this.jeu_attribut&quot;</span>
+  [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;this.jeu_attribut&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mat-slide-toggle</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.jeu_attribut&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-volume-high&quot;</span>
+  <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-left : 2%; color : #ff4083&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;!this.jeu_attribut&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-volume-high&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-left : 2%&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+</div></code></pre>
+<p><strong>Slider valeur</strong></p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-title&quot;</span>&gt;</span>Nom du paramètre<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">mat-slider</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;slider&quot;</span> <span class="hljs-attr">thumbLabel</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;this.jeu_attribut&quot;</span> [<span class="hljs-attr">displayWith</span>]=<span class="hljs-string">&quot;formatLabel&quot;</span> <span class="hljs-attr">tickInterval</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">step</span>=<span class="hljs-string">&quot;1&quot;</span>
+  <span class="hljs-attr">min</span>=<span class="hljs-string">&quot;0&quot;</span> (<span class="hljs-attr">change</span>)=<span class="hljs-string">&quot;this.list[&#x27;jeu_attribut&#x27;]= input_slider.value&quot;</span> #<span class="hljs-attr">input_slider</span> <span class="hljs-attr">max</span>=<span class="hljs-string">&quot;10&quot;</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;units&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width : 75%&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mat-slider</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-title&quot;</span>&gt;</span>{{this.jeu_attribut}}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>
+<p>Une fois le formulaire créer vous devez implanter la fonction d'édition ou de création</p>
+</li>
+</ul>
+<p><strong>Edition</strong></p>
+<pre><code class="language-ts"><div>save(): <span class="hljs-built_in">void</span> {<span class="hljs-comment">//Sauvegarde les changement lors d&#x27;un edit et fait l&#x27;update dans la bd</span>
+  <span class="hljs-built_in">this</span>.onSend_update(<span class="hljs-built_in">this</span>.list)
+  <span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/panel/NOM_DU_JEU&#x27;</span>]);
+}
+</div></code></pre>
+<p><strong>Création</strong></p>
+<pre><code class="language-ts"><div>create(): <span class="hljs-built_in">void</span> {<span class="hljs-comment">//Crée le jeu NOM_DU_JEU avec les parametres soit par défaut, soit modifier à la création</span>
+  <span class="hljs-built_in">this</span>.onSend(<span class="hljs-built_in">this</span>.list);
+  <span class="hljs-built_in">this</span>.router.navigate([<span class="hljs-string">&#x27;/panel/NOM_DU_JEU&#x27;</span>]);
+}
+</div></code></pre>
+<hr>
+<h2 align=center>Etape 3 : Ajoutez le jeu au séssion</h2>
+<p>Pour que le jeu puisse être jouer il faut l'ajouter au séssion.<br> Nous allons donc ajoutez du code dans <a href="../src/app/sessions/sessions.component.html"><b><i>sessions.component.html</i></b></a></p>
+<p>Dans un premier temps on ajoute la liste des jeux de ce type dans la création de séssion</p>
+<pre><code class="language-html"><div>
+<span class="hljs-comment">&lt;!-- Jeux --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.play&quot;</span>&gt;</span>
+  ...
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.join &amp;&amp; this.getConnected() &amp;&amp; !this.inPlay&quot;</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">mat-card-header</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;g.type == &#x27;NOM_DU_JEU&#x27;&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;justify-content-center&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">mat-card-title</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-size : 23px&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;CLASSE FONTAWESOME D&#x27;ICON ADAPTE&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color : rgb(51, 51, 51) ; margin-top : 2%&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+            {{g.type}}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">mat-card-title</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">mat-card-header</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">img</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;g.type == &#x27;Recopier&#x27;&quot;</span> <span class="hljs-attr">mat-card-image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../../assets/images/thumb/NOM_DU_JEU.png&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.inPlay&quot;</span>&gt;</span>
+    ...
+
+     <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.jeu == &#x27;NOM_DU_JEU&#x27;&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span> [<span class="hljs-attr">play</span>]=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-12 text-center sortButton&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">mat-raised-button</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color : red&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;redirectSession()&quot;</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;fa-solid fa-angles-left&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-bottom : 1px&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Revenir à la listes des jeux<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span> [<span class="hljs-attr">jeu</span>]=<span class="hljs-string">&quot;this.NOM_DU_JEU&quot;</span> [<span class="hljs-attr">showTitle</span>]=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Création et édition de session --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card container&quot;</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.create_session&quot;</span>&gt;</span>
+  ...
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.jeuId.length != 0&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row justify-content-center&quot;</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">mat-card-header</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;g.type == &#x27;NOM_DU_JEU&#x27;&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;justify-content-center&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">mat-card-title</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-size : 23px&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;CLASSE FONTAWESOME D&#x27;ICON ADAPTE&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;color : rgb(51, 51, 51) ; margin-top : 2%&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+          {{g.type}}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">mat-card-title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">mat-card-header</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;g.type == &#x27;Recopier&#x27;&quot;</span> <span class="hljs-attr">mat-card-image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../../assets/images/thumb/NOM_DU_JEU.png&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  ...
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;{{this.jeuSession}}&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-control&quot;</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Default select example&quot;</span> (<span class="hljs-attr">change</span>)=<span class="hljs-string">&quot;this.changeJeuSession(jeu_session.value)&quot;</span> #<span class="hljs-attr">jeu_session</span>&gt;</span>
+    ...
+    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text-center&quot;</span>&gt;</span>NOM_DU_JEU<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;jeuSession == &#x27;NOM_DU_JEU&#x27;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;table table-hover text-center&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">&quot;col&quot;</span>
+            *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let col of [&#x27;NOM_COLLONE_1&#x27;,&#x27;NOM_COLLONE_2&#x27;,&#x27;&#x27;]&quot;</span>&gt;</span>
+            {{col}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let element of this.NOM_DU_JEU_list&quot;</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;addJeu(&#x27;NOM_DU_JEU&#x27;,element.id)&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>{{element.NOM_ATTRIBUT_1}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>{{element.NOM_ATTRIBUT_2}}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">mat-checkbox</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;!containRecopier(element)&quot;</span> (<span class="hljs-attr">ngModelChange</span>)=<span class="hljs-string">&quot;addNOM_DU_JEU(element)&quot;</span> [<span class="hljs-attr">ngModel</span>]=<span class="hljs-string">&quot;false&quot;</span>
+              <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-margin&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mat-checkbox</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">mat-checkbox</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;containRecopier(element)&quot;</span> (<span class="hljs-attr">ngModelChange</span>)=<span class="hljs-string">&quot;deleteNOM_DU_JEU(element)&quot;</span> [<span class="hljs-attr">ngModel</span>]=<span class="hljs-string">&quot;true&quot;</span>
+              <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;example-margin&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mat-checkbox</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  ...
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.previsualiserJeuSession&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.jeu == &#x27;NOM_DU_JEU&#x27;&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">app-nom-du-jeu</span> [<span class="hljs-attr">jeu</span>]=<span class="hljs-string">&quot;this.NOM_DU_JEU&quot;</span> [<span class="hljs-attr">showTitle</span>]=<span class="hljs-string">&quot;false&quot;</span> [<span class="hljs-attr">play</span>]=<span class="hljs-string">&quot;true&quot;</span> [<span class="hljs-attr">showList</span>]=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">app-nom-du-jeu</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card container&quot;</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.view&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">&quot;let b of this.selected_session!.jeuId&quot;</span> <span class="hljs-attr">mat-raised-button</span>
+    <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background-color : rgb(10, 41, 218) ; margin : 1%&quot;</span>
+    (<span class="hljs-attr">click</span>)=<span class="hljs-string">&quot;this.jeuSelected = b.type; this.jeuSelected_id = b.id_jeu&quot;</span> <span class="hljs-attr">color</span>=<span class="hljs-string">&quot;primary&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">i</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;b.type == &#x27;NOM_DU_JEU&#x27;&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-right : 5%&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;CLASSE FONTAWESOME ADAPTE&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>Ajoutez les fonctions quit suivents dans le fichier <a href="../src/app/sessions/sessions.component.ts"><b><i>session.component.ts</i></b></a></p>
+<pre><code class="language-ts"><div>addJeu(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+
+  <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {
+    ...
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>:
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.containNOM_DU_JEU(<span class="hljs-built_in">this</span>.getNOM_DU_JEU(id)!)) {
+        <span class="hljs-built_in">this</span>.deleteNOM_DU_JEU(<span class="hljs-built_in">this</span>.getNOM_DU_JEU(id)!);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">this</span>.addNOM_DU_JEU(<span class="hljs-built_in">this</span>.getNOM_DU_JEU(id)!)
+      }
+      <span class="hljs-keyword">break</span>;
+  }
+}
+
+deleteJeu(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+  <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {
+    ...
+    <span class="hljs-keyword">case</span> (<span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>):
+      <span class="hljs-built_in">this</span>.deleteNOM_DU_JEU(<span class="hljs-built_in">this</span>.getNOM_DU_JEU(id)!)
+      <span class="hljs-keyword">break</span>;
+  }
+}
+
+<span class="hljs-comment">//NE PAS OUBLIER D&#x27;IMPLANTER LA FONCTION DE RECUPERATION DES JEUX DEPUIS LA BDD</span>
+getNOM_DU_JEU(id: <span class="hljs-built_in">number</span>): NOM_DU_JEU | <span class="hljs-literal">null</span> {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.NOM_DU_JEU_LIST) {
+    <span class="hljs-keyword">if</span> (j.id == id) {
+      <span class="hljs-keyword">return</span> j;
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+}
+
+addNOM_DU_JEU(r: NOM_DU_JEU): <span class="hljs-built_in">void</span> {
+  <span class="hljs-built_in">this</span>.jeuId.push(
+    { <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;NOM_DU_JEU&quot;</span>, <span class="hljs-attr">id_jeu</span>: r.id }
+  )
+}
+
+deleteNOM_DU_JEU(r: NOM_DU_JEU): <span class="hljs-built_in">void</span> {
+  <span class="hljs-keyword">let</span> index = -<span class="hljs-number">1</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> g <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.jeuId) {
+    <span class="hljs-keyword">if</span> (g.type == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span> &amp;&amp; g.id_jeu == r.id) {
+      index = <span class="hljs-built_in">this</span>.jeuId.indexOf(g, <span class="hljs-number">0</span>);
+    }
+  }
+
+  <span class="hljs-keyword">if</span> (index &gt; -<span class="hljs-number">1</span>) {
+    <span class="hljs-built_in">this</span>.jeuId.splice(index, <span class="hljs-number">1</span>);
+  }
+}
+
+containNOM_DU_JEU(r: NOM_DU_JEU): <span class="hljs-built_in">boolean</span> {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> g <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.jeuId) {
+    <span class="hljs-keyword">if</span> (g.type == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span> &amp;&amp; g.id_jeu == r.id) {
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+...
+playGamePreview(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+  <span class="hljs-built_in">this</span>.inPlay = <span class="hljs-literal">true</span>;
+  <span class="hljs-built_in">this</span>.jeu = <span class="hljs-keyword">type</span>;
+
+  <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {
+    ...
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>:
+      <span class="hljs-built_in">this</span>.NOM_DU_JEU = <span class="hljs-built_in">this</span>.getNOM_DU_JEU(id);
+      <span class="hljs-keyword">break</span>;
+  }
+}
+
+playGame(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.inPlay = <span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">this</span>.jeu = <span class="hljs-keyword">type</span>;
+
+    <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {
+      ...
+      <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>:
+        <span class="hljs-built_in">this</span>.NOM_DU_JEU = <span class="hljs-built_in">this</span>.getNOM_DU_JEU(id);
+        <span class="hljs-keyword">break</span>;
+    }
+}
+
+previewGame(<span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span>, <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.previsualiserJeuSession = <span class="hljs-literal">true</span>;
+
+    <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {
+      <span class="hljs-keyword">case</span> (<span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>):
+        <span class="hljs-built_in">this</span>.jeu = <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>
+        <span class="hljs-built_in">this</span>.NOM_DU_JEU = <span class="hljs-built_in">this</span>.getNOM_DU_JEU(id)!
+        <span class="hljs-keyword">break</span>;
+    }
+}
+
+<span class="hljs-comment">// /!\ LE CODE QUI SUIT EST INUTILE SI VOTRE JEU NE POSSEDE PAS DE D&#x27;IMAGE ET/OU N&#x27;EST PAS ASSOCIE A UN THEME</span>
+deleteSession(session: Session): <span class="hljs-built_in">void</span> {
+  <span class="hljs-built_in">this</span>.onSend_delete(session.id);
+
+  <span class="hljs-keyword">let</span> theme: ThemeComponent = <span class="hljs-keyword">new</span> ThemeComponent(<span class="hljs-built_in">this</span>.route, <span class="hljs-built_in">this</span>.jeuxService, <span class="hljs-built_in">this</span>.router);
+  theme.recup2(theme.data);
+
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> t <span class="hljs-keyword">of</span> theme.test) {
+      <span class="hljs-keyword">if</span> (t.id_session == session.id) {
+        theme.onSend_delete(t.id_theme);
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> theme.getTheme(t.id_theme).id_jeux.split(<span class="hljs-string">&#x27;;&#x27;</span>)) {
+          ...
+
+        <span class="hljs-keyword">if</span>(j.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>) {
+              <span class="hljs-keyword">let</span> jc : NOM_DU_JEUComponent = <span class="hljs-comment">//APPEL DU CONSTRUCTEUR DU COMPONENENT</span>
+              jc.onSend_delete(j.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">1</span>])
+            }
+        }
+      }
+    }
+  }
+}
+</div></code></pre>
+<hr>
+<h2 align=center>Etape 4 : Ajout au theme</h4>
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i> Attention cette partie n'est nécéssaire que si votre jeu contient des images.</p>
+<p>Nous allons maintenant ajouter le jeu dans les themes</p>
+<p>On commence par ajouter le code qui suit au fichier <a href="../src/app/theme/theme.component.html"><b><i>theme.componenent.htmk</i></b></a></p>
+<pre><code class="language-html"><div><span class="hljs-comment">&lt;!-- Création / édition théme --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container card container_list&quot;</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.create_theme&quot;</span>&gt;</span>
+  ...
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-12 text-center&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card-title&quot;</span>&gt;</span>Créer automatiquement des jeux à partir de ce thème<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      ...
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-4 text-center&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-12&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;font-size : 24px&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>NOM_DU_JEU<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-md-12&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;!this.create_NOM_DU_JEU&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-right : 4% ; color : #ff4083&quot;</span>&gt;</span>Non<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.create_NOM_DU_JEU&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-right : 4%&quot;</span>&gt;</span>Non<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+
+          <span class="hljs-tag">&lt;<span class="hljs-name">mat-slide-toggle</span> (<span class="hljs-attr">change</span>)=<span class="hljs-string">&quot;this.create_NOM_DU_JEU = NOM_DU_JEU_slider.checked&quot;</span>
+            [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">&quot;this.create_NOM_DU_JEU&quot;</span> #<span class="hljs-attr">NOM_DU_JEU_slider</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mat-slide-toggle</span>&gt;</span>
+
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;!this.create_NOM_DU_JEU&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-left : 4%&quot;</span>&gt;</span>Oui<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">&quot;this.create_NOM_DU_JEU&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;margin-left : 4% ; color : #ff4083 &quot;</span>&gt;</span>Oui<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<p>Puis le code qui suit dans le <b>.ts</b></p>
+<pre><code class="language-ts"><div>create_NOM_DU_JEU: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;
+edit_create_NOM_DU_JEU: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;
+
+edit(element: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">void</span> {
+    <span class="hljs-built_in">this</span>.recup_image = element;
+    <span class="hljs-built_in">this</span>.create_theme = <span class="hljs-literal">true</span>;
+    <span class="hljs-built_in">this</span>.edit_session = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; element.id.length; i++) {
+      <span class="hljs-built_in">this</span>.n_theme.push(element.id[i])
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> <span class="hljs-built_in">this</span>.recup_image.id_jeux.split(<span class="hljs-string">&#x27;;&#x27;</span>)) {
+      <span class="hljs-keyword">switch</span> (j.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>]) {
+        ...
+        <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>:
+          <span class="hljs-built_in">this</span>.create_NOM_DU_JEU = <span class="hljs-literal">true</span>;
+          <span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU = j;
+          <span class="hljs-keyword">break</span>;
+      }
+    }
+}
+
+remove2(id: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">any</span> {
+
+
+    <span class="hljs-keyword">let</span> ses: SessionsComponent = <span class="hljs-keyword">new</span> SessionsComponent(<span class="hljs-built_in">this</span>.router, <span class="hljs-built_in">this</span>.route, <span class="hljs-built_in">this</span>.jeuxService);
+    <span class="hljs-keyword">let</span> session_list: Session[] = []
+    ses.recup(session_list);
+
+    <span class="hljs-keyword">let</span> t : <span class="hljs-built_in">any</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; <span class="hljs-built_in">this</span>.test[i] != <span class="hljs-literal">null</span>; i++) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.test[i].id_theme == id) {
+        t = <span class="hljs-built_in">this</span>.test[i];
+        <span class="hljs-built_in">this</span>.test.splice(i, <span class="hljs-number">1</span>);
+      }
+    }
+
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> s <span class="hljs-keyword">of</span> session_list) {
+        <span class="hljs-keyword">if</span>(s.id == t.id_session) {
+          ses.onSend_delete(s.id);
+
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> t.id_jeux.split(<span class="hljs-string">&#x27;;&#x27;</span>)) {.
+            ...
+            <span class="hljs-keyword">if</span>(j.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>] == <span class="hljs-string">&#x27;NOM_DU_JEU&#x27;</span>) {
+              <span class="hljs-keyword">let</span> jc : NOM_DU_JEUComponent = <span class="hljs-comment">//APPEL DU CONSTRUCTEUR DU COMPONENENT</span>
+              JC.onSend_delete(j.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">1</span>])
+            }
+          }
+        }
+      }
+    }
+}
+
+create(): <span class="hljs-built_in">void</span> {<span class="hljs-comment">//Crée le thème et les jeux séléctionner</span>
+  <span class="hljs-built_in">this</span>.nouveau_theme[<span class="hljs-string">&#x27;id&#x27;</span>] = <span class="hljs-built_in">this</span>.n_theme;
+  ...
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.create_NOM_DU_JEU) {
+      <span class="hljs-built_in">this</span>.cpt_jeux++;
+      <span class="hljs-keyword">let</span> jc : NOM_DU_JEUComponent = <span class="hljs-comment">//APPEL DU CONSTRUCTEUR DU COMPONENENT</span>
+      <span class="hljs-keyword">let</span> NOM_DU_JEU_list: NOM_DU_JEU[] = [];
+      jc.list[<span class="hljs-string">&#x27;id_image&#x27;</span>] = <span class="hljs-built_in">this</span>.n_theme.toString();
+      jc.onSend(jc.list);
+
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        jc.recup(NOM_DU_JEU_list);
+      }, <span class="hljs-number">300</span>)
+
+      <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = NOM_DU_JEU_list.length - <span class="hljs-number">1</span>; NOM_DU_JEU_list[i] != <span class="hljs-literal">null</span>; i--) {
+          <span class="hljs-keyword">if</span> (NOM_DU_JEU_list[i].id_crea == +<span class="hljs-built_in">localStorage</span>.getItem(<span class="hljs-string">&#x27;id_crea&#x27;</span>)!) {
+            <span class="hljs-built_in">this</span>.nouveau_theme[<span class="hljs-string">&#x27;id_jeux&#x27;</span>] += <span class="hljs-string">&#x27;NOM_DU_JEU,&#x27;</span> + NOM_DU_JEU_list[i].id + <span class="hljs-string">&#x27;;&#x27;</span>
+            <span class="hljs-keyword">break</span>;
+          }
+        }
+      }, <span class="hljs-number">500</span>)
+    }
+}
+
+save(): <span class="hljs-built_in">void</span> {<span class="hljs-comment">//Update le thème,ajoute des images dans le thèmes ou supprime les images du thèmes en fonnction du choix de l&#x27;utilisateur</span>
+    <span class="hljs-comment">//Supprime totalement les jeux de la bdd si séléctionner ou en re-créez</span>
+ 
+ <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU != <span class="hljs-literal">null</span> &amp;&amp; !<span class="hljs-built_in">this</span>.create_NOM_DU_JEU) {
+    <span class="hljs-built_in">this</span>.cpt_jeux++;
+    <span class="hljs-keyword">let</span> jc : NOM_DU_JEUComponent = <span class="hljs-comment">//APPEL DU CONSTRUCTEUR DU COMPONENENT</span>
+    jc.onSend_delete(<span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">1</span>])
+    jc.deleteSessionNOM_DU_JEU(+<span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">1</span>])
+    <span class="hljs-keyword">let</span> ses: SessionsComponent = <span class="hljs-keyword">new</span> SessionsComponent(<span class="hljs-built_in">this</span>.router, <span class="hljs-built_in">this</span>.route, <span class="hljs-built_in">this</span>.jeuxService);
+    <span class="hljs-keyword">let</span> array = ses.getJeuSession(<span class="hljs-built_in">this</span>.recup_image.id_jeux);
+
+    <span class="hljs-keyword">let</span> index_recopier = -<span class="hljs-number">1</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> j <span class="hljs-keyword">of</span> array) {
+      <span class="hljs-keyword">if</span> (j.type == <span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU!.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">0</span>]) {
+        <span class="hljs-keyword">if</span> (j.id_jeu == +<span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU!.split(<span class="hljs-string">&#x27;,&#x27;</span>)[<span class="hljs-number">1</span>]) {
+          index_NOM_DU_JEU = array.indexOf(j);
+        }
+      }
+    }
+
+    <span class="hljs-keyword">if</span> (index_NOM_DU_JEU &gt; -<span class="hljs-number">1</span>) {
+      array.splice(index_NOM_DU_JEU, <span class="hljs-number">1</span>);
+      <span class="hljs-built_in">this</span>.recup_image.id_jeux = ses.setJeuSession(array);
+    }
+  }
+  <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU == <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-built_in">this</span>.create_NOM_DU_JEU) {
+    <span class="hljs-built_in">this</span>.cpt_jeux++;
+    <span class="hljs-keyword">let</span> jc : NOM_DU_JEUComponent = <span class="hljs-comment">//APPEL DU CONSTRUCTEUR DU COMPONENENT</span>
+    <span class="hljs-keyword">let</span> NOM_DU_JEU_list: NOM_DU_JEU[] = [];
+    jc.list[<span class="hljs-string">&#x27;id_image&#x27;</span>] = <span class="hljs-built_in">this</span>.n_theme.toString();
+    jc.onSend(NOM_DU_JEU.list);
+
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      jc.recup(NOM_DU_JEU_list);
+    }, <span class="hljs-number">100</span>)
+
+    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = NOM_DU_JEU_list.length - <span class="hljs-number">1</span>; NOM_DU_JEU_list[i] != <span class="hljs-literal">null</span>; i--) {
+        <span class="hljs-keyword">if</span> (NOM_DU_JEU_list[i].id_crea == +<span class="hljs-built_in">localStorage</span>.getItem(<span class="hljs-string">&#x27;id_crea&#x27;</span>)!) {
+          <span class="hljs-built_in">this</span>.recup_image.id_jeux += <span class="hljs-string">&#x27;NOM_DU_JEU,&#x27;</span> + NOM_DU_JEU_list[i].id + <span class="hljs-string">&#x27;;&#x27;</span>
+          <span class="hljs-keyword">break</span>;
+        }
+      }
+
+    }, <span class="hljs-number">300</span>)
+  }
+}
+
+
+ quitEdit(): <span class="hljs-built_in">void</span> {
+  ...
+  <span class="hljs-built_in">this</span>.create_NOM_DU_JEU = <span class="hljs-literal">false</span>;
+  ...
+  <span class="hljs-built_in">this</span>.edit_create_NOM_DU_JEU = <span class="hljs-literal">null</span>;
+ }
+
+
+</div></code></pre>
+</div>
+        </div>
+        <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </body>
+    </html>

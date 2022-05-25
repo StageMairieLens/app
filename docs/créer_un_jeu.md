@@ -34,7 +34,7 @@ Pour <b>appeler</b> ce component depuis un autre vous devez utiliser le code qui
   <app-nom-du-jeu></app-nom-du-jeu>
 ```
 </div>
-
+<hr>
 <h2 align=center>Etape 2 : Créer le jeu</h2>
 
 La création du jeu est une chose a faire de vous même mais je vous met a disposition des partie de code que vous pouvez reutilisez.
@@ -347,7 +347,7 @@ Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.
 
 <div id="deleteSessionJeu">
 
->***Fonction suppréssion du jeu dans toutes les séssion***
+***Fonction suppréssion du jeu dans toutes les séssion***
 
 ```ts
   deleteSessionJeu(id: number): void {
@@ -399,7 +399,7 @@ Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.
   }
 ```
 </div>
-
+<hr>
 <h2 align=center>Etape 3 : Ajoutez le jeu au panel</h2>
 
 <p>L'ajout du jeu au panel se fait en plusieurs étapes.<br>
@@ -628,4 +628,461 @@ La classe Image est la classe <a href="../src/app/Image.ts"><b><i>Image</i></b><
 <label for="id_input_text" class="form-label align-middle"><b>Nom du paramètre</b></label>
 <input (change)="this.jeu_attribut = id_input_text.value" value="{{this.jeu_attribut}}" type="text"
   class="form-control" id_input_text title="Déscription du paramètre">
+```
+
+**Slider OUI / NON**
+
+```html
+<h2 class="card-title">Nom du paramètre</h2>
+<i *ngIf="!this.jeu_attribut" class="fa-solid fa-volume-xmark"
+  style="margin-right : 2%; color : #ff4083"></i>
+<i *ngIf="this.jeu_attribut" class="fa-solid fa-volume-xmark" style="margin-right : 2%"></i>
+
+<mat-slide-toggle (change)="this.list['jeu_attribut']=+this.jeu_attribut"
+  [(ngModel)]="this.jeu_attribut"></mat-slide-toggle>
+
+<i *ngIf="this.jeu_attribut" class="fa-solid fa-volume-high"
+  style="margin-left : 2%; color : #ff4083"></i>
+<i *ngIf="!this.jeu_attribut" class="fa-solid fa-volume-high" style="margin-left : 2%"></i>
+```
+
+**Slider valeur**
+
+```html
+<h2 class="card-title">Nom du paramètre</h2>
+<mat-slider id="slider" thumbLabel [(ngModel)]="this.jeu_attribut" [displayWith]="formatLabel" tickInterval="1" step="1"
+  min="0" (change)="this.list['jeu_attribut']= input_slider.value" #input_slider max="10" aria-label="units" style="width : 75%"></mat-slider>
+<h2 class="card-title">{{this.jeu_attribut}}</h2>
+```
+
+- <p>Une fois le formulaire créer vous devez implanter la fonction d'édition ou de création</p>
+
+**Edition**
+
+```ts
+save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bd
+  this.onSend_update(this.list)
+  this.router.navigate(['/panel/NOM_DU_JEU']);
+}
+```
+
+**Création**
+
+```ts
+create(): void {//Crée le jeu NOM_DU_JEU avec les parametres soit par défaut, soit modifier à la création
+  this.onSend(this.list);
+  this.router.navigate(['/panel/NOM_DU_JEU']);
+}
+```
+<hr>
+
+<h2 align=center>Etape 3 : Ajoutez le jeu au séssion</h2>
+
+<p>Pour que le jeu puisse être jouer il faut l'ajouter au séssion.<br> Nous allons donc ajoutez du code dans <a href="../src/app/sessions/sessions.component.html"><b><i>sessions.component.html</i></b></a></p>
+
+<p>Dans un premier temps on ajoute la liste des jeux de ce type dans la création de séssion</p>
+
+```html
+
+<!-- Jeux -->
+<div *ngIf="this.play">
+  ...
+  <div *ngIf="this.join && this.getConnected() && !this.inPlay">
+
+    <mat-card-header *ngIf="g.type == 'NOM_DU_JEU'" class="justify-content-center">
+        <mat-card-title style="font-size : 23px">
+          <b>
+            <i class="CLASSE FONTAWESOME D'ICON ADAPTE" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+            {{g.type}}
+          </b>
+        </mat-card-title>
+      </mat-card-header>
+      <img *ngIf="g.type == 'Recopier'" mat-card-image src="../../assets/images/thumb/NOM_DU_JEU.png">
+  </div>
+
+  <div *ngIf="this.inPlay">
+    ...
+
+     <div *ngIf="this.jeu == 'NOM_DU_JEU'">
+      <app-nom-du-jeu [play]="false"></app-nom-du-jeu>
+      <div class="col-md-12 text-center sortButton">
+        <button mat-raised-button style="background-color : red" (click)="redirectSession()" color="primary">
+          <i class="fa-solid fa-angles-left" style="margin-bottom : 1px"></i>
+          <span>Revenir à la listes des jeux</span>
+        </button>
+      </div>
+      <app-nom-du-jeu [jeu]="this.NOM_DU_JEU" [showTitle]="false"></app-nom-du-jeu>
+    </div>
+  </div>
+</div>
+
+<!-- Création et édition de session -->
+<div class="card container" *ngIf="this.create_session">
+  ...
+  <div *ngIf="this.jeuId.length != 0" class="row justify-content-center">
+    ...
+    <mat-card-header *ngIf="g.type == 'NOM_DU_JEU'" class="justify-content-center">
+      <mat-card-title style="font-size : 23px">
+        <b>
+          <i class="CLASSE FONTAWESOME D'ICON ADAPTE" style="color : rgb(51, 51, 51) ; margin-top : 2%"></i>
+          {{g.type}}
+        </b>
+      </mat-card-title>
+    </mat-card-header>
+    <img *ngIf="g.type == 'Recopier'" mat-card-image src="../../assets/images/thumb/NOM_DU_JEU.png">
+  </div>
+
+  ...
+
+  <select value="{{this.jeuSession}}" class="form-control" aria-label="Default select example" (change)="this.changeJeuSession(jeu_session.value)" #jeu_session>
+    ...
+    <option class="text-center">NOM_DU_JEU</option>
+
+  </select>
+</div>
+</div>
+
+  <div *ngIf="jeuSession == 'NOM_DU_JEU'">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col"
+            *ngFor="let col of ['NOM_COLLONE_1','NOM_COLLONE_2','']">
+            {{col}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let element of this.NOM_DU_JEU_list" (click)="addJeu('NOM_DU_JEU',element.id)">
+          <th>{{element.NOM_ATTRIBUT_1}}</th>
+          <th>{{element.NOM_ATTRIBUT_2}}</th>
+          <th>
+            <mat-checkbox *ngIf="!containRecopier(element)" (ngModelChange)="addNOM_DU_JEU(element)" [ngModel]="false"
+              color="primary" class="example-margin"></mat-checkbox>
+            <mat-checkbox *ngIf="containRecopier(element)" (ngModelChange)="deleteNOM_DU_JEU(element)" [ngModel]="true"
+              color="primary" class="example-margin"></mat-checkbox>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  ...
+
+  <div *ngIf="this.previsualiserJeuSession">
+    <div *ngIf="this.jeu == 'NOM_DU_JEU'">
+      <app-nom-du-jeu [jeu]="this.NOM_DU_JEU" [showTitle]="false" [play]="true" [showList]="false"></app-nom-du-jeu>
+    </div>
+  </div>
+</div>
+
+<div class="card container" *ngIf="this.view">
+  <button *ngFor="let b of this.selected_session!.jeuId" mat-raised-button
+    style="background-color : rgb(10, 41, 218) ; margin : 1%"
+    (click)="this.jeuSelected = b.type; this.jeuSelected_id = b.id_jeu" color="primary">
+      <i *ngIf="b.type == 'NOM_DU_JEU'" style="margin-right : 5%" class="CLASSE FONTAWESOME ADAPTE"></i>
+    </button>
+</div>
+```
+<p>Ajoutez les fonctions quit suivents dans le fichier <a href="../src/app/sessions/sessions.component.ts"><b><i>session.component.ts</i></b></a></p>
+
+```ts
+addJeu(type: string, id: number): void {
+
+  switch (type) {
+    ...
+    case 'NOM_DU_JEU':
+      if (this.containNOM_DU_JEU(this.getNOM_DU_JEU(id)!)) {
+        this.deleteNOM_DU_JEU(this.getNOM_DU_JEU(id)!);
+      } else {
+        this.addNOM_DU_JEU(this.getNOM_DU_JEU(id)!)
+      }
+      break;
+  }
+}
+
+deleteJeu(type: string, id: number): void {
+  switch (type) {
+    ...
+    case ('NOM_DU_JEU'):
+      this.deleteNOM_DU_JEU(this.getNOM_DU_JEU(id)!)
+      break;
+  }
+}
+
+//NE PAS OUBLIER D'IMPLANTER LA FONCTION DE RECUPERATION DES JEUX DEPUIS LA BDD
+getNOM_DU_JEU(id: number): NOM_DU_JEU | null {
+  for (let j of this.NOM_DU_JEU_LIST) {
+    if (j.id == id) {
+      return j;
+    }
+  }
+  return null;
+}
+
+addNOM_DU_JEU(r: NOM_DU_JEU): void {
+  this.jeuId.push(
+    { type: "NOM_DU_JEU", id_jeu: r.id }
+  )
+}
+
+deleteNOM_DU_JEU(r: NOM_DU_JEU): void {
+  let index = -1;
+  for (let g of this.jeuId) {
+    if (g.type == 'NOM_DU_JEU' && g.id_jeu == r.id) {
+      index = this.jeuId.indexOf(g, 0);
+    }
+  }
+
+  if (index > -1) {
+    this.jeuId.splice(index, 1);
+  }
+}
+
+containNOM_DU_JEU(r: NOM_DU_JEU): boolean {
+  for (let g of this.jeuId) {
+    if (g.type == 'NOM_DU_JEU' && g.id_jeu == r.id) {
+      return true;
+    }
+  }
+  return false;
+}
+
+...
+playGamePreview(type: string, id: number): void {
+  this.inPlay = true;
+  this.jeu = type;
+
+  switch (type) {
+    ...
+    case 'NOM_DU_JEU':
+      this.NOM_DU_JEU = this.getNOM_DU_JEU(id);
+      break;
+  }
+}
+
+playGame(type: string, id: number): void {
+    this.inPlay = true;
+    this.jeu = type;
+
+    switch (type) {
+      ...
+      case 'NOM_DU_JEU':
+        this.NOM_DU_JEU = this.getNOM_DU_JEU(id);
+        break;
+    }
+}
+
+previewGame(type: string, id: number): void {
+    this.previsualiserJeuSession = true;
+
+    switch (type) {
+      case ('NOM_DU_JEU'):
+        this.jeu = 'NOM_DU_JEU'
+        this.NOM_DU_JEU = this.getNOM_DU_JEU(id)!
+        break;
+    }
+}
+
+// /!\ LE CODE QUI SUIT EST INUTILE SI VOTRE JEU NE POSSEDE PAS DE D'IMAGE ET/OU N'EST PAS ASSOCIE A UN THEME
+deleteSession(session: Session): void {
+  this.onSend_delete(session.id);
+
+  let theme: ThemeComponent = new ThemeComponent(this.route, this.jeuxService, this.router);
+  theme.recup2(theme.data);
+
+  setTimeout(() => {
+    for (let t of theme.test) {
+      if (t.id_session == session.id) {
+        theme.onSend_delete(t.id_theme);
+        for(let j of theme.getTheme(t.id_theme).id_jeux.split(';')) {
+          ...
+
+        if(j.split(',')[0] == 'NOM_DU_JEU') {
+              let jc : NOM_DU_JEUComponent = //APPEL DU CONSTRUCTEUR DU COMPONENENT
+              jc.onSend_delete(j.split(',')[1])
+            }
+        }
+      }
+    }
+  }
+}
+```
+
+<hr>
+
+<h2 align=center>Etape 4 : Ajout au theme</h4>
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i> Attention cette partie n'est nécéssaire que si votre jeu contient des images.</p>
+
+<p>Nous allons maintenant ajouter le jeu dans les themes</p>
+<p>On commence par ajouter le code qui suit au fichier <a href="../src/app/theme/theme.component.html"><b><i>theme.componenent.htmk</i></b></a></p>
+
+```html
+<!-- Création / édition théme -->
+<div class="container card container_list" *ngIf="this.create_theme">
+  ...
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3 class="card-title">Créer automatiquement des jeux à partir de ce thème</h3>
+    </div>
+      ...
+      <div class="col-md-4 text-center">
+        <div class="col-md-12">
+          <label for="" style="font-size : 24px"><b>NOM_DU_JEU</b></label>
+        </div>
+        <div class="col-md-12">
+          <span *ngIf="!this.create_NOM_DU_JEU" style="margin-right : 4% ; color : #ff4083">Non</span>
+          <span *ngIf="this.create_NOM_DU_JEU" style="margin-right : 4%">Non</span>
+
+          <mat-slide-toggle (change)="this.create_NOM_DU_JEU = NOM_DU_JEU_slider.checked"
+            [(ngModel)]="this.create_NOM_DU_JEU" #NOM_DU_JEU_slider></mat-slide-toggle>
+
+          <span *ngIf="!this.create_NOM_DU_JEU" style="margin-left : 4%">Oui</span>
+          <span *ngIf="this.create_NOM_DU_JEU" style="margin-left : 4% ; color : #ff4083 ">Oui</span>
+
+        </div>
+      </div>
+    </div>
+</div>
+```
+
+<p>Puis le code qui suit dans le <b>.ts</b></p>
+
+```ts
+create_NOM_DU_JEU: boolean = false;
+edit_create_NOM_DU_JEU: string | null = null;
+
+edit(element: any): void {
+    this.recup_image = element;
+    this.create_theme = true;
+    this.edit_session = true;
+    for (let i = 0; i < element.id.length; i++) {
+      this.n_theme.push(element.id[i])
+    }
+
+    for (let j of this.recup_image.id_jeux.split(';')) {
+      switch (j.split(',')[0]) {
+        ...
+        case 'NOM_DU_JEU':
+          this.create_NOM_DU_JEU = true;
+          this.edit_create_NOM_DU_JEU = j;
+          break;
+      }
+    }
+}
+
+remove2(id: any): any {
+
+
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+    let session_list: Session[] = []
+    ses.recup(session_list);
+
+    let t : any;
+    for (var i = 0; this.test[i] != null; i++) {
+      if (this.test[i].id_theme == id) {
+        t = this.test[i];
+        this.test.splice(i, 1);
+      }
+    }
+
+    setTimeout(() => {
+      for(let s of session_list) {
+        if(s.id == t.id_session) {
+          ses.onSend_delete(s.id);
+
+          for(let j of t.id_jeux.split(';')) {.
+            ...
+            if(j.split(',')[0] == 'NOM_DU_JEU') {
+              let jc : NOM_DU_JEUComponent = //APPEL DU CONSTRUCTEUR DU COMPONENENT
+              JC.onSend_delete(j.split(',')[1])
+            }
+          }
+        }
+      }
+    }
+}
+
+create(): void {//Crée le thème et les jeux séléctionner
+  this.nouveau_theme['id'] = this.n_theme;
+  ...
+  if (this.create_NOM_DU_JEU) {
+      this.cpt_jeux++;
+      let jc : NOM_DU_JEUComponent = //APPEL DU CONSTRUCTEUR DU COMPONENENT
+      let NOM_DU_JEU_list: NOM_DU_JEU[] = [];
+      jc.list['id_image'] = this.n_theme.toString();
+      jc.onSend(jc.list);
+
+      setTimeout(() => {
+        jc.recup(NOM_DU_JEU_list);
+      }, 300)
+
+      setTimeout(() => {
+        for (let i = NOM_DU_JEU_list.length - 1; NOM_DU_JEU_list[i] != null; i--) {
+          if (NOM_DU_JEU_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+            this.nouveau_theme['id_jeux'] += 'NOM_DU_JEU,' + NOM_DU_JEU_list[i].id + ';'
+            break;
+          }
+        }
+      }, 500)
+    }
+}
+
+save(): void {//Update le thème,ajoute des images dans le thèmes ou supprime les images du thèmes en fonnction du choix de l'utilisateur
+    //Supprime totalement les jeux de la bdd si séléctionner ou en re-créez
+ 
+ if (this.edit_create_NOM_DU_JEU != null && !this.create_NOM_DU_JEU) {
+    this.cpt_jeux++;
+    let jc : NOM_DU_JEUComponent = //APPEL DU CONSTRUCTEUR DU COMPONENENT
+    jc.onSend_delete(this.edit_create_NOM_DU_JEU.split(',')[1])
+    jc.deleteSessionNOM_DU_JEU(+this.edit_create_NOM_DU_JEU.split(',')[1])
+    let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
+    let array = ses.getJeuSession(this.recup_image.id_jeux);
+
+    let index_recopier = -1;
+    for (let j of array) {
+      if (j.type == this.edit_create_NOM_DU_JEU!.split(',')[0]) {
+        if (j.id_jeu == +this.edit_create_NOM_DU_JEU!.split(',')[1]) {
+          index_NOM_DU_JEU = array.indexOf(j);
+        }
+      }
+    }
+
+    if (index_NOM_DU_JEU > -1) {
+      array.splice(index_NOM_DU_JEU, 1);
+      this.recup_image.id_jeux = ses.setJeuSession(array);
+    }
+  }
+  else if (this.edit_create_NOM_DU_JEU == null && this.create_NOM_DU_JEU) {
+    this.cpt_jeux++;
+    let jc : NOM_DU_JEUComponent = //APPEL DU CONSTRUCTEUR DU COMPONENENT
+    let NOM_DU_JEU_list: NOM_DU_JEU[] = [];
+    jc.list['id_image'] = this.n_theme.toString();
+    jc.onSend(NOM_DU_JEU.list);
+
+    setTimeout(() => {
+      jc.recup(NOM_DU_JEU_list);
+    }, 100)
+
+    setTimeout(() => {
+      for (let i = NOM_DU_JEU_list.length - 1; NOM_DU_JEU_list[i] != null; i--) {
+        if (NOM_DU_JEU_list[i].id_crea == +localStorage.getItem('id_crea')!) {
+          this.recup_image.id_jeux += 'NOM_DU_JEU,' + NOM_DU_JEU_list[i].id + ';'
+          break;
+        }
+      }
+
+    }, 300)
+  }
+}
+
+
+ quitEdit(): void {
+  ...
+  this.create_NOM_DU_JEU = false;
+  ...
+  this.edit_create_NOM_DU_JEU = null;
+ }
+
+
 ```
