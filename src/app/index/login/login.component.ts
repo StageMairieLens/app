@@ -3,7 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Login } from './Login';
 import { JeuxService } from '../../jeux.service';
-import { EmailValidator } from '@angular/forms';
 
 
 @Component({
@@ -56,21 +55,8 @@ export class LoginComponent implements OnInit {
   onSend(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('send', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
@@ -78,19 +64,9 @@ export class LoginComponent implements OnInit {
   onSend_verify(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('user_verify', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
       error: err => {
-        console.log(err);
         var liste: Login[] = [];
         this.recup(liste);
 
@@ -112,42 +88,16 @@ export class LoginComponent implements OnInit {
   onSend_update(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('user_update', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res.name);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
 
   onSend_verify_deco(list: any) {
 
     const formData: FormData = new FormData();
-    /*for(var i = 0;i<list.lenght;i++){
-      formData.append('list[]',list[i]);
-    }*/
     formData.append('user_verify_deco', list);
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
   onSend_delete(id: any) {
@@ -155,17 +105,7 @@ export class LoginComponent implements OnInit {
     const formData: FormData = new FormData();
     var list={table:'user',id:id,id_table:'id_user'};
     formData.append('delete', JSON.stringify(list));
-    console.log(formData);
     this.jeuxService.onSend(formData).subscribe({
-      next: res => {
-        console.log(res);
-
-      },
-
-      error: err => {
-        console.log(err);
-      },
-
     });
   }
  
