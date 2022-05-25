@@ -44,13 +44,15 @@ export class SessionsComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
   list_image: Image[] = [];
-
+  pseudo_prof:string=localStorage.getItem('id_pseudo')!;
   recupRecopier(tab: any) {
     this.jeuxService.recup_recopier(tab).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        tab.push(
-          new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
-        );
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          tab.push(
+            new Recopier(data[i].id_recopier, data[i].date_recopier, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].title_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_bo, data[i].bu_text_co, data[i].i_bg_co, data[i].i_text_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
+          );
+        }
       }
 
     })
@@ -59,9 +61,11 @@ export class SessionsComponent implements OnInit {
   recupMemory(donne: any) {
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        donne.push(
-          new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps, data[i].id_crea)
-        );
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(
+            new Memory(data[i].id_memory, data[i].date_memory, this.getImage(data[i].id_image).slice(1), this.getImage(data[i].id_image)[0], data[i].isVoca, data[i].nb_pair, [data[i].sett0, data[i].sett1], data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].tmps, data[i].id_crea)
+          );
+        }
       }
     })
 
@@ -70,10 +74,11 @@ export class SessionsComponent implements OnInit {
   recupReconnaitre(donne: any) {
     this.jeuxService.recup_reconnaitre(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-
-        donne.push(
-          new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
-        );
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(
+            new Reconnaitre(data[i].id_reco, data[i].date_reco, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].isVoca, data[i].id_crea)
+          );
+        }
       }
     })
 
@@ -82,9 +87,11 @@ export class SessionsComponent implements OnInit {
   recupAbecedaire(donne: any) {
     this.jeuxService.recup_abcd(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        donne.push(
-          new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri, data[i].id_crea)
-        );
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(
+            new Abecedaire(data[i].id_abcdr, data[i].date_abcdr, this.getImage(data[i].id_image), data[i].bg_color, data[i].text_color, data[i].gaw, data[i].waw, data[i].progress, data[i].bu_bg_co, data[i].bu_txt_co, data[i].isVoca, data[i].type_ecri, data[i].id_crea)
+          );
+        }
       }
     })
 
@@ -93,9 +100,11 @@ export class SessionsComponent implements OnInit {
   recupBoyGirl(donne: any) {
     this.jeuxService.recup_bg(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        donne.push(
-          new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri, data[i].id_crea)
-        );
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(
+            new BoyGirl(data[i].id_gb, data[i].date_gb, this.getMots(data[i].l_m_f), this.getMots(data[i].l_m_b), data[i].bg_color, data[i].bg_color_f, data[i].bg_color_b, data[i].bg_color_m, data[i].word_f, data[i].word_b, data[i].word_m, data[i].title_f, data[i].title_b, data[i].title_m, data[i].text_f, data[i].text_b, data[i].text_m, data[i].type_ecri, data[i].id_crea)
+          );
+        }
       }
     })
   }
@@ -103,9 +112,11 @@ export class SessionsComponent implements OnInit {
   recupPuzzle(donne: any) {
     this.jeuxService.recup_puzzle(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        donne.push(
-          new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe, data[i].id_crea)
-        );
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(
+            new Puzzle(data[i].id_puzzle, data[i].date_puzzle, this.getImage(data[i].id_images), data[i].bg_color, data[i].title_color, data[i].text_color, data[i].bu_bg_co, data[i].bu_txt_co, data[i].type_ecri, data[i].decoupe, data[i].id_crea)
+          );
+        }
       }
 
     })

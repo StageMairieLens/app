@@ -128,7 +128,7 @@ Nous utilisons le style des cadres **boostrap** vous pouvez donc utiliser le cod
 
 <h3 align=center>La liste des jeux</h3>
 
-<p>Une fois votre jeu terminé vous devez créer une classe avec les attributs de votre jeu qui le rendront personalisable (couleur de background , couleur de texte, police d'écriture,ect...)
+- <p>Une fois votre jeu terminé vous devez créer une classe avec les attributs de votre jeu qui le rendront personalisable (couleur de background , couleur de texte, police d'écriture,ect...)
 </p>
 <p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
 Votre classe doit contenir les deux attributs suivant !</p>
@@ -136,4 +136,145 @@ Votre classe doit contenir les deux attributs suivant !</p>
 ```ts
   id: number;
   date: string;
+```
+
+- <p>Vous devez ensuite créer une table dans la base de données correspondant à votre jeu</p>
+
+***Exemple***
+<img src="./images/capture_bd.png">
+
+<p></p>
+
+- <p>Vous devez créer le fichier <b>PHP</b> correspondant à la récupération des données (vue) </p>
+
+```php
+<?php
+header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Authorization, Content-Type, Accept");
+require_once("connection.php");
+$conn = new Connection();
+$result;
+$myArray=array();
+
+    $sql = "SELECT * FROM {NOM_DE_LA_TABLE}";
+    $result = $conn->db->query($sql);
+    
+        while($row = $result->fetch(PDO::FETCH_ASSOC)){
+            $myArray[] = $row;
+        }
+    
+    $myJSON = json_encode($myArray);
+    echo $myJSON;
+?>
+```
+
+- <p>Vous devez ensuite ajoutez dans votre fichier <b>.ts</b> les fonctions de récupération et d'envoie dans la base de données</p>
+
+***Récupération***
+```ts
+recup(tab: any) {//Récupére le jeu depuis la BDD
+    this.jeuxService.recup_recopier(tab).subscribe(data => {
+      for (var i = 0; data[i] != null; i++) {
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          tab.push(
+            //Appeler le constructeur de votre jeu
+          );
+        }
+      }
+    })
+  }
+```
+
+***Insertion***
+
+```ts
+  onSend(list: any) {//Ajoute le jeu dans la BDD
+    const formData: FormData = new FormData();
+    formData.append('send', JSON.stringify(list));
+    this.jeuxService.onSend(formData).subscribe({
+      next: res => {
+        this.reponse = res;
+      },
+    });
+  }
+```
+
+***Update***
+
+```ts
+  onSend_update(list: any) {//Update le jeu dans la bdd
+    const formData: FormData = new FormData();
+    list['id_table']='ID_NOM_DU_JEU';//Permet de reconnaitre la table
+    formData.append('update', JSON.stringify(list));
+    this.jeuxService.onSend(formData).subscribe({
+    });
+  }
+```
+
+***Delete***
+
+```ts
+  onSend_delete(id_jeu: any) {//Suprimme un jeu de la bdd
+
+    const formData: FormData = new FormData();
+    var list={table:'NOM_DE_LA_TABLE_DU_JEU',id:id_jeu,id_table:'ID_NOM_DU_JEU'};//Permet de reconnaitre la table, le nom de l'id et le numero de l'id
+    formData.append('delete', JSON.stringify(list));
+    this.jeuxService.onSend(formData).subscribe({
+    });
+  }
+```
+
+<p>Si vous souhaitez faire afficher vos jeu vous devez dans un premier temps les récupérer depuis la bdd en faisant l'appel de la fonction <b>recup</b>. Cela se fait dans la fonction <b>ngOnInit</b> dans le fichier <b>.ts</b></p>
+
+***Exemple***
+
+```ts
+data : NOM_DU_JEU[] = [];
+ngOnInit(): void {
+  this.recup(this.data);
+}
+```
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
+Vous devez considérez que cette action prendra un certain temps donc il est conseillez si vous souhaitez agir sur la liste récupérer de laissez le temps en utilisant la fonction <b>setTimeout</b></p>
+
+- <p> Pour maintenant afficher la liste des jeux vous devez ajoutez le code HTML qui suit
+
+```html
+ <table class="table table-hover text-center">
+        <thead>
+          <tr>
+            <th scope="col"
+              *ngFor="let col of ['NOM_COLLONE_1',NOM_COLLONE_2','Actions']">
+              {{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let element of this.data">
+            <th>{{element.attribut_1}}</th> <!-- element correspondant à la collone 1 -->
+            <th>{{element.atrribut_2}}</th> <!-- element correspondant à la collone 2 -->
+
+            <!-- Actions -->
+            <th class="button_actions">
+              <!-- Prévisualiser le jeu -->
+              <button mat-raised-button title="Prévisualiser le jeu" color="primary" (click)="preview(element)">
+                <i class="fa-solid fa-eye fa-lg fa-lg" style="margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Editer le jeu -->
+              <button mat-raised-button title="Editer le jeu" style="background-color : rgb(223, 175, 18)"
+                color="primary" (click)="edit(element)">
+                <i class="fa-solid fa-pen fa-lg" style=" margin-bottom : 2px"></i>
+              </button>
+
+              <!-- Supprimer le jeu -->
+              <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
+                (click)="delete(element)">
+                <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
+              </button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
 ```
