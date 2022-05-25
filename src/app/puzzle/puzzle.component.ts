@@ -38,7 +38,7 @@ export class PuzzleComponent implements OnInit {
 
   reponse = "";
   data: Puzzle[] = [];
-  recup(donne: any) {
+  recup(donne: any) {//Recupere les jeux Puzzle crée par l'utilisateur
     this.jeuxService.recup_puzzle(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         if(data[i].id_crea == +localStorage.getItem('id_crea')!){
@@ -51,7 +51,7 @@ export class PuzzleComponent implements OnInit {
     })
   }
 
-  getImage(s: string): ImageImport[] {
+  getImage(s: string): ImageImport[] {//Recupere les images et les ajoutes dans un tableau
     let res = [];
     let tab = s.split(',');
     if (s.length != 0) {
@@ -114,7 +114,7 @@ export class PuzzleComponent implements OnInit {
 
 
   list_login : Login[] = [];
-  recupLogin(donne: any) {
+  recupLogin(donne: any) {//Recupere les données des utilisateurs
     this.jeuxService.recup_user(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
@@ -132,7 +132,7 @@ export class PuzzleComponent implements OnInit {
   }
 
   list_session : Session[] = [];
-  recupSession(donne: any) {
+  recupSession(donne: any) {//Recupere les sessions
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -152,7 +152,7 @@ export class PuzzleComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {
+  getJeuSession(s: string): Jeu[] {//Récupere la liste des jeux de la session et les mets en tableau
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -165,7 +165,7 @@ export class PuzzleComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {//Récupere la liste des joueurs de la session et les mets en tableau
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
@@ -265,7 +265,7 @@ export class PuzzleComponent implements OnInit {
   selected_image: HTMLImageElement[] = [];
   showModel: boolean = false;
 
-
+  // Check si le puzzle est fini
   checkPuzzle(): boolean {
     for (let i = 0; i < this.r!.decoupe * this.r!.decoupe; i++) {
       if (this.decoupage[i] != this.plateau[i][0]) {
@@ -371,15 +371,18 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
+  //Permet de previsualiser le jeu
   previewPuzzle(r: Puzzle): void {
     this.r = r;
     this.puzzle_previsualiser = true;
   }
 
+  //Quitte la previsualition en cours 
   quitPreviewPuzzle(): void {
     this.puzzle_previsualiser = false;
   }
 
+  //delete le jeu Puzzle de toutes les sessions qui le contient
   deletePuzzle(id : number, s : Session): void {
     let index = -1;
     for (let g of s.jeuId) {
@@ -393,7 +396,7 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
-  setJoueurs(s: Session): string {
+  setJoueurs(s: Session): string {//Cast les données des joueurs dans le type string pour la base de donnée de la table session
     let res = "";
 
     for (let j of s.joueur) {
@@ -407,7 +410,7 @@ export class PuzzleComponent implements OnInit {
     return res;
   }
 
-  setJeuSession(tab: Jeu[]): string {
+  setJeuSession(tab: Jeu[]): string {//Cast les données des jeux dans le type string pour la base de donnée de la table session
     let res = "";
     for (let g of tab) {
       res += g.type + ',' + g.id_jeu + ';'
@@ -415,7 +418,7 @@ export class PuzzleComponent implements OnInit {
     return res;
   }
 
-  deleteSessionPuzzle(id : number) : void {
+  deleteSessionPuzzle(id : number) : void {//Delete le jeu de toutes sessions auquel il appartient
     let ses : SessionsComponent = new SessionsComponent(this.router,this.route,this.jeuxService);
     for (let s of this.list_session) {
       for(let jeu of s.jeuId) {
@@ -428,7 +431,7 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
-  deleteThemePuzzle(id: number): void {
+  deleteThemePuzzle(id: number): void {//Delete le jeu Abecedaire du theme
     let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
     let liste: any = [];
     theme.recup2(liste);
@@ -455,7 +458,7 @@ export class PuzzleComponent implements OnInit {
     }, 200)
   }
 
-  deleteGamePuzzle(r: Puzzle): void {
+  deleteGamePuzzle(r: Puzzle): void {//Supprime le jeu Abecedaire de partout
     this.onSend_delete(r.id);
     this.deleteSessionPuzzle(r.id);
     this.deleteThemePuzzle(r.id);
@@ -465,7 +468,7 @@ export class PuzzleComponent implements OnInit {
     }, 400)
   }
 
-  setPrevisualiserPuzzle(prev: boolean): void {
+  setPrevisualiserPuzzle(prev: boolean): void {//Affiche le jeu dans la prévisualisation
     if (prev == true) {
       this.r = new Puzzle(0, '', this.selectedImages, this.puzzle_bg_color, this.puzzle_title_color, this.puzzle_text_color, this.puzzle_button_bg_color, this.puzzle_button_text_color, this.puzzle_type_ecriture, Number(this.decoupe),Number(this.id_crea));
       this.puzzle_previsualiser = true;
@@ -479,17 +482,17 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
-  setActive(element: Element | null): void {
+  setActive(element: Element | null): void {// Donne Du style
     (<HTMLButtonElement>element!).style.background = 'white';
     (<HTMLButtonElement>element!).style.color = 'black';
   }
 
-  setInactive(element: Element | null) {
+  setInactive(element: Element | null) {//Enleve  Du style
     (<HTMLButtonElement>element!).style.background = '';
     (<HTMLButtonElement>element!).style.color = 'white';
   }
 
-  nextStep(): void {
+  nextStep(): void {//Permet d'aller a l'étape suivante dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep < 2) {
       step++;
@@ -505,7 +508,7 @@ export class PuzzleComponent implements OnInit {
 
   }
 
-  previousStep(): void {
+  previousStep(): void {//Permet d'aller a l'étape précédente dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
@@ -513,7 +516,7 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
-  save(): void {
+  save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bd
     this.onSend_update(this.list)
     this.router.navigate(['/panel/Puzzle']);
   }
@@ -522,13 +525,13 @@ export class PuzzleComponent implements OnInit {
     window.location.href = '/panel/Puzzle/edit/' + p.id;
   }
 
-  create(): void {
+  create(): void {//Crée le jeu Puzzle avec les parametres soit par défaut, soit modifier à la création
     this.list = {table:'Puzzle', id_images: this.image.toString(), id: 1, bg_color: this.puzzle_bg_color,text_co: this.puzzle_text_color, title_color: this.puzzle_title_color,bu_bg_co: this.puzzle_button_bg_color,bu_text_co: this.puzzle_button_text_color,type_ecri: this.puzzle_type_ecriture, decoupe: this.decoupe,id_crea:Number(this.id_crea) };
     this.onSend(this.list)
     this.router.navigate(['/panel/Puzzle']);
   }
 
-  addImage(img: ImageImport): void {
+  addImage(img: ImageImport): void {//ajoute les images choisit dans la liste
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
@@ -536,7 +539,7 @@ export class PuzzleComponent implements OnInit {
     }
   }
 
-  deleteImage(i: ImageImport): void {
+  deleteImage(i: ImageImport): void {//Supprime les images de la liste
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
