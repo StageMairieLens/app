@@ -254,7 +254,6 @@ export class PanelComponent implements OnInit {
   formStep: number = 0;
 
 
-
   ngOnInit(): void {
 
     this.recupImage(this.liste_image)

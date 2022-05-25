@@ -175,6 +175,8 @@ $myArray=array();
 
 - <p>Vous devez ensuite ajoutez dans votre fichier <b>.ts</b> les fonctions de récupération et d'envoie dans la base de données</p>
 
+<div id="recup"></div>
+
 ***Récupération***
 ```ts
 recup(tab: any) {//Récupére le jeu depuis la BDD
@@ -343,7 +345,7 @@ Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.
 
 <div id="deleteSessionJeu">
 
-***Fonction suppréssion du jeu dans toutes les séssion***
+>***Fonction suppréssion du jeu dans toutes les séssion***
 
 ```ts
   deleteSessionJeu(id: number): void {
@@ -395,3 +397,95 @@ Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.
   }
 ```
 </div>
+
+<h2 align=center>Etape 3 : Ajoutez le jeu au panel</h2>
+
+<p>L'ajout du jeu au panel se fait en plusieurs étapes.<br>
+La prémière étape consiste à ajouté dans panel la route pour l'affichage de la liste des jeux, la création et l'édition du jeu</p>
+
+<h3 align=center>Ajout de la route</h3>
+
+<p>Dans le fichier <a href="../src/app/panel/panel.component.ts"><b><i>panel.component.ts</i></b></a> ajoutez <u>la fonction de récupération</u> du jeu depuis la BDD (<a href="#recup">voir fonction recup</a>)
+
+- <p>Ensuit il faut mettre en place la route. Pour cela ajoutez les lignes suivants dans la fonction <b>ngOnInit()</b></p>
+
+```ts
+this.NOM_DU_JEU_list : NOM_DU_JEU[] = [];
+ngOnInit(): void {
+  this.recup_NOM_DU_JEU(this.NOM_DU_JEU_list)
+  ...
+
+  else if (this.selectedGame == 'NOM_DU_JEU') {
+    if (this.getNOM_DU_JEU()! == null) {
+      this.router.navigate(['/panel/NOM_DU_JEU']);
+    } else {
+      this.NOM_DU_JEU = this.getNOM_DU_JEU();
+    }
+  }
+
+  ...
+}
+```
+
+- <p>Ensuite ajouter la fonction <b>getNOM_DU_JEU() dans le fichier comme suit :</b></p>
+
+```ts
+  getNOM_DU_JEU(): NOM_DU_JEU | null {
+    for (let j of this.NOM_DU_JEU_list) {
+      if (j.id == this.id_game) {
+        return j;
+      }
+    }
+    return null;
+  }
+```
+
+- <p>On ajoute maintenant l'appel dans le <b>HTML</b> mais avant cela ajoutez les variables dans le fichier <b>.ts</b> de votre jeu afin de géré l'affichage lors de l'appel. <br>
+  On ajoutera au moins les variables qui suivent</p>
+
+  ```ts
+  @Input() jeu : NOM_DU_JEU | null;
+  @Input() showTitle: boolean = true; //affiche le titre du jeu
+  @Input() showList: boolean = false; //Affiche la liste des jeu
+  @Input() play: boolean = true;//Lance le jeu
+  @Input() create_game: boolean = false;//Crée le jeu si true
+  @Input() edit: boolean = false;//Va dans l'edit si true
+  ```
+
+<p>On commence par ajoutez les boutons quit permettent d'acceder au menu du jeu dans le  panel pour cela ajoutez le code quit suit dans le fichier <a href="../src/app/panel/panel.component.html"><b><i>panel.componenent.html</i></b></a></p>
+
+```html
+<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+...
+  <li class="nav-item">
+    <a class="nav-link" href="/panel/NOM_DU_JEU" role="">
+      NOM_DU_JEU
+    </a>
+  </li>
+</nav>
+
+...
+
+<!-- Panel - Page d'accueil -->
+<div class="card container" *ngIf="this.panel == null">
+...
+    <!-- Jeux -->
+    <div class="col-md-6">
+      ...
+      <i *ngIf="c == 'NOM_DU_JEU'" class="METTRE ICI LA CLASSE D'UNE ICON FONTAWESOME APPROPRIER AU JEU"></i>
+      ...
+    </div>
+
+</div>
+
+<!-- Si /panel/create -->
+<div *ngIf="this.panel == 'create'">
+  ...
+  <button class="choice" *ngFor="let c of this.optionGame" [routerLink]="['/panel/', c,'create']" mat-raised-button color="primary">
+    ...
+    <i *ngIf="c == 'NOM_DU_JEU'" class="METTRE ICI LA CLASSE D'UNE ICON FONTAWESOME APPROPRIER AU JEU"></i>
+    ...
+  </button>
+</div>
+
+```

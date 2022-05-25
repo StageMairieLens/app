@@ -46,7 +46,7 @@ export class ReconnaitreComponent implements OnInit {
     })
   }
 
-  
+
   data: Reconnaitre[] = [];
   login: string = localStorage.getItem('id_pseudo')!;
 
@@ -211,7 +211,7 @@ export class ReconnaitreComponent implements OnInit {
 
       for (let i of this.selectedImages) {
         this.image.push(i.id);
-        
+
       }
 
       this.list = //Recupere les données dans une liste pour l'update
@@ -232,26 +232,26 @@ export class ReconnaitreComponent implements OnInit {
   typeEcriture: string = "CAPITAL"; // default
   @Input() r: Reconnaitre | null;
   @Input() showTitle: boolean = true;//affiche le titre du jeu
-  @Input() showList: boolean = false;
+  @Input() showList: boolean = false; //affiche la liste des jeu
   @Input() play: boolean = true;//Lance le jeu
   @Input() create_game: boolean = false;//Crée le jeu si true
   @Input() edit: boolean = false;//Va dans l'edit si true
 
 
   clicked = false; //Le boutton n'est pas désactiver
-  
+
   liste_image: Image[] = [];
   selectedImages: Image[] = [];
   erreur_image: Erreur[] = [];
-  
+
   prochaine_image = 0;
   taille_to = 0;
   //Variable qui contient l'image a trouver
-  
+
   liste_mot_boutton: string[] = [];
   compteur = 0; //Compte le nombre d'erreur
   compteur_image = 0; //Compte erreur par image
-  
+
   progressValue: Progress[] = [
     Progress.Blue,
     Progress.Green,
@@ -259,7 +259,7 @@ export class ReconnaitreComponent implements OnInit {
     Progress.Orange,
     Progress.Red
   ];
-  //Permet de mettre le son 
+  //Permet de mettre le son
   synthesis: SpeechSynthesis | null = window.speechSynthesis;
   voice: SpeechSynthesisVoice | null = this.synthesis!.getVoices().filter(function (voice) {
     return voice.lang === 'fr';
@@ -469,7 +469,7 @@ export class ReconnaitreComponent implements OnInit {
     this.r = r;
     this.reconnaitre_previsualiser = true;
   }
-  //Quitte la previsualition en cours 
+  //Quitte la previsualition en cours
   quitPreviewReconnaitre(): void {
     this.reconnaitre_previsualiser = false;
   }
