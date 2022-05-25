@@ -1,8 +1,9 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css">
 <h1 align=center>Ajouter un jeu dans l'application</h1> 
-<p align=center><i class='fa-solid fa-exclamation-triangle fa-lg' style='color : yellow'></i> Tout ce qui suit doit être réaliser dans l'application angular
+<p align=center><i class='fa-solid fa-exclamation-triangle fa-lg' style='color : yellow'></i> Tout ce qui suit doit être réaliser dans l'application <i class="fa-brands fa-angular" style="color : #dd0031"></i> Angular.
 </p>
-<span align=center>Nous avons utiliser <b>boostrap 4.0</b> et <b>angular material</b> pour le front du projet en grande partie vous pouvez donc allez piocher des styles directement depuis ces librairie pour le rendu front de votre jeu</span>
+<span align=center>Nous avons utiliser <b>boostrap 4.0</b> et <b>angular material</b> pour le front du projet en grande partie vous pouvez donc allez piocher des styles directement depuis ces librairie pour le rendu front de votre jeu.</span>
+<p>Dans le cas d'une intérogation je vous conseille de regardez les autres componenent de jeu dans le dossier source (Angular).</p>
 
 <hr>
 
@@ -278,3 +279,24 @@ Vous devez considérez que cette action prendra un certain temps donc il est con
         </tbody>
       </table>
 ```
+
+<p>La collone actions contient des boutons qui appel des fonctions nécéssaire</p>
+
+***Prévisualisation du jeu***
+
+```ts
+  preview(prev: boolean): void {
+    if (prev == true) {
+      this.jeu = //APPEL ICI DU CONSTRUCTEUR DU JEU AVEC LES PARAMETRES DU JEU
+      this.previsualiser = true;
+    }
+    else {
+      this.previsualiser = false;
+      setTimeout(() => {
+        this.setInactive(document.getElementsByClassName('breadcrumb-item')!.item(0)!.children.item(0));
+        this.setActive(document.getElementsByClassName('breadcrumb-item')!.item(this.formStep)!.children.item(0));
+      }, 0);
+    }
+  }
+```
+Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci
