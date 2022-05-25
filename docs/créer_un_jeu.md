@@ -11,9 +11,13 @@
 <h2 align=center>Sommaire</h2>
 
 <a href="#step1"><h4>Etape 1 - Créer le componenent pour le jeu</h4></a>
+
 <a href="#step2"><h4>Etape 2 - Créer le jeu</h4></a>
+
 <a href="#step3"><h4>Etape 3 - Ajoutez le jeu au panel</h4></a>
+
 <a href="#step4"><h4>Etape 4 - Ajoutez le jeu au séssion</h4></a>
+
 <a href="#step5"><h4>Etape 5 - Ajout au theme</h4></a>
 
 <hr>
