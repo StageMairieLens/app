@@ -489,3 +489,39 @@ ngOnInit(): void {
 </div>
 
 ```
+
+- <p>Ensuite, nous allons ajoutez l'appel de du formulaire de création / édition et l'affichage de la liste des jeux. <br> Ajoutez le code qui suit dans <a href="../src/app/panel/panel.component.html"><b><i>panel.component.html</a></b></i></p>
+
+```html
+<!-- Si un jeu est selectionné -->
+<div *ngIf="this.selectedGame != '' && this.optionGame.includes(this.selectedGame!)">
+
+  <div *ngIf="this.panel_option == 'create'">
+    ...
+
+    <!-- Formulaire NOM_DU_JEU -->
+    <div class="card-body" *ngIf="this.selectedGame == 'NOM_DU_JEU'">
+      <app-nom-du-jeu [play]="false" [showTitle]="false" [create_game]="true"></app-nom-du-jeu>
+    </div>
+  </div>
+
+  <div *ngIf="this.panel_option == 'showList'">
+    ...
+
+    <div *ngIf="this.selectedGame == 'NOM_DU_JEU'">
+      <app-nom-du-jeu [play]="false" [showTitle]="false" [showList]="true"></app-nom-du-jeu>
+    </div>
+
+  </div>
+
+  <div *ngIf="this.panel_option == 'edit'">
+    ...
+    
+    <!-- Formulaire édition NOM_DU_JEU -->
+    <div *ngIf="this.selectedGame == 'NOM_DU_JEU'">
+      <app-nom-du-jeu [play]="false" [showTitle]="false" [edit]="true" [jeu]="this.NOM_DU_JEU"></app-nom-du-jeu>
+    </div>
+  </div>
+
+</div>
+```
