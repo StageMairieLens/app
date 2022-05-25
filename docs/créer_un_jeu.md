@@ -6,12 +6,21 @@
 <p>Dans le cas d'une intérogation je vous conseille de regardez les autres componenent de jeu dans le dossier source (Angular).</p>
 
 <p> <i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i> Si votre jeu doit contenir des images : créer une liste d'<a href="../src/app/Image.ts"><b><i>Image</i></b></a> qui contiendra le resultat de la méthode <b><u>recup</u></b> du component <a href="../src/app/images/images.component.ts"><b><i>images.componenent.ts</i></b></a> qui ira chercher les images dans la BDD.</p>
+<hr>
+
+<h2 align=center>Sommaire</h2>
+
+<a href="#step1"><h4>Etape 1 - Créer le componenent pour le jeu</h4></a>
+<a href="#step2"><h4>Etape 2 - Créer le jeu</h4></a>
+<a href="#step3"><h4>Etape 3 - Ajoutez le jeu au panel</h4></a>
+<a href="#step4"><h4>Etape 4 - Ajoutez le jeu au séssion</h4></a>
+<a href="#step5"><h4>Etape 5 - Ajout au theme</h4></a>
 
 <hr>
 
 <p align=center></p>
 
-<h2 align=center>Etape 1 : Créer le component pour le jeu</h2>
+<h2 align=center id=step1>Etape 1 : Créer le component pour le jeu</h2>
 Rendez vous dans la racine du projet dans un shell et tapez la commandes quit suit
 
 ```sh
@@ -35,7 +44,7 @@ Pour <b>appeler</b> ce component depuis un autre vous devez utiliser le code qui
 ```
 </div>
 <hr>
-<h2 align=center>Etape 2 : Créer le jeu</h2>
+<h2 align=center id=step2>Etape 2 : Créer le jeu</h2>
 
 La création du jeu est une chose a faire de vous même mais je vous met a disposition des partie de code que vous pouvez reutilisez.
 
@@ -400,7 +409,7 @@ Cette fonction permet de prévisualiser le jeu avec les paramètres de celui-ci.
 ```
 </div>
 <hr>
-<h2 align=center>Etape 3 : Ajoutez le jeu au panel</h2>
+<h2 align=center id=step3>Etape 3 : Ajoutez le jeu au panel</h2>
 
 <p>L'ajout du jeu au panel se fait en plusieurs étapes.<br>
 La prémière étape consiste à ajouté dans panel la route pour l'affichage de la liste des jeux, la création et l'édition du jeu</p>
@@ -676,7 +685,7 @@ create(): void {//Crée le jeu NOM_DU_JEU avec les parametres soit par défaut, 
 ```
 <hr>
 
-<h2 align=center>Etape 3 : Ajoutez le jeu au séssion</h2>
+<h2 align=center id=step4>Etape 4 : Ajoutez le jeu au séssion</h2>
 
 <p>Pour que le jeu puisse être jouer il faut l'ajouter au séssion.<br> Nous allons donc ajoutez du code dans <a href="../src/app/sessions/sessions.component.html"><b><i>sessions.component.html</i></b></a></p>
 
@@ -911,7 +920,7 @@ deleteSession(session: Session): void {
 
 <hr>
 
-<h2 align=center>Etape 4 : Ajout au theme</h4>
+<h2 align=center id=step5>Etape 5 : Ajout au theme</h4>
 <p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i> Attention cette partie n'est nécéssaire que si votre jeu contient des images.</p>
 
 <p>Nous allons maintenant ajouter le jeu dans les themes</p>
