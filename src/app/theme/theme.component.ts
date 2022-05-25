@@ -28,7 +28,7 @@ export class ThemeComponent implements OnInit {
 
   math = Math;
 
-  
+
   affiche: Boolean = false;
   temps: number = 0;
   test: any = [];//Récupère les donées de la base
@@ -112,6 +112,7 @@ export class ThemeComponent implements OnInit {
   onRemove(event: File) {//Retire les images de la liste
     this.files.splice(this.files.indexOf(event), 1);
   }
+
   recup(donne: any) {//Recupère les images crée par l'utilisateur
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
@@ -152,7 +153,7 @@ export class ThemeComponent implements OnInit {
     var list2 = list;
     list2.id = list2.id.toString();
     const formData: FormData = new FormData();
-    
+
     formData.append('send', JSON.stringify(list2));
     this.jeuxService.onSend(formData).subscribe({
       error: err => {
@@ -161,7 +162,7 @@ export class ThemeComponent implements OnInit {
 
     });
   }
-  onSend_delete(id: any) {//Supprime une ligne de la table en fonction de l'id 
+  onSend_delete(id: any) {//Supprime une ligne de la table en fonction de l'id
 
     const formData: FormData = new FormData();
     var list={table:'Theme',id:id,id_table:'id_theme'};
@@ -176,12 +177,12 @@ export class ThemeComponent implements OnInit {
     list2['id_table']='id_theme';
     list2['table']='Theme';
     const formData: FormData = new FormData();
-    
+
     formData.append('update', JSON.stringify(list2));
     this.jeuxService.onSend(formData).subscribe({
     });
   }
-  
+
   remove(id: any, liste: any): any {//Enleve l'image de la liste
     for (var i = 0; liste[i] != null; i++) {
       if (liste[i] == id) {
@@ -194,7 +195,7 @@ export class ThemeComponent implements OnInit {
     window.location.reload();
   }
   remove2(id: any): any {
-    
+
 
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     let session_list: Session[] = []
@@ -321,7 +322,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for (let i = abecedaire_list.length - 1; abecedaire_list[i] != null; i--) {
           if (abecedaire_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.nouveau_theme['id_jeux'] += 'Abécédaire,' + abecedaire_list[i].id + ';'
+            this.nouveau_theme['id_jeux'] += 'Abecedaire,' + abecedaire_list[i].id + ';'
             break;
           }
         }
@@ -555,7 +556,7 @@ export class ThemeComponent implements OnInit {
       setTimeout(() => {
         for (let i = abecedaire_list.length - 1; abecedaire_list[i] != null; i--) {
           if (abecedaire_list[i].id_crea == +localStorage.getItem('id_crea')!) {
-            this.recup_image.id_jeux += 'Abécédaire,' + abecedaire_list[i].id + ';'
+            this.recup_image.id_jeux += 'Abecedaire,' + abecedaire_list[i].id + ';'
             break;
           }
         }
