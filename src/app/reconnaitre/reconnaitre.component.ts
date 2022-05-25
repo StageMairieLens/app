@@ -84,7 +84,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {//Récupere la session et lui rajoute le jeu
+  getJeuSession(s: string): Jeu[] {//Récupere la liste des jeux de la session et les mets en tableau
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -97,7 +97,7 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number): Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {//Récupere la liste des joueurs de la session et les mets en tableau
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
@@ -120,7 +120,7 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  getImage(s: string): Image[] {//Recupere les images et les ajoutes dans une liste
+  getImage(s: string): Image[] {//Recupere les images et les ajoutes dans un tableau
     let res = [];
     let tab = s.split(',');
     if (s.length != 0) {
@@ -398,7 +398,7 @@ export class ReconnaitreComponent implements OnInit {
       return false;
     }
   }
-  //Récupere la session
+  //Récupere la session du jeu
   getSession(): Session | null {
     for (let s of this.list_session) {
       for (let j of s.jeuId) {
@@ -412,7 +412,7 @@ export class ReconnaitreComponent implements OnInit {
     return null
   }
 
-  getJeuById(): number {
+  getJeuById(): number {//Récupère le jeu de la session par son id
     for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
       if (this.getSession()!.jeuId[i].type == 'Reconnaitre') {
         if (this.getSession()!.jeuId[i].id_jeu == this.r!.id) {
@@ -423,7 +423,7 @@ export class ReconnaitreComponent implements OnInit {
     return -1;
   }
 
-  getJoueur(): Guest | null {
+  getJoueur(): Guest | null {//Récupère les informations du joueur actuel
     for (let g of this.getSession()!.joueur) {
       if (g.id == +localStorage.getItem('id_user')!) {
         return g;
@@ -487,7 +487,7 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  setJoueurs(s: Session): string {
+  setJoueurs(s: Session): string {//Cast les données des joueurs dans le type string pour la base de donnée de la table session
     let res = "";
 
     for (let j of s.joueur) {
@@ -501,7 +501,7 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  setJeuSession(tab: Jeu[]): string {
+  setJeuSession(tab: Jeu[]): string {//Cast les données des jeux dans le type string pour la base de donnée de la table session
     let res = "";
     for (let g of tab) {
       res += g.type + ',' + g.id_jeu + ';'
@@ -509,7 +509,7 @@ export class ReconnaitreComponent implements OnInit {
     return res;
   }
 
-  deleteSessionReconnaitre(id: number): void {
+  deleteSessionReconnaitre(id: number): void {//Delete le jeu de toutes sessions auquel il appartient
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
       for (let jeu of s.jeuId) {
@@ -559,7 +559,7 @@ export class ReconnaitreComponent implements OnInit {
     }, 400)
   }
 
-  setPrevisualiserReconnaitre(prev: boolean): void {
+  setPrevisualiserReconnaitre(prev: boolean): void {//Affiche le jeu dans la prévisualisation
     if (prev == true) {
       this.r = new Reconnaitre(0, '', this.selectedImages, this.reconnaitre_bg_color, this.reconnaitre_title_color, this.reconnaitre_text_color, this.reconnaitre_good_answer_color, this.reconnaitre_wrong_answer_color, this.reconnaitre_progress, this.reconnaitre_button_bg_color, this.reconnaitre_button_text_color, this.reconnaitre_type_ecriture, this.reconnaitre_isVocaliser, Number(this.id_crea));
       this.reconnaitre_previsualiser = true;
@@ -573,7 +573,7 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  nextStep(): void {
+  nextStep(): void {//Permet d'aller a l'étape suivante dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep < 2) {
       step++;
@@ -581,7 +581,7 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  previousStep(): void {
+  previousStep(): void {//Permet d'aller a l'étape précédente dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
@@ -589,12 +589,12 @@ export class ReconnaitreComponent implements OnInit {
     }
   }
 
-  setActive(element: Element | null): void {
+  setActive(element: Element | null): void {// Donne Du style
     (<HTMLButtonElement>element!).style.background = 'white';
     (<HTMLButtonElement>element!).style.color = 'black';
   }
 
-  setInactive(element: Element | null) {
+  setInactive(element: Element | null) {//Enleve  Du style
     (<HTMLButtonElement>element!).style.background = '';
     (<HTMLButtonElement>element!).style.color = 'white';
   }
@@ -607,7 +607,7 @@ export class ReconnaitreComponent implements OnInit {
   }
 
   changeProgressValue(jeu: string, element: HTMLSelectElement): void {
-
+    //Change la couleur de la progress bar
     switch (element.value) {
       case 'blue':
         this.reconnaitre_progress = Progress.Blue;
@@ -679,7 +679,7 @@ export class ReconnaitreComponent implements OnInit {
     this.synthesis!.speak(utterance);
   }
 
-  save(): void {//Sauvegarde les changement lors d'un edit
+  save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bdd
     this.list['id'] = this.r!.id;
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Reconnaitre']);

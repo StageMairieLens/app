@@ -1,4 +1,4 @@
-<div *ngIf="this.showTitle" class="text-center">
+<div *ngIf="this.showTitle" class="text-center"><!--Affiche le titre du jeu si showTitle == True -->
   <h1 class="title">
     <span>R</span>
     <span>E</span>
@@ -55,7 +55,7 @@
 
 
           </div>
-
+          <!--Permet la vocalistion -->
           <div class="col-md-2" *ngIf="+this.r!.isVocaliser == 1">
             <button mat-fab-button
               style="background-color: rgb(255, 255, 255); margin-bottom: 20px; width: 20%; height: 5%;"
@@ -68,7 +68,7 @@
 
 
         <div class="row">
-
+          <!--Affiche l'image -->
           <div class="col d-flex justify-content-center">
             <img style="width:400px;" src="{{ this.r!.images[this.prochaine_image].src }}" class="card-img-top image ">
           </div>
@@ -84,10 +84,7 @@
 
           <div id="mot" class="text-center col">
             <!-- Centre les mots -->
-            <!-- <button *ngFor="let mot of this.r!.liste_button" type="button" id="{{ mot }}" [disabled]="clicked"
-          (click)="change($event,mot)    ;"
-          [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}">{{ mot }}</button> -->
-
+            <!--Change l'écriture des mots -->
             <div *ngIf="this.r!.typeEcriture == 'CURSIF'">
               <button [ngStyle]="{background : this.r!.button_bg_color, color : this.r!.button_text_color}"
                 *ngFor="let mot of this.r!.liste_button" style="font-family : cursiveFont; font-size : 28px"
@@ -120,7 +117,7 @@
 
 
         </div>
-
+        <!--Couleur de la progress_bar en fonction du choix fait par le professeur lors de la création du jeu 5 couleurs uniquement -->
         <div class="align-bottom">
           <div class="progress" *ngIf="this.r!.color_progress_bar == 'blue' ">
             <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
@@ -164,6 +161,7 @@
 
 
       </div>
+      <!--Affiche les images et le nombre d'erreur par image  -->
       <div *ngIf="this.prochaine_image == this.r!.images.length" class="text-center">
         <figure class="figure" *ngFor="let items of this.erreur_image">
           <img src="{{ items.src }}" width="200" height="200">
@@ -211,9 +209,6 @@
   <div *ngIf="this.data.length != 0">
     <!-- Prévisualisation -->
     <div *ngIf="this.reconnaitre_previsualiser">
-
-
-
 
       <div class="prev-button align-middle text-center" style="margin-bottom : 10px ; margin-top : 20px">
         <div class="prev-button align-middle text-center" style="margin-bottom : 10px">
