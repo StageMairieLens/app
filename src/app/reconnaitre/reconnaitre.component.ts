@@ -140,7 +140,8 @@ export class ReconnaitreComponent implements OnInit {
   onSend(list: any) {//Envoi les données du jeu dans la bdd
 
     const formData: FormData = new FormData();
-    formData.append('send', JSON.stringify(list));
+    formData.append('send', JSON.stringify(list));//Faire en sorte que les valeur envoyées est les mêmes non que celui de la table
+                                                  //Exemple ici : {table:"Reconnaitre",type_ecri:"string",isVoca:0|1,id_images:"string",.....}
     this.jeuxService.onSend(formData).subscribe({
     });
   }
@@ -166,8 +167,10 @@ export class ReconnaitreComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
-      }
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
+        }
+    }
     })
   }
 

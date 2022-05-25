@@ -142,7 +142,9 @@ export class RecopierGameComponent implements OnInit {
   recupImage(donne: any) {//Récupere les images
     this.jeuxService.recup_image_id(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
-        donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(new Image(data[i].nom, data[i].id_image, data[i].id_crea));
+        }
       }
     })
   }

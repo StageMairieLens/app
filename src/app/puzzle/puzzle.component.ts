@@ -11,10 +11,6 @@ import { LoginComponent } from '../index/login/login.component';
 import { Session } from '../sessions/Session';
 import { ThemeComponent } from '../theme/theme.component';
 
-declare function restart(gridsize: number, imagess: any): any;
-declare function rules(): any;
-declare function lance(gridsize: number, imagess: any): any;
-declare var images: any;
 
 
 interface tuile {
@@ -106,7 +102,9 @@ export class PuzzleComponent implements OnInit {
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
-        donne.push(new ImageImport(data[i].nom, data[i].id_image,data[i].id_crea));
+        if (data[i].id_crea == +localStorage.getItem('id_crea')!) {
+          donne.push(new ImageImport(data[i].nom, data[i].id_image, data[i].id_crea));
+        }
       }
     })
   }
