@@ -5,6 +5,8 @@
 <span align=center>Nous avons utiliser <b>boostrap 4.0</b> et <b>angular material</b> pour le front du projet en grande partie vous pouvez donc allez piocher des styles directement depuis ces librairie pour le rendu front de votre jeu.</span>
 <p>Dans le cas d'une intérogation je vous conseille de regardez les autres componenent de jeu dans le dossier source (Angular).</p>
 
+<p> <i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i> Si votre jeu doit contenir des images : créer une liste d'<a href="../src/app/Image.ts"><b><i>Image</i></b></a> qui contiendra le resultat de la méthode <b><u>recup</u></b> du component <a href="../src/app/images/images.component.ts"><b><i>images.componenent.ts</i></b></a> qui ira chercher les images dans la BDD.</p>
+
 <hr>
 
 <p align=center></p>
@@ -516,7 +518,7 @@ ngOnInit(): void {
 
   <div *ngIf="this.panel_option == 'edit'">
     ...
-    
+
     <!-- Formulaire édition NOM_DU_JEU -->
     <div *ngIf="this.selectedGame == 'NOM_DU_JEU'">
       <app-nom-du-jeu [play]="false" [showTitle]="false" [edit]="true" [jeu]="this.NOM_DU_JEU"></app-nom-du-jeu>
@@ -524,4 +526,106 @@ ngOnInit(): void {
   </div>
 
 </div>
+```
+
+- <p>La prochaine étape consiste à ajoutez le code pour modifier les paramètre par défaut en cas d'édition. <br> Ajoutez le code qui suit dans le fichier <b>.ts</b> de votre jeu :</p>
+
+```ts
+
+  ngOnInit(): void {
+    ...
+    
+    if (this.edit) {//Permet d'editer un jeu, récupere les données du jeu this.jeu!.(nom d'une variable du jeu) de NOM_DU_JEU.ts et les affiches
+        this.create_game = true
+        this.selectedImages = this.r!.images;
+        
+        //METTRE ICI LE CODE D'ASSOCIATION DES PARAM7TRE DE JEU AU VARIABLE PAR DEFAUT
+        //EXEMPLE :
+        this.NOM_DU_JEU_bg_color = this.jeu!.bg_color;
+
+
+        this.list = //Recupere les données dans une liste pour l'update
+        {
+          table: 'NOM_DU_JEU', 
+          attribut_nom_collonne_bdd_1: this.jeu.attribut_1, 
+          id_crea: this.id_crea, 
+          id: this.jeu!.id,
+        };
+      }
+    ...
+    }
+```
+
+- <p>Une fois cela fait vous devriez avoir l'affichage et la redirection sur le formulaire d'édition ou de création. <p>La partie sur le formulaire de création et d'édition étant propre au jeu je n'ai pas de fonction clair a donnez cependant je liste ici quelque partie de code qui pourrait vous être utile</p></p>
+
+***Le code utilisé pour la sélection des images***
+
+**.html**
+
+```html
+ <!--Formulaire Recopier Etape du formulaire 1 -- Choix des images-->
+      <div class="card-body selectImage_container text-center align-top">
+        <h5 class="card-header" style="color : black">Listes des images</h5>
+        <figure class="figure" *ngFor="let image of this.liste_image">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="addImage(image)">
+          <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+        </figure>
+
+      </div>
+      <div class="card-body selectImage_container text-center">
+        <h5 class="card-header" style="color : black">Images selectionné</h5>
+        <h6 *ngIf="this.selectedImages.length == 0" class="card-title" style="color : black">Vous n'avez
+          selectionné
+          aucune image</h6>
+        <figure class="figure" *ngFor="let image of this.selectedImages">
+          <img src="{{image.getSrc()}}" class="figure-img img-fluid rounded" alt="..." (click)="deleteImage(image)">
+          <figcaption class="figure-caption">{{image.getNom()}}</figcaption>
+        </figure>
+      </div>
+```
+
+**.ts**
+
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
+La classe Image est la classe <a href="../src/app/Image.ts"><b><i>Image</i></b></a> créer pour le projet</p>
+```ts
+
+  selectedImages : Image[] = [];
+
+  addImage(img: Image): void {//ajoute les images choisit dans la liste
+    if (this.selectedImages.indexOf(img) == -1) {
+      this.selectedImages.push(img);
+      this.image.push(img.id);
+      this.list['id_images'] = this.image.toString();
+    }
+  }
+
+  deleteImage(i: Image): void {//Supprime les images de la liste
+    let index = this.selectedImages.indexOf(i, 0);
+    if (index > -1) {
+      this.selectedImages.splice(index, 1);
+      this.image.splice(index, 1);
+      this.list['id_images'] = this.image.toString();
+    }
+  }
+```
+
+
+***L'input de couleur***
+
+```html
+<label for="id_input_couleur" class="form-label align-middle">Nom du paramètre
+  <input type="color" class="form-control form-control-color"
+    (change)="this.jeu_attribut = id_input_couleur.value " #id_input_couleur
+    (change)="this.list['jeu_attribut']=id_input_couleur.value" value="{{this.jeu_attribut}}"
+    title="Déscription du paramètre">
+</label>
+```
+
+**L'input de texte**
+
+```html
+<label for="id_input_text" class="form-label align-middle"><b>Nom du paramètre</b></label>
+<input (change)="this.jeu_attribut = id_input_text.value" value="{{this.jeu_attribut}}" type="text"
+  class="form-control" id_input_text title="Déscription du paramètre">
 ```
