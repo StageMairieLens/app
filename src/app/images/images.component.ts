@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Image } from '../Image'
 import { JeuxService } from '../jeux.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 })
 export class ImagesComponent implements OnInit {
   [x: string]: any;
-  //pro_img = 0;
   constructor(private jeuxService: JeuxService, private router: Router) { }
 
   static list_image: Image[] = [

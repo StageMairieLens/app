@@ -42,10 +42,6 @@ export class AbecedaireComponent implements OnInit {
 
   rightLetter = '';
   errors = 0;
-  images: Image[] = [
-    /*new Image("Orange", "../../assets/orange.jpg"),
-    new Image("Voiture", "../../assets/voiture.png"),*/
-  ];
   nbEntries = 0;
   sound = true;
   afficherMot = "CURSIF";
@@ -118,7 +114,7 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
-  getImage(s: string): Image[] {
+  getImage(s: string): Image[] {//Recupere les images et les ajoutes dans un tableau
     let res = [];
     let tab = s.split(',');
     if (s.length != 0) {
@@ -135,7 +131,7 @@ export class AbecedaireComponent implements OnInit {
   }
 
   list_session: Session[] = [];
-  recupSession(donne: any) {
+  recupSession(donne: any) {//Recupere les sessions
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -155,7 +151,7 @@ export class AbecedaireComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {
+  getJeuSession(s: string): Jeu[] {//Récupere la liste des jeux de la session et les mets en tableau
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -168,7 +164,7 @@ export class AbecedaireComponent implements OnInit {
     return res;
   }
 
-  getJoueurs(s: string, id_session: number): Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {//Récupere la liste des joueurs de la session et les mets en tableau
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
@@ -192,7 +188,7 @@ export class AbecedaireComponent implements OnInit {
   }
 
   list_login: Login[] = [];
-  recupLogin(donne: any) {
+  recupLogin(donne: any) {//Recupere les données des utilisateurs
     this.jeuxService.recup_user(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -210,7 +206,7 @@ export class AbecedaireComponent implements OnInit {
     })
   }
 
-  recupImage(donne: any) {//Récupère uniquement les images de l'utilisateur pour crée un jeu
+  recupImage(donne: any) {//Récupere les images depuis la bdd
     this.jeuxService.recup_image_id(donne).subscribe(data => {
 
       for (var i = 0; data[i] != null; i++) {
@@ -266,6 +262,7 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
+  // Vocalisation
   vocalise(): void {
     this.synthesis!.cancel();
     var utterance = new SpeechSynthesisUtterance(this.game!.images[this.nbEntries].getNom());
@@ -324,7 +321,7 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-
+  //Récupere la session du jeu
   getSession(): Session | null {
     for (let s of this.list_session) {
       for (let j of s.jeuId) {
@@ -338,7 +335,7 @@ export class AbecedaireComponent implements OnInit {
     return null
   }
 
-  getJeuById(): number {
+  getJeuById(): number {//Récupère le jeu de la session par son id
     for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
       if (this.getSession()!.jeuId[i].type == 'Abecedaire') {
         if (this.getSession()!.jeuId[i].id_jeu == this.game!.id) {
@@ -349,7 +346,7 @@ export class AbecedaireComponent implements OnInit {
     return -1;
   }
 
-  getJoueur(): Guest | null {
+  getJoueur(): Guest | null {//Récupère les informations du joueur actuel
     for (let g of this.getSession()!.joueur) {
       if (g.id == +localStorage.getItem('id_user')!) {
         return g;
@@ -359,7 +356,7 @@ export class AbecedaireComponent implements OnInit {
   }
 
 
-  session_onSend_update(list: any) {
+  session_onSend_update(list: any) {//Update la session avec les parametre du jeu en cours
 
     const formData: FormData = new FormData();
     formData.append('session_update', JSON.stringify(list));
@@ -367,7 +364,7 @@ export class AbecedaireComponent implements OnInit {
     });
   }
 
-  sendProgress(): void {
+  sendProgress(): void {//Envoie la progression dans la session du jeu en cours
 
     this.list_session = [];
     this.recupSession(this.list_session);
@@ -380,7 +377,7 @@ export class AbecedaireComponent implements OnInit {
     }, 500);
   }
 
-
+  // Réactive tout les boutons
   resetButton() {
     var buttons = document.getElementsByClassName("button");
     for (var i = 0; i < buttons.length; i++) {
@@ -389,15 +386,18 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
+  //Permet de previsualiser le jeu
   previewAbecedaire(a: Abecedaire): void {
     this.game = a;
     this.abecedaire_previsualiser = true;
   }
 
+  //Quitte la previsualition en cours 
   quitPreviewAbecedaire(): void {
     this.abecedaire_previsualiser = false;
   }
 
+  //delete le jeu Abécédaire de toutes les sessions qui le contient
   deleteAbcdr(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
@@ -411,7 +411,7 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-  setJoueurs(s: Session): string {
+  setJoueurs(s: Session): string {//Cast les données des joueurs dans le type string pour la base de donnée de la table session
     let res = "";
 
     for (let j of s.joueur) {
@@ -425,7 +425,7 @@ export class AbecedaireComponent implements OnInit {
     return res;
   }
 
-  setJeuSession(tab: Jeu[]): string {
+  setJeuSession(tab: Jeu[]): string {//Cast les données des jeux dans le type string pour la base de donnée de la table session
     let res = "";
     for (let g of tab) {
       res += g.type + ',' + g.id_jeu + ';'
@@ -434,7 +434,7 @@ export class AbecedaireComponent implements OnInit {
   }
 
 
-  deleteSessionAbecedaire(id: number): void {
+  deleteSessionAbecedaire(id: number): void {//Delete le jeu de toutes sessions auquel il appartient
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
       for (let jeu of s.jeuId) {
@@ -447,7 +447,7 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-  deleteThemeAbcdr(id: number): void {
+  deleteThemeAbcdr(id: number): void {//Delete le jeu Abecedaire du theme
     let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
     let liste: any = [];
     theme.recup2(liste);
@@ -474,7 +474,7 @@ export class AbecedaireComponent implements OnInit {
     }, 200)
   }
 
-  deleteGameAbecedaire(a: Abecedaire): void {
+  deleteGameAbecedaire(a: Abecedaire): void {//Supprime le jeu Abecedaire de partout
     this.onSend_delete(a.id)
     this.deleteSessionAbecedaire(a.id);
     this.deleteThemeAbcdr(a.id);
@@ -489,7 +489,7 @@ export class AbecedaireComponent implements OnInit {
     window.location.href = '/panel/Abecedaire/edit/' + a.id;
   }
 
-  setPrevisualiserAbecedaire(prev: boolean): void {
+  setPrevisualiserAbecedaire(prev: boolean): void {//Affiche le jeu dans la prévisualisation
     if (prev == true) {
       this.game = new Abecedaire(0, '', this.selectedImages, this.abecedaire_bg_color, this.abecedaire_text_color, this.abecedaire_good_answer_color, this.abecedaire_wrong_answer_color, this.abecedaire_progress, this.abecedaire_button_bg_color, this.abecedaire_button_text_color, this.abecedaire_isVocaliser, this.abecedaire_type_ecriture, Number(this.id_crea));
       this.abecedaire_previsualiser = true;
@@ -505,24 +505,24 @@ export class AbecedaireComponent implements OnInit {
   }
 
 
-  setActive(element: Element | null): void {
+  setActive(element: Element | null): void {// Donne Du style
     (<HTMLButtonElement>element!).style.background = 'white';
     (<HTMLButtonElement>element!).style.color = 'black';
   }
 
-  setInactive(element: Element | null) {
+  setInactive(element: Element | null) {//Enleve  Du style
     (<HTMLButtonElement>element!).style.background = '';
     (<HTMLButtonElement>element!).style.color = 'white';
   }
 
-  nextStep(): void {
+  nextStep(): void {//Permet d'aller a l'étape suivante dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep < 2) {
       step++;
       this.setFormStep(step);
     }
   }
-  previousStep(): void {
+  previousStep(): void {//Permet d'aller a l'étape précédente dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
@@ -537,7 +537,7 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
-  addImageSelected(img: Image): void {
+  addImageSelected(img: Image): void {//ajoute les images choisit dans la liste
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
@@ -545,7 +545,7 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-  deleteImage(i: Image): void {
+  deleteImage(i: Image): void {//Supprime les images de la liste
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
@@ -555,6 +555,7 @@ export class AbecedaireComponent implements OnInit {
   }
 
   changeProgressValue(jeu: string, element: HTMLSelectElement): void {
+    //Change la couleur de la progress bar
     switch (element.value) {
       case 'blue':
         this.abecedaire_progress = Progress.Blue;
@@ -579,7 +580,7 @@ export class AbecedaireComponent implements OnInit {
     }
   }
 
-  create(): void {
+  create(): void {//Crée le jeu Abecedaire avec les parametres soit par défaut, soit modifier à la création
 
     this.list = {table:'Abcdr',id_image: this.image.toString(), id: 0, bg_color: this.abecedaire_bg_color, text_color: this.abecedaire_text_color, gaw: this.abecedaire_good_answer_color, waw: this.abecedaire_wrong_answer_color,bu_bg_co: this.abecedaire_button_bg_color,bu_txt_co: this.abecedaire_button_text_color, progress: this.abecedaire_progress,type_ecri: this.abecedaire_type_ecriture,isVoca: +this.abecedaire_isVocaliser, id_crea: Number(this.id_crea) };
     this.onSend(this.list);
@@ -587,7 +588,7 @@ export class AbecedaireComponent implements OnInit {
 
   }
 
-  save(): void {
+  save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bd
     this.onSend_update(this.list);
     this.router.navigate(['/panel/Abecedaire']);
   }

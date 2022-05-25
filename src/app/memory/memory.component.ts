@@ -22,11 +22,10 @@ export class MemoryComponent implements OnInit {
 
   list_login : Login[] = [];
   cpt_erreur: number = 0;
-  recupLogin(donne: any) {
+  recupLogin(donne: any) {//Recupere les données des utilisateurs
       this.jeuxService.recup_user(donne).subscribe(data => {
 
         for (var i = 0; data[i] != null; i++) {
-          //donne.push({id:data[i].id_user,mail:data[i].mail_user,pwd:data[i].password_user,co:data[i].connect});
           donne.push(new Login(data[i].id_user, data[i].mail_user, data[i].password_user, data[i].connect,data[i].pseudo));
           var inn = 0;
           for (var j = 0; LoginComponent.logins[j]; j++) {
@@ -130,7 +129,7 @@ export class MemoryComponent implements OnInit {
   }
   data: Memory[] = [];
   list_session: Session[] = [];
-  recup(donne: any) {
+  recup(donne: any) {//Recupere les jeux Memory crée par l'utilisateur
     this.jeuxService.recup_memory(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         if(data[i].id_crea == +localStorage.getItem('id_crea')!){
@@ -144,7 +143,7 @@ export class MemoryComponent implements OnInit {
 
   }
 
-  recupSession(donne: any) {
+  recupSession(donne: any) {//Recupere les sessions
     this.jeuxService.recup_session(donne).subscribe(data => {
       for (var i = 0; data[i] != null; i++) {
         let isJ = false;
@@ -164,7 +163,7 @@ export class MemoryComponent implements OnInit {
   }
 
 
-  getJeuSession(s: string): Jeu[] {
+  getJeuSession(s: string): Jeu[] {//Récupere la liste des jeux de la session et les mets en tableau
     let res: Jeu[] = [];
     if (s.length > 0) {
       let tab = s.split(';');
@@ -176,7 +175,7 @@ export class MemoryComponent implements OnInit {
     }
     return res;
   }
-  getJoueurs(s: string, id_session: number):  Guest[] {
+  getJoueurs(s: string, id_session: number): Guest[] {//Récupere la liste des joueurs de la session et les mets en tableau
     let tab = s.split(';');
     let res = []
     for (let i of tab) {
@@ -198,7 +197,7 @@ export class MemoryComponent implements OnInit {
     }
     return res;
   }
-  onSend_delete(id: any) {
+  onSend_delete(id: any) {//Supprime les données du jeu
 
     const formData: FormData = new FormData();
     var list={table:'Memory',id:id,id_table:'id_memory'};//Ajoute le nom de la table,le nom de l'id de la table et le numero de l'id
@@ -229,7 +228,7 @@ export class MemoryComponent implements OnInit {
     });
   }
 
-  getImage(s: string): Image[] {
+  getImage(s: string): Image[] {//Recupere les images et les ajoutes dans un tableau
     let res = [];
     let tab = s.split(',');
     if (s.length != 0) {
@@ -427,18 +426,21 @@ export class MemoryComponent implements OnInit {
     }
   }
 
+  // Désactive toutes les tiles
   disable(): void {
     for (var i = 0; i < this.nbTile; i++) {
       this.tiles[i].disable = true;
     }
   }
 
+  // Réactive toutes les tiles
   enable(): void {
     for (var i = 0; i < this.nbTile; i++) {
       this.tiles[i].disable = false;
     }
   }
 
+  //Récupere la session du jeu
   getSession(): Session | null {
     for (let s of this.list_session) {
       for (let j of s.jeuId) {
@@ -452,7 +454,7 @@ export class MemoryComponent implements OnInit {
     return null
   }
 
-  getJeuById(): number {
+  getJeuById(): number {//Récupère le jeu de la session par son id
     for (let i = 0; i < this.getSession()!.jeuId.length; i++) {
       if (this.getSession()!.jeuId[i].type == 'Memory') {
         if (this.getSession()!.jeuId[i].id_jeu == this.game!.id) {
@@ -463,7 +465,7 @@ export class MemoryComponent implements OnInit {
     return -1;
   }
 
-  getJoueur(): Guest | null {
+  getJoueur(): Guest | null {//Récupère les informations du joueur actuel
     for (let g of this.getSession()!.joueur) {
       if (g.id == +localStorage.getItem('id_user')!) {
         return g;
@@ -473,7 +475,7 @@ export class MemoryComponent implements OnInit {
   }
 
 
-  session_onSend_update(list: any) {
+  session_onSend_update(list: any) {//Update la session avec les parametre du jeu en cours
 
     const formData: FormData = new FormData();
     formData.append('session_update', JSON.stringify(list));
@@ -481,7 +483,7 @@ export class MemoryComponent implements OnInit {
     });
   }
 
-  sendProgress(): void {
+  sendProgress(): void {//Envoie la progression dans la session du jeu en cours
 
     this.list_session = [];
     this.recupSession(this.list_session);
@@ -517,17 +519,18 @@ export class MemoryComponent implements OnInit {
     }, this.tmpAfficher);
   }
 
-
+  //Permet de previsualiser le jeu
   previewMemory(m: Memory): void {
     this.game = m;
     this.memory_previsualiser = true;
   }
 
+  //Quitte la previsualition en cours 
   quitPreviewMemory(): void {
     this.memory_previsualiser = false;
   }
 
-  setJoueurs(s: Session): string {
+  setJoueurs(s: Session): string {//Cast les données des joueurs dans le type string pour la base de donnée de la table session
     let res = "";
 
     for (let j of s.joueur) {
@@ -541,7 +544,7 @@ export class MemoryComponent implements OnInit {
     return res;
   }
 
-  setJeuSession(tab: Jeu[]): string {
+  setJeuSession(tab: Jeu[]): string {//Cast les données des jeux dans le type string pour la base de donnée de la table session
     let res = "";
     for (let g of tab) {
       res += g.type + ',' + g.id_jeu + ';'
@@ -549,7 +552,7 @@ export class MemoryComponent implements OnInit {
     return res;
   }
 
-
+  //delete le jeu Abécédaire de toutes les sessions qui le contient
   deleteMemory(id: number, s: Session): void {
     let index = -1;
     for (let g of s.jeuId) {
@@ -563,7 +566,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  deleteSessionMemory(id: number): void {
+  deleteSessionMemory(id: number): void {//Delete le jeu de toutes sessions auquel il appartient
     let ses: SessionsComponent = new SessionsComponent(this.router, this.route, this.jeuxService);
     for (let s of this.list_session) {
       for (let jeu of s.jeuId) {
@@ -576,7 +579,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  deleteThemeMemory(id: number): void {
+  deleteThemeMemory(id: number): void {//Delete le jeu Memory du theme
     let theme = new ThemeComponent(this.route, this.jeuxService, this.router);
     let liste: any = [];
     theme.recup2(liste);
@@ -603,7 +606,7 @@ export class MemoryComponent implements OnInit {
     }, 200)
   }
 
-  deleteGameMemory(m: Memory): void {
+  deleteGameMemory(m: Memory): void {//Supprime le jeu Abecedaire de partout
     this.onSend_delete(m.id);
     this.deleteSessionMemory(m.id);
     this.deleteThemeMemory(m.id);
@@ -617,7 +620,7 @@ export class MemoryComponent implements OnInit {
     window.location.href = '/panel/Memory/edit/' + m.id;
   }
 
-  nextStep(): void {
+  nextStep(): void {//Permet d'aller a l'étape suivante dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep < 2) {
       step++;
@@ -625,7 +628,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  previousStep(): void {
+  previousStep(): void {//Permet d'aller a l'étape précédente dans le formulaire de création et d'édit
     let step = this.formStep;
     if (this.formStep > 0) {
       step--;
@@ -633,12 +636,12 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  setActive(element: Element | null): void {
+  setActive(element: Element | null): void {// Donne Du style
     (<HTMLButtonElement>element!).style.background = 'white';
     (<HTMLButtonElement>element!).style.color = 'black';
   }
 
-  setInactive(element: Element | null) {
+  setInactive(element: Element | null) {//Enleve  Du style
     (<HTMLButtonElement>element!).style.background = '';
     (<HTMLButtonElement>element!).style.color = 'white';
   }
@@ -651,7 +654,7 @@ export class MemoryComponent implements OnInit {
   }
 
   changeProgressValue(jeu: string, element: HTMLSelectElement): void {
-
+    //Change la couleur de la progress bar
     switch (element.value) {
       case 'blue':
         this.memory_progress = Progress.Blue;
@@ -676,7 +679,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  addImage(img: Image): void {
+  addImage(img: Image): void {//ajoute les images choisit dans la liste
     if (this.selectedImages.indexOf(img) == -1) {
       this.selectedImages.push(img);
       this.image.push(img.id);
@@ -684,7 +687,7 @@ export class MemoryComponent implements OnInit {
     }
   }
 
-  deleteImage(i: Image): void {
+  deleteImage(i: Image): void {//Supprime les images de la liste
     let index = this.selectedImages.indexOf(i, 0);
     if (index > -1) {
       this.selectedImages.splice(index, 1);
@@ -694,7 +697,7 @@ export class MemoryComponent implements OnInit {
   }
 
 
-  setPrevisualiserMemory(prev: boolean): void {
+  setPrevisualiserMemory(prev: boolean): void {//Affiche le jeu dans la prévisualisation
     if (prev == true) {
       this.game = new Memory(0, "", this.selectedImages.slice(1), this.selectedImages[0], this.memory_isVocaliser, this.memory_nbTile, this.memory_settings, this.memory_bg_color, this.memory_text_color, this.memory_good_answer_color, this.memory_wrong_answer_color, this.memory_progress, this.memory_tmp_affichage,Number(this.id_crea));
       this.memory_previsualiser = true;
@@ -708,24 +711,27 @@ export class MemoryComponent implements OnInit {
     }
   }
 
+  // Retourne les settings du memory
   getMemorySetting(n: number): string {
     return this.memory_settings[n];
   }
 
+  // Change un setting du memory
   changeMemorySetting(n: number, setting: string): void {
     this.memory_settings[n] = setting;
   }
 
+  // Change le nombre de tiles
   changeMemoryNbTile(n: number): void {
     this.memory_nbTile = n;
   }
 
-  create(): void {
+  create(): void {//Crée le jeu Memory avec les parametres soit par défaut, soit modifier à la création
     this.onSend(this.list);
     this.router.navigate(['/panel/Memory']);
   }
 
-  save(): void {
+  save(): void {//Sauvegarde les changement lors d'un edit et fait l'update dans la bd
     this.onSend_update(this.list)
     this.router.navigate(['/panel/Memory']);
   }
