@@ -10,6 +10,7 @@
 </div>
 
 <div *ngIf="this.play">
+  <!-- ERREURS -->
   <div *ngIf="game == null" class="card align-middle container boite" id="card_error"
     style="width: 32rem; background-color: #3bb8c9; color : black">
     <img class="card-img-top img-fluid" src="../../assets/images/error.png" alt="Card image cap">
@@ -31,6 +32,7 @@
   <div *ngIf="!finish && game != null && game.images.length >= (game.nbTile/2) && game.derriere != null"
     class="plateau container boite" [ngStyle]="{background: game!.bg_color}">
     <div *ngIf="pressStart == false">
+      <!-- Change les paramètres direct dans le jeu -->
       <div style="background-color: orange; width: fit-content; display: inline-block;">
         <button mat-raised-button *ngIf="this.setting[0] == 'image'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[0] = 'capital'; this.set(); this.resetImage()">Image</button>
         <button mat-raised-button *ngIf="this.setting[0] == 'capital'" style="background-color: rgb(240, 156, 0)" (click)="this.setting[0] = 'script'; this.set(); this.resetImage()">Capital</button>
@@ -46,7 +48,7 @@
       <button mat-raised-button style="background-color: orange" *ngIf="sound == false" (click)="sound = true; this.set(); this.resetImage()">Non Vocalisation</button>
     </div>
     <table>
-
+      <!-- Toutes les tiles -->
       <tr>
         <td id="1" *ngIf="nbTile >= 1">
           <app-tile class="tile text-center" #tile1 [derriere]="derriere!.getSrc()"
@@ -126,6 +128,7 @@
         </td>
       </tr>
     </table>
+    <!-- Progress bar -->
     <div style="margin: 20px;">
       <div class="progress" *ngIf="this.game!.color_progress_bar == 'blue' ">
         <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
@@ -159,6 +162,7 @@
     </div>
   </div>
 
+  <!-- Fin du jeu -->
   <div *ngIf="finish" class="container boite" style="background-color: white; margin-top: 10%;"
     [ngStyle]="{background: game!.bg_color}">
     <img class="img-fluid" src="../../assets/images/congratulations.png">
@@ -239,12 +243,6 @@
               <button mat-raised-button title="Supprimer le jeu" style="background-color : red" color="primary"
                 (click)="deleteGameMemory(element)">
                 <i class="fa-solid fa-trash fa-lg" style=" margin-bottom : 2px "></i>
-              </button>
-
-              <!-- Démarrer une session à partir de ce jeu -->
-              <button title="Démarrer une session à partir de ce jeu" mat-raised-button
-                style="background-color : rgb(168, 14, 135)" color="primary">
-                <i class="fa-solid fa-play fa-lg" style=" margin-bottom : 2px "></i>
               </button>
 
 
