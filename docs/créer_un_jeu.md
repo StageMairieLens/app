@@ -86,7 +86,7 @@ La création du jeu est une chose a faire de vous même mais je vous met a dispo
 </div>
 ```
 
-A notez qu'il faut que vous rajoutiez le code qui suit dans le **.ts** pour désactiver ou non l'affichage du titre lors de l'appel du componenent (nous utiliserons cette fonctionalité dans le panel pour faire afficher la prévisualisation du jeu ou l'affichage de la liste et du formulaire de création / édition du jeu)
+A notez qu'il faut que vous rajoutez le code qui suit dans le **.ts** pour désactiver ou non l'affichage du titre lors de l'appel du componenent (nous utiliserons cette fonctionalité dans le panel pour faire afficher la prévisualisation du jeu ou l'affichage de la liste et du formulaire de création / édition du jeu)
 
 ```ts
   @Input() showTitle: boolean = true;
@@ -124,4 +124,16 @@ Nous utilisons le style des cadres **boostrap** vous pouvez donc utiliser le cod
 <div class="card_play align-middle text-center container">
 
 </div>
+```
+
+<h3 align=center>La liste des jeux</h3>
+
+<p>Une fois votre jeu terminé vous devez créer une classe avec les attributs de votre jeu qui le rendront personalisable (couleur de background , couleur de texte, police d'écriture,ect...)
+</p>
+<p><i class="fa-solid fa-exclamation-circle fa-lg" style='color : yellow'></i>
+Votre classe doit contenir les deux attributs suivant !</p>
+
+```ts
+  id: number;
+  date: string;
 ```
