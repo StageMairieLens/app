@@ -822,7 +822,7 @@
             <!--Type d'écriture du jeu-->
             <th *ngIf="element.isVocaliser">Oui</th>
             <th *ngIf="!element.isVocaliser">Non</th>
-            <th>Aucun</th>
+            <th>{{ this.pseudo_prof }}</th>
             <!--Nom de l'utilisateur qui à créer le jeu-->
             <th>
               <mat-checkbox *ngIf="!containRecopier(element)" (ngModelChange)="addRecopier(element)" [ngModel]="false"
@@ -851,7 +851,7 @@
             <th>{{element.date}}</th> <!-- Date de création du jeu -->
             <th>{{element.nbTile}}</th> <!-- Nombre de tuile qui compose le jeu -->
             <th>{{element.setting[0]}} / {{element.setting[1]}}</th> <!-- Paramètre du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th>{{ this.pseudo_prof }}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
             <th>
               <mat-checkbox *ngIf="!containMemory(element)" (ngModelChange)="addMemory(element)" [ngModel]="false"
                 color="primary" class="example-margin"></mat-checkbox>
@@ -881,7 +881,7 @@
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
             <th *ngIf="element.isVocaliser">Oui</th>
             <th *ngIf="!element.isVocaliser">Non</th>
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th>{{ this.pseudo_prof }}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
             <th>
               <mat-checkbox *ngIf="!containReconnaitre(element)" (ngModelChange)="addReconaitre(element)"
                 [ngModel]="false" color="primary" class="example-margin"></mat-checkbox>
@@ -911,7 +911,7 @@
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
             <th *ngIf="element.isVocaliser">Oui</th>
             <th *ngIf="!element.isVocaliser">Non</th>
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th>{{ this.pseudo_prof }}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
             <th>
               <mat-checkbox *ngIf="!containAbecedaire(element)" (ngModelChange)="addAbecedaire(element)"
                 [ngModel]="false" color="primary" class="example-margin"></mat-checkbox>
@@ -939,7 +939,7 @@
             <th>{{element.listMotsFille.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
             <th>{{element.listMotsGarcon.length}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
             <th>{{element.type_ecriture}}</th> <!-- Type d'écriture du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th>{{ this.pseudo_prof }}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
             <th>
               <mat-checkbox *ngIf="!containBoyGirl(element)" (ngModelChange)="addBoyGirl(element)" [ngModel]="false"
                 color="primary" class="example-margin"></mat-checkbox>
@@ -969,7 +969,7 @@
             <th>{{element.liste_images.length}}</th> <!-- Nombre de mot fille qui compose le jeu -->
             <th>{{element.decoupe}}</th> <!-- Nombre de mot garçon qui compose le jeu -->
             <th>{{element.typeEcriture}}</th> <!-- Type d'écriture du jeu -->
-            <th>Aucun</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
+            <th>{{ this.pseudo_prof }}</th> <!-- Nom de l'utilisateur qui à créer le jeu -->
             <th>
               <mat-checkbox *ngIf="!containPuzzle(element)" (ngModelChange)="addPuzzle(element)" [ngModel]="false"
                 color="primary" class="example-margin"></mat-checkbox>
